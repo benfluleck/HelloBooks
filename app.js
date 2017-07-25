@@ -1,5 +1,5 @@
-var express = require('express');
-var app = express();
+let express = require('express');
+let app = express();
 
 // prepare server
 //app.use('/api', api); // redirect API calls
