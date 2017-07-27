@@ -3,11 +3,26 @@
 body {
     background: #1d2a33 url('../images/bg.jpg') no-repeat;
     background-size: cover;
+    color: whitesmoke;
+    padding-top: 80px;
 }
 
-h1,
-p {
-    color: white;
+.header {
+    margin-left: 1em;
+    width: 45%;
+    position: relative;
+    top: 0;
+}
+
+.foot {
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+}
+
+.btn {
+    color: black;
 }
 
 a:hover {
@@ -19,7 +34,7 @@ a:hover {
 
 .navbar {
     padding: 1rem 0;
-    background: rgba(0, 0, 0, .25);
+    background: rgba(0, 0, 0, 0);
 }
 
 .lead {
@@ -140,12 +155,20 @@ a:hover {
     margin-top: 30px;
 }
 
+.form-group {
+    width: 30%;
+}
+
+.form-group label {
+    color: white;
+}
+
 
 /* Media Queries */
 
 @media (min-width: 0) and (max-width: 47em) {
     .navbar {
-        background: #1d2a33;
+        background: #466982;
     }
     .nav-items .nav-item {
         float: none;
