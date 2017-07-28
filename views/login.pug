@@ -1,9 +1,14 @@
 form(action='', method='post')
   .form-group
-    label(for='username') Username
-    input#username.form-control(type='username', placeholder='username')
+    .col2
+        label(for='username') Username
+        input#username.form-control(type='username', placeholder='username')
   .form-group
-    label(for='Password') Password
-    input#InputPassword.form-control(type='password', placeholder='Password')
+    .col2
+        label(for='Password') Password
+        input#InputPassword.form-control(type='password', placeholder='Password')
+        a(href='#') Forgot password?
     br
+    br
+    
     button.btn.btn-default(type='submit') Submit

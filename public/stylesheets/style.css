@@ -4,21 +4,24 @@ body {
     background: #1d2a33 url('../images/bg.jpg') no-repeat;
     background-size: cover;
     color: whitesmoke;
-    padding-top: 80px;
+    display: flex;
+    min-height: 100%;
+    flex-direction: column;
 }
 
 .header {
-    margin-left: 1em;
-    width: 45%;
-    position: relative;
+    margin-left: 2em;
     top: 0;
+    flex: 1;
+    align-self: flex-start;
 }
 
-.foot {
-    right: 0;
-    bottom: 0;
-    left: 0;
-    padding: 1rem;
+#footer {
+    height: 3rem;
+    /* Height of the footer */
+    font-size: .85rem;
+    padding: .5rem 0;
+    color: whitesmoke;
 }
 
 .btn {
@@ -44,12 +47,6 @@ a:hover {
 .main {
     color: #fff;
     min-height: calc(100vh - 34px);
-}
-
-.foot {
-    font-size: .85rem;
-    padding: .5rem 0;
-    color: rgba(255, 255, 255, .6);
 }
 
 
@@ -111,27 +108,6 @@ a:hover {
     transition: .4s;
 }
 
-
-/* Icon Styles */
-
-.icn-logo {
-    margin: 3px 3px 0;
-    float: left;
-}
-
-.icn-person {
-    font-size: 50px;
-    border-radius: 50%;
-    border: solid 2px;
-    padding: .5rem;
-}
-
-.avatar {
-    width: 35px;
-    margin-right: 18px;
-    border: solid 2px rgba(255, 255, 255, .75);
-}
-
 .options {
     display: none;
 }
@@ -156,7 +132,12 @@ a:hover {
 }
 
 .form-group {
-    width: 30%;
+    width: 100%;
+}
+
+.form-group a {
+    font-size: 15;
+    color: blue;
 }
 
 .form-group label {
