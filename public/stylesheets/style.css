@@ -1,7 +1,7 @@
 /* Base Styles */
 
 body {
-    background: #1d2a33 url('../images/bg.jpg') no-repeat;
+    background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5)), #1d2a33 url('../images/bg.jpg') no-repeat;
     background-size: cover;
     color: whitesmoke;
     display: flex;
@@ -24,12 +24,12 @@ body {
     color: whitesmoke;
 }
 
-.btn {
-    color: black;
-}
-
 a:hover {
     color: rgba(49, 176, 213, .7);
+}
+
+hr {
+    border-color: white;
 }
 
 
@@ -82,6 +82,7 @@ a:hover {
 .btn-primary {
     background: #417aba;
     border-color: #417aba;
+    width: 100%;
 }
 
 .btn-info {
@@ -101,6 +102,10 @@ a:hover {
 
 .btn-light:hover {
     background: rgba(255, 255, 255, .2);
+}
+
+.btn-social {
+    text-align: center;
 }
 
 .active,
