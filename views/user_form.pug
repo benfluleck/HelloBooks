@@ -1,0 +1,84 @@
+
+.container
+  // Example row of columns
+  .row
+    #userform.col-md-6
+        form(action='', method='post')
+        
+        img.img-responsive.img-thumbnail(src='http://websamplenow.com/30/userprofile/images/avatar.jpg')
+        .form-group
+            .fileinput
+                a.btn.btn-primary(href='javascript:;')
+                    | Choose File...
+                    input(type='file', style='position:absolute;opacity:0;transparent;', name='file_source', size='40', onchange='$("#upload-file-info").html($(this).val());')
+                span#upload-file-info.label.label-info
+            
+        
+        .form-group
+            label.col.form-control-label(for='firstname') FirstName
+                .input-group
+                    .input-group-addon
+                        i.fa.fa-user
+                    input#username.form-control.input(name='firstname', type='text', placeholder='firstname')
+        .form-group
+            label.col.form-control-label(for='username') Username
+                .input-group
+                    .input-group-addon
+                        i.fa.fa-user
+                    input#username.form-control.input(name='username', type='text', placeholder='username')
+        .form-group
+            label.col.form-control-label(for='oldpassword') Old Password
+                .input-group
+                    .input-group-addon
+                        i.fa.fa-key
+                    input#username.form-control.input(name='oldpassword', type='password', placeholder='oldpassword')
+        .form-group
+            label.col.form-control-label(for='newpassword') New Password
+                .input-group
+                    .input-group-addon
+                        i.fa.fa-key
+                    input#username.form-control.input(name='newpassword', type='password', placeholder='newpassword')                 
+        .form-group
+            label.col.form-control-label(for='confirmpassword') Confirm New Password
+                .input-group
+                    .input-group-addon
+                        i.fa.fa-key
+                    input#username.form-control.input(name='confirmpassword', type='password', placeholder='confirmpassword')                                              
+        .form-group
+            label.col.form-control-label(for='email') Email
+                .input-group
+                    .input-group-addon
+                        i.fa.fa-envelope
+                    input#username.form-control.input(name='email', type='email', placeholder='email')                             
+        
+        a.btn.btn-primary(href='#')
+            span.glyphicon.glyphicon-thumbs-up
+            |  Submit
+  
+    .col-md-6
+        .dropdown
+            button#displaylist.btn.btn-secondary.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                | User Select
+            .dropdown-menu(aria-labelledby='displaylist')
+                button.dropdown-item(type='button') Books
+                button.dropdown-item(type='button') My Books
+                button.dropdown-item(type='button') Loan History
+        .panel.panel-default
+            .panel-heading
+                h3.panel-title Populate Panel
+            .panel-body
+                | This is a Basic panel
+            table.table
+                tr
+                th Library Books
+                th Author
+                th Category
+                tr
+                td Book 1
+                td Ben
+                td Horror
+                tr
+                td Book2
+                td Ben2
+                td Romance
+

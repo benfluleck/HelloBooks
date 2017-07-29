@@ -28,8 +28,30 @@ a:hover {
     color: rgba(49, 176, 213, .7);
 }
 
-hr {
-    border-color: white;
+.row {
+    background: rgba(0, 0, 0, .5);
+    padding-top: 1em;
+    width: 100%
+}
+
+#userform {
+    border: 1px solid;
+    padding-bottom: 1em;
+}
+
+.panel-heading {
+    padding-top: 3rem;
+}
+
+.fileinput {
+    position: relative;
+    padding: 1em;
+    width: 180px;
+}
+
+h4 {
+    padding: .5rem 0;
+    font-size: 1rem;
 }
 
 
