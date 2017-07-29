@@ -1,0 +1,22 @@
+.container
+  .row
+    .col-md-4.col-lg-3
+      .bootstrap-vertical-nav
+        h3 Order By
+        ul#exCollapsingNavbar3.nav.flex-column
+          li.nav-item
+            a.nav-link.active(href='#') Purchase Date
+          li.nav-item
+            a.nav-link(href='#') Author
+          li.nav-item
+            a.nav-link(href='#') Quantity
+    .col-md-8.col-lg-9
+      h1 Books
+      .dropdown
+            button#displaylist.btn.btn-secondary.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                | User Select
+            .dropdown-menu(aria-labelledby='displaylist')
+                button.dropdown-item(type='button') All Books
+                button.dropdown-item(type='button') All Available
+                button.dropdown-item(type='button') Books on Loan
+      include includes/allbooks

@@ -9,6 +9,14 @@ body {
     flex-direction: column;
 }
 
+.card-deck {
+    color: rgba(0, 0, 0, .5);
+}
+
+img {
+    width: 100%
+}
+
 .header {
     margin-left: 2em;
     top: 0;
@@ -24,12 +32,15 @@ body {
     color: whitesmoke;
 }
 
+.table {
+    color: black;
+}
+
 a:hover {
     color: rgba(49, 176, 213, .7);
 }
 
 .row {
-    background: rgba(0, 0, 0, .5);
     padding-top: 1em;
     width: 100%
 }
@@ -128,6 +139,7 @@ h4 {
 
 .btn-social {
     text-align: center;
+    color: whitesmoke;
 }
 
 .active,
