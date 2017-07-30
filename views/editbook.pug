@@ -1,7 +1,4 @@
-.row
-    .col-md-3
-      h2 Edit Book
-      hr
+include includes/admin_titles
 include includes/search
 
 //- .imageupload.panel.panel-default
@@ -35,9 +32,5 @@ include includes/partial_admin_forms
                     | Choose File...
                     input(type='file', style='position:absolute;opacity:0;transparent;', name='file_source', size='40', onchange='$("#upload-file-info").html($(this).val());')
                 span#upload-file-info.label.label-info
-.row
-    .col-md-3
-    .col-md-6
-      button.btn.btn-primary(type='submit')
-        i.fa.fa-user-plus
-        |  Update
+include includes/delete_update_dropdown
+            

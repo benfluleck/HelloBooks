@@ -1,0 +1,14 @@
+.row
+    .col-md-3.field-label-responsive
+      label(for='edit_delete') Select Action
+    .col-md-6
+      .form-group
+        .input-group.mb-2.mr-sm-2.mb-sm-2
+          .input-group-addon(style='width: 2.6rem')
+            i.fa.fa-book
+          button#edit_delete.form-control.btn-default.dropdown-toggle(type='button',data-toggle="dropdown", aria-haspopup="true", aria-expanded="true")
+            span.caret
+          ul.dropdown-menu(aria-labelledby='edit_delete')
+            li Delete
+            li Update
+            

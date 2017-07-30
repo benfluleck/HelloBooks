@@ -1,0 +1,76 @@
+include includes/admin_titles
+form.form-horizontal(role='form', method='POST', action='/')
+  .row
+    .col-md-3.field-label-responsive
+      label(for='name') Name
+    .col-md-6
+      .form-group
+        .input-group.mb-2.mr-sm-2.mb-sm-0
+          .input-group-addon(style='width: 2.6rem')
+            i.fa.fa-book
+          input#name.form-control(type='text', name='name', placeholder='Enter Name', required='', autofocus='')
+    .col-md-3
+      .form-control-feedback
+        span.text-danger.align-middle
+          // Put name validation error messages here
+  .row
+    .col-md-3.field-label-responsive
+      label(for='username') Username
+    .col-md-6
+      .form-group
+        .input-group.mb-2.mr-sm-2.mb-sm-0
+          .input-group-addon(style='width: 2.6rem')
+            i.fa.fa-user
+          input#username.form-control(type='text', name='username', placeholder='Username' autofocus='')
+    .col-md-3
+      .form-control-feedback
+        span.text-danger.align-middle
+          // Put e-mail validation error messages here
+  .row
+    .col-md-3.field-label-responsive
+      label(for='email') Email
+    .col-md-6
+      .form-group
+        .input-group.mb-2.mr-sm-2.mb-sm-0
+          .input-group-addon(style='width: 2.6rem')
+            i.fa.fa-envelope
+          input#email.form-control(type='text', name='email', placeholder='you@example.com' autofocus='')
+    .col-md-3
+      .form-control-feedback
+        span.text-danger.align-middle
+          // Put e-mail validation error messages here
+  .row
+    .col-md-3.field-label-responsive
+      label(for='user_role') User Role
+    .col-md-6
+      .form-group
+        .input-group.mb-2.mr-sm-2.mb-sm-2
+          .input-group-addon(style='width: 2.6rem')
+            i.fa.fa-book
+          button#user_role.form-control.btn-default.dropdown-toggle(type='button',data-toggle="dropdown", aria-haspopup="true", aria-expanded="true")
+            span.caret
+          ul.dropdown-menu(aria-labelledby='user_role')
+            li Gold
+            li Silver
+            li Bronze
+    .col-md-3
+      .form-control-feedback
+        span.text-danger.align-middle
+          // Put e-mail validation error messages here
+  
+  
+  
+  .row
+    .col-md-3.field-label-responsive
+      label(for='edit_delete') Select Action
+    .col-md-6
+      .form-group
+        .input-group.mb-2.mr-sm-2.mb-sm-2
+          .input-group-addon(style='width: 2.6rem')
+            i.fa.fa-book
+          button#edit_delete.form-control.btn-default.dropdown-toggle(type='button',data-toggle="dropdown", aria-haspopup="true", aria-expanded="true")
+            span.caret
+          ul.dropdown-menu(aria-labelledby='edit_delete')
+            li Delete
+            li Update
+            

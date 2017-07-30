@@ -1,0 +1,23 @@
+.row 
+    .col-md-6
+        ul.list-group
+        li.list-group-item Cras justo odio
+        li.list-group-item Dapibus ac facilisis in
+        li.list-group-item Morbi leo risus
+        li.list-group-item Porta ac consectetur ac
+        li.list-group-item Vestibulum at eros
+
+    
+    .col-md-6
+        form.form-horizontal(role='form', method='POST', action='/')
+            label(for='name') Create New Category
+            .col-md-6
+                .form-group
+                    .input-group.mb-2.mr-sm-2.mb-sm-2
+                        .input-group-addon(style='width: 2.6rem')
+                            i.fa.fa-book
+                        input#name.form-control(type='text', name='name', placeholder='Enter Book', required='', autofocus='')
+            .col-md-3
+            .form-control-feedback
+                span.text-danger.align-middle
+                // Put name validation error messages here
