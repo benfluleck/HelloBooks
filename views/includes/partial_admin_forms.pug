@@ -1,0 +1,58 @@
+form.form-horizontal(role='form', method='POST', action='/')
+  .row
+    .col-md-3.field-label-responsive
+      label(for='name') Book Name
+    .col-md-6
+      .form-group
+        .input-group.mb-2.mr-sm-2.mb-sm-0
+          .input-group-addon(style='width: 2.6rem')
+            i.fa.fa-book
+          input#name.form-control(type='text', name='name', placeholder='Enter Book', required='', autofocus='')
+    .col-md-3
+      .form-control-feedback
+        span.text-danger.align-middle
+          // Put name validation error messages here
+  .row
+    .col-md-3.field-label-responsive
+      label(for='email') Author Name
+    .col-md-6
+      .form-group
+        .input-group.mb-2.mr-sm-2.mb-sm-0
+          .input-group-addon(style='width: 2.6rem')
+            i.fa.fa-user
+          input#author.form-control(type='text', name='author', placeholder='Author Name' autofocus='')
+    .col-md-3
+      .form-control-feedback
+        span.text-danger.align-middle
+          // Put e-mail validation error messages here
+  .row
+    .col-md-3.field-label-responsive
+      label(for='description') Description
+    .col-md-6
+      .input-group.mb-2.mr-sm-2.mb-sm-3
+          .input-group-addon(style='width: 2.6rem')
+            i.fa.fa-book
+          textarea#description.form-control(rows="4")
+    .col-md-3
+      .form-control-feedback
+        span.text-danger.align-middle
+          // Put name validation error messages here
+  
+  .row
+    .col-md-3.field-label-responsive
+      label(for='category') Category
+    .col-md-6
+      .form-group
+        .input-group.mb-2.mr-sm-2.mb-sm-2
+          .input-group-addon(style='width: 2.6rem')
+            i.fa.fa-book
+          button#category.form-control.btn-default.dropdown-toggle(type='button',data-toggle="dropdown", aria-haspopup="true", aria-expanded="true")
+            span.caret
+          ul.dropdown-menu(aria-labelledby='category')
+            li Horror
+            li Romance
+            li Action
+    .col-md-3
+      .form-control-feedback
+        span.text-danger.align-middle
+          // Put e-mail validation error messages here

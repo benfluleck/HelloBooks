@@ -1,0 +1,22 @@
+.row
+    .col-md-3
+      h2 Create New Book
+      hr
+include includes/partial_admin_forms
+  .row 
+    .col-md-6
+      .form-group
+        label(for='exampleInputFile') File input
+        input#exampleInputFile.form-control-file(type='file', aria-describedby='fileHelp')
+        small#fileHelp.form-text.text-muted
+            | Upload a picture of the book unto the server.         
+    .col-md-3
+      .form-control-feedback
+        span.text-danger.align-middle
+          // Put e-mail validation error messages here
+  .row
+    .col-md-3
+    .col-md-6
+      button.btn.btn-primary(type='submit')
+        i.fa.fa-user-plus
+        |  Create Book

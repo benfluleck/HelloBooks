@@ -1,0 +1,19 @@
+nav.navbar.navbar-toggleable-sm.navbar-inverse.bg-inverse.fixed-top
+  button.navbar-toggler.navbar-toggler-left(type='button', data-toggle='collapse', data-target='#navbarsExampleDefault', aria-controls='navbarsExampleDefault', aria-expanded='false', aria-label='Toggle navigation')
+    span.navbar-toggler-icon
+  a.navbar-brand(href='#') Admin
+  #navbarsExampleDefault.collapse.navbar-collapse
+    ul.navbar-nav.mr-auto
+      li.nav-item.active
+        a.nav-link(href='#')
+          | Home 
+          span.sr-only (current)
+      li.nav-item
+        a.nav-link(href='#') Visit Site
+    .dropdown.default
+      a#dropdownMenuLink.btn.btn-secondary.dropdown-toggle(data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+        | Account
+      .dropdown-menu(aria-labelledby='dropdownMenuLink')
+        a.dropdown-item(href='#') Action
+        a.dropdown-item(href='#') Another action
+        a.dropdown-item(href='#') Logout

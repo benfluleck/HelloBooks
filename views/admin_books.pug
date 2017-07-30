@@ -1,0 +1,16 @@
+.container-fluid
+  ul#booksadmin-nav.nav.nav-tabs(role='tablist')
+    li.nav-item
+      a#books-tab.nav-link.active(href='#books', role='tab', data-toggle='tab', aria-controls='books', aria-expanded='true') Books
+    li.nav-item
+      a#category-tab.nav-link(href='#category', role='tab', data-toggle='tab', aria-controls='category') Category
+  
+  #booksadmin-nav-content.tab-content
+    #books.tab-pane.fade.show.active(role='tabpanel', aria-labelledby='books-tab')
+      a.nav-link(href='#') Create New Book
+      a.nav-link(href='#') Edit Book
+      a.nav-link(href='#') View All Books
+    #category.tab-pane.fade(role='tabpanel', aria-labelledby='category-tab')
+      a.nav-link(href='#') Create New Category
+      a.nav-link(href='#') Edit Category
+    
