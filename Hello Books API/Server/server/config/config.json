@@ -4,14 +4,16 @@
         "password": null,
         "database": "hello_books",
         "host": "127.0.0.1",
-        "dialect": "postgresql"
+        "port": 5432,
+        "dialect": "postgres"
     },
     "test": {
-        "username": "root",
+        "username": "benny",
         "password": null,
         "database": "hello_books",
         "host": "127.0.0.1",
-        "dialect": "postgresql"
+        "port": 5432,
+        "dialect": "postgres"
     }
     /* "production": {
       "username": "root",
