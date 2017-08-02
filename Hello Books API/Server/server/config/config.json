@@ -1,0 +1,25 @@
+{
+    "development": {
+        "username": "benny",
+        "password": null,
+        "database": "hello_books",
+        "host": "127.0.0.1",
+        "port": 5432,
+        "dialect": "postgres"
+    },
+    "test": {
+        "username": "benny",
+        "password": null,
+        "database": "hello_books",
+        "host": "127.0.0.1",
+        "port": 5432,
+        "dialect": "postgres"
+    }
+    /* "production": {
+      "username": "root",
+      "password": null,
+      "database": "database_production",
+      "host": "127.0.0.1",
+      "dialect": "mysql"
+    } */
+}
