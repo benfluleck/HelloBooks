@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 const UserController = require('../controllers').User;
+const BooksController = require('../controllers').Books;
 
 
 
@@ -38,11 +39,13 @@ module.exports = (app) => {
             // return an error
             return res.status(403).send({
                 success: false,
-                message: 'No token provided.'
+                message: 'No token provided. Did you specify your secret message'
             });
 
         }
     });
+
+    app.get('/api/books', BooksController.create);
 
 
 };
