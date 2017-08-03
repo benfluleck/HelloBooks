@@ -12,7 +12,11 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.17.2",
+    "eslint": "^4.3.0",
+    "eslint-config-airbnb": "^15.1.0",
     "express": "^4.15.3",
+    "json": "^9.0.6",
+    "jsonwebtoken": "^7.4.1",
     "morgan": "^1.8.2",
     "nodemon": "^1.11.0",
     "pg": "^7.0.2",
