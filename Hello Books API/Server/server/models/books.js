@@ -18,11 +18,12 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             defaultValue: false,
         }
+
     });
     Books.associate = (models) => {
         Books.belongsTo(models.User, {
             // associations can be defined here
-            foreignKey: 'UserId',
+            foreignKey: 'userId',
             onDelete: 'CASCADE',
 
         });
