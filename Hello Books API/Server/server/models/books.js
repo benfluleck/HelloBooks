@@ -1,6 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-    const Books = sequelize.define('Books', {
+    const Todo = sequelize.define('Books', {
         book_title: {
             types: DataTypes.STRING,
             allowNull: false,
@@ -18,18 +18,15 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             defaultValue: false,
         }
-
-    });
-    Books.associate = (models) => {
-        Books.belongsTo(models.User, {
-            // associations can be defined here
-            foreignKey: 'userId',
-            onDelete: 'CASCADE',
-
-        });
+    }, {
+        classMethods: {
+            associate: function(models) {
+                // associations can be defined here
+            }
+        }
 
     }, {
         underscored: true
     });
-return Books;
+    return Books;
 };
