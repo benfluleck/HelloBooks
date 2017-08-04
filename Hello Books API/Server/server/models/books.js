@@ -1,6 +1,11 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-    const Books = sequelize.define('Books', {
+    let Books = sequelize.define('Books', {
+        id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true,
+        },
         book_title: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -13,16 +18,19 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        on_loan: {
+        status: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: false,
-        }
+        },
+    }, {
+        underscore: true,
     });
     Books.associate = (models) => {
-        Books.belongsTo(models.User, {
-            foreignKey: 'userId',
-            onDelete: 'CASCADE',
+        Books.hasMany(models.User, {
+            foreignKey: 'id',
+
+
         });
 
 

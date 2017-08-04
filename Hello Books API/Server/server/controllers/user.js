@@ -1,7 +1,7 @@
 const User = require('../models').User;
 
 const jwt = require('jsonwebtoken');
-const json = require('json');
+
 
 module.exports = {
     create(req, res) {

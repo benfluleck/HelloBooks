@@ -45,7 +45,8 @@ module.exports = (app) => {
         }
     });
 
-    app.get('/api/books', BooksController.create);
-
+    app.post('/api/books', BooksController.create);
+    app.put('/api/books/:bookId', BooksController.update);
+    app.get('/api/books/', BooksController.getAllBooks);
 
 };
