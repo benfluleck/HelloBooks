@@ -48,7 +48,7 @@ module.exports = (app) => {
     app.post('/api/books', BooksController.create);
     app.put('/api/books/:bookId', BooksController.update);
     app.get('/api/books/', BooksController.getAllBooks);
+    app.get('/api/users/:userId/books', UserController.getborrowerslist);
     app.post('/api/users/:userId/books', UserController.loanbook);
-    app.get('/api/users/:userId/books?returned=false', UserController.getborrowedlist);
     app.put('/api/users/:userId/books', UserController.returnbook);
 };

@@ -1,5 +1,6 @@
 const User = require('../models').User;
 const Books = require('../models').Books;
+const UserBooks = require('../models').UserBooks;
 
 const jwt = require('jsonwebtoken');
 
@@ -61,39 +62,25 @@ module.exports = {
     },
 
     loanbook(req, res) {
-        return Books
-            .findOne({
-                where: {
-                    book_title: req.body.title
-                },
-            })
-            .then(book => {
-
-                if (book) {
-                    book.updateAttributes({
-                            status: true,
-                            userid: req.params.userId,
-
-                        })
-                        .then(book => res.status(201).send(book))
-                        .catch(error => res.status(400).send(error));
-                }
-                return book
+        return UserBooks
+            .create({
+                userid: req.params.userId,
+                bookid: req.body.book_id,
+                return_date: req.body.date,
+                return_status: false
 
             })
+
+
+        //if book id does not exist
+        .then(User => res.status(201).send(User))
+            .catch(error => res.status(400).send(error));
 
     },
 
-    getborrowedlist(req, res) {
-        return Books
-            .findAll({
-                where: {
-                    status: true,
-
-                },
-
-
-            })
+    getborrowerslist(req, res) {
+        return UserBooks
+            .findAll({ where: { userid: req.params.userId } })
             .then(book => res.status(201).send(book))
             .catch(error => res.status(400).send(error));
 

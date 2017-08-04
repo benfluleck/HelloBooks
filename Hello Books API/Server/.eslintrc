@@ -1,6 +1,39 @@
 {
-    "extends": "airbnb",
+    "parser": "babel-eslint",
     "rules": {
-        "func-names": ["error", "never"]
-    }
+        "quotes": [
+            2,
+            "single"
+        ],
+        "linebreak-style": [
+            2,
+            "unix"
+        ],
+        "no-unused-vars": [2, {
+            "vars": "all",
+            "args": "after-used",
+            "argsIgnorePattern": "^_",
+            "varsIgnorePattern": "^_"
+        }],
+        "semi": [
+            2,
+            "always"
+        ],
+        "no-console": 0,
+        "id-length": [2, {
+            "min": 2,
+            "exceptions": ["x", "v", "T"],
+        }],
+    },
+    "env": {
+        "es6": true,
+        "node": true,
+        "mocha": true,
+    },
+    "ecmaFeatures": {
+        "classes": true,
+        "modules": true,
+    },
+    "plugins": [],
+    "extends": "airbnb/base"
 }

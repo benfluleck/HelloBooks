@@ -21,13 +21,8 @@ module.exports = (sequelize, DataTypes) => {
         underscore: true
     });
     User.associate = (models) => {
-        User.hasMany(models.Books, {
-            // associations can be defined here
-            foreignKey: 'id',
-            as: 'bookid'
 
-
-        });
+        User.belongsToMany(models.Books, { as: 'userbooks', through: models.UserBooks, foreignKey: 'userid' });
 
     };
     return User;
