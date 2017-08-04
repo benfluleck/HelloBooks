@@ -22,18 +22,8 @@
         "no-console": 0,
         "id-length": [2, {
             "min": 2,
-            "exceptions": ["x", "v", "T"],
-        }],
-    },
-    "env": {
-        "es6": true,
-        "node": true,
-        "mocha": true,
-    },
-    "ecmaFeatures": {
-        "classes": true,
-        "modules": true,
-    },
-    "plugins": [],
-    "extends": "airbnb/base"
+            "exceptions": ["x", "v", "T"]
+        }]
+    }
+
 }

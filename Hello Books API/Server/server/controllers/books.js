@@ -44,7 +44,12 @@ module.exports = {
             .catch(error => res.status(400).send(error));
     },
 
+    returnBooks(req, res) {
+        return Books
+            .find;
 
+
+    }
 
 
 

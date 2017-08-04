@@ -58,7 +58,7 @@ module.exports = {
                     }
                 }
 
-            )
+            );
     },
 
     loanbook(req, res) {
@@ -86,8 +86,10 @@ module.exports = {
 
     },
 
+
+
     returnbook(req, res) {
-        return Books
+        return UserBooks
             .findOne({
                 where: {
                     book_title: req.body.title,
@@ -101,8 +103,8 @@ module.exports = {
                     });
                 }
                 return book
-                    .updateAttributes({
-                        status: false,
+                    .update({
+                        return_status: true,
                     })
                     .then(() => res.status(200).send(book)) // Send back the updated book
                     .catch((error) => res.status(400).send(error));
