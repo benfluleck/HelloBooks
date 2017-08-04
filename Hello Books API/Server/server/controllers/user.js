@@ -90,9 +90,9 @@ module.exports = {
 
     returnbook(req, res) {
         return UserBooks
-            .findOne({
+            .find({
                 where: {
-                    book_title: req.body.title,
+                    bookid: req.body.book_id,
                     userid: req.params.userId,
                 },
             })
