@@ -89,8 +89,9 @@ module.exports = {
             .findAll({
                 where: {
                     status: true,
-                    userid: req.params.userId,
+
                 },
+
 
             })
             .then(book => res.status(201).send(book))
@@ -115,8 +116,6 @@ module.exports = {
                 return book
                     .updateAttributes({
                         status: false,
-
-
                     })
                     .then(() => res.status(200).send(book)) // Send back the updated book
                     .catch((error) => res.status(400).send(error));
