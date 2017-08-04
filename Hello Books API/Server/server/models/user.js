@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
         User.hasMany(models.Books, {
             // associations can be defined here
             foreignKey: 'id',
-
+            as: 'bookid'
 
 
         });

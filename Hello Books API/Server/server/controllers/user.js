@@ -1,4 +1,5 @@
 const User = require('../models').User;
+const Books = require('../models').Books;
 
 const jwt = require('jsonwebtoken');
 
@@ -57,8 +58,70 @@ module.exports = {
                 }
 
             )
-    }
+    },
+
+    loanbook(req, res) {
+        return Books
+            .findOne({
+                where: {
+                    book_title: req.body.title
+                },
+            })
+            .then(book => {
+
+                if (book) {
+                    book.updateAttributes({
+                            status: true,
+                            userid: req.params.userId,
+
+                        })
+                        .then(book => res.status(201).send(book))
+                        .catch(error => res.status(400).send(error));
+                }
+                return book
+
+            })
+
+    },
+
+    getborrowedlist(req, res) {
+        return Books
+            .findAll({
+                where: {
+                    status: true,
+                    userid: req.params.userId,
+                },
+
+            })
+            .then(book => res.status(201).send(book))
+            .catch(error => res.status(400).send(error));
+
+    },
+
+    returnbook(req, res) {
+        return Books
+            .findOne({
+                where: {
+                    book_title: req.body.title,
+                    userid: req.params.userId,
+                },
+            })
+            .then(book => {
+                if (!book) {
+                    return res.status(404).send({
+                        message: 'Book does not exist in this database',
+                    });
+                }
+                return book
+                    .updateAttributes({
+                        status: false,
 
 
+                    })
+                    .then(() => res.status(200).send(book)) // Send back the updated book
+                    .catch((error) => res.status(400).send(error));
+            })
+            .catch((error) => res.status(400).send(error));
+    },
 
 };
