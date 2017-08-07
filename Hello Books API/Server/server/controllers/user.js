@@ -1,6 +1,7 @@
 const User = require('../models').User;
 const Books = require('../models').Books;
 const UserBooks = require('../models').UserBooks;
+//import faker from 'faker';
 
 const jwt = require('jsonwebtoken');
 
@@ -33,12 +34,14 @@ module.exports = {
             })
             .then(User => {
                     if (!User) {
+                        //res.status(403).send();
                         res.json({ success: false, message: 'Authentication failed. User not found.' });
 
                     } else if (User) {
 
                         // check if password matches
                         if (User.password != req.body.password) {
+                            //res.status(403).send();
                             res.json({ success: false, message: 'Authentication failed. Wrong password.' });
                         } else {
                             const user = { name: User.username, password: User.password };

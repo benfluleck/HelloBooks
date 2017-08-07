@@ -2,7 +2,7 @@
     "parser": "babel-eslint",
     "rules": {
         "quotes": [
-            2,
+            1,
             "single"
         ],
         "linebreak-style": [
@@ -24,6 +24,14 @@
             "min": 2,
             "exceptions": ["x", "v", "T"]
         }]
+    },
+    "ecmaFeatures": {
+        "modules": true
+    },
+    "env": {
+        "browser": true,
+        "jquery": true,
+        "es6": true
     }
 
 }

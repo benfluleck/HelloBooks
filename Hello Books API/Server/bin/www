@@ -7,7 +7,7 @@
 let app = require('../app');
 let debug = require('debug')('Server:server');
 let http = require('http');
-let sequelize = require('../models').sequelize;
+let sequelize = require('../server/models').sequelize;
 
 
 /**
@@ -26,7 +26,7 @@ let server = http.createServer(app);
 /**
  * Listen on provided port, on all network interfaces.
  */
-sequelize.sync().then(function() {
+sequelize.sync().then(() => {
     server.listen(port);
 });
 
