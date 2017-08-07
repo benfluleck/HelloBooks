@@ -6,7 +6,7 @@
             "single"
         ],
         "linebreak-style": [
-            2,
+            1,
             "unix"
         ],
         "no-unused-vars": [2, {

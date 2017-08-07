@@ -11,8 +11,7 @@ module.exports = {
             .create({
                 username: req.body.username,
                 password: req.body.password,
-                email: req.body.email
-
+                email: req.body.email,
             })
             .then(User => res.status(201).send(User))
             .catch(error => res.status(400).send(error));
@@ -68,12 +67,9 @@ module.exports = {
                 bookid: req.body.book_id,
                 return_date: req.body.date,
                 return_status: false
-
             })
-
-
-        //if book id does not exist
-        .then(User => res.status(201).send(User))
+            //if book id does not exist
+            .then(User => res.status(201).send(User))
             .catch(error => res.status(400).send(error));
 
     },

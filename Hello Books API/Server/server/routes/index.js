@@ -3,18 +3,14 @@ const jwt = require('jsonwebtoken');
 const UserController = require('../controllers').User;
 const BooksController = require('../controllers').Books;
 
-
-
-
 module.exports = (app) => {
     app.get('/api', (req, res) => res.status(200).send({
         message: 'Welcome to the Hello Books!',
     }));
 
-
     app.post('/api/users/signup', UserController.create);
     app.post('/api/users/signin', UserController.signin);
-    app.use(function(req, res, next) {
+    app.use((req, res, next) => {
 
         // check header or url parameters or post parameters for token
         const token = req.body.token || req.query.token || req.headers['x-access-token'];
