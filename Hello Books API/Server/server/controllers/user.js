@@ -71,6 +71,7 @@ module.exports = {
                 return_date: req.body.date,
                 return_status: false
             })
+            // status in user table will need to be updated
             //if book id does not exist
             .then(User => res.status(201).send(User))
             .catch(error => res.status(400).send(error));
@@ -93,6 +94,7 @@ module.exports = {
                 where: {
                     bookid: req.body.book_id,
                     userid: req.params.userId,
+                    return_status: req.query.isreturnbool
                 },
             })
             .then(book => {

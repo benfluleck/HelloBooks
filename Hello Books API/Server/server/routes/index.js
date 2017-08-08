@@ -40,6 +40,7 @@ module.exports = (app) => {
 
         }
     });
+    //if  user selects a different route and is not authenticated redirect him
 
     app.post('/api/books', BooksController.create);
     app.put('/api/books/:bookId', BooksController.update);
