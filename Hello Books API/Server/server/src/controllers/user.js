@@ -1,116 +1,92 @@
-const User = require('../models').User;
-const Books = require('../models').Books;
-const UserBooks = require('../models').UserBooks;
-//import faker from 'faker';
-
-const jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken';
+import models from '../models';
 
 
-module.exports = {
-    create(req, res) {
-        return User
-            .create({
-                username: req.body.username,
-                password: req.body.password,
-                email: req.body.email,
-            })
-            .then(User => res.status(201).send(User))
-            .catch(error => res.status(400).send(error));
-        /* User.create = (err) => {
-            if (err) throw err;
-
-            console.log('User saved successfully');
-        }; */
-    },
-
-    // Sign In route build
-    signin(req, res) {
-        return User
-            .findOne({
-                where: {
-                    username: req.body.username,
-                    password: req.body.password
-                },
-            })
-            .then(User => {
-                    if (!User) {
-                        //res.status(403).send();
-                        res.json({ success: false, message: 'Authentication failed. User not found.' });
-
-                    } else if (User) {
-
-                        // check if password matches
-                        if (User.password != req.body.password) {
-                            //res.status(403).send();
-                            res.json({ success: false, message: 'Authentication failed. Wrong password.' });
-                        } else {
-                            const user = { name: User.username, password: User.password };
-                            const token = jwt.sign(user, 'superSecret', {
-                                expiresIn: 1440 // expires in 24 hours
-                            });
-
-                            // return the information including token as JSON
-                            res.json({
-                                success: true,
-                                message: 'Enjoy your token, You are now logged in!',
-                                token: token
-                            });
-
-                        }
-                    }
-                }
-
-            );
-    },
-
-    loanbook(req, res) {
-        return UserBooks
-            .create({
-                userid: req.params.userId,
-                bookid: req.body.book_id,
-                return_date: req.body.date,
-                return_status: false
-            })
-            // status in user table will need to be updated
-            //if book id does not exist
-            .then(User => res.status(201).send(User))
-            .catch(error => res.status(400).send(error));
-
-    },
-
-    getborrowerslist(req, res) {
-        return UserBooks
-            .findAll({ where: { userid: req.params.userId } })
-            .then(book => res.status(201).send(book))
-            .catch(error => res.status(400).send(error));
-
-    },
+const User = models.User;
+const UserBooks = models.UserBooks;
 
 
+export default {
+  create(req, res) {
+    return User.create({
+      username: req.body.username,
+      password: req.body.password,
+      email: req.body.email
+    }).then(user => res.status(201).send(user)).catch(error => res.status(400).send(error));
+    /* User.create = (err) => {
+                    if (err) throw err;
+                      console.log('User saved successfully');
+                }; */
+  },
 
-    returnbook(req, res) {
-        return UserBooks
-            .find({
-                where: {
-                    bookid: req.body.book_id,
-                    userid: req.params.userId,
-                    //return_status: req.query.isreturnbool
-                },
-            })
-            .then(book => {
-                if (!book) {
-                    return res.status(404).send({
-                        message: 'Book does not exist in this database',
-                    });
-                }
-                return book
-                    .update({
-                        return_status: true,
-                    })
-                    .then(() => res.status(200).send(book)) // Send back the updated book
-                    .catch((error) => res.status(400).send(error));
-            })
-            .catch((error) => res.status(400).send(error));
-    },
+  // Sign In route build
+  signin(req, res) {
+    return User.findOne({
+      where: {
+        username: req.body.username,
+        password: req.body.password
+      }
+    }).then((user) => {
+      if (!user) {
+        // res.status(403).send();
+        res.json({ success: false, message: 'Authentication failed. User not found.' });
+      } else if (user) {
+        // check if password matches
+        if (user.password !== req.body.password) {
+          // res.status(403).send();
+          res.json({ success: false, message: 'Authentication failed. Wrong password.' });
+        } else {
+          const Userjwt = { name: User.username, password: User.password };
+          const token = jwt.sign(Userjwt, 'superSecret', {
+            expiresIn: 1440 // expires in 24 hours
+          });
+
+          // return the information including token as JSON
+          res.json({
+            success: true,
+            message: 'Enjoy your token, You are now logged in!',
+            token
+          });
+        }
+      }
+    });
+  },
+
+  loanbook(req, res) {
+    return UserBooks.create({
+      userid: req.params.userId,
+      bookid: req.body.book_id,
+      return_date: req.body.date,
+      return_status: false
+    }
+      // status in user table will need to be updated
+      // if book id does not exist
+    ).then(user => res.status(201).send(user)).catch(error => res.status(400).send(error));
+  },
+
+  getborrowerslist(req, res) {
+    return UserBooks.findAll({ where: { userid: req.params.userId } })
+      .then(book => res.status(201).send(book)).catch(error => res.status(400).send(error));
+  },
+
+  returnbook(req, res) {
+    return UserBooks.find({
+      where: {
+        bookid: req.body.book_id,
+        userid: req.params.userId
+        // return_status: req.query.isreturnbool
+      }
+    }).then((book) => {
+      if (!book) {
+        return res.status(404).send({
+          message: 'Book does not exist in this database'
+        });
+      }
+      return book.update({
+        return_status: true
+      }).then(() => res.status(200).send(book) // Send back the updated book
+      ).catch(error => res.status(400).send(error));
+    }).catch(error => res.status(400).send(error));
+  }
 
 };

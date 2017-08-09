@@ -1,25 +1,46 @@
 'use strict';
 
-var app = require('../app');
-var mocha = require('mocha');
-var chai = require('chai');
-var chaiHttp = require('chai-http');
-var db = require('../server/models');
-var User = require('../server/models').User;
-var Books = require('../server/models').Books;
-var server = require('../server/routes/index');
-var expect = chai.expect;
-var faker = require('faker');
-var sequelize = require('../server/models').sequelize;
+var _app = require('../app');
+
+var _app2 = _interopRequireDefault(_app);
+
+var _mocha = require('mocha');
+
+var _mocha2 = _interopRequireDefault(_mocha);
+
+var _chai = require('chai');
+
+var _chai2 = _interopRequireDefault(_chai);
+
+var _chaiHttp = require('chai-http');
+
+var _chaiHttp2 = _interopRequireDefault(_chaiHttp);
+
+var _models = require('../models');
+
+var _models2 = _interopRequireDefault(_models);
+
+var _faker = require('faker');
+
+var _faker2 = _interopRequireDefault(_faker);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var User = _models2.default.User;
+var Books = _models2.default.Books;
+//const server = require('../routes/index');
+var expect = _chai2.default.expect;
+
 //--compilers js:babel-core/register
 // Questions: Classes , ES6 problems maybe babel
 
-
+// const User = require('../models').User;
+// let Books = require('../models').Books;
 //During the test the env variable is set to test
 //process.env.NODE_ENV = 'test';
 
 
-chai.use(chaiHttp);
+_chai2.default.use(_chaiHttp2.default);
 //Our parent block
 
 
@@ -46,7 +67,7 @@ describe('HelloBooks', function () {
         var user = User.create({
             username: "Benny",
             password: "benny",
-            email: faker.internet.email()
+            email: _faker2.default.internet.email()
         }).then(function (user) {
             userId = user.id;
         });
@@ -59,13 +80,13 @@ describe('HelloBooks', function () {
      */
     describe('/GET', function () {
         it('Only authenticated users allowed to view books', function (done) {
-            chai.request(app).get('/api/books/').end(function (err, res) {
+            _chai2.default.request(_app2.default).get('/api/books/').end(function (err, res) {
                 expect(res.status).to.equal(403);
                 done();
             });
         });
         it('Only authenticated users allowed to see the book list', function (done) {
-            chai.request(app).get('/api/users/1/books').end(function (err, res) {
+            _chai2.default.request(_app2.default).get('/api/users/1/books').end(function (err, res) {
                 expect(res.status).to.equal(403);
                 done();
             });
@@ -74,19 +95,19 @@ describe('HelloBooks', function () {
 
     describe('/POST ', function () {
         it('All users are allowed to register, Sign up successful', function (done) {
-            chai.request(app).post('/api/users/signup').send({ username: faker.internet.userName(), password: faker.internet.password }).end(function (err, res) {
+            _chai2.default.request(_app2.default).post('/api/users/signup').send({ username: _faker2.default.internet.userName(), password: _faker2.default.internet.password }).end(function (err, res) {
                 expect(201);
                 done();
             });
         });
         it('Only authenticated users allowed to create books', function (done) {
-            chai.request(app).post('/api/books/').end(function (err, res) {
+            _chai2.default.request(_app2.default).post('/api/books/').end(function (err, res) {
                 expect(res.status).to.equal(403);
                 done();
             });
         });
         it('Only authenticated users allowed to loan', function (done) {
-            chai.request(app).post('/api/users/1/books').end(function (err, res) {
+            _chai2.default.request(_app2.default).post('/api/users/1/books').end(function (err, res) {
                 expect(res.status).to.equal(403);
                 done();
             });
@@ -94,13 +115,13 @@ describe('HelloBooks', function () {
     });
     describe('/PUT', function () {
         it('Only authenticated users allowed to edit books', function (done) {
-            chai.request(app).put('/api/books/1').end(function (err, res) {
+            _chai2.default.request(_app2.default).put('/api/books/1').end(function (err, res) {
                 expect(res.status).to.equal(403);
                 done();
             });
         });
         it('Only authenticated users allowed to return books', function (done) {
-            chai.request(app).put('/api/users/1/books').end(function (err, res) {
+            _chai2.default.request(_app2.default).put('/api/users/1/books').end(function (err, res) {
                 expect(res.status).to.equal(403);
                 done();
             });
@@ -112,21 +133,21 @@ describe('HelloBooks', function () {
     */
     describe('POST /login', function () {
         it('it responds with 401 status code if bad username or password', function (done) {
-            chai.request(app).post('api/users/signin').send({ username: faker.internet.userName(), password: faker.internet.password }).end(function (err, res) {
+            _chai2.default.request(_app2.default).post('api/users/signin').send({ username: _faker2.default.internet.userName(), password: _faker2.default.internet.password }).end(function (err, res) {
                 expect(403);
                 done();
             });
         });
         //Authenticated users
         it('it responds with 202 status code if good username or password', function (done) {
-            chai.request(app).post('/api/users/signin').send({ username: "Benny", password: "benny" }).end(function (err, res) {
+            _chai2.default.request(_app2.default).post('/api/users/signin').send({ username: "Benny", password: "benny" }).end(function (err, res) {
                 expect(res.status).to.equal(200);
                 done();
             });
         });
         //Authenticate the user with a token
         it('it returns succesful login if user name and password', function (done) {
-            chai.request(app).post('/api/users/signin').send({ username: "Benny", password: "benny" }).end(function (err, res) {
+            _chai2.default.request(_app2.default).post('/api/users/signin').send({ username: "Benny", password: "benny" }).end(function (err, res) {
                 token = res.body.token;
                 //if (err) return done(err);
                 expect('Content-Type', /json/);
@@ -145,7 +166,7 @@ describe('HelloBooks', function () {
                 // return_status: false
             };
 
-            chai.request(app).post('/api/users/' + userbook.userid + '/books').set('x-access-token', token).send(userbook).end(function (err, res) {
+            _chai2.default.request(_app2.default).post('/api/users/' + userbook.userid + '/books').set('x-access-token', token).send(userbook).end(function (err, res) {
 
                 expect(res.status).to.equal(201);
 
@@ -156,7 +177,7 @@ describe('HelloBooks', function () {
         //Retrieves
         describe('/GET', function () {
             it('It retrieves all books from the data', function (done) {
-                chai.request(app).get('/api/books').set('x-access-token', token).end(function (err, res) {
+                _chai2.default.request(_app2.default).get('/api/books').set('x-access-token', token).end(function (err, res) {
                     //bookid = Books.id
                     expect(res.status).to.equal(200);
                     done();
@@ -166,7 +187,7 @@ describe('HelloBooks', function () {
         //Edit a book
         describe('/PUT', function () {
             it('Edit a select book from the data', function (done) {
-                chai.request(app).put('/api/books/' + bookid).set('x-access-token', token).send({
+                _chai2.default.request(_app2.default).put('/api/books/' + bookid).set('x-access-token', token).send({
                     book_title: "The Chronicles of Andela",
                     books_author: "C.S. Lewis",
                     category: "Action"
@@ -178,7 +199,7 @@ describe('HelloBooks', function () {
 
             //return books
             it('it should return a book', function (done) {
-                chai.request(app).put('/api/users/' + userId + '/books').set('x-access-token', token).send({
+                _chai2.default.request(_app2.default).put('/api/users/' + userId + '/books').set('x-access-token', token).send({
                     book_id: bookid,
                     userid: userId
                 }).end(function (err, res) {
