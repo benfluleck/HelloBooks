@@ -9,7 +9,6 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     classMethods: {
 
-     
     }
   });
   return UserBooks;

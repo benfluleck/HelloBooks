@@ -1,7 +1,7 @@
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 var _express = require('express');
@@ -38,9 +38,9 @@ app.use(_bodyParser2.default.urlencoded({ extended: false }));
 
 
 app.get('*', function (req, res) {
-    return res.status(200).send({
-        message: 'This is just a test.'
-    });
+  return res.status(200).send({
+    message: 'This is just a test.'
+  });
 });
 
 exports.default = app;
