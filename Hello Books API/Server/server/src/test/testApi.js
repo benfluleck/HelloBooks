@@ -54,23 +54,6 @@ describe('HelloBooks', () => {
         done();
     });
 
-    // describe('Sign In', () => {
-    //     it('it returns succesful login if user name and password', (done) => {
-    //         chai.request(app)
-    //             .post('/api/users/signin')
-    //             .send({ username: "Benny", password: "benny" })
-    //             .end((err, res) => {
-    //                 //if (err) return done(err);
-    //                 token = res.body.token;
-    //                 expect('Content-Type', /json/)
-    //                 expect(res.body).have.property('token');
-    //                 console.log(res);
-    //                 done();
-    //             });
-    //     });
-    // });
-
-
     /*
      *Unauthenticated user tests
      */
@@ -156,7 +139,7 @@ describe('HelloBooks', () => {
                     done();
                 });
         });
-
+        //Authenticated users
         it('it responds with 202 status code if good username or password', (done) => {
             chai.request(app)
                 .post('/api/users/signin')
@@ -166,7 +149,7 @@ describe('HelloBooks', () => {
                     done();
                 });
         });
-
+        //Authenticate the user with a token
         it('it returns succesful login if user name and password', (done) => {
             chai.request(app)
                 .post('/api/users/signin')
@@ -176,33 +159,33 @@ describe('HelloBooks', () => {
                     //if (err) return done(err);
                     expect('Content-Type', /json/)
                     expect(res.body).have.property('token');
-                    //console.log(res);
+
                     done();
                 });
         });
 
+        //Loan a book need to change the date
         it('it allows the user to loan a book', (done) => {
-            console.log(bookid);
             let userbook = {
                 userid: userId,
                 book_id: bookid,
                 date: '2016-08-09 04:05:02',
-                return_status: false
+                // return_status: false
             }
-            console.log(userbook, '++++++++++++++++++++++++++++++++++++++++++++++++++++')
+
             chai.request(app)
                 .post('/api/users/' + userbook.userid + '/books')
                 .set('x-access-token', token)
                 .send(userbook)
                 .end((err, res) => {
-                    console.log(res.body, '=================response')
+
                     expect(res.status).to.equal(201)
 
                     done();
                 });
         });
 
-
+        //Retrieves
         describe('/GET', () => {
             it('It retrieves all books from the data', (done) => {
                 chai.request(app)
@@ -215,6 +198,7 @@ describe('HelloBooks', () => {
                     });
             });
         });
+        //Edit a book
         describe('/PUT', () => {
             it('Edit a select book from the data', (done) => {
                 chai.request(app)
@@ -231,21 +215,24 @@ describe('HelloBooks', () => {
                     });
 
             });
-            // it('Edit a select book from the data', (done) => {
-            //     chai.request(app)
-            //         .put('/api/books/' + bookid)
-            //         .set('x-access-token', token)
-            //         .send({
-            //             book_title: "The Chronicles of Andela",
-            //             books_author: "C.S. Lewis",
-            //             category: "Action"
-            //         })
-            //         .end((err, res) => {
-            //             expect(res.status).to.equal(200)
-            //             done();
-            //         });
 
-            // });
+            //return books
+            it('it should return a book', (done) => {
+                chai.request(app)
+                    .put('/api/users/' + userId + '/books')
+                    .set('x-access-token', token)
+                    .send({
+                        book_id: bookid,
+                        userid: userId,
+                    })
+                    .end((err, res) => {
+                        //console.log(res, '++++++++++++')
+                        expect(res.status).to.equal(200)
+
+                        done();
+                    });
+
+            });
         });
 
 
@@ -272,27 +259,3 @@ describe('HelloBooks', () => {
 
 Authenticated users
 */
-
-
-
-// });
-// describe('/POST user signups', () => {
-//     it('Users should be able to sign up ', (done) => {
-//         let user = {
-//             username: "Test user",
-//             password: "testuser",
-//             email: "test@user.com"
-//         }
-//         chai.request(app)
-//             .post('/api/users/signup')
-//             .send(user)
-//             .end((err, res) => {
-//                 expect(res.status).to.equal(201);
-//                 expect(res.body) //res.body.should.be.a('object');
-//                     //res.body.should.have.property('errors');
-//                     //res.body.errors.should.have.property('pages');
-//                     //    res.body.errors.pages.should.have.property('kind').eql('required');
-//                 done();
-//             });
-//     });
-//

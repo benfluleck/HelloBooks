@@ -1,33 +1,40 @@
 #!/usr/bin/env node
+'use strict';
+
+var _app = require('../app');
+
+var _app2 = _interopRequireDefault(_app);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//let app = require('../app');
+var debug = require('debug')('Server:server');
 
 /**
  * Module dependencies.
  */
 
-let app = require('../app');
-let debug = require('debug')('Server:server');
-let http = require('http');
-let sequelize = require('../server/models').sequelize;
-
+var http = require('http');
+var sequelize = require('../models').sequelize;
 
 /**
  * Get port from environment and store in Express.
  */
 
-let port = normalizePort(process.env.PORT || '3003');
-app.set('port', port);
+var port = normalizePort(process.env.PORT || '3004');
+_app2.default.set('port', port);
 
 /**
  * Create HTTP server.
  */
 
-let server = http.createServer(app);
+var server = http.createServer(_app2.default);
 
 /**
  * Listen on provided port, on all network interfaces.
  */
 //  server.listen(port);
-sequelize.sync().then(() => {
+sequelize.sync().then(function () {
     server.listen(port);
 });
 
@@ -39,7 +46,7 @@ server.on('listening', onListening);
  */
 
 function normalizePort(val) {
-    let port = parseInt(val, 10);
+    var port = parseInt(val, 10);
 
     if (isNaN(port)) {
         // named pipe
@@ -63,9 +70,7 @@ function onError(error) {
         throw error;
     }
 
-    let bind = typeof port === 'string' ?
-        'Pipe ' + port :
-        'Port ' + port;
+    var bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
 
     // handle specific listen errors with friendly messages
     switch (error.code) {
@@ -88,8 +93,6 @@ function onError(error) {
 
 function onListening() {
     var addr = server.address();
-    var bind = typeof addr === 'string' ?
-        'pipe ' + addr :
-        'port ' + addr.port;
+    var bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
     debug('Listening on ' + bind);
 }

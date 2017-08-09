@@ -94,7 +94,7 @@ module.exports = {
                 where: {
                     bookid: req.body.book_id,
                     userid: req.params.userId,
-                    return_status: req.query.isreturnbool
+                    //return_status: req.query.isreturnbool
                 },
             })
             .then(book => {
