@@ -62,15 +62,20 @@ export default {
  },
 
  loanbook(req, res) {
+
   return UserBooks.create({
     userid: req.params.userId,
-    bookid: req.body.book_id,
+    bookid: req.body.bookid,
     return_date: req.body.date,
-    return_status: false
    }
    // status in user table will need to be updated
    // if book id does not exist
-  ).then(user => res.status(201).send(user)).catch(error => res.status(400).send(error));
+  ).then((userbook) => {
+   if (userbook.return_status = false)
+    userbook.return_status = true;
+   userbook.save;
+   return res.status(201).send(userbook);
+  }).catch(error => res.status(400).send(error));
  },
 
  getborrowerslist(req, res) {
@@ -79,6 +84,7 @@ export default {
  },
 
  returnbook(req, res) {
+
   return UserBooks.find({
    where: {
     bookid: req.body.book_id,
@@ -91,6 +97,7 @@ export default {
      message: 'Book does not exist in this database'
     });
    }
+
    return book.update({
     return_status: true
    }).then(() => res.status(200).send(book) // Send back the updated book

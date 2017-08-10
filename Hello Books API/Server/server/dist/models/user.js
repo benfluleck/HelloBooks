@@ -1,10 +1,12 @@
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 var _bcryptNodejs = require('bcrypt-nodejs');
 
 var _bcryptNodejs2 = _interopRequireDefault(_bcryptNodejs);
+
+var _toTitleCase = require('to-title-case');
+
+var _toTitleCase2 = _interopRequireDefault(_toTitleCase);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -26,6 +28,9 @@ module.exports = function (sequelize, DataTypes) {
           arg: ['^[a-z]+$', 'i'],
           msg: 'Must be only letters'
         }
+      },
+      set: function set(val) {
+        this.setDataValue('firstname', (0, _toTitleCase2.default)(val));
       }
     },
 
@@ -38,6 +43,9 @@ module.exports = function (sequelize, DataTypes) {
           arg: ['^[a-z]+$', 'i'],
           msg: 'Must be only letters'
         }
+      },
+      set: function set(val) {
+        this.setDataValue('lastname', (0, _toTitleCase2.default)(val));
       }
     },
 
@@ -70,6 +78,7 @@ module.exports = function (sequelize, DataTypes) {
 
       }
     },
+
     password_confirmation: {
       type: DataTypes.VIRTUAL,
       allowNull: false,
@@ -77,6 +86,7 @@ module.exports = function (sequelize, DataTypes) {
         notEmpty: true
       }
     },
+
     email: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -115,13 +125,12 @@ module.exports = function (sequelize, DataTypes) {
         if (user.password === user.password_confirmation) {
           user.password = User.generateHash(user.password);
         } else {
-          return "Passwords do not the match";
+          return 'Passwords do not the match';
         }
       },
 
       beforeUpdate: function beforeUpdate(user) {
         if (user._changed.password) {
-
           undefined.password = _bcryptNodejs2.default.hashSync(user.password, _bcryptNodejs2.default.genSaltSync(10), null);
         }
       }
@@ -137,9 +146,6 @@ module.exports = function (sequelize, DataTypes) {
 
   User.generateHash = function (password) {
     return _bcryptNodejs2.default.hashSync(password, _bcryptNodejs2.default.genSaltSync(10), null);
-  }, User.validatepassword = function (password, password2) {
-    console.log(_typeof(undefined.password));
-    return _bcryptNodejs2.default.compareSync(password, password2);
   };
 
   return User;

@@ -1,3 +1,8 @@
+import toTitleCase from 'to-title-case';
+import uniqueRandom from 'unique-random';
+
+const randomId = uniqueRandom(1000000, 1000000);
+
 module.exports = (sequelize, DataTypes) => {
  const Books = sequelize.define('Books', {
   id: {
@@ -11,10 +16,13 @@ module.exports = (sequelize, DataTypes) => {
    required: true,
    trim: true,
    validate: {
-    isName: {
+    is: {
      arg: ['^[a-z]+$', 'i'],
      msg: 'Must be only letters',
     }
+   },
+   set(val) {
+    this.setDataValue('title', toTitleCase(val));
    }
   },
   author: {
@@ -23,10 +31,13 @@ module.exports = (sequelize, DataTypes) => {
    required: true,
    trim: true,
    validate: {
-    isName: {
+    is: {
      arg: ['^[a-z]+$', 'i'],
      msg: 'Must be only letters',
     }
+   },
+   set(val) {
+    this.setDataValue('author', toTitleCase(val));
    }
   },
   category: {
@@ -35,12 +46,21 @@ module.exports = (sequelize, DataTypes) => {
    required: true,
    trim: true,
    validate: {
-    isName: {
+    is: {
      arg: ['^[a-z]+$', 'i'],
      msg: 'Must be only letters',
     }
+   },
+   set(val) {
+    this.setDataValue('category', toTitleCase(val));
    }
 
+
+  },
+  Isbn: {
+   type: DataTypes.INTEGER,
+   allowNull: false,
+   defaultValue: () => randomId()
   },
   status: {
    type: DataTypes.BOOLEAN,

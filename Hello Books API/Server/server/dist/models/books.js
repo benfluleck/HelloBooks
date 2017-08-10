@@ -1,5 +1,17 @@
 'use strict';
 
+var _toTitleCase = require('to-title-case');
+
+var _toTitleCase2 = _interopRequireDefault(_toTitleCase);
+
+var _uniqueRandom = require('unique-random');
+
+var _uniqueRandom2 = _interopRequireDefault(_uniqueRandom);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var randomId = (0, _uniqueRandom2.default)(1000000, 1000000);
+
 module.exports = function (sequelize, DataTypes) {
   var Books = sequelize.define('Books', {
     id: {
@@ -13,10 +25,13 @@ module.exports = function (sequelize, DataTypes) {
       required: true,
       trim: true,
       validate: {
-        isName: {
+        is: {
           arg: ['^[a-z]+$', 'i'],
           msg: 'Must be only letters'
         }
+      },
+      set: function set(val) {
+        this.setDataValue('title', (0, _toTitleCase2.default)(val));
       }
     },
     author: {
@@ -25,10 +40,13 @@ module.exports = function (sequelize, DataTypes) {
       required: true,
       trim: true,
       validate: {
-        isName: {
+        is: {
           arg: ['^[a-z]+$', 'i'],
           msg: 'Must be only letters'
         }
+      },
+      set: function set(val) {
+        this.setDataValue('author', (0, _toTitleCase2.default)(val));
       }
     },
     category: {
@@ -37,12 +55,21 @@ module.exports = function (sequelize, DataTypes) {
       required: true,
       trim: true,
       validate: {
-        isName: {
+        is: {
           arg: ['^[a-z]+$', 'i'],
           msg: 'Must be only letters'
         }
+      },
+      set: function set(val) {
+        this.setDataValue('category', (0, _toTitleCase2.default)(val));
       }
-
+    },
+    Isbn: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: function defaultValue() {
+        return randomId();
+      }
     },
     status: {
       type: DataTypes.BOOLEAN,

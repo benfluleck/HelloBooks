@@ -80,15 +80,17 @@ exports.default = {
     });
   },
   loanbook: function loanbook(req, res) {
+
     return UserBooks.create({
       userid: req.params.userId,
-      bookid: req.body.book_id,
-      return_date: req.body.date,
-      return_status: false
+      bookid: req.body.bookid,
+      return_date: req.body.date
       // status in user table will need to be updated
       // if book id does not exist
-    }).then(function (user) {
-      return res.status(201).send(user);
+    }).then(function (userbook) {
+      if (userbook.return_status = false) userbook.return_status = true;
+      userbook.save;
+      return res.status(201).send(userbook);
     }).catch(function (error) {
       return res.status(400).send(error);
     });
@@ -101,6 +103,7 @@ exports.default = {
     });
   },
   returnbook: function returnbook(req, res) {
+
     return UserBooks.find({
       where: {
         bookid: req.body.book_id,
@@ -113,6 +116,7 @@ exports.default = {
           message: 'Book does not exist in this database'
         });
       }
+
       return book.update({
         return_status: true
       }).then(function () {

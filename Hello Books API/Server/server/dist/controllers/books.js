@@ -22,8 +22,8 @@ exports.default = {
       return res.json({ success: false, message: 'You need to be logged in.' });
     }
     return Books.create({
-      book_title: req.body.book_title,
-      books_author: req.body.books_author,
+      title: req.body.title,
+      author: req.body.author,
       category: req.body.category
     }).then(function (books) {
       return res.status(201).send(books);
