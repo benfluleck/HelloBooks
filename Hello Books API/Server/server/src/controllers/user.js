@@ -80,7 +80,7 @@ export default {
 
  getborrowerslist(req, res) {
   return UserBooks.findAll({ where: { userid: req.params.userId } })
-   .then(book => res.status(201).send(book)).catch(error => res.status(400).send(error));
+   .then(book => res.status(200).send(book)).catch(error => res.status(400).send(error));
  },
 
  returnbook(req, res) {

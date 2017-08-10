@@ -97,7 +97,7 @@ exports.default = {
   },
   getborrowerslist: function getborrowerslist(req, res) {
     return UserBooks.findAll({ where: { userid: req.params.userId } }).then(function (book) {
-      return res.status(201).send(book);
+      return res.status(200).send(book);
     }).catch(function (error) {
       return res.status(400).send(error);
     });

@@ -23,7 +23,7 @@ export default {
     });
    }
    return book.updateAttributes(req.body, { fields: Object.keys(req.body) })
-    .then(() => res.status(200).send(book) // Send back the updated book
+    .then(() => res.status(201).send(book) // Send back the updated book
     ).catch(error => res.status(400).send(error));
   }).catch(error => res.status(400).send(error));
  },

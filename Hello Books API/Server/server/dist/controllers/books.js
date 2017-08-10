@@ -41,7 +41,7 @@ exports.default = {
         });
       }
       return book.updateAttributes(req.body, { fields: Object.keys(req.body) }).then(function () {
-        return res.status(200).send(book);
+        return res.status(201).send(book);
       } // Send back the updated book
       ).catch(function (error) {
         return res.status(400).send(error);
