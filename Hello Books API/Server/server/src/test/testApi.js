@@ -45,12 +45,12 @@ const expect = chai.expect;
 chai.use(chaiHttp);
 // Our parent block
 
-
-let bookid;
 let userId;
-let token;
+let bookid;
+
 // Middleware for database
 describe('HelloBooks', () => {
+ let token;
  before((done) => {
   Books.destroy({ where: {} });
   User.destroy({ where: {} });
@@ -141,7 +141,7 @@ describe('HelloBooks', () => {
   it('it responds with 401 status code if bad username or password', (done) => {
    chai.request(app).post('api/users/signin').send({ username: faker.internet.userName(), password: faker.internet.password })
     .end((err, res) => {
-     expect(403);
+     expect(401);
      done();
     });
   });
@@ -156,12 +156,12 @@ describe('HelloBooks', () => {
     });
   });
   // Authenticate the user with a token
-  it('it returns succesful login if user name and password', (done) => {
+  it('it returns successful login if user name and password', (done) => {
    chai.request(app).post('/api/users/signin')
     .send({ username: 'Benny', password: 'benny' })
     .end((err, res) => {
      token = res.body.token;
-     console.log(res.body);
+     //console.log(res.body);
      // if (err) return done(err);
      expect('Content-Type', /json/);
      expect(res.body).have.property('token');
@@ -172,14 +172,16 @@ describe('HelloBooks', () => {
 
   // Loan a book need to change the date
   it('it allows the user to loan a book', (done) => {
+
    const userbook = {
     userid: userId,
-    bookid,
-    date: '2016-08-09 04:05:02'
+    bookid: bookid,
+    return_date: '2016-08-16 04:05:02'
      // return_status: false
    };
 
-   chai.request(app).post(`/api/users/${userbook.userid}/books`).set('x-access-token', token).send(userbook)
+   chai.request(app).post(`/api/users/${userbook.userid}/books`).
+   set('x-access-token', token).send(userbook)
     .end((err, res) => {
      expect(res.status).to.equal(201);
      done();
@@ -201,22 +203,24 @@ describe('HelloBooks', () => {
   // Edit a book
   describe('/PUT', () => {
    it('Edit a select book from the data', (done) => {
+
     chai.request(app).put(`/api/books/${bookid}`).set('x-access-token', token).send({
       title: 'The Chronicles of Andela',
       author: 'C.S. Lewis',
       category: 'Action'
      })
      .end((err, res) => {
-      expect(res.status).to.equal(200);
+      expect(res.status).to.equal(201);
       done();
      });
    });
 
    // return books
    it('it should return a book', (done) => {
+    console.log(bookid, '------?');
     chai.request(app).put(`/api/users/${userId}/books`).set('x-access-token', token).send({
       bookid,
-      userid: userId
+
      })
      .end((err, res) => {
       expect(res.status).to.equal(200);
@@ -227,12 +231,12 @@ describe('HelloBooks', () => {
   });
  });
 
- after((done) => {
-  //     User.drop();
-  //     Books.drop();
-  sequelize.sequelize.sync({ force: true });
+ // //  after((done) => {
+ // //   //     User.drop();
+ // //   //     Books.drop();
+ // //   sequelize.sequelize.sync({ force: true });
 
- });
+ //  });
 });
 
 /*

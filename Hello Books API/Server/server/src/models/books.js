@@ -1,7 +1,7 @@
 import toTitleCase from 'to-title-case';
 import uniqueRandom from 'unique-random';
 
-const randomId = uniqueRandom(1000000, 1000000);
+const randomId = uniqueRandom(1000000, 100000000);
 
 module.exports = (sequelize, DataTypes) => {
  const Books = sequelize.define('Books', {

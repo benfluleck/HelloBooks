@@ -10,7 +10,7 @@ var _uniqueRandom2 = _interopRequireDefault(_uniqueRandom);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var randomId = (0, _uniqueRandom2.default)(1000000, 1000000);
+var randomId = (0, _uniqueRandom2.default)(1000000, 100000000);
 
 module.exports = function (sequelize, DataTypes) {
   var Books = sequelize.define('Books', {

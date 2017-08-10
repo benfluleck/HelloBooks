@@ -69,12 +69,12 @@ var expect = _chai2.default.expect;
 _chai2.default.use(_chaiHttp2.default);
 // Our parent block
 
-
-var bookid = void 0;
 var userId = void 0;
-var token = void 0;
+var bookid = void 0;
+
 // Middleware for database
 describe('HelloBooks', function () {
+  var token = void 0;
   before(function (done) {
     Books.destroy({ where: {} });
     User.destroy({ where: {} });
@@ -161,7 +161,7 @@ describe('HelloBooks', function () {
   describe('POST /login', function () {
     it('it responds with 401 status code if bad username or password', function (done) {
       _chai2.default.request(_app2.default).post('api/users/signin').send({ username: _faker2.default.internet.userName(), password: _faker2.default.internet.password }).end(function (err, res) {
-        expect(403);
+        expect(401);
         done();
       });
     });
@@ -173,10 +173,10 @@ describe('HelloBooks', function () {
       });
     });
     // Authenticate the user with a token
-    it('it returns succesful login if user name and password', function (done) {
+    it('it returns successful login if user name and password', function (done) {
       _chai2.default.request(_app2.default).post('/api/users/signin').send({ username: 'Benny', password: 'benny' }).end(function (err, res) {
         token = res.body.token;
-        console.log(res.body);
+        //console.log(res.body);
         // if (err) return done(err);
         expect('Content-Type', /json/);
         expect(res.body).have.property('token');
@@ -187,10 +187,11 @@ describe('HelloBooks', function () {
 
     // Loan a book need to change the date
     it('it allows the user to loan a book', function (done) {
+
       var userbook = {
         userid: userId,
         bookid: bookid,
-        date: '2016-08-09 04:05:02'
+        return_date: '2016-08-16 04:05:02'
         // return_status: false
       };
 
@@ -213,21 +214,23 @@ describe('HelloBooks', function () {
     // Edit a book
     describe('/PUT', function () {
       it('Edit a select book from the data', function (done) {
+
         _chai2.default.request(_app2.default).put('/api/books/' + bookid).set('x-access-token', token).send({
           title: 'The Chronicles of Andela',
           author: 'C.S. Lewis',
           category: 'Action'
         }).end(function (err, res) {
-          expect(res.status).to.equal(200);
+          expect(res.status).to.equal(201);
           done();
         });
       });
 
       // return books
       it('it should return a book', function (done) {
+        console.log(bookid, '------?');
         _chai2.default.request(_app2.default).put('/api/users/' + userId + '/books').set('x-access-token', token).send({
-          bookid: bookid,
-          userid: userId
+          bookid: bookid
+
         }).end(function (err, res) {
           expect(res.status).to.equal(200);
 
@@ -237,11 +240,12 @@ describe('HelloBooks', function () {
     });
   });
 
-  after(function (done) {
-    //     User.drop();
-    //     Books.drop();
-    _index2.default.sequelize.sync({ force: true });
-  });
+  // //  after((done) => {
+  // //   //     User.drop();
+  // //   //     Books.drop();
+  // //   sequelize.sequelize.sync({ force: true });
+
+  //  });
 });
 
 /*

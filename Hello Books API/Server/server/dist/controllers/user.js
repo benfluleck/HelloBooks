@@ -106,7 +106,7 @@ exports.default = {
 
     return UserBooks.find({
       where: {
-        bookid: req.body.book_id,
+        bookid: req.body.bookid,
         userid: req.params.userId
         // return_status: req.query.isreturnbool
       }
