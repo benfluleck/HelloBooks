@@ -1,5 +1,9 @@
 'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _fs = require('fs');
 
 var _fs2 = _interopRequireDefault(_fs);
@@ -48,4 +52,4 @@ Object.keys(db).forEach(function (modelName) {
 db.sequelize = sequelize;
 db.Sequelize = _sequelize2.default;
 
-module.exports = db;
+exports.default = db;

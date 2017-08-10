@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt-nodejs';
 import models from '../models';
 
 
@@ -7,86 +8,94 @@ const UserBooks = models.UserBooks;
 
 
 export default {
-  create(req, res) {
-    return User.create({
-      username: req.body.username,
-      password: req.body.password,
-      email: req.body.email
-    }).then(user => res.status(201).send(user)).catch(error => res.status(400).send(error));
-    /* User.create = (err) => {
-                    if (err) throw err;
-                      console.log('User saved successfully');
-                }; */
-  },
+ /**
+  * Create a new user
+  * Route: POST: /users
+  * @param {Object} req request object
+  * @param {Object} res response object
+  * @returns {void|Response} response object or void
+  */
+ create(req, res) {
+  // console.log(req.body, '++++++++++')
+  return User.create({
+    firstname: req.body.firstname,
+    lastname: req.body.lastname,
+    username: req.body.username,
+    password: req.body.password,
+    password_confirmation: req.body.password_confirmation,
+    email: req.body.email
 
-  // Sign In route build
-  signin(req, res) {
-    return User.findOne({
-      where: {
-        username: req.body.username,
-        password: req.body.password
-      }
-    }).then((user) => {
-      if (!user) {
-        // res.status(403).send();
-        res.json({ success: false, message: 'Authentication failed. User not found.' });
-      } else if (user) {
-        // check if password matches
-        if (user.password !== req.body.password) {
-          // res.status(403).send();
-          res.json({ success: false, message: 'Authentication failed. Wrong password.' });
-        } else {
-          const Userjwt = { name: User.username, password: User.password };
-          const token = jwt.sign(Userjwt, 'superSecret', {
-            expiresIn: 1440 // expires in 24 hours
-          });
+   }).then(user => res.json({ success: true, name: user.firstname, username: user.username }))
+   .catch(error => res.status(400).send(error.message));
 
-          // return the information including token as JSON
-          res.json({
-            success: true,
-            message: 'Enjoy your token, You are now logged in!',
-            token
-          });
-        }
-      }
+ },
+
+ // Sign In route build
+ signin(req, res) {
+  return User.findOne({
+
+   where: {
+    username: req.body.username,
+
+   }
+  }).then((user) => {
+
+   if (!user) {
+    // res.status(403).send();
+    res.json({ success: false, message: 'Bad Authentication failed. User not found.' });
+   } else if (bcrypt.compareSync(req.body.password, user.password)) {
+    const Userjwt = { name: user.username, password: user.password };
+    const token = jwt.sign(Userjwt, 'superSecret', {
+     expiresIn: 1440 // expires in 24 hours
     });
-  },
 
-  loanbook(req, res) {
-    return UserBooks.create({
-      userid: req.params.userId,
-      bookid: req.body.book_id,
-      return_date: req.body.date,
-      return_status: false
-    }
-      // status in user table will need to be updated
-      // if book id does not exist
-    ).then(user => res.status(201).send(user)).catch(error => res.status(400).send(error));
-  },
+    // return the information including token as JSON
+    res.json({
+     success: true,
+     message: 'Enjoy your token, You are now logged in!',
+     token
+    });
+   } else {
+    res.json({ success: false, message: 'Password error.' });
+   }
+  }).catch(error => res.status(400).send(error.message));
+ },
 
-  getborrowerslist(req, res) {
-    return UserBooks.findAll({ where: { userid: req.params.userId } })
-      .then(book => res.status(201).send(book)).catch(error => res.status(400).send(error));
-  },
+ loanbook(req, res) {
+  return UserBooks.create({
+    userid: req.params.userId,
+    bookid: req.body.book_id,
+    return_date: req.body.date,
+    return_status: false
+   }
+   // status in user table will need to be updated
+   // if book id does not exist
+  ).then(user => res.status(201).send(user)).catch(error => res.status(400).send(error));
+ },
 
-  returnbook(req, res) {
-    return UserBooks.find({
-      where: {
-        bookid: req.body.book_id,
-        userid: req.params.userId
-        // return_status: req.query.isreturnbool
-      }
-    }).then((book) => {
-      if (!book) {
-        return res.status(404).send({
-          message: 'Book does not exist in this database'
-        });
-      }
-      return book.update({
-        return_status: true
-      }).then(() => res.status(200).send(book) // Send back the updated book
-      ).catch(error => res.status(400).send(error));
-    }).catch(error => res.status(400).send(error));
-  }
+ getborrowerslist(req, res) {
+  return UserBooks.findAll({ where: { userid: req.params.userId } })
+   .then(book => res.status(201).send(book)).catch(error => res.status(400).send(error));
+ },
+
+ returnbook(req, res) {
+  return UserBooks.find({
+   where: {
+    bookid: req.body.book_id,
+    userid: req.params.userId
+     // return_status: req.query.isreturnbool
+   }
+  }).then((book) => {
+   if (!book) {
+    return res.status(404).send({
+     message: 'Book does not exist in this database'
+    });
+   }
+   return book.update({
+    return_status: true
+   }).then(() => res.status(200).send(book) // Send back the updated book
+   ).catch(error => res.status(400).send(error));
+  }).catch(error => res.status(400).send(error));
+ }
 
 };

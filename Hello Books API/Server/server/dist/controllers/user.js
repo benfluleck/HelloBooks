@@ -8,6 +8,10 @@ var _jsonwebtoken = require('jsonwebtoken');
 
 var _jsonwebtoken2 = _interopRequireDefault(_jsonwebtoken);
 
+var _bcryptNodejs = require('bcrypt-nodejs');
+
+var _bcryptNodejs2 = _interopRequireDefault(_bcryptNodejs);
+
 var _models = require('../models');
 
 var _models2 = _interopRequireDefault(_models);
@@ -18,53 +22,61 @@ var User = _models2.default.User;
 var UserBooks = _models2.default.UserBooks;
 
 exports.default = {
+  /**
+   * Create a new user
+   * Route: POST: /users
+   * @param {Object} req request object
+   * @param {Object} res response object
+   * @returns {void|Response} response object or void
+   */
   create: function create(req, res) {
+    // console.log(req.body, '++++++++++')
     return User.create({
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
       username: req.body.username,
       password: req.body.password,
+      password_confirmation: req.body.password_confirmation,
       email: req.body.email
+
     }).then(function (user) {
-      return res.status(201).send(user);
+      return res.json({ success: true, name: user.firstname, username: user.username });
     }).catch(function (error) {
-      return res.status(400).send(error);
+      return res.status(400).send(error.message);
     });
-    /* User.create = (err) => {
-                    if (err) throw err;
-                      console.log('User saved successfully');
-                }; */
   },
 
 
   // Sign In route build
   signin: function signin(req, res) {
     return User.findOne({
+
       where: {
-        username: req.body.username,
-        password: req.body.password
+        username: req.body.username
+
       }
     }).then(function (user) {
+
       if (!user) {
         // res.status(403).send();
-        res.json({ success: false, message: 'Authentication failed. User not found.' });
-      } else if (user) {
-        // check if password matches
-        if (user.password !== req.body.password) {
-          // res.status(403).send();
-          res.json({ success: false, message: 'Authentication failed. Wrong password.' });
-        } else {
-          var Userjwt = { name: User.username, password: User.password };
-          var token = _jsonwebtoken2.default.sign(Userjwt, 'superSecret', {
-            expiresIn: 1440 // expires in 24 hours
-          });
+        res.json({ success: false, message: 'Bad Authentication failed. User not found.' });
+      } else if (_bcryptNodejs2.default.compareSync(req.body.password, user.password)) {
+        var Userjwt = { name: user.username, password: user.password };
+        var token = _jsonwebtoken2.default.sign(Userjwt, 'superSecret', {
+          expiresIn: 1440 // expires in 24 hours
+        });
 
-          // return the information including token as JSON
-          res.json({
-            success: true,
-            message: 'Enjoy your token, You are now logged in!',
-            token: token
-          });
-        }
+        // return the information including token as JSON
+        res.json({
+          success: true,
+          message: 'Enjoy your token, You are now logged in!',
+          token: token
+        });
+      } else {
+        res.json({ success: false, message: 'Password error.' });
       }
+    }).catch(function (error) {
+      return res.status(400).send(error.message);
     });
   },
   loanbook: function loanbook(req, res) {
