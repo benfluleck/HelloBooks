@@ -134,6 +134,22 @@ describe('HelloBooks', () => {
   });
  });
 
+ it('Should validate to say created user is not unique', (done) => {
+  chai.request(app)
+   .post('/api/users/signup')
+   .send({
+    firstname: faker.name.firstName(),
+    lastname: faker.name.lastName(),
+    username: 'Benny',
+    password: 'benny',
+    password_confirmation: 'benny',
+    email: 'benny@ogidan.com',
+   })
+   .end((err, res) => {
+    expect(err.message).to.be.equal('Bad Request');
+    done();
+   });
+ });
  /*
    Authenticated users Tests
    */
@@ -155,20 +171,22 @@ describe('HelloBooks', () => {
      done();
     });
   });
+
+
   // Authenticate the user with a token
   it('it returns successful login if user name and password', (done) => {
    chai.request(app).post('/api/users/signin')
     .send({ username: 'Benny', password: 'benny' })
     .end((err, res) => {
      token = res.body.token;
-     //console.log(res.body);
-     // if (err) return done(err);
      expect('Content-Type', /json/);
      expect(res.body).have.property('token');
 
      done();
     });
   });
+
+
 
   // Loan a book need to change the date
   it('it allows the user to loan a book', (done) => {
@@ -188,13 +206,12 @@ describe('HelloBooks', () => {
     });
   });
 
-  // Retrieves
+  // Retrieves all the books
   describe('/GET', () => {
    it('It retrieves all books from the data', (done) => {
     chai.request(app).get('/api/books')
      .set('x-access-token', token)
      .end((err, res) => {
-      // bookid = Books.id
       expect(res.status).to.equal(200);
       done();
      });
@@ -215,16 +232,13 @@ describe('HelloBooks', () => {
      });
    });
 
-   // return books
+   // Returns a book
    it('it should return a book', (done) => {
-    console.log(bookid, '------?');
     chai.request(app).put(`/api/users/${userId}/books`).set('x-access-token', token).send({
       bookid,
-
      })
      .end((err, res) => {
       expect(res.status).to.equal(200);
-
       done();
      });
    });

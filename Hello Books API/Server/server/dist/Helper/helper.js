@@ -1,32 +1,61 @@
-'use strict';
+// import faker from 'faker';
+// import db from '../models';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
 
-var _faker = require('faker');
+// const User = db.User;
 
-var _faker2 = _interopRequireDefault(_faker);
+// const Helper = {
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+//  /**
+//   * Get user's profile'
+//   * @param {Object} data object containing user's details
+//   * @returns {Object} return user's data
+//   */
+//  adminUser: {
+//   username: faker.internet.userName(),
+//   firstname: faker.name.firstName(),
+//   lastname: faker.name.lastName(),
+//   email: faker.internet.email(),
 
-var Helper = {
+//  },
+//  adminUser1: {
+//   username: faker.internet.userName(),
+//   firstname: faker.name.firstName(),
+//   lastname: faker.name.lastName(),
+//   email: faker.internet.email(),
+//   password: faker.internet.password()
+//  },
+//  regularUser: {
+//   username: faker.internet.userName(),
+//   firstname: faker.name.firstName(),
+//   lastname: faker.name.lastName(),
+//   email: faker.internet.email(),
+//   password: faker.internet.password(),
+//  },
 
-  /**
-   * Get user's profile'
-   * @param {Object} data object containing user's details
-   * @returns {Object} return user's data
-   */
-  fakeuserProfile: function fakeuserProfile() {
-    return {
-      firstname: firstname,
-      lastname: lastname,
-      username: username,
-      password: password,
-      password_confirmation: password_confirmation,
-      email: email
-    };
-  }
-};
+//  firstUser: {
+//   username: faker.internet.userName(),
+//   firstname: faker.name.firstName(),
+//   lastname: faker.name.lastName(),
+//   email: faker.internet.email(),
+//   password: faker.internet.password()
+//  },
+//  secondUser: {
+//   username: faker.internet.userName(),
+//   firstname: faker.name.firstName(),
+//   lastname: faker.name.lastName(),
+//   email: faker.internet.email(),
+//   password: faker.internet.password()
+//  },
+//  thirdUser: {
+//   username: faker.internet.userName(),
+//   firstname: faker.name.firstName(),
+//   lastname: faker.name.lastName(),
+//   email: faker.internet.email(),
+//   password: faker.internet.password()
+//  },
+// };
 
-exports.default = Helper;
+
+// export default Helper;
+"use strict";

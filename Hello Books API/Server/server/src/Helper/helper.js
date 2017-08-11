@@ -1,32 +1,61 @@
-import faker from 'faker';
-import db from '../models';
+// import faker from 'faker';
+// import db from '../models';
 
 
-const User = db.User;
+// const User = db.User;
 
-const Helper = {
+// const Helper = {
 
-/**
- * Get user's profile'
- * @param {Object} data object containing user's details
- * @returns {Object} return user's data
- */
-User.create({
- firstname: faker.name.firstName(),
- lastname: faker.name.lastName(),
- username: 'Benny',
- password: 'benny',
- password_confirmation: 'benny',
- email: faker.internet.email()
-}).then((user) => {
- userId = user.id;
-});
+//  /**
+//   * Get user's profile'
+//   * @param {Object} data object containing user's details
+//   * @returns {Object} return user's data
+//   */
+//  adminUser: {
+//   username: faker.internet.userName(),
+//   firstname: faker.name.firstName(),
+//   lastname: faker.name.lastName(),
+//   email: faker.internet.email(),
 
-done();
-}),
+//  },
+//  adminUser1: {
+//   username: faker.internet.userName(),
+//   firstname: faker.name.firstName(),
+//   lastname: faker.name.lastName(),
+//   email: faker.internet.email(),
+//   password: faker.internet.password()
+//  },
+//  regularUser: {
+//   username: faker.internet.userName(),
+//   firstname: faker.name.firstName(),
+//   lastname: faker.name.lastName(),
+//   email: faker.internet.email(),
+//   password: faker.internet.password(),
+//  },
 
-};
+//  firstUser: {
+//   username: faker.internet.userName(),
+//   firstname: faker.name.firstName(),
+//   lastname: faker.name.lastName(),
+//   email: faker.internet.email(),
+//   password: faker.internet.password()
+//  },
+//  secondUser: {
+//   username: faker.internet.userName(),
+//   firstname: faker.name.firstName(),
+//   lastname: faker.name.lastName(),
+//   email: faker.internet.email(),
+//   password: faker.internet.password()
+//  },
+//  thirdUser: {
+//   username: faker.internet.userName(),
+//   firstname: faker.name.firstName(),
+//   lastname: faker.name.lastName(),
+//   email: faker.internet.email(),
+//   password: faker.internet.password()
+//  },
+// };
 
 
 
-export default Helper;
+// export default Helper;

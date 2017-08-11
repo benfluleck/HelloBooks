@@ -155,6 +155,19 @@ describe('HelloBooks', function () {
     });
   });
 
+  it('Should validate to say created user is not unique', function (done) {
+    _chai2.default.request(_app2.default).post('/api/users/signup').send({
+      firstname: _faker2.default.name.firstName(),
+      lastname: _faker2.default.name.lastName(),
+      username: 'Benny',
+      password: 'benny',
+      password_confirmation: 'benny',
+      email: 'benny@ogidan.com'
+    }).end(function (err, res) {
+      expect(err.message).to.be.equal('Bad Request');
+      done();
+    });
+  });
   /*
     Authenticated users Tests
     */
@@ -172,12 +185,11 @@ describe('HelloBooks', function () {
         done();
       });
     });
+
     // Authenticate the user with a token
     it('it returns successful login if user name and password', function (done) {
       _chai2.default.request(_app2.default).post('/api/users/signin').send({ username: 'Benny', password: 'benny' }).end(function (err, res) {
         token = res.body.token;
-        //console.log(res.body);
-        // if (err) return done(err);
         expect('Content-Type', /json/);
         expect(res.body).have.property('token');
 
@@ -201,11 +213,10 @@ describe('HelloBooks', function () {
       });
     });
 
-    // Retrieves
+    // Retrieves all the books
     describe('/GET', function () {
       it('It retrieves all books from the data', function (done) {
         _chai2.default.request(_app2.default).get('/api/books').set('x-access-token', token).end(function (err, res) {
-          // bookid = Books.id
           expect(res.status).to.equal(200);
           done();
         });
@@ -225,15 +236,12 @@ describe('HelloBooks', function () {
         });
       });
 
-      // return books
+      // Returns a book
       it('it should return a book', function (done) {
-        console.log(bookid, '------?');
         _chai2.default.request(_app2.default).put('/api/users/' + userId + '/books').set('x-access-token', token).send({
           bookid: bookid
-
         }).end(function (err, res) {
           expect(res.status).to.equal(200);
-
           done();
         });
       });

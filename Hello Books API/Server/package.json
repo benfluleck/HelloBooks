@@ -29,6 +29,7 @@
   "express-boom": "^2.0.0",
   "faker": "^4.1.0",
   "fakerator": "^0.3.0",
+  "git": "^0.1.5",
   "json": "^9.0.6",
   "jsonwebtoken": "^7.4.1",
   "mocha": "^3.5.0",

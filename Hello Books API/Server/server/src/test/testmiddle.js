@@ -1,15 +1,28 @@
-// import test from './test';
+import chai from 'chai';
+import db from '../../app/models';
+//import helper from '../helper/test.helper';
 
-// --compilers js:babel-core/register
-// Questions: Classes , ES6 problems maybe babel
+const expect = chai.expect;
 
-// const User = require('../models').User;
-// let Books = require('../models').Books;
-// During the test the env variable is set to test
-// process.env.NODE_ENV = 'test';
-// const chai = test.chai;
-// const chaiHttp = test.chaiHttp;
-// const faker = test.faker;
-// const expect = chai.expect;
-// const Books = test.Books;
-// const User = test.User;
+
+describe('User ', () => {
+ it('should not create a user when password character is not up to 8',
+  (done) => {
+   User.create(helper.invalidPasswordUser)
+    .then({
+     firstname: faker.name.firstName(),
+     lastname: faker.name.lastName(),
+     username: 'Benny',
+     password: '',
+     password_confirmation: '',
+     email: 'benny@ogidan.com'
+    })
+    .catch((error) => {
+     expect(error.errors[0].message)
+      .to.equal('Minimum of 8s characters is required');
+     expect(error.errors[0].type).to.equal('Validation error');
+     expect(error.errors[0].path).to.equal('validatePassword');
+     done();
+    });
+  });
+});

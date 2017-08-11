@@ -1,16 +1,33 @@
-// import test from './test';
+'use strict';
 
-// --compilers js:babel-core/register
-// Questions: Classes , ES6 problems maybe babel
+var _chai = require('chai');
 
-// const User = require('../models').User;
-// let Books = require('../models').Books;
-// During the test the env variable is set to test
-// process.env.NODE_ENV = 'test';
-// const chai = test.chai;
-// const chaiHttp = test.chaiHttp;
-// const faker = test.faker;
-// const expect = chai.expect;
-// const Books = test.Books;
-// const User = test.User;
-"use strict";
+var _chai2 = _interopRequireDefault(_chai);
+
+var _models = require('../../app/models');
+
+var _models2 = _interopRequireDefault(_models);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//import helper from '../helper/test.helper';
+
+var expect = _chai2.default.expect;
+
+describe('User ', function () {
+  it('should not create a user when password character is not up to 8', function (done) {
+    User.create(helper.invalidPasswordUser).then({
+      firstname: faker.name.firstName(),
+      lastname: faker.name.lastName(),
+      username: 'Benny',
+      password: '',
+      password_confirmation: '',
+      email: 'benny@ogidan.com'
+    }).catch(function (error) {
+      expect(error.errors[0].message).to.equal('Minimum of 8s characters is required');
+      expect(error.errors[0].type).to.equal('Validation error');
+      expect(error.errors[0].path).to.equal('validatePassword');
+      done();
+    });
+  });
+});
