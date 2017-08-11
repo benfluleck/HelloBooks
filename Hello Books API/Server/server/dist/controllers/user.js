@@ -96,7 +96,7 @@ exports.default = {
     });
   },
   getborrowerslist: function getborrowerslist(req, res) {
-    return UserBooks.findAll({ where: { userid: req.params.userId } }).then(function (book) {
+    return UserBooks.findAll({ where: { userid: req.params.userId, return_status: req.query.returned } }).then(function (book) {
       return res.status(200).send(book);
     }).catch(function (error) {
       return res.status(400).send(error);
@@ -108,7 +108,7 @@ exports.default = {
       where: {
         bookid: req.body.bookid,
         userid: req.params.userId
-        // return_status: req.query.isreturnbool
+
       }
     }).then(function (book) {
       if (!book) {

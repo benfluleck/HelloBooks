@@ -79,7 +79,7 @@ export default {
  },
 
  getborrowerslist(req, res) {
-  return UserBooks.findAll({ where: { userid: req.params.userId } })
+  return UserBooks.findAll({ where: { userid: req.params.userId, return_status: req.query.returned } })
    .then(book => res.status(200).send(book)).catch(error => res.status(400).send(error));
  },
 
@@ -88,8 +88,8 @@ export default {
   return UserBooks.find({
    where: {
     bookid: req.body.bookid,
-    userid: req.params.userId
-     // return_status: req.query.isreturnbool
+    userid: req.params.userId,
+
    }
   }).then((book) => {
    if (!book) {
