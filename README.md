@@ -74,7 +74,7 @@ Document Management System API is built with the following technologies;
 
 ## Installation
   - Install [NodeJs](https://nodejs.org/en/) and [Postgres](https://www.postgresql.org/) on your machine
-  - Clone the repository `$ git clone https://github.com/andela-oaladeusi/dms.git`
+  - Clone the repository 
   - Change into the directory `$ cd /dms`
   - Install all required dependencies with `$ npm install`
   - Create a `.env` file in your root directory as described in `.env.sample` file
