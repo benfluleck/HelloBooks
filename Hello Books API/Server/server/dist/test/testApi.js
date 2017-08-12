@@ -133,6 +133,19 @@ describe('HelloBooks', function () {
         done();
       });
     });
+    it('Should validate to say created user is not unique', function (done) {
+      _chai2.default.request(_app2.default).post('/api/users/signup').send({
+        firstname: _faker2.default.name.firstName(),
+        lastname: _faker2.default.name.lastName(),
+        username: 'Benny',
+        password: 'benny',
+        password_confirmation: 'benny',
+        email: 'benny@ogidan.com'
+      }).end(function (err, res) {
+        expect(err.message).to.be.equal('Bad Request');
+        done();
+      });
+    });
     it('Only authenticated users allowed to loan', function (done) {
       _chai2.default.request(_app2.default).post('/api/users/1/books').end(function (err, res) {
         expect(res.status).to.equal(403);

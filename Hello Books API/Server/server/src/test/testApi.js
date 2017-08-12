@@ -112,6 +112,22 @@ describe('HelloBooks', () => {
     done();
    });
   });
+  it('Should validate to say created user is not unique', (done) => {
+   chai.request(app)
+    .post('/api/users/signup')
+    .send({
+     firstname: faker.name.firstName(),
+     lastname: faker.name.lastName(),
+     username: 'Benny',
+     password: 'benny',
+     password_confirmation: 'benny',
+     email: 'benny@ogidan.com',
+    })
+    .end((err, res) => {
+     expect(err.message).to.be.equal('Bad Request');
+     done();
+    });
+  });
   it('Only authenticated users allowed to loan', (done) => {
    chai.request(app).post('/api/users/1/books').end((err, res) => {
     expect(res.status).to.equal(403);
