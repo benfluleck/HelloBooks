@@ -9,6 +9,9 @@
   "build": "babel server/src --watch --out-dir server/dist --presets es2015",
   "test": "SET NODE_ENV=test& mocha server/dist/test/*.js --timeout 10000  "
  },
+ "engines": {
+  "npm": "7.4.0"
+ },
  "keywords": [],
  "author": "",
  "license": "ISC",
