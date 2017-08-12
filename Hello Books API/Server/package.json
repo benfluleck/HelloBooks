@@ -2,7 +2,7 @@
  "name": "server",
  "version": "1.0.0",
  "description": "",
- "main": "./server/src/app.js",
+ "main": "./server/dist/bin/app.js",
  "scripts": {
   "start": "node ./server/dist/bin/www.js",
   "start:dev": "nodemon ./server/dist/bin/www.js",
