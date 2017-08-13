@@ -1,0 +1,8 @@
+language: node.js
+
+cache:
+  directories:
+    - "node_modules"
+
+env:
+- NODE_ENV=test
