@@ -10,7 +10,8 @@
   "test": "SET NODE_ENV=test& mocha server/dist/test/*.js --timeout 10000  "
  },
  "engines": {
-  "npm": "5.3.0"
+  "npm": "5.3.0",
+  "node": "7.4.0"
  },
  "keywords": [],
  "author": "",
