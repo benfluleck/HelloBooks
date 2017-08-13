@@ -44,7 +44,7 @@ var server = _http2.default.createServer(_app2.default);
  * Listen on provided port, on all network interfaces.
  */
 //  server.listen(port);
-_models2.default.sync({ force: true }).then(function () {
+_models2.default.sequelize.sync({ force: true }).then(function () {
   server.listen(port);
 });
 

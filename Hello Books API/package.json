@@ -2,10 +2,10 @@
  "name": "server",
  "version": "1.0.0",
  "description": "",
- "main": " server/dist/bin/app.js",
+ "main": " server/src/app.js",
  "scripts": {
-  "start": "node ./server/dist/bin/www.js",
-  "start:dev": "nodemon ./server/dist/bin/www.js",
+  "start": "node server/dist/bin/www.js",
+  "start:dev": "nodemon server/dist/bin/www.js",
   "build": "babel server/src --watch --out-dir server/dist --presets es2015",
   "test": "SET NODE_ENV=test& mocha server/dist/test/*.js --timeout 10000  "
  },

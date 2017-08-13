@@ -2,7 +2,7 @@
 
 import debug from 'debug'; // ('Server:server');
 import http from 'http';
-import sequelize from '../models';
+import db from '../models';
 /**
  * Module dependencies.
  */
@@ -28,7 +28,7 @@ const server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 //  server.listen(port);
-sequelize.sync({ force: true }).then(() => {
+db.sequelize.sync({ force: true }).then(() => {
  server.listen(port);
 });
 
