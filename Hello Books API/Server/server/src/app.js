@@ -7,7 +7,7 @@ import routes from './routes';
 const app = express();
 
 // Log requests to the console.
-app.use(logger('dev'));
+app.use(logger('production'));
 
 
 // Parse incoming requests data (https://github.com/expressjs/body-parser)
@@ -20,7 +20,7 @@ routes(app);
 
 
 app.get('*', (req, res) => res.status(200).send({
-  message: 'This is just a test.',
+ message: 'This is just a test.',
 }));
 
 export default app;

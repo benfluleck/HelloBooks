@@ -2,7 +2,7 @@
 
 import debug from 'debug'; // ('Server:server');
 import http from 'http';
-import sequelize from '../models/index';
+import sequelize from '../models';
 /**
  * Module dependencies.
  */
@@ -10,12 +10,12 @@ import app from '../app';
 
 // let app = require('../app');
 
-const sequelizesync = sequelize.sequelize;
+
 /**
  * Get port from environment and store in Express.
  */
 
-const port = normalizePort(process.env.PORT || '3002');
+const port = normalizePort(process.env.PORT || '5000');
 app.set('port', port);
 
 /**
@@ -28,7 +28,7 @@ const server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 //  server.listen(port);
-sequelizesync.sync().then(() => {
+sequelize.sync({ force: true }).then(() => {
  server.listen(port);
 });
 
