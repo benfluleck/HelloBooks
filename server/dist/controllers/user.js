@@ -48,15 +48,6 @@ exports.default = {
       res.status(400).send(error.message);
     });
   },
-
-
-  // if (error.message === "SequelizeValidationError") {
-  //  res.status(400).send(error);
-  //  res.json({
-  //   user: user.build(req.body),
-  //   error: error.errors,
-  //  });
-  // Sign In route build
   signin: function signin(req, res) {
     return User.findOne({
 
@@ -67,8 +58,11 @@ exports.default = {
     }).then(function (user) {
 
       if (!user) {
+        if (!user.username) {
+          return res.json({ success: false, message: userbook.username + ' does not exist' });
+        }
         // res.status(403).send();
-        res.json({ success: false, message: 'Bad Authentication failed. User not found.' });
+        res.json({ success: false, message: 'Bad Authentication failed. Check your token' });
       } else if (_bcryptNodejs2.default.compareSync(req.body.password, user.password)) {
         var Userjwt = { name: user.username, password: user.password };
         var token = _jsonwebtoken2.default.sign(Userjwt, 'superSecret', {
@@ -89,7 +83,6 @@ exports.default = {
     });
   },
   loanbook: function loanbook(req, res) {
-
     return UserBooks.create({
       userid: req.params.userId,
       bookid: req.body.bookid,
@@ -97,9 +90,19 @@ exports.default = {
       // status in user table will need to be updated
       // if book id does not exist
     }).then(function (userbook) {
-      if (userbook.return_status = false) userbook.return_status = true;
-      userbook.save;
-      return res.status(201).send(userbook);
+      if (!userbook.userid) {
+        return res.json({ success: false, message: userbook.userid + ' does not exist' });
+      } else if (!userbook.bookid) {
+        return res.json({ success: false, message: userbook.bookid + ' does not exist' });
+      } else if (userbook.return_date < Date.now()) {
+        return res.json({ success: false, message: 'The date is in the paast' });
+      } else {
+        if (userbook.return_status == false) {
+          userbook.return_status = true;
+          userbook.save;
+          return res.json({ message: userbook.bookid + ' has been returned' });
+        }
+      }
     }).catch(function (error) {
       return res.status(400).send(error);
     });

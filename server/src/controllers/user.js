@@ -41,14 +41,6 @@ export default {
  },
 
 
-
- // if (error.message === "SequelizeValidationError") {
- //  res.status(400).send(error);
- //  res.json({
- //   user: user.build(req.body),
- //   error: error.errors,
- //  });
- // Sign In route build
  signin(req, res) {
   return User.findOne({
 
@@ -59,8 +51,11 @@ export default {
   }).then((user) => {
 
    if (!user) {
+    if (!user.username) {
+     return res.json({ success: false, message: `${userbook.username} does not exist` });
+    }
     // res.status(403).send();
-    res.json({ success: false, message: 'Bad Authentication failed. User not found.' });
+    res.json({ success: false, message: 'Bad Authentication failed. Check your token' });
    } else if (bcrypt.compareSync(req.body.password, user.password)) {
     const Userjwt = { name: user.username, password: user.password };
     const token = jwt.sign(Userjwt, 'superSecret', {
@@ -80,7 +75,6 @@ export default {
  },
 
  loanbook(req, res) {
-
   return UserBooks.create({
     userid: req.params.userId,
     bookid: req.body.bookid,
@@ -89,10 +83,19 @@ export default {
    // status in user table will need to be updated
    // if book id does not exist
   ).then((userbook) => {
-   if (userbook.return_status = false)
-    userbook.return_status = true;
-   userbook.save;
-   return res.status(201).send(userbook);
+   if (!userbook.userid) {
+    return res.json({ success: false, message: `${userbook.userid} does not exist` });
+   } else if (!userbook.bookid) {
+    return res.json({ success: false, message: `${userbook.bookid} does not exist` });
+   } else if (userbook.return_date < Date.now()) {
+    return res.json({ success: false, message: `The date is in the paast` });
+   } else {
+    if (userbook.return_status == false) {
+     userbook.return_status = true;
+     userbook.save;
+     return res.json({ message: `${userbook.bookid} has been returned` });
+    }
+   }
   }).catch(error => res.status(400).send(error));
  },
 
