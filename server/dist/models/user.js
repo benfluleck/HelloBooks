@@ -25,8 +25,8 @@ module.exports = function (sequelize, DataTypes) {
       trim: true,
       validate: {
         is: {
-          arg: ['^[a-z]+$', 'i'],
-          msg: 'Must be only letters'
+          arg: /^[A-Za-z]+$/i,
+          msg: 'Firstname can only consit of letters'
         }
       },
       set: function set(val) {
@@ -40,8 +40,8 @@ module.exports = function (sequelize, DataTypes) {
       trim: true,
       validate: {
         is: {
-          arg: ['^[a-z]+$', 'i'],
-          msg: 'Must be only letters'
+          arg: /^[A-Za-z]+$/i,
+          msg: 'Lastname can only consit of letters'
         }
       },
       set: function set(val) {
@@ -55,14 +55,18 @@ module.exports = function (sequelize, DataTypes) {
       required: true,
       trim: true,
       validate: {
+        notEmpty: {
+          args: true,
+          msg: 'Usernames can not be empty'
+        },
         isAlphanumeric: {
           args: true,
-          msg: 'Only Alpha numeric characters please'
+          msg: 'Only Alpha numeric for usernames please'
         }
       },
       unique: {
         args: true,
-        msg: 'Username already exist'
+        msg: 'Username already exist in database'
       }
     },
     password: {
@@ -83,7 +87,10 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.VIRTUAL,
       allowNull: false,
       validate: {
-        notEmpty: true
+        notEmpty: {
+          args: true,
+          msg: 'Password confirmation can not be empty'
+        }
       }
     },
 
@@ -100,7 +107,7 @@ module.exports = function (sequelize, DataTypes) {
       },
       unique: {
         args: true,
-        msg: 'email already exist'
+        msg: 'Email already exist'
       }
     },
     user_level: {
@@ -125,7 +132,7 @@ module.exports = function (sequelize, DataTypes) {
         if (user.password === user.password_confirmation) {
           user.password = User.generateHash(user.password);
         } else {
-          return 'Passwords do not the match';
+          throw new Error('Passwords do not the match');
         }
       },
 

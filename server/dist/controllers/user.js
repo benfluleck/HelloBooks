@@ -42,11 +42,18 @@ exports.default = {
     }).then(function (user) {
       return res.json({ success: true, name: user.firstname, username: user.username });
     }).catch(function (error) {
-      return res.status(400).send(error.message);
+
+      res.status(400).send(error.message);
     });
   },
 
 
+  // if (error.message === "SequelizeValidationError") {
+  //  res.status(400).send(error);
+  //  res.json({
+  //   user: user.build(req.body),
+  //   error: error.errors,
+  //  });
   // Sign In route build
   signin: function signin(req, res) {
     return User.findOne({

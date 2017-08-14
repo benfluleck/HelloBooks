@@ -26,10 +26,23 @@ export default {
     email: req.body.email
 
    }).then(user => res.json({ success: true, name: user.firstname, username: user.username }))
-   .catch(error => res.status(400).send(error.message));
+   .catch(error => {
+
+
+    res.status(400).send(error.message);
+
+   });
 
  },
 
+
+
+ // if (error.message === "SequelizeValidationError") {
+ //  res.status(400).send(error);
+ //  res.json({
+ //   user: user.build(req.body),
+ //   error: error.errors,
+ //  });
  // Sign In route build
  signin(req, res) {
   return User.findOne({
