@@ -38,11 +38,13 @@ exports.default = {
       password: req.body.password,
       password_confirmation: req.body.password_confirmation,
       email: req.body.email
-
     }).then(function (user) {
-      return res.json({ success: true, name: user.firstname, username: user.username });
+      if (!user) {
+        res.json({ message: 'Error adding user' });
+      } else {
+        res.json({ success: true, name: user.firstname, username: user.username });
+      }
     }).catch(function (error) {
-
       res.status(400).send(error.message);
     });
   },

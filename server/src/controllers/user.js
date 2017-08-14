@@ -24,11 +24,16 @@ export default {
     password: req.body.password,
     password_confirmation: req.body.password_confirmation,
     email: req.body.email
+   })
+   .then(user => {
+    if (!user) {
+     res.json({ message: 'Error adding user' });
 
-   }).then(user => res.json({ success: true, name: user.firstname, username: user.username }))
+    } else {
+     res.json({ success: true, name: user.firstname, username: user.username });
+    }
+   })
    .catch(error => {
-
-
     res.status(400).send(error.message);
 
    });
