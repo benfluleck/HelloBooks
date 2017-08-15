@@ -1,5 +1,9 @@
 'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _toTitleCase = require('to-title-case');
 
 var _toTitleCase2 = _interopRequireDefault(_toTitleCase);
@@ -12,7 +16,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var randomId = (0, _uniqueRandom2.default)(1000000, 100000000);
 
-module.exports = function (sequelize, DataTypes) {
+exports.default = function (sequelize, DataTypes) {
   var Books = sequelize.define('Books', {
     id: {
       type: DataTypes.INTEGER,
@@ -37,7 +41,6 @@ module.exports = function (sequelize, DataTypes) {
     author: {
       type: DataTypes.STRING,
       allowNull: false,
-      required: true,
       trim: true,
       validate: {
         is: {

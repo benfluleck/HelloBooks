@@ -1,5 +1,9 @@
 'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _bcryptNodejs = require('bcrypt-nodejs');
 
 var _bcryptNodejs2 = _interopRequireDefault(_bcryptNodejs);
@@ -10,7 +14,7 @@ var _toTitleCase2 = _interopRequireDefault(_toTitleCase);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-module.exports = function (sequelize, DataTypes) {
+exports.default = function (sequelize, DataTypes) {
   var User = sequelize.define('User', {
     id: {
       type: DataTypes.INTEGER,
@@ -22,6 +26,7 @@ module.exports = function (sequelize, DataTypes) {
     firstname: {
       type: DataTypes.STRING,
       required: true,
+      allowNull: false,
       trim: true,
       validate: {
         is: {
@@ -30,13 +35,16 @@ module.exports = function (sequelize, DataTypes) {
         }
       },
       set: function set(val) {
-        this.setDataValue('firstname', (0, _toTitleCase2.default)(val));
+        if (val !== undefined) {
+          this.setDataValue('firstname', (0, _toTitleCase2.default)(val));
+        }
       }
     },
 
     lastname: {
       type: DataTypes.STRING,
       required: true,
+      allowNull: false,
       trim: true,
       validate: {
         is: {
@@ -45,15 +53,16 @@ module.exports = function (sequelize, DataTypes) {
         }
       },
       set: function set(val) {
-        this.setDataValue('lastname', (0, _toTitleCase2.default)(val));
+        if (val !== undefined) {
+          this.setDataValue('lastname', (0, _toTitleCase2.default)(val));
+        }
       }
     },
 
     username: {
       type: DataTypes.STRING,
-      allowNull: false,
-      required: true,
       trim: true,
+      allowNull: false,
       validate: {
         notEmpty: {
           args: true,
@@ -72,14 +81,16 @@ module.exports = function (sequelize, DataTypes) {
     password: {
       type: DataTypes.STRING,
       allowNull: false,
-      required: true,
       trim: true,
       validate: {
         len: {
           arg: [5, 16],
           msg: 'Length between 5 and 16 please'
+        },
+        notEmpty: {
+          args: true,
+          msg: 'Password can not be empty'
         }
-
       }
     },
 
@@ -97,7 +108,6 @@ module.exports = function (sequelize, DataTypes) {
     email: {
       type: DataTypes.STRING,
       allowNull: false,
-      required: true,
       trim: true,
       validate: {
         isEmail: {
@@ -154,6 +164,10 @@ module.exports = function (sequelize, DataTypes) {
   User.generateHash = function (password) {
     return _bcryptNodejs2.default.hashSync(password, _bcryptNodejs2.default.genSaltSync(10), null);
   };
+  types: {
+
+    allowNull: (function (val) {});
+  }
 
   return User;
 };

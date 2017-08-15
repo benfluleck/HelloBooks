@@ -3,7 +3,7 @@ import uniqueRandom from 'unique-random';
 
 const randomId = uniqueRandom(1000000, 100000000);
 
-module.exports = (sequelize, DataTypes) => {
+export default (sequelize, DataTypes) => {
  const Books = sequelize.define('Books', {
   id: {
    type: DataTypes.INTEGER,
@@ -28,7 +28,6 @@ module.exports = (sequelize, DataTypes) => {
   author: {
    type: DataTypes.STRING,
    allowNull: false,
-   required: true,
    trim: true,
    validate: {
     is: {

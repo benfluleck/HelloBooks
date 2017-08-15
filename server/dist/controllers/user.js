@@ -29,8 +29,9 @@ exports.default = {
    * @param {Object} res response object
    * @returns {void|Response} response object or void
    */
-  create: function create(req, res) {
+  create: function create(req, res, err) {
     // console.log(req.body, '++++++++++')
+
     return User.create({
       firstname: req.body.firstname,
       lastname: req.body.lastname,

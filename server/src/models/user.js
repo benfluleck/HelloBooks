@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt-nodejs';
 import toTitleCase from 'to-title-case';
 
-module.exports = (sequelize, DataTypes) => {
+export default (sequelize, DataTypes) => {
  const User = sequelize.define('User', {
   id: {
    type: DataTypes.INTEGER,
@@ -13,15 +13,18 @@ module.exports = (sequelize, DataTypes) => {
   firstname: {
    type: DataTypes.STRING,
    required: true,
+   allowNull: false,
    trim: true,
    validate: {
     is: {
      arg: /^[A-Za-z]+$/i,
      msg: 'Firstname can only consit of letters'
-    }
+    },
    },
    set(val) {
-    this.setDataValue('firstname', toTitleCase(val));
+    if (val !== undefined) {
+     this.setDataValue('firstname', toTitleCase(val));
+    }
    }
   },
 
@@ -29,23 +32,25 @@ module.exports = (sequelize, DataTypes) => {
   lastname: {
    type: DataTypes.STRING,
    required: true,
+   allowNull: false,
    trim: true,
    validate: {
     is: {
      arg: /^[A-Za-z]+$/i,
      msg: 'Lastname can only consit of letters',
-    }
+    },
    },
    set(val) {
-    this.setDataValue('lastname', toTitleCase(val));
+    if (val !== undefined) {
+     this.setDataValue('lastname', toTitleCase(val));
+    }
    }
   },
 
   username: {
    type: DataTypes.STRING,
-   allowNull: false,
-   required: true,
    trim: true,
+   allowNull: false,
    validate: {
     notEmpty: {
      args: true,
@@ -64,14 +69,16 @@ module.exports = (sequelize, DataTypes) => {
   password: {
    type: DataTypes.STRING,
    allowNull: false,
-   required: true,
    trim: true,
    validate: {
     len: {
      arg: [5, 16],
      msg: 'Length between 5 and 16 please',
+    },
+    notEmpty: {
+     args: true,
+     msg: 'Password can not be empty'
     }
-
    }
   },
 
@@ -89,7 +96,6 @@ module.exports = (sequelize, DataTypes) => {
   email: {
    type: DataTypes.STRING,
    allowNull: false,
-   required: true,
    trim: true,
    validate: {
     isEmail: {
@@ -126,8 +132,8 @@ module.exports = (sequelize, DataTypes) => {
     } else {
      throw new Error('Passwords do not the match');
     }
-   },
 
+   },
 
    beforeUpdate: (user) => {
     if (user._changed.password) {
@@ -145,6 +151,15 @@ module.exports = (sequelize, DataTypes) => {
  };
 
  User.generateHash = (password) => bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
+ types: {
+
+  allowNull: (val => {
+
+
+
+  })
+ }
+
 
 
  return User;

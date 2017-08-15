@@ -2,7 +2,6 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt-nodejs';
 import models from '../models';
 
-
 const User = models.User;
 const UserBooks = models.UserBooks;
 
@@ -15,8 +14,9 @@ export default {
   * @param {Object} res response object
   * @returns {void|Response} response object or void
   */
- create(req, res) {
+ create(req, res, err) {
   // console.log(req.body, '++++++++++')
+
   return User.create({
     firstname: req.body.firstname,
     lastname: req.body.lastname,
