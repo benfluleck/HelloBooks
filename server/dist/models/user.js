@@ -164,10 +164,6 @@ exports.default = function (sequelize, DataTypes) {
   User.generateHash = function (password) {
     return _bcryptNodejs2.default.hashSync(password, _bcryptNodejs2.default.genSaltSync(10), null);
   };
-  types: {
-
-    allowNull: (function (val) {});
-  }
 
   return User;
 };
