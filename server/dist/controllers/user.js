@@ -59,11 +59,10 @@ exports.default = {
     }).then(function (user) {
 
       if (!user) {
-        if (!user.username) {
-          return res.json({ success: false, message: userbook.username + ' does not exist' });
-        }
+
+        return res.json({ success: false, message: req.body.username + ' does not exist' });
+
         // res.status(403).send();
-        res.json({ success: false, message: 'Bad Authentication failed. Check your token' });
       } else if (_bcryptNodejs2.default.compareSync(req.body.password, user.password)) {
         var Userjwt = { name: user.username, password: user.password };
         var token = _jsonwebtoken2.default.sign(Userjwt, 'superSecret', {
@@ -77,7 +76,7 @@ exports.default = {
           token: token
         });
       } else {
-        res.json({ success: false, message: 'Password error.' });
+        res.json({ success: false, message: 'Incorrect Password Entered' });
       }
     }).catch(function (error) {
       return res.status(400).send(error.message);
@@ -95,8 +94,8 @@ exports.default = {
         return res.json({ success: false, message: userbook.userid + ' does not exist' });
       } else if (!userbook.bookid) {
         return res.json({ success: false, message: userbook.bookid + ' does not exist' });
-      } else if (userbook.return_date < Date.now()) {
-        return res.json({ success: false, message: 'The date is in the paast' });
+      } else if (req.body.date < Date.now()) {
+        return res.json({ success: false, message: 'The date is in the past' });
       } else {
         if (userbook.return_status == false) {
           userbook.return_status = true;
