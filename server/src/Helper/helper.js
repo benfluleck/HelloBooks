@@ -5,16 +5,15 @@ const Helper = {
   * @param {Object} data object containing user's details
   * @returns {Object} return user's data
   */
- userProfile() {
-  return {
-   firstname: firstname,
-   lastname: lastname,
-   username: username,
-   password: password,
-   password_confirmation: password_confirmation,
-   email: email
-  };
+ errorArray(error) {
+  const errorArray = [];
+  error.errors.forEach((err) => {
+   errorArray.push({ path: err.path, message: err.message });
+  });
+  return errorArray;
  },
+
+
 };
 
 export default Helper;

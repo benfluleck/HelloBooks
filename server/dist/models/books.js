@@ -8,6 +8,10 @@ var _toTitleCase = require('to-title-case');
 
 var _toTitleCase2 = _interopRequireDefault(_toTitleCase);
 
+var _sentenceCase = require('sentence-case');
+
+var _sentenceCase2 = _interopRequireDefault(_sentenceCase);
+
 var _uniqueRandom = require('unique-random');
 
 var _uniqueRandom2 = _interopRequireDefault(_uniqueRandom);
@@ -26,12 +30,16 @@ exports.default = function (sequelize, DataTypes) {
     title: {
       type: DataTypes.STRING,
       allowNull: false,
-      required: true,
       trim: true,
+      unique: 'compositeIndex',
       validate: {
         is: {
           arg: ['^[a-z]+$', 'i'],
           msg: 'Must be only letters'
+        },
+        len: {
+          args: [2, 30],
+          msg: 'Book Title must be at least 2 chars and less than 50 chars'
         }
       },
       set: function set(val) {
@@ -42,38 +50,65 @@ exports.default = function (sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false,
       trim: true,
+      unique: 'compositeIndex',
       validate: {
         is: {
-          arg: ['^[a-z]+$', 'i'],
+          arg: /^[A-Za-z]+$/i,
           msg: 'Must be only letters'
+        },
+        len: {
+          args: [2, 30],
+          msg: 'Author\'s name must be at least 2 chars and less than 50 chars'
         }
       },
       set: function set(val) {
-        this.setDataValue('author', (0, _toTitleCase2.default)(val));
+        if (val !== undefined) {
+          this.setDataValue('author', (0, _toTitleCase2.default)(val));
+        }
       }
     },
     category: {
       type: DataTypes.STRING,
       allowNull: false,
-      required: true,
       trim: true,
       validate: {
         is: {
-          arg: ['^[a-z]+$', 'i'],
+          arg: /^[A-Za-z]+$/i,
           msg: 'Must be only letters'
+        },
+        len: {
+          args: [2, 30],
+          msg: 'Category name must be at least 2 chars and less than 30 chars'
         }
       },
       set: function set(val) {
-        this.setDataValue('category', (0, _toTitleCase2.default)(val));
+        if (val !== undefined) {
+          this.setDataValue('category', (0, _toTitleCase2.default)(val));
+        }
       }
     },
-    Isbn: {
+    description: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      trim: true,
+      set: function set(val) {
+        if (val !== undefined) {
+          this.setDataValue('description', (0, _sentenceCase2.default)(val));
+        }
+      }
+    },
+    quantity: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      defaultValue: function defaultValue() {
-        return randomId();
+      defaultValue: 1,
+      validate: {
+        isNumeric: {
+          msg: 'Only numbers allowed'
+        }
       }
+
     },
+
     status: {
       type: DataTypes.BOOLEAN,
       allowNull: false,

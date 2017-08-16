@@ -19,7 +19,6 @@ exports.default = function (sequelize, DataTypes) {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
-      allowNull: false,
       autoIncrement: true
     },
 
@@ -32,6 +31,10 @@ exports.default = function (sequelize, DataTypes) {
         is: {
           arg: /^[A-Za-z]+$/i,
           msg: 'Firstname can only consit of letters'
+        },
+        len: {
+          args: [2, 30],
+          msg: 'Firstname must be at least 2 chars and less than 30 chars'
         }
       },
       set: function set(val) {
@@ -50,6 +53,10 @@ exports.default = function (sequelize, DataTypes) {
         is: {
           arg: /^[A-Za-z]+$/i,
           msg: 'Lastname can only consit of letters'
+        },
+        len: {
+          args: [2, 30],
+          msg: 'Lastname must be at least 2 chars and less than 30 chars'
         }
       },
       set: function set(val) {
@@ -71,6 +78,10 @@ exports.default = function (sequelize, DataTypes) {
         isAlphanumeric: {
           args: true,
           msg: 'Only Alpha numeric for usernames please'
+        },
+        len: {
+          args: [2, 30],
+          msg: 'Username must be at least 2 chars and less than 30 chars'
         }
       },
       unique: {
@@ -113,6 +124,10 @@ exports.default = function (sequelize, DataTypes) {
         isEmail: {
           arg: true,
           msg: 'Must be an Email address'
+        },
+        len: {
+          args: [5, 45],
+          msg: 'Firstname must be at least 2 chars and less than 30 chars'
         }
       },
       unique: {

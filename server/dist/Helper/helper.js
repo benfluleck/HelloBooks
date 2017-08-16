@@ -10,15 +10,12 @@ var Helper = {
    * @param {Object} data object containing user's details
    * @returns {Object} return user's data
    */
-  userProfile: function userProfile() {
-    return {
-      firstname: firstname,
-      lastname: lastname,
-      username: username,
-      password: password,
-      password_confirmation: password_confirmation,
-      email: email
-    };
+  errorArray: function errorArray(error) {
+    var errorArray = [];
+    error.errors.forEach(function (err) {
+      errorArray.push({ path: err.path, message: err.message });
+    });
+    return errorArray;
   }
 };
 

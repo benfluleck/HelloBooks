@@ -51,6 +51,9 @@
   "babel-preset-react": "^6.24.1",
   "babel-preset-stage-2": "^6.24.1",
   "babel-register": "^6.24.1",
-  "eslint-config-airbnb": "^15.1.0"
+  "eslint-config-airbnb": "^15.1.0",
+  "sentence-case": "^2.1.1",
+  "validator": "^8.0.0",
+  "validators": "^0.3.1"
  }
 }

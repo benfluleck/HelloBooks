@@ -1,5 +1,6 @@
 import User from './user';
 import models from '../models';
+import Helper from '../Helper/helper';
 
 const Books = models.Books;
 
@@ -11,12 +12,37 @@ export default {
   return Books.create({
    title: req.body.title,
    author: req.body.author,
-   category: req.body.category
-  }).then(books => res.status(201).send(books)).catch(error => res.status(400).send(error));
+   category: req.body.category,
+   quantity: req.body.quantity,
+   description: req.body.description
+  }).then(books => res.json({
+   Book_number: books.bookid,
+   Book: books.title,
+   Author: books.author,
+   Description: books.description,
+   Number: books.quantity
+  })).
+  catch(error => {
+   if (error.name === "SequelizeUniqueConstraintError") {
+    res.json({
+     error: 'Unique Error',
+     message: 'The book with this author is already in the database try editing the book quantity'
+    });
+    //res.status(400).send(error);
+   } else {
+    res.status(400)
+     .send({
+      Errors: Helper.errorArray(error)
+     });
+   }
+  });
  },
  // .updateAttributes(req.body, { fields: Object.keys(req.body) })
  update(req, res) {
   return Books.findById(req.params.bookId).then((book) => {
+   if (req.params.bookId === null) {
+    return res.json({ success: false, message: 'Enter a parameter' });
+   }
    if (!book) {
     return res.status(404).send({
      message: 'Book does not exist in this database'
@@ -24,12 +50,35 @@ export default {
    }
    return book.updateAttributes(req.body, { fields: Object.keys(req.body) })
     .then(() => res.status(201).send(book) // Send back the updated book
-    ).catch(error => res.status(400).send(error));
-  }).catch(error => res.status(400).send(error));
+    ).catch(error => {
+     if (error.name === "SequelizeUniqueConstraintError") {
+      res.json({
+       error: 'Unique Error',
+       message: 'The book with this author is already in the database try editing the book quantity'
+      });
+      //res.status(400).send(error);
+     } else {
+      res.status(400)
+       .send({
+        Errors: Helper.errorArray(error)
+       });
+     }
+    });
+  }).catch(error =>
+   res.status(400).send({ Errors: Helper.errorArray(error) }));
  },
 
  getAllBooks(req, res) {
-  return Books.all().then(book => res.status(200).send(book))
+  return Books.all().then(book => {
+    if (book == '' || book == undefined || book == null) {
+     res.json({
+      error: 'Empty',
+      message: 'There are no books present in the database'
+     });
+    } else {
+     res.status(200).send({ book });
+    }
+   })
    .catch(error => res.status(400).send(error));
  }
 

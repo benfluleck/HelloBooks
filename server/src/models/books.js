@@ -1,4 +1,5 @@
 import toTitleCase from 'to-title-case';
+import sentenceCase from 'sentence-case';
 import uniqueRandom from 'unique-random';
 
 const randomId = uniqueRandom(1000000, 100000000);
@@ -13,12 +14,16 @@ export default (sequelize, DataTypes) => {
   title: {
    type: DataTypes.STRING,
    allowNull: false,
-   required: true,
    trim: true,
+   unique: 'compositeIndex',
    validate: {
     is: {
      arg: ['^[a-z]+$', 'i'],
      msg: 'Must be only letters',
+    },
+    len: {
+     args: [2, 30],
+     msg: 'Book Title must be at least 2 chars and less than 50 chars'
     }
    },
    set(val) {
@@ -29,38 +34,69 @@ export default (sequelize, DataTypes) => {
    type: DataTypes.STRING,
    allowNull: false,
    trim: true,
+   unique: 'compositeIndex',
    validate: {
     is: {
-     arg: ['^[a-z]+$', 'i'],
+     arg: /^[A-Za-z]+$/i,
      msg: 'Must be only letters',
+    },
+    len: {
+     args: [2, 30],
+     msg: `Author's name must be at least 2 chars and less than 50 chars`
     }
    },
    set(val) {
-    this.setDataValue('author', toTitleCase(val));
+    if (val !== undefined) {
+     this.setDataValue('author', toTitleCase(val));
+    }
    }
   },
   category: {
    type: DataTypes.STRING,
    allowNull: false,
-   required: true,
    trim: true,
    validate: {
     is: {
-     arg: ['^[a-z]+$', 'i'],
+     arg: /^[A-Za-z]+$/i,
      msg: 'Must be only letters',
+    },
+    len: {
+     args: [2, 30],
+     msg: 'Category name must be at least 2 chars and less than 30 chars'
     }
    },
    set(val) {
-    this.setDataValue('category', toTitleCase(val));
+    if (val !== undefined) {
+     this.setDataValue('category', toTitleCase(val));
+    }
    }
 
 
   },
-  Isbn: {
+  description: {
+   type: DataTypes.STRING,
+   allowNull: true,
+   trim: true,
+   set(val) {
+    if (val !== undefined) {
+     this.setDataValue('description', sentenceCase(val));
+    }
+   }
+
+
+  },
+  quantity: {
    type: DataTypes.INTEGER,
    allowNull: false,
-   defaultValue: () => randomId()
+   defaultValue: 1,
+   validate: {
+    isNumeric: {
+     msg: 'Only numbers allowed'
+    }
+   },
+
   },
+
   status: {
    type: DataTypes.BOOLEAN,
    allowNull: false,
