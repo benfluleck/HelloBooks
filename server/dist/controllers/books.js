@@ -96,7 +96,7 @@ exports.default = {
         res.status(200).send({ book: book });
       }
     }).catch(function (error) {
-      return res.status(400).send(error);
+      return res.status(400).send(error.message);
     });
   }
 };

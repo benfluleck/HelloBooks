@@ -79,7 +79,7 @@ export default {
      res.status(200).send({ book });
     }
    })
-   .catch(error => res.status(400).send(error));
+   .catch(error => res.status(400).send(error.message));
  }
 
 };
