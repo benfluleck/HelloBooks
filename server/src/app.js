@@ -7,7 +7,7 @@ import routes from './routes';
 const app = express();
 
 // Log requests to the console.
-app.use(logger('production'));
+app.use(logger('test'));
 
 
 // Parse incoming requests data (https://github.com/expressjs/body-parser)
