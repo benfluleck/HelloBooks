@@ -4,7 +4,7 @@ import Sequelize from 'sequelize';
 
 import configenv from '../config/config.json';
 
-const env = process.env.NODE_ENV || 'test';
+const env = process.env.NODE_ENV || 'development';
 const config = configenv[env];
 
 const db = {};
@@ -12,7 +12,7 @@ const basename = path.basename(module.filename);
 
 let sequelize;
 
-if (config.use_env_variable) {
+if (configenv.use_env_variable) {
  sequelize = new Sequelize(process.env[config.use_env_variable]);
 } else {
  sequelize = new Sequelize(

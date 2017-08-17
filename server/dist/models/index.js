@@ -22,7 +22,7 @@ var _config2 = _interopRequireDefault(_config);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var env = process.env.NODE_ENV || 'test';
+var env = process.env.NODE_ENV || 'development';
 var config = _config2.default[env];
 
 var db = {};
@@ -30,7 +30,7 @@ var basename = _path2.default.basename(module.filename);
 
 var sequelize = void 0;
 
-if (config.use_env_variable) {
+if (_config2.default.use_env_variable) {
   sequelize = new _sequelize2.default(process.env[config.use_env_variable]);
 } else {
   sequelize = new _sequelize2.default(config.database, config.username, config.password, config);
