@@ -1,9 +1,5 @@
 language: node_js
 
-env:
-  global:
-NODE_ENV = 'test'
-
 
 notifications:
   email: false
@@ -15,6 +11,7 @@ before_script:
   - psql -c 'drop database if exists travis;' -U postgres
   - psql -c 'create database travis;' -U postgres
   - NODE_ENV=test npm run test:db
+  - npm run build
 script:
   - npm test
 
