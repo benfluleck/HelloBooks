@@ -1,7 +1,6 @@
 language: node_js
 
-rvm:
-  - 2.2.0
+
 node_js:
   - node
 notifications:
@@ -13,6 +12,7 @@ before_script:
   - npm install -g sequelize
   - psql -c 'drop database if exists travis;' -U postgres
   - psql -c 'create database travis;' -U postgres
+  - npm run build
   - NODE_ENV=test npm run test:db
 cache:
   directories:
