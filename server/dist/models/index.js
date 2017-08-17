@@ -31,9 +31,6 @@ var basename = _path2.default.basename(module.filename);
 var sequelize = void 0;
 
 if (config.use_env_variable) {
-  console.log(_config2.default, config, '???????????');
-  console.log(env, '--------------');
-
   sequelize = new _sequelize2.default(process.env[config.use_env_variable]);
 } else {
 
