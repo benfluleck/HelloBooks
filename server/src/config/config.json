@@ -15,13 +15,7 @@
   "logging": false
  },
 
- //  "test": {
- //   "username": "benny",
- //   "password": null,
- //   "database": "hello_books_test",
- //   "host": "127.0.0.1",
- //   "dialect": "postgres"
- //  },
+
  "production": {
 
   "dialect": "postgres",
