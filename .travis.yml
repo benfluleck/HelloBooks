@@ -8,8 +8,8 @@ notifications:
 services:
   - postgresql
 before_script:
-  - npm run install -g codeclimate-test-reporter
-  - npm run install -g sequelize
+  - npm install -g codeclimate-test-reporter
+  - npm install -g sequelize
   - psql -c 'drop database if exists travis;' -U postgres
   - psql -c 'create database travis;' -U postgres
   - npm run build
@@ -18,7 +18,7 @@ cache:
   directories:
     - "node_modules"
 script:
-  - npm test 
+  - npm run test 
 
 after_success:
   - npm run coverage
