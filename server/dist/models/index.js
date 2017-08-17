@@ -22,7 +22,7 @@ var _config2 = _interopRequireDefault(_config);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var env = process.env.NODE_ENV || 'development';
+var env = process.env.NODE_ENV || 'test';
 var config = _config2.default[env];
 
 var db = {};
