@@ -1,7 +1,10 @@
 language: node_js
 
-node_js:
-  - node
+env:
+  global:
+NODE_ENV = 'test'
+
+
 notifications:
   email: false
 services:
