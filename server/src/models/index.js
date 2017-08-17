@@ -12,12 +12,13 @@ const basename = path.basename(module.filename);
 
 let sequelize;
 
-if (configenv.use_env_variable) {
+if (config.use_env_variable) {
+ console.log(configenv, config, '???????????');
+ console.log(env, '--------------');
 
  sequelize = new Sequelize(process.env[config.use_env_variable]);
 } else {
- console.log(configenv, config, '???????????');
- console.log(env, '--------------');
+
  sequelize = new Sequelize(
   config.database, config.username, config.password, config
  );
