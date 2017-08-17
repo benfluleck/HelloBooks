@@ -7,7 +7,7 @@
   "start": "node server/dist/bin/www.js",
   "start:dev": "nodemon server/dist/bin/www.js",
   "build": "babel server/src --watch --out-dir server/dist --presets es2015",
-  "test": "SET NODE_ENV=test& mocha server/dist/test/*.js --timeout 10000  ",
+  "test": "cross-env NODE_ENV=test& mocha server/dist/test/*.js --timeout 10000  ",
   "test:db": "sequelize db:migrate --env test"
  },
  "engines": {
@@ -52,6 +52,7 @@
   "babel-preset-react": "^6.24.1",
   "babel-preset-stage-2": "^6.24.1",
   "babel-register": "^6.24.1",
+  "cross-env": "^5.0.5",
   "sentence-case": "^2.1.1",
   "validator": "^8.0.0",
   "validators": "^0.3.1"
