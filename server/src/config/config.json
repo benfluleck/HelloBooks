@@ -1,11 +1,4 @@
 {
- "development": {
-  "username": "benny1",
-  "password": null,
-  "database": "hello_books",
-  "host": "127.0.0.1",
-  "dialect": "postgres"
- },
  "test": {
   "username": "postgres",
   "password": "",
