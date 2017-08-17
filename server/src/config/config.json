@@ -12,9 +12,9 @@
   "password": null,
   "database": "travis",
   "host": "127.0.0.1",
-  "dialect": "postgres",
-  "logging": false
+  "dialect": "postgres"
  },
+
  "production": {
 
   "dialect": "postgres",

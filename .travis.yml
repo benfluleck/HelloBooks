@@ -11,6 +11,10 @@ before_script:
   - psql -c 'drop database if exists travis;' -U postgres
   - psql -c 'create database travis;' -U postgres
   - NODE_ENV=test npm run test:db
+<<<<<<< HEAD
+=======
+
+>>>>>>> Travisbranch
 script:
   - npm test
 after_success:
