@@ -8,7 +8,7 @@
   "test:db": "sequelize db:migrate",
   "start:dev": "nodemon server/dist/bin/www.js",
   "build": "babel server/src --watch --out-dir server/dist --presets es2015",
-  "test": "NODE_ENV=test& mocha server/dist/test/*.js --timeout 10000  "
+  "test": "cross-env NODE_ENV=test& mocha server/dist/test/*.js --timeout 10000 "
  },
 
  "keywords": [],
