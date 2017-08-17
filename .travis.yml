@@ -1,8 +1,7 @@
 language: node_js
 
 node_js:
-  - "stable"
-
+  - node
 notifications:
   email: false
 services:
