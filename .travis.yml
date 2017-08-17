@@ -1,7 +1,5 @@
 language: node_js
 
-rvm:
-  - 2.2.0
 
 node_js:
   - node
@@ -10,8 +8,8 @@ notifications:
 services:
   - postgresql
 before_script:
-  - npm install -g codeclimate-test-reporter
-  - npm install -g sequelize
+  - npm run install -g codeclimate-test-reporter
+  - npm run install -g sequelize
   - psql -c 'drop database if exists travis;' -U postgres
   - psql -c 'create database travis;' -U postgres
   - npm run build
