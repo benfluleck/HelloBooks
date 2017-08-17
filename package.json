@@ -5,6 +5,7 @@
  "main": "server/src/app.js",
  "scripts": {
   "start": "node server/dist/bin/www.js",
+  "test:db": "sequelize db:migrate",
   "start:dev": "nodemon server/dist/bin/www.js",
   "build": "babel server/src --watch --out-dir server/dist --presets es2015",
   "test": "NODE_ENV=test& mocha server/dist/test/*.js --timeout 10000  "
@@ -25,6 +26,7 @@
   "body-parser": "^1.17.2",
   "chai": "^4.1.0",
   "chai-http": "^3.0.0",
+  "cross-env": "^5.0.5",
   "debug": "^3.0.0",
   "eslint": "^4.3.0",
   "express": "^4.15.3",
