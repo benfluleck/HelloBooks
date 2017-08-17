@@ -18,7 +18,7 @@ export default (sequelize, DataTypes) => {
    unique: 'compositeIndex',
    validate: {
     is: {
-     arg: ['^[a-z]+$', 'i'],
+     arg: /\w+/g,
      msg: 'Must be only letters',
     },
     len: {
@@ -37,7 +37,7 @@ export default (sequelize, DataTypes) => {
    unique: 'compositeIndex',
    validate: {
     is: {
-     arg: /^[A-Za-z]+$/i,
+     arg: /\w+/g,
      msg: 'Must be only letters',
     },
     len: {
@@ -57,7 +57,7 @@ export default (sequelize, DataTypes) => {
    trim: true,
    validate: {
     is: {
-     arg: /^[A-Za-z]+$/i,
+     arg: /\w+/g,
      msg: 'Must be only letters',
     },
     len: {

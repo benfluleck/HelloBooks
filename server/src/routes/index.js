@@ -4,7 +4,7 @@ import controller from '../controllers';
 
 const UserController = controller.User;
 const BooksController = controller.Books;
-
+const UserBooksController = controller.UserBooks;
 
 export default (app) => {
  app.get('/api', (req, res) => res.status(200).send({
@@ -43,7 +43,7 @@ export default (app) => {
  app.post('/api/books', BooksController.create);
  app.put('/api/books/:bookId', BooksController.update);
  app.get('/api/books/', BooksController.getAllBooks);
- app.get('/api/users/:userId/books', UserController.getborrowerslist);
- app.post('/api/users/:userId/books', UserController.loanbook);
- app.put('/api/users/:userId/books', UserController.returnbook);
+ app.get('/api/users/:userId/books', UserBooksController.getborrowerslist);
+ app.post('/api/users/:userId/books', UserBooksController.loanbook);
+ app.put('/api/users/:userId/books', UserBooksController.returnbook);
 };

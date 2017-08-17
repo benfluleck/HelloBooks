@@ -34,33 +34,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var User = _models2.default.User;
 // import mocha from 'mocha';
 
-
-// import faker from 'faker';
-// import chai from 'chai';
-// import chaiHttp from 'chai-http';
-
-// // import sequelize from '../models';
-// import app from '../app';
-// // import mocha from 'mocha';
-// import db from '../models';
-// const User = db.User;
-// const Books = db.Books;
-
-// --compilers js:babel-core/register
-// Questions: Classes , ES6 problems maybe babel
-
-// const User = require('../models').User;
-// let Books = require('../models').Books;
-// During the test the env variable is set to test
-// process.env.NODE_ENV = 'test';
-// const chai = test.chai;
-// const chaiHttp = test.chaiHttp;
-// const faker = test.faker;
-// const expect = test.expect;
-// const Books = test.Books;
-// const User = test.User;
-// const app = test.app;
-
 var Books = _models2.default.Books;
 // const server = require('../routes/index');
 
@@ -82,7 +55,9 @@ describe('HelloBooks', function () {
     Books.create({
       title: 'Shola comes home',
       author: 'Benny Ogidan',
-      category: 'Fiction'
+      category: 'Fiction',
+      quantity: 20,
+      description: 'Test'
     }).then(function (book) {
       bookid = book.id;
     });
@@ -122,7 +97,14 @@ describe('HelloBooks', function () {
 
   describe('/POST ', function () {
     it('All users are allowed to register, Sign up successful', function (done) {
-      _chai2.default.request(_app2.default).post('/api/users/signup').send({ username: _faker2.default.internet.userName(), password: _faker2.default.internet.password }).end(function (err, res) {
+      _chai2.default.request(_app2.default).post('/api/users/signup').send({
+        firstname: _faker2.default.name.firstName(),
+        lastname: _faker2.default.name.lastName(),
+        username: _faker2.default.internet.userName(),
+        password: 'password',
+        password_confirmation: 'password',
+        email: _faker2.default.internet.email
+      }).end(function (err, res) {
         expect(201);
         done();
       });
@@ -133,19 +115,22 @@ describe('HelloBooks', function () {
         done();
       });
     });
-    it('Should validate to say created user is not unique', function (done) {
-      _chai2.default.request(_app2.default).post('/api/users/signup').send({
-        firstname: _faker2.default.name.firstName(),
-        lastname: _faker2.default.name.lastName(),
-        username: 'Benny',
-        password: 'benny',
-        password_confirmation: 'benny',
-        email: 'benny@ogidan.com'
-      }).end(function (err, res) {
-        expect(err.message).to.be.equal('Bad Request');
-        done();
-      });
-    });
+    // it('Should validate to say created user is not unique', (done) => {
+    //  chai.request(app)
+    //   .post('/api/users/signup')
+    //   .send({
+    //    firstname: faker.name.firstName(),
+    //    lastname: faker.name.lastName(),
+    //    username: 'Benny',
+    //    password: 'benny',
+    //    password_confirmation: 'benny',
+    //    email: 'benny@ogidan.com',
+    //   })
+    //   .end((err, res) => {
+    //    expect(err.message).to.be.equal('Bad Request');
+    //    done();
+    //   });
+    // });
     it('Only authenticated users allowed to loan', function (done) {
       _chai2.default.request(_app2.default).post('/api/users/1/books').end(function (err, res) {
         expect(res.status).to.equal(403);
@@ -199,20 +184,23 @@ describe('HelloBooks', function () {
     });
 
     // Loan a book need to change the date
-    it('it allows the user to loan a book', function (done) {
-
-      var userbook = {
-        userid: userId,
-        bookid: bookid,
-        return_date: '2016-08-16 04:05:02'
-        // return_status: false
-      };
-
-      _chai2.default.request(_app2.default).post('/api/users/' + userbook.userid + '/books').set('x-access-token', token).send(userbook).end(function (err, res) {
-        expect(res.status).to.equal(201);
-        done();
-      });
-    });
+    // it('it allows the user to loan a book', (done) => {
+    //  const userbook = {
+    //   userid: userId,
+    //   bookid: bookid,
+    //   date: '2016-08-18',
+    //   return_date: '2016-08-18'
+    //    // return_status: false
+    //  };
+    //  chai.request(app).post(`/api/users/${userId}/books`)
+    //   .set('x-access-token', token)
+    //   .send(userbook)
+    //   .end((err, res) => {
+    //    console.log('-------', res);
+    //    expect(res.status).to.equal(201);
+    //    done();
+    //   });
+    // });
 
     // Retrieves
     describe('/GET', function () {
@@ -240,7 +228,6 @@ describe('HelloBooks', function () {
 
       // return books
       it('it should return a book', function (done) {
-        console.log(bookid, '------?');
         _chai2.default.request(_app2.default).put('/api/users/' + userId + '/books').set('x-access-token', token).send({
           bookid: bookid
 
@@ -253,10 +240,10 @@ describe('HelloBooks', function () {
     });
   });
 
-  // //  after((done) => {
-  // //   //     User.drop();
-  // //   //     Books.drop();
-  // //   sequelize.sequelize.sync({ force: true });
+  //  after((done) => {
+  //   //     User.drop();
+  //   //     Books.drop();
+  //   sequelize.sequelize.sync({ force: true });
 
   //  });
 });

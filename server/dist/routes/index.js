@@ -16,6 +16,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var UserController = _controllers2.default.User;
 var BooksController = _controllers2.default.Books;
+var UserBooksController = _controllers2.default.UserBooks;
 
 exports.default = function (app) {
   app.get('/api', function (req, res) {
@@ -56,7 +57,7 @@ exports.default = function (app) {
   app.post('/api/books', BooksController.create);
   app.put('/api/books/:bookId', BooksController.update);
   app.get('/api/books/', BooksController.getAllBooks);
-  app.get('/api/users/:userId/books', UserController.getborrowerslist);
-  app.post('/api/users/:userId/books', UserController.loanbook);
-  app.put('/api/users/:userId/books', UserController.returnbook);
+  app.get('/api/users/:userId/books', UserBooksController.getborrowerslist);
+  app.post('/api/users/:userId/books', UserBooksController.loanbook);
+  app.put('/api/users/:userId/books', UserBooksController.returnbook);
 };
