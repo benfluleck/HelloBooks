@@ -67,6 +67,7 @@ describe('HelloBooks', () => {
    chai
     .request(app)
     .get('/api/books/')
+    .set('Accept', 'application/x-www-form-urlencoded')
     .end((err, res) => {
      expect(res.status).to.equal(403);
      done();
@@ -74,6 +75,7 @@ describe('HelloBooks', () => {
   });
   it('Only authenticated users allowed to see the book list', (done) => {
    chai.request(app).get('/api/users/1/books')
+    .set('Accept', 'application/x-www-form-urlencoded')
     .end((err, res) => {
      expect(res.status).to.equal(403);
      done();
@@ -83,8 +85,10 @@ describe('HelloBooks', () => {
 
  describe('/POST ', () => {
   it('All users are allowed to register, Sign up successful', (done) => {
-   chai.request(app).post('/api/users/signup').
-   send({
+   chai.request(app)
+    .post('/api/users/signup')
+    .set('Accept', 'application/x-www-form-urlencoded')
+    .send({
      firstname: faker.name.firstName(),
      lastname: faker.name.lastName(),
      username: faker.internet.userName(),
@@ -98,10 +102,12 @@ describe('HelloBooks', () => {
     });
   });
   it('Only authenticated users allowed to create books', (done) => {
-   chai.request(app).post('/api/books/').end((err, res) => {
-    expect(res.status).to.equal(403);
-    done();
-   });
+   chai.request(app).post('/api/books/')
+    .set('Accept', 'application/x-www-form-urlencoded')
+    .end((err, res) => {
+     expect(res.status).to.equal(403);
+     done();
+    });
   });
   // it('Should validate to say created user is not unique', (done) => {
   //  chai.request(app)
@@ -120,24 +126,32 @@ describe('HelloBooks', () => {
   //   });
   // });
   it('Only authenticated users allowed to loan', (done) => {
-   chai.request(app).post('/api/users/1/books').end((err, res) => {
-    expect(res.status).to.equal(403);
-    done();
-   });
+   chai.request(app)
+    .post('/api/users/1/books')
+    .set('Accept', 'application/x-www-form-urlencoded').end((err, res) => {
+     expect(res.status).to.equal(403);
+     done();
+    });
   });
  });
  describe('/PUT', () => {
   it('Only authenticated users allowed to edit books', (done) => {
-   chai.request(app).put('/api/books/1').end((err, res) => {
-    expect(res.status).to.equal(403);
-    done();
-   });
+   chai.request(app)
+    .put('/api/books/1')
+    .set('Accept', 'application/x-www-form-urlencoded')
+    .end((err, res) => {
+     expect(res.status).to.equal(403);
+     done();
+    });
   });
   it('Only authenticated users allowed to return books', (done) => {
-   chai.request(app).put('/api/users/1/books').end((err, res) => {
-    expect(res.status).to.equal(403);
-    done();
-   });
+   chai.request(app)
+    .put('/api/users/1/books')
+    .set('Accept', 'application/x-www-form-urlencoded')
+    .end((err, res) => {
+     expect(res.status).to.equal(403);
+     done();
+    });
   });
  });
 
@@ -146,7 +160,10 @@ describe('HelloBooks', () => {
    */
  describe('POST /login', () => {
   it('it responds with 401 status code if bad username or password', (done) => {
-   chai.request(app).post('api/users/signin').send({ username: faker.internet.userName(), password: faker.internet.password })
+   chai.request(app)
+    .post('api/users/signin')
+    .set('Accept', 'application/x-www-form-urlencoded')
+    .send({ username: faker.internet.userName(), password: faker.internet.password })
     .end((err, res) => {
      expect(401);
      done();
@@ -156,6 +173,7 @@ describe('HelloBooks', () => {
   it('it responds with 200 status code if good username or password', (done) => {
    chai.request(app)
     .post('/api/users/signin')
+    .set('Accept', 'application/x-www-form-urlencoded')
     .send({ username: 'Benny', password: 'benny' })
     .end((err, res) => {
      token = res.body.token;
@@ -168,8 +186,11 @@ describe('HelloBooks', () => {
 
   /////
   it('it returns successful login if user name and password', (done) => {
-   chai.request(app).post('/api/users/signin')
-    .send({ username: 'Benny', password: 'benny' })
+   chai.request(app)
+    .post('/api/users/signin')
+    .set('Accept', 'application/x-www-form-urlencoded')
+
+   .send({ username: 'Benny', password: 'benny' })
     .end((err, res) => {
 
 
@@ -205,6 +226,7 @@ describe('HelloBooks', () => {
    it('It retrieves all books from the data', (done) => {
     chai.request(app).get('/api/books')
      .set('x-access-token', token)
+     .set('Accept', 'application/x-www-form-urlencoded')
      .end((err, res) => {
       // bookid = Books.id
       expect(res.status).to.equal(200);
@@ -216,7 +238,9 @@ describe('HelloBooks', () => {
   describe('/PUT', () => {
    it('Edit a select book from the data', (done) => {
 
-    chai.request(app).put(`/api/books/${bookid}`).set('x-access-token', token).send({
+    chai.request(app).put(`/api/books/${bookid}`)
+     .set('Accept', 'application/x-www-form-urlencoded')
+     .set('x-access-token', token).send({
       title: 'The Chronicles of Andela',
       author: 'C.S. Lewis',
       category: 'Action'
@@ -229,7 +253,9 @@ describe('HelloBooks', () => {
 
    // return books
    it('it should return a book', (done) => {
-    chai.request(app).put(`/api/users/${userId}/books`).set('x-access-token', token).send({
+    chai.request(app)
+     .put(`/api/users/${userId}/books`)
+     .set('x-access-token', token).send({
       bookid,
 
      })

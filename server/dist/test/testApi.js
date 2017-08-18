@@ -83,13 +83,13 @@ describe('HelloBooks', function () {
    */
   describe('/GET', function () {
     it('Only authenticated users allowed to view books', function (done) {
-      _chai2.default.request(_app2.default).get('/api/books/').end(function (err, res) {
+      _chai2.default.request(_app2.default).get('/api/books/').set('Accept', 'application/x-www-form-urlencoded').end(function (err, res) {
         expect(res.status).to.equal(403);
         done();
       });
     });
     it('Only authenticated users allowed to see the book list', function (done) {
-      _chai2.default.request(_app2.default).get('/api/users/1/books').end(function (err, res) {
+      _chai2.default.request(_app2.default).get('/api/users/1/books').set('Accept', 'application/x-www-form-urlencoded').end(function (err, res) {
         expect(res.status).to.equal(403);
         done();
       });
@@ -98,7 +98,7 @@ describe('HelloBooks', function () {
 
   describe('/POST ', function () {
     it('All users are allowed to register, Sign up successful', function (done) {
-      _chai2.default.request(_app2.default).post('/api/users/signup').send({
+      _chai2.default.request(_app2.default).post('/api/users/signup').set('Accept', 'application/x-www-form-urlencoded').send({
         firstname: _faker2.default.name.firstName(),
         lastname: _faker2.default.name.lastName(),
         username: _faker2.default.internet.userName(),
@@ -111,7 +111,7 @@ describe('HelloBooks', function () {
       });
     });
     it('Only authenticated users allowed to create books', function (done) {
-      _chai2.default.request(_app2.default).post('/api/books/').end(function (err, res) {
+      _chai2.default.request(_app2.default).post('/api/books/').set('Accept', 'application/x-www-form-urlencoded').end(function (err, res) {
         expect(res.status).to.equal(403);
         done();
       });
@@ -133,7 +133,7 @@ describe('HelloBooks', function () {
     //   });
     // });
     it('Only authenticated users allowed to loan', function (done) {
-      _chai2.default.request(_app2.default).post('/api/users/1/books').end(function (err, res) {
+      _chai2.default.request(_app2.default).post('/api/users/1/books').set('Accept', 'application/x-www-form-urlencoded').end(function (err, res) {
         expect(res.status).to.equal(403);
         done();
       });
@@ -141,13 +141,13 @@ describe('HelloBooks', function () {
   });
   describe('/PUT', function () {
     it('Only authenticated users allowed to edit books', function (done) {
-      _chai2.default.request(_app2.default).put('/api/books/1').end(function (err, res) {
+      _chai2.default.request(_app2.default).put('/api/books/1').set('Accept', 'application/x-www-form-urlencoded').end(function (err, res) {
         expect(res.status).to.equal(403);
         done();
       });
     });
     it('Only authenticated users allowed to return books', function (done) {
-      _chai2.default.request(_app2.default).put('/api/users/1/books').end(function (err, res) {
+      _chai2.default.request(_app2.default).put('/api/users/1/books').set('Accept', 'application/x-www-form-urlencoded').end(function (err, res) {
         expect(res.status).to.equal(403);
         done();
       });
@@ -159,14 +159,14 @@ describe('HelloBooks', function () {
     */
   describe('POST /login', function () {
     it('it responds with 401 status code if bad username or password', function (done) {
-      _chai2.default.request(_app2.default).post('api/users/signin').send({ username: _faker2.default.internet.userName(), password: _faker2.default.internet.password }).end(function (err, res) {
+      _chai2.default.request(_app2.default).post('api/users/signin').set('Accept', 'application/x-www-form-urlencoded').send({ username: _faker2.default.internet.userName(), password: _faker2.default.internet.password }).end(function (err, res) {
         expect(401);
         done();
       });
     });
     // Authenticated users
     it('it responds with 200 status code if good username or password', function (done) {
-      _chai2.default.request(_app2.default).post('/api/users/signin').send({ username: 'Benny', password: 'benny' }).end(function (err, res) {
+      _chai2.default.request(_app2.default).post('/api/users/signin').set('Accept', 'application/x-www-form-urlencoded').send({ username: 'Benny', password: 'benny' }).end(function (err, res) {
         token = res.body.token;
         console.log(res.body, '-------------------');
         expect(res.status).to.equal(200);
@@ -177,7 +177,7 @@ describe('HelloBooks', function () {
 
     /////
     it('it returns successful login if user name and password', function (done) {
-      _chai2.default.request(_app2.default).post('/api/users/signin').send({ username: 'Benny', password: 'benny' }).end(function (err, res) {
+      _chai2.default.request(_app2.default).post('/api/users/signin').set('Accept', 'application/x-www-form-urlencoded').send({ username: 'Benny', password: 'benny' }).end(function (err, res) {
 
         // if (err) return done(err);
         expect('Content-Type', /json/);
@@ -209,7 +209,7 @@ describe('HelloBooks', function () {
     // Retrieves
     describe('/GET', function () {
       it('It retrieves all books from the data', function (done) {
-        _chai2.default.request(_app2.default).get('/api/books').set('x-access-token', token).end(function (err, res) {
+        _chai2.default.request(_app2.default).get('/api/books').set('x-access-token', token).set('Accept', 'application/x-www-form-urlencoded').end(function (err, res) {
           // bookid = Books.id
           expect(res.status).to.equal(200);
           done();
@@ -220,7 +220,7 @@ describe('HelloBooks', function () {
     describe('/PUT', function () {
       it('Edit a select book from the data', function (done) {
 
-        _chai2.default.request(_app2.default).put('/api/books/' + bookid).set('x-access-token', token).send({
+        _chai2.default.request(_app2.default).put('/api/books/' + bookid).set('Accept', 'application/x-www-form-urlencoded').set('x-access-token', token).send({
           title: 'The Chronicles of Andela',
           author: 'C.S. Lewis',
           category: 'Action'
