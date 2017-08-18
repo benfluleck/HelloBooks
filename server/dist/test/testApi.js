@@ -51,7 +51,7 @@ describe('HelloBooks', function () {
   before(function (done) {
     Books.destroy({ where: {} });
     User.destroy({ where: {} });
-    //sequelize.sequelize.sync({});
+    _index2.default.sequelize.sync({});
     // create dummy books
     Books.create({
       title: 'Shola comes home',

@@ -32,7 +32,7 @@ describe('HelloBooks', () => {
  before((done) => {
   Books.destroy({ where: {} });
   User.destroy({ where: {} });
-  //sequelize.sequelize.sync({});
+  sequelize.sequelize.sync({});
   // create dummy books
   Books.create({
    title: 'Shola comes home',
