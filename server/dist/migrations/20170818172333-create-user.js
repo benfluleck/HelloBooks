@@ -1,10 +1,11 @@
 'use strict';
 var bcrypt = require('bcrypt-nodejs');
 var toTitleCase = require('to-title-case');
+var Sequelize = require('sequelize');
 
 module.exports = {
  up: function(queryInterface, Sequelize) {
-  return queryInterface.createTable('Users', {
+  return queryInterface.createTable('User', {
    id: {
     allowNull: false,
     autoIncrement: true,
@@ -86,15 +87,6 @@ module.exports = {
      notEmpty: {
       args: true,
       msg: 'Password can not be empty'
-     }
-    }
-   },
-   password_confirmation: {
-    type: Sequelize.VIRTUAL,
-    validate: {
-     notEmpty: {
-      args: true,
-      msg: 'Password confirmation can not be empty'
      }
     }
    },
