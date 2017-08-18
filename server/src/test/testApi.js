@@ -21,8 +21,8 @@ const expect = chai.expect;
 chai.use(chaiHttp);
 // Our parent block
 
-let userId;
-let bookid;
+var userId;
+var bookid;
 
 Books.destroy({ where: {} });
 User.destroy({ where: {} });
@@ -30,7 +30,7 @@ sequelize.sequelize.sync({});
 
 // Middleware for database
 describe('HelloBooks', () => {
- let token;
+ var token;
  before((done) => {
 
   // create dummy books
@@ -168,7 +168,7 @@ describe('HelloBooks', () => {
     .send({ username: 'Benny', password: 'benny' })
     .end((err, res) => {
      token = res.body.token;
-     //console.log(res.body);
+     console.log(res.body, '-------------------');
      // if (err) return done(err);
      expect('Content-Type', /json/);
      expect(res.body).have.property('token');

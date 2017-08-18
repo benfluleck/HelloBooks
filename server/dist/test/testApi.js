@@ -42,8 +42,8 @@ var expect = _chai2.default.expect;
 _chai2.default.use(_chaiHttp2.default);
 // Our parent block
 
-var userId = void 0;
-var bookid = void 0;
+var userId;
+var bookid;
 
 Books.destroy({ where: {} });
 User.destroy({ where: {} });
@@ -51,7 +51,7 @@ _index2.default.sequelize.sync({});
 
 // Middleware for database
 describe('HelloBooks', function () {
-  var token = void 0;
+  var token;
   before(function (done) {
 
     // create dummy books
@@ -177,7 +177,7 @@ describe('HelloBooks', function () {
     it('it returns successful login if user name and password', function (done) {
       _chai2.default.request(_app2.default).post('/api/users/signin').send({ username: 'Benny', password: 'benny' }).end(function (err, res) {
         token = res.body.token;
-        //console.log(res.body);
+        console.log(res.body, '-------------------');
         // if (err) return done(err);
         expect('Content-Type', /json/);
         expect(res.body).have.property('token');
