@@ -30,8 +30,8 @@ let bookid;
 describe('HelloBooks', () => {
  let token;
  before((done) => {
-  Books.destroy({ where: {} });
-  User.destroy({ where: {} });
+  // Books.destroy({ where: {} });
+  // User.destroy({ where: {} });
   sequelize.sequelize.sync({});
   // create dummy books
   Books.create({

@@ -49,8 +49,8 @@ var bookid = void 0;
 describe('HelloBooks', function () {
   var token = void 0;
   before(function (done) {
-    Books.destroy({ where: {} });
-    User.destroy({ where: {} });
+    // Books.destroy({ where: {} });
+    // User.destroy({ where: {} });
     _index2.default.sequelize.sync({});
     // create dummy books
     Books.create({
