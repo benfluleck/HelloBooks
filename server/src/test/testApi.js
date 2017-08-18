@@ -24,15 +24,13 @@ chai.use(chaiHttp);
 let userId;
 let bookid;
 
-
-sequelize.sequelize.sync({ force: true });
 // Middleware for database
 describe('HelloBooks', () => {
  let token;
  before((done) => {
   Books.destroy({ where: {} });
   User.destroy({ where: {} });
-
+  sequelize.sequelize.sync({});
   // create dummy books
   Books.create({
    title: 'Shola comes home',
