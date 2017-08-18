@@ -111,7 +111,7 @@ exports.default = function (sequelize, DataTypes) {
       defaultValue: false
     }
   }, {
-    underscore: true
+    freezeTableName: true
   });
   Books.associate = function (models) {
     Books.belongsToMany(models.User, { as: 'userbooks', through: models.UserBooks, foreignKey: 'bookid' });

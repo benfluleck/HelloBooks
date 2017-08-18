@@ -141,7 +141,7 @@ exports.default = function (sequelize, DataTypes) {
       defaultValue: false
     }
   }, {
-
+    freezeTableName: true,
     hooks: {
 
       beforeCreate: function beforeCreate(user) {

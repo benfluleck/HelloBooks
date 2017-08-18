@@ -129,7 +129,7 @@ export default (sequelize, DataTypes) => {
    defaultValue: false,
   }
  }, {
-
+  freezeTableName: true,
   hooks: {
 
    beforeCreate: (user) => {

@@ -29,7 +29,7 @@ let bookid;
 // Middleware for database
 describe('HelloBooks', () => {
  let token;
- beforeEach((done) => {
+ before((done) => {
   Books.destroy({ where: {} });
   User.destroy({ where: {} });
   sequelize.sequelize.sync({});

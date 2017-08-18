@@ -48,7 +48,7 @@ var bookid = void 0;
 // Middleware for database
 describe('HelloBooks', function () {
   var token = void 0;
-  beforeEach(function (done) {
+  before(function (done) {
     Books.destroy({ where: {} });
     User.destroy({ where: {} });
     _index2.default.sequelize.sync({});
