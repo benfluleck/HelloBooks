@@ -22,11 +22,7 @@ var randomId = (0, _uniqueRandom2.default)(1000000, 100000000);
 
 exports.default = function (sequelize, DataTypes) {
   var Books = sequelize.define('Books', {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true
-    },
+
     title: {
       type: DataTypes.STRING,
       allowNull: false,

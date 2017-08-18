@@ -16,15 +16,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = function (sequelize, DataTypes) {
   var User = sequelize.define('User', {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true
-    },
-
     firstname: {
       type: DataTypes.STRING,
-      required: true,
       allowNull: false,
       trim: true,
       validate: {
@@ -80,7 +73,7 @@ exports.default = function (sequelize, DataTypes) {
           msg: 'Only Alpha numeric for usernames please'
         },
         len: {
-          args: [2, 30],
+          args: [4, 30],
           msg: 'Username must be at least 2 chars and less than 30 chars'
         }
       },

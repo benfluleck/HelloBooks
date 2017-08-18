@@ -6,11 +6,7 @@ const randomId = uniqueRandom(1000000, 100000000);
 
 export default (sequelize, DataTypes) => {
  const Books = sequelize.define('Books', {
-  id: {
-   type: DataTypes.INTEGER,
-   primaryKey: true,
-   autoIncrement: true,
-  },
+
   title: {
    type: DataTypes.STRING,
    allowNull: false,

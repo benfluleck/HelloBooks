@@ -3,15 +3,8 @@ import toTitleCase from 'to-title-case';
 
 export default (sequelize, DataTypes) => {
  const User = sequelize.define('User', {
-  id: {
-   type: DataTypes.INTEGER,
-   primaryKey: true,
-   autoIncrement: true,
-  },
-
   firstname: {
    type: DataTypes.STRING,
-   required: true,
    allowNull: false,
    trim: true,
    validate: {
@@ -68,7 +61,7 @@ export default (sequelize, DataTypes) => {
      msg: 'Only Alpha numeric for usernames please',
     },
     len: {
-     args: [2, 30],
+     args: [4, 30],
      msg: 'Username must be at least 2 chars and less than 30 chars'
     }
    },
