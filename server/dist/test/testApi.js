@@ -167,15 +167,18 @@ describe('HelloBooks', function () {
     // Authenticated users
     it('it responds with 200 status code if good username or password', function (done) {
       _chai2.default.request(_app2.default).post('/api/users/signin').send({ username: 'Benny', password: 'benny' }).end(function (err, res) {
+        token = res.body.token;
+        console.log(res.body, '-------------------');
         expect(res.status).to.equal(200);
         done();
       });
     });
     // Authenticate the user with a token
+
+    /////
     it('it returns successful login if user name and password', function (done) {
       _chai2.default.request(_app2.default).post('/api/users/signin').send({ username: 'Benny', password: 'benny' }).end(function (err, res) {
-        token = res.body.token;
-        console.log(res.body, '-------------------');
+
         // if (err) return done(err);
         expect('Content-Type', /json/);
         expect(res.body).have.property('token');

@@ -158,17 +158,21 @@ describe('HelloBooks', () => {
     .post('/api/users/signin')
     .send({ username: 'Benny', password: 'benny' })
     .end((err, res) => {
+     token = res.body.token;
+     console.log(res.body, '-------------------');
      expect(res.status).to.equal(200);
      done();
     });
   });
   // Authenticate the user with a token
+
+  /////
   it('it returns successful login if user name and password', (done) => {
    chai.request(app).post('/api/users/signin')
     .send({ username: 'Benny', password: 'benny' })
     .end((err, res) => {
-     token = res.body.token;
-     console.log(res.body, '-------------------');
+
+
      // if (err) return done(err);
      expect('Content-Type', /json/);
      expect(res.body).have.property('token');
