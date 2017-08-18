@@ -39,7 +39,6 @@ exports.default = function (sequelize, DataTypes) {
 
     lastname: {
       type: DataTypes.STRING,
-      required: true,
       allowNull: false,
       trim: true,
       validate: {
