@@ -27,7 +27,7 @@ before_script:
   - npm install -g sequelize
   - psql -c 'drop database if exists travis;' -U postgres
   - psql -c 'create database travis;' -U postgres
-  - NODE_ENV=test npm && run test:db
+  - NODE_ENV=test && npm run test:db
 script:
   - npm test
 
