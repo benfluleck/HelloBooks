@@ -45,15 +45,13 @@ _chai2.default.use(_chaiHttp2.default);
 var userId;
 var bookid;
 
-Books.destroy({ where: {} });
-User.destroy({ where: {} });
-_index2.default.sequelize.sync({});
-
 // Middleware for database
 describe('HelloBooks', function () {
   var token;
   before(function (done) {
-
+    Books.destroy({ where: {} });
+    User.destroy({ where: {} });
+    //sequelize.sequelize.sync({});
     // create dummy books
     Books.create({
       title: 'Shola comes home',
