@@ -21,14 +21,14 @@ const expect = chai.expect;
 chai.use(chaiHttp);
 // Our parent block
 
-var userId;
-var bookid;
+let userId;
+let bookid;
 
 
 
 // Middleware for database
 describe('HelloBooks', () => {
- var token;
+ let token;
  before((done) => {
   Books.destroy({ where: {} });
   User.destroy({ where: {} });
