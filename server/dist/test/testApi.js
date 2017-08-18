@@ -51,6 +51,7 @@ describe('HelloBooks', function () {
   before(function (done) {
     Books.destroy({ where: {} });
     User.destroy({ where: {} });
+    _index2.default.sequelize.sync({ force: true });
     // create dummy books
     Books.create({
       title: 'Shola comes home',
@@ -240,12 +241,12 @@ describe('HelloBooks', function () {
     });
   });
 
-  //  after((done) => {
-  //   //     User.drop();
-  //   //     Books.drop();
-  //   sequelize.sequelize.sync({ force: true });
+  // after((done) => {
+  //  //     User.drop();
+  //  //     Books.drop();
+  //  sequelize.sequelize.sync({ force: true });
 
-  //  });
+  // });
 });
 
 /*
