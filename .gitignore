@@ -3,4 +3,7 @@ node_modules/*
 node_modules/
 server/config/*
 package-lock.json
-
+*/coverage/*
+*/nyc_output/*
+coverage/*
+nyc_output/*
