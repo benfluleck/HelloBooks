@@ -193,7 +193,7 @@ describe('HelloBooks', function () {
       var userbook = {
         userid: userId,
         bookid: bookid,
-        date: '2017-08-20',
+        date: '2017-11-25',
         //return_date: '2016-08-18'
         //
 
