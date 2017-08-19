@@ -36,17 +36,16 @@ exports.default = function (sequelize, DataTypes) {
       defaultValue: false
     }
   }, {
-    classMethods: {}
-    //   hooks: {
-    //    beforeCreate: (UserBooks) => {
-    //     if (UserBooks.return_date < Date.now()) {
+    classMethods: {},
+    hooks: {
+      beforeCreate: function beforeCreate(UserBooks) {
+        if (UserBooks.return_date < Date.now()) {
 
-    //      throw new Error('Date is less than current date');
-    //     }
+          throw new Error('Date is less than current date');
+        }
+      }
 
-    //    },
-
-    //   }
+    }
 
   });
   UserBooks.associate = function (models) {
