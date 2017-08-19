@@ -11,6 +11,16 @@ module.exports = {
     primaryKey: true,
     type: Sequelize.INTEGER
    },
+   bookid: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+
+   },
+   userid: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+
+   },
    return_date: {
     type: Sequelize.DATE,
     allowNull: false,
