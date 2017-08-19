@@ -205,8 +205,8 @@ describe('HelloBooks', () => {
   //Loan a book need to change the date
   it('it allows the user to loan a book', (done) => {
    const userbook = {
-    userid: userId,
-    bookid: bookid,
+    userId,
+    bookid,
     date: '2017-11-25',
     //return_date: '2016-08-18'
     //

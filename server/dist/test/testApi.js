@@ -191,7 +191,7 @@ describe('HelloBooks', function () {
     //Loan a book need to change the date
     it('it allows the user to loan a book', function (done) {
       var userbook = {
-        userid: userId,
+        userId: userId,
         bookid: bookid,
         date: '2017-11-25',
         //return_date: '2016-08-18'
