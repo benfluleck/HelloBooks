@@ -4,16 +4,7 @@ import uniqueRandom from 'unique-random';
 
 export default (sequelize, DataTypes) => {
  const Books = sequelize.define('Books', {
-  bookid: {
-   type: DataTypes.INTEGER,
-   allowNull: false,
 
-  },
-  userid: {
-   type: DataTypes.INTEGER,
-   allowNull: false,
-
-  },
 
   title: {
    type: DataTypes.STRING,

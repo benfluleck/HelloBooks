@@ -3,6 +3,16 @@ const randomId = uniqueRandom(1000000, 100000000);
 
 export default (sequelize, DataTypes) => {
  const UserBooks = sequelize.define('UserBooks', {
+  bookid: {
+   type: DataTypes.INTEGER,
+   allowNull: false,
+
+  },
+  userid: {
+   type: DataTypes.INTEGER,
+   allowNull: false,
+
+  },
   return_date: {
    type: DataTypes.DATE,
    allowNull: false,
@@ -40,7 +50,7 @@ export default (sequelize, DataTypes) => {
  });
  UserBooks.associate = (models) => {
   UserBooks.belongsTo(models.Books, {
-   foreignKey: 'bookid',
+   foreignKey: 'id',
    as: 'book',
    onDelete: 'CASCADE',
   });
