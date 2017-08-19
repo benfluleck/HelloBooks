@@ -200,6 +200,7 @@ describe('HelloBooks', function () {
         return_status: false
       };
       _chai2.default.request(_app2.default).post('/api/users/' + userId + '/books').set('x-access-token', token).send(userbook).end(function (err, res) {
+        console.log('+++++++++++', res.body, userbook.return_date);
         expect(res.status).to.equal(201);
         done();
       });
