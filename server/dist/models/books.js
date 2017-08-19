@@ -20,6 +20,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = function (sequelize, DataTypes) {
   var Books = sequelize.define('Books', {
+    bookid: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+
+    },
+    userid: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+
+    },
 
     title: {
       type: DataTypes.STRING,
