@@ -12,12 +12,12 @@ module.exports = {
     type: Sequelize.INTEGER
    },
    bookid: {
-    type: DataTypes.INTEGER,
+    type: Sequelize.INTEGER,
     allowNull: false,
 
    },
    userid: {
-    type: DataTypes.INTEGER,
+    type: Sequelize.INTEGER,
     allowNull: false,
 
    },
