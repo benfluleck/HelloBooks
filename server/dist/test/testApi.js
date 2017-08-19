@@ -45,13 +45,14 @@ _chai2.default.use(_chaiHttp2.default);
 var userId = void 0;
 var bookid = void 0;
 
+//sequelize.sequelize.sync({ force: true });
 // Middleware for database
 describe('HelloBooks', function () {
   var token = void 0;
   before(function (done) {
     Books.destroy({ where: {} });
     User.destroy({ where: {} });
-    _index2.default.sequelize.sync({});
+
     // create dummy books
     Books.create({
       title: 'Shola comes home',
@@ -168,7 +169,7 @@ describe('HelloBooks', function () {
     it('it responds with 200 status code if good username or password', function (done) {
       _chai2.default.request(_app2.default).post('/api/users/signin').set('Accept', 'application/x-www-form-urlencoded').send({ username: 'Benny', password: 'benny' }).end(function (err, res) {
         token = res.body.token;
-        console.log(res.body, '-------------------');
+        //console.log(res.body, '-------------------');
         expect(res.status).to.equal(200);
         done();
       });
@@ -187,24 +188,22 @@ describe('HelloBooks', function () {
       });
     });
 
-    // Loan a book need to change the date
-    // it('it allows the user to loan a book', (done) => {
-    //  const userbook = {
-    //   userid: userId,
-    //   bookid: bookid,
-    //   date: '2016-08-18',
-    //   return_date: '2016-08-18'
-    //    // return_status: false
-    //  };
-    //  chai.request(app).post(`/api/users/${userId}/books`)
-    //   .set('x-access-token', token)
-    //   .send(userbook)
-    //   .end((err, res) => {
-    //    console.log('-------', res);
-    //    expect(res.status).to.equal(201);
-    //    done();
-    //   });
-    // });
+    //Loan a book need to change the date
+    it('it allows the user to loan a book', function (done) {
+      var userbook = {
+        userid: userId,
+        bookid: bookid,
+        date: '2017-08-20',
+        //return_date: '2016-08-18'
+        //
+
+        return_status: false
+      };
+      _chai2.default.request(_app2.default).post('/api/users/' + userId + '/books').set('x-access-token', token).send(userbook).end(function (err, res) {
+        expect(res.status).to.equal(201);
+        done();
+      });
+    });
 
     // Retrieves
     describe('/GET', function () {

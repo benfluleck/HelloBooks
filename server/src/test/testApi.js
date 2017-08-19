@@ -25,14 +25,14 @@ let userId;
 let bookid;
 
 
-
+//sequelize.sequelize.sync({ force: true });
 // Middleware for database
 describe('HelloBooks', () => {
  let token;
  before((done) => {
   Books.destroy({ where: {} });
   User.destroy({ where: {} });
-  sequelize.sequelize.sync({});
+
   // create dummy books
   Books.create({
    title: 'Shola comes home',
@@ -177,7 +177,7 @@ describe('HelloBooks', () => {
     .send({ username: 'Benny', password: 'benny' })
     .end((err, res) => {
      token = res.body.token;
-     console.log(res.body, '-------------------');
+     //console.log(res.body, '-------------------');
      expect(res.status).to.equal(200);
      done();
     });
@@ -202,24 +202,25 @@ describe('HelloBooks', () => {
     });
   });
 
-  // Loan a book need to change the date
-  // it('it allows the user to loan a book', (done) => {
-  //  const userbook = {
-  //   userid: userId,
-  //   bookid: bookid,
-  //   date: '2016-08-18',
-  //   return_date: '2016-08-18'
-  //    // return_status: false
-  //  };
-  //  chai.request(app).post(`/api/users/${userId}/books`)
-  //   .set('x-access-token', token)
-  //   .send(userbook)
-  //   .end((err, res) => {
-  //    console.log('-------', res);
-  //    expect(res.status).to.equal(201);
-  //    done();
-  //   });
-  // });
+  //Loan a book need to change the date
+  it('it allows the user to loan a book', (done) => {
+   const userbook = {
+    userid: userId,
+    bookid: bookid,
+    date: '2017-08-20',
+    //return_date: '2016-08-18'
+    //
+
+    return_status: false
+   };
+   chai.request(app).post(`/api/users/${userId}/books`)
+    .set('x-access-token', token)
+    .send(userbook)
+    .end((err, res) => {
+     expect(res.status).to.equal(201);
+     done();
+    });
+  });
 
   // Retrieves
   describe('/GET', () => {
