@@ -1,4 +1,4 @@
-![Build Status](https://travis-ci.org/benfluleck/HelloBooks.svg?branch=master)
+![Build Status](https://travis-ci.org/benfluleck/HelloBooks.svg?branch=Travisrepo)
 
 # HelloBooks
 
