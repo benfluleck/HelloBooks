@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/benfluleck/HelloBooks.svg?branch=master)]
+
 # HelloBooks
 
 HelloBooks is an application that simulates a real life library
