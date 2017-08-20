@@ -19,6 +19,17 @@ var BooksController = _controllers2.default.Books;
 var UserBooksController = _controllers2.default.UserBooks;
 
 exports.default = function (app) {
+  /**
+   * @swagger
+   * /:
+   *   get:
+   *     tags:
+   *       - Welcome to Hello Books
+   *     description: Returns the homepage
+   *     responses:
+   *       200:
+   *         description: Welcome to Hello Books Library
+   */
   app.get('/api', function (req, res) {
     return res.status(200).send({
       message: 'Welcome to the Hello Books!'

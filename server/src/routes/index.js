@@ -7,6 +7,17 @@ const BooksController = controller.Books;
 const UserBooksController = controller.UserBooks;
 
 export default (app) => {
+ /**
+  * @swagger
+  * /:
+  *   get:
+  *     tags:
+  *       - Welcome to Hello Books
+  *     description: Returns the homepage
+  *     responses:
+  *       200:
+  *         description: Welcome to Hello Books Library
+  */
  app.get('/api', (req, res) => res.status(200).send({
   message: 'Welcome to the Hello Books!',
  }));

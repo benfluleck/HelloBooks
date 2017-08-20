@@ -6,5 +6,5 @@ package-lock.json
 */coverage/*
 */nyc_output/*
 coverage/*
-.nyc_output/*
+*/.nyc_output/*
 .coveralls.yml
