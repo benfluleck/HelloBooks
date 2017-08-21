@@ -177,7 +177,6 @@ describe('HelloBooks', () => {
     .send({ username: 'Benny', password: 'benny' })
     .end((err, res) => {
      token = res.body.token;
-     //console.log(res.body, '-------------------');
      expect(res.status).to.equal(200);
      done();
     });
@@ -217,7 +216,6 @@ describe('HelloBooks', () => {
     .set('x-access-token', token)
     .send(userbook)
     .end((err, res) => {
-     console.log('+++++++++++', res.body, userbook.return_date)
      expect(res.status).to.equal(201);
      done();
     });

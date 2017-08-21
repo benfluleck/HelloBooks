@@ -169,7 +169,6 @@ describe('HelloBooks', function () {
     it('it responds with 200 status code if good username or password', function (done) {
       _chai2.default.request(_app2.default).post('/api/users/signin').set('Accept', 'application/x-www-form-urlencoded').send({ username: 'Benny', password: 'benny' }).end(function (err, res) {
         token = res.body.token;
-        //console.log(res.body, '-------------------');
         expect(res.status).to.equal(200);
         done();
       });
@@ -200,7 +199,6 @@ describe('HelloBooks', function () {
         return_status: false
       };
       _chai2.default.request(_app2.default).post('/api/users/' + userId + '/books').set('x-access-token', token).send(userbook).end(function (err, res) {
-        console.log('+++++++++++', res.body, userbook.return_date);
         expect(res.status).to.equal(201);
         done();
       });

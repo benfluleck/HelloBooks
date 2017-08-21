@@ -24,33 +24,29 @@ var _swaggerJsdoc = require('swagger-jsdoc');
 
 var _swaggerJsdoc2 = _interopRequireDefault(_swaggerJsdoc);
 
+var _path = require('path');
+
+var _path2 = _interopRequireDefault(_path);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // Set up the express app
 var app = (0, _express2.default)();
 var swaggerDefinition = {
   info: {
-    title: 'Node Swagger API',
+    title: 'Hello Books API - Benny Ogidan',
     version: '1.0.0',
     description: 'Demonstrating how to describe a RESTful API with Swagger'
   },
-  basePath: '/'
+  host: 'localhost:5000',
+  basePath: '/api/v1'
 };
 
 var options = {
   // import swaggerDefinitions
   swaggerDefinition: swaggerDefinition,
   // path to the API docs
-  apis: ['./routes/*.js'],
-  basePath: '/api/v1',
-  securityDefinitions: {
-    jwt: {
-      type: 'apiKey',
-      name: 'Authorization',
-      in: 'x-access-token'
-    }
-  },
-  security: [{ jwt: [] }]
+  apis: ['./server/dist/routes/*.js']
 
 };
 
@@ -63,15 +59,20 @@ app.use((0, _morgan2.default)('dev'));
 app.use(_bodyParser2.default.json());
 app.use(_bodyParser2.default.urlencoded({ extended: false }));
 
-(0, _routes2.default)(app);
+app.use(_express2.default.static(_path2.default.join(__dirname, '../api-docs/')));
+//console.log(path.join(__dirname, '../api-docs/'));
 
-// Setup a default catch-all route that sends back a welcome message in JSON format.
-//app.use('/api/v1', routes);
-// serve swagger
 app.get('/hellobooks.json', function (req, res) {
   res.setHeader('Content-Type', 'application/json');
   res.send(swaggerSpec);
 });
+//routes(app);
+
+
+// Setup a default catch-all route that sends back a welcome message in JSON format.
+app.use('/api/v1', _routes2.default);
+// serve swagger
+
 
 app.get('*', function (req, res) {
   return res.status(404).send({
