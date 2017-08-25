@@ -123,7 +123,7 @@ Router.post('/users/signup', UserController.create);
  * /users/signin:
  *   post:
  *     tags:
- *       - Users & Authentication
+ *       - Users, Register & Authentication
  *     description: Signs in a User
  *     produces:
  *       - application/json
@@ -174,7 +174,7 @@ Router.use(function (req, res, next) {
  * /books:
  *   post:
  *     tags:
- *       - Starting Books
+ *       - Books
  *     description: Adds a new book type  with a seperate quantity
  *     produces:
  *       - application/json
@@ -197,10 +197,179 @@ Router.use(function (req, res, next) {
  *         description: Invalid Tokens
  */
 Router.post('/books', BooksController.create);
-Router.put('/books/:bookId', BooksController.update);
-Router.get('/books/', BooksController.getAllBooks);
-Router.get('/users/:userId/books', UserBooksController.getborrowerslist);
-Router.post('/users/:userId/books', UserBooksController.loanbook);
-Router.put('/users/:userId/books', UserBooksController.returnbook);
 
+/**
+ * @swagger
+ * /books/{bookId}:
+ *   put:
+ *     tags:
+ *       - Books
+ *     description: Edit a Book stored in the library
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: bookId
+ *         description: ID of the Book
+ *         in: path
+ *         required: true
+ *         type: integer
+ *       - name: book
+ *         description: Book object with updated information
+ *         in: body
+ *         required: true
+ *         schema:
+ *           $ref: '#/definitions/Book'
+ *       - name: x-access-token
+ *         in: header
+ *         description: Header for token
+ *         required: true
+ *         type: string
+ *     responses:
+ *       201:
+ *         description: Successfully edited
+ *         schema:
+ *           $ref: '#/definitions/Book'
+ *       400:
+ *         description: All fields are required
+ *       404:
+ *         description: Book not found
+ */
+
+Router.put('/books/:bookId', BooksController.update);
+
+/**
+ * @swagger
+ * /books:
+ *   get:
+ *     tags:
+ *       - Books
+ *     description: Returns all Books
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: x-access-token
+ *         in: header
+ *         description: Header for token
+ *         required: true
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: List of Books in the database
+ *         schema:
+ *           $ref: '#/definitions/Book'
+ */
+Router.get('/books/', BooksController.getAllBooks);
+
+/**
+ * @swagger
+ * /users/{userId}/books:
+ *   post:
+ *     tags:
+ *       - Loan Books
+ *     description: Loan a specific Book
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: userId
+ *         description: ID of the User
+ *         in: path
+ *         required: true
+ *         type: integer
+ *       - name: return_date
+ *         description: Return Date of the book
+ *         in: path
+ *         required: true
+ *         type: date
+ *       - name: bookId
+ *         description: ID of Book to Borrow
+ *         in: body
+ *         required: true
+ *         schema:
+ *           type: object
+ *           required:
+ *             - bookId
+ *           properties:
+ *             bookId:
+ *               type: integer
+ *
+ *       - name: x-access-token
+ *         in: header
+ *         description: Header for Token
+ *         required: true
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: Book Successfully borrowed
+ *         schema:
+ *           $ref: '#/definitions/Book'
+ *       400:
+ *         description: All fields are required
+ *       404:
+ *         description: Book not found
+ */
+Router.post('/users/:userId/books', UserBooksController.loanbook);
+/**
+ * @swagger
+ * /users/{userId}/books:
+ *   put:
+ *     tags:
+ *       - Loan Books
+ *     description: Return a specific Book
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: userId
+ *         description: ID of the User
+ *         in: path
+ *         required: true
+ *         type: integer
+ *       - name: bookId
+ *         description: Book Loaned
+ *         in: body
+ *         required: true
+ *         type: integer
+ *       - name: x-access-token
+ *         in: header
+ *         description: Header for Token
+ *         required: true
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: Book Successfully returned
+ *         schema:
+ *           $ref: '#/definitions/Book'
+ *       400:
+ *         description: All fields are required
+ *       404:
+ *         description: Book does not exist
+ */
+
+Router.put('/users/:userId/books', UserBooksController.returnbook);
+/**
+ * @swagger
+ * /users/{userId}/books:
+ *   get:
+ *     tags:
+ *       - Loan Books
+ *     description: Returns a list of all Books borrowed but not returned by a User
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: returned
+ *         in: query
+ *         required: true
+ *         type: boolean
+ *         default: false
+ *       - name: x-access-token
+ *         in: header
+ *         description: Header for Token
+ *         required: true
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: An array of Books
+ *         schema:
+ *           $ref: '#/definitions/Book'
+ */
+Router.get('/users/:userId/books', UserBooksController.getborrowerslist);
 exports.default = Router;

@@ -12,7 +12,7 @@ const swaggerDefinition = {
  info: {
   title: 'Hello Books API - Benny Ogidan',
   version: '1.0.0',
-  description: 'Demonstrating how to describe a RESTful API with Swagger',
+  description: 'API for a Library database with Swagger',
  },
  host: 'localhost:5000',
  basePath: '/api/v1',
