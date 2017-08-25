@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt-nodejs';
 import toTitleCase from 'to-title-case';
+import sequelize from 'Sequelize';
 
 export default (sequelize, DataTypes) => {
  const User = sequelize.define('User', {
@@ -8,10 +9,10 @@ export default (sequelize, DataTypes) => {
    allowNull: false,
    trim: true,
    validate: {
-    // is: {
-    //  arg: /\w+/g,
-    //  msg: 'Firstname can only consit of letters'
-    // },
+    is: {
+     arg: /\w+/g,
+     msg: 'Firstname can only consit of letters'
+    },
     len: {
      args: [2, 30],
      msg: 'Firstname must be at least 2 chars and less than 30 chars'
@@ -30,10 +31,10 @@ export default (sequelize, DataTypes) => {
    allowNull: false,
    trim: true,
    validate: {
-    // is: {
-    //  arg: /\w+/g,
-    //  msg: 'Lastname can only consit of letters',
-    // },
+    is: {
+     arg: /\w+/g,
+     msg: 'Lastname can only consit of letters',
+    },
     len: {
      args: [2, 30],
      msg: 'Lastname must be at least 2 chars and less than 30 chars'
@@ -49,7 +50,12 @@ export default (sequelize, DataTypes) => {
   username: {
    type: DataTypes.STRING,
    trim: true,
+   unique: {
+    args: true,
+    msg: "Username already in database"
+   },
    allowNull: false,
+
    validate: {
     notEmpty: {
      args: true,
@@ -64,10 +70,7 @@ export default (sequelize, DataTypes) => {
      msg: 'Username must be at least 2 chars and less than 30 chars'
     }
    },
-   unique: {
-    args: true,
-    msg: 'Username already exist in database'
-   }
+
   },
   password: {
    type: DataTypes.STRING,
@@ -82,7 +85,8 @@ export default (sequelize, DataTypes) => {
      args: true,
      msg: 'Password can not be empty'
     }
-   }
+
+   },
   },
 
   password_confirmation: {
@@ -99,6 +103,10 @@ export default (sequelize, DataTypes) => {
   email: {
    type: DataTypes.STRING,
    allowNull: false,
+   unique: {
+    args: true,
+    msg: "Email already in database"
+   },
    trim: true,
    validate: {
     isEmail: {
@@ -110,16 +118,16 @@ export default (sequelize, DataTypes) => {
      msg: 'Firstname must be at least 2 chars and less than 30 chars'
     }
    },
-   unique: {
-    args: true,
-    msg: 'Email already exist'
-   }
+
   },
   user_level: {
    type: DataTypes.INTEGER,
    allowNull: false,
    defaultValue: 1,
-
+  },
+  user_image: {
+   type: DataTypes.STRING,
+   allowNull: true,
   },
 
   isAdmin: {

@@ -12,6 +12,10 @@ var _toTitleCase = require('to-title-case');
 
 var _toTitleCase2 = _interopRequireDefault(_toTitleCase);
 
+var _Sequelize = require('Sequelize');
+
+var _Sequelize2 = _interopRequireDefault(_Sequelize);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = function (sequelize, DataTypes) {
@@ -21,10 +25,10 @@ exports.default = function (sequelize, DataTypes) {
       allowNull: false,
       trim: true,
       validate: {
-        // is: {
-        //  arg: /\w+/g,
-        //  msg: 'Firstname can only consit of letters'
-        // },
+        is: {
+          arg: /\w+/g,
+          msg: 'Firstname can only consit of letters'
+        },
         len: {
           args: [2, 30],
           msg: 'Firstname must be at least 2 chars and less than 30 chars'
@@ -42,10 +46,10 @@ exports.default = function (sequelize, DataTypes) {
       allowNull: false,
       trim: true,
       validate: {
-        // is: {
-        //  arg: /\w+/g,
-        //  msg: 'Lastname can only consit of letters',
-        // },
+        is: {
+          arg: /\w+/g,
+          msg: 'Lastname can only consit of letters'
+        },
         len: {
           args: [2, 30],
           msg: 'Lastname must be at least 2 chars and less than 30 chars'
@@ -61,7 +65,12 @@ exports.default = function (sequelize, DataTypes) {
     username: {
       type: DataTypes.STRING,
       trim: true,
+      unique: {
+        args: true,
+        msg: "Username already in database"
+      },
       allowNull: false,
+
       validate: {
         notEmpty: {
           args: true,
@@ -75,11 +84,8 @@ exports.default = function (sequelize, DataTypes) {
           args: [4, 30],
           msg: 'Username must be at least 2 chars and less than 30 chars'
         }
-      },
-      unique: {
-        args: true,
-        msg: 'Username already exist in database'
       }
+
     },
     password: {
       type: DataTypes.STRING,
@@ -94,6 +100,7 @@ exports.default = function (sequelize, DataTypes) {
           args: true,
           msg: 'Password can not be empty'
         }
+
       }
     },
 
@@ -111,6 +118,10 @@ exports.default = function (sequelize, DataTypes) {
     email: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: {
+        args: true,
+        msg: "Email already in database"
+      },
       trim: true,
       validate: {
         isEmail: {
@@ -121,17 +132,17 @@ exports.default = function (sequelize, DataTypes) {
           args: [5, 45],
           msg: 'Firstname must be at least 2 chars and less than 30 chars'
         }
-      },
-      unique: {
-        args: true,
-        msg: 'Email already exist'
       }
+
     },
     user_level: {
       type: DataTypes.INTEGER,
       allowNull: false,
       defaultValue: 1
-
+    },
+    user_image: {
+      type: DataTypes.STRING,
+      allowNull: true
     },
 
     isAdmin: {

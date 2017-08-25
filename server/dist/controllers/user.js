@@ -35,8 +35,7 @@ exports.default = {
    * @returns {void|Response} response object or void
    */
   create: function create(req, res) {
-
-    return User.create({
+    User.create({
       firstname: req.body.firstname,
       lastname: req.body.lastname,
       username: req.body.username,
@@ -45,22 +44,13 @@ exports.default = {
       email: req.body.email
     }).then(function (user) {
       if (!user) {
-        res.json({ message: 'Error adding user' });
+        //console.log("Couldn't add user")
+        res.status(400).send({ message: 'Error adding user' });
       } else {
         res.json({ success: true, name: user.firstname, username: user.username });
       }
     }).catch(function (error) {
-      //if(error.message ==="Validation Error")
-      error.errors.map(function (error) {
-        if (error.type === "notNull Violation") {
-          res.json({
-            error: 'not Null',
-            message: 'You have not defined one or more of your values'
-          });
-        }
-      });
-      // console.log(error.message);
-      //res.status(400).send(error);
+      res.status(400).send({ success: false, message: ' ' + error.message });
     });
   },
   signin: function signin(req, res) {
@@ -74,7 +64,7 @@ exports.default = {
 
       if (!user) {
 
-        return res.json({ success: false, message: req.body.username + ' does not exist in the database' });
+        return res.status(400).send({ success: false, message: req.body.username + ' does not exist in the database' });
 
         // res.status(403).send();
       } else if (_bcryptNodejs2.default.compareSync(req.body.password, user.password)) {
@@ -90,7 +80,7 @@ exports.default = {
           token: token
         });
       } else {
-        res.json({ success: false, message: 'Incorrect Password Entered' });
+        res.status(400).send({ success: false, message: 'Incorrect Password Entered' });
       }
     }).catch(function (error) {
       return res.status(400).send(error.message);

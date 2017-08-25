@@ -18,8 +18,7 @@ export default {
   * @returns {void|Response} response object or void
   */
  create(req, res) {
-
-  return User.create({
+  User.create({
     firstname: req.body.firstname,
     lastname: req.body.lastname,
     username: req.body.username,
@@ -29,24 +28,15 @@ export default {
    })
    .then(user => {
     if (!user) {
-     res.json({ message: 'Error adding user' });
+     //console.log("Couldn't add user")
+     res.status(400).send({ message: 'Error adding user' });
 
     } else {
      res.json({ success: true, name: user.firstname, username: user.username });
     }
    })
    .catch(error => {
-    //if(error.message ==="Validation Error")
-    error.errors.map(error => {
-     if (error.type === "notNull Violation") {
-      res.json({
-       error: 'not Null',
-       message: 'You have not defined one or more of your values'
-      });
-     }
-    });
-    // console.log(error.message);
-    //res.status(400).send(error);
+    res.status(400).send({ success: false, message: ` ${error.message}` });
 
    });
 
@@ -64,7 +54,7 @@ export default {
 
    if (!user) {
 
-    return res.json({ success: false, message: `${req.body.username} does not exist in the database` });
+    return res.status(400).send({ success: false, message: `${req.body.username} does not exist in the database` });
 
     // res.status(403).send();
 
@@ -81,7 +71,7 @@ export default {
      token
     });
    } else {
-    res.json({ success: false, message: 'Incorrect Password Entered' });
+    res.status(400).send({ success: false, message: 'Incorrect Password Entered' });
    }
   }).catch(error => res.status(400).send(error.message));
  },

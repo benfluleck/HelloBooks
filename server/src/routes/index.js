@@ -29,20 +29,26 @@ Router.get('/', (req, res) => res.status(200).send({
  *     properties:
  *       firstname:
  *         type: string
+ *         default: 'Ben'
  *       lastname:
  *         type: string
+ *         default: 'Ogidan'
  *       username:
  *         type: string
+ *         default: 'Benny'
  *       email:
  *         type: string
+ *         default: 'Ogidan@yahoo.com'
  *       password:
  *         type: string
+ *         default: 'benny'
  *       password_confirmation:
  *         type: string
+ *         default: 'benny'
  */
 /**
  * @swagger
- * definitions:
+ * definition:
  *   Login:
  *     properties:
  *       username:
@@ -55,7 +61,7 @@ Router.get('/', (req, res) => res.status(200).send({
 
 /**
  * @swagger
- * definitions:
+ * definition:
  *   Book:
  *     properties:
  *       title:
@@ -95,6 +101,28 @@ Router.get('/', (req, res) => res.status(200).send({
  *         description: Invalid Username, Password or Email
  */
 Router.post('/users/signup', UserController.create);
+/**
+ * @swagger
+ * /users/signin:
+ *   post:
+ *     tags:
+ *       - Users & Authentication
+ *     description: Signs in a User
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: user
+ *         description: User object
+ *         in: body
+ *         required: true
+ *         schema:
+ *           $ref: '#/definitions/Login'
+ *     responses:
+ *       200:
+ *         description: Successfully created
+ *       400:
+ *         description: Bad Username, Password or Email
+ */
 Router.post('/users/signin', UserController.signin);
 Router.use((req, res, next) => {
  // check header or url parameters or post parameters for token
@@ -123,6 +151,34 @@ Router.use((req, res, next) => {
 // if  user selects a different route and is not authenticated redirect him
 // number of copies
 //admin
+
+/**
+ * @swagger
+ * /books:
+ *   post:
+ *     tags:
+ *       - Starting Books
+ *     description: Adds a new book type  with a seperate quantity
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: book
+ *         description: Book object
+ *         in: body
+ *         required: true
+ *         schema:
+ *           $ref: '#/definitions/Book'
+ *       - name: x-access-token
+ *         in: header
+ *         description: Header for token
+ *         required: true
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: Successfully created
+ *       400:
+ *         description: Invalid Tokens
+ */
 Router.post('/books', BooksController.create);
 Router.put('/books/:bookId', BooksController.update);
 Router.get('/books/', BooksController.getAllBooks);

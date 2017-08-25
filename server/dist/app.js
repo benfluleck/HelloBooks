@@ -60,7 +60,7 @@ app.use(_bodyParser2.default.json());
 app.use(_bodyParser2.default.urlencoded({ extended: false }));
 
 app.use(_express2.default.static(_path2.default.join(__dirname, '../api-docs/')));
-//console.log(path.join(__dirname, '../api-docs/'));
+console.log(_path2.default.join(__dirname, '../api-docs/'));
 
 app.get('/hellobooks.json', function (req, res) {
   res.setHeader('Content-Type', 'application/json');

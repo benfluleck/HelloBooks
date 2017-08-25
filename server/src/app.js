@@ -41,7 +41,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 
 app.use(express.static(path.join(__dirname, '../api-docs/')));
-//console.log(path.join(__dirname, '../api-docs/'));
+console.log(path.join(__dirname, '../api-docs/'));
 
 app.get('/hellobooks.json', (req, res) => {
  res.setHeader('Content-Type', 'application/json');
