@@ -25,10 +25,10 @@ exports.default = function (sequelize, DataTypes) {
       allowNull: false,
       trim: true,
       validate: {
-        is: {
-          arg: /\w+/g,
-          msg: 'Firstname can only consit of letters'
-        },
+        // is: {
+        //  arg: /\w+/g,
+        //  msg: 'Firstname can only consit of letters'
+        // },
         len: {
           args: [2, 30],
           msg: 'Firstname must be at least 2 chars and less than 30 chars'
@@ -46,10 +46,10 @@ exports.default = function (sequelize, DataTypes) {
       allowNull: false,
       trim: true,
       validate: {
-        is: {
-          arg: /\w+/g,
-          msg: 'Lastname can only consit of letters'
-        },
+        // is: {
+        //  arg: /\w+/g,
+        //  msg: 'Lastname can only consit of letters',
+        // },
         len: {
           args: [2, 30],
           msg: 'Lastname must be at least 2 chars and less than 30 chars'
