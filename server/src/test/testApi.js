@@ -206,11 +206,11 @@ describe('HelloBooks', () => {
    const userbook = {
     userId,
     bookid,
-    date: '2017-11-25',
-    //return_date: '2016-08-18'
-    //
+    return_date: '2017-11-25'
+     //return_date: '2016-08-18'
+     //
 
-    return_status: false
+    // return_status: false
    };
    chai.request(app).post(`/api/v1/users/${userId}/books`)
     .set('x-access-token', token)

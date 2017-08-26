@@ -192,11 +192,11 @@ describe('HelloBooks', function () {
       var userbook = {
         userId: userId,
         bookid: bookid,
-        date: '2017-11-25',
+        return_date: '2017-11-25'
         //return_date: '2016-08-18'
         //
 
-        return_status: false
+        // return_status: false
       };
       _chai2.default.request(_app2.default).post('/api/v1/users/' + userId + '/books').set('x-access-token', token).send(userbook).end(function (err, res) {
         expect(res.status).to.equal(201);
