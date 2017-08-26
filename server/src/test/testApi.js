@@ -206,16 +206,17 @@ describe('HelloBooks', () => {
    const userbook = {
     userId,
     bookid,
-    return_date: '2017-11-25'
-     //return_date: '2016-08-18'
-     //
+    date: '2017-11-25',
+    //return_date: '2016-08-18'
+    //
 
-    // return_status: false
+    return_status: false
    };
    chai.request(app).post(`/api/v1/users/${userId}/books`)
     .set('x-access-token', token)
     .send(userbook)
     .end((err, res) => {
+     console.log('+++++++++++', res.body, userbook.return_date)
      expect(res.status).to.equal(201);
      done();
     });

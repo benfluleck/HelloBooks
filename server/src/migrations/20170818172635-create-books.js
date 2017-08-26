@@ -35,6 +35,10 @@ module.exports = {
     allowNull: false,
     defaultValue: 1,
    },
+   book_image: {
+    type: Sequelize.STRING,
+    allowNull: true
+   },
    status: {
     type: Sequelize.BOOLEAN,
     allowNull: false,
