@@ -9,7 +9,7 @@
   "start:dev": "nodemon server/dist/bin/www.js",
   "build": "babel server/src --watch --out-dir server/dist --presets es2015",
   "test": "cross-env NODE_ENV=test& mocha server/dist/test/*.js --timeout 10000 ",
-  "coverage": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text --reporter=lcovonly mocha --compilers js:babel-register server/dist/test/*.js"
+  "coverage": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text --reporter=lcovonly mocha --compilers js:babel-register server/src/test/*.js"
  },
  "engines": {
   "npm": "5.3.0",
