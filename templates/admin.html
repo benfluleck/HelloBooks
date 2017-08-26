@@ -1,0 +1,63 @@
+<!DOCTYPE html(lang='en')>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>HelloBooks | </title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="public/stylesheets/bootstrap-social.css" />
+    <link rel="stylesheet" href="public/stylesheets/bootstrap-imageupload.min.css" />
+    <link rel="stylesheet" href="public/stylesheets/styles.css" />
+    <script src="https://use.fontawesome.com/e096d8d3e1.js"></script>
+
+    <body>
+        <nav class="navbar navbar-toggleable-sm navbar-inverse bg-inverse fixed-top">
+            <button class="navbar-toggler navbar-toggler-left" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <a class="navbar-brand" href="#">Admin</a>
+            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active"><a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html">Visit Site</a></li>
+                </ul>
+                <div class="dropdown default"><a class="btn btn-secondary dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink"><a class="dropdown-item" href="#">Action</a><a class="dropdown-item" href="#">Another action</a><a class="dropdown-item" href="#">Logout</a></div>
+                </div>
+            </div>
+        </nav>
+        <div class="container-fluid">
+            <div class="row">
+                <nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar">
+                    <ul class="nav nav-pills flex-column">
+                        <li class="nav-item"><a class="nav-link active" href="create_category.html">Catalog<span class="sr-only">(current)</span></a></li>
+                        <li class="nav-item"><a class="nav-link" href="user.html">Users &amp; Groups</a></li>
+                    </ul>
+                </nav>
+                <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
+                    <h1>Welcome Administrator</h1>
+                    <ol class="breadcrumb">
+                        <li class="active"><a href="#">Admin</a></li>
+
+                    </ol>
+                    <div class="container-fluid">
+                        <ul class="nav nav-tabs" id="booksadmin-nav" role="tablist">
+                            <li class="nav-item"><a class="nav-link active" id="books-tab" href="#books" role="tab" data-toggle="tab" aria-controls="books" aria-expanded="true">Books</a></li>
+                            <li class="nav-item"><a class="nav-link" id="category-tab" href="#category" role="tab" data-toggle="tab" aria-controls="category">Category</a></li>
+                        </ul>
+                        <div class="tab-content" id="booksadmin-nav-content">
+                            <div class="tab-pane fade show active" id="books" role="tabpanel" aria-labelledby="books-tab"><a class="nav-link" href="create_book.html">Create New Book</a><a class="nav-link" href="edit_book.html">Edit Book</a><a class="nav-link" href="#">View All Books</a></div>
+                            <div class="tab-pane fade" id="category" role="tabpanel" aria-labelledby="category-tab"><a class="nav-link" href="create_category.html">Create New Category</a><a class="nav-link" href="edit_category.html">Edit Category</a></div>
+                        </div>
+                    </div>
+                    <div class="foot text-xs-center" id="footer">&#169;Benny in Patnership with Andela</div>
+                </main>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+        <script src="/javascripts/bootstrap-imageupload.min.js"></script>
+        <script src="/javascripts/data-toggle.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    </body>
+</head>

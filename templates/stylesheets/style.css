@@ -1,0 +1,231 @@
+/* Base Styles */
+
+body {
+    background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5)), #1d2a33 url('../images/bg.jpg') no-repeat;
+    background-size: cover;
+    color: whitesmoke;
+    display: flex;
+    min-height: 100%;
+    flex-direction: column;
+}
+
+.card-deck {
+    color: rgba(0, 0, 0, .5);
+}
+
+img {
+    width: 100%
+}
+
+.header {
+    margin-left: 2em;
+    top: 0;
+    flex: 1;
+    align-self: flex-start;
+}
+
+#footer {
+    height: 3rem;
+    /* Height of the footer */
+    font-size: .85rem;
+    padding: .5rem 0;
+    color: whitesmoke;
+}
+
+.table {
+    color: black;
+}
+
+a:hover {
+    color: rgba(49, 176, 213, .7);
+}
+
+.row {
+    padding-top: 1em;
+    width: 100%
+}
+
+#userform {
+    border: 1px solid;
+    padding-bottom: 1em;
+}
+
+.panel-heading {
+    padding-top: 3rem;
+}
+
+.fileinput {
+    position: relative;
+    padding: 1em;
+    width: 180px;
+}
+
+h4 {
+    padding: .5rem 0;
+    font-size: 1rem;
+}
+
+
+/* Component Styles */
+
+.navbar {
+    padding: 1rem 0;
+    background: rgba(0, 0, 0, 0);
+}
+
+.lead {
+    margin-bottom: 2.5rem;
+}
+
+.main {
+    color: #fff;
+    min-height: calc(100vh - 34px);
+}
+
+
+/* Modifier Styles */
+
+.nav-items .nav-link {
+    margin: 0 1rem;
+}
+
+.navbar-brand {
+    margin: 0;
+}
+
+.navbar .nav-link,
+.navbar .btn {
+    text-transform: uppercase;
+    font-size: .95rem;
+}
+
+.list-group {
+    color: initial;
+}
+
+.label {
+    font-size: .88rem;
+    vertical-align: top;
+    margin: 3px 0 0 4px;
+}
+
+#testbook {
+    width: inherit;
+}
+
+
+/* Button Styles */
+
+.btn-primary {
+    background: #417aba;
+    border-color: #417aba;
+    width: 100%;
+}
+
+.btn-info {
+    background-color: #31b0d5;
+    border-color: #2aabd2;
+}
+
+.btn-info:hover {
+    background-color: #5bc0de;
+    border-color: #5bc0de;
+}
+
+.btn-light {
+    color: rgba(255, 255, 255, .75);
+    background: rgba(255, 255, 255, .12);
+}
+
+.btn-light:hover {
+    background: rgba(255, 255, 255, .2);
+}
+
+.btn-social {
+    text-align: center;
+    color: whitesmoke;
+}
+
+.active,
+.btn {
+    transition: .4s;
+}
+
+.options {
+    display: none;
+}
+
+.list-group-item:hover .options {
+    display: block;
+}
+
+.options .material-icons {
+    font-size: 1.25rem;
+    cursor: pointer;
+    margin-left: 1rem;
+    color: rgba(0, 0, 0, .35);
+}
+
+.options .material-icons:hover {
+    color: initial;
+}
+
+.favorite-book {
+    margin-top: 30px;
+}
+
+.form-group {
+    width: 100%;
+}
+
+.form-group a {
+    font-size: 15;
+    color: blue;
+}
+
+.form-group label {
+    color: white;
+}
+
+
+/* Media Queries */
+
+@media (min-width: 0) and (max-width: 47em) {
+    .navbar {
+        background: #466982;
+    }
+    .nav-items .nav-item {
+        float: none;
+    }
+    .nav-items .nav-link {
+        padding: .65rem 0;
+        display: block;
+    }
+    .nav-items {
+        padding: 1rem 0;
+        clear: left;
+    }
+    .navbar .btn {
+        margin-left: 1rem;
+    }
+    .main {
+        padding-top: 6rem;
+    }
+}
+
+@media (min-width: 48em) {
+    .navbar {
+        min-height: 70px;
+    }
+    .navbar-nav .container {
+        display: -webkit-flex;
+        display: flex;
+    }
+    .nav-items {
+        margin-right: auto;
+        margin-left: auto;
+    }
+    .main {
+        padding-top: 8rem;
+    }
+}
