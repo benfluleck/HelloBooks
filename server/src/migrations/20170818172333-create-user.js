@@ -1,4 +1,7 @@
 'use strict';
+import Sequilize from 'sequelize';
+
+
 module.exports = {
  up: (queryInterface, Sequelize) => {
   return queryInterface.createTable('User', {

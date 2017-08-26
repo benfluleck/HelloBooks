@@ -1,5 +1,11 @@
 'use strict';
 
+var _sequelize = require('sequelize');
+
+var _sequelize2 = _interopRequireDefault(_sequelize);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 module.exports = {
   up: function up(queryInterface, Sequelize) {
     return queryInterface.createTable('User', {
