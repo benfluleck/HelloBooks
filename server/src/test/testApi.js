@@ -66,7 +66,7 @@ describe('HelloBooks', () => {
   it('Only authenticated users allowed to view books', (done) => {
    chai
     .request(app)
-    .get('/api/v1/api/books/')
+    .get('/api/v1/books/')
     .set('Accept', 'application/x-www-form-urlencoded')
     .end((err, res) => {
      expect(res.status).to.equal(403);
@@ -145,8 +145,8 @@ describe('HelloBooks', () => {
     });
   });
   it('Only authenticated users allowed to return books', (done) => {
-   .put('/api/v1/users/1/books')
    chai.request(app)
+    .put('/api/v1/users/1/books')
     .set('Accept', 'application/x-www-form-urlencoded')
     .end((err, res) => {
      expect(res.status).to.equal(403);
