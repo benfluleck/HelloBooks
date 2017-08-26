@@ -134,7 +134,7 @@ describe('HelloBooks', function () {
     //   });
     // });
     it('Only authenticated users allowed to loan', function (done) {
-      _chai2.default.request(_app2.default).post('/api/v1/users/1/books').set('Accept', 'application/x-www-form-urlencoded').end(function (err, res) {
+      _chai2.default.request(_app2.default).post('/api/v1/users/' + userId + '/books').set('Accept', 'application/x-www-form-urlencoded').end(function (err, res) {
         expect(res.status).to.equal(403);
         done();
       });
@@ -142,13 +142,13 @@ describe('HelloBooks', function () {
   });
   describe('/PUT', function () {
     it('Only authenticated users allowed to edit books', function (done) {
-      _chai2.default.request(_app2.default).put('/api/v1/books/1').set('Accept', 'application/x-www-form-urlencoded').end(function (err, res) {
+      _chai2.default.request(_app2.default).put('/api/v1/books/' + bookid).set('Accept', 'application/x-www-form-urlencoded').end(function (err, res) {
         expect(res.status).to.equal(403);
         done();
       });
     });
     it('Only authenticated users allowed to return books', function (done) {
-      _chai2.default.request(_app2.default).put('/api/v1/users/1/books').set('Accept', 'application/x-www-form-urlencoded').end(function (err, res) {
+      _chai2.default.request(_app2.default).put('/api/v1/users/' + userId + '/books').set('Accept', 'application/x-www-form-urlencoded').end(function (err, res) {
         expect(res.status).to.equal(403);
         done();
       });
