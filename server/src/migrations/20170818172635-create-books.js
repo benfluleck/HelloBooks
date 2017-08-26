@@ -1,5 +1,5 @@
 'use strict';
-
+import Sequilize from 'sequelize';
 
 module.exports = {
  up: function(queryInterface, Sequelize) {
