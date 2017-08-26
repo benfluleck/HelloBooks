@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt-nodejs';
 import toTitleCase from 'to-title-case';
-import sequelize from 'Sequelize';
+import Sequelize from 'sequelize';
 
 export default (sequelize, DataTypes) => {
  const User = sequelize.define('User', {

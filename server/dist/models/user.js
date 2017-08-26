@@ -12,9 +12,9 @@ var _toTitleCase = require('to-title-case');
 
 var _toTitleCase2 = _interopRequireDefault(_toTitleCase);
 
-var _Sequelize = require('Sequelize');
+var _sequelize = require('sequelize');
 
-var _Sequelize2 = _interopRequireDefault(_Sequelize);
+var _sequelize2 = _interopRequireDefault(_sequelize);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
