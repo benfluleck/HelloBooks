@@ -11,9 +11,11 @@ const PurifyCSSPlugin = require('purifycss-webpack');
 
 const DIST_DIR = path.resolve(__dirname, "./client/dist");
 const SRC_DIR = path.resolve(__dirname, "./client/src");
-const extractplugin = new ExtractTextPlugin('css/main.css',
+
+
+const extractscss = new ExtractTextPlugin(
 {
-    filename: 'main.css'
+    filename: 'style.css'
 });
 
 const config = {
@@ -21,8 +23,14 @@ const config = {
  output: {
   path: DIST_DIR + "/app",
   filename: "bundle.js",
-  publicPath: "/app/"
+  publicPath: ""
  },
+
+devServer:{
+    port:8080
+},
+
+
  module: {
   loaders: [{
    test: /\.js?/,
@@ -33,13 +41,13 @@ const config = {
     presets: ["react", "es2015", "stage-2"]
    },
   // rules:[
- }, { 
-     test: /\.css$/, 
-     use: extractplugin.extract({ 
-             fallback: 'style-loader', 
-     use: [ 'css-loader' ]
-    })
-    },
+ },{ 
+        test: /\.(scss|sass)$/, 
+        use: extractscss.extract({ 
+                fallback: 'style-loader', 
+        use: [ 'css-loader','sass-loader' ]
+       })
+       },
   {
       test:/\.html$/,
       //options:{ sourceMap: true},
@@ -69,9 +77,12 @@ const config = {
         sourcemap: false,
         minimize: true,
      }),
-    extractplugin,
+
+    extractscss,
     new HtmlPlugin({
-        template:'./client/src/index.html'
+        template:'./client/src/index.html',
+        filename:'./index.html',
+        inject: 'body'
     }),
     new PurifyCSSPlugin({
         // Give paths to parse for rules. These should be absolute!
