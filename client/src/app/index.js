@@ -6,19 +6,32 @@ import {BrowserRouter as Router, Route,Switch } from 'react-router-dom'
 
 
 import {Root} from './components/Root'
+import {LogIn} from './components/LogIn'
 
 
 class App extends React.Component {
+constructor(props){
+  super(props);
+
+  this.state = {
+    message: 'Welcome Guest'
+  }
+}
+
+
  render() {
   return (
     <Router>
-      <div>
-         <Route component={Root}/>
-            
+      <Root>
+         
+          <Switch>
+            <Route exact path={'/'} component={LogIn}/>
+          </Switch>
+
               
             
 
-      </div>
+      </Root>
    </Router>
   )
  }

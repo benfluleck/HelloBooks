@@ -89,6 +89,8 @@
     "purifycss-webpack": "^0.7.0",
     "react-addons-css-transition-group": "^15.6.0",
     "react-addons-transition-group": "^15.6.0",
+    "react-burger-menu": "^2.1.6",
+    "react-materialize": "^1.0.11",
     "react-redux": "^5.0.6",
     "reactstrap": "^4.8.0",
     "redux-logger": "^3.0.6",

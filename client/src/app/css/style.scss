@@ -1,11 +1,5 @@
-body {
-  background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5)), #1d2a33 url('../img/bg.jpg');
-  background-repeat: no-repeat;
-  color: whitesmoke;
-  min-height: 100%;
 
-  
-}
+
 
 .card-deck {
   color: rgba(0, 0, 0, 0.5);
@@ -15,14 +9,14 @@ img {
   width: 100%;
 }
 
-.header {
+header {
   margin-left: 2em;
   top: 0;
   flex: 1;
-  align-self: flex-start;
+  
 }
 
-#footer {
+footer {
   height: 3rem;
   /* Height of the footer */
   font-size: .85rem;
@@ -65,7 +59,13 @@ h4 {
 
 /* Component Styles */
 
-.navbar {
+.root{
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+}
+
+.nav {
   padding: 1rem 0;
   background: rgba(0, 0, 0, 0);
 }
@@ -74,11 +74,20 @@ h4 {
   margin-bottom: 2.5rem;
 }
 
-.main {
+main {
   color: #fff;
-  min-height: calc(100vh - 34px);
+  min-height:calc(74vh - 40px);
+
 }
 
+
+body {
+  background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5)), #1d2a33 url('../img/bg.jpg');
+  background-repeat: no-repeat;
+  color: whitesmoke;
+ 
+  
+}
 /* Modifier Styles */
 
 .nav-items .nav-link {
@@ -112,10 +121,11 @@ h4 {
 
 /* Button Styles */
 
-.btn-primary {
+.btn {
   background: #417aba;
   border-color: #417aba;
-  width: 100%;
+  margin-left: 2em;
+
 }
 
 .btn-info {
@@ -180,7 +190,7 @@ h4 {
 /* Media Queries */
 
 @media (min-width: 0) and (max-width: 47em) {
-  .navbar {
+  .nav {
     background: #466982;
   }
   .nav-items {
@@ -197,7 +207,7 @@ h4 {
   .navbar .btn {
     margin-left: 1rem;
   }
-  .main {
+  main {
     padding-top: 6rem;
   }
 }
@@ -214,7 +224,7 @@ h4 {
     margin-right: auto;
     margin-left: auto;
   }
-  .main {
+  main {
     padding-top: 8rem;
   }
 }
