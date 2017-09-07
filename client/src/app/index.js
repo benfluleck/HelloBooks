@@ -1,17 +1,25 @@
 import React from 'react';
 import { render } from 'react-dom';
-import image from './img/bg.jpg'
-import css from './css/style.scss'
+import {BrowserRouter as Router, Route,Switch } from 'react-router-dom'
+
+
+
+
+import {Root} from './components/Root'
 
 
 class App extends React.Component {
  render() {
   return (
-    
-      <div className='jumbotron'>
-        <h1 className="display-3">Hello, world!</h1>
+    <Router>
+      <div>
+         <Route component={Root}/>
+            
+              
+            
+
       </div>
-   
+   </Router>
   )
  }
 }

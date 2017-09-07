@@ -1,9 +1,14 @@
 body {
-  background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5)), #1d2a33 url('../img/bg.jpg');
+  background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5)), #1d2a33 url(img/7b4ef4a4f63e1885c081f064fe939a8c.jpg);
   background-repeat: no-repeat;
-  background-size: cover;
   color: whitesmoke;
-  display: flex;
   min-height: 100%;
-  flex-direction: column;
 }
+
+/* Component Styles */
+
+/* Modifier Styles */
+
+/* Button Styles */
+
+/* Media Queries */
