@@ -7,30 +7,21 @@ import {BrowserRouter as Router, Route,Switch } from 'react-router-dom'
 
 import {Root} from './components/Root'
 import {LogIn} from './components/LogIn'
+import {Register} from './components/Register'
+import {Profile} from './components/Profile'
 
 
 class App extends React.Component {
-constructor(props){
-  super(props);
-
-  this.state = {
-    message: 'Welcome Guest'
-  }
-}
-
 
  render() {
   return (
     <Router>
       <Root>
-         
           <Switch>
             <Route exact path={'/'} component={LogIn}/>
+            <Route path={'/register'} component={Register}/>
+            <Route path={'/profile'} component={Profile}/>
           </Switch>
-
-              
-            
-
       </Root>
    </Router>
   )

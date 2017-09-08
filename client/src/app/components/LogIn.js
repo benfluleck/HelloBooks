@@ -1,32 +1,39 @@
 import React from 'react'
 import {NavLink} from 'react-router-dom'
-import {Input, Row,Icon, Button} from 'react-materialize'
+import {Input, Col,Row,Icon, Button} from 'react-materialize'
+
 
 
 
 export  class LogIn extends React.Component{
-
+    
     render(){
+        // const user = {name:'Guest'}
+        // const message = `Welcome ${user.name}` 
+        const body =<p> Please Login or Click on Register to Start</p>
         return(
-        <div className='welcome'>
-            <h5>{this.props.message}</h5>
-            <div className='container'>
+            <div className='login'> 
+                
                 <Row>
-                    <Row>
-                        <Input placeholder="Placeholder" s={10} label="Username" ><Icon>account_circle</Icon></Input>
-                    </Row>
-                    <Row>
-                        <Input placeholder="Placeholder" type="password" label="Password" s={10} ><Icon>account_circle</Icon></Input>
-                    </Row>
-                    <Row>
-                        <Input s={12} label="disabled" defaultValue="I am not editable" disabled />
-                    </Row>
-                    <Row>
+                        <Input placeholder="Username" s={12} label="Username"  ><Icon>account_circle</Icon></Input>
+                    
+                    
+                    
+                        <Input placeholder=" Password" type="password" label="Password" s={12}><Icon>lock</Icon></Input>
+                    
+                   <Col s={12}>
+                        <Input   defaultValue="Forgotten Password" disabled className="#efebe9 brown-text text-lighten-5" />
+                        <Input  defaultValue="Sign Up" disabled className="#efebe9 brown-text text-lighten-5" />
+                    </Col>
+                    <Col className='center' s={12}>
 		                <Button waves='light'>Login</Button>
-                    </Row>
+                    </Col>
+                    <Col className='center' s={12}>
+		                <br/><a className= "btn btn-social btn-google"><span className="fa fa-google"></span> Sign in with Google</a>
+                    </Col>
                 </Row>  
             </div> 
-        </div>    
+          
             
         );
     }
