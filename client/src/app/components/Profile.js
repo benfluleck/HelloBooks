@@ -3,11 +3,12 @@ import css from '../css/style.scss'
 import {Input, Col,Row,Icon, Button,Tabs, Tab, Table} from 'react-materialize'
 
 export class Profile extends React.Component{
+
     render(){
         return(
                 <div className='profile-con'>
                 <Row>
-                <Tabs className='tab-demo z-depth-1 transparent'>
+                <Tabs className='tab-demo z-depth-1 transparent '>
                 <Tab title="Profile" active>
                 <Col s={12} m={4} l={4} className='center profpic'>
                     <div className ='profile'/>
@@ -32,18 +33,17 @@ export class Profile extends React.Component{
                     <Input placeholder="Password" type="password" label="Old Password" s={12} ><Icon>lock</Icon></Input>
                     <Input placeholder="New Password" type="password" label="New Password" s={12} ><Icon>lock</Icon></Input>
                     <Input placeholder="Confirm New Password" type="password" label="Confirm Password" s={12} ><Icon>lock</Icon></Input>
-                            
-                    
+                                   
                     <Col s={12} className="center">
                         <Button waves='light'>Submit</Button>
                     </Col>
                     
                 </Col>
                 </Tab>
-                <Tab title="Profile History">
+                <Tab title="Website Activity">
                 <Row>
                     
-                    <Col>
+                    <Col l={12}>
                     <Table centered ={true}  responsive ={true}>
                         <thead>
                             <tr>
@@ -75,6 +75,7 @@ export class Profile extends React.Component{
 
 
                 </Tab>
+                
                 </Tabs>
                 </Row>
                 

@@ -18,7 +18,11 @@ footer {
   color: whitesmoke; }
 
 .table {
-  color: black; }
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  display: block;
+  position: relative; }
 
 a:hover {
   color: rgba(49, 176, 213, 0.7); }
@@ -56,6 +60,9 @@ main {
   color: #fff;
   min-height: calc(74vh - 40px); }
 
+.register {
+  padding-top: 3em; }
+
 .regcon {
   border: 1px solid white;
   border-radius: 4px;
@@ -70,9 +77,6 @@ main {
   height: 100px;
   width: 100px;
   margin-top: 1em; }
-
-.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
-  background-color: #DEDE49; }
 
 .profile-con {
   border: 1px solid white;
@@ -90,7 +94,6 @@ main {
 body {
   background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5)), #1d2a33 url(img/7b4ef4a4f63e1885c081f064fe939a8c.jpg);
   background-blend-mode: luminosity;
-  background-blend-mode: dodge;
   background-repeat: no-repeat;
   color: whitesmoke; }
 

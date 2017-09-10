@@ -9,7 +9,8 @@ import {Root} from './components/Root'
 import {LogIn} from './components/LogIn'
 import {Register} from './components/Register'
 import {Profile} from './components/Profile'
-
+import {Books} from './components/Books'
+import {Forgetpass} from './components/Forgetpass'
 
 class App extends React.Component {
 
@@ -21,6 +22,8 @@ class App extends React.Component {
             <Route exact path={'/'} component={LogIn}/>
             <Route path={'/register'} component={Register}/>
             <Route path={'/profile'} component={Profile}/>
+            <Route path={'/books'} component={Books}/>
+            <Route path={'/forgetpass'} component={Forgetpass}/>
           </Switch>
       </Root>
    </Router>

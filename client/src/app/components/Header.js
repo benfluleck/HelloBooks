@@ -6,8 +6,8 @@ import css from '../css/style.scss'
 
 
 
-export const Header = (props)=>{
-
+export  class Header extends React.Component{
+    render(){
     return(
         <header>
             <Navbar right className='transparent'>
@@ -17,11 +17,9 @@ export const Header = (props)=>{
             </Navbar>
            
             
-        </header>           
-         
-       
+        </header>             
         
     );
-
+    }
 
 };

@@ -27,7 +27,11 @@ footer {
 }
 
 .table {
-  color: black;
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  display: block;
+  position: relative;
 }
 
 a:hover {
@@ -80,6 +84,9 @@ main {
   min-height:calc(74vh - 40px);
 }
 
+.register{
+  padding-top: 3em;
+}
 .regcon {
   border: 1px solid white;
   border-radius: 4px;
@@ -95,13 +102,17 @@ main {
   width: 100px;
   margin-top: 1em;
 
+}
 
+.hr{
+  color:white;
 }
-.table tbody tr:hover {
-  td, th {
-    background-color: #DEDE49;
-  }
+
+.modal.modal-fixed-footer .modal-content {
+
+  background-color: rgba(0, 0, 0, 0.80);
 }
+
 
 .profile-con {
   border: 1px solid white;
@@ -248,6 +259,9 @@ h4, p{
     margin-top:10rem;
   }
 }
+
+
+
 
 @media (min-width: 48em) {
   .navbar {

@@ -7,7 +7,7 @@ export class Register extends React.Component{
         return(
             <div className='register'>
 
-           
+           <h3> Register</h3>
             <div className='regcon'>
                
                     <Row>

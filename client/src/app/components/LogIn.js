@@ -10,14 +10,15 @@ export  class LogIn extends React.Component{
     render(){
         // const user = {name:'Guest'}
         // const message = `Welcome ${user.name}` 
+        
         const body =<p> Please Login or Click on Register to Start</p>
         return(
+            <div>
+                <h3>Log In</h3>
             <div className='login'> 
                 
                 <Row>
                         <Input placeholder="Username" s={12} label="Username"  ><Icon>account_circle</Icon></Input>
-                    
-                    
                     
                         <Input placeholder=" Password" type="password" label="Password" s={12}><Icon>lock</Icon></Input>
                     
@@ -33,7 +34,7 @@ export  class LogIn extends React.Component{
                     </Col>
                 </Row>  
             </div> 
-          
+          </div>
             
         );
     }
