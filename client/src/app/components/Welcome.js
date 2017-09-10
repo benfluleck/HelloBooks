@@ -3,11 +3,11 @@ import css from '../css/style.scss'
 import {Row,Col} from 'react-materialize'
 
 
-export class Welcome extends React.Component{
+export const Welcome= (props) => {
    
-    render(){
+   
        const name = 'Guest'
-        if (!this.props.isLoggedIn){
+        if (!props.isLoggedIn){
             return(
 
                 <div className='welcome'>
@@ -31,5 +31,5 @@ export class Welcome extends React.Component{
                 </div>
             );
         }
-    };
+  
 }

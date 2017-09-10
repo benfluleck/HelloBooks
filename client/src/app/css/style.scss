@@ -44,18 +44,7 @@ a:hover {
   
 }
 
-#userform {
-  border: 1px solid;
-  padding-bottom: 1em;
-}
 
-
-
-.fileinput {
-  position: relative;
-  padding: 1em;
-  width: 180px;
-}
 
 h4 {
   padding: .5rem 0;
@@ -113,13 +102,16 @@ main {
   background-color: rgba(0, 0, 0, 0.80);
 }
 
-
+.adminpanel{
+  margin-top: 30px;
+}
 .profile-con {
   border: 1px solid white;
   border-radius: 4px;
   background-color: rgba(0, 0, 0, 0.80);
   padding: 10px;
 }
+
 
 
 .login{

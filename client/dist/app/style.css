@@ -30,15 +30,6 @@ a:hover {
 .row {
   margin-bottom: 0px; }
 
-#userform {
-  border: 1px solid;
-  padding-bottom: 1em; }
-
-.fileinput {
-  position: relative;
-  padding: 1em;
-  width: 180px; }
-
 h4 {
   padding: .5rem 0;
   font-size: 1rem; }
@@ -77,6 +68,12 @@ main {
   height: 100px;
   width: 100px;
   margin-top: 1em; }
+
+.hr {
+  color: white; }
+
+.modal.modal-fixed-footer .modal-content {
+  background-color: rgba(0, 0, 0, 0.8); }
 
 .profile-con {
   border: 1px solid white;

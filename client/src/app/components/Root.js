@@ -10,13 +10,6 @@ import {Welcome} from './Welcome'
 
 export class Root extends React.Component
 {
-    constructor(){
-        super();
-        this.state={
-            isLoggedIn:true
-        };
-    }
-    
   
     render() {
         
@@ -28,7 +21,7 @@ export class Root extends React.Component
                <main> 
                    <Row>
                     <div className="container" >   
-                        <Welcome  isLoggedIn={this.state.isLoggedIn}/>
+                        <Welcome isLoggedIn ={true}/>
                         <Col s={12} m={8} l={6} offset='l1'>
                             {this.props.children}
                         </Col>
