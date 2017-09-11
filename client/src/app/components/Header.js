@@ -11,9 +11,10 @@ export  class Header extends React.Component{
     return(
         <header>
             <Navbar right className='transparent'>
-                <NavItem href='#'>Log In</NavItem>
-                <NavItem href='#'>Books</NavItem>
-                <NavItem href='#'>My Profile</NavItem>
+                <NavItem><NavLink to='/'>Log In</NavLink></NavItem>
+                
+                <NavItem><NavLink to='/books'>Books</NavLink></NavItem>
+                <NavItem ><NavLink to='/profile'>My Profile</NavLink></NavItem>
             </Navbar>
            
             

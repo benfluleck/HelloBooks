@@ -15,10 +15,11 @@ export class Adminroot extends React.Component{
                             
                         </Collection>
                         </Tab>
-                        <Tab title="Category">
-                        <CollectionItem href='#'>Create New Category</CollectionItem>
-                        <CollectionItem href='#'>Edit Category</CollectionItem>    
-
+                        <Tab title="Users & Groups">
+                        <Collection>       
+                            <CollectionItem><NavLink to ='/admin/edituser'>Edit User </NavLink></CollectionItem>  
+                            <CollectionItem><NavLink to ='/admin/userlist'>View list of users</NavLink></CollectionItem>
+                        </Collection>   
                         </Tab>
                        
                     </Tabs>   

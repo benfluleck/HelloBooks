@@ -1,18 +1,18 @@
 {
  "development": {
   "username": "postgres",
-  "password": null,
+  "password":"root",
   "database": "hello_books",
-  "host": "127.0.0.1",
+  "host": "localhost",
   "dialect": "postgres"
  },
  "test": {
   "username": "postgres",
-  "password": null,
+  "password":"root",
+
   "database": "travis",
   "host": "127.0.0.1",
-  "dialect": "postgres",
-  "logging": false
+  "dialect": "postgres"
  },
 
  "production": {

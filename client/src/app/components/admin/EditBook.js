@@ -40,7 +40,7 @@ export class EditBook extends React.Component{
                         
                     </Input>
 
-                    <Col s={12} l={18} className="center">
+                    <Col s={12} l={8} className="center">
                         <Button waves='light'>Submit</Button>
                     </Col>
                 </div>

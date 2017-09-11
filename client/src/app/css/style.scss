@@ -44,6 +44,10 @@ a:hover {
   
 }
 
+.notfound{
+
+  background-image: url('../img/404.jpg');
+}
 
 
 h4 {
@@ -75,6 +79,19 @@ main {
 
 .register{
   padding-top: 3em;
+}
+
+.img {
+  
+  max-width: 65%;
+}
+
+.books{
+  border: 1px solid white;
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.80);
+  padding: 20px;
+
 }
 .regcon {
   border: 1px solid white;

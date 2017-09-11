@@ -7,6 +7,7 @@ export class Profile extends React.Component{
     render(){
         return(
                 <div className='profile-con'>
+                    <h4> Guest Name</h4>
                 <Row>
                 <Tabs className='tab-demo z-depth-1 transparent '>
                 <Tab title="Profile" active>

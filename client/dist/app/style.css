@@ -30,6 +30,9 @@ a:hover {
 .row {
   margin-bottom: 0px; }
 
+.notfound {
+  background-image: url(img/d4b48bc42dab3a7812fd66988dda08d4.jpg); }
+
 h4 {
   padding: .5rem 0;
   font-size: 1rem; }
@@ -54,6 +57,15 @@ main {
 .register {
   padding-top: 3em; }
 
+.img {
+  max-width: 65%; }
+
+.books {
+  border: 1px solid white;
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 20px; }
+
 .regcon {
   border: 1px solid white;
   border-radius: 4px;
@@ -74,6 +86,9 @@ main {
 
 .modal.modal-fixed-footer .modal-content {
   background-color: rgba(0, 0, 0, 0.8); }
+
+.adminpanel {
+  margin-top: 30px; }
 
 .profile-con {
   border: 1px solid white;

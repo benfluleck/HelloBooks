@@ -12,6 +12,7 @@ import {Profile} from './components/Profile'
 import {Books} from './components/Books'
 import {Forgetpass} from './components/Forgetpass'
 import {Admin} from './components/admin/Admin'
+import {NotFound} from './components/NotFound'
 
 class App extends React.Component {
 
@@ -20,17 +21,20 @@ class App extends React.Component {
     <Router>
       <div>
       <Root >
-          {/* <Switch> */}
+          <Switch>
             <Route exact path={'/'} component={LogIn}/>
-            <Route path={'/register'} component={Register}/>
-            <Route path={'/profile'} component={Profile}/>
-            <Route path={'/books'} component={Books}/>
-            <Route path={'/forgetpass'} component={Forgetpass}/>
+            <Route exact path={'/register'} component={Register}/>
+            <Route exact path={'/profile'} component={Profile}/>
+            <Route exact path={'/books'} component={Books}/>
+            <Route exact path={'/forgetpass'} component={Forgetpass}/>
             
             
             <Route path={'/admin'} component={Admin}/>
+
+            <Route component={NotFound}/>
+
            
-          {/* </Switch>} */}
+          </Switch>
       </Root>
       </div>
    </Router>
