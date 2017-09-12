@@ -1,12 +1,10 @@
 
 
 
-.card-deck {
-  color: rgba(0, 0, 0, 0.5);
-}
 
 img {
-  width: 100%;
+  width: 75%;
+
 }
 
 header {
@@ -93,6 +91,15 @@ main {
   padding: 20px;
 
 }
+
+.admintab {
+  border: 1px solid white;
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.80);
+  padding: 20px;
+}
+
+
 .regcon {
   border: 1px solid white;
   border-radius: 4px;

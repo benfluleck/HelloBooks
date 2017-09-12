@@ -7,7 +7,7 @@ export class EditBook extends React.Component{
                 <div>
                     <h5> Edit Book </h5>
                 <div>
-                    
+                    <form>
                     <Input label="Change Book Title" l={12} />
                     <Input label="Change Author's Name" l={12}/>
                     <div class="input-field">
@@ -43,6 +43,7 @@ export class EditBook extends React.Component{
                     <Col s={12} l={8} className="center">
                         <Button waves='light'>Submit</Button>
                     </Col>
+                    </form>
                 </div>
                 </div>
 

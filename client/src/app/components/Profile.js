@@ -27,18 +27,19 @@ export class Profile extends React.Component{
                     </div>
                 </Col>
                 <Col s={12} m={8} l={8}>
-                    <Input placeholder="First Name" s={12} disabled label="First Name"  ><Icon>contactss</Icon></Input>
-                    <Input placeholder="Surname" s={12} disabled label="Surnmame" ><Icon>contacts</Icon></Input>        
-                    <Input placeholder="Username" s={12} disabled label="Username"  ><Icon>account_circle</Icon></Input>
-                    <Input placeholder="Email" s={12} label="Email"  ><Icon>mail</Icon></Input>
-                    <Input placeholder="Password" type="password" label="Old Password" s={12} ><Icon>lock</Icon></Input>
-                    <Input placeholder="New Password" type="password" label="New Password" s={12} ><Icon>lock</Icon></Input>
+                <form>
+                    <Input s={12} disabled label="First Name"  ><Icon>contactss</Icon></Input>
+                    <Input s={12} disabled label="Surnmame" ><Icon>contacts</Icon></Input>        
+                    <Input s={12} disabled label="Username"  ><Icon>account_circle</Icon></Input>
+                    <Input s={12} label="Email"  ><Icon>mail</Icon></Input>
+                    <Input  type="password" label="Old Password" s={12} ><Icon>lock</Icon></Input>
+                    <Input  type="password" label="New Password" s={12} ><Icon>lock</Icon></Input>
                     <Input placeholder="Confirm New Password" type="password" label="Confirm Password" s={12} ><Icon>lock</Icon></Input>
                                    
                     <Col s={12} className="center">
                         <Button waves='light'>Submit</Button>
                     </Col>
-                    
+                </form>
                 </Col>
                 </Tab>
                 <Tab title="Website Activity">

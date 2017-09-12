@@ -5,7 +5,7 @@ import {Input, CollectionItem, Collection, Collapsible, CollapsibleItem,  Col, T
 export class Adminroot extends React.Component{
     render(){
         return( 
-                <div>
+                <div className="admintab">
                     <Tabs className='tab-demo z-depth-1 transparent'>
                         <Tab title="Books" active>
                         <Collection>

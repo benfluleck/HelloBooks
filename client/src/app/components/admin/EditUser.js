@@ -7,6 +7,7 @@ export class EditUser extends React.Component{
                 <div>
                     <h5> Edit User</h5>
                 <div>
+                    <form>
                     
                     <Input label="Firstname" l={12} />
                     <Input label="Surname" l={12}/>
@@ -29,6 +30,7 @@ export class EditUser extends React.Component{
                     <Col s={12} l={8} className="center">
                         <Button waves='light'>Submit</Button>
                     </Col>
+                    </form>
                 </div>
                 </div>
 

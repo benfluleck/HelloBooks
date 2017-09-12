@@ -7,7 +7,7 @@ export class CreateBook extends React.Component{
                 <div>
                     <h5> Create Book </h5>
                 <div>
-                    
+                    <form>
                     <Input label="Enter Book Title"  l={12} />
                     <Input label="Author's Name" l={12} />
                     <div class="input-field">
@@ -32,10 +32,11 @@ export class CreateBook extends React.Component{
                             <input className="file-path validate" type="text"></input>
                         </div>
                     </div>
+
                     <Col s={12} l={8}  className="center">
                         <Button waves='light'>Submit</Button>
                     </Col>
-            
+                    </form>
                 </div>
                 </div>
 

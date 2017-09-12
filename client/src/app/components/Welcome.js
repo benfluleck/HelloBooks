@@ -4,9 +4,6 @@ import {Row,Col} from 'react-materialize'
 import PropTypes from 'prop-types'
 
 export const Welcome=(props)=>{
- 
-   
-       
         if (props.isLoggedIn){
             return(
 

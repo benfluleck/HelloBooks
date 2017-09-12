@@ -95,11 +95,12 @@
     "reactstrap": "^4.8.0",
     "redux-form": "^6.8.0",
     "redux-logger": "^3.0.6",
+    "redux-promise-middleware": "^4.4.1",
     "sass-loader": "^6.0.6",
     "scss-loader": "0.0.1",
     "sentence-case": "^2.1.1",
     "style-loader": "^0.18.2",
-    "validator": "^8.0.0",
+    "validator": "^8.2.0",
     "validators": "^0.3.1",
     "webpack": "^3.5.5",
     "webpack-dev-server": "^2.7.1"

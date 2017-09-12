@@ -1,7 +1,7 @@
 import React from 'react'
-import {Registerform} from '../components/Registerform';
+import {Loginform} from '../components/Loginform';
 
-export class Register extends React.Component{
+export class Login extends React.Component{
     submit = (data) =>{
         console.log(data)
     }
@@ -10,8 +10,8 @@ export class Register extends React.Component{
         return(
             <div className='register'>
 
-           <h3> Register</h3>
-            <Registerform submit ={this.submit} /> 
+           <h3> Login</h3>
+            <Loginform submit ={this.submit} /> 
            
         </div>  
         );
