@@ -1,7 +1,5 @@
 
 
-
-
 img {
   width: 75%;
 
@@ -20,8 +18,13 @@ header {
 footer {
   height: 3rem;
   /* Height of the footer */
-  font-size: .85rem;
+  font-size: 0.9em;
   color: whitesmoke;
+}
+
+.card.horizontal .card-image img {
+  
+  max-width: 70% !important;
 }
 
 .table {
@@ -52,6 +55,8 @@ h4 {
   padding: .5rem 0;
   font-size: 1rem;
 }
+
+
 
 /* Component Styles */
 
@@ -135,9 +140,7 @@ main {
 
 }
 
-.mui-tabs__bar{
-  color: white;
-}
+
 
 .hr{
   color:white;
@@ -156,8 +159,17 @@ main {
   border-radius: 4px;
   background-color: rgba(0, 0, 0, 0.80);
   padding: 40px;
+  font-size: 2rem !important;
+}
+nav ul a {
+  font-size: 2rem !important;
+
 }
 
+.mui-tabs__bar>li>a {
+ 
+  color: #eee !important;
+}
 .createbook{
   border: 1px solid white;
   border-radius: 4px;
@@ -185,7 +197,7 @@ main {
 body {
   background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5)), #1d2a33 url('../img/bg.jpg');
   background-blend-mode: luminosity;
-  
+  font-size: 19px !important;
   background-repeat: no-repeat;
   color: whitesmoke;
  
