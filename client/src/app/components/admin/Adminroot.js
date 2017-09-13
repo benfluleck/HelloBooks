@@ -2,9 +2,11 @@ import React from 'react'
 import {NavLink} from 'react-router-dom'
 import {Input, CollectionItem, Collection, Collapsible, CollapsibleItem,  Col, Tabs , Tab} from 'react-materialize'
 
+
 export class Adminroot extends React.Component{
     render(){
-        return( 
+        return(
+            
                 <div className="admintab">
                     <Tabs className='tab-demo z-depth-1 transparent'>
                         <Tab title="Books" active>
@@ -24,6 +26,7 @@ export class Adminroot extends React.Component{
                        
                     </Tabs>   
                 </div>
+           
 
         );
     }

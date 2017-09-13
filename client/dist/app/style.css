@@ -1,8 +1,5 @@
-.card-deck {
-  color: rgba(0, 0, 0, 0.5); }
-
 img {
-  width: 100%; }
+  width: 75%; }
 
 header {
   margin-left: 2em;
@@ -47,9 +44,6 @@ h4 {
   padding: 1rem 0;
   background: transparent; }
 
-.lead {
-  margin-bottom: 2.5rem; }
-
 main {
   color: #fff;
   min-height: calc(74vh - 40px); }
@@ -66,6 +60,16 @@ main {
   background-color: rgba(0, 0, 0, 0.8);
   padding: 20px; }
 
+.admintab {
+  border: 1px solid white;
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 20px; }
+
+.forgetpass {
+  padding: 20px;
+  margin-top: 7em; }
+
 .regcon {
   border: 1px solid white;
   border-radius: 4px;
@@ -81,6 +85,14 @@ main {
   width: 100px;
   margin-top: 1em; }
 
+.picture {
+  border: 1px solid white;
+  border-radius: 4px;
+  padding: 15px; }
+
+.mui-tabs__bar {
+  color: white; }
+
 .hr {
   color: white; }
 
@@ -94,7 +106,13 @@ main {
   border: 1px solid white;
   border-radius: 4px;
   background-color: rgba(0, 0, 0, 0.8);
-  padding: 10px; }
+  padding: 40px; }
+
+.createbook {
+  border: 1px solid white;
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 40px; }
 
 .login {
   border: 1px solid white;
@@ -127,9 +145,6 @@ body {
   font-size: .88rem;
   vertical-align: top;
   margin: 3px 0 0 4px; }
-
-#testbook {
-  width: inherit; }
 
 /* Button Styles */
 .container {

@@ -128,13 +128,13 @@ onFocus=(e)=>{
                 <Row>
                     <form onSubmit={this.onSubmit}>
                     <Input s={12} label="First Name" 
-                        required 
+                        required
                         name='firstname'
                         onChange={this.onChange}>
                         <Icon>contacts</Icon>
                     </Input>
                     <Input s={12} label="Surname" 
-                    required 
+                    required
                     name='surname'
                     onChange={this.onChange}>
                         <Icon>contacts</Icon>

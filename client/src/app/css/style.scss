@@ -66,9 +66,6 @@ h4 {
   background: rgba(0, 0, 0, 0);
 }
 
-.lead {
-  margin-bottom: 2.5rem;
-}
 
 main {
   color: #fff;
@@ -99,6 +96,17 @@ main {
   padding: 20px;
 }
 
+.forgetpass{
+ 
+ 
+ 
+  padding: 20px;
+
+  margin-top: 7em;
+
+}
+
+
 
 .regcon {
   border: 1px solid white;
@@ -115,6 +123,20 @@ main {
   width: 100px;
   margin-top: 1em;
 
+
+}
+
+
+
+.picture{
+  border: 1px solid white;
+  border-radius: 4px;
+  padding: 15px;
+
+}
+
+.mui-tabs__bar{
+  color: white;
 }
 
 .hr{
@@ -133,10 +155,23 @@ main {
   border: 1px solid white;
   border-radius: 4px;
   background-color: rgba(0, 0, 0, 0.80);
-  padding: 10px;
+  padding: 40px;
 }
 
+.createbook{
+  border: 1px solid white;
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.80);
+  padding-bottom: 40px;
+  padding: 50px;
 
+}
+
+.createbookbtn{
+  padding-bottom:10px;
+  float: none;
+  margin-top: 15px;
+}
 
 .login{
   border: 1px solid white;
@@ -183,9 +218,7 @@ body {
   margin: 3px 0 0 4px;
 }
 
-#testbook {
-  width: inherit;
-}
+
 
 /* Button Styles */
 

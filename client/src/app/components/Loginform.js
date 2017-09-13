@@ -2,6 +2,7 @@ import React from 'react'
 import {NavLink} from 'react-router-dom'
 import {Input, Col,Row,Icon, Button} from 'react-materialize'
 import ReactCssTransitions from "react-addons-css-transition-group"
+import PropTypes from 'prop-types'
 
 export  class Loginform extends React.Component{
   constructor () {
@@ -46,13 +47,29 @@ export  class Loginform extends React.Component{
             <div className='login'> 
                 
                 <Row>
-                     <form>
-                      <Input  s={12} label="Username" required value={data.username} onChange={this.onChange} ><Icon>account_circle</Icon></Input>
-                      <Input  type="password" label="Password" s={12} required value={data.name} onChange={this.onChange}><Icon>lock</Icon></Input>
+                     <form onSubmit={this.onSubmit}>
+                      <Input  s={12} label="Username"
+                         required name='username' 
+                         value={data.username} 
+                         error={errors.username}
+                         onChange={this.onChange} >
+                         <Icon>account_circle</Icon>
+                      </Input>
+                      <Input  type="password"
+                       label="Password" name='password' 
+                       value={data.password} 
+                       error={errors.password}required s={12} 
+                        onChange={this.onChange}>
+                        <Icon>lock</Icon>
+                      </Input>
                     
-                   <Col s={12}>
-                      <Input  defaultValue="Forgotten Password" disabled className="#efebe9 brown-text text-lighten-5" />
-                      <Input  defaultValue="Sign Up" disabled className="#efebe9 brown-text text-lighten-5" />
+                   <Col s={12} l={8}>
+                      <div className="#efebe9 brown-text text-lighten-5">
+                        <NavLink to='/forgetpass'><p>Forgotten Password</p>
+                      </NavLink>
+                      <NavLink to='/register'><p>Sign Up</p></NavLink>
+                      </div>
+                      
                     </Col>
                     <Col className='center' s={12}>
 		                  <Button waves='light'>Login</Button>
@@ -69,6 +86,9 @@ export  class Loginform extends React.Component{
     }
     
     };
+
+
+
 
 
 
