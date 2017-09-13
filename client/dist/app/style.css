@@ -112,7 +112,13 @@ main {
   border: 1px solid white;
   border-radius: 4px;
   background-color: rgba(0, 0, 0, 0.8);
-  padding: 40px; }
+  padding-bottom: 40px;
+  padding: 50px; }
+
+.createbookbtn {
+  padding-bottom: 10px;
+  float: none;
+  margin-top: 15px; }
 
 .login {
   border: 1px solid white;
