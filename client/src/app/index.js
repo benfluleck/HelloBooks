@@ -21,6 +21,7 @@ import {EditBook} from './components/admin/EditBook'
 import {ViewBooks} from './components/admin/ViewBooks'
 import {Userlist} from './components/admin/Userlist'
 import {EditUser} from './components/admin/EditUser'
+import {store} from './store/store'
 
 class App extends React.Component {
   
@@ -56,4 +57,7 @@ class App extends React.Component {
  }
 }
 
-render(<App/>,window.document.getElementById('app'))
+render(<Provider store={store}>
+  <App/>
+  </Provider>,
+  window.document.getElementById('app'))

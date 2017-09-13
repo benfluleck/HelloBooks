@@ -6,16 +6,13 @@ import {composeWithDevTools}from 'redux-devtools-extension'
 
 
 
-import reducer from '../reducers/rootReducers'
+import rootreducer from '../reducers/rootReducers'
 
 
-
-
-const  store = createStore(
+export const  store = createStore(
     rootreducer, composeWithDevTools(applyMiddleware(thunk))
 );
 
 
 
 
-export default createStore(reducer, middleware)
