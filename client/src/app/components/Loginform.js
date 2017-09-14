@@ -3,6 +3,7 @@ import {NavLink} from 'react-router-dom'
 import {Input, Col,Row,Icon, Button} from 'react-materialize'
 import ReactCssTransitions from "react-addons-css-transition-group"
 import PropTypes from 'prop-types'
+import swal from 'sweetalert2'
 
 export  class Loginform extends React.Component{
   constructor () {
@@ -13,7 +14,7 @@ export  class Loginform extends React.Component{
           password:'',
         },
         loading:false,
-        errors:{}
+        
       };
 
     }
@@ -22,20 +23,42 @@ export  class Loginform extends React.Component{
           data:{...this.state.data,[e.target.name]:e.target.value}
       
       })
-    onSubmit=e => {
-      e.preventDefault();
-  
-    const errors =this.validate(this.state.data);
-    this.setState({errors})
-    if(Object.keys(errors).length ===0){
-        this.props.submit(this.state.data);
-    }
-  
-  };
-  
+      onSubmit=(e) => {
+        e.preventDefault();
+        
+          this.setState({ errors:{}, loading:true});
+          
+          this.props.submit(this.state.data)
+          // .then(
+          //   (res) =>{ swal(
+          //     'Welcome!',
+          //     'You are about to be redirected!',
+          //     'success'
+          //   ),
+          //   (error)=>{
+          //     swal(
+          //       'Oops...',
+          //       'Logon denied!',
+          //       'error'
+          //     )
+          //   }
+
+          //   },
+          // )
+          // .catch((err)=>{
+          //   swal(
+          //     'Oops...',
+          //     'Not sure what went wrong try again',
+          //     'error'
+          //   )
+          // })
+          // ;
+      
     
+    };
+  
     render(){
-      const {data, errors} = this.state;
+      const {data} = this.state;
       
         // const user = {name:'Guest'}
         // const message = `Welcome ${user.name}` 
@@ -51,14 +74,14 @@ export  class Loginform extends React.Component{
                       <Input  s={12} label="Username"
                          required name='username' 
                          value={data.username} 
-                         error={errors.username}
+                         
                          onChange={this.onChange} >
                          <Icon>account_circle</Icon>
                       </Input>
                       <Input  type="password"
                        label="Password" name='password' 
                        value={data.password} 
-                       error={errors.password}required s={12} 
+                       required s={12} 
                         onChange={this.onChange}>
                         <Icon>lock</Icon>
                       </Input>
@@ -72,7 +95,7 @@ export  class Loginform extends React.Component{
                       
                     </Col>
                     <Col className='center' s={12}>
-		                  <Button waves='light'>Login</Button>
+		                  <Button waves='light' disabled={data.loading}>Login</Button>
                     </Col>
                     <Col className='center' s={12}>
 		                  <br/><a className= "btn btn-social btn-google"><span className="fa fa-google"></span> Sign in with Google</a>
@@ -85,6 +108,10 @@ export  class Loginform extends React.Component{
         );
     }
     
+    }
+
+    Loginform.propTypes= {
+     submit: PropTypes.func.isRequired
     };
 
 

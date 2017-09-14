@@ -27,7 +27,14 @@ const config = {
  },
 
 devServer:{
-    port:8080
+    port:8080,
+    proxy:{
+        '/api/*':{
+            target: 'http://localhost:5000/',
+            secure:false,
+            changeOrigin:true,
+        }
+    }
 },
 
 
@@ -70,14 +77,14 @@ devServer:{
 
  },
  plugins: [
-     new webpack.optimize.UglifyJsPlugin({
-        compress: { warnings: false },
-        output: {comments: false },
-        mangle: false,
-        sourcemap: false,
-        minimize: true,
-     }),
-
+    //  new webpack.optimize.UglifyJsPlugin({
+    //     compress: { warnings: false },
+    //     output: {comments: false },
+    //     mangle: false,
+    //     sourcemap: false,
+    //     minimize: true,
+    //  }),
+new webpack.optimize.OccurrenceOrderPlugin(),
     extractscss,
     new HtmlPlugin({
         template:'./client/src/index.html',

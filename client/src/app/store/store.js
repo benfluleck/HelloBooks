@@ -6,11 +6,12 @@ import {composeWithDevTools}from 'redux-devtools-extension'
 
 
 
-import rootreducer from '../reducers/rootReducers'
+import rootReducer from '../reducers/rootReducers'
 
 
-export const  store = createStore(
-    rootreducer, composeWithDevTools(applyMiddleware(thunk))
+export const store = createStore(
+    rootReducer, 
+    composeWithDevTools(applyMiddleware(thunk))
 );
 
 

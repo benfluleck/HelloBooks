@@ -34,15 +34,26 @@ const swaggerSpec = swaggerJSDoc(options);
 // Log requests to the console.
 app.use(logger('dev'));
 
-
 // Parse incoming requests data (https://github.com/expressjs/body-parser)
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 
+app.use((req, res, next) => {
+  console.log('========================== CORS middleware here +++++++++++++++++++++++')
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT, DELETE, HEAD');
+    res.header(
+      'Access-Control-Allow-Headers',
+      'Authorization, X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept, x-access-token'
+    );
+    next();
+  });
+  
+
 app.use(express.static(path.join(__dirname, '../api-docs/')));
 console.log(path.join(__dirname, '../api-docs/'));
-
+  
 app.get('/hellobooks.json', (req, res) => {
  res.setHeader('Content-Type', 'application/json');
  res.send(swaggerSpec);

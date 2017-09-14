@@ -63,7 +63,7 @@ export default (sequelize, DataTypes) => {
     },
     isAlphanumeric: {
      args: true,
-     msg: 'Only Alpha numeric for usernames please',
+     msg: 'No Alphanumeric characters please',
     },
     len: {
      args: [4, 30],

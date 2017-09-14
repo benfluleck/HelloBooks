@@ -59,6 +59,14 @@ app.use((0, _morgan2.default)('dev'));
 app.use(_bodyParser2.default.json());
 app.use(_bodyParser2.default.urlencoded({ extended: false }));
 
+app.use(function (req, res, next) {
+  console.log('========================== CORS middleware here +++++++++++++++++++++++');
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT, DELETE, HEAD');
+  res.header('Access-Control-Allow-Headers', 'Authorization, X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept, x-access-token');
+  next();
+});
+
 app.use(_express2.default.static(_path2.default.join(__dirname, '../api-docs/')));
 console.log(_path2.default.join(__dirname, '../api-docs/'));
 

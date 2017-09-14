@@ -3,6 +3,7 @@ import css from '../css/style.scss'
 import {Input, Col,Row,Icon, Button} from 'react-materialize'
 import Validator from 'validator'
 import PropTypes from 'prop-types'
+import {Redirect} from 'react-router'
 
 export class Registerform extends React.Component{
    
@@ -72,7 +73,7 @@ onBlur(e){
 onSubmit=(e) => {
     e.preventDefault();
     if(this.setState.length === 0){
-      console.log(errors)
+      <Redirect to='/' push/>
       this.props.submit(this.state.data);
   }
 
