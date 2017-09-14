@@ -12,9 +12,7 @@ export class EditUser extends React.Component{
            booktitleError: ''
           };
         
-          this.onChange = this.onChange.bind(this);
-          
-        
+          this.onChange = this.onChange.bind(this); 
     }
 
     onChange = e => 

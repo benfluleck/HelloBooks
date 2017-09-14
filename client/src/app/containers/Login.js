@@ -8,38 +8,27 @@ import swal from 'sweetalert2'
 class Login extends React.Component{
     submit = data => {
         this.props.login(data)
-            .then(() => {
-                
-               this.props.history.push('/dashboard');
-            })
-            .then(
-                (res) =>{ swal(
+            // .then(() => {
+            //  //  this.props.history.push('/dashboard');
+            // })
+            .then((res) =>{ 
+                console.log(res.user.data.success)
+             if (res.user.data.success){
+                swal(
                   'Welcome!',
-                  'You are about to be redirected!',
-                  'success'
-                ),
-                (error)=>{
-                  swal(
-                    'Oops...',
-                    'Logon denied!',
-                    'error'
-                  )
-                }
-    
-                },
-              )
-              .catch((err)=>{
+                  res.user.data.message,
+                  'success'     
+                );
+                this.props.history.push('/dashboard');
+            }else{
                 swal(
                   'Oops...',
-                  'Not sure what went wrong try again',
+                  res.user.data.message,
                   'error'
-                )
-              })
-              ;
-        // this.props.login(JSON.stringify(data)).then(() => this.props.history.push('/'))
-        // console.log(data.response)
-        //console.log(username),
-        //console.log(password)
+                );
+            }
+            })
+            
     }
     render(){
 

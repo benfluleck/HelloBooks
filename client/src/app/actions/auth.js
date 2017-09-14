@@ -9,5 +9,9 @@ export const userLoggedIn = user => ({
 
 
 export const login = credentials=>(dispatch)=>
-    api.user.login(credentials).then(user => dispatch(userLoggedIn(user)));
+    api.user.login(credentials)
+    .then(user => dispatch(userLoggedIn(user)))
+    .catch(error => 
+        dispatch(userLoggedIn(error.response))
+    );
 

@@ -1,7 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { Input, Col,Row,Icon, Button } from 'react-materialize'
-import ReactCssTransitions from "react-addons-css-transition-group"
 import PropTypes from 'prop-types'
 
 
@@ -14,7 +13,7 @@ export  class Loginform extends React.Component{
           password:'',
         },
         loading:false,
-        
+        errors:{}
       };
 
     }
@@ -24,30 +23,26 @@ export  class Loginform extends React.Component{
       
       })
       onSubmit=(e) => {
-        e.preventDefault();
-        
-          this.setState({ errors:{}, loading:true});
-          
+        const errors={}
+       e.preventDefault();
+        // this.setState({ errors:{}, loading:true});
+        if(Object.keys(errors).length ==0){
           this.props.submit(this.state.data)
-     
-      
-    
-    };
-  
+          
+        } 
+      }     
     render(){
       const {data} = this.state;
-      
-        // const user = {name:'Guest'}
-        // const message = `Welcome ${user.name}` 
-        
-        const body =<p> Please Login or Click on Register to Start</p>
+
         return(
-           
-               
+
             <div className='login'> 
                 
                 <Row>
+                  
                      <form onSubmit={this.onSubmit}>
+                       
+                       
                       <Input  s={12} label="Username"
                          required name='username' 
                          value={data.username} 
