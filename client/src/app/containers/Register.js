@@ -1,5 +1,5 @@
 import React from 'react'
-import {Registerform} from '../components/Registerform';
+import { Registerform } from '../components/Registerform';
 
 export class Register extends React.Component{
     submit = (data) =>{

@@ -1,5 +1,5 @@
 import React from 'react'
-import {Input, Button, CollectionItem, Collection, Collapsible, CollapsibleItem, Col, Tabs ,  Tab} from 'react-materialize'
+import { Input, Button, CollectionItem, Collection, Collapsible, CollapsibleItem, Col, Tabs ,  Tab } from 'react-materialize'
 
 export class EditBook extends React.Component{
     constructor () {

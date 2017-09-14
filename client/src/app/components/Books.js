@@ -1,11 +1,11 @@
 import React from 'react';
-import {NavLink} from 'react-router-dom';
-import {Navbar, NavItem, Col,Row, Card, Tab, Tabs, CardTitle, Button, Modal} from 'react-materialize';
+import { NavLink } from 'react-router-dom';
+import { Navbar, NavItem, Col,Row, Card, Tab, Tabs, CardTitle, Button, Modal } from 'react-materialize';
 import  book1 from '../img/book1.jpg';
 import book2 from '../img/book2.jpg';
 
 
-import {Book} from './Book';
+import { Book } from './Book';
 
 import BOOKS from '../containers/staticBooks';
 

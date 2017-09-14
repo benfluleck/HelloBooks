@@ -1,6 +1,6 @@
 import React from 'react'
 import css from '../css/style.scss'
-import {Row,Col} from 'react-materialize'
+import { Row,Col } from 'react-materialize'
 import PropTypes from 'prop-types'
 
 export const Welcome=(props)=>{

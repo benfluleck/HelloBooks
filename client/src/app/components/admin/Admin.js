@@ -3,12 +3,12 @@ import {Input, CollectionItem, Collection, Collapsible, Breadcrumb, MenuItem, Co
 import {BrowserRouter as Router, Route,Switch } from 'react-router-dom'
 
 
-import {Adminroot} from './Adminroot'
-import {CreateBook} from './CreateBook'
-import {EditBook} from './EditBook'
-import {ViewBooks} from './ViewBooks'
-import {Userlist} from './Userlist'
-import {EditUser} from './EditUser'
+import { Adminroot } from './Adminroot'
+import { CreateBook } from './CreateBook'
+import { EditBook } from './EditBook'
+import { ViewBooks } from './ViewBooks'
+import { Userlist } from './Userlist'
+import { EditUser } from './EditUser'
 
 export class Admin extends React.Component{
     render(){

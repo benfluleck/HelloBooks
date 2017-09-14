@@ -1,19 +1,41 @@
 import React from 'react'
-import {Loginform} from '../components/Loginform';
-import {connect} from 'react-redux';
+import { Loginform } from '../components/Loginform';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types'
-import {login} from '../actions/auth'
+import { login } from '../actions/auth'
+import swal from 'sweetalert2'
 
 class Login extends React.Component{
     submit = data => {
         this.props.login(data)
-            .then((res) => {
-                console.log(res);
-             //   this.props.history.push('/');
+            .then(() => {
+                
+               this.props.history.push('/dashboard');
             })
-            .catch(err=>{
-                console.log('err');
-            });
+            .then(
+                (res) =>{ swal(
+                  'Welcome!',
+                  'You are about to be redirected!',
+                  'success'
+                ),
+                (error)=>{
+                  swal(
+                    'Oops...',
+                    'Logon denied!',
+                    'error'
+                  )
+                }
+    
+                },
+              )
+              .catch((err)=>{
+                swal(
+                  'Oops...',
+                  'Not sure what went wrong try again',
+                  'error'
+                )
+              })
+              ;
         // this.props.login(JSON.stringify(data)).then(() => this.props.history.push('/'))
         // console.log(data.response)
         //console.log(username),

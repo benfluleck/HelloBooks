@@ -1,9 +1,9 @@
 import React from 'react'
 import css from '../css/style.scss'
-import {Input, Col,Row,Icon, Button} from 'react-materialize'
+import { Input, Col,Row,Icon, Button } from 'react-materialize'
 import Validator from 'validator'
 import PropTypes from 'prop-types'
-import {Redirect} from 'react-router'
+import { Redirect } from 'react-router'
 
 export class Registerform extends React.Component{
    

@@ -1,5 +1,5 @@
 import React from 'react'
-import {Forgetpassform} from '../components/Forgetpassform';
+import { Forgetpassform } from '../components/Forgetpassform';
 
 export class Forgetpass extends React.Component{
     submit = (data) =>{

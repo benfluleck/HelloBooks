@@ -18,7 +18,7 @@ header {
 footer {
   height: 3rem;
   /* Height of the footer */
-  font-size: 0.9em;
+  font-size: 0.8em;
   color: whitesmoke;
 }
 
@@ -140,6 +140,10 @@ main {
 
 }
 
+p{
+  font-size: 1.0em;
+}
+
 
 
 .hr{
@@ -162,7 +166,7 @@ main {
   font-size: 2rem !important;
 }
 nav ul a {
-  font-size: 2rem !important;
+  font-size: 1.7rem !important;
 
 }
 
@@ -197,7 +201,7 @@ nav ul a {
 body {
   background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5)), #1d2a33 url('../img/bg.jpg');
   background-blend-mode: luminosity;
-  font-size: 19px !important;
+  font-size: 17px !important;
   background-repeat: no-repeat;
   color: whitesmoke;
  

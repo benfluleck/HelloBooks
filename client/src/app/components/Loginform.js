@@ -1,12 +1,12 @@
 import React from 'react'
-import {NavLink} from 'react-router-dom'
-import {Input, Col,Row,Icon, Button} from 'react-materialize'
+import { NavLink } from 'react-router-dom'
+import { Input, Col,Row,Icon, Button } from 'react-materialize'
 import ReactCssTransitions from "react-addons-css-transition-group"
 import PropTypes from 'prop-types'
-import swal from 'sweetalert2'
+
 
 export  class Loginform extends React.Component{
-  constructor () {
+  constructor (props) {
     super();
     this.state ={
         data:{
@@ -29,30 +29,7 @@ export  class Loginform extends React.Component{
           this.setState({ errors:{}, loading:true});
           
           this.props.submit(this.state.data)
-          // .then(
-          //   (res) =>{ swal(
-          //     'Welcome!',
-          //     'You are about to be redirected!',
-          //     'success'
-          //   ),
-          //   (error)=>{
-          //     swal(
-          //       'Oops...',
-          //       'Logon denied!',
-          //       'error'
-          //     )
-          //   }
-
-          //   },
-          // )
-          // .catch((err)=>{
-          //   swal(
-          //     'Oops...',
-          //     'Not sure what went wrong try again',
-          //     'error'
-          //   )
-          // })
-          // ;
+     
       
     
     };

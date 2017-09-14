@@ -1,6 +1,6 @@
 import React from 'react'
-import {NavLink} from 'react-router-dom'
-import {Input, CollectionItem, Collection, Collapsible, CollapsibleItem,  Col, Tabs , Tab} from 'react-materialize'
+import { NavLink } from 'react-router-dom'
+import { Input, CollectionItem, Collection, Collapsible, CollapsibleItem,  Col, Tabs , Tab } from 'react-materialize'
 
 
 export class Adminroot extends React.Component{

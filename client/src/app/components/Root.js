@@ -1,11 +1,11 @@
 import React from 'react'
 import css from '../css/style.scss'
-import {Row,Col} from 'react-materialize'
+import { Row,Col } from 'react-materialize'
 
 
-import {Header} from './Header';
-import {Bottom} from './Bottom';
-import {Welcome} from './Welcome';
+import { Header } from './Header';
+import { Bottom } from './Bottom';
+import { Welcome } from './Welcome';
 
 
 export class Root extends React.Component

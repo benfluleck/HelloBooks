@@ -1,5 +1,5 @@
 import React from 'react'
-import {Footer} from 'react-materialize'
+import { Footer } from 'react-materialize'
 
 
 
