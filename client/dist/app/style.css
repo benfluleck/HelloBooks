@@ -8,10 +8,13 @@ header {
 .page-footer {
   padding-top: 0.5em; }
 
+.h2 {
+  font-size: 3.56rem !important; }
+
 footer {
   height: 3rem;
   /* Height of the footer */
-  font-size: 0.9em;
+  font-size: 0.8em;
   color: whitesmoke; }
 
 .card.horizontal .card-image img {
@@ -93,6 +96,9 @@ main {
   border-radius: 4px;
   padding: 15px; }
 
+p {
+  font-size: 1.0em; }
+
 .hr {
   color: white; }
 
@@ -110,7 +116,7 @@ main {
   font-size: 2rem !important; }
 
 nav ul a {
-  font-size: 2rem !important; }
+  font-size: 1.7rem !important; }
 
 .mui-tabs__bar > li > a {
   color: #eee !important; }
@@ -137,7 +143,7 @@ nav ul a {
 body {
   background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5)), #1d2a33 url(img/7b4ef4a4f63e1885c081f064fe939a8c.jpg);
   background-blend-mode: luminosity;
-  font-size: 19px !important;
+  font-size: 17px !important;
   background-repeat: no-repeat;
   color: whitesmoke; }
 

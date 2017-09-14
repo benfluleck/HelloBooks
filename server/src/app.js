@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 import routes from './routes';
 import swaggerJSDoc from 'swagger-jsdoc';
 import path from 'path';
+import dotenv from 'dotenv'
 
 
 // Set up the express app
@@ -17,6 +18,8 @@ const swaggerDefinition = {
  host: 'localhost:5000',
  basePath: '/api/v1',
 };
+
+
 
 
 const options = {

@@ -16,12 +16,18 @@ var _controllers = require('../controllers');
 
 var _controllers2 = _interopRequireDefault(_controllers);
 
+var _dotenv = require('dotenv');
+
+var _dotenv2 = _interopRequireDefault(_dotenv);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Router = _express2.default.Router();
 var UserController = _controllers2.default.User;
 var BooksController = _controllers2.default.Books;
 var UserBooksController = _controllers2.default.UserBooks;
+
+_dotenv2.default.config();
 
 /**
  * @swagger
@@ -148,7 +154,7 @@ Router.use(function (req, res, next) {
   // decode token
   if (token) {
     // verifies secret and checks exp
-    _jsonwebtoken2.default.verify(token, 'superSecret', function (err, decoded) {
+    _jsonwebtoken2.default.verify(token, process.dotenv.JWT_SECRET, function (err, decoded) {
       if (err) {
         return res.json({ success: false, message: 'Failed to authenticate token.' });
       }

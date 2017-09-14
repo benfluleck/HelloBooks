@@ -26,6 +26,7 @@ class Login extends React.Component{
                   res.user.data.message,
                   'error'
                 );
+                this.props.data.loading =false;
             }
             })
             

@@ -12,7 +12,7 @@ export  class Loginform extends React.Component{
           username:'',
           password:'',
         },
-        loading:false,
+       
         errors:{}
       };
 
@@ -27,13 +27,14 @@ export  class Loginform extends React.Component{
        e.preventDefault();
         // this.setState({ errors:{}, loading:true});
         if(Object.keys(errors).length ==0){
+        
           this.props.submit(this.state.data)
           
         } 
       }     
     render(){
-      const {data} = this.state;
-
+      const {data,errors } = this.state;
+      
         return(
 
             <div className='login'> 

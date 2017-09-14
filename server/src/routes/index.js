@@ -1,12 +1,14 @@
 import jwt from 'jsonwebtoken';
 import express from 'express';
 import controller from '../controllers';
+import dotenv from 'dotenv'
 
 const Router = express.Router();
 const UserController = controller.User;
 const BooksController = controller.Books;
 const UserBooksController = controller.UserBooks;
 
+dotenv.config();
 
 /**
  * @swagger
@@ -131,7 +133,7 @@ Router.use((req, res, next) => {
  // decode token
  if (token) {
   // verifies secret and checks exp
-  jwt.verify(token, 'superSecret', (err, decoded) => {
+  jwt.verify(token, process.dotenv.JWT_SECRET, (err, decoded) => {
    if (err) {
     return res.json({ success: false, message: 'Failed to authenticate token.' });
    }
