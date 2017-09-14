@@ -41,5 +41,5 @@ Welcome.propTypes = {
 
 Welcome.defaultProps= {
     name:'Guest',
-    isLoggedIn: false
+    isLoggedIn: true
 }
