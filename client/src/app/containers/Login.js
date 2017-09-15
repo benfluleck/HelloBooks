@@ -1,32 +1,34 @@
-import React from 'react'
+import React from 'react';
 import { Loginform } from '../components/Loginform';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types'
-import { login } from '../actions/auth'
-import swal from 'sweetalert2'
+import PropTypes from 'prop-types';
+import { login } from '../actions/auth';
+import swal from 'sweetalert2';
 
 class Login extends React.Component{
     submit = data => {
         this.props.login(data)
             // .then(() => {
-            //  //  this.props.history.push('/dashboard');
+           //this.props.history.push('/dashboard');
             // })
             .then((res) =>{ 
-                console.log(res.user.data.success)
-             if (res.user.data.success){
+              
+             if (res.success){
                 swal(
                   'Welcome!',
-                  res.user.data.message,
+                  res.message,
                   'success'     
                 );
                 this.props.history.push('/dashboard');
             }else{
+                
                 swal(
+                    
                   'Oops...',
                   res.user.data.message,
                   'error'
                 );
-                this.props.data.loading =false;
+                
             }
             })
             

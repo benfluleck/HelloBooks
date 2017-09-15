@@ -15,9 +15,7 @@ header {
   padding-top: 0.5em;
 }
 
-h2{
-  font-size: 4.56rem !important; 
-}
+
 
 
 footer {
@@ -168,10 +166,10 @@ p{
   border-radius: 4px;
   background-color: rgba(0, 0, 0, 0.80);
   padding: 40px;
-  font-size: 2rem !important;
+  
 }
 nav ul a {
-  font-size: 1.7rem !important;
+  font-size: 1.3rem !important;
 
 }
 
@@ -206,7 +204,7 @@ nav ul a {
 body {
   background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5)), #1d2a33 url('../img/bg.jpg');
   background-blend-mode: luminosity;
-  font-size: 17px !important;
+  // font-size: 17px !important;
   background-repeat: no-repeat;
   color: whitesmoke;
  
@@ -285,6 +283,9 @@ h4, p{
   }
 }
 
+.welcome{
+ padding-bottom: 6rem;
+}
 
 .favorite-book {
   margin-top: 30px;

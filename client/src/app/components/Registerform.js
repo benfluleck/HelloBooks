@@ -5,6 +5,9 @@ import Validator from 'validator'
 import PropTypes from 'prop-types'
 import { Redirect } from 'react-router'
 
+/*
+eslint-disable
+ */
 export class Registerform extends React.Component{
    
     constructor () {
@@ -41,14 +44,14 @@ onBlur(e){
         case 'username':
         if(!Validator.isLength(value,{min:5, max:17})){
             this.setState({
-                usernameError: 'Username must be between 5 qnd 17 characters'
+                usernameError: 'Username must be between 5 and 17 characters'
             })
         }
         break;
         case 'password':
         if(!Validator.isLength(value,{min:5, max:17})){
             this.setState({
-                passwordError: 'Password must be between 5 qnd 17 characters'
+                passwordError: 'Password must be between 5 and 17 characters'
             })
           }
           else if (!Validator.isAlphanumeric(value)){

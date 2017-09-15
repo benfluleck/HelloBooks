@@ -6,7 +6,13 @@ import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom';
 import Tabs from 'muicss/lib/react/tabs';
 import Tab from 'muicss/lib/react/tab';
+//import { Tab } from 'semantic-ui-react'
 
+
+
+/*
+eslint-disable
+ */
 
 export class Profile extends React.Component{
 
@@ -65,7 +71,7 @@ onChange
   onSubmit=(e) => {
       e.preventDefault();
       if(this.setState.length === 0){
-        console.log(errors)
+       
         this.props.submit(this.state.data);
     }
   

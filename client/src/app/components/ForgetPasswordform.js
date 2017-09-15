@@ -5,9 +5,11 @@ import css from '../css/style.scss'
 import Validator from 'validator' 
 
 
+/*
+eslint-disable
+ */
 
-
-export class Forgetpassform extends React.Component{
+export class ForgetPassordform extends React.Component{
   constructor () {
     super();
     this.state ={

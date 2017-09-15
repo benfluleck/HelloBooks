@@ -3,6 +3,9 @@ import { NavLink } from 'react-router-dom'
 import { Input, CollectionItem, Collection, Collapsible, CollapsibleItem,  Col, Tabs , Tab } from 'react-materialize'
 
 
+/*
+eslint-disable
+ */
 export class Adminroot extends React.Component{
     render(){
         return(

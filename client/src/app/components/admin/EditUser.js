@@ -1,6 +1,10 @@
 import React from 'react'
 import { Input, Button, CollectionItem, Collection, Collapsible, CollapsibleItem, Col, Tabs ,  Tab } from 'react-materialize'
 
+
+/*
+eslint-disable
+ */
 export class EditUser extends React.Component{
     constructor () {
         super();

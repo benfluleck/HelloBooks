@@ -5,7 +5,7 @@ server/config/*
 package-lock.json
 */coverage/*
 */nyc_output/*
-coverage/*
+coverage/
 */.nyc_output/*
 .coveralls.yml
 .env

@@ -4,7 +4,9 @@ import { Navbar, NavItem } from 'react-materialize'
 import css from '../css/style.scss'
 
 
-
+/*
+eslint-disable
+ */
 
 export  class Header extends React.Component{
     render(){

@@ -1,6 +1,10 @@
 import React from 'react'
+
 import {Input, CollectionItem, Collection, Collapsible, Button, CollapsibleItem, Col, Tabs ,  Tab} from 'react-materialize'
 
+/*
+eslint-disable
+ */
 export class CreateBook extends React.Component{
     constructor () {
         super();
@@ -18,8 +22,7 @@ export class CreateBook extends React.Component{
           };
         
           this.onChange = this.onChange.bind(this);
-          
-        
+    
     }
 
     onChange = e => 
@@ -35,10 +38,6 @@ export class CreateBook extends React.Component{
       }
     
     };
-
-    
-
-
 
     render(){
         const {data} = this.state;

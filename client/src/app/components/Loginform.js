@@ -4,7 +4,12 @@ import { Input, Col,Row,Icon, Button } from 'react-materialize'
 import PropTypes from 'prop-types'
 
 
-export  class Loginform extends React.Component{
+
+/*
+eslint-disable
+ */
+
+export class Loginform extends React.Component{
   constructor (props) {
     super();
     this.state ={
@@ -41,9 +46,7 @@ export  class Loginform extends React.Component{
                 
                 <Row>
                   
-                     <form onSubmit={this.onSubmit}>
-                       
-                       
+                  <form onSubmit={this.onSubmit}>
                       <Input  s={12} label="Username"
                          required name='username' 
                          value={data.username} 
@@ -68,7 +71,7 @@ export  class Loginform extends React.Component{
                       
                     </Col>
                     <Col className='center' s={12}>
-		                  <Button waves='light' disabled={data.loading}>Login</Button>
+		                  <Button waves='light'>Login</Button>
                     </Col>
                     <Col className='center' s={12}>
 		                  <br/><a className= "btn btn-social btn-google"><span className="fa fa-google"></span> Sign in with Google</a>

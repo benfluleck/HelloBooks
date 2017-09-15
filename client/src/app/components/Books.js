@@ -9,8 +9,9 @@ import { Book } from './Book';
 
 import BOOKS from '../containers/staticBooks';
 
-
-
+/*
+eslint-disable
+ */
 
 export class Books extends React.Component{
     render(){

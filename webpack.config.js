@@ -37,6 +37,13 @@ devServer:{
     }
 },
 
+stats: {
+   
+    errors: true,
+    // Add details to errors (like resolving log)
+    errorDetails: true,
+},
+
 
  module: {
   loaders: [{

@@ -1,7 +1,7 @@
-import React from 'react'
-import { Forgetpassform } from '../components/Forgetpassform';
+import React from 'react';
+import ForgetPassordform from '../components/ForgetPasswordform';
 
-export class Forgetpass extends React.Component{
+export class Forgetpassform extends React.Component{
     submit = (data) =>{
         console.log(data)
     }

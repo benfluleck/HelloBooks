@@ -4,9 +4,13 @@ import { Row,Col } from 'react-materialize'
 
 
 import { Header } from './Header';
-import { Bottom } from './Bottom';
-import { Welcome } from './Welcome';
+import { Bottom } from './Footer';
+import  Welcome  from './Welcome';
 
+
+/*
+eslint-disable
+ */
 
 export class Root extends React.Component
 {

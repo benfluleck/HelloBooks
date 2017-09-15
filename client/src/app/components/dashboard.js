@@ -1,23 +1,32 @@
 import React from 'react'
 import css from '../css/style.scss'
-import { Row,Col } from 'react-materialize'
+import {Row, Col} from 'react-materialize'
 import PropTypes from 'prop-types'
+import {connect} from 'react-redux'
+import ConfirmEmailMessage from '../messages/ConfirmEmailMessage'
 
-export default class dashboard extends React.Component {
-    render(){
-        return(
-            <div className='dashboard'>
-            <Col s={12} m={6} l={4}>
-                <div className='head'>
-                <h2>Welcome {props.name}</h2>       
+/*
+eslint-disable
+ */
+const Dashboard = ({isConfirmed}) => {
 
-                <h4>Hello Books</h4>
-                <p>by Benny Ogidan</p>
-                </div>
-            </Col>
-        </div>
-        );
-    }
-       
-     
+  return (
+    <div className='dashboard'>
+      <h2>
+        User Dashboard
+      </h2>
+      {!isConfirmed && <ConfirmEmailMessage/>}
+
+    </div>
+  );
 }
+
+Dashboard.PropTypes = {
+  isConfirmed: PropTypes.bool.isRequired
+}
+
+const mapStateToProps = (state) => {
+  return {isConfirmed: state.user.confirmed}
+}
+
+export default connect(mapStateToProps)(Dashboard)

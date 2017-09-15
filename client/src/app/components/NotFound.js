@@ -1,9 +1,11 @@
 import React from 'react'
 import css from '../css/style.scss'
 import { Row,Col } from 'react-materialize'
-import image from '../img/404-2.jpg'
+import image from '../img/404.jpg'
 
-
+/*
+eslint-disable
+ */
 export const NotFound =(props)=>{
    
             

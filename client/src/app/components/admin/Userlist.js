@@ -2,6 +2,10 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { Input,  Col, Table , Tab } from 'react-materialize'
 
+
+/*
+eslint-disable
+ */
 export class Userlist extends React.Component{
     render(){
         return( 

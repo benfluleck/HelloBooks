@@ -8,7 +8,9 @@ import book2 from '../img/book2.jpg'
 import PropTypes from 'prop-types'
 
 
-
+/*
+eslint-disable
+ */
 
 
 export const Book  = (props) =>{
