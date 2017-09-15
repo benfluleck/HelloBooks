@@ -1,17 +1,11 @@
 import bcrypt from 'bcrypt-nodejs';
 import toTitleCase from 'to-title-case';
+import Sequelize from 'sequelize';
 
 export default (sequelize, DataTypes) => {
  const User = sequelize.define('User', {
-  id: {
-   type: DataTypes.INTEGER,
-   primaryKey: true,
-   autoIncrement: true,
-  },
-
   firstname: {
    type: DataTypes.STRING,
-   required: true,
    allowNull: false,
    trim: true,
    validate: {
@@ -34,7 +28,6 @@ export default (sequelize, DataTypes) => {
 
   lastname: {
    type: DataTypes.STRING,
-   required: true,
    allowNull: false,
    trim: true,
    validate: {
@@ -57,7 +50,12 @@ export default (sequelize, DataTypes) => {
   username: {
    type: DataTypes.STRING,
    trim: true,
+   unique: {
+    args: true,
+    msg: "Username already in database"
+   },
    allowNull: false,
+
    validate: {
     notEmpty: {
      args: true,
@@ -65,17 +63,14 @@ export default (sequelize, DataTypes) => {
     },
     isAlphanumeric: {
      args: true,
-     msg: 'Only Alpha numeric for usernames please',
+     msg: 'No Alphanumeric characters please',
     },
     len: {
-     args: [2, 30],
+     args: [4, 30],
      msg: 'Username must be at least 2 chars and less than 30 chars'
     }
    },
-   unique: {
-    args: true,
-    msg: 'Username already exist in database'
-   }
+
   },
   password: {
    type: DataTypes.STRING,
@@ -90,7 +85,8 @@ export default (sequelize, DataTypes) => {
      args: true,
      msg: 'Password can not be empty'
     }
-   }
+
+   },
   },
 
   password_confirmation: {
@@ -107,6 +103,10 @@ export default (sequelize, DataTypes) => {
   email: {
    type: DataTypes.STRING,
    allowNull: false,
+   unique: {
+    args: true,
+    msg: "Email already in database"
+   },
    trim: true,
    validate: {
     isEmail: {
@@ -118,16 +118,16 @@ export default (sequelize, DataTypes) => {
      msg: 'Firstname must be at least 2 chars and less than 30 chars'
     }
    },
-   unique: {
-    args: true,
-    msg: 'Email already exist'
-   }
+
   },
   user_level: {
    type: DataTypes.INTEGER,
    allowNull: false,
    defaultValue: 1,
-
+  },
+  user_image: {
+   type: DataTypes.STRING,
+   allowNull: true,
   },
 
   isAdmin: {
@@ -136,7 +136,7 @@ export default (sequelize, DataTypes) => {
    defaultValue: false,
   }
  }, {
-
+  freezeTableName: true,
   hooks: {
 
    beforeCreate: (user) => {

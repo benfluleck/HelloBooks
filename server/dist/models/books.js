@@ -18,15 +18,9 @@ var _uniqueRandom2 = _interopRequireDefault(_uniqueRandom);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var randomId = (0, _uniqueRandom2.default)(1000000, 100000000);
-
 exports.default = function (sequelize, DataTypes) {
   var Books = sequelize.define('Books', {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true
-    },
+
     title: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -109,16 +103,25 @@ exports.default = function (sequelize, DataTypes) {
 
     },
 
+    book_image: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+
     status: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: false
     }
   }, {
-    underscore: true
+    freezeTableName: true
   });
   Books.associate = function (models) {
-    Books.belongsToMany(models.User, { as: 'userbooks', through: models.UserBooks, foreignKey: 'bookid' });
+    Books.belongsToMany(models.User, {
+      as: 'userbooks',
+      through: models.UserBooks,
+      foreignKey: 'bookid'
+    });
   };
 
   return Books;

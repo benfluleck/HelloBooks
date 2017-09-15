@@ -2,15 +2,10 @@ import toTitleCase from 'to-title-case';
 import sentenceCase from 'sentence-case';
 import uniqueRandom from 'unique-random';
 
-const randomId = uniqueRandom(1000000, 100000000);
-
 export default (sequelize, DataTypes) => {
  const Books = sequelize.define('Books', {
-  id: {
-   type: DataTypes.INTEGER,
-   primaryKey: true,
-   autoIncrement: true,
-  },
+
+
   title: {
    type: DataTypes.STRING,
    allowNull: false,
@@ -97,16 +92,25 @@ export default (sequelize, DataTypes) => {
 
   },
 
+  book_image: {
+   type: DataTypes.STRING,
+   allowNull: true,
+  },
+
   status: {
    type: DataTypes.BOOLEAN,
    allowNull: false,
    defaultValue: false,
   },
  }, {
-  underscore: true,
+  freezeTableName: true,
  });
  Books.associate = (models) => {
-  Books.belongsToMany(models.User, { as: 'userbooks', through: models.UserBooks, foreignKey: 'bookid' });
+  Books.belongsToMany(models.User, {
+   as: 'userbooks',
+   through: models.UserBooks,
+   foreignKey: 'bookid'
+  });
  };
 
  return Books;

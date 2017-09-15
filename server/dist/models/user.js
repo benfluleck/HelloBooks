@@ -12,19 +12,16 @@ var _toTitleCase = require('to-title-case');
 
 var _toTitleCase2 = _interopRequireDefault(_toTitleCase);
 
+var _sequelize = require('sequelize');
+
+var _sequelize2 = _interopRequireDefault(_sequelize);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = function (sequelize, DataTypes) {
   var User = sequelize.define('User', {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true
-    },
-
     firstname: {
       type: DataTypes.STRING,
-      required: true,
       allowNull: false,
       trim: true,
       validate: {
@@ -46,7 +43,6 @@ exports.default = function (sequelize, DataTypes) {
 
     lastname: {
       type: DataTypes.STRING,
-      required: true,
       allowNull: false,
       trim: true,
       validate: {
@@ -69,7 +65,12 @@ exports.default = function (sequelize, DataTypes) {
     username: {
       type: DataTypes.STRING,
       trim: true,
+      unique: {
+        args: true,
+        msg: "Username already in database"
+      },
       allowNull: false,
+
       validate: {
         notEmpty: {
           args: true,
@@ -77,17 +78,14 @@ exports.default = function (sequelize, DataTypes) {
         },
         isAlphanumeric: {
           args: true,
-          msg: 'Only Alpha numeric for usernames please'
+          msg: 'No Alphanumeric characters please'
         },
         len: {
-          args: [2, 30],
+          args: [4, 30],
           msg: 'Username must be at least 2 chars and less than 30 chars'
         }
-      },
-      unique: {
-        args: true,
-        msg: 'Username already exist in database'
       }
+
     },
     password: {
       type: DataTypes.STRING,
@@ -102,6 +100,7 @@ exports.default = function (sequelize, DataTypes) {
           args: true,
           msg: 'Password can not be empty'
         }
+
       }
     },
 
@@ -119,6 +118,10 @@ exports.default = function (sequelize, DataTypes) {
     email: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: {
+        args: true,
+        msg: "Email already in database"
+      },
       trim: true,
       validate: {
         isEmail: {
@@ -129,17 +132,17 @@ exports.default = function (sequelize, DataTypes) {
           args: [5, 45],
           msg: 'Firstname must be at least 2 chars and less than 30 chars'
         }
-      },
-      unique: {
-        args: true,
-        msg: 'Email already exist'
       }
+
     },
     user_level: {
       type: DataTypes.INTEGER,
       allowNull: false,
       defaultValue: 1
-
+    },
+    user_image: {
+      type: DataTypes.STRING,
+      allowNull: true
     },
 
     isAdmin: {
@@ -148,7 +151,7 @@ exports.default = function (sequelize, DataTypes) {
       defaultValue: false
     }
   }, {
-
+    freezeTableName: true,
     hooks: {
 
       beforeCreate: function beforeCreate(user) {

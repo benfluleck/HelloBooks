@@ -20,7 +20,7 @@ var Books = _models2.default.Books;
 
 exports.default = {
   loanbook: function loanbook(req, res) {
-    return UserBooks.findOne({
+    UserBooks.findOne({
       where: {
         userid: req.params.userId,
         bookid: req.body.bookid,
@@ -54,9 +54,9 @@ exports.default = {
           }
 
           return bookfound.update({
-            quantity: bookfound.quantity - 1
+            quantity: bookfound.quantity -= 1
           }).then(function (updateBook) {
-            res.status(200).send({ success: true, message: updateBook.title + ' succesfully loaned', updateBook: updateBook });
+            res.status(201).send({ success: true, message: updateBook.title + ' succesfully loaned', updateBook: updateBook });
           }).catch(function (error) {
             res.status(400).send({ Errors: _helper2.default.errorArray(error) });
           });

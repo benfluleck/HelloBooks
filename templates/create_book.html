@@ -1,0 +1,151 @@
+<!DOCTYPE html(lang='en')>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>HelloBooks | </title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="public/stylesheets/bootstrap-social.css" />
+    <link rel="stylesheet" href="public/stylesheets/bootstrap-imageupload.min.css" />
+    <link rel="stylesheet" href="public/stylesheets/styles.css" />
+    <script src="https://use.fontawesome.com/e096d8d3e1.js"></script>
+
+    <body>
+        <nav class="navbar navbar-toggleable-sm navbar-inverse bg-inverse fixed-top">
+            <button class="navbar-toggler navbar-toggler-left" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <a class="navbar-brand" href="#">Admin</a>
+            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active"><a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html">Visit Site</a></li>
+                </ul>
+                <div class="dropdown default"><a class="btn btn-secondary dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink"><a class="dropdown-item" href="#">Action</a><a class="dropdown-item" href="#">Another action</a><a class="dropdown-item" href="#">Logout</a></div>
+                </div>
+            </div>
+        </nav>
+        <div class="container-fluid">
+            <div class="row">
+                <nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar">
+                    <ul class="nav nav-pills flex-column">
+                        <li class="nav-item"><a class="nav-link active" href="create_category">Catalog<span class="sr-only">(current)</span></a></li>
+                        <li class="nav-item"><a class="nav-link" href="user.html">Users &amp; Groups</a></li>
+                    </ul>
+                </nav>
+                <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
+                    <h1>Welcome Administrator</h1>
+                    <ol class="breadcrumb">
+                        <li><a href="admin.html">Admin</a></li>
+
+                        <li class="active">Book</li>
+                    </ol>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h2> Title</h2>
+                            <hr/>
+                        </div>
+                    </div>
+                    <form class="form-horizontal" role="form" method="POST" action="/">
+                        <div class="row">
+                            <div class="col-md-3 field-label-responsive">
+                                <label for="name">Book Name</label>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                        <div class="input-group-addon" style="width: 2.6rem;"><i class="fa fa-book"></i></div>
+                                        <input class="form-control" id="name" type="text" name="name" placeholder="Enter Book" required="" autofocus="" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-control-feedback"><span class="text-danger align-middle">
+                    <!-- Put name validation error messages here--></span></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 field-label-responsive">
+                                <label for="email">Author Name</label>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                        <div class="input-group-addon" style="width: 2.6rem;"><i class="fa fa-user"></i></div>
+                                        <input class="form-control" id="author" type="text" name="author" placeholder="Author Name" autofocus="" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-control-feedback"><span class="text-danger align-middle">
+                    <!-- Put e-mail validation error messages here--></span></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 field-label-responsive">
+                                <label for="description">Description</label>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="input-group mb-2 mr-sm-2 mb-sm-3">
+                                    <div class="input-group-addon" style="width: 2.6rem;"><i class="fa fa-book"></i></div>
+                                    <textarea class="form-control" id="description" rows="4"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-control-feedback"><span class="text-danger align-middle">
+                    <!-- Put name validation error messages here--></span></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 field-label-responsive">
+                                <label for="category">Category</label>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="input-group mb-2 mr-sm-2 mb-sm-2">
+                                        <div class="input-group-addon" style="width: 2.6rem;"><i class="fa fa-book"></i></div>
+                                        <button class="form-control btn-default dropdown-toggle" id="category" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><span class="caret"></span></button>
+                                        <ul class="dropdown-menu" aria-labelledby="category">
+                                            <li>Horror</li>
+                                            <li>Romance</li>
+                                            <li>Action</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-control-feedback"><span class="text-danger align-middle">
+                    <!-- Put e-mail validation error messages here--></span></div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="exampleInputFile">File input</label>
+                                <input class="form-control-file" id="exampleInputFile" type="file" aria-describedby="fileHelp" /><small class="form-text text-muted" id="fileHelp">Upload a picture of the book unto the server.         </small>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-control-feedback"></div><span class="text-danger align-middle">
+                <!-- Put e-mail validation error messages here--></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6">
+                            <button class="btn btn-primary" type="submit"><i class="fa fa-user-plus"></i> Create Book</button>
+                        </div>
+                    </div>
+                    <div class="foot text-xs-center" id="footer">&#169;Benny in Patnership with Andela</div>
+                </main>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+        <script src="/javascripts/bootstrap-imageupload.min.js"></script>
+        <script src="/javascripts/data-toggle.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    </body>
+</head>

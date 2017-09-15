@@ -1,0 +1,128 @@
+<!DOCTYPE html(lang='en')>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>HelloBooks | </title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="public/stylesheets/bootstrap-social.css" />
+    <!--link(rel='stylesheet', href='/stylesheets/font-awesome.min.css')-->
+    <link rel="stylesheet" href="public/stylesheets/style.css" />
+    <script src="https://use.fontawesome.com/e096d8d3e1.js"></script>
+
+    <body>
+        <!--navbar stripped from page-->
+        <nav class="navbar sticky-top navbar-dark bg-inverse">
+            <button class="navbar-toggler hidden-md-up pull-xs-left" type="button" data-toggle="collapse" data-target="#navbar">&#x2630;</button>
+            <div class="navbar-nav collapse navbar-toggleable-sm" id="navbar">
+                <div class="container pull-md-right">
+                    <div class="nav-items clearfix"><a class="nav-item nav-link" href="register.html">Sign Up</a><a class="nav-item nav-link" href="profile.html">My Profile</a><a class="nav-item nav-link" href="books.html">Books</a></div><a class="btn btn-info" href="index.html">Login</a>
+                </div>
+            </div>
+        </nav>
+        <div class="header">
+            <h1></h1>
+            <p>Welcome to
+                <div class="container">
+                    <!-- Example row of columns-->
+                    <div class="row">
+                        <div class="col-md-6" id="userform">
+                            <form action="" method="post"></form><img class="img-responsive img-thumbnail" src="http://websamplenow.com/30/userprofile/images/avatar.jpg" />
+                            <div class="form-group">
+                                <div class="fileinput"><a class="btn btn-primary" href="javascript:;">Choose File...
+                        <input type="file" style="position:absolute;opacity:0;transparent;" name="file_source" size="40" onchange="$(&quot;#upload-file-info&quot;).html($(this).val());"/></a><span class="label label-info" id="upload-file-info"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col form-control-label" for="firstname">FirstName
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-user"></i></div>
+                        <input class="form-control input" id="username" name="firstname" type="text" placeholder="firstname"/>
+                    </div>
+                    </label>
+                            </div>
+                            <div class="form-group">
+                                <label class="col form-control-label" for="username">Username
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-user"></i></div>
+                        <input class="form-control input" id="username" name="username" type="text" placeholder="username"/>
+                    </div>
+                    </label>
+                            </div>
+                            <div class="form-group">
+                                <label class="col form-control-label" for="oldpassword">Old Password
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-key"></i></div>
+                        <input class="form-control input" id="username" name="oldpassword" type="password" placeholder="oldpassword"/>
+                    </div>
+                    </label>
+                            </div>
+                            <div class="form-group">
+                                <label class="col form-control-label" for="newpassword">New Password
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-key"></i></div>
+                        <input class="form-control input" id="username" name="newpassword" type="password" placeholder="newpassword"/>
+                    </div>
+                    </label>
+                            </div>
+                            <div class="form-group">
+                                <label class="col form-control-label" for="confirmpassword">Confirm New Password
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-key"></i></div>
+                        <input class="form-control input" id="username" name="confirmpassword" type="password" placeholder="confirmpassword"/>
+                    </div>
+                    </label>
+                            </div>
+                            <div class="form-group">
+                                <label class="col form-control-label" for="email">Email
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
+                        <input class="form-control input" id="username" name="email" type="email" placeholder="email"/>
+                    </div>
+                    </label>
+                            </div><a class="btn btn-primary" href="#"><span class="glyphicon glyphicon-thumbs-up"></span> Submit</a>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" id="displaylist" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">User Select</button>
+                                <div class="dropdown-menu" aria-labelledby="displaylist">
+                                    <button class="dropdown-item" type="button">Books</button>
+                                    <button class="dropdown-item" type="button">My Books</button>
+                                    <button class="dropdown-item" type="button">Loan History</button>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Populate Panel</h3>
+                                </div>
+                                <div class="panel-body">This is a Basic panel</div>
+                                <table class="table">
+                                    <tr></tr>
+                                    <th>Library Books</th>
+                                    <th>Author</th>
+                                    <th>Category</th>
+                                    <tr></tr>
+                                    <td>Book 1</td>
+                                    <td>Ben</td>
+                                    <td>Horror</td>
+                                    <tr></tr>
+                                    <td>Book2</td>
+                                    <td>Ben2</td>
+                                    <td>Romance</td>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </p>
+        </div>
+        <!-- footer-->
+        <div class="foot text-xs-center" id="footer">&#169;Benny in Patnership with Andela</div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
+    </body>
+</head>
+
+</html>

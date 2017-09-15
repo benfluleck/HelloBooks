@@ -5,6 +5,7 @@ import Sequelize from 'sequelize';
 import configenv from '../config/config.json';
 
 const env = process.env.NODE_ENV || 'development';
+console.log(env);
 const config = configenv[env];
 
 const db = {};

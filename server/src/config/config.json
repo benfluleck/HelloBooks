@@ -1,12 +1,19 @@
 {
+ "development": {
+  "username": "ben",
+
+  "database": "hello_books",
+  "host": "127.0.0.1",
+  "dialect": "postgres"
+ },
  "test": {
-  "username": "postgres",
-  "password": "",
+  "username": "ben",
+
   "database": "travis",
   "host": "127.0.0.1",
-  "dialect": "postgres",
-  "logging": false
+  "dialect": "postgres"
  },
+
  "production": {
 
   "dialect": "postgres",

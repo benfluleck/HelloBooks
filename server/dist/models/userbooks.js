@@ -14,6 +14,16 @@ var randomId = (0, _uniqueRandom2.default)(1000000, 100000000);
 
 exports.default = function (sequelize, DataTypes) {
   var UserBooks = sequelize.define('UserBooks', {
+    bookid: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+
+    },
+    userid: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+
+    },
     return_date: {
       type: DataTypes.DATE,
       allowNull: false
@@ -50,12 +60,12 @@ exports.default = function (sequelize, DataTypes) {
   });
   UserBooks.associate = function (models) {
     UserBooks.belongsTo(models.Books, {
-      foreignKey: 'bookid',
+      foreignKey: 'id',
       as: 'book',
       onDelete: 'CASCADE'
     });
     UserBooks.belongsTo(models.User, {
-      foreignKey: 'userid',
+      foreignKey: 'id',
       onDelete: 'CASCADE'
     });
   };

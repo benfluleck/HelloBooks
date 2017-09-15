@@ -1,24 +1,35 @@
-language: node_js
+env:
+  global:
+    - CC_TEST_REPORTER_ID=$CODECLIMATE_REPO_TOKEN
+    - GIT_COMMITTED_AT=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then git log -1 --pretty=format:%ct; else git log -1 --skip 1 --pretty=format:%ct; fi)
 
+language: node_js
 
 node_js:
   - node
+script:
+  - bundle exec rspec
+  # Preferably you will run test-reporter on branch update events. But
+  # if you setup travis to build PR updates only, you don't need to run
+  # the line below
+  - if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT; fi
+  # In the case where travis is setup to build PR updates only,
+  # uncomment the line below
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 notifications:
   email: false
 services:
   - postgresql
 before_script:
-  - npm run install -g codeclimate-test-reporter
-  - npm run install -g sequelize
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - npm install -g codeclimate-test-reporter
+  - npm install -g sequelize
   - psql -c 'drop database if exists travis;' -U postgres
   - psql -c 'create database travis;' -U postgres
-  - npm run build
-  - NODE_ENV=test npm run test:db
-cache:
-  directories:
-    - "node_modules"
+  - NODE_ENV=test && npm run test:db
 script:
-  - npm test 
+  - npm test
 
 after_success:
   - npm run coverage

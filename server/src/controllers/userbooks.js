@@ -10,7 +10,7 @@ const Books = models.Books;
 export default {
 
  loanbook(req, res) {
-  return UserBooks
+  UserBooks
    .findOne({
     where: {
      userid: req.params.userId,
@@ -29,7 +29,8 @@ export default {
     if (bookfound) {
      return res.status(405).send({ success: false, messsage: 'This book has already been borrowed by you', bookfound });
     }
-    return UserBooks.create({
+    return UserBooks
+     .create({
        userid: req.params.userId,
        bookid: req.body.bookid,
        return_date: req.body.date
@@ -53,10 +54,10 @@ export default {
 
         return bookfound
          .update({
-          quantity: bookfound.quantity - 1,
+          quantity: bookfound.quantity -= 1,
          })
          .then((updateBook) => {
-          res.status(200).send({ success: true, message: `${updateBook.title} succesfully loaned`, updateBook });
+          res.status(201).send({ success: true, message: `${updateBook.title} succesfully loaned`, updateBook });
          })
          .catch((error) => {
           res.status(400).send({ Errors: Helper.errorArray(error) });
