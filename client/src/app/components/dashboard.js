@@ -12,9 +12,9 @@ const Dashboard = ({isConfirmed}) => {
 
   return (
     <div className='dashboard'>
-      <h2>
+      <h3>
         User Dashboard
-      </h2>
+      </h3>
       {!isConfirmed && <ConfirmEmailMessage/>}
 
     </div>
@@ -22,11 +22,11 @@ const Dashboard = ({isConfirmed}) => {
 }
 
 Dashboard.PropTypes = {
-  isConfirmed: PropTypes.bool.isRequired
+  isConfirmed: PropTypes.bool
 }
 
 const mapStateToProps = (state) => {
-  return {isConfirmed: state.user.confirmed}
+  return {isConfirmed: state.confirmed}
 }
 
 export default connect(mapStateToProps)(Dashboard)

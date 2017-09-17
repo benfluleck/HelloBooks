@@ -25,23 +25,22 @@ exports.default = {
         userid: req.params.userId,
         bookid: req.body.bookid,
         return_status: false
-
       },
-      include: [{ model: Books, as: 'book', required: true }]
+      include: [{
+        model: Books,
+        as: 'book',
+        required: true
+      }]
     }).then(function (bookfound) {
       /**
-       * Check if the book has been borrowed before,
-       * User should borrow .
-       */
+      * Check if the book has been borrowed before,
+      * User should borrow .
+      */
       if (bookfound) {
-        return res.status(405).send({ success: false, messsage: 'This book has already been borrowed by you', bookfound: bookfound });
+        return res.status(404).send({ success: false, messsage: 'This book has already been borrowed by you', bookfound: bookfound });
       }
-      return UserBooks.create({
-        userid: req.params.userId,
-        bookid: req.body.bookid,
-        return_date: req.body.date
-        // status in user table will need to be updated
-        // if book id does not exist
+      return UserBooks.create({ userid: req.params.userId, bookid: req.body.bookid, return_date: req.body.date
+        // status in user table will need to be updated if book id does not exist
       }).then(function () {
         Books.findOne({
           where: {
@@ -58,17 +57,21 @@ exports.default = {
           }).then(function (updateBook) {
             res.status(201).send({ success: true, message: updateBook.title + ' succesfully loaned', updateBook: updateBook });
           }).catch(function (error) {
-            res.status(400).send({ Errors: _helper2.default.errorArray(error) });
+            res.status(500).send({
+              Errors: _helper2.default.errorArray(error)
+            });
           });
         }).catch(function (error) {
-          res.status(400).send({ Errors: _helper2.default.errorArray(error) });
+          res.status(500).send({
+            Errors: _helper2.default.errorArray(error)
+          });
         });
       }).catch(function () {
         res.status(400).send({ success: false, message: 'Check entered UserId or BookId and ensure its valid input' });
       });
     }).catch(function (error) {
-      //console.log(error);
-      res.status(400).send({ success: false, message: ' ' + error.message });
+
+      res.status(404).send({ success: false, message: ' ' + error.message });
     });
   },
   getborrowerslist: function getborrowerslist(req, res) {
@@ -77,14 +80,16 @@ exports.default = {
         userid: req.params.userId,
         return_status: req.query.returned
       },
-      include: [{ model: Books, as: 'book', required: true }]
+      include: [{
+        model: Books,
+        as: 'book',
+        required: true
+      }]
     }).then(function (book) {
       if (book.length === 0) {
         return res.status(404).send({ success: false, message: 'You have no books on your loan list' });
       }
-      res.status(200).send({
-        book: book
-      });
+      res.status(200).send({ book: book });
     }).catch(function (error) {
       return res.status(400).send(error.message);
     });
@@ -96,7 +101,11 @@ exports.default = {
         userid: req.params.userId,
         return_status: true
       },
-      include: [{ model: Books, as: 'book', required: true }]
+      include: [{
+        model: Books,
+        as: 'book',
+        required: true
+      }]
     }).then(function (book) {
       if (book) {
         return res.status(409).send({ success: false, messsage: 'You have returned this book already', book: book });
@@ -117,9 +126,7 @@ exports.default = {
           }
         }).then(function (bookfound) {
           if (!bookfound) {
-            return res.status(404).send({
-              message: 'Book does not exist in this database'
-            });
+            return res.status(404).send({ message: 'Book does not exist in this database' });
           }
           return bookfound.update({
             quantity: bookfound.quantity + 1
@@ -133,7 +140,7 @@ exports.default = {
         });
       });
     }).catch(function (error) {
-      return res.status(400).send(error.message);
+      return res.status(500).send(error.message);
     });
   }
 };

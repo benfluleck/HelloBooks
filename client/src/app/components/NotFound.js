@@ -6,9 +6,7 @@ import image from '../img/404.jpg'
 /*
 eslint-disable
  */
-export const NotFound =(props)=>{
-   
-            
+export const NotFound =(props)=>{   
         return(
                 <div>
                 <h1> 404 - Page Not Found </h1>

@@ -8,13 +8,12 @@ header {
 .page-footer {
   padding-top: 0.5em; }
 
-h2 {
-  font-size: 4.56rem !important; }
+.welcome {
+  padding-bottom: 4em; }
 
 footer {
   height: 3rem;
   /* Height of the footer */
-  font-size: 0.8em;
   color: whitesmoke; }
 
 .card.horizontal .card-image img {
@@ -112,11 +111,10 @@ p {
   border: 1px solid white;
   border-radius: 4px;
   background-color: rgba(0, 0, 0, 0.8);
-  padding: 40px;
-  font-size: 2rem !important; }
+  padding: 40px; }
 
 nav ul a {
-  font-size: 1.7rem !important; }
+  font-size: 1.3rem !important; }
 
 .mui-tabs__bar > li > a {
   color: #eee !important; }
@@ -143,7 +141,6 @@ nav ul a {
 body {
   background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5)), #1d2a33 url(img/7b4ef4a4f63e1885c081f064fe939a8c.jpg);
   background-blend-mode: luminosity;
-  font-size: 17px !important;
   background-repeat: no-repeat;
   color: whitesmoke; }
 
@@ -154,7 +151,8 @@ body {
 .navbar-brand {
   margin: 0; }
 
-.navbar .nav-link, .navbar .btn {
+.navbar .nav-link,
+.navbar .btn {
   text-transform: uppercase;
   font-size: .95rem; }
 
@@ -173,13 +171,15 @@ body {
 h4 {
   font-size: 2rem; }
 
-h4, p {
+h4,
+p {
   margin-left: 1em; }
 
 .btn-social {
   color: whitesmoke; }
 
-.active, .btn {
+.active,
+.btn {
   transition: .4s; }
 
 /* label focus color */

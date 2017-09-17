@@ -9,7 +9,6 @@ import {connect} from 'react-redux'
 *Routes for Authenticated users
 */
 const UserRoute = ({
-
     isAuthenticated,
     component: Component,
     ...rest
@@ -20,21 +19,26 @@ const UserRoute = ({
             {...rest}
             render={props => isAuthenticated
             ? <Component{...props}/>
-            : <Redirect to ='/'/>}/>
+            : <Redirect to='/'/>}/>
 
     );
 
 };
 
 UserRoute.PropTypes = {
-    component: PropTypes.func.IsRequired,
-    isAuthenticated: PropTypes.bool.IsRequired
+    component: PropTypes.func,
+    isAuthenticated: PropTypes.bool
+
 };
 
 const mapStateToProps = (state) => {
+    // if (!state.user.user.token || state.user.user.token === "") { //if there is
+    // no token, dont bother     return ; } else {
+
     return {
-        isAuthenticated: !!state.user.user.token
-    }
+        isAuthenticated: !!state.token
+    };
+    // }
 }
 
 export default connect(mapStateToProps)(UserRoute);

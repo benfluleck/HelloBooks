@@ -46,7 +46,7 @@ export class Loginform extends React.Component{
                 
                 <Row>
                   
-                  <form onSubmit={this.onSubmit}>
+                <form onSubmit={this.onSubmit}>
                       <Input  s={12} label="Username"
                          required name='username' 
                          value={data.username} 

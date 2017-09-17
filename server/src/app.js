@@ -6,30 +6,22 @@ import swaggerJSDoc from 'swagger-jsdoc';
 import path from 'path';
 import dotenv from 'dotenv'
 
-
-// Set up the express app
 const app = express();
 const swaggerDefinition = {
- info: {
-  title: 'Hello Books API - Benny Ogidan',
-  version: '1.0.0',
-  description: 'API for a Library database with Swagger',
- },
- host: 'localhost:5000',
- basePath: '/api/v1',
+  info: {
+    title: 'Hello Books API - Benny Ogidan',
+    version: '1.0.0',
+    description: 'API for a Library database with Swagger'
+  },
+  host: 'localhost:5000',
+  basePath: '/api/v1'
 };
 
-
-
-
 const options = {
- // import swaggerDefinitions
- swaggerDefinition: swaggerDefinition,
- // path to the API docs
- apis: ['./server/dist/routes/*.js'],
-
-
-
+  // import swaggerDefinitions
+  swaggerDefinition: swaggerDefinition,
+  // path to the API docs
+  apis: ['./server/dist/routes/*.js']
 };
 
 const swaggerSpec = swaggerJSDoc(options);
@@ -39,37 +31,24 @@ app.use(logger('dev'));
 
 // Parse incoming requests data (https://github.com/expressjs/body-parser)
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-
+app.use(bodyParser.urlencoded({extended: false}));
 
 app.use((req, res, next) => {
-    res.header(
-      'Access-Control-Allow-Headers',
-      'Authorization, X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept, x-access-token'
-    );
-    next();
-  });
-  
+
+  res.header('Access-Control-Allow-Headers', 'Authorization, X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept, x-ac' +
+      'cess-token');
+  next();
+});
 
 app.use(express.static(path.join(__dirname, '../api-docs/')));
 console.log(path.join(__dirname, '../api-docs/'));
-  
+
 app.get('/hellobooks.json', (req, res) => {
- res.setHeader('Content-Type', 'application/json');
- res.send(swaggerSpec);
+  res.setHeader('Content-Type', 'application/json');
+  res.send(swaggerSpec);
 });
-//routes(app);
-
-
-
-
-// Setup a default catch-all route that sends back a welcome message in JSON format.
 app.use('/api/v1', routes);
-// serve swagger
 
+app.get('*', (req, res) => res.status(404).send({message: 'This is a wrong route.'}));
 
-app.get('*', (req, res) => res.status(404).send({
- message: 'This is a wrong route.',
-}));
-
-export default (app);
+export default(app);

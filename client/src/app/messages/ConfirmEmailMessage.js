@@ -1,20 +1,14 @@
-import React, { Component } from 'react'
-import { Message } from 'semantic-ui-react';
+import React, {Component} from 'react'
+import {Message} from 'semantic-ui-react';
 
-
-
-const ConfirmEmailMessage = () =>
-{
-    return(
+const ConfirmEmailMessage = () => {
+  return (
     <Message info>
-            <Message.Header>Please, verify your email to unlock your account</Message.Header>
+      <Message.Header>Please, verify your email to unlock your account</Message.Header>
 
-        </Message>
+    </Message>
 
-    )
+  )
 };
 
 export default ConfirmEmailMessage;
-   
-
-

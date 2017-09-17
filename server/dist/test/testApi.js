@@ -35,7 +35,6 @@ var User = _models2.default.User;
 // import mocha from 'mocha';
 
 var Books = _models2.default.Books;
-// const server = require('../routes/index');
 
 var expect = _chai2.default.expect;
 
@@ -45,8 +44,7 @@ _chai2.default.use(_chaiHttp2.default);
 var userId = void 0;
 var bookid = void 0;
 
-//sequelize.sequelize.sync({ force: true });
-// Middleware for database
+//sequelize.sequelize.sync({ force: true }); Middleware for database
 describe('HelloBooks', function () {
   var token = void 0;
   before(function (done) {
@@ -54,13 +52,7 @@ describe('HelloBooks', function () {
     User.destroy({ where: {} });
 
     // create dummy books
-    Books.create({
-      title: 'Shola comes home',
-      author: 'Benny Ogidan',
-      category: 'Fiction',
-      quantity: 20,
-      description: 'Test'
-    }).then(function (book) {
+    Books.create({ title: 'Shola comes home', author: 'Benny Ogidan', category: 'Fiction', quantity: 20, description: 'Test' }).then(function (book) {
       bookid = book.id;
     });
 
@@ -80,8 +72,8 @@ describe('HelloBooks', function () {
   });
 
   /*
-   *Unauthenticated user tests
-   */
+  *Unauthenticated user tests
+  */
   describe('/GET', function () {
     it('Only authenticated users allowed to view books', function (done) {
       _chai2.default.request(_app2.default).get('/api/v1/books/').set('Accept', 'application/x-www-form-urlencoded').end(function (err, res) {
@@ -118,21 +110,11 @@ describe('HelloBooks', function () {
       });
     });
     // it('Should validate to say created user is not unique', (done) => {
-    //  chai.request(app)
-    //   .post('/api/users/signup')
-    //   .send({
-    //    firstname: faker.name.firstName(),
-    //    lastname: faker.name.lastName(),
-    //    username: 'Benny',
-    //    password: 'benny',
-    //    password_confirmation: 'benny',
-    //    email: 'benny@ogidan.com',
-    //   })
-    //   .end((err, res) => {
-    //    expect(err.message).to.be.equal('Bad Request');
-    //    done();
-    //   });
-    // });
+    // chai.request(app)   .post('/api/users/signup')   .send({    firstname:
+    // faker.name.firstName(),    lastname: faker.name.lastName(),    username:
+    // 'Benny',    password: 'benny',    password_confirmation: 'benny',    email:
+    // 'benny@ogidan.com',   })   .end((err, res) => {
+    // expect(err.message).to.be.equal('Bad Request');    done();   }); });
     it('Only authenticated users allowed to loan', function (done) {
       _chai2.default.request(_app2.default).post('/api/v1/users/' + userId + '/books').set('Accept', 'application/x-www-form-urlencoded').end(function (err, res) {
         expect(res.status).to.equal(403);
@@ -156,11 +138,14 @@ describe('HelloBooks', function () {
   });
 
   /*
-    Authenticated users Tests
-    */
+   Authenticated users Tests
+   */
   describe('POST /login', function () {
     it('it responds with 401 status code if bad username or password', function (done) {
-      _chai2.default.request(_app2.default).post('/api/v1/users/signin').set('Accept', 'application/x-www-form-urlencoded').send({ username: _faker2.default.internet.userName(), password: _faker2.default.internet.password }).end(function (err, res) {
+      _chai2.default.request(_app2.default).post('/api/v1/users/signin').set('Accept', 'application/x-www-form-urlencoded').send({
+        username: _faker2.default.internet.userName(),
+        password: _faker2.default.internet.password
+      }).end(function (err, res) {
         expect(401);
         done();
       });
@@ -173,9 +158,7 @@ describe('HelloBooks', function () {
         done();
       });
     });
-    // Authenticate the user with a token
-
-    /////
+    // Authenticate the user with a token ///
     it('it returns successful login if user name and password', function (done) {
       _chai2.default.request(_app2.default).post('/api/v1/users/signin').set('Accept', 'application/x-www-form-urlencoded').send({ username: 'Benny', password: 'benny' }).end(function (err, res) {
 
@@ -193,13 +176,10 @@ describe('HelloBooks', function () {
         userId: userId,
         bookid: bookid,
         date: '2017-11-25',
-        //return_date: '2016-08-18'
-        //
 
         return_status: false
       };
       _chai2.default.request(_app2.default).post('/api/v1/users/' + userId + '/books').set('x-access-token', token).send(userbook).end(function (err, res) {
-        console.log('+++++++++++', res.body, userbook.return_date);
         expect(res.status).to.equal(201);
         done();
       });
@@ -209,7 +189,6 @@ describe('HelloBooks', function () {
     describe('/GET', function () {
       it('It retrieves all books from the data', function (done) {
         _chai2.default.request(_app2.default).get('/api/v1/books').set('x-access-token', token).set('Accept', 'application/x-www-form-urlencoded').end(function (err, res) {
-          // bookid = Books.id
           expect(res.status).to.equal(200);
           done();
         });
@@ -219,11 +198,7 @@ describe('HelloBooks', function () {
     describe('/PUT', function () {
       it('Edit a select book from the data', function (done) {
 
-        _chai2.default.request(_app2.default).put('/api/v1/books/' + bookid).set('Accept', 'application/x-www-form-urlencoded').set('x-access-token', token).send({
-          title: 'The Chronicles of Andela',
-          author: 'C.S. Lewis',
-          category: 'Action'
-        }).end(function (err, res) {
+        _chai2.default.request(_app2.default).put('/api/v1/books/' + bookid).set('Accept', 'application/x-www-form-urlencoded').set('x-access-token', token).send({ title: 'The Chronicles of Andela', author: 'C.S. Lewis', category: 'Action' }).end(function (err, res) {
           expect(res.status).to.equal(201);
           done();
         });
@@ -231,10 +206,7 @@ describe('HelloBooks', function () {
 
       // return books
       it('it should return a book', function (done) {
-        _chai2.default.request(_app2.default).put('/api/v1/users/' + userId + '/books').set('x-access-token', token).send({
-          bookid: bookid
-
-        }).end(function (err, res) {
+        _chai2.default.request(_app2.default).put('/api/v1/users/' + userId + '/books').set('x-access-token', token).send({ bookid: bookid }).end(function (err, res) {
           expect(res.status).to.equal(200);
 
           done();
@@ -242,13 +214,6 @@ describe('HelloBooks', function () {
       });
     });
   });
-
-  // after((done) => {
-  //  //     User.drop();
-  //  //     Books.drop();
-  //  sequelize.sequelize.sync({ force: true });
-
-  // });
 });
 
 /*

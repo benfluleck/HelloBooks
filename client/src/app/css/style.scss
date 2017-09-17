@@ -1,32 +1,27 @@
-
-
 img {
   width: 75%;
-
 }
 
 header {
   margin-left: 2em;
   top: 0;
-  
 }
 
-.page-footer{
+.page-footer {
   padding-top: 0.5em;
 }
 
-
-
+.welcome {
+  padding-bottom: 4em;
+}
 
 footer {
   height: 3rem;
   /* Height of the footer */
-  font-size: 0.8em;
   color: whitesmoke;
 }
 
 .card.horizontal .card-image img {
-  
   max-width: 70% !important;
 }
 
@@ -43,16 +38,12 @@ a:hover {
 }
 
 .row {
-  
   margin-bottom: 0px;
-  
 }
 
-.notfound{
-
+.notfound {
   background-image: url('../img/404.jpg');
 }
-
 
 h4 {
   padding: .5rem 0;
@@ -60,12 +51,11 @@ h4 {
 }
 
 
-
 /* Component Styles */
 
-.root{
+.root {
   min-height: 100%;
- /* display: flex; */
+  /* display: flex; */
   /* flex-direction: column; */
 }
 
@@ -74,27 +64,22 @@ h4 {
   background: rgba(0, 0, 0, 0);
 }
 
-
 main {
   color: #fff;
-  min-height:calc(74vh - 40px);
+  min-height: calc(74vh - 40px);
 }
 
-.register{
-  padding-top: 3em;
-}
+
 
 .img {
-  
   max-width: 65%;
 }
 
-.books{
+.books {
   border: 1px solid white;
   border-radius: 4px;
   background-color: rgba(0, 0, 0, 0.80);
   padding: 20px;
-
 }
 
 .admintab {
@@ -104,17 +89,10 @@ main {
   padding: 20px;
 }
 
-.forgetpass{
- 
- 
- 
+.forgetpass {
   padding: 20px;
-
   margin-top: 7em;
-
 }
-
-
 
 .regcon {
   border: 1px solid white;
@@ -122,94 +100,84 @@ main {
   background-color: rgba(0, 0, 0, 0.80);
   padding: 20px;
 }
-.profile{
+
+.profile {
   border: 1px solid white;
   border-radius: 4px;
   background-color: rgba(0, 0, 0, 0.80);
   padding: 5px;
-  height:100px;
+  height: 100px;
   width: 100px;
   margin-top: 1em;
-
-
 }
 
-
-
-.picture{
+.picture {
   border: 1px solid white;
   border-radius: 4px;
   padding: 15px;
-
 }
 
-p{
+p {
   font-size: 1.0em;
 }
 
-
-
-.hr{
-  color:white;
+.hr {
+  color: white;
 }
 
 .modal.modal-fixed-footer .modal-content {
-
   background-color: rgba(0, 0, 0, 0.80);
 }
 
-.adminpanel{
+.adminpanel {
   margin-top: 30px;
 }
+
 .profile-con {
   border: 1px solid white;
   border-radius: 4px;
   background-color: rgba(0, 0, 0, 0.80);
   padding: 40px;
-  
 }
+
 nav ul a {
   font-size: 1.3rem !important;
-
 }
 
 .mui-tabs__bar>li>a {
- 
   color: #eee !important;
 }
-.createbook{
+
+.createbook {
   border: 1px solid white;
   border-radius: 4px;
   background-color: rgba(0, 0, 0, 0.80);
   padding-bottom: 40px;
   padding: 50px;
-
 }
 
-.createbookbtn{
-  padding-bottom:10px;
+.createbookbtn {
+  padding-bottom: 10px;
   float: none;
   margin-top: 15px;
 }
 
-.login{
+.login {
   border: 1px solid white;
   border-radius: 4px;
   background-color: rgba(0, 0, 0, 0.80);
-  padding:10px;
+  padding: 10px;
   margin-top: 5rem;
-  
 }
 
 body {
   background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5)), #1d2a33 url('../img/bg.jpg');
-  background-blend-mode: luminosity;
-  // font-size: 17px !important;
+  background-blend-mode: luminosity; // font-size: 17px !important;
   background-repeat: no-repeat;
   color: whitesmoke;
- 
-  
 }
+
+
 /* Modifier Styles */
 
 .nav-items .nav-link {
@@ -221,7 +189,8 @@ body {
 }
 
 .navbar {
-  .nav-link, .btn {
+  .nav-link,
+  .btn {
     text-transform: uppercase;
     font-size: .95rem;
   }
@@ -238,32 +207,32 @@ body {
 }
 
 
-
 /* Button Styles */
 
-.container{
-  width:90%;
+.container {
+  width: 90%;
 }
 
-h4{
+h4 {
   font-size: 2rem;
 }
 
-h4, p{
+h4,
+p {
   margin-left: 1em;
 }
 
 .btn-social {
- 
   color: whitesmoke;
 }
 
-.active, .btn {
+.active,
+.btn {
   transition: .4s;
 }
 
- /* label focus color */
 
+/* label focus color */
 
 .options {
   display: none;
@@ -283,10 +252,6 @@ h4, p{
   }
 }
 
-.welcome{
- padding-bottom: 6rem;
-}
-
 .favorite-book {
   margin-top: 30px;
 }
@@ -301,6 +266,7 @@ h4, p{
     color: white;
   }
 }
+
 
 /* Media Queries */
 
@@ -322,17 +288,13 @@ h4, p{
   .navbar .btn {
     margin-left: 1rem;
   }
-  
 }
 
-@media only screen and (min-width: 993px){
-  .head{
-    margin-top:10rem;
+@media only screen and (min-width: 993px) {
+  .head {
+    margin-top: 10rem;
   }
 }
-
-
-
 
 @media (min-width: 48em) {
   .navbar {

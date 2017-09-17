@@ -29,7 +29,7 @@ export class Books extends React.Component{
         })
         return(
             <div className='books'>
-                <h2>Books</h2>
+                <h4>Books</h4>
                 
                 <Tabs className='books-tab z-depth-1 transparent'>
                     <Tab title="All Books" active>

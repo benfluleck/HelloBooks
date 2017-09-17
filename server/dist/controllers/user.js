@@ -28,12 +28,12 @@ var Books = _models2.default.Books;
 
 exports.default = {
   /**
-   * Create a new user
-   * Route: POST: /users
-   * @param {Object} req request object
-   * @param {Object} res response object
-   * @returns {void|Response} response object or void
-   */
+  * Create a new user
+  * Route: POST: /users
+  * @param {Object} req request object
+  * @param {Object} res response object
+  * @returns {void|Response} status, send
+  */
   create: function create(req, res) {
     User.create({
       firstname: req.body.firstname,
@@ -44,8 +44,7 @@ exports.default = {
       email: req.body.email
     }).then(function (user) {
       if (!user) {
-        //console.log("Couldn't add user")
-        res.status(400).send({ message: 'Error adding user' });
+        res.status(404).send({ message: 'Error adding user' });
       } else {
         res.json({ success: true, name: user.firstname, username: user.username });
       }
@@ -55,35 +54,26 @@ exports.default = {
   },
   signin: function signin(req, res) {
     return User.findOne({
-
       where: {
         username: req.body.username
-
       }
     }).then(function (user) {
-
       if (!user) {
-
-        return res.status(400).send({ success: false, message: req.body.username + ' does not exist in the database' });
-
-        // res.status(403).send();
+        return res.status(404).send({ success: false, message: req.body.username + ' does not exist in the database' });
       } else if (_bcryptNodejs2.default.compareSync(req.body.password, user.password)) {
-        var Userjwt = { name: user.username, password: user.password };
+        var Userjwt = {
+          name: user.username,
+          password: user.password
+        };
         var token = _jsonwebtoken2.default.sign(Userjwt, 'superSecret', {
           expiresIn: 1440 // expires in 24 hours
         });
-
-        // return the information including token as JSON
-        res.json({
-          success: true,
-          message: 'Enjoy your token, You are now logged in!',
-          token: token
-        });
+        res.json({ success: true, message: 'Enjoy your token, You are now logged in!', token: token });
       } else {
         res.status(400).send({ success: false, message: 'Incorrect Password Entered' });
       }
     }).catch(function (error) {
-      return res.status(400).send(error.message);
+      return res.status(500).send(error.message);
     });
   }
 };
