@@ -16,7 +16,12 @@ const Dashboard = ({isConfirmed}) => {
         User Dashboard
       </h3>
       {!isConfirmed && <ConfirmEmailMessage/>}
-
+      <div>
+        <h4>Favourite Book</h4>
+        <div>
+          <p>No Books have been loaned at the moment</p>
+        </div>
+      </div>
     </div>
   );
 }

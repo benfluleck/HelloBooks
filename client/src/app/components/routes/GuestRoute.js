@@ -31,13 +31,12 @@ UserRoute.PropTypes = {
 };
 
 const mapStateToProps = (state) => {
-  // if (!state.user.user.token || state.user.user.token === "") { //if there is no token, dont bother
-  //   return ;
-  // } else {
+  // if (!state.user.user.token || state.user.user.token === "") { //if there is
+  // no token, dont bother   return ; } else {
 
-    return {
-      isAuthenticated: !!state.token
-    };
+  return {
+    isAuthenticated: !!state.user.user
+  };
   // }
 }
 

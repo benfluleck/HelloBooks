@@ -20,6 +20,8 @@ var _helper = require('../Helper/helper');
 
 var _helper2 = _interopRequireDefault(_helper);
 
+var _mailer = require('../mailer/mailer');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var User = _models2.default.User;
@@ -68,12 +70,27 @@ exports.default = {
         var token = _jsonwebtoken2.default.sign(Userjwt, 'superSecret', {
           expiresIn: 1440 // expires in 24 hours
         });
-        res.json({ success: true, message: 'Enjoy your token, You are now logged in!', token: token });
+
+        res.json({ success: true, message: 'Welcome, ' + req.body.username + ' You are now logged in!', token: token, username: req.body.username });
       } else {
         res.status(400).send({ success: false, message: 'Incorrect Password Entered' });
       }
     }).catch(function (error) {
       return res.status(500).send(error.message);
+    });
+  },
+  reset_password: function reset_password(req, res) {
+    User.findOne({ email: req.body.email }).then(function (user) {
+      if (user) {
+        sendRestPasswordEmail(user);
+        res.json({});
+      } else {
+        res.status(400).json({
+          errors: {
+            global: 'There are no users with such email'
+          }
+        });
+      }
     });
   }
 };

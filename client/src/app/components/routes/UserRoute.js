@@ -3,7 +3,6 @@ import {PropTypes} from 'prop-types'
 import {Redirect, Route} from 'react-router-dom'
 import {connect} from 'react-redux'
 
-
 /*
 *
 *Routes for Authenticated users
@@ -13,13 +12,13 @@ const UserRoute = ({
     component: Component,
     ...rest
 }) => {
+
+
     return (
 
-        <Route
-            {...rest}
-            render={props => isAuthenticated
-            ? <Component{...props}/>
-            : <Redirect to='/'/>}/>
+        <Route {...rest} render={
+            (props) => 
+            isAuthenticated ? <Component{...props}/>  : <Redirect to='/'/>}/>
 
     );
 
@@ -27,7 +26,8 @@ const UserRoute = ({
 
 UserRoute.PropTypes = {
     component: PropTypes.func,
-    isAuthenticated: PropTypes.bool
+    isAuthenticated: PropTypes.bool,
+    name: PropTypes.string
 
 };
 
@@ -35,8 +35,11 @@ const mapStateToProps = (state) => {
     // if (!state.user.user.token || state.user.user.token === "") { //if there is
     // no token, dont bother     return ; } else {
 
+    
     return {
-        isAuthenticated: !!state.token
+        isAuthenticated: !!state.user.user,
+        
+
     };
     // }
 }

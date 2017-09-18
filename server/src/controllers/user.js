@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt-nodejs';
 import models from '../models';
 import Helper from '../Helper/helper';
+import {sendResetPasswordEmail} from '../mailer/mailer'
 
 const User = models.User;
 const UserBooks = models.UserBooks;
@@ -53,7 +54,7 @@ export default {
     })
       .then((user) => {
         if (!user) {
-          return res
+          return res  
             .status(404)
             .send({success: false, message: `${req.body.username} does not exist in the database`});
 
@@ -65,7 +66,8 @@ export default {
           const token = jwt.sign(Userjwt, 'superSecret', {
             expiresIn: 1440 // expires in 24 hours
           });
-          res.json({success: true, message: 'Enjoy your token, You are now logged in!', token});
+
+          res.json({success: true, message: `Welcome, ${req.body.username} You are now logged in!`, token, username : req.body.username});
         } else {
           res
             .status(400)
@@ -73,5 +75,27 @@ export default {
         }
       })
       .catch(error => res.status(500).send(error.message));
+  },
+
+  reset_password(req, res) {
+    User
+      .findOne({email: req.body.email})
+      .then(user => {
+        if (user) {
+          sendRestPasswordEmail(user);
+          res.json({});
+        } else {
+          res
+            .status(400)
+            .json({
+              errors: {
+                global: 'There are no users with such email'
+              }
+            });
+
+        }
+
+      });
+
   }
 };

@@ -11,7 +11,7 @@ class Login extends React.Component {
       .props
       .login(data)
       .then((res) => {
-        console.log
+        console.log(this.props.history)
         if (res.success) {
           swal('Welcome!', res.message, 'success');
           this
@@ -20,7 +20,7 @@ class Login extends React.Component {
             .push('/dashboard');
         } else {
 
-          swal('Oops...', res.error, 'error');
+          swal('Oops...', res.error.data.message, 'error');
 
         }
       })

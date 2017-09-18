@@ -6,7 +6,7 @@ import Login from './containers/Login'
 import Register from './containers/Register'
 import {Profile} from './components/Profile'
 import {Books} from './components/Books'
-import {Forgetpass} from './containers/forgetPasswordForm'
+import {Forgetpass} from './containers/ForgetPasswordForm'
 import {Admin} from './components/admin/Admin'
 import {NotFound} from './components/NotFound'
 import {Adminroot} from './components/admin/Adminroot'
@@ -32,10 +32,11 @@ export default class MainRoot extends Component {
             <Switch>
               <GuestRoute exact path='/' component={Login}/>
               <GuestRoute exact path={'/register'} component={Register}/>
+              <GuestRoute exact path={'/forgetpass'} component={Forgetpass}/>
               <UserRoute path={'/dashboard'} exact component={Dashboard}/>
               <UserRoute exact path={'/profile'} component={Profile}/>
               <UserRoute exact path={'/books'} component={Books}/>
-              <UserRoute exact path={'/forgetpass'} component={Forgetpass}/>
+              
 
               <UserRoute exact path={'/admin'} component={Admin}/>
               <UserRoute path={'/admin/createbook'} component={CreateBook}/>
