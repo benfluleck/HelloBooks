@@ -1,16 +1,17 @@
 import React from 'react';
-import {NavLink} from 'react-router-dom';
-import {Navbar, NavItem, Col,Row, Card, Tab, Tabs, CardTitle, Button, Modal} from 'react-materialize';
+import { NavLink } from 'react-router-dom';
+import { Navbar, NavItem, Col,Row, Card, Tab, Tabs, CardTitle, Button, Modal } from 'react-materialize';
 import  book1 from '../img/book1.jpg';
 import book2 from '../img/book2.jpg';
 
 
-import {Book} from './Book';
+import { Book } from './Book';
 
 import BOOKS from '../containers/staticBooks';
 
-
-
+/*
+eslint-disable
+ */
 
 export class Books extends React.Component{
     render(){
@@ -28,7 +29,7 @@ export class Books extends React.Component{
         })
         return(
             <div className='books'>
-                <h2>Books</h2>
+                <h4>Books</h4>
                 
                 <Tabs className='books-tab z-depth-1 transparent'>
                     <Tab title="All Books" active>

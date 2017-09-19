@@ -17,12 +17,10 @@ exports.default = function (sequelize, DataTypes) {
     bookid: {
       type: DataTypes.INTEGER,
       allowNull: false
-
     },
     userid: {
       type: DataTypes.INTEGER,
       allowNull: false
-
     },
     return_date: {
       type: DataTypes.DATE,
@@ -54,7 +52,6 @@ exports.default = function (sequelize, DataTypes) {
           throw new Error('Date is less than current date');
         }
       }
-
     }
 
   });

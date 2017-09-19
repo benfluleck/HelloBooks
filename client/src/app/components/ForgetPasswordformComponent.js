@@ -1,18 +1,21 @@
 import React from 'react'
-import {NavLink} from 'react-router-dom'
-import {Row,Col, Button, Input, Icon} from 'react-materialize'
+import { NavLink } from 'react-router-dom'
+import { Row,Col, Button, Input, Icon } from 'react-materialize'
 import css from '../css/style.scss'
 import Validator from 'validator' 
 
 
 
+/*
+eslint-disable
+ */
 
-export class Forgetpassform extends React.Component{
+export class ForgetPassordform extends React.Component{
   constructor () {
     super();
     this.state ={
             email:'',
-            loading:false,
+            success:false,
             emailError: ''
           };
           this.onBlur = this.onBlur.bind(this);
@@ -58,7 +61,8 @@ export class Forgetpassform extends React.Component{
       const {data} = this.state;
     return(
         <div>
- 
+            
+            
             <p>Email address you used to log in to your account</p>
             <p>We will send instructions to your email to reset your password</p>
 

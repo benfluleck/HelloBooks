@@ -16,12 +16,18 @@ var _controllers = require('../controllers');
 
 var _controllers2 = _interopRequireDefault(_controllers);
 
+var _dotenv = require('dotenv');
+
+var _dotenv2 = _interopRequireDefault(_dotenv);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Router = _express2.default.Router();
 var UserController = _controllers2.default.User;
 var BooksController = _controllers2.default.Books;
 var UserBooksController = _controllers2.default.UserBooks;
+
+_dotenv2.default.config();
 
 /**
  * @swagger
@@ -35,9 +41,7 @@ var UserBooksController = _controllers2.default.UserBooks;
  *         description: Welcome to Hello Books Library
  */
 Router.get('/', function (req, res) {
-  return res.status(200).send({
-    message: 'Welcome to the Hello Books!'
-  });
+  return res.status(200).send({ message: 'Welcome to the Hello Books!' });
 });
 /**
  * @swagger
@@ -141,6 +145,7 @@ Router.post('/users/signup', UserController.create);
  *         description: Bad Username, Password or Email
  */
 Router.post('/users/signin', UserController.signin);
+//Router.post('/api/auth/reset_password_request',UserController.reset_password)
 Router.use(function (req, res, next) {
   // check header or url parameters or post parameters for token
   var token = req.body.token || req.query.token || req.headers['x-access-token'];
@@ -148,7 +153,7 @@ Router.use(function (req, res, next) {
   // decode token
   if (token) {
     // verifies secret and checks exp
-    _jsonwebtoken2.default.verify(token, 'superSecret', function (err, decoded) {
+    _jsonwebtoken2.default.verify(token, process.dotenv.JWT_SECRET, function (err, decoded) {
       if (err) {
         return res.json({ success: false, message: 'Failed to authenticate token.' });
       }
@@ -157,17 +162,12 @@ Router.use(function (req, res, next) {
       next();
     });
   } else {
-    // if there is no token
-    // return an error
-    return res.status(403).send({
-      success: false,
-      message: 'No token provided. Did you specify your secret message'
-    });
+    // if there is no token return an error
+    return res.status(403).send({ success: false, message: 'No token provided. Did you specify your secret message' });
   }
 });
 // if  user selects a different route and is not authenticated redirect him
-// number of copies
-//admin
+// number of copies admin
 
 /**
  * @swagger

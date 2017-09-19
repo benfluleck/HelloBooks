@@ -1,21 +1,22 @@
 import {createStore, applyMiddleware} from 'redux';
-import {logger} from 'redux-logger'
+import {createLogger} from 'redux-logger'
 import thunk from 'redux-thunk'
-import {composeWithDevTools}from 'redux-devtools-extension'
+import {composeWithDevTools} from 'redux-devtools-extension'
+import {loadState, saveState} from '../utils/Localsave'
+import throttle from 'lodash/throttle'
+import userLoggedIn from '../actions/auth'
 
+import rootReducer from '../reducers/rootReducers'
 
+const initialState = loadState();
 
+export const store = createStore(rootReducer, 
+    initialState, 
+    composeWithDevTools(applyMiddleware(createLogger(), thunk)));
 
-import reducer from '../reducers/rootReducers'
+// if (localStorage.setItem(token))     {         const user = {token :
+// localStorage.user.user}         store.dispatch(userLoggedIn(user))     }
 
-
-
-
-const  store = createStore(
-    rootreducer, composeWithDevTools(applyMiddleware(thunk))
-);
-
-
-
-
-export default createStore(reducer, middleware)
+store.subscribe(throttle(() => {
+    saveState(store.getState());
+}), 1000);
