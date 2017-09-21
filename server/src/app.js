@@ -6,6 +6,9 @@ import swaggerJSDoc from 'swagger-jsdoc';
 import path from 'path';
 import dotenv from 'dotenv'
 
+
+
+dotenv.config()
 const app = express();
 const swaggerDefinition = {
   info: {

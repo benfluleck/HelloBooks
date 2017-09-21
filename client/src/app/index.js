@@ -7,11 +7,10 @@ import thunk from 'redux-thunk'
 import {store} from './store/store'
 import MainRoot from './mainRoot'
 
+
 class App extends React.Component {
 
   render() {
-
-    
     return (<MainRoot/>) 
   }
 }

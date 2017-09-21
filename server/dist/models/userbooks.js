@@ -28,7 +28,6 @@ exports.default = function (sequelize, DataTypes) {
     },
     user_return_date: {
       type: DataTypes.DATE,
-      //set to false on launch
       allowNull: true
     },
     ISBN: {

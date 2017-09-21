@@ -63,7 +63,7 @@ export default {
             name: user.username,
             password: user.password
           };
-          const token = jwt.sign(Userjwt, 'superSecret', {
+          const token = jwt.sign(Userjwt, process.env.JWT_SECRET, {
             expiresIn: 1440 // expires in 24 hours
           });
 
@@ -71,7 +71,7 @@ export default {
         } else {
           res
             .status(400)
-            .send({success: false, message: 'Incorrect Password Entered'});
+            .send({success: false, message: 'Wrong Credentials'});
         }
       })
       .catch(error => res.status(500).send(error.message));

@@ -26,7 +26,7 @@ eslint-disable
 export default class MainRoot extends Component {
   render() {
     return (
-      <Router>
+        <Router>
         <div>
           <Root >
             <Switch>
@@ -50,7 +50,8 @@ export default class MainRoot extends Component {
             </Switch>
           </Root>
         </div>
-      </Router>
+        </Router>
+      
 
     )
   }

@@ -34,6 +34,7 @@ var _dotenv2 = _interopRequireDefault(_dotenv);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+_dotenv2.default.config();
 var app = (0, _express2.default)();
 var swaggerDefinition = {
   info: {

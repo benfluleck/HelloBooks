@@ -2,13 +2,14 @@ import React, {Component} from 'react'
 import {PropTypes} from 'prop-types'
 import {Redirect, Route} from 'react-router-dom'
 import {connect} from 'react-redux'
+import {browserHistory} from 'react-router'
 
 /*
 *
 *Routes for Authenticated users
 */
 const UserRoute = ({
-    isAuthenticated,
+    isAuthenticated,history,
     component: Component,
     ...rest
 }) => {
@@ -16,7 +17,7 @@ const UserRoute = ({
 
     return (
 
-        <Route {...rest} render={
+        <Route history={browserHistory}  {...rest} render={
             (props) => 
             isAuthenticated ? <Component{...props}/>  : <Redirect to='/'/>}/>
 

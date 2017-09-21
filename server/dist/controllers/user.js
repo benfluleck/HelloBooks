@@ -67,7 +67,7 @@ exports.default = {
           name: user.username,
           password: user.password
         };
-        var token = _jsonwebtoken2.default.sign(Userjwt, 'superSecret', {
+        var token = _jsonwebtoken2.default.sign(Userjwt, process.env.JWT_SECRET, {
           expiresIn: 1440 // expires in 24 hours
         });
 

@@ -6,6 +6,7 @@ import {loadState, saveState} from '../utils/Localsave'
 import throttle from 'lodash/throttle'
 import userLoggedIn from '../actions/auth'
 
+
 import rootReducer from '../reducers/rootReducers'
 
 const initialState = loadState();
@@ -14,8 +15,7 @@ export const store = createStore(rootReducer,
     initialState, 
     composeWithDevTools(applyMiddleware(createLogger(), thunk)));
 
-// if (localStorage.setItem(token))     {         const user = {token :
-// localStorage.user.user}         store.dispatch(userLoggedIn(user))     }
+
 
 store.subscribe(throttle(() => {
     saveState(store.getState());

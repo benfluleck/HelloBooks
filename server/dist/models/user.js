@@ -25,7 +25,6 @@ exports.default = function (sequelize, DataTypes) {
       allowNull: false,
       trim: true,
       validate: {
-        // is: {  arg: /\w+/g,  msg: 'Firstname can only consit of letters' },
         len: {
           args: [2, 30],
           msg: 'Firstname must be at least 2 chars and less than 30 chars'
@@ -147,8 +146,6 @@ exports.default = function (sequelize, DataTypes) {
     hooks: {
 
       beforeCreate: function beforeCreate(user) {
-        // user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
-        // user.password_confirmation
         if (user.password === user.password_confirmation) {
           user.password = User.generateHash(user.password);
         } else {
