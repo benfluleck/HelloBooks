@@ -18,7 +18,7 @@ const UserBooksController = controller.UserBooks;
  *       200:
  *         description: Welcome to Hello Books Library
  */
-Router.get('/', (req, res) => res.status(200).send({message: 'Welcome to the Hello Books!'}));
+Router.get('/', (req, res) => res.status(200).send({ message: 'Welcome to the Hello Books!' }));
 /**
  * @swagger
  * definition:
@@ -71,7 +71,7 @@ Router.get('/', (req, res) => res.status(200).send({message: 'Welcome to the Hel
  *         type: string
  *       quantity:
  *         type: integer
- *       image:
+ *       book_image:
  *         type: string
  */
 
@@ -121,7 +121,7 @@ Router.post('/users/signup', UserController.create);
  *         description: Bad Username, Password or Email
  */
 Router.post('/users/signin', UserController.signin);
-//Router.post('/api/auth/reset_password_request',UserController.reset_password)
+// Router.post('/api/auth/reset_password_request',UserController.reset_password)
 Router.use((req, res, next) => {
   // check header or url parameters or post parameters for token
   const token = req.body.token || req.query.token || req.headers['x-access-token'];
@@ -131,7 +131,7 @@ Router.use((req, res, next) => {
     // verifies secret and checks exp
     jwt.verify(token, 'superSecret', (err, decoded) => {
       if (err) {
-        return res.json({success: false, message: 'Failed to authenticate token.'});
+        return res.json({ success: false, message: 'Failed to authenticate token.' });
       }
       // if everything is good, save to request for use in other routes
       req.decoded = decoded;
@@ -141,7 +141,7 @@ Router.use((req, res, next) => {
     // if there is no token return an error
     return res
       .status(403)
-      .send({success: false, message: 'No token provided. Did you specify your secret message'});
+      .send({ success: false, message: 'No token provided. Did you specify your secret message' });
   }
 });
 // if  user selects a different route and is not authenticated redirect him
@@ -350,4 +350,4 @@ Router.put('/users/:userId/books', UserBooksController.returnbook);
  *           $ref: '#/definitions/Book'
  */
 Router.get('/users/:userId/books', UserBooksController.getborrowerslist);
-export default(Router)
+export default(Router);

@@ -9,40 +9,40 @@ import {browserHistory} from 'react-router'
 *Routes for Authenticated users
 */
 const UserRoute = ({
-    isAuthenticated,history,
-    component: Component,
-    ...rest
+  isAuthenticated,
+  history,
+  component: Component,
+  ...rest
 }) => {
 
+  return (
 
-    return (
+    <Route
+      history={browserHistory}
+      {...rest}
+      render={(props) => isAuthenticated
+      ? <Component{...props}/>
+      : <Redirect to='/'/>}/>
 
-        <Route history={browserHistory}  {...rest} render={
-            (props) => 
-            isAuthenticated ? <Component{...props}/>  : <Redirect to='/'/>}/>
-
-    );
+  );
 
 };
 
 UserRoute.PropTypes = {
-    component: PropTypes.func,
-    isAuthenticated: PropTypes.bool,
-    name: PropTypes.string
+  component: PropTypes.func,
+  isAuthenticated: PropTypes.bool,
+  name: PropTypes.string
 
 };
 
 const mapStateToProps = (state) => {
-    // if (!state.user.user.token || state.user.user.token === "") { //if there is
-    // no token, dont bother     return ; } else {
+  // if (!state.user.user.token || state.user.user.token === "") { //if there is
+  // no token, dont bother     return ; } else {
 
-    
-    return {
-        isAuthenticated: !!state.user.user,
-        
-
-    };
-    // }
+  return {
+    isAuthenticated: !!state.user.user
+  };
+  // }
 }
 
 export default connect(mapStateToProps)(UserRoute);

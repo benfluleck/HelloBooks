@@ -104,8 +104,8 @@ exports.default = function (sequelize, DataTypes) {
     },
 
     book_image: {
-      type: DataTypes.STRING,
-      allowNull: true
+      type: DataTypes.STRING
+      //  allowNull: true,
     },
 
     status: {

@@ -1,20 +1,21 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 import {
-    Navbar,
-    NavItem,
-    Col,
-    Row,
-    Card,
-    Tab,
-    Tabs,
-    CardTitle,
-    Button,
-    Modal
+		Navbar,
+		NavItem,
+		Col,
+		Row,
+		Card,
+		Tab,
+		Tabs,
+		CardTitle,
+		Button,
+		Modal
 } from 'react-materialize';
 import book1 from '../img/book1.jpg';
 import book2 from '../img/book2.jpg';
 import {connect} from 'react-redux'
+import PropTypes from 'prop-types'
 
 import {fetchAllBooks} from '../actions/fetchbooks'
 import {Book} from './Book';
@@ -26,34 +27,36 @@ eslint-disable
  */
 
 class Books extends React.Component {
-    componentDidMount(fetchAllBooks) {
-        this
-            .props
-            .fetchAllBooks();
+		componentWillMount() {
+				this
+						.props
+						.fetchAllBooks();
 
-    }
+		}
+		render() {
+				const returnedAllBooks = this
+						.props
+						.books
+						.map((book) => {
+								return (<Book
+										key={book.id}
+										title={book.title}
+										author
+										={book.author}
+										category={book.category}
+										quantity={book.quantity}
+										description={book.description}/>);
+						})
+				return (
 
-    render() {
-        const returnedBooks = BOOKS.map((book) => {
-            return (<Book
-                key={book.id}
-                title={book.title}
-                author
-                ={book.author}
-                category={book.category}
-                quantity={book.quantity}
-                description={book.description}/>);
-        })
-        console.log(this.props.books)
-        return (
-            <div className='books'>
-                <h4>Books</h4>
+						<div className='books'>
+								<h4>Books</h4>
 
-                {/* <Tabs className='books-tab z-depth-1 transparent'>
+								<Tabs className='books-tab z-depth-1 transparent'>
                     <Tab title="All Books" active>
-                        {[...returnedBooks]}
+                        {[...returnedAllBooks]}
                     </Tab>
-                    <Tab title="Books On Loan">
+                    {/* <Tab title="Books On Loan">
                         {[...returnedBooks]}
                     </Tab>
                     <Tab title="Books To Return">
@@ -61,17 +64,22 @@ class Books extends React.Component {
                     </Tab>
                     <Tab title="My Books">
                         {[...returnedBooks]}
-                    </Tab>
-                </Tabs> */}
+                    </Tab> */}
+                </Tabs>
 
-            </div>
+						</div>
 
-        )
-    };
+				)
+		};
 }
+
+Books.PropTypes = {
+  books: PropTypes.array.isRequired
+}
+
 
 const mapStateToProps = (state) => {
-    return {prop: state.books}
+		return {books: state.bookReducer.books}
 }
 
-export default connect(mapStateToProps, {fetchAllBooks}) (Books);
+export default connect(mapStateToProps, {fetchAllBooks})(Books);

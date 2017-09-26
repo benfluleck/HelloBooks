@@ -73,7 +73,7 @@ exports.default = {
 
         res.json({ success: true, message: 'Welcome, ' + req.body.username + ' You are now logged in!', token: token, username: req.body.username });
       } else {
-        res.status(400).send({ success: false, message: 'Incorrect Password Entered' });
+        res.status(400).send({ success: false, message: 'Wrong Credentials' });
       }
     }).catch(function (error) {
       return res.status(500).send(error.message);

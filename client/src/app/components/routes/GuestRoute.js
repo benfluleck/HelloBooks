@@ -4,25 +4,23 @@ import {Redirect, Route} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {browserHistory} from 'react-router'
 
-
-
-
-
 /**
- * 
- * @param {*} 
+ *
+ * @param {*}
  */
 
 const UserRoute = ({
 
-  isAuthenticated, history,
+  isAuthenticated,
+  history,
   component: Component,
   ...rest
 }) => {
   return (
 
     <Route
-      {...rest} history={browserHistory} 
+      {...rest}
+      history={browserHistory}
       render={props => !isAuthenticated
       ? <Component{...props}/>
       : <Redirect to='/'/>}/>
@@ -37,7 +35,6 @@ UserRoute.PropTypes = {
 };
 
 const mapStateToProps = (state) => {
- 
 
   return {
     isAuthenticated: !!state.user.user

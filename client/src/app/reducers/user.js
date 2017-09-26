@@ -7,6 +7,15 @@ import {SIGNUP_USER_SUCCESS} from '../actions/type'
 
 const INITIAL_STATE = {};
 
+
+/**
+ * 
+ * 
+ * @export
+ * @param {any} [state=INITIAL_STATE] 
+ * @param {any} [action={}] 
+ * @returns 
+ */
 export default function user(state = INITIAL_STATE, action = {}) {
   let error;
   switch (action.type) {
@@ -22,8 +31,8 @@ export default function user(state = INITIAL_STATE, action = {}) {
         user: action.user
       };
 
-    case USER_SIGN_IN_FAILURE: 
-      error = action.error.data.message 
+    case USER_SIGN_IN_FAILURE:
+      error = action.error.data.message;
         
       return {
         ...state,

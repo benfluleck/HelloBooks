@@ -4,10 +4,8 @@ import Helper from '../Helper/helper';
 
 const Books = models.Books;
 
-
-
 /**
- * 
+ *
  */
 export default {
   create(req, res) {
@@ -15,12 +13,23 @@ export default {
       return res.json({success: false, message: 'You need to be logged in.'});
     }
     return Books
-      .create({title: req.body.title, author: req.body.author, category: req.body.category, quantity: req.body.quantity, description: req.body.description})
-      .then(books => res.json({Book_number: books.bookid, Book: books.title, Author: books.author, Description: books.description, Number: books.quantity}))
-      .catch(error => {
-        if (error.name === "SequelizeUniqueConstraintError") {
+      .create({
+      title: req.body.title,
+      author: req.body.author,
+      category: req.body.category,
+      quantity: req.body.quantity,
+      description: req.body.description,
+      book_image: req.body.book_image
+    })
+      .then(books => res.json({ 
+        Book_title: books.title,
+        Author: books.author,
+        Description: books.description,
+        Number: books.quantity,
+        Image: books.book_image }))
+      .catch((error) => {
+        if (error.name === 'SequelizeUniqueConstraintError') {
           res.json({error: 'Unique Error', message: 'The book with this author is already in the database, try to add to books'});
-
         } else {
           res
             .status(401)
@@ -47,14 +56,13 @@ export default {
           fields: Object.keys(req.body)
         })
           .then(() => res.status(201).send(book))
-          .catch(error => {
-            if (error.name === "SequelizeUniqueConstraintError") {
+          .catch((error) => {
+            if (error.name === 'SequelizeUniqueConstraintError') {
               res.json({
                 error: 'Unique Error',
                 message: 'The book with this author is already in the database try editing the book quanti' +
                     'ty'
               });
-
             } else {
               res
                 .status(401)
@@ -72,7 +80,7 @@ export default {
   getAllBooks(req, res) {
     return Books
       .all()
-      .then(book => {
+      .then((book) => {
         if (book == '' || book == undefined || book == null) {
           res.json({error: 'Empty', message: 'There are no books present in the database'});
         } else {

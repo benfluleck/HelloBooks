@@ -15,6 +15,7 @@ export const store = createStore(rootReducer,
     initialState, 
     composeWithDevTools(applyMiddleware(createLogger(), thunk)));
 
+    
 
 
 store.subscribe(throttle(() => {

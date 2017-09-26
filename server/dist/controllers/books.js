@@ -20,15 +20,30 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var Books = _models2.default.Books;
 
+/**
+ *
+ */
 exports.default = {
   create: function create(req, res) {
     if (_user2.default === null) {
       return res.json({ success: false, message: 'You need to be logged in.' });
     }
-    return Books.create({ title: req.body.title, author: req.body.author, category: req.body.category, quantity: req.body.quantity, description: req.body.description }).then(function (books) {
-      return res.json({ Book_number: books.bookid, Book: books.title, Author: books.author, Description: books.description, Number: books.quantity });
+    return Books.create({
+      title: req.body.title,
+      author: req.body.author,
+      category: req.body.category,
+      quantity: req.body.quantity,
+      description: req.body.description,
+      book_image: req.body.book_image
+    }).then(function (books) {
+      return res.json({
+        Book_title: books.title,
+        Author: books.author,
+        Description: books.description,
+        Number: books.quantity,
+        Image: books.book_image });
     }).catch(function (error) {
-      if (error.name === "SequelizeUniqueConstraintError") {
+      if (error.name === 'SequelizeUniqueConstraintError') {
         res.json({ error: 'Unique Error', message: 'The book with this author is already in the database, try to add to books' });
       } else {
         res.status(401).send({
@@ -50,7 +65,7 @@ exports.default = {
       }).then(function () {
         return res.status(201).send(book);
       }).catch(function (error) {
-        if (error.name === "SequelizeUniqueConstraintError") {
+        if (error.name === 'SequelizeUniqueConstraintError') {
           res.json({
             error: 'Unique Error',
             message: 'The book with this author is already in the database try editing the book quanti' + 'ty'
