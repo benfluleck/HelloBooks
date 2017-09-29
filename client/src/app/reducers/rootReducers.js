@@ -1,6 +1,10 @@
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
 
-import user from './user'
-import bookReducer from './bookReducers'
+import { routerReducer } from 'react-router-redux';
+import user from './user';
+import bookReducer from './bookReducers';
+import persistReducer from './persistStateReducer';
 
-export default combineReducers({user, bookReducer})
+export default combineReducers({
+  user, bookReducer, persistReducer, routerReducer
+});

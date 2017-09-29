@@ -1,14 +1,12 @@
 import express from 'express';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
-import routes from './routes';
 import swaggerJSDoc from 'swagger-jsdoc';
 import path from 'path';
-import dotenv from 'dotenv'
+import dotenv from 'dotenv';
+import routes from './routes';
 
-
-
-dotenv.config()
+dotenv.config();
 const app = express();
 const swaggerDefinition = {
   info: {
@@ -22,7 +20,7 @@ const swaggerDefinition = {
 
 const options = {
   // import swaggerDefinitions
-  swaggerDefinition: swaggerDefinition,
+  swaggerDefinition,
   // path to the API docs
   apis: ['./server/dist/routes/*.js']
 };
@@ -34,10 +32,9 @@ app.use(logger('dev'));
 
 // Parse incoming requests data (https://github.com/expressjs/body-parser)
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use((req, res, next) => {
-
   res.header('Access-Control-Allow-Headers', 'Authorization, X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept, x-ac' +
       'cess-token');
   next();
@@ -52,6 +49,6 @@ app.get('/hellobooks.json', (req, res) => {
 });
 app.use('/api/v1', routes);
 
-app.get('*', (req, res) => res.status(404).send({message: 'This is a wrong route.'}));
+app.get('*', (req, res) => res.status(404).send({ message: 'This is a wrong route.' }));
 
 export default(app);

@@ -19,19 +19,19 @@ import Dashboard from './components/Dashboard'
 import UserRoute from './components/routes/UserRoute'
 import GuestRoute from './components/routes/GuestRoute'
 
+
 /*
 eslint-disable
  */
-console.log(Books)
 export default class MainRoot extends Component {
   render() {
     return (
       <Router>
         <Root>
           <Switch>
-            <GuestRoute exact path='/' component={Login}/>
-            <GuestRoute exact path={'/register'} component={Register}/>
-            <GuestRoute exact path={'/forgetpass'} component={Forgetpass}/>
+            <Route exact path='/' component={Login}/>
+            <Route exact path={'/register'} component={Register}/>
+            <Route exact path={'/forgetpass'} component={Forgetpass}/>
             <UserRoute path={'/dashboard'} exact component={Dashboard}/>
             <UserRoute exact path={'/profile'} component={Profile}/>
             <UserRoute exact path={'/books'} component={Books}/>

@@ -11,7 +11,6 @@ class Login extends React.Component {
       .props
       .login(data)
       .then((res) => {
-        console.log(this.props.history)
         if (res.success) {
           swal('Welcome!', res.message, 'success');
           this

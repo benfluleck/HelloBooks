@@ -13,7 +13,7 @@ import { FETCH_BOOKS_REJECTED } from '../actions/type';
  *   error: null
  * }]
  * @param {any} action
- * @returns
+ * @returns state
  */
 export default function bookReducer(state = {
   books: [],

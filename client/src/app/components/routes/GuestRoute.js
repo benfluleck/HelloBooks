@@ -12,7 +12,6 @@ import {browserHistory} from 'react-router'
 const UserRoute = ({
 
   isAuthenticated,
-  history,
   component: Component,
   ...rest
 }) => {
@@ -20,7 +19,6 @@ const UserRoute = ({
 
     <Route
       {...rest}
-      history={browserHistory}
       render={props => !isAuthenticated
       ? <Component{...props}/>
       : <Redirect to='/'/>}/>

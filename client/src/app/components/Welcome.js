@@ -51,9 +51,7 @@ const mapStateToProps = (state) => {
 		// if (!state.user.user.token || state.user.user.token === "" ) { //if there is
 		// no token, dont bother     return state.user.user.token = ''; } else {
 
-		return {
-				isAuthenticated: !!state.user.user
-		};
+		return {isAuthenticated: state.user.isAuthenticated}
 		// }
 }
 

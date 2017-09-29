@@ -1,10 +1,8 @@
 import axios from 'axios';
 
 
-const token = localStorage.getItem('token');
-
 /**
- *
+ * 
  */
 export default {
   user: {
@@ -14,7 +12,7 @@ export default {
   },
   book: {
     fetch: data => axios
-    .get('api/v1/books', data).then(res => res.data)
+      .get('api/v1/books', data).then(res => res.data)
 
 
   }

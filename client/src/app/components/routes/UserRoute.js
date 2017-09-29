@@ -10,7 +10,6 @@ import {browserHistory} from 'react-router'
 */
 const UserRoute = ({
   isAuthenticated,
-  history,
   component: Component,
   ...rest
 }) => {
@@ -18,7 +17,6 @@ const UserRoute = ({
   return (
 
     <Route
-      history={browserHistory}
       {...rest}
       render={(props) => isAuthenticated
       ? <Component{...props}/>
@@ -30,7 +28,7 @@ const UserRoute = ({
 
 UserRoute.PropTypes = {
   component: PropTypes.func,
-  isAuthenticated: PropTypes.bool,
+  isAuthenticated: PropTypes.bool.isRequired,
   name: PropTypes.string
 
 };
@@ -40,7 +38,7 @@ const mapStateToProps = (state) => {
   // no token, dont bother     return ; } else {
 
   return {
-    isAuthenticated: !!state.user.user
+    isAuthenticated: !! state.user.isAuthenticated
   };
   // }
 }

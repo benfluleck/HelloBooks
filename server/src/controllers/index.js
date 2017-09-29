@@ -3,7 +3,7 @@ import Books from './books';
 import UserBooks from './userbooks';
 
 export default {
- User,
- Books,
- UserBooks
+  User,
+  Books,
+  UserBooks
 };

@@ -20,7 +20,7 @@ export const Book  = (props) =>{
                   <Row>
                     <Col m={10} l={10}>
                         <Card className ='transparent' 
-                        horizontal header={<CardTitle image={book1}></CardTitle>} 
+                        horizontal header={<CardTitle image={props.image}></CardTitle>} 
                         actions={[<a href='#'>More Information</a>]}>
                             <p>Title: {props.title}</p>
                             <p>Category: {props.category}</p>

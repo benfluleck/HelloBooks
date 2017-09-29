@@ -36,7 +36,7 @@ export class EditUser extends React.Component {
     onSubmit = (e) => {
         e.preventDefault();
         if (this.setState.length === 0) {
-            console.log(errors)
+            
             this
                 .props
                 .submit(this.state.data);

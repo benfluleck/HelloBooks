@@ -27,10 +27,6 @@ exports.default = function (sequelize, DataTypes) {
       trim: true,
       unique: 'compositeIndex',
       validate: {
-        is: {
-          arg: /\w+/g,
-          msg: 'Must be only letters'
-        },
         len: {
           args: [2, 30],
           msg: 'Book Title must be at least 2 chars and less than 50 chars'
@@ -52,7 +48,7 @@ exports.default = function (sequelize, DataTypes) {
         },
         len: {
           args: [2, 30],
-          msg: 'Author\'s name must be at least 2 chars and less than 50 chars'
+          msg: "Author's name must be at least 2 chars and less than 50 chars"
         }
       },
       set: function set(val) {

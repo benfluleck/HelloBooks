@@ -16,10 +16,6 @@ var _bodyParser = require('body-parser');
 
 var _bodyParser2 = _interopRequireDefault(_bodyParser);
 
-var _routes = require('./routes');
-
-var _routes2 = _interopRequireDefault(_routes);
-
 var _swaggerJsdoc = require('swagger-jsdoc');
 
 var _swaggerJsdoc2 = _interopRequireDefault(_swaggerJsdoc);
@@ -31,6 +27,10 @@ var _path2 = _interopRequireDefault(_path);
 var _dotenv = require('dotenv');
 
 var _dotenv2 = _interopRequireDefault(_dotenv);
+
+var _routes = require('./routes');
+
+var _routes2 = _interopRequireDefault(_routes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -63,7 +63,6 @@ app.use(_bodyParser2.default.json());
 app.use(_bodyParser2.default.urlencoded({ extended: false }));
 
 app.use(function (req, res, next) {
-
   res.header('Access-Control-Allow-Headers', 'Authorization, X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept, x-ac' + 'cess-token');
   next();
 });

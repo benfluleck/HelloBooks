@@ -36,12 +36,7 @@ exports.default = {
       description: req.body.description,
       book_image: req.body.book_image
     }).then(function (books) {
-      return res.json({
-        Book_title: books.title,
-        Author: books.author,
-        Description: books.description,
-        Number: books.quantity,
-        Image: books.book_image });
+      return res.json({ Book_title: books.title, Author: books.author, Description: books.description, Number: books.quantity, Image: books.book_image });
     }).catch(function (error) {
       if (error.name === 'SequelizeUniqueConstraintError') {
         res.json({ error: 'Unique Error', message: 'The book with this author is already in the database, try to add to books' });
@@ -83,8 +78,8 @@ exports.default = {
     });
   },
   getAllBooks: function getAllBooks(req, res) {
-    return Books.all().then(function (book) {
-      if (book == '' || book == undefined || book == null) {
+    return Books.all({ offset: 3, limit: 3 }).then(function (book) {
+      if (book === '' || book === undefined || book === null) {
         res.json({ error: 'Empty', message: 'There are no books present in the database' });
       } else {
         res.status(200).send({ book: book });

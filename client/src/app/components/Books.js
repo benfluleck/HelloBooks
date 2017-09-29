@@ -10,7 +10,8 @@ import {
 		Tabs,
 		CardTitle,
 		Button,
-		Modal
+		Modal,
+		Pagination
 } from 'react-materialize';
 import book1 from '../img/book1.jpg';
 import book2 from '../img/book2.jpg';
@@ -45,15 +46,16 @@ class Books extends React.Component {
 										={book.author}
 										category={book.category}
 										quantity={book.quantity}
-										description={book.description}/>);
+										description={book.description}
+										image={book.book_image}/>);
 						})
 				return (
-
 						<div className='books'>
 								<h4>Books</h4>
 
 								<Tabs className='books-tab z-depth-1 transparent'>
                     <Tab title="All Books" active>
+										<Pagination items={3} activePage={1} maxButtons={5} />
                         {[...returnedAllBooks]}
                     </Tab>
                     {/* <Tab title="Books On Loan">

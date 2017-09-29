@@ -6,10 +6,10 @@ Object.defineProperty(exports, "__esModule", {
 var Helper = {
 
   /**
-   * Get user's profile'
-   * @param {Object} data object containing user's details
-   * @returns {Object} return user's data
-   */
+  * Get user's profile'
+  * @param {Object} data object containing user's details
+  * @returns {Object} return user's data
+  */
   errorArray: function errorArray(error) {
     var errorArray = [];
     error.errors.forEach(function (err) {
