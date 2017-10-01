@@ -33,12 +33,29 @@ class Books extends React.Component {
 				this.state = {
 						limit: 3,
 						offset: 0
-
 				};
-
+				this.onSelect = this
+						.onSelect
+						.bind(this);
 		}
-		componentWillMount() {
 
+		onSelect = (pagenumber) => {
+				// update state with new page of items
+				let pageOffset;
+				if (pagenumber === 1) {
+						pageOffset = 0;
+				} else {
+						pageOffset = pagenumber - 1;
+				}
+				let pageLimit =  ((pageOffset) * this.state.limit);
+				// update state with new page of items
+				this.setState({offset: pageLimit});
+				console.log(pageLimit, pagenumber, this.state.limit, '-------------------')
+
+				this .props .fetchAllBooks(pageLimit, this.state.limit);
+		}
+
+		componentWillMount() {
 				this
 						.props
 						.fetchAllBooks(this.state.offset, this.state.limit);
@@ -62,11 +79,13 @@ class Books extends React.Component {
 				const page = this.props.pagination;
 				return (
 						<div className='books'>
+							<Row>
+								
 								<h4>Books</h4>
-
 								<Tabs className='books-tab z-depth-1 transparent'>
 										<Tab title="All Books" active>
 												<Pagination
+														onSelect={this.onSelect}
 														items={page.pageCount}
 														activePage={page.page}
 														maxButtons={5}/> {[...returnedAllBooks]}
@@ -81,9 +100,10 @@ class Books extends React.Component {
                         {[...returnedBooks]}
                     </Tab> */}
 								</Tabs>
-
+								</Row>
 						</div>
 
+					
 				)
 		};
 }
@@ -93,8 +113,7 @@ Books.PropTypes = {
 }
 
 const mapStateToProps = (state) => {
-		return {books: state.bookReducer.books, 
-			pagination: state.bookReducer.books.pagination}
+		return {books: state.bookReducer.books, pagination: state.bookReducer.books.pagination}
 }
 
 export default connect(mapStateToProps, {fetchAllBooks})(Books);

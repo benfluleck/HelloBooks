@@ -48,9 +48,9 @@ Welcome.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-	
-		return {isAuthenticated: state.user.isAuthenticated }
-	
+
+		return {isAuthenticated: state.user.isAuthenticated}
+
 }
 
 export default connect(mapStateToProps, {logout})(Welcome);

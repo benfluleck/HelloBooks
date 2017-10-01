@@ -1,6 +1,6 @@
-import { FETCH_BOOKS } from './type';
-import { FETCH_BOOKS_FULFILLED } from './type';
-import { FETCH_BOOKS_REJECTED } from './type';
+import { FETCH_BOOKS,
+  FETCH_BOOKS_FULFILLED,
+  FETCH_BOOKS_REJECTED } from './type';
 import api from './api';
 
 export const fetchBooks = books => ({ type: FETCH_BOOKS, books });

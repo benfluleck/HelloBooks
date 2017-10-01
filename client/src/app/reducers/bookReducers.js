@@ -1,13 +1,8 @@
 import {
   FETCH_BOOKS,
-  USER_LOGGED_OUT,
   FETCH_BOOKS_FULFILLED,
   FETCH_BOOKS_REJECTED
 } from '../actions/type';
-
-const INITIAL_STATE = {
-  
-};
 
 
 /**
@@ -54,8 +49,6 @@ export default function bookReducer(state = {
         error: action.error.message
       };
     }
-    
-    // default:
     default:
       return state;
   }

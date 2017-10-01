@@ -5,7 +5,6 @@ import {
   SIGNUP_USER_SUCCESS } from '../actions/type';
 
 const INITIAL_STATE = {
-  
 };
 
 

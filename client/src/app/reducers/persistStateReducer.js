@@ -1,9 +1,5 @@
-import { PERSIST_STATE, USER_LOGGED_OUT } from '../actions/type';
+import { PERSIST_STATE } from '../actions/type';
 
-
-const INITIAL_STATE = {
-  
-};
 
 /**
  *
