@@ -12,15 +12,10 @@ var _sentenceCase = require('sentence-case');
 
 var _sentenceCase2 = _interopRequireDefault(_sentenceCase);
 
-var _uniqueRandom = require('unique-random');
-
-var _uniqueRandom2 = _interopRequireDefault(_uniqueRandom);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = function (sequelize, DataTypes) {
   var Books = sequelize.define('Books', {
-
     title: {
       type: DataTypes.STRING,
       allowNull: false,

@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import {PropTypes} from 'prop-types'
 import {Redirect, Route} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {browserHistory} from 'react-router'
 
 /*
 *
@@ -38,7 +37,7 @@ const mapStateToProps = (state) => {
   // no token, dont bother     return ; } else {
 
   return {
-    isAuthenticated: !! state.user.isAuthenticated
+    isAuthenticated: !!state.user.isAuthenticated
   };
   // }
 }

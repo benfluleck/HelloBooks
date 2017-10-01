@@ -42,7 +42,7 @@ export const signup = data => dispatch => api
     const data = user.data;
     if (user.status !== 200) {
       dispatch(signInUserFailure(user));
-      reject(data);
+      Promise.reject(data);
     } else {
       dispatch(signUpUserSuccess(user));
       
@@ -61,12 +61,14 @@ export const login = credentials => dispatch => api
   .login(credentials)
   .then((user) => {
     const token = user.data.token;
+    const username = user.data.username;
     
     if (user.status !== 200) {
       dispatch(signInUserFailure(user));
       return Promise.reject(token);
     }
-    localStorage.setItem('token', token);
+    global.localStorage.setItem('token', token);
+    global.localStorage.setItem('username', username);
     
     setAuthorizationToken(token);
     dispatch(userLoggedIn(user.data));
@@ -80,7 +82,7 @@ export const login = credentials => dispatch => api
  *  @param {*} dispatch
  */
 export const logout = () => (dispatch) => {
-  localStorage.removeItem('token');
+  global.localStorage.removeItem('token');
   setAuthorizationToken(false);
   dispatch(userLoggedOut());
 };

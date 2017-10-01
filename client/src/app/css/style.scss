@@ -173,7 +173,7 @@ nav ul a {
 body {
   background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5)), #1d2a33 url('../img/bg.jpg');
   background-blend-mode: luminosity; // font-size: 17px !important;
-  background-repeat: no-repeat;
+  background-repeat: repeat;
   color: whitesmoke;
 }
 

@@ -1,10 +1,11 @@
-import { USER_LOGGED_IN } from '../actions/type';
-import { USER_LOGGED_OUT } from '../actions/type';
-import { USER_SIGN_IN_FAILURE } from '../actions/type';
-import { SIGNUP_USER_SUCCESS } from '../actions/type';
+import {
+  USER_LOGGED_IN,
+  USER_LOGGED_OUT,
+  USER_SIGN_IN_FAILURE,
+  SIGNUP_USER_SUCCESS } from '../actions/type';
 
 const INITIAL_STATE = {
-  isAuthenticated: localStorage.getItem('token')
+  
 };
 
 
@@ -46,7 +47,7 @@ export default function user(state = INITIAL_STATE, action = {}) {
     case USER_LOGGED_OUT:
 
       return {
-        ...state,
+        INITIAL_STATE,
         isAuthenticated: false,
         user: null
       };

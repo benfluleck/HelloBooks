@@ -1,11 +1,8 @@
 import toTitleCase from 'to-title-case';
 import sentenceCase from 'sentence-case';
-import uniqueRandom from 'unique-random';
 
 export default (sequelize, DataTypes) => {
   const Books = sequelize.define('Books', {
-
-
     title: {
       type: DataTypes.STRING,
       allowNull: false,

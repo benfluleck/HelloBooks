@@ -28,15 +28,25 @@ eslint-disable
  */
 
 class Books extends React.Component {
+		constructor(props) {
+				super(props);
+				this.state = {
+						limit: 3,
+						offset: 0
+
+				};
+
+		}
 		componentWillMount() {
+
 				this
 						.props
-						.fetchAllBooks();
-
+						.fetchAllBooks(this.state.offset, this.state.limit);
 		}
 		render() {
 				const returnedAllBooks = this
 						.props
+						.books
 						.books
 						.map((book) => {
 								return (<Book
@@ -48,17 +58,20 @@ class Books extends React.Component {
 										quantity={book.quantity}
 										description={book.description}
 										image={book.book_image}/>);
-						})
+						});
+				const page = this.props.pagination;
 				return (
 						<div className='books'>
 								<h4>Books</h4>
 
 								<Tabs className='books-tab z-depth-1 transparent'>
-                    <Tab title="All Books" active>
-										<Pagination items={3} activePage={1} maxButtons={5} />
-                        {[...returnedAllBooks]}
-                    </Tab>
-                    {/* <Tab title="Books On Loan">
+										<Tab title="All Books" active>
+												<Pagination
+														items={page.pageCount}
+														activePage={page.page}
+														maxButtons={5}/> {[...returnedAllBooks]}
+										</Tab>
+										{/* <Tab title="Books On Loan">
                         {[...returnedBooks]}
                     </Tab>
                     <Tab title="Books To Return">
@@ -67,7 +80,7 @@ class Books extends React.Component {
                     <Tab title="My Books">
                         {[...returnedBooks]}
                     </Tab> */}
-                </Tabs>
+								</Tabs>
 
 						</div>
 
@@ -76,12 +89,12 @@ class Books extends React.Component {
 }
 
 Books.PropTypes = {
-  books: PropTypes.array.isRequired
+		books: PropTypes.array.isRequired
 }
 
-
 const mapStateToProps = (state) => {
-		return {books: state.bookReducer.books}
+		return {books: state.bookReducer.books, 
+			pagination: state.bookReducer.books.pagination}
 }
 
 export default connect(mapStateToProps, {fetchAllBooks})(Books);

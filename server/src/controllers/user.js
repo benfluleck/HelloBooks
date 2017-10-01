@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt-nodejs';
 import models from '../models';
 import Helper from '../Helper/helper';
-import {sendResetPasswordEmail} from '../mailer/mailer'
+import {sendResetPasswordEmail} from '../mailer/mailer';
 
 const User = models.User;
 const UserBooks = models.UserBooks;

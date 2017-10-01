@@ -11,13 +11,12 @@ export const fetchBooksfufilled = books => ({ type: FETCH_BOOKS_FULFILLED, books
  * fetch books in thhe Library
  * @return {any} dispatches an action
  */
-export const fetchAllBooks = () => dispatch =>
-  api
-    .book
-    .fetch()
-    .then((response) => {
-      dispatch(fetchBooksfufilled(response.book));
-    })
-    .catch((error) => {
-      dispatch(fetchBooksRejected(error.response.message));
-    });
+export const fetchAllBooks = (offset, limit) => dispatch => api
+  .book
+  .fetch(offset, limit)
+  .then((response) => {
+    dispatch(fetchBooksfufilled(response));
+  })
+  .catch((error) => {
+    dispatch(fetchBooksRejected(error.response));
+  });

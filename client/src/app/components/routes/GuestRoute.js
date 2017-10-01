@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import {PropTypes} from 'prop-types'
 import {Redirect, Route} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {browserHistory} from 'react-router'
 
 /**
  *
@@ -29,7 +28,7 @@ const UserRoute = ({
 
 UserRoute.PropTypes = {
   component: PropTypes.func,
-  isAuthenticated: PropTypes.bool
+  isAuthenticated: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state) => {

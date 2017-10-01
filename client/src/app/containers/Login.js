@@ -42,7 +42,7 @@ class Login extends React.Component {
 
 Login.propTypes = {
 
-  login: PropTypes.func
+  login: PropTypes.func.isRequired
 
 };
 

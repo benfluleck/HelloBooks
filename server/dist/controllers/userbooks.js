@@ -70,7 +70,6 @@ exports.default = {
         res.status(400).send({ success: false, message: 'Check entered UserId or BookId and ensure its valid input' });
       });
     }).catch(function (error) {
-
       res.status(404).send({ success: false, message: ' ' + error.message });
     });
   },
