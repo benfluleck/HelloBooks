@@ -56,12 +56,12 @@ exports.default = function (sequelize, DataTypes) {
   });
   UserBooks.associate = function (models) {
     UserBooks.belongsTo(models.Books, {
-      foreignKey: 'id',
+      foreignKey: 'bookid',
       as: 'book',
       onDelete: 'CASCADE'
     });
     UserBooks.belongsTo(models.User, {
-      foreignKey: 'id',
+      foreignKey: 'userid',
       onDelete: 'CASCADE'
     });
   };

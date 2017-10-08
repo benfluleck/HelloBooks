@@ -18,7 +18,7 @@ const UserBooksController = controller.UserBooks;
  *       200:
  *         description: Welcome to Hello Books Library
  */
-Router.get('/', (req, res) => res.status(200).send({ message: 'Welcome to the Hello Books!' }));
+Router.get('/', (req, res) => res.status(200).send({ message: 'Welcome to the Hello Books!'}));
 /**
  * @swagger
  * definition:
@@ -131,7 +131,8 @@ Router.use((req, res, next) => {
     // verifies secret and checks exp
     jwt.verify(token, 'superSecret', (err, decoded) => {
       if (err) {
-        return res.json({ success: false, message: 'Failed to authenticate token.' });
+        return res.status(401)
+          .send({ success: false, message: 'Failed to authenticate token.' });
       }
       // if everything is good, save to request for use in other routes
       req.decoded = decoded;
@@ -175,7 +176,6 @@ Router.use((req, res, next) => {
  *         description: Invalid Tokens
  */
 Router.post('/books', BooksController.create);
-
 /**
  * @swagger
  * /books/{bookId}:
@@ -186,7 +186,7 @@ Router.post('/books', BooksController.create);
  *     produces:
  *       - application/json
  *     parameters:
- *       - name: bookId
+ *       - name: bookid
  *         description: ID of the Book
  *         in: path
  *         required: true
@@ -212,9 +212,7 @@ Router.post('/books', BooksController.create);
  *       404:
  *         description: Book not found
  */
-
 Router.put('/books/:bookId', BooksController.update);
-
 /**
  * @swagger
  * /books:
@@ -237,7 +235,6 @@ Router.put('/books/:bookId', BooksController.update);
  *           $ref: '#/definitions/Book'
  */
 Router.get('/books/', BooksController.getAllBooks);
-
 /**
  * @swagger
  * /users/{userId}/books:
@@ -253,30 +250,28 @@ Router.get('/books/', BooksController.getAllBooks);
  *         in: path
  *         required: true
  *         type: integer
- *       - name: return_date
- *         description: Return Date of the book
- *         in: path
- *         required: true
- *         type: date
- *       - name: bookId
- *         description: ID of Book to Borrow
- *         in: body
- *         required: true
+ *       - in: body
+ *         name: loan with return_date
+ *         description: Loan book with Return date specified
  *         schema:
  *           type: object
  *           required:
- *             - bookId
+ *              - return_date
  *           properties:
- *             bookId:
- *               type: integer
- *
+ *              return_date:
+ *                type: string
+ *                format: date
+ *                description: Return date for the book
+ *              bookid:
+ *                type: integer
+ *                description: ID of Book to Borrow
  *       - name: x-access-token
  *         in: header
  *         description: Header for Token
  *         required: true
  *         type: string
  *     responses:
- *       200:
+ *       201:
  *         description: Book Successfully borrowed
  *         schema:
  *           $ref: '#/definitions/Book'
@@ -301,7 +296,7 @@ Router.post('/users/:userId/books', UserBooksController.loanbook);
  *         in: path
  *         required: true
  *         type: integer
- *       - name: bookId
+ *       - name: bookid
  *         description: Book Loaned
  *         in: body
  *         required: true
@@ -312,7 +307,7 @@ Router.post('/users/:userId/books', UserBooksController.loanbook);
  *         required: true
  *         type: string
  *     responses:
- *       200:
+ *       201:
  *         description: Book Successfully returned
  *         schema:
  *           $ref: '#/definitions/Book'
@@ -333,6 +328,11 @@ Router.put('/users/:userId/books', UserBooksController.returnbook);
  *     produces:
  *       - application/json
  *     parameters:
+ *       - name: userId
+ *         description: ID of the User
+ *         in: path
+ *         required: true
+ *         type: integer
  *       - name: returned
  *         in: query
  *         required: true

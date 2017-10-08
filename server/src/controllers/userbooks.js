@@ -6,8 +6,8 @@ const UserBooks = models.UserBooks;
 const Books = models.Books;
 
 export default {
-
   loanbook(req, res) {
+    console.log(req.body.bookid, req.params.userId, req, '??????????');
     UserBooks.findOne({
       where: {
         userid: req.params.userId,
@@ -29,54 +29,63 @@ export default {
       if (bookfound) {
         return res
           .status(404)
-          .send({ success: false, messsage: 'This book has already been borrowed by you', bookfound });
-      }
-      return UserBooks.create({ userid: req.params.userId, bookid: req.body.bookid, return_date: req.body.date }
-      // status in user table will need to be updated if book id does not exist
-      ).then(() => {
-        Books
-          .findOne({
-            where: {
-              id: req.body.bookid
-            }
-          })
-          .then((bookfound) => {
-            // If book is borrowed out, then No book to borrow
-            if (!bookfound || bookfound.quantity === 0) {
-              return res
-                .status(404)
-                .send({ success: false, message: 'Book not found or All copies of this book are gone' });
-            }
-
-            return bookfound
-              .update({
-                quantity: bookfound.quantity -= 1
-              })
-              .then((updateBook) => {
-                res
-                  .status(201)
-                  .send({ success: true, message: `${updateBook.title} succesfully loaned`, updateBook });
-              })
-              .catch((error) => {
-                res
-                  .status(500)
-                  .send({
-                    Errors: Helper.errorArray(error)
-                  });
-              });
-          })
-          .catch((error) => {
-            res
-              .status(500)
-              .send({
-                Errors: Helper.errorArray(error)
-              });
+          .send({
+            success: false,
+            messsage: 'This book has already been borrowed by you',
+            bookfound
           });
-      }).catch(() => {
-        res
-          .status(400)
-          .send({ success: false, message: 'Check entered UserId or BookId and ensure its valid input' });
-      });
+      }
+      return UserBooks
+        .create({
+          userid: req.params.userId,
+          bookid: req.body.bookid,
+          return_date: req.body.return_date
+        })
+        .then(() => {
+          Books
+            .findOne({
+              where: {
+                id: req.body.bookid
+              }
+            })
+            .then((loanbook) => {
+              // If book is borrowed out, then No book to borrow
+              if (!loanbook || loanbook.quantity === 0) {
+                return res
+                  .status(404)
+                  .send({ success: false, message: 'Book not found or All copies of this book are gone' });
+              }
+
+              loanbook
+                .update({
+                  quantity: loanbook.quantity -= 1
+                })
+                .then((updateBook) => {
+                  res
+                    .status(201)
+                    .send({ success: true, message: `${updateBook.title} succesfully loaned`, updateBook });
+                })
+                .catch((error) => {
+                  res
+                    .status(500)
+                    .send({
+                      Errors: Helper.errorArray(error)
+                    });
+                });
+            })
+            .catch((error) => {
+              res
+                .status(500)
+                .send({
+                  Errors: Helper.errorArray(error)
+                });
+            });
+        })
+        .catch(() => {
+          res
+            .status(400)
+            .send({ success: false, message: 'Check entered UserId or BookId and ensure its valid input' });
+        });
     }).catch((error) => {
       res
         .status(404)
@@ -95,9 +104,10 @@ export default {
           model: Books,
           as: 'book',
           required: true
-        }
-      ]
+        },
+      ],
     }).then((book) => {
+      console.log(book, '????????/dfdfdddfdd')
       if (book.length === 0) {
         return res
           .status(404)
@@ -108,6 +118,7 @@ export default {
         .send({ book });
     }).catch(error => res.status(400).send(error.message));
   },
+
 
   returnbook(req, res) {
     return UserBooks.findOne({

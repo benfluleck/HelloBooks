@@ -82,7 +82,6 @@ class Books extends React.Component {
 						<Col s={10} m={10} l={10} offset='l1'>
 								<div className='books'>
 										<Row>
-
 												<h4>Books</h4>
 												<Tabs className='books-tab z-depth-1 transparent'>
 														<Tab title="All Books" active>

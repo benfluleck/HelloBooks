@@ -12,7 +12,6 @@ const UserRoute = ({
   component: Component,
   ...rest
 }) => {
-  // console.log('-------------??????????????', this.props);
   return (
 
     <Route
@@ -23,7 +22,6 @@ const UserRoute = ({
 
   );
 
-  // console.log('-------------??????????????', this.props);
 };
 
 UserRoute.PropTypes = {

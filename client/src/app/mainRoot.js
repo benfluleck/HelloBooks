@@ -30,7 +30,7 @@ export default class MainRoot extends Component {
         <Root>
           <Switch>
             <Route exact path='/' component={Login}/>
-            <Route exact path={'/register'} component={Register}/>
+            <GuestRoute exact path={'/register'} component={Register}/>
             <Route exact path={'/forgetpass'} component={Forgetpass}/>
             <UserRoute path={'/dashboard'} exact component={Dashboard}/>
             <UserRoute exact path={'/profile'} component={Profile}/>

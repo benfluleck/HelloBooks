@@ -20,6 +20,7 @@ var Books = _models2.default.Books;
 
 exports.default = {
   loanbook: function loanbook(req, res) {
+    console.log(req.body.bookid, req.params.userId, req, '??????????');
     UserBooks.findOne({
       where: {
         userid: req.params.userId,
@@ -37,23 +38,29 @@ exports.default = {
       * User should borrow .
       */
       if (bookfound) {
-        return res.status(404).send({ success: false, messsage: 'This book has already been borrowed by you', bookfound: bookfound });
+        return res.status(404).send({
+          success: false,
+          messsage: 'This book has already been borrowed by you',
+          bookfound: bookfound
+        });
       }
-      return UserBooks.create({ userid: req.params.userId, bookid: req.body.bookid, return_date: req.body.date
-        // status in user table will need to be updated if book id does not exist
+      return UserBooks.create({
+        userid: req.params.userId,
+        bookid: req.body.bookid,
+        return_date: req.body.return_date
       }).then(function () {
         Books.findOne({
           where: {
             id: req.body.bookid
           }
-        }).then(function (bookfound) {
+        }).then(function (loanbook) {
           // If book is borrowed out, then No book to borrow
-          if (!bookfound || bookfound.quantity === 0) {
+          if (!loanbook || loanbook.quantity === 0) {
             return res.status(404).send({ success: false, message: 'Book not found or All copies of this book are gone' });
           }
 
-          return bookfound.update({
-            quantity: bookfound.quantity -= 1
+          loanbook.update({
+            quantity: loanbook.quantity -= 1
           }).then(function (updateBook) {
             res.status(201).send({ success: true, message: updateBook.title + ' succesfully loaned', updateBook: updateBook });
           }).catch(function (error) {
@@ -85,6 +92,7 @@ exports.default = {
         required: true
       }]
     }).then(function (book) {
+      console.log(book, '????????/dfdfdddfdd');
       if (book.length === 0) {
         return res.status(404).send({ success: false, message: 'You have no books on your loan list' });
       }
