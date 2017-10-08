@@ -20,7 +20,6 @@ export default function user(state = INITIAL_STATE, action = {}) {
   let error;
   switch (action.type) {
     case USER_LOGGED_IN:
-
       return {
         ...state,
         isAuthenticated: true,
@@ -32,10 +31,8 @@ export default function user(state = INITIAL_STATE, action = {}) {
         isAuthenticated: true,
         user: action.user
       };
-
     case USER_SIGN_IN_FAILURE:
       error = action.error.data.message;
-
       return {
         ...state,
         user: null,
@@ -44,7 +41,6 @@ export default function user(state = INITIAL_STATE, action = {}) {
         error
       };
     case USER_LOGGED_OUT:
-
       return {
         INITIAL_STATE,
         isAuthenticated: false,

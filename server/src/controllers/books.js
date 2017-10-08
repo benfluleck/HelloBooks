@@ -1,4 +1,3 @@
-import User from './user';
 import models from '../models';
 import Helper from '../Helper/helper';
 
@@ -9,31 +8,46 @@ const Books = models.Books;
  */
 export default {
   create(req, res) {
-    if (User === null) {
-      return res.json({ success: false, message: 'You need to be logged in.' });
-    }
+    // const title = req.body.title;
     return Books
-      .create({
-        title: req.body.title,
-        author: req.body.author,
-        category: req.body.category,
-        quantity: req.body.quantity,
-        description: req.body.description,
-        book_image: req.body.book_image
+      .findOne({
+        where: { title: req.body.title }
+
       })
-      .then(books => res.json({
- Book_title: books.title, Author: books.author, Description: books.description, Number: books.quantity, Image: books.book_image
- }))
-      .catch((error) => {
-        if (error.name === 'SequelizeUniqueConstraintError') {
-          res.json({ error: 'Unique Error', message: 'The book with this author is already in the database, try to add to books' });
-        } else {
-          res
-            .status(401)
-            .send({
-              Errors: Helper.errorArray(error)
-            });
+      .then((book) => {
+        if (book !== null) {
+          return res.status(400)
+            .send({ message: 'A book with the same title already exist' });
         }
+        return Books
+          .create({
+            title: req.body.title,
+            author: req.body.author,
+            category: req.body.category,
+            quantity: req.body.quantity,
+            description: req.body.description,
+            book_image: req.body.book_image
+          })
+          .then(books =>
+            res.status(201).send({
+              Book_title: books.title,
+              Author: books.author,
+              Description: books.description,
+              Number: books.quantity,
+              Image: books.book_image
+            }))
+          .catch((error) => {
+            if (error.name === 'SequelizeUniqueConstraintError') {
+              res.json({ error: 'Unique Error', message: 'The book with this author is already in the database, try to add to books' });
+            } else {
+              res
+                .status(401)
+                .send({
+                  Errors: Helper.errorArray(error)
+                });
+            }
+          })
+          .catch(error => res.status(401).send(error));
       });
   },
   update(req, res) {

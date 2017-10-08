@@ -1,8 +1,7 @@
 import axios from 'axios';
 
-
 /**
- * 
+ *
  */
 export default {
   user: {
@@ -11,6 +10,8 @@ export default {
     signup: data => axios.post('api/v1/users/signup', data)
   },
   book: {
-    fetch: (offset, limit) => axios.get(`api/v1/books?offset=${offset}&limit=${limit}`).then(res => res.data)
+    fetch: (offset, limit) => axios
+      .get(`api/v1/books?offset=${offset}&limit=${limit}`)
+      .then(res => res.data)
   }
 };

@@ -47,12 +47,13 @@ class Books extends React.Component {
 				} else {
 						pageOffset = pagenumber - 1;
 				}
-				let pageLimit =  ((pageOffset) * this.state.limit);
+				let pageLimit = ((pageOffset) * this.state.limit);
 				// update state with new page of items
 				this.setState({offset: pageLimit});
-				console.log(pageLimit, pagenumber, this.state.limit, '-------------------')
 
-				this .props .fetchAllBooks(pageLimit, this.state.limit);
+				this
+						.props
+						.fetchAllBooks(pageLimit, this.state.limit);
 		}
 
 		componentWillMount() {
@@ -78,19 +79,20 @@ class Books extends React.Component {
 						});
 				const page = this.props.pagination;
 				return (
-						<div className='books'>
-							<Row>
-								
-								<h4>Books</h4>
-								<Tabs className='books-tab z-depth-1 transparent'>
-										<Tab title="All Books" active>
-												<Pagination
-														onSelect={this.onSelect}
-														items={page.pageCount}
-														activePage={page.page}
-														maxButtons={5}/> {[...returnedAllBooks]}
-										</Tab>
-										{/* <Tab title="Books On Loan">
+						<Col s={10} m={10} l={10} offset='l1'>
+								<div className='books'>
+										<Row>
+
+												<h4>Books</h4>
+												<Tabs className='books-tab z-depth-1 transparent'>
+														<Tab title="All Books" active>
+																<Pagination
+																		onSelect={this.onSelect}
+																		items={page.pageCount}
+																		activePage={page.page}
+																		maxButtons={5}/> {[...returnedAllBooks]}
+														</Tab>
+														{/* <Tab title="Books On Loan">
                         {[...returnedBooks]}
                     </Tab>
                     <Tab title="Books To Return">
@@ -99,11 +101,10 @@ class Books extends React.Component {
                     <Tab title="My Books">
                         {[...returnedBooks]}
                     </Tab> */}
-								</Tabs>
-								</Row>
-						</div>
-
-					
+												</Tabs>
+										</Row>
+								</div>
+						</Col>
 				)
 		};
 }

@@ -21,7 +21,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // let app = require('../app');
 
-
 /**
  * Get port from environment and store in Express.
  */

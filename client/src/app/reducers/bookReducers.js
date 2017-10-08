@@ -1,9 +1,4 @@
-import {
-  FETCH_BOOKS,
-  FETCH_BOOKS_FULFILLED,
-  FETCH_BOOKS_REJECTED
-} from '../actions/type';
-
+import { FETCH_BOOKS, FETCH_BOOKS_FULFILLED, FETCH_BOOKS_REJECTED, USER_LOGGED_OUT } from '../actions/type';
 
 /**
  * *
@@ -49,6 +44,8 @@ export default function bookReducer(state = {
         error: action.error.message
       };
     }
+    // case USER_LOGGED_OUT:
+    //   return { books: [], fetching: false };
     default:
       return state;
   }

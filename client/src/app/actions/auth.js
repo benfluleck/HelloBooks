@@ -51,10 +51,9 @@ export const signup = data => dispatch => api
   .catch(error => dispatch(signInUserFailure(error.response)));
 
 /**
- *
- * @param {*} credentials
+ * 
+ * @param {*} credentials 
  */
-
 export const login = credentials => dispatch => api
   .user
   .login(credentials)

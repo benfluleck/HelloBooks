@@ -4,10 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _user = require('./user');
-
-var _user2 = _interopRequireDefault(_user);
-
 var _models = require('../models');
 
 var _models2 = _interopRequireDefault(_models);
@@ -25,28 +21,40 @@ var Books = _models2.default.Books;
  */
 exports.default = {
   create: function create(req, res) {
-    if (_user2.default === null) {
-      return res.json({ success: false, message: 'You need to be logged in.' });
-    }
-    return Books.create({
-      title: req.body.title,
-      author: req.body.author,
-      category: req.body.category,
-      quantity: req.body.quantity,
-      description: req.body.description,
-      book_image: req.body.book_image
-    }).then(function (books) {
-      return res.json({
-        Book_title: books.title, Author: books.author, Description: books.description, Number: books.quantity, Image: books.book_image
-      });
-    }).catch(function (error) {
-      if (error.name === 'SequelizeUniqueConstraintError') {
-        res.json({ error: 'Unique Error', message: 'The book with this author is already in the database, try to add to books' });
-      } else {
-        res.status(401).send({
-          Errors: _helper2.default.errorArray(error)
-        });
+    // const title = req.body.title;
+    return Books.findOne({
+      where: { title: req.body.title }
+
+    }).then(function (book) {
+      if (book !== null) {
+        return res.status(400).send({ message: 'A book with the same title already exist' });
       }
+      return Books.create({
+        title: req.body.title,
+        author: req.body.author,
+        category: req.body.category,
+        quantity: req.body.quantity,
+        description: req.body.description,
+        book_image: req.body.book_image
+      }).then(function (books) {
+        return res.status(201).send({
+          Book_title: books.title,
+          Author: books.author,
+          Description: books.description,
+          Number: books.quantity,
+          Image: books.book_image
+        });
+      }).catch(function (error) {
+        if (error.name === 'SequelizeUniqueConstraintError') {
+          res.json({ error: 'Unique Error', message: 'The book with this author is already in the database, try to add to books' });
+        } else {
+          res.status(401).send({
+            Errors: _helper2.default.errorArray(error)
+          });
+        }
+      }).catch(function (error) {
+        return res.status(401).send(error);
+      });
     });
   },
   update: function update(req, res) {

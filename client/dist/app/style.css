@@ -168,7 +168,10 @@ body {
 h4 {
   font-size: 2rem; }
 
-h4,
+.card .card-content p {
+  font-size: 1.7em !important;
+  font-family: unset !important; }
+
 p {
   margin-left: 1em; }
 

@@ -12,7 +12,7 @@ const UserRoute = ({
   component: Component,
   ...rest
 }) => {
-
+  // console.log('-------------??????????????', this.props);
   return (
 
     <Route
@@ -23,6 +23,7 @@ const UserRoute = ({
 
   );
 
+  // console.log('-------------??????????????', this.props);
 };
 
 UserRoute.PropTypes = {
@@ -33,13 +34,9 @@ UserRoute.PropTypes = {
 };
 
 const mapStateToProps = (state) => {
-  // if (!state.user.user.token || state.user.user.token === "") { //if there is
-  // no token, dont bother     return ; } else {
-
   return {
-    isAuthenticated: !!state.user.isAuthenticated
+    isAuthenticated: state.user.isAuthenticated
   };
-  // }
 }
 
 export default connect(mapStateToProps)(UserRoute);

@@ -33,7 +33,7 @@ const Welcome = ({isAuthenticated, logout}) => {
 												style={{
 												'marginBottom': '3em'
 										}}
-												onClick={() => logout()}>Logout</Button>
+											onClick={() => logout()}>Logout</Button>
 								</Col>
 						</div>
 				);

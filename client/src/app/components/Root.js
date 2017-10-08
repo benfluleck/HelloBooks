@@ -12,7 +12,6 @@ eslint-disable
 
 export class Root extends React.Component
 {
-
     render() {
 
         return (
@@ -24,15 +23,11 @@ export class Root extends React.Component
                     <Row>
                         <div className="container">
                             <Welcome/>
-                            <Col s={12} m={8} l={6} offset='l1'>
-                                {this.props.children}
-                            </Col>
+                              {this.props.children}
                         </div>
                     </Row>
                 </main>
-
                 <Bottom/>
-
             </div>
 
         )

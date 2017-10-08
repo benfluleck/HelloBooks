@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt-nodejs';
 import models from '../models';
 import Helper from '../Helper/helper';
-import {sendResetPasswordEmail} from '../mailer/mailer';
+import { sendResetPasswordEmail } from '../mailer/mailer';
 
 const User = models.User;
 const UserBooks = models.UserBooks;
@@ -19,45 +19,41 @@ export default {
   create(req, res) {
     User
       .create({
-      firstname: req.body.firstname,
-      lastname: req.body.lastname,
-      username: req.body.username,
-      password: req.body.password,
-      password_confirmation: req.body.password_confirmation,
-      email: req.body.email
-    })
-      .then(user => {
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        username: req.body.username,
+        password: req.body.password,
+        password_confirmation: req.body.password_confirmation,
+        email: req.body.email
+      })
+      .then((user) => {
         if (!user) {
           res
             .status(404)
-            .send({message: 'Error adding user'});
-
+            .send({ message: 'Error adding user' });
         } else {
-          res.json({success: true, name: user.firstname, username: user.username});
+          res.json({ success: true, name: user.firstname, username: user.username });
         }
       })
-      .catch(error => {
+      .catch((error) => {
         res
           .status(400)
-          .send({success: false, message: ` ${error.message}`});
-
+          .send({ success: false, message: ` ${error.message}` });
       });
-
   },
 
   signin(req, res) {
     return User
       .findOne({
-      where: {
-        username: req.body.username
-      }
-    })
+        where: {
+          username: req.body.username
+        }
+      })
       .then((user) => {
         if (!user) {
-          return res  
+          return res
             .status(404)
-            .send({success: false, message: `${req.body.username} does not exist in the database`});
-
+            .send({ success: false, message: `${req.body.username} does not exist in the database` });
         } else if (bcrypt.compareSync(req.body.password, user.password)) {
           const Userjwt = {
             name: user.username,
@@ -67,11 +63,13 @@ export default {
             expiresIn: 1440 // expires in 24 hours
           });
 
-          res.json({success: true, message: `Welcome, ${req.body.username} You are now logged in!`, token, username : req.body.username});
+          res.json({ 
+success: true, message: `Welcome, ${req.body.username} You are now logged in!`, token, username: req.body.username 
+});
         } else {
           res
             .status(400)
-            .send({success: false, message: 'Wrong Credentials'});
+            .send({ success: false, message: 'Wrong Credentials' });
         }
       })
       .catch(error => res.status(500).send(error.message));
@@ -79,10 +77,10 @@ export default {
 
   reset_password(req, res) {
     User
-      .findOne({email: req.body.email})
-      .then(user => {
+      .findOne({ email: req.body.email })
+      .then((user) => {
         if (user) {
-          sendRestPasswordEmail(user);
+          sendResetPasswordEmail(user);
           res.json({});
         } else {
           res
@@ -92,10 +90,7 @@ export default {
                 global: 'There are no users with such email'
               }
             });
-
         }
-
       });
-
   }
 };

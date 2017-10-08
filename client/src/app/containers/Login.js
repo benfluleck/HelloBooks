@@ -1,4 +1,5 @@
 import React from 'react';
+import {Col} from 'react-materialize'
 import {Loginform} from '../components/Loginform';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
@@ -28,13 +29,15 @@ class Login extends React.Component {
   render() {
 
     return (
-      <div className='register'>
+      <Col s={12} m={8} l={6} offset='l1'>
+        <div className='register'>
 
-        <h3>
-          Login</h3>
-        <Loginform submit ={this.submit}/>
+          <h3>
+            Login</h3>
+          <Loginform submit ={this.submit}/>
 
-      </div>
+        </div>
+      </Col>
     );
   }
 

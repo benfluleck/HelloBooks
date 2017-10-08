@@ -71,7 +71,9 @@ exports.default = {
           expiresIn: 1440 // expires in 24 hours
         });
 
-        res.json({ success: true, message: 'Welcome, ' + req.body.username + ' You are now logged in!', token: token, username: req.body.username });
+        res.json({
+          success: true, message: 'Welcome, ' + req.body.username + ' You are now logged in!', token: token, username: req.body.username
+        });
       } else {
         res.status(400).send({ success: false, message: 'Wrong Credentials' });
       }
@@ -82,7 +84,7 @@ exports.default = {
   reset_password: function reset_password(req, res) {
     User.findOne({ email: req.body.email }).then(function (user) {
       if (user) {
-        sendRestPasswordEmail(user);
+        (0, _mailer.sendResetPasswordEmail)(user);
         res.json({});
       } else {
         res.status(400).json({
