@@ -7,7 +7,6 @@ const Books = models.Books;
 
 export default {
   loanbook(req, res) {
-    console.log(req.body.bookid, req.params.userId, req, '??????????');
     UserBooks.findOne({
       where: {
         userid: req.params.userId,
@@ -28,11 +27,10 @@ export default {
      */
       if (bookfound) {
         return res
-          .status(404)
+          .status(409)
           .send({
             success: false,
             messsage: 'This book has already been borrowed by you',
-            bookfound
           });
       }
       return UserBooks
@@ -84,7 +82,7 @@ export default {
         .catch(() => {
           res
             .status(400)
-            .send({ success: false, message: 'Check entered UserId or BookId and ensure its valid input' });
+            .send({ success: false, message: 'Check the Book or User' });
         });
     }).catch((error) => {
       res
@@ -107,7 +105,6 @@ export default {
         },
       ],
     }).then((book) => {
-      console.log(book, '????????/dfdfdddfdd')
       if (book.length === 0) {
         return res
           .status(404)
@@ -118,7 +115,6 @@ export default {
         .send({ book });
     }).catch(error => res.status(400).send(error.message));
   },
-
 
   returnbook(req, res) {
     return UserBooks.findOne({

@@ -64,6 +64,7 @@ exports.default = {
         return res.status(404).send({ success: false, message: req.body.username + ' does not exist in the database' });
       } else if (_bcryptNodejs2.default.compareSync(req.body.password, user.password)) {
         var Userjwt = {
+          id: user.id,
           name: user.username,
           password: user.password
         };

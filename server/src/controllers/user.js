@@ -56,6 +56,7 @@ export default {
             .send({ success: false, message: `${req.body.username} does not exist in the database` });
         } else if (bcrypt.compareSync(req.body.password, user.password)) {
           const Userjwt = {
+            id: user.id,
             name: user.username,
             password: user.password
           };
@@ -63,9 +64,9 @@ export default {
             expiresIn: 1440 // expires in 24 hours
           });
 
-          res.json({ 
-success: true, message: `Welcome, ${req.body.username} You are now logged in!`, token, username: req.body.username 
-});
+          res.json({
+            success: true, message: `Welcome, ${req.body.username} You are now logged in!`, token, username: req.body.username 
+          });
         } else {
           res
             .status(400)

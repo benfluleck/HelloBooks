@@ -20,7 +20,6 @@ var Books = _models2.default.Books;
 
 exports.default = {
   loanbook: function loanbook(req, res) {
-    console.log(req.body.bookid, req.params.userId, req, '??????????');
     UserBooks.findOne({
       where: {
         userid: req.params.userId,
@@ -38,10 +37,9 @@ exports.default = {
       * User should borrow .
       */
       if (bookfound) {
-        return res.status(404).send({
+        return res.status(409).send({
           success: false,
-          messsage: 'This book has already been borrowed by you',
-          bookfound: bookfound
+          messsage: 'This book has already been borrowed by you'
         });
       }
       return UserBooks.create({
@@ -74,7 +72,7 @@ exports.default = {
           });
         });
       }).catch(function () {
-        res.status(400).send({ success: false, message: 'Check entered UserId or BookId and ensure its valid input' });
+        res.status(400).send({ success: false, message: 'Check the Book or User' });
       });
     }).catch(function (error) {
       res.status(404).send({ success: false, message: ' ' + error.message });
@@ -92,7 +90,6 @@ exports.default = {
         required: true
       }]
     }).then(function (book) {
-      console.log(book, '????????/dfdfdddfdd');
       if (book.length === 0) {
         return res.status(404).send({ success: false, message: 'You have no books on your loan list' });
       }
