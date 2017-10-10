@@ -73,19 +73,20 @@ class Books extends React.Component {
 		componentWillMount() {
 				this
 						.props
-						.fetchAllBooks(this.state.offset, this.state.limit);
+						.fetchAllBooks(this.state.offset, this.state.limit)
+
 				this
 						.props
 						.fetchAllBooksbyId(this.state.offset, this.props.user.user, this.state.limit)
 
 		}
 		render() {
+
 				if (!this.props.books) {
 						return <h5>Loading....</h5>
 				}
 				const getAllBooks = this
 						.props
-						.books
 						.books
 						.map((book) => {
 								return (<Book
@@ -150,12 +151,11 @@ class Books extends React.Component {
 		};
 }
 
-Books.PropTypes = {
-		books: PropTypes.array.isRequired
-}
+// Books.PropTypes = { 		books: PropTypes.array.isRequired }
 
 const mapStateToProps = (state) => {
-		return {books: state.bookReducer.books, borrowed_books: state.bookReducer.borrowed_books, pagination: state.bookReducer.books.pagination, user: state.user}
+		console.log('this is my book', state.bookReducer.books.pagination);
+		return {books: state.bookReducer.books.books, borrowedbooks: state.bookReducer.borrowedbooks, user: state.user, pagination: state.bookReducer.books.pagination}
 }
 
 export default connect(mapStateToProps, {fetchAllBooks, fetchAllBooksbyId})(Books);

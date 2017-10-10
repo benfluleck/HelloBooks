@@ -89,6 +89,7 @@ export const login = credentials => dispatch => api
  */
 export const logout = () => (dispatch) => {
   global.localStorage.removeItem('token');
+  global.localStorage.removeItem('username');
   setAuthorizationToken(false);
   dispatch(userLoggedOut());
 };

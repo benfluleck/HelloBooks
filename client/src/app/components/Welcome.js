@@ -11,20 +11,7 @@ import {logout} from '../actions/auth'
 
 const Welcome = ({isAuthenticated, logout}) => {
 		const username = localStorage.getItem('username');
-		if (!isAuthenticated) {
-				return (
-						<div className='welcome'>
-								<Col s={12} m={6} l={4}>
-										<div className='head'>
-												<h1>Welcome Guest</h1>
-												<h3>Hello Books</h3>
-												<p>by Benny Ogidan</p>
-
-										</div>
-								</Col>
-						</div>
-				);
-		} else {
+		if (isAuthenticated) {
 				return (
 						<div className='welcome'>
 								<Col s={8} m={10} l={4}>
@@ -37,6 +24,21 @@ const Welcome = ({isAuthenticated, logout}) => {
 								</Col>
 						</div>
 				);
+
+		} else {
+				return (
+						<div className='welcome'>
+								<Col s={12} m={6} l={4}>
+										<div className='head'>
+												<h1>Welcome Guest</h1>
+												<h3>Hello Books</h3>
+												<p>by Benny Ogidan</p>
+
+										</div>
+								</Col>
+						</div>
+				);
+
 		}
 
 }

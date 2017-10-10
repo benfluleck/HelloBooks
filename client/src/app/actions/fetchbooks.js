@@ -1,4 +1,5 @@
-import { FETCH_BOOKS,
+import {
+  FETCH_BOOKS,
   FETCH_BOOKS_FULFILLED,
   FETCH_BOOKS_REJECTED,
   FETCH_BOOKS_BY_USER_ID,
@@ -15,7 +16,6 @@ export const fetchBooksById = books => ({ type: FETCH_BOOKS_BY_USER_ID, books })
 export const fetchBooksByIdRejected = error => ({ type: FETCH_BOOKS_REJECTED_BY_USER_ID, error });
 export const fetchBooksByIdfufilled = books => ({ type: FETCH_BOOKS_FULFILLED_BY_USER_ID, books });
 
-
 /**
  * fetch books in thhe Library
  * @return {any} dispatches an action
@@ -25,6 +25,7 @@ export const fetchAllBooks = (offset, limit) => dispatch => api
   .fetch(offset, limit)
   .then((response) => {
     dispatch(fetchBooksfufilled(response));
+    return response;
   })
   .catch((error) => {
     dispatch(fetchBooksRejected(error.response));

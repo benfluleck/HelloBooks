@@ -17,7 +17,7 @@ import {Userlist} from './components/admin/Userlist'
 import {EditUser} from './components/admin/EditUser'
 import Dashboard from './components/Dashboard'
 import UserRoute from './components/routes/UserRoute'
-import GuestRoute from './components/routes/GuestRoute'
+
 
 
 /*
@@ -30,7 +30,7 @@ export default class MainRoot extends Component {
         <Root>
           <Switch>
             <Route exact path='/' component={Login}/>
-            <GuestRoute exact path={'/register'} component={Register}/>
+            <Route exact path={'/register'} component={Register}/>
             <Route exact path={'/forgetpass'} component={Forgetpass}/>
             <UserRoute path={'/dashboard'} exact component={Dashboard}/>
             <UserRoute exact path={'/profile'} component={Profile}/>

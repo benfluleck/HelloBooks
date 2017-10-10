@@ -17,11 +17,11 @@ export default function persistReducer(state = [], action) {
         ...state,
         persistedState: action.payload
       };
-    case USER_LOGGED_OUT:
-      return {
-        INITIAL_STATE,
-        isAuthenticated: false
-      };
+    // case USER_LOGGED_OUT:
+    //   return {
+    //     INITIAL_STATE,
+    //     isAuthenticated: false
+    //   };
     default:
       return state;
   }
