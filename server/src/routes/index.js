@@ -121,7 +121,7 @@ Router.post('/users/signup', UserController.create);
  *         description: Bad Username, Password or Email
  */
 Router.post('/users/signin', UserController.signin);
-// Router.post('/api/auth/reset_password_request',UserController.reset_password)
+
 Router.use((req, res, next) => {
   // check header or url parameters or post parameters for token
   const token = req.body.token || req.query.token || req.headers['x-access-token'];

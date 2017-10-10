@@ -12,6 +12,10 @@ var _helper = require('../Helper/helper');
 
 var _helper2 = _interopRequireDefault(_helper);
 
+var _pagination = require('../controllers/middleware/pagination');
+
+var _pagination2 = _interopRequireDefault(_pagination);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var User = _models2.default.User;
@@ -33,9 +37,9 @@ exports.default = {
       }]
     }).then(function (bookfound) {
       /**
-      * Check if the book has been borrowed before,
-      * User should borrow .
-      */
+       * Check if the book has been borrowed before,
+       * User should borrow .
+       */
       if (bookfound) {
         return res.status(409).send({
           success: false,
@@ -52,7 +56,6 @@ exports.default = {
             id: req.body.bookid
           }
         }).then(function (loanbook) {
-          // If book is borrowed out, then No book to borrow
           if (!loanbook || loanbook.quantity === 0) {
             return res.status(404).send({ success: false, message: 'Book not found or All copies of this book are gone' });
           }
@@ -79,21 +82,30 @@ exports.default = {
     });
   },
   getborrowerslist: function getborrowerslist(req, res) {
-    return UserBooks.findAll({
+    var offset = req.query.offset;
+    var limit = req.query.limit;
+    return UserBooks.findAndCountAll({
       where: {
         userid: req.params.userId,
         return_status: req.query.returned
+
       },
       include: [{
         model: Books,
         as: 'book',
         required: true
-      }]
+      }],
+      limit: limit,
+      offset: offset
     }).then(function (book) {
       if (book.length === 0) {
         return res.status(404).send({ success: false, message: 'You have no books on your loan list' });
       }
-      res.status(200).send({ book: book });
+      res.status(200).send({
+        book: book,
+        books: book.rows,
+        pagination: (0, _pagination2.default)(offset, limit, book)
+      });
     }).catch(function (error) {
       return res.status(400).send(error.message);
     });

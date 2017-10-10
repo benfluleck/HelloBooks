@@ -12,6 +12,10 @@ var _helper = require('../Helper/helper');
 
 var _helper2 = _interopRequireDefault(_helper);
 
+var _pagination = require('../controllers/middleware/pagination');
+
+var _pagination2 = _interopRequireDefault(_pagination);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Books = _models2.default.Books;
@@ -97,15 +101,15 @@ exports.default = {
       if (books.count === 0) {
         res.json({ error: 'Empty', message: 'There are no books present in the database' });
       } else {
-        var pagination = {
-          page: Math.floor(offset / limit) + 1,
-          pageCount: Math.ceil(books.count / limit),
-          pageSize: books.rows.length,
-          totalCount: books.count
-        };
+        // const pagination = {
+        //   page: Math.floor(offset / limit) + 1,
+        //   pageCount: Math.ceil(books.count / limit),
+        //   pageSize: books.rows.length,
+        //   totalCount: books.count
+        // };
         res.status(200).send({
           books: books.rows,
-          pagination: pagination
+          pagination: (0, _pagination2.default)(offset, limit, books)
         });
       }
     }).catch(function (error) {

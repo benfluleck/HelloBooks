@@ -1,10 +1,15 @@
+import isEmpty from 'lodash/isEmpty';
+
 import {
   USER_LOGGED_IN,
   USER_LOGGED_OUT,
   USER_SIGN_IN_FAILURE,
+  SET_CURRENT_USER,
   SIGNUP_USER_SUCCESS } from '../actions/type';
 
 const INITIAL_STATE = {
+  isAuthenticated: false,
+  user: {}
 };
 
 
@@ -29,6 +34,12 @@ export default function user(state = INITIAL_STATE, action = {}) {
       return {
         ...state,
         isAuthenticated: true,
+        user: action.user
+      };
+    case SET_CURRENT_USER:
+      return {
+        ...state,
+        isAuthenticated: !isEmpty(action.user),
         user: action.user
       };
     case USER_SIGN_IN_FAILURE:

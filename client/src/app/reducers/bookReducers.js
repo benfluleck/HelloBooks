@@ -1,4 +1,10 @@
-import { FETCH_BOOKS, FETCH_BOOKS_FULFILLED, FETCH_BOOKS_REJECTED, USER_LOGGED_OUT } from '../actions/type';
+import { FETCH_BOOKS,
+  FETCH_BOOKS_FULFILLED,
+  FETCH_BOOKS_REJECTED,
+  FETCH_BOOKS_BY_USER_ID,
+  FETCH_BOOKS_FULFILLED_BY_USER_ID,
+  FETCH_BOOKS_REJECTED_BY_USER_ID
+} from '../actions/type';
 
 /**
  * *
@@ -27,6 +33,13 @@ export default function bookReducer(state = {
         fetching: true
       };
     }
+    case FETCH_BOOKS_BY_USER_ID:
+    {
+      return {
+        ...state,
+        fetching: true
+      };
+    }
     case FETCH_BOOKS_FULFILLED:
     {
       return {
@@ -34,6 +47,15 @@ export default function bookReducer(state = {
         fetching: false,
         fetched: true,
         books: action.books
+      };
+    }
+    case FETCH_BOOKS_FULFILLED_BY_USER_ID:
+    {
+      return {
+        ...state,
+        fetching: false,
+        fetched: true,
+        borrowed_books: action.books
       };
     }
     case FETCH_BOOKS_REJECTED:
@@ -44,6 +66,15 @@ export default function bookReducer(state = {
         error: action.error.message
       };
     }
+    case FETCH_BOOKS_REJECTED_BY_USER_ID:
+    {
+      return {
+        ...state,
+        fetching: false,
+        error: action.error.message
+      };
+    }
+
     // case USER_LOGGED_OUT:
     //   return { books: [], fetching: false };
     default:

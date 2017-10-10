@@ -1,13 +1,12 @@
+import jwtdecode from 'jwt-decode';
+
 import { createStore, applyMiddleware } from 'redux';
 import { createLogger } from 'redux-logger';
 import thunk from 'redux-thunk';
 import { persistStore, autoRehydrate } from 'redux-persist';
 import { composeWithDevTools } from 'redux-devtools-extension';
-// import throttle from 'lodash/throttle';
-// import { loadState, saveState } from '../utils/Localsave';
-// import userLoggedIn from '../actions/auth';
-
-
+import setAuthorizationToken from '../utils/setAuthorizationToken';
+import { setCurrentUser } from '../actions/auth';
 import rootReducer from '../reducers/rootReducers';
 
 
@@ -27,6 +26,11 @@ const store = composeWithDevTools(
   autoRehydrate()
 )(createStore)(rootReducer);
 
+
+if (global.localStorage.token) {
+  setAuthorizationToken(global.localStorage.token);
+  store.dispatch(setCurrentUser(jwtdecode(global.localStorage.token)));
+}
 
 persistStore(store);
 

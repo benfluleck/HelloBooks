@@ -1,5 +1,6 @@
 import models from '../models';
 import Helper from '../Helper/helper';
+import paginationfunc from '../controllers/middleware/pagination';
 
 const Books = models.Books;
 
@@ -99,18 +100,18 @@ export default {
       .then((books) => {
         if (books.count === 0) {
           res.json({ error: 'Empty', message: 'There are no books present in the database' });
-        } else {
-          const pagination = {
-            page: Math.floor(offset / limit) + 1,
-            pageCount: Math.ceil(books.count / limit),
-            pageSize: books.rows.length,
-            totalCount: books.count
-          };
+        } else { 
+          // const pagination = {
+          //   page: Math.floor(offset / limit) + 1,
+          //   pageCount: Math.ceil(books.count / limit),
+          //   pageSize: books.rows.length,
+          //   totalCount: books.count
+          // };
           res
             .status(200)
             .send({
               books: books.rows,
-              pagination
+              pagination: paginationfunc(offset, limit, books)
             });
         }
       })

@@ -33,7 +33,7 @@ UserRoute.PropTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    isAuthenticated: state.user.isAuthenticated
+    isAuthenticated: !!state.user.isAuthenticated
   };
 }
 

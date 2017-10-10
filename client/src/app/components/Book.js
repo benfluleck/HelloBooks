@@ -1,5 +1,3 @@
-
-
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { Navbar, NavItem, Col,Row, Card, Tab, Tabs, CardTitle, Button, Modal } from 'react-materialize'

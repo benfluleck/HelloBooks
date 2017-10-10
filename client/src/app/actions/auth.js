@@ -1,12 +1,19 @@
+import jwtdecode from 'jwt-decode';
+
 import { USER_LOGGED_IN,
   USER_LOGGED_OUT,
   USER_SIGN_IN_FAILURE,
-  SIGNUP_USER_SUCCESS } from './type';
-
+  SIGNUP_USER_SUCCESS,
+  SET_CURRENT_USER } from './type';
 
 import api from './api';
 import setAuthorizationToken from '../utils/setAuthorizationToken';
 
+export const setCurrentUser = user =>
+  ({
+    type: SET_CURRENT_USER,
+    user
+  });
 export const userLoggedIn = user =>
   ({
     type: USER_LOGGED_IN,
@@ -70,6 +77,7 @@ export const login = credentials => dispatch => api
 
     setAuthorizationToken(token);
     dispatch(userLoggedIn(user.data));
+    dispatch(setCurrentUser(jwtdecode(token)));
     return user.data;
   })
   .catch(error => dispatch(signInUserFailure(error.response)));

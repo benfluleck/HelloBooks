@@ -1,5 +1,6 @@
 import models from '../models';
 import Helper from '../Helper/helper';
+import paginationfunc from '../controllers/middleware/pagination';
 
 const User = models.User;
 const UserBooks = models.UserBooks;
@@ -21,7 +22,7 @@ export default {
         }
       ]
     }).then((bookfound) => {
-      /**
+    /**
      * Check if the book has been borrowed before,
      * User should borrow .
      */
@@ -47,7 +48,6 @@ export default {
               }
             })
             .then((loanbook) => {
-              // If book is borrowed out, then No book to borrow
               if (!loanbook || loanbook.quantity === 0) {
                 return res
                   .status(404)
@@ -92,10 +92,13 @@ export default {
   },
 
   getborrowerslist(req, res) {
-    return UserBooks.findAll({
+    const offset = req.query.offset;
+    const limit = req.query.limit;
+    return UserBooks.findAndCountAll({
       where: {
         userid: req.params.userId,
-        return_status: req.query.returned
+        return_status: req.query.returned,
+        
       },
       include: [
         {
@@ -104,6 +107,8 @@ export default {
           required: true
         },
       ],
+      limit,
+      offset
     }).then((book) => {
       if (book.length === 0) {
         return res
@@ -112,7 +117,11 @@ export default {
       }
       res
         .status(200)
-        .send({ book });
+        .send({
+          book,
+          books: book.rows,
+          pagination: paginationfunc(offset, limit, book)
+        });
     }).catch(error => res.status(400).send(error.message));
   },
 
