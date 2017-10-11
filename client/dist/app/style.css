@@ -237,4 +237,5 @@ p {
     margin-right: auto;
     margin-left: auto; }
   main {
-    padding-top: 2rem; } }
+    padding-top: 2rem;
+    margin-left: -100px; } }

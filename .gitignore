@@ -9,3 +9,5 @@ coverage/
 */.nyc_output/*
 .coveralls.yml
 .env
+.nyc_output
+npm-debug.log

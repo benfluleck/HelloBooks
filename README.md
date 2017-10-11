@@ -1,5 +1,4 @@
 [![Build Status](https://travis-ci.org/benfluleck/HelloBooks.png)](https://travis-ci.org/benfluleck/HelloBooks.svg?branch=Travisrepo)
-[![Coverage Status](https://coveralls.io/repos/github/benfluleck/HelloBooks/badge.svg)](https://coveralls.io/github/benfluleck/HelloBooks)
 [![Code Climate](https://codeclimate.com/github/benfluleck/HelloBooks/badges/gpa.svg)](https://codeclimate.com/github/benfluleck/HelloBooks/)
 [![Test Coverage](https://codeclimate.com/github/benfluleck/HelloBooks/badges/coverage.svg)](https://codeclimate.com/github/codeclimate/benfluleck/HelloBooks)
 
@@ -7,9 +6,7 @@
 
 # HelloBooks
 
-HelloBooks is an application that simulates a real life library
-
-With this application users are able to find and loan books.
+HelloBooks is an application that simulates a real life library with this application users are able to find and borrow books.
 
 ## Features
 HelloBooks consists of the following features:
