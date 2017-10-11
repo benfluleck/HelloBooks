@@ -5,9 +5,10 @@ server/config/*
 package-lock.json
 */coverage/*
 */nyc_output/*
-coverage/
+coverage
 */.nyc_output/*
 .coveralls.yml
 .env
 .nyc_output
 npm-debug.log
+coverage/
