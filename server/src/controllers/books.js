@@ -4,12 +4,19 @@ import paginationfunc from '../controllers/middleware/pagination';
 
 const Books = models.Books;
 
-/**
- *
- */
+
 export default {
+
+  /**
+   *
+   * @description creates a book
+   * @param {any} req
+   * @param {any} res
+   * @returns {any} book
+   *
+   * @memmberOf BookController
+  */
   create(req, res) {
-    // const title = req.body.title;
     return Books
       .findOne({
         where: { title: req.body.title }
@@ -51,6 +58,18 @@ export default {
           .catch(error => res.status(401).send(error));
       });
   },
+
+  /**
+   *
+   * @description update a book
+   * @param {any} req
+   * @param {any} res
+   * @returns {any} book
+   *
+   * @memmberOf BookController
+   *
+   *
+   */
   update(req, res) {
     return Books
       .findById(req.params.bookId)
@@ -89,6 +108,42 @@ export default {
       }));
   },
 
+  /**
+   *
+   *
+   * @param {any} req
+   * @param {any} res
+   * @returns {any} delete books
+   *
+   *
+   */
+  destroybooks(req, res) {
+    if (req.params.bookId === 'undefined') {
+      return res.status(404).send({ success: false, message: 'Book not found' });
+    }
+    return Books
+      .findById({
+        where: {
+          id: req.params.bookId,
+        },
+      })
+      .then((book) => {
+        if (!book) {
+          return res.status(404).send({ success: false, message: 'Book not found' });
+        }
+        book.destroy();
+        return res.status(200).send({ success: true, message: 'Book successfully deleted' });
+      })
+      .catch(() => res.status(400).send({ success: false, message: 'Enter valid inputs!' }));
+  },
+
+  /**
+   *
+   *
+   * @param {any} req
+   * @param {any} res
+   * @returns {any} books
+   */
   getAllBooks(req, res) {
     const offset = req.query.offset;
     const limit = req.query.limit;
@@ -100,13 +155,7 @@ export default {
       .then((books) => {
         if (books.count === 0) {
           res.json({ error: 'Empty', message: 'There are no books present in the database' });
-        } else { 
-          // const pagination = {
-          //   page: Math.floor(offset / limit) + 1,
-          //   pageCount: Math.ceil(books.count / limit),
-          //   pageSize: books.rows.length,
-          //   totalCount: books.count
-          // };
+        } else {
           res
             .status(200)
             .send({

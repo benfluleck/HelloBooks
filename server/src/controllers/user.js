@@ -1,12 +1,10 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt-nodejs';
 import models from '../models';
-import Helper from '../Helper/helper';
-import { sendResetPasswordEmail } from '../mailer/mailer';
+import sendResetPasswordEmail from '../mailer/mailer';
 
 const User = models.User;
-const UserBooks = models.UserBooks;
-const Books = models.Books;
+
 
 export default {
   /**
@@ -42,6 +40,14 @@ export default {
       });
   },
 
+  /**
+   *
+   *
+   * @param {Object} req request object
+   * @param {Object} res response object
+   * @returns {void|Response} status, send
+   *
+   */ 
   signin(req, res) {
     return User
       .findOne({
@@ -61,11 +67,11 @@ export default {
             password: user.password
           };
           const token = jwt.sign(Userjwt, process.env.JWT_SECRET, {
-            expiresIn: 1440 // expires in 24 hours
+            expiresIn: 1440
           });
 
           res.json({
-            success: true, message: `Welcome, ${req.body.username} You are now logged in!`, token, username: req.body.username 
+            success: true, message: `Welcome, ${req.body.username} You are now logged in!`, token, username: req.body.username
           });
         } else {
           res
@@ -76,6 +82,16 @@ export default {
       .catch(error => res.status(500).send(error.message));
   },
 
+  /**
+   *
+   *
+   * @param {any} req
+   * @param {any} res
+   * @returns {any} reset password
+   *
+   *
+   *
+   */
   reset_password(req, res) {
     User
       .findOne({ email: req.body.email })
@@ -93,5 +109,36 @@ export default {
             });
         }
       });
-  }
+  },
+
+  /**
+   * Edit user Information
+   * @public
+   * @method
+   * @param  {object} req - express http request object
+   * @param  {object} res - express http response object
+   * @return {mixed}      - sends an http response
+   */
+  updateUserInfo(req, res) {
+    User
+      .findById(req.params.userId)
+      .then((user) => {
+        user.update(req.body, { returning: true, plain: true })
+          .then(() => res.status(202).send({
+            success: true,
+            user,
+            message: 'Your information was successfully updated',
+          }), (error) => {
+            res.status(500).send({
+              success: false,
+              error,
+            });
+          });
+      })
+      .catch(error => res.status(500).send({
+        success: false,
+        error,
+      }));
+  },
+
 };

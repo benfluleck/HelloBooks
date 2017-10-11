@@ -16,11 +16,9 @@ var _models = require('../models');
 
 var _models2 = _interopRequireDefault(_models);
 
-var _helper = require('../Helper/helper');
-
-var _helper2 = _interopRequireDefault(_helper);
-
 var _mailer = require('../mailer/mailer');
+
+var _mailer2 = _interopRequireDefault(_mailer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -54,6 +52,16 @@ exports.default = {
       res.status(400).send({ success: false, message: ' ' + error.message });
     });
   },
+
+
+  /**
+   *
+   *
+   * @param {Object} req request object
+   * @param {Object} res response object
+   * @returns {void|Response} status, send
+   *
+   */
   signin: function signin(req, res) {
     return User.findOne({
       where: {
@@ -69,7 +77,7 @@ exports.default = {
           password: user.password
         };
         var token = _jsonwebtoken2.default.sign(Userjwt, process.env.JWT_SECRET, {
-          expiresIn: 1440 // expires in 24 hours
+          expiresIn: 1440
         });
 
         res.json({
@@ -82,10 +90,22 @@ exports.default = {
       return res.status(500).send(error.message);
     });
   },
+
+
+  /**
+   *
+   *
+   * @param {any} req
+   * @param {any} res
+   * @returns {any} reset password
+   *
+   *
+   *
+   */
   reset_password: function reset_password(req, res) {
     User.findOne({ email: req.body.email }).then(function (user) {
       if (user) {
-        (0, _mailer.sendResetPasswordEmail)(user);
+        (0, _mailer2.default)(user);
         res.json({});
       } else {
         res.status(400).json({
@@ -94,6 +114,37 @@ exports.default = {
           }
         });
       }
+    });
+  },
+
+
+  /**
+   * Edit user Information
+   * @public
+   * @method
+   * @param  {object} req - express http request object
+   * @param  {object} res - express http response object
+   * @return {mixed}      - sends an http response
+   */
+  updateUserInfo: function updateUserInfo(req, res) {
+    User.findById(req.params.userId).then(function (user) {
+      user.update(req.body, { returning: true, plain: true }).then(function () {
+        return res.status(202).send({
+          success: true,
+          user: user,
+          message: 'Your information was successfully updated'
+        });
+      }, function (error) {
+        res.status(500).send({
+          success: false,
+          error: error
+        });
+      });
+    }).catch(function (error) {
+      return res.status(500).send({
+        success: false,
+        error: error
+      });
     });
   }
 };

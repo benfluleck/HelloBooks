@@ -40,57 +40,57 @@ Router.get('/', function (req, res) {
 /**
  * @swagger
  * definition:
- *   SignIn:
- *     properties:
- *       firstname:
- *         type: string
- *         default: 'Ben'
- *       lastname:
- *         type: string
- *         default: 'Ogidan'
- *       username:
- *         type: string
- *         default: 'Benny'
- *       email:
- *         type: string
- *         default: 'Ogidan@yahoo.com'
- *       password:
- *         type: string
- *         default: 'benny'
- *       password_confirmation:
- *         type: string
- *         default: 'benny'
+ *  SignIn:
+ *   properties:
+ *    firstname:
+ *      type: string
+ *      default: 'Ben'
+ *    lastname:
+ *      type: string
+ *      default: 'Ogidan'
+ *    username:
+ *      type: string
+ *      default: 'Benny'
+ *    email:
+ *      type: string
+ *      default: 'Ogidan@yahoo.com'
+ *    password:
+ *      type: string
+ *      default: 'benny'
+ *    password_confirmation:
+ *      type: string
+ *      default: 'benny'
  */
 /**
  * @swagger
  * definition:
- *   Login:
- *     properties:
- *       username:
- *         type: string
- *         default: Benny
- *       password:
- *         type: string
- *         default: benny
+ *  Login:
+ *   properties:
+ *    username:
+ *     type: string
+ *     default: Benny
+ *    password:
+ *     type: string
+ *     default: benny
  */
 
 /**
  * @swagger
  * definition:
- *   Book:
- *     properties:
- *       title:
- *         type: string
- *       author:
- *         type: string
- *       category:
- *         type: string
- *       description:
- *         type: string
- *       quantity:
- *         type: integer
- *       book_image:
- *         type: string
+ *  Book:
+ *   properties:
+ *     title:
+ *      type: string
+ *     author:
+ *      type: string
+ *     category:
+ *      type: string
+ *     description:
+ *      type: string
+ *     quantity:
+ *      type: integer
+ *     book_image:
+ *      type: string
  */
 
 /**
@@ -110,10 +110,14 @@ Router.get('/', function (req, res) {
  *         schema:
  *           $ref: '#/definitions/SignIn'
  *     responses:
- *       200:
+ *       '201':
  *         description: User Successfully created
- *       400:
+ *       '400':
  *         description: Invalid Username, Password or Email
+ *       '422':
+ *         Email is not the right format
+ *       '409':
+ *         Password and username do not match
  */
 Router.post('/users/signup', UserController.create);
 /**
@@ -133,10 +137,16 @@ Router.post('/users/signup', UserController.create);
  *         schema:
  *           $ref: '#/definitions/Login'
  *     responses:
- *       200:
- *         description: Successfully created
- *       400:
+ *       '200':
+ *         description: Successfully login
+ *       '400':
  *         description: Bad Username, Password or Email
+ *       '401':
+ *         description: Authorization information is missing or invalid.
+ *       '404':
+ *         description: A user with the specified ID was not found.
+ *       '5XX':
+ *         description: Error with Token.
  */
 Router.post('/users/signin', UserController.signin);
 
@@ -160,8 +170,6 @@ Router.use(function (req, res, next) {
     return res.status(403).send({ success: false, message: 'No token provided. Did you specify your secret message' });
   }
 });
-// if  user selects a different route and is not authenticated redirect him
-// number of copies admin
 
 /**
  * @swagger
@@ -185,10 +193,14 @@ Router.use(function (req, res, next) {
  *         required: true
  *         type: string
  *     responses:
- *       200:
+ *       '201':
  *         description: Successfully created
- *       400:
- *         description: Invalid Tokens
+ *       '400':
+ *         description: All fields are required
+ *       '401':
+ *         description: Invalid request.
+ *       '5XX':
+ *         description: Error with Token.
  */
 Router.post('/books', BooksController.create);
 /**
@@ -218,14 +230,16 @@ Router.post('/books', BooksController.create);
  *         required: true
  *         type: string
  *     responses:
- *       201:
- *         description: Successfully edited
+ *       202:
+ *         description: Successfully creation
  *         schema:
  *           $ref: '#/definitions/Book'
  *       400:
  *         description: All fields are required
  *       404:
  *         description: Book not found
+ *       '5XX':
+ *         description: Error with Token.
  */
 Router.put('/books/:bookId', BooksController.update);
 /**
@@ -265,6 +279,14 @@ Router.get('/books/', BooksController.getAllBooks);
  *         in: path
  *         required: true
  *         type: integer
+ *       - name: offset
+ *         in: query
+ *         type: integer
+ *         default: 0
+ *       - name: limit
+ *         in: query
+ *         type: integer
+ *         default: 3
  *       - in: body
  *         name: loan with return_date
  *         description: Loan book with Return date specified
@@ -286,14 +308,12 @@ Router.get('/books/', BooksController.getAllBooks);
  *         required: true
  *         type: string
  *     responses:
- *       201:
- *         description: Book Successfully borrowed
- *         schema:
- *           $ref: '#/definitions/Book'
- *       400:
- *         description: All fields are required
- *       404:
- *         description: Book not found
+ *       '200':
+ *         description: Book succesfully loaned
+ *       '404':
+ *         description: There are no books present in the database
+ *       '5XX':
+ *         description: Error with Token.
  */
 Router.post('/users/:userId/books', UserBooksController.loanbook);
 /**
@@ -323,7 +343,7 @@ Router.post('/users/:userId/books', UserBooksController.loanbook);
  *         type: string
  *     responses:
  *       201:
- *         description: Book Successfully returned
+ *         description: Book Successfully lreturned
  *         schema:
  *           $ref: '#/definitions/Book'
  *       400:
@@ -331,7 +351,6 @@ Router.post('/users/:userId/books', UserBooksController.loanbook);
  *       404:
  *         description: Book does not exist
  */
-
 Router.put('/users/:userId/books', UserBooksController.returnbook);
 /**
  * @swagger
@@ -353,6 +372,14 @@ Router.put('/users/:userId/books', UserBooksController.returnbook);
  *         required: true
  *         type: boolean
  *         default: false
+ *       - name: offset
+ *         in: query
+ *         type: integer
+ *         default: 0
+ *       - name: limit
+ *         in: query
+ *         type: integer
+ *         default: 3
  *       - name: x-access-token
  *         in: header
  *         description: Header for Token
@@ -360,9 +387,13 @@ Router.put('/users/:userId/books', UserBooksController.returnbook);
  *         type: string
  *     responses:
  *       200:
- *         description: An array of Books
+ *         description: List of borrowed books successfully displayed
  *         schema:
  *           $ref: '#/definitions/Book'
  */
 Router.get('/users/:userId/books', UserBooksController.getborrowerslist);
+
+// Router.delete('books/:bookId', BooksController.destroybooks);
+// Router.put('/users/:userId', UserController.updateUserInfo);
+
 exports.default = Router;

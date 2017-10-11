@@ -36,10 +36,6 @@ exports.default = {
         required: true
       }]
     }).then(function (bookfound) {
-      /**
-       * Check if the book has been borrowed before,
-       * User should borrow .
-       */
       if (bookfound) {
         return res.status(409).send({
           success: false,
@@ -75,7 +71,7 @@ exports.default = {
           });
         });
       }).catch(function () {
-        res.status(400).send({ success: false, message: 'Check the Book or User' });
+        res.status(400).send({ success: false, message: 'Check the Book you have requested' });
       });
     }).catch(function (error) {
       res.status(404).send({ success: false, message: ' ' + error.message });
@@ -88,7 +84,6 @@ exports.default = {
       where: {
         userid: req.params.userId,
         return_status: req.query.returned
-
       },
       include: [{
         model: Books,

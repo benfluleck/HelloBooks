@@ -2,7 +2,6 @@ import models from '../models';
 import Helper from '../Helper/helper';
 import paginationfunc from '../controllers/middleware/pagination';
 
-const User = models.User;
 const UserBooks = models.UserBooks;
 const Books = models.Books;
 
@@ -22,10 +21,6 @@ export default {
         }
       ]
     }).then((bookfound) => {
-    /**
-     * Check if the book has been borrowed before,
-     * User should borrow .
-     */
       if (bookfound) {
         return res
           .status(409)
@@ -82,7 +77,7 @@ export default {
         .catch(() => {
           res
             .status(400)
-            .send({ success: false, message: 'Check the Book or User' });
+            .send({ success: false, message: 'Check the Book you have requested' });
         });
     }).catch((error) => {
       res
@@ -98,7 +93,6 @@ export default {
       where: {
         userid: req.params.userId,
         return_status: req.query.returned,
-        
       },
       include: [
         {
