@@ -84,7 +84,7 @@ app.get('/hellobooks.json', function (req, res) {
 app.use('/api/v1', _routes2.default, authenticateRoutes);
 
 app.get('*', function (req, res) {
-  return res.status(404).send({ message: 'This is a wrong route.' });
+  return res.status(404).send({ message: 'You are at a wrong point.' });
 });
 
 exports.default = app;
