@@ -12,10 +12,6 @@ var _toTitleCase = require('to-title-case');
 
 var _toTitleCase2 = _interopRequireDefault(_toTitleCase);
 
-var _sequelize = require('sequelize');
-
-var _sequelize2 = _interopRequireDefault(_sequelize);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = function (sequelize, DataTypes) {
@@ -24,12 +20,6 @@ exports.default = function (sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false,
       trim: true,
-      validate: {
-        len: {
-          args: [2, 30],
-          msg: 'Firstname must be at least 2 chars and less than 30 chars'
-        }
-      },
       set: function set(val) {
         if (val !== undefined) {
           this.setDataValue('firstname', (0, _toTitleCase2.default)(val));
@@ -60,7 +50,7 @@ exports.default = function (sequelize, DataTypes) {
       trim: true,
       unique: {
         args: true,
-        msg: "Username already in database"
+        msg: 'Username already in database'
       },
       allowNull: false,
 
@@ -112,17 +102,13 @@ exports.default = function (sequelize, DataTypes) {
       allowNull: false,
       unique: {
         args: true,
-        msg: "Email already in database"
+        msg: 'Email already in use'
       },
       trim: true,
       validate: {
         isEmail: {
           arg: true,
-          msg: 'Must be an Email address'
-        },
-        len: {
-          args: [5, 45],
-          msg: 'Firstname must be at least 2 chars and less than 30 chars'
+          msg: 'This email must be a valid email address'
         }
       }
     },

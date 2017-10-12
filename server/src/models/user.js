@@ -1,6 +1,5 @@
 import bcrypt from 'bcrypt-nodejs';
 import toTitleCase from 'to-title-case';
-import Sequelize from 'sequelize';
 
 export default(sequelize, DataTypes) => {
   const User = sequelize.define('User', {
@@ -8,14 +7,6 @@ export default(sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       trim: true,
-      validate: {
-        len: {
-          args: [
-            2, 30
-          ],
-          msg: 'Firstname must be at least 2 chars and less than 30 chars'
-        }
-      },
       set(val) {
         if (val !== undefined) {
           this.setDataValue('firstname', toTitleCase(val));
@@ -48,7 +39,7 @@ export default(sequelize, DataTypes) => {
       trim: true,
       unique: {
         args: true,
-        msg: "Username already in database"
+        msg: 'Username already in database'
       },
       allowNull: false,
 
@@ -104,19 +95,13 @@ export default(sequelize, DataTypes) => {
       allowNull: false,
       unique: {
         args: true,
-        msg: "Email already in database"
+        msg: 'Email already in use'
       },
       trim: true,
       validate: {
         isEmail: {
           arg: true,
-          msg: 'Must be an Email address'
-        },
-        len: {
-          args: [
-            5, 45
-          ],
-          msg: 'Firstname must be at least 2 chars and less than 30 chars'
+          msg: 'This email must be a valid email address'
         }
       }
     },
