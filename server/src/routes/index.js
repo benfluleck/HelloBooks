@@ -1,4 +1,3 @@
-// import jwt from 'jsonwebtoken';
 import express from 'express';
 import controller from '../controllers';
 import fieldValidationMiddleware from '../controllers/middleware/fieldValidations';
@@ -133,31 +132,6 @@ Router.post('/users/signup', fieldValidationMiddleware, UserController.create);
  *         description: Error with Token.
  */
 Router.post('/users/signin', fieldValidationMiddleware, UserController.signin);
-
-// Router.use((req, res, next) => {
-//   // check header or url parameters or post parameters for token
-//   const token = req.body.token || req.query.token || req.headers['x-access-token'];
-
-//   // decode token
-//   if (token) {
-//     // verifies secret and checks exp
-//     jwt.verify(token, 'superSecret', (err, decoded) => {
-//       if (err) {
-//         return res
-//           .status(401)
-//           .send({ success: false, message: 'Failed to authenticate token.' });
-//       }
-//       // if everything is good, save to request for use in other routes
-//       req.decoded = decoded;
-//       next();
-//     });
-//   } else {
-//     // if there is no token return an error
-//     return res
-//       .status(403)
-//       .send({ success: false, message: 'No token provided. Did you specify your secret message' });
-//   }
-// });
 
 /**
  * @swagger
