@@ -5,7 +5,7 @@ import swaggerJSDoc from 'swagger-jsdoc';
 import path from 'path';
 import dotenv from 'dotenv';
 import routes from './routes';
-import authenticate from './controllers/middleware/authenticate'
+import authenticate from './controllers/middleware/authenticate';
 
 dotenv.config();
 const app = express();
@@ -19,7 +19,7 @@ const swaggerDefinition = {
   basePath: '/api/v1'
 };
 
-const authenticateRoutes= authenticate.authenticate;
+const authenticateRoutes = authenticate.authenticate;
 
 const options = {
   // import swaggerDefinitions
@@ -44,7 +44,7 @@ app.use((req, res, next) => {
 });
 
 app.use(express.static(path.join(__dirname, '../api-docs/')));
-console.log(path.join(__dirname, '../api-docs/'));
+
 
 app.get('/hellobooks.json', (req, res) => {
   res.setHeader('Content-Type', 'application/json');
