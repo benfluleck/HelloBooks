@@ -4,10 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _jsonwebtoken = require('jsonwebtoken');
-
-var _jsonwebtoken2 = _interopRequireDefault(_jsonwebtoken);
-
 var _express = require('express');
 
 var _express2 = _interopRequireDefault(_express);
@@ -16,8 +12,17 @@ var _controllers = require('../controllers');
 
 var _controllers2 = _interopRequireDefault(_controllers);
 
+var _fieldValidations = require('../controllers/middleware/fieldValidations');
+
+var _fieldValidations2 = _interopRequireDefault(_fieldValidations);
+
+var _authenticate = require('../controllers/middleware/authenticate');
+
+var _authenticate2 = _interopRequireDefault(_authenticate);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// import jwt from 'jsonwebtoken';
 var Router = _express2.default.Router();
 var UserController = _controllers2.default.User;
 var BooksController = _controllers2.default.Books;
@@ -110,16 +115,16 @@ Router.get('/', function (req, res) {
  *         schema:
  *           $ref: '#/definitions/SignIn'
  *     responses:
- *       '201':
- *         description: User Successfully created
- *       '400':
- *         description: Invalid Username, Password or Email
- *       '422':
- *         Email is not the right format
- *       '409':
- *         Password and username do not match
+ *      201:
+ *       description: User Successfully created
+ *      400:
+ *       description: Invalid Username, Password or Email
+ *      200:
+ *       Email is not the right format
+ *      404:
+ *       Password and username do not match
  */
-Router.post('/users/signup', UserController.create);
+Router.post('/users/signup', _fieldValidations2.default, UserController.create);
 /**
  * @swagger
  * /users/signin:
@@ -148,28 +153,32 @@ Router.post('/users/signup', UserController.create);
  *       '5XX':
  *         description: Error with Token.
  */
-Router.post('/users/signin', UserController.signin);
+Router.post('/users/signin', _fieldValidations2.default, UserController.signin);
 
-Router.use(function (req, res, next) {
-  // check header or url parameters or post parameters for token
-  var token = req.body.token || req.query.token || req.headers['x-access-token'];
+// Router.use((req, res, next) => {
+//   // check header or url parameters or post parameters for token
+//   const token = req.body.token || req.query.token || req.headers['x-access-token'];
 
-  // decode token
-  if (token) {
-    // verifies secret and checks exp
-    _jsonwebtoken2.default.verify(token, 'superSecret', function (err, decoded) {
-      if (err) {
-        return res.status(401).send({ success: false, message: 'Failed to authenticate token.' });
-      }
-      // if everything is good, save to request for use in other routes
-      req.decoded = decoded;
-      next();
-    });
-  } else {
-    // if there is no token return an error
-    return res.status(403).send({ success: false, message: 'No token provided. Did you specify your secret message' });
-  }
-});
+//   // decode token
+//   if (token) {
+//     // verifies secret and checks exp
+//     jwt.verify(token, 'superSecret', (err, decoded) => {
+//       if (err) {
+//         return res
+//           .status(401)
+//           .send({ success: false, message: 'Failed to authenticate token.' });
+//       }
+//       // if everything is good, save to request for use in other routes
+//       req.decoded = decoded;
+//       next();
+//     });
+//   } else {
+//     // if there is no token return an error
+//     return res
+//       .status(403)
+//       .send({ success: false, message: 'No token provided. Did you specify your secret message' });
+//   }
+// });
 
 /**
  * @swagger
@@ -202,7 +211,7 @@ Router.use(function (req, res, next) {
  *       '5XX':
  *         description: Error with Token.
  */
-Router.post('/books', BooksController.create);
+Router.post('/books', _authenticate2.default.authenticate, BooksController.create);
 /**
  * @swagger
  * /books/{bookId}:
@@ -241,7 +250,7 @@ Router.post('/books', BooksController.create);
  *       '5XX':
  *         description: Error with Token.
  */
-Router.put('/books/:bookId', BooksController.update);
+Router.put('/books/:bookId', _authenticate2.default.authenticate, BooksController.update);
 /**
  * @swagger
  * /books:
@@ -254,7 +263,7 @@ Router.put('/books/:bookId', BooksController.update);
  *     parameters:
  *       - name: x-access-token
  *         in: header
- *         description: Header for token
+ *         description: Header for token which uses jwt authentication
  *         required: true
  *         type: string
  *     responses:
@@ -263,7 +272,7 @@ Router.put('/books/:bookId', BooksController.update);
  *         schema:
  *           $ref: '#/definitions/Book'
  */
-Router.get('/books/', BooksController.getAllBooks);
+Router.get('/books/', _authenticate2.default.authenticate, BooksController.getAllBooks);
 /**
  * @swagger
  * /users/{userId}/books:
@@ -280,6 +289,7 @@ Router.get('/books/', BooksController.getAllBooks);
  *         required: true
  *         type: integer
  *       - name: offset
+ *         description: offset for pagination for books
  *         in: query
  *         type: integer
  *         default: 0
@@ -315,7 +325,7 @@ Router.get('/books/', BooksController.getAllBooks);
  *       '5XX':
  *         description: Error with Token.
  */
-Router.post('/users/:userId/books', UserBooksController.loanbook);
+Router.post('/users/:userId/books', _authenticate2.default.authenticate, UserBooksController.loanbook);
 /**
  * @swagger
  * /users/{userId}/books:
@@ -351,7 +361,7 @@ Router.post('/users/:userId/books', UserBooksController.loanbook);
  *       404:
  *         description: Book does not exist
  */
-Router.put('/users/:userId/books', UserBooksController.returnbook);
+Router.put('/users/:userId/books', _authenticate2.default.authenticate, UserBooksController.returnbook);
 /**
  * @swagger
  * /users/{userId}/books:
@@ -391,7 +401,7 @@ Router.put('/users/:userId/books', UserBooksController.returnbook);
  *         schema:
  *           $ref: '#/definitions/Book'
  */
-Router.get('/users/:userId/books', UserBooksController.getborrowerslist);
+Router.get('/users/:userId/books', _authenticate2.default.authenticate, UserBooksController.getborrowerslist);
 
 // Router.delete('books/:bookId', BooksController.destroybooks);
 // Router.put('/users/:userId', UserController.updateUserInfo);

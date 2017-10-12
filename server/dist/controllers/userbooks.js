@@ -18,7 +18,6 @@ var _pagination2 = _interopRequireDefault(_pagination);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var User = _models2.default.User;
 var UserBooks = _models2.default.UserBooks;
 var Books = _models2.default.Books;
 

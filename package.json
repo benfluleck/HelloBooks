@@ -74,6 +74,7 @@
     "sweetalert2": "^6.7.0",
     "to-title-case": "^1.0.0",
     "unique-random": "^1.0.0",
+    "validator": "^8.2.0",
     "webpack": "^3.5.5"
   },
   "devDependencies": {
@@ -117,8 +118,6 @@
     "scss-loader": "0.0.1",
     "semantic-ui-react": "^0.73.0",
     "style-loader": "^0.18.2",
-    "sweetalert2": "^6.7.0",
-    "validator": "^8.2.0",
     "validators": "^0.3.1",
     "webpack": "^3.5.5",
     "webpack-dev-server": "^2.7.1"
