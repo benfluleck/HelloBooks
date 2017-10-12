@@ -102,7 +102,7 @@ Router.get('/', (req, res) => res.status(200).send({ message: 'Welcome to the He
  *      404:
  *       Password and username do not match
  */
-Router.post('/users/signup', fieldValidationMiddleware, UserController.create);
+Router.post('/auth/users/signup', fieldValidationMiddleware, UserController.create);
 /**
  * @swagger
  * /users/signin:
@@ -131,7 +131,7 @@ Router.post('/users/signup', fieldValidationMiddleware, UserController.create);
  *       '5XX':
  *         description: Error with Token.
  */
-Router.post('/users/signin', fieldValidationMiddleware, UserController.signin);
+Router.post('/auth/users/signin', fieldValidationMiddleware, UserController.signin);
 
 /**
  * @swagger

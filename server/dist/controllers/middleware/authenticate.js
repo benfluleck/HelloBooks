@@ -15,7 +15,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 * @return {undefined} if not defined send a response to the server indicating this
 */
 var authenticate = function authenticate(req, res, next) {
-  var token = req.body.token || req.headers['x-access-token'] || req.headers.cookies.token || req.headers.authorization;
+  if (req.url.startsWith('/auth')) return next();
+  var token = req.headers['x-access-token'] || req.headers.authorization;
   if (token) {
     _jsonwebtoken2.default.verify(token, process.env.JWT_SECRET, function (error, decoded) {
       if (error) {
@@ -45,7 +46,7 @@ var getJWT = function getJWT(id, email, username, firstname) {
       username: username,
       firstname: firstname
     }, process.env.JWT_SECRET, {
-      expiresIn: '10h'
+      expiresIn: '24h'
     }, function (error, token) {
       if (error) {
         reject(new Error({
@@ -60,7 +61,7 @@ var getJWT = function getJWT(id, email, username, firstname) {
       } else {
         reject(new Error({
           status: 'Error',
-          message: 'token error'
+          message: 'Token error'
         }));
       }
     });

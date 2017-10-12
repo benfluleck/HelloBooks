@@ -22,7 +22,6 @@ var _authenticate2 = _interopRequireDefault(_authenticate);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// import jwt from 'jsonwebtoken';
 var Router = _express2.default.Router();
 var UserController = _controllers2.default.User;
 var BooksController = _controllers2.default.Books;
@@ -124,7 +123,7 @@ Router.get('/', function (req, res) {
  *      404:
  *       Password and username do not match
  */
-Router.post('/users/signup', _fieldValidations2.default, UserController.create);
+Router.post('/auth/users/signup', _fieldValidations2.default, UserController.create);
 /**
  * @swagger
  * /users/signin:
@@ -153,32 +152,7 @@ Router.post('/users/signup', _fieldValidations2.default, UserController.create);
  *       '5XX':
  *         description: Error with Token.
  */
-Router.post('/users/signin', _fieldValidations2.default, UserController.signin);
-
-// Router.use((req, res, next) => {
-//   // check header or url parameters or post parameters for token
-//   const token = req.body.token || req.query.token || req.headers['x-access-token'];
-
-//   // decode token
-//   if (token) {
-//     // verifies secret and checks exp
-//     jwt.verify(token, 'superSecret', (err, decoded) => {
-//       if (err) {
-//         return res
-//           .status(401)
-//           .send({ success: false, message: 'Failed to authenticate token.' });
-//       }
-//       // if everything is good, save to request for use in other routes
-//       req.decoded = decoded;
-//       next();
-//     });
-//   } else {
-//     // if there is no token return an error
-//     return res
-//       .status(403)
-//       .send({ success: false, message: 'No token provided. Did you specify your secret message' });
-//   }
-// });
+Router.post('/auth/users/signin', _fieldValidations2.default, UserController.signin);
 
 /**
  * @swagger

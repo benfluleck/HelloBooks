@@ -10,7 +10,8 @@ import jwt from 'jsonwebtoken';
 * @return {undefined} if not defined send a response to the server indicating this
 */
 const authenticate = (req, res, next) => {
-  const token = req.body.token || req.headers['x-access-token'] || req.headers.cookies.token || req.headers.authorization;
+  if (req.url.startsWith('/auth')) return next();
+  const token = req.headers['x-access-token'] || req.headers.authorization;
   if (token) {
     jwt.verify(token, process.env.JWT_SECRET, (error, decoded) => {
       if (error) {
@@ -45,7 +46,7 @@ const getJWT = (id, email, username, firstname) => new Promise((resolve, reject)
       firstname
     }, process.env.JWT_SECRET,
     {
-      expiresIn: '10h'
+      expiresIn: '24h'
     }, (error, token) => {
       if (error) {
         reject(new Error({
@@ -60,7 +61,7 @@ const getJWT = (id, email, username, firstname) => new Promise((resolve, reject)
       } else {
         reject(new Error({
           status: 'Error',
-          message: 'token error'
+          message: 'Token error'
         }));
       }
     }

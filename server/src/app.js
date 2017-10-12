@@ -5,6 +5,7 @@ import swaggerJSDoc from 'swagger-jsdoc';
 import path from 'path';
 import dotenv from 'dotenv';
 import routes from './routes';
+import authenticate from './controllers/middleware/authenticate'
 
 dotenv.config();
 const app = express();
@@ -17,6 +18,8 @@ const swaggerDefinition = {
   host: 'localhost:5000',
   basePath: '/api/v1'
 };
+
+const authenticateRoutes= authenticate.authenticate;
 
 const options = {
   // import swaggerDefinitions
@@ -47,7 +50,8 @@ app.get('/hellobooks.json', (req, res) => {
   res.setHeader('Content-Type', 'application/json');
   res.send(swaggerSpec);
 });
-app.use('/api/v1', routes);
+
+app.use('/api/v1', routes, authenticateRoutes);
 
 app.get('*', (req, res) => res.status(404).send({ message: 'This is a wrong route.' }));
 

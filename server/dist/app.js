@@ -32,6 +32,10 @@ var _routes = require('./routes');
 
 var _routes2 = _interopRequireDefault(_routes);
 
+var _authenticate = require('./controllers/middleware/authenticate');
+
+var _authenticate2 = _interopRequireDefault(_authenticate);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _dotenv2.default.config();
@@ -45,6 +49,8 @@ var swaggerDefinition = {
   host: 'localhost:5000',
   basePath: '/api/v1'
 };
+
+var authenticateRoutes = _authenticate2.default.authenticate;
 
 var options = {
   // import swaggerDefinitions
@@ -74,7 +80,8 @@ app.get('/hellobooks.json', function (req, res) {
   res.setHeader('Content-Type', 'application/json');
   res.send(swaggerSpec);
 });
-app.use('/api/v1', _routes2.default);
+
+app.use('/api/v1', _routes2.default, authenticateRoutes);
 
 app.get('*', function (req, res) {
   return res.status(404).send({ message: 'This is a wrong route.' });

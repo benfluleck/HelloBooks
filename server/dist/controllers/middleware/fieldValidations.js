@@ -7,8 +7,8 @@ Object.defineProperty(exports, "__esModule", {
 var _validators = require('./validators');
 
 var fieldMap = {
-  '/users/signin': ['username', 'password'],
-  '/users/signup': ['email', 'password', 'username', 'firstname', 'lastname']
+  '/auth/users/signin': ['username', 'password'],
+  '/auth/users/signup': ['email', 'password', 'username', 'firstname', 'lastname']
 };
 
 /**

@@ -1,8 +1,8 @@
 import { fieldValidationFnMap, inValidFieldMessage } from './validators';
 
 const fieldMap = {
-  '/users/signin': ['username', 'password'],
-  '/users/signup': ['email', 'password', 'username', 'firstname', 'lastname']
+  '/auth/users/signin': ['username', 'password'],
+  '/auth/users/signup': ['email', 'password', 'username', 'firstname', 'lastname']
 };
 
 /**
