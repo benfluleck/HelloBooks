@@ -2,11 +2,13 @@ import express from 'express';
 import controller from '../controllers';
 import fieldValidationMiddleware from '../controllers/middleware/fieldValidations';
 import authenticate from '../controllers/middleware/authenticate';
+import nullvalidationMiddleware from '../controllers/middleware/nullValidation';
 
 const Router = express.Router();
 const UserController = controller.User;
 const BooksController = controller.Books;
 const UserBooksController = controller.UserBooks;
+const authorization = authenticate.authenticate;
 
 /**
  * @swagger
@@ -102,7 +104,7 @@ Router.get('/', (req, res) => res.status(200).send({ message: 'Welcome to the He
  *      404:
  *       Password and username do not match
  */
-Router.post('/auth/users/signup', fieldValidationMiddleware, UserController.create);
+Router.post('/auth/users/signup', fieldValidationMiddleware, nullvalidationMiddleware, UserController.create);
 /**
  * @swagger
  * /users/signin:
@@ -131,7 +133,7 @@ Router.post('/auth/users/signup', fieldValidationMiddleware, UserController.crea
  *       '5XX':
  *         description: Error with Token.
  */
-Router.post('/auth/users/signin', fieldValidationMiddleware, UserController.signin);
+Router.post('/auth/users/signin', nullvalidationMiddleware, UserController.signin);
 
 /**
  * @swagger
@@ -164,7 +166,7 @@ Router.post('/auth/users/signin', fieldValidationMiddleware, UserController.sign
  *       '5XX':
  *         description: Error with Token.
  */
-Router.post('/books', authenticate.authenticate, BooksController.create);
+Router.post('/books', authorization, nullvalidationMiddleware, BooksController.create);
 /**
  * @swagger
  * /books/{bookId}:
@@ -203,7 +205,7 @@ Router.post('/books', authenticate.authenticate, BooksController.create);
  *       '5XX':
  *         description: Error with Token.
  */
-Router.put('/books/:bookId', authenticate.authenticate, BooksController.update);
+Router.put('/books/:bookId', authorization, nullvalidationMiddleware, BooksController.update);
 /**
  * @swagger
  * /books:
@@ -225,7 +227,7 @@ Router.put('/books/:bookId', authenticate.authenticate, BooksController.update);
  *         schema:
  *           $ref: '#/definitions/Book'
  */
-Router.get('/books/', authenticate.authenticate, BooksController.getAllBooks);
+Router.get('/books/', authorization, BooksController.getAllBooks);
 /**
  * @swagger
  * /users/{userId}/books:
@@ -278,7 +280,7 @@ Router.get('/books/', authenticate.authenticate, BooksController.getAllBooks);
  *       '5XX':
  *         description: Error with Token.
  */
-Router.post('/users/:userId/books', authenticate.authenticate, UserBooksController.loanbook);
+Router.post('/users/:userId/books', authorization, UserBooksController.loanbook);
 /**
  * @swagger
  * /users/{userId}/books:
@@ -314,7 +316,7 @@ Router.post('/users/:userId/books', authenticate.authenticate, UserBooksControll
  *       404:
  *         description: Book does not exist
  */
-Router.put('/users/:userId/books', authenticate.authenticate, UserBooksController.returnbook);
+Router.put('/users/:userId/books', authorization, UserBooksController.returnbook);
 /**
  * @swagger
  * /users/{userId}/books:
@@ -354,7 +356,7 @@ Router.put('/users/:userId/books', authenticate.authenticate, UserBooksControlle
  *         schema:
  *           $ref: '#/definitions/Book'
  */
-Router.get('/users/:userId/books', authenticate.authenticate, UserBooksController.getborrowerslist);
+Router.get('/users/:userId/books', authorization, UserBooksController.getborrowerslist);
 
 // Router.delete('books/:bookId', BooksController.destroybooks);
 // Router.put('/users/:userId', UserController.updateUserInfo);
