@@ -48,10 +48,6 @@ export default(sequelize, DataTypes) => {
           args: true,
           msg: 'Usernames can not be empty'
         },
-        isAlphanumeric: {
-          args: true,
-          msg: 'No Alphanumeric characters please'
-        },
         len: {
           args: [
             4, 30
@@ -148,7 +144,7 @@ export default(sequelize, DataTypes) => {
     });
   };
 
-  User.generateHash = (password) => bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
+  User.generateHash = password => bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
 
   return User;
 };

@@ -59,10 +59,6 @@ exports.default = function (sequelize, DataTypes) {
           args: true,
           msg: 'Usernames can not be empty'
         },
-        isAlphanumeric: {
-          args: true,
-          msg: 'No Alphanumeric characters please'
-        },
         len: {
           args: [4, 30],
           msg: 'Username must be at least 2 chars and less than 30 chars'
