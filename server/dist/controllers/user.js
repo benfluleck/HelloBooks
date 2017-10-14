@@ -26,16 +26,20 @@ var User = _models2.default.User;
 
 exports.default = {
   /**
-  * Create a new user
-  * Route: POST: /users
+  * Route: POST: /auth/users/signin
+  * @description Create a new user
   * @param {Object} req request object
   * @param {Object} res response object
   * @returns {void|Response} status, send
   */
   create: function create(req, res) {
     if (!req.body.firstname || !req.body.lastname || !req.body.username || !req.body.password || !req.body.email || !req.body.password_confirmation) {
-      res.status(400).send('All fields are required');
+      return res.status(400).send({ message: 'All fields are required' });
     }
+    if (!req.body.password !== req.body.password_confirmation) {
+      return res.status(422).send({ message: 'Password and Password confirmation do not match' });
+    }
+
     User.findOne({
       where: { email: req.body.email }
     }).then(function (userExists) {
@@ -56,7 +60,7 @@ exports.default = {
           if (user) {
             res.status(201).send({
               success: true,
-              message: 'New User has been added'
+              message: 'User has been added'
             });
           }
         }).catch(function (error) {
@@ -70,8 +74,9 @@ exports.default = {
 
 
   /**
-   * User sign in
-   * Route: POST: /users
+   *
+   * Route: POST: /auth/users/sigin
+   * @description User sign in
    * @param {Object} req request object
    * @param {Object} res response object
    * @returns {void|Response} status, send
@@ -86,7 +91,7 @@ exports.default = {
       if (!user) {
         return res.status(404).send({
           success: false,
-          message: req.body.username + ' does not exist, Go to User SignUp'
+          message: req.body.username + ' does not exist, Go to SignUp'
         });
       } else if (_bcryptNodejs2.default.compareSync(req.body.password, user.password)) {
         var Userjwt = {
@@ -128,7 +133,7 @@ exports.default = {
       } else {
         res.status(400).json({
           errors: {
-            global: 'There are no users with such email'
+            global: 'There is no user with such email'
           }
         });
       }

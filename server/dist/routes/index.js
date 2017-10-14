@@ -20,12 +20,17 @@ var _authenticate = require('../controllers/middleware/authenticate');
 
 var _authenticate2 = _interopRequireDefault(_authenticate);
 
+var _nullValidation = require('../controllers/middleware/nullValidation');
+
+var _nullValidation2 = _interopRequireDefault(_nullValidation);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Router = _express2.default.Router();
 var UserController = _controllers2.default.User;
 var BooksController = _controllers2.default.Books;
 var UserBooksController = _controllers2.default.UserBooks;
+var authorization = _authenticate2.default.authenticate;
 
 /**
  * @swagger
@@ -123,7 +128,7 @@ Router.get('/', function (req, res) {
  *      404:
  *       Password and username do not match
  */
-Router.post('/auth/users/signup', _fieldValidations2.default, UserController.create);
+Router.post('/auth/users/signup', _fieldValidations2.default, _nullValidation2.default, UserController.create);
 /**
  * @swagger
  * /users/signin:
@@ -152,7 +157,7 @@ Router.post('/auth/users/signup', _fieldValidations2.default, UserController.cre
  *       '5XX':
  *         description: Error with Token.
  */
-Router.post('/auth/users/signin', _fieldValidations2.default, UserController.signin);
+Router.post('/auth/users/signin', _nullValidation2.default, UserController.signin);
 
 /**
  * @swagger
@@ -185,7 +190,7 @@ Router.post('/auth/users/signin', _fieldValidations2.default, UserController.sig
  *       '5XX':
  *         description: Error with Token.
  */
-Router.post('/books', _authenticate2.default.authenticate, BooksController.create);
+Router.post('/books', authorization, _nullValidation2.default, BooksController.create);
 /**
  * @swagger
  * /books/{bookId}:
@@ -224,7 +229,7 @@ Router.post('/books', _authenticate2.default.authenticate, BooksController.creat
  *       '5XX':
  *         description: Error with Token.
  */
-Router.put('/books/:bookId', _authenticate2.default.authenticate, BooksController.update);
+Router.put('/books/:bookId', authorization, _nullValidation2.default, BooksController.update);
 /**
  * @swagger
  * /books:
@@ -246,7 +251,7 @@ Router.put('/books/:bookId', _authenticate2.default.authenticate, BooksControlle
  *         schema:
  *           $ref: '#/definitions/Book'
  */
-Router.get('/books/', _authenticate2.default.authenticate, BooksController.getAllBooks);
+Router.get('/books/', authorization, BooksController.getAllBooks);
 /**
  * @swagger
  * /users/{userId}/books:
@@ -299,7 +304,7 @@ Router.get('/books/', _authenticate2.default.authenticate, BooksController.getAl
  *       '5XX':
  *         description: Error with Token.
  */
-Router.post('/users/:userId/books', _authenticate2.default.authenticate, UserBooksController.loanbook);
+Router.post('/users/:userId/books', authorization, UserBooksController.loanbook);
 /**
  * @swagger
  * /users/{userId}/books:
@@ -335,7 +340,7 @@ Router.post('/users/:userId/books', _authenticate2.default.authenticate, UserBoo
  *       404:
  *         description: Book does not exist
  */
-Router.put('/users/:userId/books', _authenticate2.default.authenticate, UserBooksController.returnbook);
+Router.put('/users/:userId/books', authorization, UserBooksController.returnbook);
 /**
  * @swagger
  * /users/{userId}/books:
@@ -375,7 +380,7 @@ Router.put('/users/:userId/books', _authenticate2.default.authenticate, UserBook
  *         schema:
  *           $ref: '#/definitions/Book'
  */
-Router.get('/users/:userId/books', _authenticate2.default.authenticate, UserBooksController.getborrowerslist);
+Router.get('/users/:userId/books', authorization, UserBooksController.getborrowerslist);
 
 // Router.delete('books/:bookId', BooksController.destroybooks);
 // Router.put('/users/:userId', UserController.updateUserInfo);

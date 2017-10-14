@@ -8,24 +8,27 @@ const Books = models.Books;
 export default {
 
   /**
-   *
+   * Route: POST: /books
    * @description creates a book
    * @param {any} req
    * @param {any} res
    * @returns {any} book
-   *
    * @memmberOf BookController
   */
   create(req, res) {
-    return Books
+    Books
       .findOne({
-        where: { title: req.body.title }
-
+        where: {
+          $and: [{ title: req.body.title },
+            { title: req.body.title }]
+        }
       })
-      .then((book) => {
-        if (book !== null) {
-          return res.status(400)
-            .send({ message: 'A book with the same title already exist' });
+      .then((bookExists) => {
+        if (bookExists !== null) {
+          return res.status(409)
+            .send({
+              message: 'A book with the same title and author already exists'
+            });
         }
         return Books
           .create({
@@ -38,44 +41,26 @@ export default {
           })
           .then(books =>
             res.status(201).send({
-              Book_title: books.title,
-              Author: books.author,
-              Description: books.description,
-              Number: books.quantity,
-              Image: books.book_image
+              message: `${books.title} has been added`
             }))
-          .catch((error) => {
-            if (error.name === 'SequelizeUniqueConstraintError') {
-              res.json({ error: 'Unique Error', message: 'The book with this author is already in the database, try to add to books' });
-            } else {
-              res
-                .status(401)
-                .send({
-                  Errors: Helper.errorArray(error)
-                });
-            }
-          })
           .catch(error => res.status(401).send(error));
       });
   },
 
   /**
-   *
+   * Route: PUT: /books/:bookId
    * @description update a book
    * @param {any} req
    * @param {any} res
    * @returns {any} book
-   *
    * @memmberOf BookController
-   *
-   *
    */
   update(req, res) {
     return Books
       .findById(req.params.bookId)
       .then((book) => {
         if (req.params.bookId === null) {
-          return res.json({ success: false, message: 'Enter a parameter' });
+          return res.send(404).send({ success: false, message: 'No book selected' });
         }
         if (!book) {
           return res
@@ -86,24 +71,25 @@ export default {
           .updateAttributes(req.body, {
             fields: Object.keys(req.body)
           })
-          .then(() => res.status(201).send(book))
+          .then(() =>
+            res.status(202).send({
+              message: `${book.title} has been updated`,
+              Title: book.title,
+              Author: book.author,
+              Quantity: book.quantity,
+              Category: book.category,
+              Description: book.description,
+              Image: book.book_image
+            }))
           .catch((error) => {
-            if (error.name === 'SequelizeUniqueConstraintError') {
-              res.json({
-                error: 'Unique Error',
-                message: 'The book with this author is already in the database try editing the book quanti' +
-                    'ty'
+            res
+              .status(400)
+              .send({
+                Errors: Helper.errorArray(error)
               });
-            } else {
-              res
-                .status(401)
-                .send({
-                  Errors: Helper.errorArray(error)
-                });
-            }
           });
       })
-      .catch(error => res.status(500).send({
+      .catch(error => res.status(400).send({
         Errors: Helper.errorArray(error)
       }));
   },
@@ -138,15 +124,16 @@ export default {
   },
 
   /**
-   *
-   *
+   * Route: GET: /books
+   * @description update a book
    * @param {any} req
    * @param {any} res
    * @returns {any} books
+   * @memmberOf BookController
    */
   getAllBooks(req, res) {
-    const offset = req.query.offset;
-    const limit = req.query.limit;
+    const offset = req.query.offset || 0;
+    const limit = req.query.limit || 3;
     return Books
       .findAndCountAll({
         limit,
