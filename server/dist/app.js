@@ -74,7 +74,6 @@ app.use(function (req, res, next) {
 });
 
 app.use(_express2.default.static(_path2.default.join(__dirname, '../api-docs/')));
-console.log(_path2.default.join(__dirname, '../api-docs/'));
 
 app.get('/hellobooks.json', function (req, res) {
   res.setHeader('Content-Type', 'application/json');
@@ -84,7 +83,7 @@ app.get('/hellobooks.json', function (req, res) {
 app.use('/api/v1', _routes2.default, authenticateRoutes);
 
 app.get('*', function (req, res) {
-  return res.status(404).send({ message: 'You are at a wrong point.' });
+  return res.status(404).send({ message: 'You are at a wrong route in the website' });
 });
 
 exports.default = app;

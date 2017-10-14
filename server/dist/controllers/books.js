@@ -23,21 +23,23 @@ var Books = _models2.default.Books;
 exports.default = {
 
   /**
-   *
+   * Route: POST: /books
    * @description creates a book
    * @param {any} req
    * @param {any} res
    * @returns {any} book
-   *
    * @memmberOf BookController
   */
   create: function create(req, res) {
-    return Books.findOne({
-      where: { title: req.body.title }
-
-    }).then(function (book) {
-      if (book !== null) {
-        return res.status(400).send({ message: 'A book with the same title already exist' });
+    Books.findOne({
+      where: {
+        $and: [{ title: req.body.title }, { title: req.body.title }]
+      }
+    }).then(function (bookExists) {
+      if (bookExists !== null) {
+        return res.status(409).send({
+          message: 'A book with the same title and author already exists'
+        });
       }
       return Books.create({
         title: req.body.title,
@@ -48,20 +50,8 @@ exports.default = {
         book_image: req.body.book_image
       }).then(function (books) {
         return res.status(201).send({
-          Book_title: books.title,
-          Author: books.author,
-          Description: books.description,
-          Number: books.quantity,
-          Image: books.book_image
+          message: books.title + ' has been added'
         });
-      }).catch(function (error) {
-        if (error.name === 'SequelizeUniqueConstraintError') {
-          res.json({ error: 'Unique Error', message: 'The book with this author is already in the database, try to add to books' });
-        } else {
-          res.status(401).send({
-            Errors: _helper2.default.errorArray(error)
-          });
-        }
       }).catch(function (error) {
         return res.status(401).send(error);
       });
@@ -70,20 +60,17 @@ exports.default = {
 
 
   /**
-   *
+   * Route: PUT: /books/:bookId
    * @description update a book
    * @param {any} req
    * @param {any} res
    * @returns {any} book
-   *
    * @memmberOf BookController
-   *
-   *
    */
   update: function update(req, res) {
     return Books.findById(req.params.bookId).then(function (book) {
       if (req.params.bookId === null) {
-        return res.json({ success: false, message: 'Enter a parameter' });
+        return res.send(404).send({ success: false, message: 'No book selected' });
       }
       if (!book) {
         return res.status(404).send({ message: 'Book does not exist in this database' });
@@ -91,21 +78,22 @@ exports.default = {
       return book.updateAttributes(req.body, {
         fields: Object.keys(req.body)
       }).then(function () {
-        return res.status(201).send(book);
+        return res.status(202).send({
+          message: book.title + ' has been updated',
+          Title: book.title,
+          Author: book.author,
+          Quantity: book.quantity,
+          Category: book.category,
+          Description: book.description,
+          Image: book.book_image
+        });
       }).catch(function (error) {
-        if (error.name === 'SequelizeUniqueConstraintError') {
-          res.json({
-            error: 'Unique Error',
-            message: 'The book with this author is already in the database try editing the book quanti' + 'ty'
-          });
-        } else {
-          res.status(401).send({
-            Errors: _helper2.default.errorArray(error)
-          });
-        }
+        res.status(400).send({
+          Errors: _helper2.default.errorArray(error)
+        });
       });
     }).catch(function (error) {
-      return res.status(500).send({
+      return res.status(400).send({
         Errors: _helper2.default.errorArray(error)
       });
     });
@@ -142,15 +130,16 @@ exports.default = {
 
 
   /**
-   *
-   *
+   * Route: GET: /books
+   * @description update a book
    * @param {any} req
    * @param {any} res
    * @returns {any} books
+   * @memmberOf BookController
    */
   getAllBooks: function getAllBooks(req, res) {
-    var offset = req.query.offset;
-    var limit = req.query.limit;
+    var offset = req.query.offset || 0;
+    var limit = req.query.limit || 3;
     return Books.findAndCountAll({
       limit: limit,
       offset: offset
