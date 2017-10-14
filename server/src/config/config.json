@@ -1,0 +1,26 @@
+{
+  "development": {
+   "username": "postgres",
+   "password": "root",
+ 
+   "database": "hello_books",
+   "host": "127.0.0.1",
+   "dialect": "postgres"
+  },
+  "test": {
+   "username": "postgres",
+   "password": "root",
+   "database": "travis",
+   "host": "127.0.0.1",
+   "dialect": "postgres"
+  },
+ 
+  "production": {
+ 
+   "dialect": "postgres",
+   "use_env_variable": "DATABASE_URL"
+ 
+  }
+ 
+ }
+ 
