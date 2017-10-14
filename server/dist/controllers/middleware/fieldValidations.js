@@ -7,12 +7,11 @@ Object.defineProperty(exports, "__esModule", {
 var _validators = require('./validators');
 
 var fieldMap = {
-  '/auth/users/signin': ['username', 'password'],
-  '/auth/users/signup': ['email', 'password', 'username', 'firstname', 'lastname']
+  '/auth/users/signup': ['email']
 };
 
 /**
- * middleware for validation
+ * middleware for field format validations
  * @param {object} req
  * @param {object} res
  * @param {function} next

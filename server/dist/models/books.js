@@ -20,16 +20,7 @@ exports.default = function (sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false,
       trim: true,
-      unique: 'compositeIndex',
-      validate: {
-        len: {
-          args: [2, 30],
-          msg: 'Book Title must be at least 2 chars and less than 50 chars'
-        }
-      },
-      set: function set(val) {
-        this.setDataValue('title', (0, _toTitleCase2.default)(val));
-      }
+      unique: 'compositeIndex'
     },
     author: {
       type: DataTypes.STRING,
@@ -40,10 +31,6 @@ exports.default = function (sequelize, DataTypes) {
         is: {
           arg: /\w+/g,
           msg: 'Must be only letters'
-        },
-        len: {
-          args: [2, 30],
-          msg: "Author's name must be at least 2 chars and less than 50 chars"
         }
       },
       set: function set(val) {
