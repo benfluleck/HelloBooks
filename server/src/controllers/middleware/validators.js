@@ -1,4 +1,4 @@
-import { isEmail, isLength, isAlphanumeric, isAlpha } from 'validator';
+import { isEmail, isLength, isAlphanumeric, isAlpha, isDate } from 'validator';
 
 
 const fieldLength = {
@@ -34,7 +34,8 @@ export const nullValidationFnMap = {
   title: [modifiedIsLength('title')],
   description: [modifiedIsLength('description')],
   author: [modifiedIsLength('author'), isAlpha],
-  category: [modifiedIsLength('category'), isAlpha]
+  category: [modifiedIsLength('category'), isAlpha],
+  return_date: [isDate]
 };
 
 export const nullValidFieldMessage = {

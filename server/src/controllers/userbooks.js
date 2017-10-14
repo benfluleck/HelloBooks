@@ -5,7 +5,16 @@ import paginationfunc from '../controllers/middleware/pagination';
 const UserBooks = models.UserBooks;
 const Books = models.Books;
 
+
 export default {
+  /**
+   * Route: POST: /users/:userId/books
+   * @description Loan a book
+   * @param {any} req
+   * @param {any} res
+   * @returns {any} book
+   * @memmberOf UserController
+   */
   loanbook(req, res) {
     UserBooks.findOne({
       where: {
