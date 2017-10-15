@@ -62,7 +62,7 @@ Admins can add new books
 - To test run `npm test` or `npm run test`
 
 ## Usage
-- Run database migration with `npm run db:migrate`
+- Run database migration with `npm start:migrate`
 - Start app development with `npm run start:dev` or `npm start`
 - Install **Postman** and use to test all endpoints
 
@@ -72,8 +72,8 @@ Admins can add new books
 
 Request type | Endpoint                                   | Action
 -------------|--------------------------------------------|--------------------------------------------------
-POST         | /api/v1/users/signup                       | Sign-up a new user
-POST	     | /api/v1/users/signin                       | Sign-in a registered user
+POST         | /api/v1/auth/users/signup                       | Sign-up a new user
+POST	     | /api/v1/auth/users/signin                       | Sign-in a registered user
 GET	         | /api/v1/books	                          | Authenticated user view all books
 POST	     | /api/v1/books	                          | Admin user create/add book
 PUT	         | /api/v1/books/:bookId	                  | Admin user modify book information

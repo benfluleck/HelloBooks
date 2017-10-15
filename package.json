@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node server/dist/bin/www.js",
     "test:db": "sequelize db:migrate",
+    "start:migrate": "sequelize db:migrate",
     "undo:migrate": "sequelize db:migrate:undo:all",
     "start:dev": "nodemon server/dist/bin/www.js",
     "start:webdev": "npm run build:webdev",
