@@ -1,6 +1,8 @@
 import { isEmail, isLength, isAlphanumeric, isAlpha, isNumeric } from 'validator';
 
 
+
+
 const fieldLength = {
   password: { max: 15, min: 6 },
   username: { max: 30, min: 5 },
@@ -36,6 +38,7 @@ export const nullValidationFnMap = {
   author: [modifiedIsLength('author'), isAlpha],
   category: [modifiedIsLength('category'), isAlpha],
   bookId: [isNumeric]
+
 };
 
 export const nullValidFieldMessage = {
