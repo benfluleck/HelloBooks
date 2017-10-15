@@ -280,7 +280,7 @@ Router.get('/books/', authorization, BooksController.getAllBooks);
  *       '5XX':
  *         description: Error with Token.
  */
-Router.post('/users/:userId/books', authorization, UserBooksController.loanbook);
+Router.post('/users/:userId/books', authorization, nullvalidationMiddleware, UserBooksController.loanbook);
 /**
  * @swagger
  * /users/{userId}/books:

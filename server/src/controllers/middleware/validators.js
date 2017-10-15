@@ -1,4 +1,6 @@
-import { isEmail, isLength, isAlphanumeric, isAlpha, isDate } from 'validator';
+import { isEmail, isLength, isAlphanumeric, isAlpha, isNumeric } from 'validator';
+
+
 
 
 const fieldLength = {
@@ -35,7 +37,8 @@ export const nullValidationFnMap = {
   description: [modifiedIsLength('description')],
   author: [modifiedIsLength('author'), isAlpha],
   category: [modifiedIsLength('category'), isAlpha],
-  return_date: [isDate]
+  bookId: [isNumeric]
+
 };
 
 export const nullValidFieldMessage = {
@@ -47,5 +50,6 @@ export const nullValidFieldMessage = {
   title: 'This book title is too short',
   description: 'More explanatory description needed',
   author: 'This author\'s name is too short',
-  category: 'Category is Invalid'
+  category: 'Category is Invalid',
+  bookId: 'This book does not exist in the library'
 };
