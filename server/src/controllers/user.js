@@ -46,12 +46,12 @@ export default {
         } else {
           User
             .create({
-              firstname: req.body.firstname,
-              lastname: req.body.lastname,
-              username: req.body.username,
-              password: req.body.password,
-              password_confirmation: req.body.password_confirmation,
-              email: req.body.email
+              firstname: req.body.firstname.trim(),
+              lastname: req.body.lastname.trim(),
+              username: req.body.username.trim(),
+              password: req.body.password.trim(),
+              password_confirmation: req.body.password_confirmation.trim(),
+              email: req.body.email.trim()
             })
             .then((user) => {
               if (user) {

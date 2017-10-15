@@ -35,10 +35,8 @@ export default(sequelize, DataTypes) => {
     hooks: {
       beforeCreate: (UserBooks) => {
         if (UserBooks.return_date < Date.now()) {
-
           throw new Error('Date is less than current date');
         }
-
       }
     }
 

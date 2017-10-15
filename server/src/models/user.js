@@ -148,7 +148,7 @@ export default(sequelize, DataTypes) => {
     });
   };
 
-  User.generateHash = (password) => bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
+  User.generateHash = password => bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
 
   return User;
 };

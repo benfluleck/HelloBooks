@@ -1,12 +1,30 @@
+import { toDate } from 'validator';
 import models from '../models';
 import Helper from '../Helper/helper';
 import paginationfunc from '../controllers/middleware/pagination';
 
+
 const UserBooks = models.UserBooks;
 const Books = models.Books;
 
+
 export default {
+  /**
+   * Route: POST: /users/:userId/books
+   * @description Loan a book
+   * @param {any} req
+   * @param {any} res
+   * @returns {any} book
+   * @memmberOf UserBooks Controller
+   */
   loanbook(req, res) {
+    if (!req.body.return_date) {
+      return res.status(404).send({ message: 'Please specify a valid return date' });
+    }
+    const returndate = (req.body.return_date).trim();
+    if (toDate(returndate) < Date.now() || !toDate(returndate)) {
+      return res.status(400).send({ message: 'Please provide a valid return date' });
+    }
     UserBooks.findOne({
       where: {
         userid: req.params.userId,
@@ -26,37 +44,37 @@ export default {
           .status(409)
           .send({
             success: false,
-            messsage: 'This book has already been borrowed by you',
+            messsage: 'You have already borrowed this book',
           });
       }
       return UserBooks
         .create({
           userid: req.params.userId,
-          bookid: req.body.bookid,
-          return_date: req.body.return_date
+          bookid: req.body.bookId,
+          return_date: returndate
         })
         .then(() => {
           Books
             .findOne({
               where: {
-                id: req.body.bookid
+                id: req.body.bookId
               }
             })
-            .then((loanbook) => {
-              if (!loanbook || loanbook.quantity === 0) {
+            .then((booktoborrow) => {
+              if (!booktoborrow || booktoborrow.quantity === 0) {
                 return res
                   .status(404)
-                  .send({ success: false, message: 'Book not found or All copies of this book are gone' });
+                  .send({ success: false, message: 'Sorry we can\'t find this book or all copies of this book are on loan' });
               }
 
-              loanbook
+              booktoborrow
                 .update({
-                  quantity: loanbook.quantity -= 1
+                  quantity: booktoborrow.quantity -= 1
                 })
-                .then((updateBook) => {
+                .then((borrowedbook) => {
                   res
                     .status(201)
-                    .send({ success: true, message: `${updateBook.title} succesfully loaned`, updateBook });
+                    .send({ success: true, message: `${borrowedbook.title} succesfully loaned` });
                 })
                 .catch((error) => {
                   res
@@ -76,23 +94,36 @@ export default {
         })
         .catch(() => {
           res
-            .status(400)
-            .send({ success: false, message: 'Check the Book you have requested' });
+            .status(422)
+            .send({ success: false, message: 'This book does not exist in the library' });
         });
     }).catch((error) => {
       res
-        .status(404)
+        .status(400)
         .send({ success: false, message: ` ${error.message}` });
     });
   },
 
+  /**
+   * Route: GET: /users/:userId/books
+   * @description Get list of borrowed books
+   * @param {any} req
+   * @param {any} res
+   * @returns {any} book list
+   * @memmberOf UserBooks Controller
+   */
   getborrowerslist(req, res) {
-    const offset = req.query.offset;
-    const limit = req.query.limit;
+    const offset = req.query.offset || 0;
+    const limit = req.query.limit || 3;
+    if (!req.query.returned) {
+      return res
+        .status(404)
+        .send({ message: 'Please specify a value for returned books' });
+    }
     return UserBooks.findAndCountAll({
       where: {
         userid: req.params.userId,
-        return_status: req.query.returned,
+        return_status: req.query.returned.trim(),
       },
       include: [
         {
@@ -112,19 +143,26 @@ export default {
       res
         .status(200)
         .send({
-          book,
           books: book.rows,
           pagination: paginationfunc(offset, limit, book)
         });
     }).catch(error => res.status(400).send(error.message));
   },
 
+  /**
+]  * Route: PUT: /users/:userId/books
+   * @description Return a book
+   * @param {any} req
+   * @param {any} res
+   * @returns {any} book
+   * @memmberOf UserBooks Controller
+   */
   returnbook(req, res) {
-    return UserBooks.findOne({
+    UserBooks.findOne({
       where: {
-        bookid: req.body.bookid,
+        bookid: req.body.bookId,
         userid: req.params.userId,
-        return_status: true
+        return_status: false
       },
       include: [
         {
@@ -134,41 +172,52 @@ export default {
         }
       ]
     }).then((book) => {
-      if (book) {
+      if (!book) {
         return res
           .status(409)
-          .send({ success: false, messsage: 'You have returned this book already', book });
+          .send({ success: false, messsage: 'You did not borrow this book' });
       }
-
-      return UserBooks.update({
+      UserBooks.update({
         return_status: true,
         user_return_date: Date.now()
       }, {
         where: {
           userid: req.params.userId,
-          bookid: req.body.bookid
+          bookid: req.body.bookId
         }
       }).then(() => {
         Books
           .findOne({
             where: {
-              id: req.body.bookid
+              id: req.body.bookId
             }
           })
-          .then((bookfound) => {
-            if (!bookfound) {
+          .then((bookToreturn) => {
+            if (!bookToreturn) {
               return res
                 .status(404)
-                .send({ message: 'Book does not exist in this database' });
+                .send({ message: 'The book is not in our library' });
             }
-            return bookfound
+            bookToreturn
               .update({
-                quantity: bookfound.quantity + 1
+                quantity: bookToreturn.quantity + 1
               })
-              .then((updatebook) => {
-                res
-                  .status(200)
-                  .send({ success: true, message: `${updatebook.title} has been returned`, updatebook });
+              .then((returnedBook) => {
+                if (returnedBook.user_return_date > returnedBook.return_date) {
+                  res
+                    .status(202)
+                    .send({
+                      success: true,
+                      message: `You have just returned ${returnedBook.title} late, A fine will be sent to you`
+                    });
+                } else {
+                  res
+                    .status(202)
+                    .send({
+                      success: true,
+                      message: `You have just returned ${returnedBook.title}`
+                    });
+                }
               })
               .catch(error => res.status(400).send(error.message));
           })
