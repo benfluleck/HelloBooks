@@ -32,9 +32,7 @@ Run `npm test` on the terminal while within the **project root directory**.
 ### Starting
 In the project root, run `npm start`.
 
-### Routes
-
-## Features
+### Features
 HelloBooks consists of the following features:
 
 ### Authentication
@@ -54,12 +52,10 @@ Users can borrow books
 Users can return books
 User can view borrowing history
 
-###Admin Users
+### Admin Users
 Admins can edit books
 Admins can add new books
 
-## Testing 
-- To test run `npm test` or `npm run test`
 
 ## Usage
 - Run database migration with `npm start:migrate`
