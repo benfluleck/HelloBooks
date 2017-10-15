@@ -4,9 +4,7 @@
 
 # HelloBooks
 
-HelloBooks is an application that helps manage a library and its processes like stocking, tracking and lending of books.
-
-With this application users are able to find and borrow books. Users  are managed by an admin who manages users as well as add, edit, delete books.
+HelloBooks is an application that helps manage a library and its processes like stocking, tracking and lending of books.This application enables users to be able to find and borrow books. Users  are managed by an admin who manages users as well as add, edit, delete books.
 
 ## Getting Started
 This is a javascript application built with [**Express**](https://expressjs.com/) framework on the nodejs platform. Authentication of users is done via [**JSON Web Tokens**](https://jwt.io/).
