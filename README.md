@@ -9,7 +9,7 @@ HelloBooks is an application that helps manage a library and its processes like 
 With this application users are able to find and borrow books. Users  are managed by an admin who manages users as well as add, edit, delete books.
 
 ## Getting Started
-This is a javascript application built with Express(https://expressjs.com/)framework on the nodejs platform. Authentication of users is done via JSON Web Tokens(https://jwt.io/).
+This is a javascript application built with Express(https://expressjs.com/) framework on the nodejs platform. Authentication of users is done via JSON Web Tokens(https://jwt.io/).
 
 ## Dependencies
 * Postgres
