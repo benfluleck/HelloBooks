@@ -18,18 +18,18 @@ export default {
    * @memmberOf UserBooks Controller
    */
   loanbook(req, res) {
-    if (!req.body.return_date) {
+    if (!req.body.returndate) {
       return res.status(404).send({ message: 'Please specify a valid return date' });
     }
-    const returndate = (req.body.return_date).trim();
+    const returndate = (req.body.returndate).trim();
     if (toDate(returndate) < Date.now() || !toDate(returndate)) {
-      return res.status(400).send({ message: 'Please provide a valid return date' });
+      return res.status(422).send({ message: 'Please provide a valid return date' });
     }
     UserBooks.findOne({
       where: {
         userid: req.params.userId,
-        bookid: req.body.bookid,
-        return_status: false
+        bookid: req.body.bookId,
+        returnstatus: false
       },
       include: [
         {
@@ -51,7 +51,7 @@ export default {
         .create({
           userid: req.params.userId,
           bookid: req.body.bookId,
-          return_date: returndate
+          returndate
         })
         .then(() => {
           Books
@@ -93,6 +93,7 @@ export default {
             });
         })
         .catch(() => {
+          console.log(req.params.userId, req.body.bookId, returndate, '????????');
           res
             .status(422)
             .send({ success: false, message: 'This book does not exist in the library' });
@@ -123,7 +124,7 @@ export default {
     return UserBooks.findAndCountAll({
       where: {
         userid: req.params.userId,
-        return_status: req.query.returned.trim(),
+        returnstatus: req.query.returned.trim(),
       },
       include: [
         {
@@ -162,7 +163,7 @@ export default {
       where: {
         bookid: req.body.bookId,
         userid: req.params.userId,
-        return_status: false
+        returnstatus: false
       },
       include: [
         {
@@ -178,8 +179,8 @@ export default {
           .send({ success: false, messsage: 'You did not borrow this book' });
       }
       UserBooks.update({
-        return_status: true,
-        user_return_date: Date.now()
+        returnstatus: true,
+        userReturndate: Date.now()
       }, {
         where: {
           userid: req.params.userId,
@@ -203,7 +204,7 @@ export default {
                 quantity: bookToreturn.quantity + 1
               })
               .then((returnedBook) => {
-                if (returnedBook.user_return_date > returnedBook.return_date) {
+                if (returnedBook.userReturndate > returnedBook.returndate) {
                   res
                     .status(202)
                     .send({

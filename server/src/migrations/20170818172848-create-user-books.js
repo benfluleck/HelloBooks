@@ -20,20 +20,15 @@ module.exports = {
     allowNull: false,
 
    },
-   return_date: {
+   returndate: {
     type: Sequelize.DATE,
     allowNull: false,
    },
-   user_return_date: {
+   userReturndate: {
     type: Sequelize.DATE,
     allowNull: true,
    },
-   ISBN: {
-    type: Sequelize.INTEGER,
-    allowNull: false,
-    defaultValue: () => randomId()
-   },
-   return_status: {
+   returnstatus: {
     type: Sequelize.BOOLEAN,
     allowNull: false,
     defaultValue: false,

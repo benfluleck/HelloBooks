@@ -1,6 +1,4 @@
-import uniqueRandom from 'unique-random';
 
-const randomId = uniqueRandom(1000000, 100000000);
 
 export default(sequelize, DataTypes) => {
   const UserBooks = sequelize.define('UserBooks', {
@@ -12,20 +10,15 @@ export default(sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    return_date: {
+    returndate: {
       type: DataTypes.DATE,
       allowNull: false
     },
-    user_return_date: {
+    userReturndate: {
       type: DataTypes.DATE,
       allowNull: true
     },
-    ISBN: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      defaultValue: () => randomId()
-    },
-    return_status: {
+    returnstatus: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: false
@@ -34,7 +27,7 @@ export default(sequelize, DataTypes) => {
     classMethods: {},
     hooks: {
       beforeCreate: (UserBooks) => {
-        if (UserBooks.return_date < Date.now()) {
+        if (UserBooks.returndate < Date.now()) {
           throw new Error('Date is less than current date');
         }
       }

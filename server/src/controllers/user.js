@@ -20,12 +20,12 @@ export default {
       !req.body.username ||
       !req.body.password ||
       !req.body.email ||
-      !req.body.password_confirmation) {
+      !req.body.passwordConfirmation) {
       return res
         .status(400)
         .send({ message: 'All fields are required' });
     }
-    if (!req.body.password !== req.body.password_confirmation) {
+    if (req.body.password !== req.body.passwordConfirmation) {
       return res
         .status(422)
         .send({ message: 'Password and Password confirmation do not match' });
@@ -50,7 +50,7 @@ export default {
               lastname: req.body.lastname.trim(),
               username: req.body.username.trim(),
               password: req.body.password.trim(),
-              password_confirmation: req.body.password_confirmation.trim(),
+              passwordConfirmation: req.body.passwordConfirmation.trim(),
               email: req.body.email.trim()
             })
             .then((user) => {

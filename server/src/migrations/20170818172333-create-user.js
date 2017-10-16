@@ -34,12 +34,12 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      user_level: {
+      userlevel: {
         type: Sequelize.INTEGER,
         allowNull: false,
         defaultValue: 1,
       },
-      user_image: {
+      userimage: {
         type: Sequelize.STRING,
         allowNull: true,
       },

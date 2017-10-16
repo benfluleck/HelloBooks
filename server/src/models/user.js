@@ -13,13 +13,11 @@ export default(sequelize, DataTypes) => {
         }
       }
     },
-
     lastname: {
       type: DataTypes.STRING,
       allowNull: false,
       trim: true,
       validate: {
-        // is: {  arg: /\w+/g,  msg: 'Lastname can only consit of letters', },
         len: {
           args: [
             2, 30
@@ -48,10 +46,6 @@ export default(sequelize, DataTypes) => {
           args: true,
           msg: 'Usernames can not be empty'
         },
-        isAlphanumeric: {
-          args: true,
-          msg: 'No Alphanumeric characters please'
-        },
         len: {
           args: [
             4, 30
@@ -79,7 +73,7 @@ export default(sequelize, DataTypes) => {
       }
     },
 
-    password_confirmation: {
+    passwordConfirmation: {
       type: DataTypes.VIRTUAL,
       allowNull: false,
       validate: {
@@ -89,13 +83,12 @@ export default(sequelize, DataTypes) => {
         }
       }
     },
-
     email: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: {
         args: true,
-        msg: 'Email already in use'
+        msg: 'This email is already in use'
       },
       trim: true,
       validate: {
@@ -105,12 +98,12 @@ export default(sequelize, DataTypes) => {
         }
       }
     },
-    user_level: {
+    userlevel: {
       type: DataTypes.INTEGER,
       allowNull: false,
       defaultValue: 1
     },
-    user_image: {
+    userimage: {
       type: DataTypes.STRING,
       allowNull: true
     },
@@ -125,7 +118,7 @@ export default(sequelize, DataTypes) => {
     hooks: {
 
       beforeCreate: (user) => {
-        if (user.password === user.password_confirmation) {
+        if (user.password === user.passwordConfirmation) {
           user.password = User.generateHash(user.password);
         } else {
           throw new Error('Passwords do not the match');
