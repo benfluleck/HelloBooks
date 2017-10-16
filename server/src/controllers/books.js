@@ -27,7 +27,7 @@ export default {
         if (bookExists !== null) {
           return res.status(409)
             .send({
-              message: 'A book with the same title and author already exists'
+              message: 'A book with the same title and author already exists in the library'
             });
         }
         return Books
@@ -37,11 +37,11 @@ export default {
             category: req.body.category,
             quantity: req.body.quantity,
             description: req.body.description,
-            book_image: req.body.book_image
+            bookimage: req.body.bookimage
           })
           .then(books =>
             res.status(201).send({
-              message: `${books.title} has been added`
+              message: `${books.title} has been added to the library`
             }))
           .catch(error => res.status(401).send(error));
       });
@@ -79,7 +79,7 @@ export default {
               Quantity: book.quantity,
               Category: book.category,
               Description: book.description,
-              Image: book.book_image
+              Image: book.bookimage
             }))
           .catch((error) => {
             res

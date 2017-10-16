@@ -154,7 +154,6 @@ class Books extends React.Component {
 // Books.PropTypes = { 		books: PropTypes.array.isRequired }
 
 const mapStateToProps = (state) => {
-		console.log('this is my book', state.bookReducer.books.pagination);
 		return {books: state.bookReducer.books.books, borrowedbooks: state.bookReducer.borrowedbooks, user: state.user, pagination: state.bookReducer.books.pagination}
 }
 

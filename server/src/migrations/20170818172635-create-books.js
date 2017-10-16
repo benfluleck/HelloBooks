@@ -1,8 +1,7 @@
-'use strict';
 import Sequelize from 'sequelize';
 
 module.exports = {
-  up: function (queryInterface, Sequelize) {
+  up (queryInterface, Sequelize) {
     return queryInterface.createTable('Books', {
       id: {
         allowNull: false,
@@ -22,6 +21,11 @@ module.exports = {
         trim: true,
         unique: 'compositeIndex'
       },
+      ISBN: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: () => randomId()
+      },
       category: {
         type: Sequelize.STRING,
         allowNull: false
@@ -35,9 +39,8 @@ module.exports = {
         allowNull: false,
         defaultValue: 1
       },
-      book_image: {
+      bookimage: {
         type: Sequelize.STRING,
-        // allowNull: true
       },
       status: {
         type: Sequelize.BOOLEAN,
@@ -54,7 +57,7 @@ module.exports = {
       }
     });
   },
-  down: function (queryInterface, Sequelize) {
+  down (queryInterface, Sequelize) {
     return queryInterface.dropTable('Books');
   }
 };

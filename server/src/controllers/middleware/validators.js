@@ -1,8 +1,5 @@
 import { isEmail, isLength, isAlphanumeric, isAlpha, isNumeric } from 'validator';
 
-
-
-
 const fieldLength = {
   password: { max: 15, min: 6 },
   username: { max: 30, min: 5 },
@@ -35,8 +32,8 @@ export const nullValidationFnMap = {
   lastname: [modifiedIsLength('lastname'), isAlpha],
   title: [modifiedIsLength('title')],
   description: [modifiedIsLength('description')],
-  author: [modifiedIsLength('author'), isAlpha],
-  category: [modifiedIsLength('category'), isAlpha],
+  author: [modifiedIsLength('author')],
+  category: [modifiedIsLength('category')],
   bookId: [isNumeric]
 
 };
@@ -49,7 +46,7 @@ export const nullValidFieldMessage = {
   lastname: 'Lastname is invalid',
   title: 'This book title is too short',
   description: 'More explanatory description needed',
-  author: 'This author\'s name is too short',
+  author: 'This author\'s name is invalid',
   category: 'Category is Invalid',
   bookId: 'This book does not exist in the library'
 };

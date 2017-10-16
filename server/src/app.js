@@ -53,6 +53,6 @@ app.get('/hellobooks.json', (req, res) => {
 
 app.use('/api/v1', routes, authenticateRoutes);
 
-app.get('*', (req, res) => res.status(404).send({ message: 'You are at a wrong route in the website' }));
+app.get('*', (req, res) => res.status(404).send({ message: 'You are at a wrong route' }));
 
 export default(app);
