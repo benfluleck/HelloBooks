@@ -12,12 +12,10 @@ module.exports = {
       bookid: {
         type: Sequelize.INTEGER,
         allowNull: false,
-
       },
       userid: {
         type: Sequelize.INTEGER,
         allowNull: false,
-
       },
       returndate: {
         type: Sequelize.DATE,
