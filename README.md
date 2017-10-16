@@ -35,24 +35,23 @@ HelloBooks consists of the following features:
 
 ### Authentication
 
-It uses JSON Web Token (JWT) for authentication.
-Token is generated on user login
-Token is perpetually verified to check the state of the user if logged in or not.
-User is assigned normal role on registration
-Admin User is pre-seeded into the application with administrative priviledges
+- It uses JSON Web Token (JWT) for authentication.
+- Token is generated on user login
+- Token is perpetually verified to check the state of the user if logged in or not.
+- Admin User will br pre-seeded into the application with administrative priviledges
 
 ### Users
 
-Users can register
-Users can log in
-Users can view all books in the library
-Users can borrow books
-Users can return books
-User can view borrowing history
+- Users can register
+- Users can log in
+- Users can view all books in the library
+- Users can borrow books
+- Users can return books
+- User can view borrowing history
 
 ### Admin Users
-Admins can edit books
-Admins can add new books
+- Admins can edit books
+- Admins can add new books
 
 
 ## Usage
