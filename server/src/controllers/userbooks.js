@@ -93,7 +93,6 @@ export default {
             });
         })
         .catch(() => {
-          console.log(req.params.userId, req.body.bookId, returndate, '????????');
           res
             .status(422)
             .send({ success: false, message: 'This book does not exist in the library' });
