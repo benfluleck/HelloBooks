@@ -1,11 +1,14 @@
-import jwt from 'jsonwebtoken';
 import express from 'express';
 import controller from '../controllers';
+import fieldValidationMiddleware from '../controllers/middleware/fieldValidations';
+import authenticate from '../controllers/middleware/authenticate';
+import nullvalidationMiddleware from '../controllers/middleware/nullValidation';
 
 const Router = express.Router();
 const UserController = controller.User;
 const BooksController = controller.Books;
 const UserBooksController = controller.UserBooks;
+const authorization = authenticate.authenticate;
 
 /**
  * @swagger
@@ -101,7 +104,7 @@ Router.get('/', (req, res) => res.status(200).send({ message: 'Welcome to the He
  *      404:
  *       Password and username do not match
  */
-Router.post('/users/signup', UserController.create);
+Router.post('/auth/users/signup', fieldValidationMiddleware, nullvalidationMiddleware, UserController.create);
 /**
  * @swagger
  * /users/signin:
@@ -130,32 +133,7 @@ Router.post('/users/signup', UserController.create);
  *       '5XX':
  *         description: Error with Token.
  */
-Router.post('/users/signin', UserController.signin);
-
-Router.use((req, res, next) => {
-  // check header or url parameters or post parameters for token
-  const token = req.body.token || req.query.token || req.headers['x-access-token'];
-
-  // decode token
-  if (token) {
-    // verifies secret and checks exp
-    jwt.verify(token, 'superSecret', (err, decoded) => {
-      if (err) {
-        return res
-          .status(401)
-          .send({ success: false, message: 'Failed to authenticate token.' });
-      }
-      // if everything is good, save to request for use in other routes
-      req.decoded = decoded;
-      next();
-    });
-  } else {
-    // if there is no token return an error
-    return res
-      .status(403)
-      .send({ success: false, message: 'No token provided. Did you specify your secret message' });
-  }
-});
+Router.post('/auth/users/signin', nullvalidationMiddleware, UserController.signin);
 
 /**
  * @swagger
@@ -188,7 +166,7 @@ Router.use((req, res, next) => {
  *       '5XX':
  *         description: Error with Token.
  */
-Router.post('/books', BooksController.create);
+Router.post('/books', authorization, nullvalidationMiddleware, BooksController.create);
 /**
  * @swagger
  * /books/{bookId}:
@@ -227,7 +205,7 @@ Router.post('/books', BooksController.create);
  *       '5XX':
  *         description: Error with Token.
  */
-Router.put('/books/:bookId', BooksController.update);
+Router.put('/books/:bookId', authorization, nullvalidationMiddleware, BooksController.update);
 /**
  * @swagger
  * /books:
@@ -249,7 +227,7 @@ Router.put('/books/:bookId', BooksController.update);
  *         schema:
  *           $ref: '#/definitions/Book'
  */
-Router.get('/books/', BooksController.getAllBooks);
+Router.get('/books/', authorization, BooksController.getAllBooks);
 /**
  * @swagger
  * /users/{userId}/books:
@@ -302,7 +280,7 @@ Router.get('/books/', BooksController.getAllBooks);
  *       '5XX':
  *         description: Error with Token.
  */
-Router.post('/users/:userId/books', UserBooksController.loanbook);
+Router.post('/users/:userId/books', authorization, UserBooksController.loanbook);
 /**
  * @swagger
  * /users/{userId}/books:
@@ -338,7 +316,7 @@ Router.post('/users/:userId/books', UserBooksController.loanbook);
  *       404:
  *         description: Book does not exist
  */
-Router.put('/users/:userId/books', UserBooksController.returnbook);
+Router.put('/users/:userId/books', authorization, UserBooksController.returnbook);
 /**
  * @swagger
  * /users/{userId}/books:
@@ -378,7 +356,7 @@ Router.put('/users/:userId/books', UserBooksController.returnbook);
  *         schema:
  *           $ref: '#/definitions/Book'
  */
-Router.get('/users/:userId/books', UserBooksController.getborrowerslist);
+Router.get('/users/:userId/books', authorization, UserBooksController.getborrowerslist);
 
 // Router.delete('books/:bookId', BooksController.destroybooks);
 // Router.put('/users/:userId', UserController.updateUserInfo);

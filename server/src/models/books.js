@@ -1,5 +1,11 @@
 import toTitleCase from 'to-title-case';
 import sentenceCase from 'sentence-case';
+import uniqueRandom from 'unique-random';
+import dotenv from 'dotenv';
+
+
+dotenv.config();
+const randomId = uniqueRandom(process.env.ISBNRANDOM_MIN_ID, process.env.ISBNRANDOM_MAX_ID);
 
 export default (sequelize, DataTypes) => {
   const Books = sequelize.define('Books', {
@@ -7,16 +13,7 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       trim: true,
-      unique: 'compositeIndex',
-      validate: {
-        len: {
-          args: [2, 30],
-          msg: 'Book Title must be at least 2 chars and less than 50 chars'
-        }
-      },
-      set(val) {
-        this.setDataValue('title', toTitleCase(val));
-      }
+      unique: 'compositeIndex'
     },
     author: {
       type: DataTypes.STRING,
@@ -27,10 +24,6 @@ export default (sequelize, DataTypes) => {
         is: {
           arg: /\w+/g,
           msg: 'Must be only letters',
-        },
-        len: {
-          args: [2, 30],
-          msg: "Author's name must be at least 2 chars and less than 50 chars"
         }
       },
       set(val) {
@@ -38,6 +31,11 @@ export default (sequelize, DataTypes) => {
           this.setDataValue('author', toTitleCase(val));
         }
       }
+    },
+    ISBN: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: () => randomId()
     },
     category: {
       type: DataTypes.STRING,
@@ -49,8 +47,8 @@ export default (sequelize, DataTypes) => {
           msg: 'Must be only letters',
         },
         len: {
-          args: [2, 30],
-          msg: 'Category name must be at least 2 chars and less than 30 chars'
+          args: [5, 20],
+          msg: 'Category name must be at least 5 chars and less than 20 characters'
         }
       },
       set(val) {
@@ -85,15 +83,8 @@ export default (sequelize, DataTypes) => {
 
     },
 
-    book_image: {
+    bookimage: {
       type: DataTypes.STRING,
-      //  allowNull: true,
-    },
-
-    status: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: false,
     },
   }, {
     freezeTableName: true,

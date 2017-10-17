@@ -5,14 +5,17 @@
   "main": "app.js",
   "scripts": {
     "start": "node server/dist/bin/www.js",
-    "test:db": "sequelize db:migrate",
+    "test:db": "npm run build:travis && sequelize db:migrate --env=test",
+    "start:migrate": "sequelize db:migrate",
+    "undo:migratetest": "sequelize db:migrate:undo:all --env=test",
     "undo:migrate": "sequelize db:migrate:undo:all",
     "start:dev": "nodemon server/dist/bin/www.js",
     "start:webdev": "npm run build:webdev",
     "build:webdev": "webpack -d  && webpack-dev-server --content-base client/src/ --inline --hot",
     "build:prod webdev": "webpack -p && cp client/src/index.html client/dist/index.html",
     "build": "babel server/src --watch --out-dir server/dist --presets es2015",
-    "test": "cross-env NODE_ENV=test& mocha server/dist/test/*.js --timeout 10000 ",
+    "build:travis": "babel server/src --out-dir server/dist --presets es2015",
+    "test": "export NODE_ENV=test && mocha server/dist/test/*.js --timeout 10000 && export NODE_ENV=development",
     "coverage": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text --reporter=lcovonly mocha --compilers js:babel-register server/src/test/*.js"
   },
   "engines": {
@@ -74,6 +77,7 @@
     "sweetalert2": "^6.7.0",
     "to-title-case": "^1.0.0",
     "unique-random": "^1.0.0",
+    "validator": "^8.2.0",
     "webpack": "^3.5.5"
   },
   "devDependencies": {
@@ -117,8 +121,6 @@
     "scss-loader": "0.0.1",
     "semantic-ui-react": "^0.73.0",
     "style-loader": "^0.18.2",
-    "sweetalert2": "^6.7.0",
-    "validator": "^8.2.0",
     "validators": "^0.3.1",
     "webpack": "^3.5.5",
     "webpack-dev-server": "^2.7.1"

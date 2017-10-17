@@ -1,6 +1,5 @@
 import bcrypt from 'bcrypt-nodejs';
 import toTitleCase from 'to-title-case';
-import Sequelize from 'sequelize';
 
 export default(sequelize, DataTypes) => {
   const User = sequelize.define('User', {
@@ -8,27 +7,17 @@ export default(sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       trim: true,
-      validate: {
-        len: {
-          args: [
-            2, 30
-          ],
-          msg: 'Firstname must be at least 2 chars and less than 30 chars'
-        }
-      },
       set(val) {
         if (val !== undefined) {
           this.setDataValue('firstname', toTitleCase(val));
         }
       }
     },
-
     lastname: {
       type: DataTypes.STRING,
       allowNull: false,
       trim: true,
       validate: {
-        // is: {  arg: /\w+/g,  msg: 'Lastname can only consit of letters', },
         len: {
           args: [
             2, 30
@@ -48,7 +37,7 @@ export default(sequelize, DataTypes) => {
       trim: true,
       unique: {
         args: true,
-        msg: "Username already in database"
+        msg: 'Username already in database'
       },
       allowNull: false,
 
@@ -56,10 +45,6 @@ export default(sequelize, DataTypes) => {
         notEmpty: {
           args: true,
           msg: 'Usernames can not be empty'
-        },
-        isAlphanumeric: {
-          args: true,
-          msg: 'No Alphanumeric characters please'
         },
         len: {
           args: [
@@ -88,7 +73,7 @@ export default(sequelize, DataTypes) => {
       }
     },
 
-    password_confirmation: {
+    passwordConfirmation: {
       type: DataTypes.VIRTUAL,
       allowNull: false,
       validate: {
@@ -98,34 +83,27 @@ export default(sequelize, DataTypes) => {
         }
       }
     },
-
     email: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: {
         args: true,
-        msg: "Email already in database"
+        msg: 'This email is already in use'
       },
       trim: true,
       validate: {
         isEmail: {
           arg: true,
-          msg: 'Must be an Email address'
-        },
-        len: {
-          args: [
-            5, 45
-          ],
-          msg: 'Firstname must be at least 2 chars and less than 30 chars'
+          msg: 'This email must be a valid email address'
         }
       }
     },
-    user_level: {
+    userlevel: {
       type: DataTypes.INTEGER,
       allowNull: false,
       defaultValue: 1
     },
-    user_image: {
+    userimage: {
       type: DataTypes.STRING,
       allowNull: true
     },
@@ -140,7 +118,7 @@ export default(sequelize, DataTypes) => {
     hooks: {
 
       beforeCreate: (user) => {
-        if (user.password === user.password_confirmation) {
+        if (user.password === user.passwordConfirmation) {
           user.password = User.generateHash(user.password);
         } else {
           throw new Error('Passwords do not the match');
@@ -163,7 +141,7 @@ export default(sequelize, DataTypes) => {
     });
   };
 
-  User.generateHash = (password) => bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
+  User.generateHash = password => bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
 
   return User;
 };
