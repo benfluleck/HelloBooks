@@ -138,7 +138,8 @@ export default {
                   token: token.token,
                   username: req.body.username
                 });
-            });
+            })
+            .catch(error => res.status(500).send(error.message));
         } else {
           res
             .status(400)
