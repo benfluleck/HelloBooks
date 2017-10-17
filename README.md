@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/benfluleck/HelloBooks.png)](https://travis-ci.org/benfluleck/HelloBooks.svg?branch=Travisrepo)
+[![Build Status](https://travis-ci.org/benfluleck/HelloBooks.png)](https://travis-ci.org/benfluleck/HelloBooks.svg?branch=staging)
 [![Code Climate](https://codeclimate.com/github/benfluleck/HelloBooks/badges/gpa.svg)](https://codeclimate.com/github/benfluleck/HelloBooks/)
 [![Test Coverage](https://codeclimate.com/github/benfluleck/HelloBooks/badges/coverage.svg)](https://codeclimate.com/github/codeclimate/benfluleck/HelloBooks)
 
