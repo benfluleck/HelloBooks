@@ -4,6 +4,7 @@ import Sequelize from 'sequelize';
 
 import configenv from '../config/config';
 
+
 const env = process.env.NODE_ENV || 'development';
 const config = configenv[env];
 
@@ -11,6 +12,7 @@ const db = {};
 const basename = path.basename(module.filename);
 
 let sequelize;
+
 
 if (config.use_env_variable) {
   sequelize = new Sequelize(process.env[config.use_env_variable]);

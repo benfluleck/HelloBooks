@@ -24,7 +24,7 @@ const authenticate = (req, res, next) => {
     });
   } else {
     res
-      .status(403)
+      .status(401)
       .send({ success: false, message: 'Incorrect, Please try Login again' });
   }
 };
