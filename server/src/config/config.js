@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 
-export default {
+module.exports = {
 
   development: {
     username: process.env.DBUSERNAME,
