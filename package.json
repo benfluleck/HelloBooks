@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node server/dist/bin/www.js",
-    "test:db": "npm run build:travis && sequelize db:migrate --env=test",
+    "test:db": "npm run travis && sequelize db:migrate --env=test",
     "start:migrate": "sequelize db:migrate",
     "undo:migratetest": "sequelize db:migrate:undo:all --env=test",
     "undo:migrate": "sequelize db:migrate:undo:all",
@@ -15,7 +15,7 @@
     "build:prod webdev": "webpack -p && cp client/src/index.html client/dist/index.html",
     "build": "babel server/src --watch --out-dir server/dist --presets es2015",
     "build:travis": "babel server/src --watch -dir server/dist --presets es2015",
-    "test": "export NODE_ENV=test && mocha server/dist/test/*.js --timeout 10000 && export NODE_ENV=development",
+    "travis": "export NODE_ENV=test && mocha server/dist/test/*.js --timeout 10000 && export NODE_ENV=development",
     "coverage": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text --reporter=lcovonly mocha --compilers js:babel-register server/src/test/*.js"
   },
   "engines": {
