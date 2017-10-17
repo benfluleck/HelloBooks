@@ -33,33 +33,53 @@ export default {
 
     User
       .findOne({
-        where: { email: req.body.email }
+        where: { username: req.body.username }
       })
-      .then((userExists) => {
-        if (userExists) {
+      .then((usernameExists) => {
+        if (usernameExists) {
           res
             .status(409)
             .json({
               success: false,
-              message: 'This email is already in use'
+              message: 'This username is already in use'
             });
         } else {
           User
-            .create({
-              firstname: req.body.firstname.trim(),
-              lastname: req.body.lastname.trim(),
-              username: req.body.username.trim(),
-              password: req.body.password.trim(),
-              passwordConfirmation: req.body.passwordConfirmation.trim(),
-              email: req.body.email.trim()
+            .findOne({
+              where: { email: req.body.email }
             })
-            .then((user) => {
-              if (user) {
+            .then((userExists) => {
+              if (userExists) {
                 res
-                  .status(201)
-                  .send({
-                    success: true,
-                    message: 'User has been added'
+                  .status(409)
+                  .json({
+                    success: false,
+                    message: 'This email is already in use'
+                  });
+              } else {
+                User
+                  .create({
+                    firstname: req.body.firstname.trim(),
+                    lastname: req.body.lastname.trim(),
+                    username: req.body.username.trim(),
+                    password: req.body.password.trim(),
+                    passwordConfirmation: req.body.passwordConfirmation.trim(),
+                    email: req.body.email.trim()
+                  })
+                  .then((user) => {
+                    if (user) {
+                      res
+                        .status(201)
+                        .send({
+                          success: true,
+                          message: 'User has been added'
+                        });
+                    }
+                  })
+                  .catch((error) => {
+                    res
+                      .status(400)
+                      .send({ success: false, message: ` ${error.message}` });
                   });
               }
             })
@@ -67,13 +87,13 @@ export default {
               res
                 .status(400)
                 .send({ success: false, message: ` ${error.message}` });
+            })
+            .catch((error) => {
+              res
+                .status(400)
+                .send({ success: false, message: ` ${error.message}` });
             });
         }
-      })
-      .catch((error) => {
-        res
-          .status(400)
-          .send({ success: false, message: ` ${error.message}` });
       });
   },
 

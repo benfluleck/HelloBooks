@@ -1,33 +1,40 @@
-import { isEmail, isLength, isAlphanumeric, isAlpha, isNumeric } from 'validator';
+import { isLength, isAlpha, isNumeric } from 'validator';
 
 const fieldLength = {
-  password: { max: 15, min: 6 },
+  password: { max: 21, min: 5 },
   username: { max: 30, min: 5 },
   lastname: { max: 30, min: 2 },
   firstname: { max: 30, min: 2 },
   title: { max: 60, min: 2 },
   author: { max: 60, min: 2 },
   description: { max: 200, min: 7 },
-  category: { max: 20, min: 5 },
-  email: { max: 20, min: 5 }
+  category: { max: 50, min: 5 },
+  email: { max: 50, min: 5 }
 };
+
+const emailRegex = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"|"_+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
+const validateEmail = emailAddress =>
+  emailRegex.test(emailAddress);
+
 
 const modifiedIsLength = field => val =>
   isLength(val, fieldLength[field] || {});
 
+
 export const fieldValidationFnMap = {
-  email: [isEmail]
+  email: [validateEmail]
 };
 
 export const inValidFieldMessage = {
-  email: 'The email address you have provided is invalid'
+  email: 'This email address you have provided is invalid'
 
 };
+
 
 export const nullValidationFnMap = {
   email: [modifiedIsLength('email')],
   password: [modifiedIsLength('password')],
-  username: [modifiedIsLength('username'), isAlphanumeric],
+  username: [modifiedIsLength('username')],
   firstname: [modifiedIsLength('firstname'), isAlpha],
   lastname: [modifiedIsLength('lastname'), isAlpha],
   title: [modifiedIsLength('title')],
@@ -48,5 +55,5 @@ export const nullValidFieldMessage = {
   description: 'More explanatory description needed',
   author: 'This author\'s name is invalid',
   category: 'Category is Invalid',
-  bookId: 'This book does not exist in the library'
+  bookId: 'This book format is wrong'
 };
