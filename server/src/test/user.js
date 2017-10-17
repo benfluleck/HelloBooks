@@ -5,22 +5,17 @@ import chaiHttp from 'chai-http';
 import app from '../app';
 import db from '../models';
 
-
 const User = db.User;
 const Books = db.Books;
 const expect = chai.expect;
 
 chai.use(chaiHttp);
 
-
-
-
-
-db.sequelize.sync({});
+let userId;
+let bookId;
+let token;
+// db.sequelize.sync({});
 describe('HelloBooks', () => {
-  let userId;
-  let bookId;
-  let token;
   before((done) => {
     Books.destroy({ where: {} });
     User.destroy({ where: {} });
@@ -30,7 +25,7 @@ describe('HelloBooks', () => {
         author: 'Benny Ogidan',
         category: 'Fiction',
         quantity: 20,
-        description: 'Test',
+        description: 'Testewfewwww',
         bookimage: 'Test Image'
       })
       .then((book) => {
@@ -54,8 +49,18 @@ describe('HelloBooks', () => {
     }).then((user) => {
       userId = user.id;
     });
-
-    done();
+    chai
+      .request(app)
+      .post('/api/v1/auth/users/signin')
+      .set('Accept', 'application/x-www-form-urlencoded')
+      .send({ username: 'Benny', password: 'benny' })
+      .end((err, res) => {
+        token = res.body.token;
+        expect(res.status)
+          .to
+          .equal(200);
+        done();
+      });
   });
 
   /*
@@ -90,7 +95,9 @@ describe('HelloBooks', () => {
 
   describe('/POST ', () => {
     it('All users are allowed to register, Sign up successful', (done) => {
-      const email = faker.internet.email();
+      const email = faker
+        .internet
+        .email();
       chai
         .request(app)
         .post('/api/v1/auth/users/signup')
@@ -175,7 +182,10 @@ describe('HelloBooks', () => {
         .post('/api/v1/users/books')
         .set({ 'x-access-token': '12345' })
         .end((err, res) => {
-          expect(res.status).to.be.equal(401);
+          expect(res.status)
+            .to
+            .be
+            .equal(401);
           done();
         });
     });
@@ -184,7 +194,10 @@ describe('HelloBooks', () => {
         .request(app)
         .post('/api/v1/users/books')
         .end((err, res) => {
-          expect(res.status).to.be.equal(401);
+          expect(res.status)
+            .to
+            .be
+            .equal(401);
           done();
         });
     });
@@ -193,7 +206,7 @@ describe('HelloBooks', () => {
    Authenticated users Tests
    */
   describe('POST /login', () => {
-    it('it responds with 401 status code if bad username or password', (done) => {
+    it('it responds with 404 status code if bad username or password', (done) => {
       chai
         .request(app)
         .post('/api/v1/auth/users/signin')
@@ -202,63 +215,65 @@ describe('HelloBooks', () => {
           username: faker
             .internet
             .userName(),
-          password: faker.internet.password
+          password: faker
+            .internet
+            .password()
         })
         .end((err, res) => {
           expect(res.status)
             .to
-            .equal(400);
+            .equal(404);
           done();
         });
     });
-    it('should prevent non authenticated user from creating books', (done) => {
-      server
+    it('administrators can create books', (done) => {
+      chai
+        .request(app)
         .post('/api/v1/books')
         .set('Accept', 'application/x-www-form-urlencoded')
+        .set('x-access-token', token)
         .send({
-          title: 'Learn SQL',
-          author: 'SQL Master',
-          description: 'Learn & Master SQL in 48hours',
+          title: 'Learn Java',
+          author: 'Sleeping Master',
+          category: 'Learning',
           quantity: 39,
+          description: 'Learn Java in 3hours',
+          bookimage: 'Test'
         })
-        .expect(200)
         .end((err, res) => {
-          expect(res.body.success).to.equal(true);
-          expect(res.statusCode).to.equal(200);
+          expect(res.status)
+            .to
+            .equal(201);
           done();
         });
-
-        it('The same book cannot be re-added', (done) => {
-          server
-            .post('/api/v1/books')
-            .set('Accept', 'application/x-www-form-urlencoded')
-            .set('x-access-token', token)
-            .send({
-              title: 'Shola comes home',
-              author: 'Benny Ogidan',
-              category: 'Fiction',
-              quantity: 20,
-              description: 'Test',
-              bookimage: 'Test Image'
-            })
-            .end((err, res) => {
-              expect(res.body.success).to.equal(false);
-              expect(res.status).to.equal(409);
-              done();
-            });
+    });
+    it('The same book cannot be re-added', (done) => {
+      chai
+        .request(app)
+        .post('/api/v1/books')
+        .set('Accept', 'application/x-www-form-urlencoded')
+        .set('x-access-token', token)
+        .send({
+          title: 'Shola comes home',
+          author: 'Benny Ogidan',
+          category: 'Fiction',
+          quantity: 20,
+          description: 'This needs to be a long description',
+          bookimage: 'Test Image'
+        })
+        .end((err, res) => {
+          expect(res.status)
+            .to
+            .equal(409);
+          done();
         });
-    
-      
-  
+    });
     it('it responds with 200 status code if good username or password', (done) => {
       chai
         .request(app)
         .post('/api/v1/auth/users/signin')
         .set('Accept', 'application/x-www-form-urlencoded')
-        .send({
-          username: 'Benny',
-          password: 'benny'
-        })
+        .send({ username: 'Benny', password: 'benny' })
         .end((err, res) => {
           token = res.body.token;
           expect(res.status)
@@ -282,7 +297,10 @@ describe('HelloBooks', () => {
           passwordConfirmation: 'benny'
         })
         .end((err, res) => {
-          expect(res.status).to.be.equal(409);
+          expect(res.status)
+            .to
+            .be
+            .equal(409);
           done();
         });
     });
@@ -291,10 +309,7 @@ describe('HelloBooks', () => {
         .request(app)
         .post('/api/v1/auth/users/signin')
         .set('Accept', 'application/x-www-form-urlencoded')
-        .send({
-          username: 'Benny',
-          password: 'benny'
-        })
+        .send({ username: 'Benny', password: 'benny' })
         .end((err, res) => {
           expect('Content-Type', /json/);
           expect(res.body)
@@ -305,6 +320,7 @@ describe('HelloBooks', () => {
     });
   });
 });
+
 /*
 Authenticated users
 */

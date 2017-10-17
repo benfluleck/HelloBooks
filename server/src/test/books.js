@@ -13,13 +13,11 @@ const expect = chai.expect;
 chai.use(chaiHttp);
 
 
-db.sequelize.sync({});
-
-
+let bookId;
+let token;
+const limit = 1;
+const offset = 0;
 describe('HelloBooks', () => {
-  let userId;
-  let bookId;
-  let token;
   before((done) => {
     Books.destroy({ where: {} });
     User.destroy({ where: {} });
@@ -50,8 +48,6 @@ describe('HelloBooks', () => {
       email: faker
         .internet
         .email()
-    }).then((user) => {
-      userId = user.id;
     });
 
     chai
@@ -89,6 +85,25 @@ describe('HelloBooks', () => {
         });
     });
   });
+  describe('/GET', () => {
+    it('should return books when given a limit and an offset', (done) => {
+      chai
+        .request(app)
+        .get('/api/v1/books')
+        .set({ 'x-access-token': token })
+        .query({
+          limit,
+          offset,
+        })
+        .end((err, res) => {
+          expect(res.status).to.be.equal(200);
+          expect('Content-Type', /json/);
+          expect(res.body.books.length).to.be.equal(limit);
+          done();
+        });
+    });
+  });
+
   // Edit a book
   describe('/PUT', () => {
     it('Edit a select book from the data', (done) => {

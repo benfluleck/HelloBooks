@@ -18,8 +18,6 @@ let bookId;
 let token;
 const testdate = new Date('2017-11-18');
 
-
-// db.sequelize.sync({});
 describe('HelloBooks', () => {
   before((done) => {
     Books.destroy({ where: {} });
@@ -71,14 +69,6 @@ describe('HelloBooks', () => {
       });
   });
 
-  /*
-  * Unauthenticated user tests
-  */
-
-
-  /*
-   Authenticated users Tests
-   */
   describe('POST /login', () => {
     // Loan a book need to change the date
     it('it allows the user to loan a book', (done) => {
@@ -99,7 +89,6 @@ describe('HelloBooks', () => {
           done();
         });
     });
-    
     // Edit a book
     describe('/PUT', () => {
       it('it should return a book', (done) => {
