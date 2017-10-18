@@ -1,34 +1,33 @@
 import express from 'express';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
-import swaggerJSDoc from 'swagger-jsdoc';
-import path from 'path';
+// impz
 import dotenv from 'dotenv';
 import routes from './routes';
 import authenticate from './controllers/middleware/authenticate';
 
 dotenv.config();
 const app = express();
-const swaggerDefinition = {
-  info: {
-    title: 'Hello Books API - Benny Ogidan',
-    version: '1.0.0',
-    description: 'API for a Library database with Swagger'
-  },
-  host: 'localhost:5000',
-  basePath: '/api/v1'
-};
+// const swaggerDefinition = {
+//   info: {
+//     title: 'Hello Books API - Benny Ogidan',
+//     version: '1.0.0',
+//     description: 'API for a Library database with Swagger'
+//   },
+//   host: 'localhost:5000',
+//   basePath: '/api/v1'
+// };
 
 const authenticateRoutes = authenticate.authenticate;
 
-const options = {
-  // import swaggerDefinitions
-  swaggerDefinition,
-  // path to the API docs
-  apis: ['./server/dist/routes/*.js']
-};
+// const options = {
+//   // import swaggerDefinitions
+//   swaggerDefinition,
+//   // path to the API docs
+//   apis: ['./server/dist/routes/*.js']
+// };
 
-const swaggerSpec = swaggerJSDoc(options);
+// const swaggerSpec = swaggerJSDoc(options);
 
 // Log requests to the console.
 app.use(logger('dev'));
@@ -43,13 +42,13 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(express.static(path.join(__dirname, '../api-docs/')));
+// app.use(express.static(path.join(__dirname, '../api-docs/')));
 
 
-app.get('/hellobooks.json', (req, res) => {
-  res.setHeader('Content-Type', 'application/json');
-  res.send(swaggerSpec);
-});
+// app.get('/hellobooks.json', (req, res) => {
+//   res.setHeader('Content-Type', 'application/json');
+//   res.send(swaggerSpec);
+// });
 
 app.use('/api/v1', routes, authenticateRoutes);
 
