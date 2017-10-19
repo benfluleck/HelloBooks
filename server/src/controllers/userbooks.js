@@ -136,7 +136,7 @@ export default {
       if (!book) {
         return res
           .status(409)
-          .send({ success: false, messsage: 'You did not borrow this book' });
+          .send({ success: false, message: 'You did not borrow this book' });
       }
       UserBooks.update({
         returnstatus: true,
@@ -166,14 +166,14 @@ export default {
               .then((returnedBook) => {
                 if (returnedBook.userReturndate > returnedBook.returndate) {
                   res
-                    .status(202)
+                    .status(201)
                     .send({
                       success: true,
                       message: `You have just returned ${returnedBook.title} late, A fine will be sent to you`
                     });
                 } else {
                   res
-                    .status(202)
+                    .status(201)
                     .send({
                       success: true,
                       message: `You have just returned ${returnedBook.title}`

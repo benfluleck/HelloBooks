@@ -1,6 +1,8 @@
 import faker from 'faker';
 import chai from 'chai';
 import chaiHttp from 'chai-http';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 
 import app from '../app';
 import db from '../models';
@@ -9,6 +11,7 @@ const User = db.User;
 const Books = db.Books;
 const expect = chai.expect;
 
+dotenv.config();
 chai.use(chaiHttp);
 
 let userId;
@@ -17,12 +20,10 @@ let token;
 // db.sequelize.sync({});
 describe('HelloBooks', () => {
   before((done) => {
-    Books.destroy({ where: {} });
-    User.destroy({ where: {} });
     Books
       .create({
         title: 'Shola comes home',
-        author: 'Benny Ogidan',
+        author: 'Benny',
         category: 'Fiction',
         quantity: 20,
         description: 'Testewfewwww',
@@ -46,19 +47,19 @@ describe('HelloBooks', () => {
       email: faker
         .internet
         .email()
-    }).then((user) => {
-      userId = user.id;
-    });
-    chai
-      .request(app)
-      .post('/api/v1/auth/users/signin')
-      .set('Accept', 'application/x-www-form-urlencoded')
-      .send({ username: 'Benny', password: 'benny' })
-      .end((err, res) => {
-        token = res.body.token;
-        expect(res.status)
-          .to
-          .equal(200);
+    })
+      .then((user) => {
+        userId = user.id;
+        token = jwt.sign({
+          id: user.id,
+          email: user.email,
+          username: user.username,
+          firstname: user.firstname
+        }, process.env.JWT_SECRET);
+        done();
+      })
+      .catch((error) => {
+        console.log('Error in the User seeding', error, '????????');
         done();
       });
   });
@@ -254,11 +255,6 @@ describe('HelloBooks', () => {
           done();
         });
     });
-  });
-  /*
-   Authenticated users Tests
-   */
-  describe('POST /login', () => {
     it('it responds with 404 status code if bad username or password', (done) => {
       chai
         .request(app)
@@ -279,6 +275,11 @@ describe('HelloBooks', () => {
           done();
         });
     });
+  });
+  /*
+   Authenticated users Tests
+   */
+  describe('POST /books', () => {
     it('administrators can create books', (done) => {
       chai
         .request(app)
@@ -308,7 +309,7 @@ describe('HelloBooks', () => {
         .set('x-access-token', token)
         .send({
           title: 'Shola comes home',
-          author: 'Benny Ogidan',
+          author: 'Benny',
           category: 'Fiction',
           quantity: 20,
           description: 'This needs to be a long description',
@@ -321,7 +322,7 @@ describe('HelloBooks', () => {
           done();
         });
     });
-    it('it responds with 200 status code if good username or password', (done) => {
+    it('404 for Users that do not exist', (done) => {
       chai
         .request(app)
         .post('/api/v1/auth/users/signin')
@@ -379,7 +380,7 @@ describe('HelloBooks', () => {
           token = res.body.token;
           expect(res.status)
             .to
-            .equal(200);
+            .equal(201);
           done();
         });
     });

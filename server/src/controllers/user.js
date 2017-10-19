@@ -106,7 +106,7 @@ export default {
           generateToken.getJWT(Userjwt)
             .then((token) => {
               res
-                .status(200)
+                .status(201)
                 .send({
                   success: true,
                   message: ` ${req.body.username} is now logged in!`,
