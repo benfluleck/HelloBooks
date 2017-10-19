@@ -46,12 +46,12 @@ const getJWT = (id, email, username, firstname) => new Promise((resolve, reject)
       firstname
     }, process.env.JWT_SECRET,
     {
-      expiresIn: '24h'
+      expiresIn: '4h'
     }, (error, token) => {
       if (error) {
         reject(new Error({
           status: 'Error',
-          message: error
+          message: 'Error generating token'
         }));
       } else if (token) {
         resolve({
@@ -61,7 +61,7 @@ const getJWT = (id, email, username, firstname) => new Promise((resolve, reject)
       } else {
         reject(new Error({
           status: 'Error',
-          message: 'Token error'
+          message: 'Error generating token'
         }));
       }
     }

@@ -69,7 +69,7 @@ describe('HelloBooks', () => {
       });
   });
 
-  describe('POST /login', () => {
+  describe('/POST loan a book', () => {
     // Loan a book need to change the date
     it('it allows the user to loan a book', (done) => {
       const userbook = {
@@ -85,12 +85,31 @@ describe('HelloBooks', () => {
         .end((err, res) => {
           expect(res.status)
             .to
-            .equal(201);
+            .equal(202);
+          done();
+        });
+    });
+    it('Loans are not pwermitted without a return date', (done) => {
+      const userbook = {
+        userId,
+        bookId: bookId.toString()
+      };
+      chai
+        .request(app)
+        .post(`/api/v1/users/${userId}/books`)
+        .set('x-access-token', token)
+        .send(userbook)
+        .end((err, res) => {
+          const response = res.body;
+          expect(response.message).to.equal('Please specify a valid return date');
+          expect(res.status)
+            .to
+            .equal(404);
           done();
         });
     });
     // Edit a book
-    describe('/PUT', () => {
+    describe('/PUT edit a book', () => {
       it('it should return a book', (done) => {
         chai
           .request(app)

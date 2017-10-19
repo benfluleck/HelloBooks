@@ -93,7 +93,7 @@ describe('HelloBooks', () => {
     });
   });
 
-  describe('/POST ', () => {
+  describe('/POST  Signing up a user', () => {
     it('All users are allowed to register, Sign up successful', (done) => {
       const email = faker
         .internet
@@ -120,6 +120,59 @@ describe('HelloBooks', () => {
           expect(res.status)
             .to
             .equal(201);
+          done();
+        });
+    });
+    it('Should throw a validation error for invalid user data', (done) => {
+      const email = faker
+        .internet
+        .email();
+      chai
+        .request(app)
+        .post('/api/v1/auth/users/signup')
+        .set('Accept', 'application/x-www-form-urlencoded')
+        .send({
+          firstname: faker
+            .name
+            .firstName(),
+          lastname: faker
+            .name
+            .lastName(),
+          password: 'password',
+          passwordConfirmation: 'password',
+          email
+        })
+        .end((err, res) => {
+          expect(res.status)
+            .to
+            .equal(400);
+          done();
+        });
+    });
+    it('Should throw a validation error for invalid user data', (done) => {
+      const email = 'nenemail.com';
+      chai
+        .request(app)
+        .post('/api/v1/auth/users/signup')
+        .set('Accept', 'application/x-www-form-urlencoded')
+        .send({
+          firstname: faker
+            .name
+            .firstName(),
+          lastname: faker
+            .name
+            .lastName(),
+          username: faker
+            .internet
+            .userName(),
+          password: 'password',
+          passwordConfirmation: 'password',
+          email
+        })
+        .end((err, res) => {
+          expect(res.status)
+            .to
+            .equal(422);
           done();
         });
     });
@@ -265,6 +318,54 @@ describe('HelloBooks', () => {
           expect(res.status)
             .to
             .equal(409);
+          done();
+        });
+    });
+    it('it responds with 200 status code if good username or password', (done) => {
+      chai
+        .request(app)
+        .post('/api/v1/auth/users/signin')
+        .set('Accept', 'application/x-www-form-urlencoded')
+        .send({ username: 'UnknownUser', password: 'error' })
+        .end((err, res) => {
+          token = res.body.token;
+          const response = res.body;
+          expect(response.message).to.equal('UnknownUser does not exist, Go to SignUp');
+          expect(res.status)
+            .to
+            .equal(404);
+          done();
+        });
+    });
+    it('Should validate username', (done) => {
+      chai
+        .request(app)
+        .post('/api/v1/auth/users/signin')
+        .set('Accept', 'application/x-www-form-urlencoded')
+        .send({ username: 'Benny', password: '' })
+        .end((err, res) => {
+          token = res.body.token;
+          const response = res.body;
+          expect(response.message).to.equal('Password is too short');
+          expect(res.status)
+            .to
+            .equal(400);
+          done();
+        });
+    });
+    it('Should validate a password for a user', (done) => {
+      chai
+        .request(app)
+        .post('/api/v1/auth/users/signin')
+        .set('Accept', 'application/x-www-form-urlencoded')
+        .send({ username: 'Benny', password: 'nnnnnnn' })
+        .end((err, res) => {
+          token = res.body.token;
+          const response = res.body;
+          expect(response.message).to.equal('Wrong Credentials');
+          expect(res.status)
+            .to
+            .equal(400);
           done();
         });
     });

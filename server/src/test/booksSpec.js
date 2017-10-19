@@ -1,3 +1,7 @@
+/*
+eslint-disable no-console
+*/
+
 import faker from 'faker';
 import chai from 'chai';
 import chaiHttp from 'chai-http';
@@ -33,6 +37,9 @@ describe('HelloBooks', () => {
       })
       .then((book) => {
         bookId = book.id;
+      })
+      .catch(() => {
+        console.log('Error in the Book seeding');
       });
 
     User.create({
@@ -43,12 +50,15 @@ describe('HelloBooks', () => {
         .name
         .lastName(),
       username: 'Benny',
-      password: 'benny',
-      passwordConfirmation: 'benny',
+      password: 'bennyogidan',
+      passwordConfirmation: 'bennyogidan',
       email: faker
         .internet
         .email()
-    });
+    })
+      .catch(() => {
+        console.log('Error in the User seeding');
+      });
 
     chai
       .request(app)
@@ -56,7 +66,7 @@ describe('HelloBooks', () => {
       .set('Accept', 'application/x-www-form-urlencoded')
       .send({
         username: 'Benny',
-        password: 'benny',
+        password: 'bennyogidan',
       })
       .end((err, res) => {
         token = res.body.token;
@@ -70,7 +80,7 @@ describe('HelloBooks', () => {
   /*
   * Unauthenticated user tests
   */
-  describe('/POST', () => {
+  describe('/GET', () => {
     it('It retrieves all books from the data', (done) => {
       chai
         .request(app)
@@ -85,7 +95,7 @@ describe('HelloBooks', () => {
         });
     });
   });
-  describe('/GET', () => {
+  describe('/GET should return a book list', () => {
     it('should return books when given a limit and an offset', (done) => {
       chai
         .request(app)
@@ -104,7 +114,6 @@ describe('HelloBooks', () => {
     });
   });
 
-  // Edit a book
   describe('/PUT', () => {
     it('Edit a select book from the data', (done) => {
       chai

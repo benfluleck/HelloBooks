@@ -15,34 +15,20 @@ export default {
   * @returns {void|Response} status, send
   */
   create(req, res) {
-    if (!req.body.firstname ||
-      !req.body.lastname ||
-      !req.body.username ||
-      !req.body.password ||
+    if (!req.body.firstname || !req.body.lastname || !req.body.username || !req.body.password ||
       !req.body.email ||
       !req.body.passwordConfirmation) {
-      return res
-        .status(400)
-        .send({ message: 'All fields are required' });
+      return res.status(400).send({ message: 'All fields are required' });
     }
     if (req.body.password !== req.body.passwordConfirmation) {
-      return res
-        .status(422)
-        .send({ message: 'Password and Password confirmation do not match' });
+      return res.status(422).send({ message: 'Password and Password confirmation do not match' });
     }
-
     User
-      .findOne({
-        where: { username: req.body.username }
-      })
+      .findOne({ where: { username: req.body.username } })
       .then((usernameExists) => {
         if (usernameExists) {
           res
-            .status(409)
-            .json({
-              success: false,
-              message: 'This username is already in use'
-            });
+            .status(409).json({ success: false, message: 'This username is already in use' });
         } else {
           User
             .findOne({
@@ -50,12 +36,7 @@ export default {
             })
             .then((userExists) => {
               if (userExists) {
-                res
-                  .status(409)
-                  .json({
-                    success: false,
-                    message: 'This email is already in use'
-                  });
+                res.status(409).json({ success: false, message: 'This email is already in use' });
               } else {
                 User
                   .create({
@@ -77,21 +58,15 @@ export default {
                     }
                   })
                   .catch((error) => {
-                    res
-                      .status(400)
-                      .send({ success: false, message: ` ${error.message}` });
+                    res.status(400).send({ success: false, message: ` ${error.message}` });
                   });
               }
             })
             .catch((error) => {
-              res
-                .status(400)
-                .send({ success: false, message: ` ${error.message}` });
+              res.status(400).send({ success: false, message: ` ${error.message}` });
             })
             .catch((error) => {
-              res
-                .status(400)
-                .send({ success: false, message: ` ${error.message}` });
+              res.status(400).send({ success: false, message: ` ${error.message}` });
             });
         }
       });
