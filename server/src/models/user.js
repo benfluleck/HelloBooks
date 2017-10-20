@@ -121,7 +121,7 @@ export default(sequelize, DataTypes) => {
         if (user.password === user.passwordConfirmation) {
           user.password = User.generateHash(user.password);
         } else {
-          throw new Error('Passwords do not the match');
+          throw new Error('Passwords do not match');
         }
 
       },
