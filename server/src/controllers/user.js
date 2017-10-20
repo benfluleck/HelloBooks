@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt-nodejs';
 import models from '../models';
-import sendResetPasswordEmail from '../mailer/mailer';
+// import sendResetPasswordEmail from '../mailer/mailer';
 import generateToken from '../controllers/middleware/authenticate';
 
 
@@ -15,34 +15,20 @@ export default {
   * @returns {void|Response} status, send
   */
   create(req, res) {
-    if (!req.body.firstname ||
-      !req.body.lastname ||
-      !req.body.username ||
-      !req.body.password ||
+    if (!req.body.firstname || !req.body.lastname || !req.body.username || !req.body.password ||
       !req.body.email ||
       !req.body.passwordConfirmation) {
-      return res
-        .status(400)
-        .send({ message: 'All fields are required' });
+      return res.status(400).send({ message: 'All fields are required' });
     }
     if (req.body.password !== req.body.passwordConfirmation) {
-      return res
-        .status(422)
-        .send({ message: 'Password and Password confirmation do not match' });
+      return res.status(422).send({ message: 'Password and Password confirmation do not match' });
     }
-
     User
-      .findOne({
-        where: { username: req.body.username }
-      })
+      .findOne({ where: { username: req.body.username } })
       .then((usernameExists) => {
         if (usernameExists) {
           res
-            .status(409)
-            .json({
-              success: false,
-              message: 'This username is already in use'
-            });
+            .status(409).json({ success: false, message: 'This username is already in use' });
         } else {
           User
             .findOne({
@@ -50,12 +36,7 @@ export default {
             })
             .then((userExists) => {
               if (userExists) {
-                res
-                  .status(409)
-                  .json({
-                    success: false,
-                    message: 'This email is already in use'
-                  });
+                res.status(409).json({ success: false, message: 'This email is already in use' });
               } else {
                 User
                   .create({
@@ -77,21 +58,15 @@ export default {
                     }
                   })
                   .catch((error) => {
-                    res
-                      .status(400)
-                      .send({ success: false, message: ` ${error.message}` });
+                    res.status(400).send({ success: false, message: ` ${error.message}` });
                   });
               }
             })
             .catch((error) => {
-              res
-                .status(400)
-                .send({ success: false, message: ` ${error.message}` });
+              res.status(400).send({ success: false, message: ` ${error.message}` });
             })
             .catch((error) => {
-              res
-                .status(400)
-                .send({ success: false, message: ` ${error.message}` });
+              res.status(400).send({ success: false, message: ` ${error.message}` });
             });
         }
       });
@@ -131,7 +106,7 @@ export default {
           generateToken.getJWT(Userjwt)
             .then((token) => {
               res
-                .status(200)
+                .status(201)
                 .send({
                   success: true,
                   message: ` ${req.body.username} is now logged in!`,
@@ -157,24 +132,24 @@ export default {
    * @returns {any} reset password
    *
    */
-  reset_password(req, res) {
-    User
-      .findOne({ email: req.body.email })
-      .then((user) => {
-        if (user) {
-          sendResetPasswordEmail(user);
-          res.json({});
-        } else {
-          res
-            .status(400)
-            .json({
-              errors: {
-                global: 'There is no user with such email'
-              }
-            });
-        }
-      });
-  },
+  // reset_password(req, res) {
+  //   User
+  //     .findOne({ email: req.body.email })
+  //     .then((user) => {
+  //       if (user) {
+  //         sendResetPasswordEmail(user);
+  //         res.json({});
+  //       } else {
+  //         res
+  //           .status(400)
+  //           .json({
+  //             errors: {
+  //               global: 'There is no user with such email'
+  //             }
+  //           });
+  //       }
+  //     });
+  // },
 
   /**
    * Edit user Information
@@ -184,21 +159,22 @@ export default {
    * @param  {object} res - express http response object
    * @return {mixed}      - sends an http response
    */
-  updateUserInfo(req, res) {
-    User
-      .findById(req.params.userId)
-      .then((user) => {
-        user
-          .update(req.body, {
-            returning: true,
-            plain: true
-          })
-          .then(() => res.status(202).send({ success: true, user, message: 'Your information was successfully updated' }), (error) => {
-            res
-              .status(500)
-              .send({ success: false, error });
-          });
-      })
-      .catch(error => res.status(500).send({ success: false, error }));
-  }
+//   updateUserInfo(req, res) {
+//     User
+//       .findById(req.params.userId)
+//       .then((user) => {
+//         user
+//           .update(req.body, {
+//             returning: true,
+//             plain: true
+//           })
+//           .then(() => res.status(202).send({ success: true, user, message:
+//            'Your information was successfully updated' }), (error) => {
+//             res
+//               .status(500)
+//               .send({ success: false, error });
+//           });
+//       })
+//       .catch(error => res.status(500).send({ success: false, error }));
+//   }
 };

@@ -1,5 +1,4 @@
 import models from '../models';
-import Helper from '../Helper/helper';
 import paginationfunc from '../controllers/middleware/pagination';
 
 const Books = models.Books;
@@ -39,10 +38,7 @@ export default {
             description: req.body.description,
             bookimage: req.body.bookimage
           })
-          .then(books =>
-            res.status(201).send({
-              message: `${books.title} has been added to the library`
-            }))
+          .then(books => res.status(201).send({ message: `${books.title} has been added to the library` }))
           .catch(error => res.status(401).send(error));
       });
   },
@@ -81,17 +77,9 @@ export default {
               Description: book.description,
               Image: book.bookimage
             }))
-          .catch((error) => {
-            res
-              .status(400)
-              .send({
-                Errors: Helper.errorArray(error)
-              });
-          });
+          .catch((error) => { res.status(400).send({ success: false, error }); });
       })
-      .catch(error => res.status(400).send({
-        Errors: Helper.errorArray(error)
-      }));
+      .catch(error => res.status(400).send({ success: false, error }));
   },
 
   /**
@@ -103,25 +91,25 @@ export default {
    *
    *
    */
-  destroybooks(req, res) {
-    if (req.params.bookId === 'undefined') {
-      return res.status(404).send({ success: false, message: 'Book not found' });
-    }
-    return Books
-      .findById({
-        where: {
-          id: req.params.bookId,
-        },
-      })
-      .then((book) => {
-        if (!book) {
-          return res.status(404).send({ success: false, message: 'Book not found' });
-        }
-        book.destroy();
-        return res.status(200).send({ success: true, message: 'Book successfully deleted' });
-      })
-      .catch(() => res.status(400).send({ success: false, message: 'Enter valid inputs!' }));
-  },
+  // destroybooks(req, res) {
+  //   if (req.params.bookId === 'undefined') {
+  //     return res.status(404).send({ success: false, message: 'Book not found' });
+  //   }
+  //   return Books
+  //     .findById({
+  //       where: {
+  //         id: req.params.bookId,
+  //       },
+  //     })
+  //     .then((book) => {
+  //       if (!book) {
+  //         return res.status(404).send({ success: false, message: 'Book not found' });
+  //       }
+  //       book.destroy();
+  //       return res.status(200).send({ success: true, message: 'Book successfully deleted' });
+  //     })
+  //     .catch(() => res.status(400).send({ success: false, message: 'Enter valid inputs!' }));
+  // },
 
   /**
    * Route: GET: /books
@@ -144,8 +132,7 @@ export default {
           res.json({ error: 'Empty', message: 'There are no books present in the database' });
         } else {
           res
-            .status(200)
-            .send({
+            .status(200).send({
               books: books.rows,
               pagination: paginationfunc(offset, limit, books)
             });
