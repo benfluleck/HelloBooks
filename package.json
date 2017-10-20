@@ -16,7 +16,7 @@
     "build:prod webdev": "webpack -p && cp client/src/index.html client/dist/index.html",
     "build": "babel server/src --watch --out-dir server/dist --presets es2015",
     "build:travis": "babel server/src --out-dir server/dist --presets es2015",
-    "pretest":"npm run undo:migratetest && npm run test:migrate && sequelize db:seed:all",
+    "pretest": "npm run undo:migratetest && npm run test:migrate && sequelize db:seed:all",
     "test": "export NODE_ENV=test && mocha server/dist/test/*.js --timeout 10000 && export NODE_ENV=development",
     "coverage": "cross-env NODE_ENV=test && npm run pretest &&  nyc --reporter=lcov --reporter=text --reporter=lcovonly mocha --compilers js:babel-register server/src/test/* --exclude 'server/dist/' "
   },
@@ -83,6 +83,7 @@
     "webpack": "^3.5.5"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-polyfill": "^6.23.0",
     "babel-preset-env": "^1.6.0",

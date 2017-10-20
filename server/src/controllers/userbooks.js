@@ -5,6 +5,7 @@ import paginationfunc from '../controllers/middleware/pagination';
 
 const UserBooks = models.UserBooks;
 const Books = models.Books;
+const User = models.User;
 
 
 export default {
@@ -24,47 +25,64 @@ export default {
     if (toDate(returndate) < Date.now() || !toDate(returndate)) {
       return res.status(422).send({ message: 'Please provide a valid return date' });
     }
-    UserBooks.findOne({
-      where: { userid: req.params.userId, bookid: req.body.bookId, returnstatus: false },
-      include: [
-        { model: Books, as: 'book', required: true }
-      ]
-    }).then((bookfound) => {
-      if (bookfound) {
-        return res.status(409).send({ success: false, message: 'You have already borrowed this book' });
-      }
-      UserBooks
-        .create({
-          userid: req.params.userId, bookid: req.body.bookId, returndate
-        })
-        .then(() => {
-          Books
-            .findOne({ where: { id: req.body.bookId } })
-            .then((booktoborrow) => {
-              if (!booktoborrow || booktoborrow.quantity === 0) {
-                return res.status(404).send({ success: false, message: 'Sorry we can\'t find this book or all copies of this book are on loan' });
-              }
-              booktoborrow
-                .update({
-                  quantity: booktoborrow.quantity -= 1
-                })
-                .then((borrowedbook) => {
-                  res.status(202).send({ success: true, message: `${borrowedbook.title} succesfully loaned` });
+    if (req.params.userId === '') {
+      return res.send(404).send({ success: false, message: 'User does not exist' });
+    }
+    User.findById(req.params.userId)
+      .then((user) => {
+        if (!user) {
+          return res
+            .status(404)
+            .send({ message: 'User does not exist' });
+        }
+        UserBooks.findOne({
+          where: { userid: req.params.userId, bookid: req.body.bookId, returnstatus: false },
+          include: [
+            { model: Books, as: 'book', required: true }
+          ]
+        }).then((bookfound) => {
+          if (bookfound) {
+            return res.status(409).send({ success: false, message: 'You have already borrowed this book' });
+          }
+          UserBooks
+            .create({
+              userid: req.params.userId, bookid: req.body.bookId, returndate
+            })
+            .then(() => {
+              Books
+                .findOne({ where: { id: req.body.bookId } })
+                .then((booktoborrow) => {
+                  if (!booktoborrow || booktoborrow.quantity === 0) {
+                    return res.status(404).send({
+                      success: false,
+                      message: 'Sorry we can\'t find this book or all copies of this book are on loan'
+                    });
+                  }
+                  booktoborrow
+                    .update({
+                      quantity: booktoborrow.quantity -= 1
+                    })
+                    .then((borrowedbook) => {
+                      res.status(201).send({ success: true, message: `${borrowedbook.title} succesfully loaned` });
+                    })
+                    .catch(() => {
+                      res.status(500).send({ success: false, message: 'Error from the client end' });
+                    });
                 })
                 .catch(() => {
-                  res.status(500).send({ success: false, message: 'Error from the your end' });
+                  res.status(500).send({ success: false, message: 'Error from the client end' });
                 });
             })
             .catch(() => {
-              res.status(500).send({ success: false, message: 'Error from the your end' });
+              res.status(404).send({ success: false, message: 'There is a problem with this user or book, Please contact the administrator' });
             });
-        })
-        .catch(() => {
-          res.status(404).send({ success: false, message: 'There is a problem with this user or book, Please contact the administrator' });
+        }).catch((error) => {
+          res.status(400).send({ success: false, message: ` ${error.message}` });
         });
-    }).catch((error) => {
-      res.status(400).send({ success: false, message: ` ${error.message}` });
-    });
+      })
+      .catch((error) => {
+        res.status(400).send({ success: false, message: ` ${error.message}` });
+      });
   },
 
   /**

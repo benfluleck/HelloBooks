@@ -24,8 +24,10 @@ chai.use(chaiHttp);
 let userId;
 let bookId;
 let zerobookId;
+let testbookId;
 let token;
 const testdate = new Date('2017-11-18');
+const nulluserId = '';
 
 
 describe('HelloBooks', () => {
@@ -55,6 +57,18 @@ describe('HelloBooks', () => {
         zerobookId = book.id;
       });
 
+    Books
+      .create({
+        title: 'Amarachi continues to go to school',
+        author: 'Benny Ogidan',
+        category: 'Fiction',
+        quantity: 1,
+        description: 'Test',
+        bookimage: 'Test Image'
+      })
+      .then((book) => {
+        testbookId = book.id;
+      });
     User.create({
       firstname: faker
         .name
@@ -99,7 +113,7 @@ describe('HelloBooks', () => {
         .end((err, res) => {
           expect(res.status)
             .to
-            .equal(202);
+            .equal(201);
           done();
         });
     });
@@ -124,6 +138,28 @@ describe('HelloBooks', () => {
         });
     });
 
+    it('should be able to borrow another book', (done) => {
+      const userbook = {
+        userId,
+        bookId: testbookId.toString(),
+        returndate: testdate
+      };
+      chai
+        .request(app)
+        .post(`/api/v1/users/${userId}/books`)
+        .set('x-access-token', token)
+        .send(userbook)
+        .end((err, res) => {
+          const response = res.body;
+          expect(response.message).to
+            .equal('Amarachi continues to go to school succesfully loaned');
+          expect(res.status)
+            .to
+            .equal(201);
+          expect(res.body).to.be.an('object');
+          done();
+        });
+    });
     it('should not be able to borrow another book of the same title', (done) => {
       const userbook = {
         userId,
@@ -146,9 +182,46 @@ describe('HelloBooks', () => {
           done();
         });
     });
+    it('should not be able to borrow book if the user id is invalid', (done) => {
+      const userbook = {
+        bookId: bookId.toString(),
+        returndate: testdate
+      };
+      chai
+        .request(app)
+        .post(`/api/v1/users/${nulluserId}/books`)
+        .set('x-access-token', token)
+        .send(userbook)
+        .end((err, res) => {
+          expect(res.status)
+            .to
+            .equal(404);
+          done();
+        });
+    });
+    it('should not be able to borrow book if the user id not registered', (done) => {
+      const userbook = {
+        bookId: bookId.toString(),
+        returndate: testdate
+      };
+      chai
+        .request(app)
+        .post(`/api/v1/users/${200}/books`)
+        .set('x-access-token', token)
+        .send(userbook)
+        .end((err, res) => {
+          const response = res.body;
+          expect(response.message).to
+            .equal('User does not exist');
+          expect(res.status)
+            .to
+            .equal(404);
+          expect(res.body).to.be.an('object');
+          done();
+        });
+    });
     it('should not be able to borrow a book if bookId cannot be found', (done) => {
       const userbook = {
-        userId,
         bookId: 500,
         returndate: testdate
       };
@@ -164,7 +237,46 @@ describe('HelloBooks', () => {
           expect(res.status)
             .to
             .equal(404);
+          done();
+        });
+    });
+    it('should not be able to borrow a book if a valid return date is not inputted', (done) => {
+      const userbook = {
+        userId,
+        bookId: bookId.toString(),
+        returndate: 'Invalid date'
+      };
+      chai
+        .request(app)
+        .post(`/api/v1/users/${userId}/books`)
+        .set('x-access-token', token)
+        .send(userbook)
+        .end((err, res) => {
+          const response = res.body;
+          expect(response.message).to
+            .equal('Please provide a valid return date');
+          expect(res.status)
+            .to
+            .equal(422);
           expect(res.body).to.be.an('object');
+          done();
+        });
+    });
+    it('should not be able to borrow a book if a valid return date is not inputted', (done) => {
+      const userbook = {
+        userId,
+        bookId: bookId.toString(),
+        returndate: 2109
+      };
+      chai
+        .request(app)
+        .post(`/api/v1/users/${userId}/books`)
+        .set('x-access-token', token)
+        .send(userbook)
+        .end((err, res) => {
+          expect(res.status)
+            .to
+            .equal(500);
           done();
         });
     });
@@ -244,6 +356,35 @@ describe('HelloBooks', () => {
         .put(`/api/v1/users/${userId}/books`)
         .set('x-access-token', token)
         .send({ bookId: 7 })
+        .end((err, res) => {
+          const response = res.body;
+          expect(response.message).to.equal('You did not borrow this book');
+          expect(res.status)
+            .to
+            .equal(409);
+          done();
+        });
+    });
+    it('users should be able to return a book they have not borrowed', (done) => {
+      chai
+        .request(app)
+        .put(`/api/v1/users/${userId}/books`)
+        .set('x-access-token', token)
+        .send({ bookId: 'one' })
+        .end((err, res) => {
+          expect(res.error.text).to.equal('invalid input syntax for integer: "one"');
+          expect(res.status)
+            .to
+            .equal(500);
+          done();
+        });
+    });
+    it('users should not return a book more than once', (done) => {
+      chai
+        .request(app)
+        .put(`/api/v1/users/${userId}/books`)
+        .set('x-access-token', token)
+        .send({ bookId })
         .end((err, res) => {
           const response = res.body;
           expect(response.message).to.equal('You did not borrow this book');

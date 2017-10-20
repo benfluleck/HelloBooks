@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt-nodejs';
 import models from '../models';
-import sendResetPasswordEmail from '../mailer/mailer';
+// import sendResetPasswordEmail from '../mailer/mailer';
 import generateToken from '../controllers/middleware/authenticate';
 
 

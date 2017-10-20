@@ -25,6 +25,7 @@ chai.use(chaiHttp);
 let bookId;
 let token;
 let limit;
+const nullid = null;
 
 describe('HelloBooks', () => {
   before((done) => {
@@ -175,7 +176,7 @@ describe('HelloBooks', () => {
           done();
         });
     });
-    it('Will not edit if a field is set to empty', (done) => {
+    it('should not edit the book if a field is set to empty', (done) => {
       chai
         .request(app)
         .put(`/api/v1/books/${bookId}`)
@@ -184,6 +185,27 @@ describe('HelloBooks', () => {
         .send({
           title: 'The Chronicles of Andela',
           author: '',
+          category: 'Action',
+          quantity: '23',
+          description: 'This is a test',
+          bookimage: 'Image'
+        })
+        .end((err, res) => {
+          expect(res.status)
+            .to
+            .equal(400);
+          done();
+        });
+    });
+    it('Book is not found when bookid is undefined or null', (done) => {
+      chai
+        .request(app)
+        .put(`/api/v1/books/${nullid}`)
+        .set('Accept', 'application/x-www-form-urlencoded')
+        .set('x-access-token', token)
+        .send({
+          title: 'The Chronicles of Andela',
+          author: 'C.S. Lewis',
           category: 'Action',
           quantity: '23',
           description: 'This is a test',

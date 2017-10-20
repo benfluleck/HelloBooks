@@ -64,7 +64,7 @@ describe('HelloBooks', () => {
         done();
       })
       .catch((error) => {
-        console.log('Error in the User seeding', error, '????????');
+        console.log('Error in the User seeding', error);
         done();
       });
   });
@@ -472,7 +472,7 @@ describe('HelloBooks', () => {
           done();
         });
     });
-    it('validates that the new user\'s email is unique', (done) => {
+    it('validates that the new user\'s email as unique', (done) => {
       chai
         .request(app)
         .post('/api/v1/auth/users/signup')
