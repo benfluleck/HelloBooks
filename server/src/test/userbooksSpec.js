@@ -1,3 +1,7 @@
+/*
+eslint-disable no-console
+*/
+
 import faker from 'faker';
 import chai from 'chai';
 import chaiHttp from 'chai-http';
@@ -19,6 +23,7 @@ chai.use(chaiHttp);
 
 let userId;
 let bookId;
+let zerobookId;
 let token;
 const testdate = new Date('2017-11-18');
 
@@ -36,6 +41,18 @@ describe('HelloBooks', () => {
       })
       .then((book) => {
         bookId = book.id;
+      });
+    Books
+      .create({
+        title: 'Eze continues to go to school',
+        author: 'Benny Ogidan',
+        category: 'Fiction',
+        quantity: 0,
+        description: 'Test',
+        bookimage: 'Test Image'
+      })
+      .then((book) => {
+        zerobookId = book.id;
       });
 
     User.create({
@@ -89,7 +106,7 @@ describe('HelloBooks', () => {
     it('loans are not permitted without a return date', (done) => {
       const userbook = {
         userId,
-        bookId: bookId.toString()
+        bookId: bookId.toString(),
       };
       chai
         .request(app)
@@ -106,7 +123,75 @@ describe('HelloBooks', () => {
           done();
         });
     });
+
+    it('should not be able to borrow another book of the same title', (done) => {
+      const userbook = {
+        userId,
+        bookId: bookId.toString(),
+        returndate: testdate
+      };
+      chai
+        .request(app)
+        .post(`/api/v1/users/${userId}/books`)
+        .set('x-access-token', token)
+        .send(userbook)
+        .end((err, res) => {
+          const response = res.body;
+          expect(response.message).to
+            .equal('You have already borrowed this book');
+          expect(res.status)
+            .to
+            .equal(409);
+          expect(res.body).to.be.an('object');
+          done();
+        });
+    });
+    it('should not be able to borrow a book if bookId cannot be found', (done) => {
+      const userbook = {
+        userId,
+        bookId: 500,
+        returndate: testdate
+      };
+      chai
+        .request(app)
+        .post(`/api/v1/users/${userId}/books`)
+        .set('x-access-token', token)
+        .send(userbook)
+        .end((err, res) => {
+          const response = res.body;
+          expect(response.message).to
+            .equal('Sorry we can\'t find this book or all copies of this book are on loan');
+          expect(res.status)
+            .to
+            .equal(404);
+          expect(res.body).to.be.an('object');
+          done();
+        });
+    });
+    it('should not be able to borrow a book if quantity === 0', (done) => {
+      const userbook = {
+        userId,
+        bookId: zerobookId,
+        returndate: testdate
+      };
+      chai
+        .request(app)
+        .post(`/api/v1/users/${userId}/books`)
+        .set('x-access-token', token)
+        .send(userbook)
+        .end((err, res) => {
+          const response = res.body;
+          expect(response.message).to
+            .equal('Sorry we can\'t find this book or all copies of this book are on loan');
+          expect(res.status)
+            .to
+            .equal(404);
+          expect(res.body).to.be.an('object');
+          done();
+        });
+    });
   });
+
   describe('/GET should return a list', () => {
     it('returns a list of books loaned by the user', (done) => {
       chai

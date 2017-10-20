@@ -31,7 +31,7 @@ export default {
       ]
     }).then((bookfound) => {
       if (bookfound) {
-        return res.status(409).send({ success: false, messsage: 'You have already borrowed this book' });
+        return res.status(409).send({ success: false, message: 'You have already borrowed this book' });
       }
       UserBooks
         .create({

@@ -24,8 +24,8 @@ chai.use(chaiHttp);
 
 let bookId;
 let token;
-const limit = 1;
-const offset = 0;
+let limit;
+
 describe('HelloBooks', () => {
   before((done) => {
     Books
@@ -94,13 +94,12 @@ describe('HelloBooks', () => {
         .get('/api/v1/books')
         .set({ 'x-access-token': token })
         .query({
-          limit,
-          offset,
+          limit: 2
         })
         .end((err, res) => {
           expect(res.status).to.be.equal(200);
           expect('Content-Type', /json/);
-          expect(res.body.books.length).to.be.equal(limit);
+          expect(res.body.books.length).to.be.equal(2);
           done();
         });
     });
@@ -110,13 +109,12 @@ describe('HelloBooks', () => {
         .get('/api/v1/books')
         .set({ 'x-access-token': token })
         .query({
-          limit: 3,
-          offset
+          limit: 1
         })
         .end((err, res) => {
           expect(res.status).to.be.equal(200);
           expect('Content-Type', /json/);
-          expect(res.body.books.length).to.be.equal(3);
+          expect(res.body.books.length).to.be.equal(1);
           done();
         });
     });
@@ -132,7 +130,7 @@ describe('HelloBooks', () => {
         .end((err, res) => {
           expect(res.status).to.be.equal(200);
           expect('Content-Type', /json/);
-          expect(res.body.books.length).to.be.equal(limit);
+          expect(res.body.books.length).to.be.equal(1);
           done();
         });
     });
@@ -148,7 +146,7 @@ describe('HelloBooks', () => {
         .end((err, res) => {
           expect(res.status).to.be.equal(200);
           expect('Content-Type', /json/);
-          expect(res.body.books.length).to.be.equal(limit);
+          expect(res.body.books.length).to.be.equal(3);
           done();
         });
     });
@@ -195,6 +193,27 @@ describe('HelloBooks', () => {
           expect(res.status)
             .to
             .equal(400);
+          done();
+        });
+    });
+    it('Book is not found when bookid is undefined or null', (done) => {
+      chai
+        .request(app)
+        .put('/api/v1/books/')
+        .set('Accept', 'application/x-www-form-urlencoded')
+        .set('x-access-token', token)
+        .send({
+          title: 'The Chronicles of Andela',
+          author: 'C.S. Lewis',
+          category: 'Action',
+          quantity: '23',
+          description: 'This is a test',
+          bookimage: 'Image'
+        })
+        .end((err, res) => {
+          expect(res.status)
+            .to
+            .equal(404);
           done();
         });
     });

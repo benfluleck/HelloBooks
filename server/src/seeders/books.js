@@ -35,6 +35,17 @@ module.exports = {
         bookimage: 'Test Image',
         createdAt: new Date(),
         updatedAt: new Date(),
+      },
+      {
+        title: faker.company.catchPhrase(),
+        author: faker.name.firstName(),
+        category: 'Drama',
+        quantity: 20,
+        description: faker.lorem.paragraphs(),
+        ISBN: 1222343432,
+        bookimage: 'Test Image',
+        createdAt: new Date(),
+        updatedAt: new Date(),
       }
     ]),
   down: queryInterface =>

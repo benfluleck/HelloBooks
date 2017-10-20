@@ -1,3 +1,7 @@
+/*
+eslint-disable no-console
+*/
+
 import faker from 'faker';
 import chai from 'chai';
 import chaiHttp from 'chai-http';
@@ -17,7 +21,8 @@ chai.use(chaiHttp);
 let userId;
 let bookId;
 let token;
-// db.sequelize.sync({});
+
+
 describe('HelloBooks', () => {
   before((done) => {
     Books
@@ -275,6 +280,40 @@ describe('HelloBooks', () => {
           done();
         });
     });
+    it('should ensure all signup fields are required', (done) => {
+      chai
+        .request(app)
+        .post('/api/v1/auth/users/signup')
+        .set('Accept', 'application/x-www-form-urlencoded')
+        .send({
+          username: faker.internet.userName(),
+          email: faker.internet.email(),
+          password: 'testpassword',
+          passwordConfirmation: 'testpassword',
+        })
+        .end((err, res) => {
+          expect(res.body.message).to.equal('Firstname is invalid');
+          expect(res.status).to.equal(400);
+          done();
+        });
+    });
+
+    it('should ensure all signup fields are defined', (done) => {
+      chai
+        .request(app)
+        .post('/api/v1/auth/users/signup')
+        .set('Accept', 'application/x-www-form-urlencoded')
+        .send({
+          usename: '',
+          email: '',
+          password: '',
+          passwordConfirmation: '',
+        })
+        .end((err, res) => {
+          expect(res.body.message).to.equal('This email address you have provided is invalid');
+          done();
+        });
+    });
   });
   /*
    Authenticated users Tests
@@ -298,6 +337,9 @@ describe('HelloBooks', () => {
           expect(res.status)
             .to
             .equal(201);
+          expect(res.body.message)
+            .to
+            .equal('Learn Java has been added to the library');
           done();
         });
     });
@@ -319,6 +361,30 @@ describe('HelloBooks', () => {
           expect(res.status)
             .to
             .equal(409);
+          expect(res.body.message)
+            .to
+            .equal('A book with the same title and author already exists in the library');
+          done();
+        });
+    });
+    it('Error in the desciption', (done) => {
+      chai
+        .request(app)
+        .post('/api/v1/books')
+        .set('Accept', 'application/x-www-form-urlencoded')
+        .set('x-access-token', token)
+        .send({
+          title: 'Benedict goes to school',
+          author: 'Benny',
+          category: 'Fiction',
+          quantity: 20,
+          description: 'This ',
+          bookimage: 'Test Image'
+        })
+        .end((err, res) => {
+          expect(res.status)
+            .to
+            .equal(400);
           done();
         });
     });
@@ -406,6 +472,51 @@ describe('HelloBooks', () => {
           done();
         });
     });
+    it('validates that the new user\'s email is unique', (done) => {
+      chai
+        .request(app)
+        .post('/api/v1/auth/users/signup')
+        .set('Accept', 'application/x-www-form-urlencoded')
+        .set({ 'x-access-token': token })
+        .send({
+          username: 'Homer',
+          firstname: 'Homer',
+          lastname: 'Simpson',
+          email: 'sample@email.com',
+          password: 'benny',
+          passwordConfirmation: 'benny'
+        })
+        .end((err, res) => {
+          expect(res.status)
+            .to
+            .be
+            .equal(409);
+          done();
+        });
+    });
+
+    it('should not create a user if the password does not match', (done) => {
+      chai
+        .request(app)
+        .post('/api/v1/auth/users/signup')
+        .set('Accept', 'application/x-www-form-urlencoded')
+        .set({ 'x-access-token': token })
+        .send({
+          username: 'Homer',
+          firstname: 'Homer',
+          lastname: 'Simpson',
+          email: 'ben@gmail.com',
+          password: 'benny',
+          passwordConfirmation: 'benny23'
+        })
+        .end((err, res) => {
+          expect(res.status)
+            .to
+            .be
+            .equal(422);
+          done();
+        });
+    });
     it('it returns successful login if user name and password', (done) => {
       chai
         .request(app)
@@ -417,6 +528,36 @@ describe('HelloBooks', () => {
           expect(res.body)
             .have
             .property('token');
+          done();
+        });
+    });
+    it('should require the username field', (done) => {
+      chai
+        .request(app)
+        .post('/api/v1/auth/users/signin')
+        .set('Accept', 'application/x-www-form-urlencoded')
+        .send({ username: '', password: 'benny' })
+        .end((err, res) => {
+          expect('Content-Type', /json/);
+          expect(res.status)
+            .to
+            .be
+            .equal(400);
+          done();
+        });
+    });
+    it('should require the password field', (done) => {
+      chai
+        .request(app)
+        .post('/api/v1/auth/users/signin')
+        .set('Accept', 'application/x-www-form-urlencoded')
+        .send({ username: 'Benny', password: '' })
+        .end((err, res) => {
+          expect('Content-Type', /json/);
+          expect(res.status)
+            .to
+            .be
+            .equal(400);
           done();
         });
     });

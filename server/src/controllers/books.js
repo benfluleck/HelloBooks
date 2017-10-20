@@ -91,25 +91,25 @@ export default {
    *
    *
    */
-  destroybooks(req, res) {
-    if (req.params.bookId === 'undefined') {
-      return res.status(404).send({ success: false, message: 'Book not found' });
-    }
-    return Books
-      .findById({
-        where: {
-          id: req.params.bookId,
-        },
-      })
-      .then((book) => {
-        if (!book) {
-          return res.status(404).send({ success: false, message: 'Book not found' });
-        }
-        book.destroy();
-        return res.status(200).send({ success: true, message: 'Book successfully deleted' });
-      })
-      .catch(() => res.status(400).send({ success: false, message: 'Enter valid inputs!' }));
-  },
+  // destroybooks(req, res) {
+  //   if (req.params.bookId === 'undefined') {
+  //     return res.status(404).send({ success: false, message: 'Book not found' });
+  //   }
+  //   return Books
+  //     .findById({
+  //       where: {
+  //         id: req.params.bookId,
+  //       },
+  //     })
+  //     .then((book) => {
+  //       if (!book) {
+  //         return res.status(404).send({ success: false, message: 'Book not found' });
+  //       }
+  //       book.destroy();
+  //       return res.status(200).send({ success: true, message: 'Book successfully deleted' });
+  //     })
+  //     .catch(() => res.status(400).send({ success: false, message: 'Enter valid inputs!' }));
+  // },
 
   /**
    * Route: GET: /books

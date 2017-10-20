@@ -132,24 +132,24 @@ export default {
    * @returns {any} reset password
    *
    */
-  reset_password(req, res) {
-    User
-      .findOne({ email: req.body.email })
-      .then((user) => {
-        if (user) {
-          sendResetPasswordEmail(user);
-          res.json({});
-        } else {
-          res
-            .status(400)
-            .json({
-              errors: {
-                global: 'There is no user with such email'
-              }
-            });
-        }
-      });
-  },
+  // reset_password(req, res) {
+  //   User
+  //     .findOne({ email: req.body.email })
+  //     .then((user) => {
+  //       if (user) {
+  //         sendResetPasswordEmail(user);
+  //         res.json({});
+  //       } else {
+  //         res
+  //           .status(400)
+  //           .json({
+  //             errors: {
+  //               global: 'There is no user with such email'
+  //             }
+  //           });
+  //       }
+  //     });
+  // },
 
   /**
    * Edit user Information
@@ -159,21 +159,22 @@ export default {
    * @param  {object} res - express http response object
    * @return {mixed}      - sends an http response
    */
-  updateUserInfo(req, res) {
-    User
-      .findById(req.params.userId)
-      .then((user) => {
-        user
-          .update(req.body, {
-            returning: true,
-            plain: true
-          })
-          .then(() => res.status(202).send({ success: true, user, message: 'Your information was successfully updated' }), (error) => {
-            res
-              .status(500)
-              .send({ success: false, error });
-          });
-      })
-      .catch(error => res.status(500).send({ success: false, error }));
-  }
+//   updateUserInfo(req, res) {
+//     User
+//       .findById(req.params.userId)
+//       .then((user) => {
+//         user
+//           .update(req.body, {
+//             returning: true,
+//             plain: true
+//           })
+//           .then(() => res.status(202).send({ success: true, user, message:
+//            'Your information was successfully updated' }), (error) => {
+//             res
+//               .status(500)
+//               .send({ success: false, error });
+//           });
+//       })
+//       .catch(error => res.status(500).send({ success: false, error }));
+//   }
 };

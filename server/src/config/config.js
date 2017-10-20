@@ -18,7 +18,6 @@ module.exports = {
     database: process.env.TESTDB,
     host: process.env.DBADDRESS,
     dialect: process.env.DBDIALECT,
-    logging: false
   },
 
   production: {
