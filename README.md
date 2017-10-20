@@ -1,5 +1,4 @@
 [![Build Status](https://travis-ci.org/benfluleck/HelloBooks.png)](https://travis-ci.org/benfluleck/HelloBooks.svg?branch=staging)
-[![Code Climate](https://codeclimate.com/github/benfluleck/HelloBooks/badges/gpa.svg)](https://codeclimate.com/github/benfluleck/HelloBooks/)
 [![Coverage Status](https://coveralls.io/repos/github/benfluleck/HelloBooks/badge.svg?branch=staging)](https://coveralls.io/github/benfluleck/HelloBooks?branch=staging)
 
 # HelloBooks
