@@ -18,7 +18,7 @@
     "build:travis": "babel server/src --out-dir server/dist --presets es2015",
     "pretest":"npm run undo:migratetest && npm run test:migrate && sequelize db:seed:all",
     "test": "export NODE_ENV=test && mocha server/dist/test/*.js --timeout 10000 && export NODE_ENV=development",
-    "coverage": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text --reporter=lcovonly mocha --compilers js:babel-register server/src/test/*"
+    "coverage": "cross-env NODE_ENV=test && npm run pretest &&  nyc --reporter=lcov --reporter=text --reporter=lcovonly mocha --compilers js:babel-register server/src/test/* --exclude 'server/dist/' "
   },
   "engines": {
     "npm": "5.3.0",
