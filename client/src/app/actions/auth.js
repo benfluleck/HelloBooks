@@ -72,8 +72,8 @@ export const login = credentials => dispatch => api
       dispatch(signInUserFailure(user));
       return Promise.reject(token);
     }
-    global.localStorage.setItem('token', token);
-    global.localStorage.setItem('username', username);
+    localStorage.setItem('token', token);
+    localStorage.setItem('username', username);
 
     setAuthorizationToken(token);
     dispatch(userLoggedIn(user.data));
@@ -88,8 +88,8 @@ export const login = credentials => dispatch => api
  *  @param {*} dispatch
  */
 export const logout = () => (dispatch) => {
-  global.localStorage.removeItem('token');
-  global.localStorage.removeItem('username');
+  localStorage.removeItem('token');
+  localStorage.removeItem('username');
   setAuthorizationToken(false);
   dispatch(userLoggedOut());
 };

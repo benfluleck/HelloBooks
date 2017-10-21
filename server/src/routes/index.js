@@ -18,17 +18,17 @@ Router.post('/auth/users/signup', fieldValidationMiddleware, nullvalidationMiddl
 Router.post('/auth/users/signin', nullvalidationMiddleware, UserController.signin);
 
 
-Router.post('/books', authorization, nullvalidationMiddleware, BooksController.create);
+Router.post('/books', nullvalidationMiddleware, BooksController.create);
 
-Router.put('/books/:bookId', authorization, nullvalidationMiddleware, BooksController.update);
+Router.put('/books/:bookId', nullvalidationMiddleware, BooksController.update);
 
-Router.get('/books/', authorization, BooksController.getAllBooks);
+Router.get('/books/', BooksController.getAllBooks);
 
-Router.post('/users/:userId/books', authorization, UserBooksController.loanbook);
+Router.post('/users/:userId/books', UserBooksController.loanbook);
 
-Router.put('/users/:userId/books', authorization, UserBooksController.returnbook);
+Router.put('/users/:userId/books', UserBooksController.returnbook);
 
-Router.get('/users/:userId/books', authorization, UserBooksController.getborrowerslist);
+Router.get('/users/:userId/books', UserBooksController.getborrowerslist);
 
 // Router.delete('books/:bookId', BooksController.destroybooks);
 // Router.put('/users/:userId', UserController.updateUserInfo);

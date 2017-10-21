@@ -4,7 +4,6 @@ import Sequelize from 'sequelize';
 
 import configenv from '../config/config';
 
-
 const env = process.env.NODE_ENV || 'development';
 const config = configenv[env];
 
