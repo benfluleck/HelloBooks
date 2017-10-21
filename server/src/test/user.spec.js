@@ -100,7 +100,7 @@ describe('HelloBooks', () => {
   });
 
   describe('/POST  Signing up a user', () => {
-    it('should only all register users who fill in all the fields', (done) => {
+    it('should only all users are to register, Sign up successful', (done) => {
       const email = faker
         .internet
         .email();
