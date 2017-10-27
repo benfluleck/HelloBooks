@@ -50,6 +50,5 @@ module.exports = {
     ]),
   down: queryInterface =>
     queryInterface.bulkDelete('Books', [{
-      username: 'aimee'
     }])
 };

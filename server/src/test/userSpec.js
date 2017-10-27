@@ -73,7 +73,7 @@ describe('HelloBooks', () => {
   * Unauthenticated user tests
   */
   describe('/GET', () => {
-    it('Only authenticated users are allowed to view books', (done) => {
+    it('should allow only authenticated users to view books', (done) => {
       chai
         .request(app)
         .get('/api/v1/books/')
@@ -85,7 +85,7 @@ describe('HelloBooks', () => {
           done();
         });
     });
-    it('Only authenticated users are allowed to see the book list', (done) => {
+    it('should allow only authenticated users see the book list', (done) => {
       chai
         .request(app)
         .get('/api/v1/users/1/books')
@@ -100,7 +100,7 @@ describe('HelloBooks', () => {
   });
 
   describe('/POST  Signing up a user', () => {
-    it('All users are allowed to register, Sign up successful', (done) => {
+    it('should only all register users who fill in all the fields', (done) => {
       const email = faker
         .internet
         .email();
@@ -129,7 +129,7 @@ describe('HelloBooks', () => {
           done();
         });
     });
-    it('Should throw a validation error for invalid user data', (done) => {
+    it('should throw a validation error for invalid user data', (done) => {
       const email = faker
         .internet
         .email();
@@ -155,7 +155,7 @@ describe('HelloBooks', () => {
           done();
         });
     });
-    it('Should throw a validation error for invalid user data', (done) => {
+    it('should throw a validation error for invalid user data', (done) => {
       const email = 'nenemail.com';
       chai
         .request(app)
@@ -182,7 +182,7 @@ describe('HelloBooks', () => {
           done();
         });
     });
-    it('Only authenticated users allowed to create books', (done) => {
+    it('should allow only authenticated users allowed to create books', (done) => {
       chai
         .request(app)
         .post('/api/v1/books/')
@@ -194,7 +194,7 @@ describe('HelloBooks', () => {
           done();
         });
     });
-    it('Only authenticated users allowed to loan', (done) => {
+    it('should allow only authenticated users allowed to loan', (done) => {
       chai
         .request(app)
         .post(`/api/v1/users/${userId}/books`)
@@ -208,7 +208,7 @@ describe('HelloBooks', () => {
     });
   });
   describe('/PUT', () => {
-    it('Only authenticated users allowed to edit books', (done) => {
+    it('should allow only authenticated users to edit books', (done) => {
       chai
         .request(app)
         .put(`/api/v1/books/${bookId}`)
@@ -220,7 +220,7 @@ describe('HelloBooks', () => {
           done();
         });
     });
-    it('Only authenticated users allowed to return books', (done) => {
+    it('should allow only authenticated users to return books', (done) => {
       chai
         .request(app)
         .put(`/api/v1/users/${userId}/books`)
@@ -234,8 +234,8 @@ describe('HelloBooks', () => {
     });
   });
 
-  describe('Authentication', () => {
-    it('rejects invalid user', (done) => {
+  describe('Authentication processes', () => {
+    it('should reject invalid user', (done) => {
       chai
         .request(app)
         .post('/api/v1/users/books')
@@ -248,7 +248,7 @@ describe('HelloBooks', () => {
           done();
         });
     });
-    it('No authorization due to no token', (done) => {
+    it('should reject authorization for users due to no token', (done) => {
       chai
         .request(app)
         .post('/api/v1/users/books')
@@ -260,7 +260,7 @@ describe('HelloBooks', () => {
           done();
         });
     });
-    it('it responds with 404 status code if bad username or password', (done) => {
+    it('should respond with 404 status code if bad username or password', (done) => {
       chai
         .request(app)
         .post('/api/v1/auth/users/signin')
@@ -319,7 +319,7 @@ describe('HelloBooks', () => {
    Authenticated users Tests
    */
   describe('POST /books', () => {
-    it('administrators can create books', (done) => {
+    it('should allow administrators to create books', (done) => {
       chai
         .request(app)
         .post('/api/v1/books')
@@ -343,7 +343,7 @@ describe('HelloBooks', () => {
           done();
         });
     });
-    it('The same book cannot be re-added', (done) => {
+    it('should reject the addition of the same book', (done) => {
       chai
         .request(app)
         .post('/api/v1/books')
@@ -388,7 +388,7 @@ describe('HelloBooks', () => {
           done();
         });
     });
-    it('404 for Users that do not exist', (done) => {
+    it('should throw a 404 error for Users that do not exist', (done) => {
       chai
         .request(app)
         .post('/api/v1/auth/users/signin')
@@ -404,7 +404,7 @@ describe('HelloBooks', () => {
           done();
         });
     });
-    it('Should validate username', (done) => {
+    it('should validate username', (done) => {
       chai
         .request(app)
         .post('/api/v1/auth/users/signin')
@@ -420,7 +420,7 @@ describe('HelloBooks', () => {
           done();
         });
     });
-    it('Should validate a password for a user', (done) => {
+    it('should validate a password for a user', (done) => {
       chai
         .request(app)
         .post('/api/v1/auth/users/signin')
@@ -436,7 +436,7 @@ describe('HelloBooks', () => {
           done();
         });
     });
-    it('it responds with 200 status code if good username or password', (done) => {
+    it('should respond with 200 status code if good username or password', (done) => {
       chai
         .request(app)
         .post('/api/v1/auth/users/signin')
@@ -450,7 +450,7 @@ describe('HelloBooks', () => {
           done();
         });
     });
-    it('validates that the new user is unique', (done) => {
+    it('should validate that the new user is unique', (done) => {
       chai
         .request(app)
         .post('/api/v1/auth/users/signup')
@@ -472,7 +472,7 @@ describe('HelloBooks', () => {
           done();
         });
     });
-    it('validates that the new user\'s email as unique', (done) => {
+    it('should validate that the new user\'s email as unique', (done) => {
       chai
         .request(app)
         .post('/api/v1/auth/users/signup')
@@ -517,7 +517,7 @@ describe('HelloBooks', () => {
           done();
         });
     });
-    it('it returns successful login if user name and password', (done) => {
+    it('should return successful login if user name and password', (done) => {
       chai
         .request(app)
         .post('/api/v1/auth/users/signin')

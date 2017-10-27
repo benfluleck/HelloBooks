@@ -76,7 +76,7 @@ describe('HelloBooks', () => {
   * Unauthenticated user tests
   */
   describe('/GET return a book list', () => {
-    it('It retrieves all books from the data', (done) => {
+    it('should display all books from the data', (done) => {
       chai
         .request(app)
         .get('/api/v1/books')
@@ -89,7 +89,7 @@ describe('HelloBooks', () => {
           done();
         });
     });
-    it('should return books when given a default and an offset', (done) => {
+    it('should return books when given a default limit and an offset', (done) => {
       chai
         .request(app)
         .get('/api/v1/books')
@@ -154,8 +154,8 @@ describe('HelloBooks', () => {
   });
 
 
-  describe('/PUT', () => {
-    it('Edit a select book from the data', (done) => {
+  describe('/PUT Edit a  book', () => {
+    it('should edit a selected book from the database', (done) => {
       chai
         .request(app)
         .put(`/api/v1/books/${bookId}`)
@@ -176,7 +176,7 @@ describe('HelloBooks', () => {
           done();
         });
     });
-    it('should not edit the book if a field is set to empty', (done) => {
+    it('should not edit a selected book if a field value is set to empty', (done) => {
       chai
         .request(app)
         .put(`/api/v1/books/${bookId}`)
@@ -197,7 +197,7 @@ describe('HelloBooks', () => {
           done();
         });
     });
-    it('Book is not found when bookid is undefined or null', (done) => {
+    it('should throw an error if the selected book is null', (done) => {
       chai
         .request(app)
         .put(`/api/v1/books/${nullid}`)
@@ -218,7 +218,7 @@ describe('HelloBooks', () => {
           done();
         });
     });
-    it('Book is not found when bookid is undefined or null', (done) => {
+    it('should throw an error if the selected book undefined', (done) => {
       chai
         .request(app)
         .put('/api/v1/books/')

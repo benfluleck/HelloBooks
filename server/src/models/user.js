@@ -1,4 +1,4 @@
-import bcrypt from 'bcrypt-nodejs';
+import bcrypt from 'bcrypt';
 import toTitleCase from 'to-title-case';
 
 export default(sequelize, DataTypes) => {

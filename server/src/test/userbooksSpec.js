@@ -99,9 +99,8 @@ describe('HelloBooks', () => {
   });
 
   describe('/POST loan a book', () => {
-    it('it allows the user to loan a book', (done) => {
+    it('should allow a logged in user to loan a book', (done) => {
       const userbook = {
-        userId,
         bookId: bookId.toString(),
         returndate: testdate
       };
@@ -117,9 +116,8 @@ describe('HelloBooks', () => {
           done();
         });
     });
-    it('loans are not permitted without a return date', (done) => {
+    it('should not allow loans without a specified return date', (done) => {
       const userbook = {
-        userId,
         bookId: bookId.toString(),
       };
       chai
@@ -138,9 +136,8 @@ describe('HelloBooks', () => {
         });
     });
 
-    it('should be able to borrow another book', (done) => {
+    it('should be able to borrow another book after first loan', (done) => {
       const userbook = {
-        userId,
         bookId: testbookId.toString(),
         returndate: testdate
       };
@@ -160,7 +157,7 @@ describe('HelloBooks', () => {
           done();
         });
     });
-    it('should not be able to borrow another book of the same title', (done) => {
+    it('should not be able to borrow the same book twice', (done) => {
       const userbook = {
         userId,
         bookId: bookId.toString(),
@@ -199,7 +196,7 @@ describe('HelloBooks', () => {
           done();
         });
     });
-    it('should not be able to borrow book if the user id not registered', (done) => {
+    it('should not be able to borrow book if the user id is not authenticated', (done) => {
       const userbook = {
         bookId: bookId.toString(),
         returndate: testdate
@@ -280,7 +277,7 @@ describe('HelloBooks', () => {
           done();
         });
     });
-    it('should not be able to borrow a book if quantity === 0', (done) => {
+    it('should not be able to borrow a book if book quantity = 0', (done) => {
       const userbook = {
         userId,
         bookId: zerobookId,
@@ -304,11 +301,11 @@ describe('HelloBooks', () => {
     });
   });
 
-  describe('/GET should return a list', () => {
-    it('returns a list of books loaned by the user', (done) => {
+  describe('/GET should return a borrow history ', () => {
+    it('should return a list of books loaned by the user', (done) => {
       chai
         .request(app)
-        .get(`/api/v1//users/${userId}/books`)
+        .get(`/api/v1/users/${userId}/books`)
         .set('Accept', 'application/x-www-form-urlencoded')
         .query({ returned: false })
         .set('x-access-token', token)
@@ -319,10 +316,10 @@ describe('HelloBooks', () => {
           done();
         });
     });
-    it('does not return a list if return query is not set', (done) => {
+    it('should not return a borrow list if return query is not set', (done) => {
       chai
         .request(app)
-        .get(`/api/v1//users/${userId}/books`)
+        .get(`/api/v1/users/${userId}/books`)
         .set('Accept', 'application/x-www-form-urlencoded')
         .set('x-access-token', token)
         .end((err, res) => {
@@ -337,7 +334,7 @@ describe('HelloBooks', () => {
 
   // Edit a book
   describe('/PUT Return book', () => {
-    it('users should be able to return a book with a book id', (done) => {
+    it('should be able to return a book with a book id', (done) => {
       chai
         .request(app)
         .put(`/api/v1/users/${userId}/books`)
@@ -350,7 +347,7 @@ describe('HelloBooks', () => {
           done();
         });
     });
-    it('users should be able to return a book they have not borrowed', (done) => {
+    it('should not be able to return a book they have not borrowed', (done) => {
       chai
         .request(app)
         .put(`/api/v1/users/${userId}/books`)
@@ -365,7 +362,7 @@ describe('HelloBooks', () => {
           done();
         });
     });
-    it('users should be able to return a book they have not borrowed', (done) => {
+    it('should not be able to return a book with an invalid id they have not borrowed', (done) => {
       chai
         .request(app)
         .put(`/api/v1/users/${userId}/books`)
@@ -379,7 +376,7 @@ describe('HelloBooks', () => {
           done();
         });
     });
-    it('users should not return a book more than once', (done) => {
+    it('should not return a book more than once', (done) => {
       chai
         .request(app)
         .put(`/api/v1/users/${userId}/books`)
