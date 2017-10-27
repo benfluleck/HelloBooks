@@ -1,8 +1,10 @@
-import webpack from 'webpack';
-import path from 'path';
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
-import HtmlPlugin from 'html-webpack-plugin';
+const webpack = require('webpack');
+const path = require('path');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HtmlPlugin = require('html-webpack-plugin');
 
+const isProd = process.env.NODE_ENV === 'production';
+let config = {};
 
 if (isProd) {
   const GLOBALS = {
@@ -28,14 +30,14 @@ if (isProd) {
       new ExtractTextPlugin('styles.css'),
       new webpack
         .optimize
-        .UglifyJsPlugin({minimize: true}),
-      new HtmlPlugin({template: './client/src/index.html', filename: './index.html', inject: 'body'})
+        .UglifyJsPlugin({ minimize: true }),
+      new HtmlPlugin({ template: './client/src/index.html', filename: './index.html', inject: 'body' })
     ],
     module: {
       loaders: [
         {
           test: /(\.css)$/,
-          use: ExtractTextPlugin.extract({use: 'css-loader'})
+          use: ExtractTextPlugin.extract({ use: 'css-loader' })
         }, {
           test: /\.scss$/,
           use: ExtractTextPlugin.extract({
@@ -71,7 +73,7 @@ if (isProd) {
 } else {
   const DIST_DIR = path.resolve(__dirname, './client/dist');
   const SRC_DIR = path.resolve(__dirname, './client/src');
-  const extractscss = new ExtractTextPlugin({filename: 'style.css'});
+  const extractscss = new ExtractTextPlugin({ filename: 'style.css' });
   config = {
     entry: `${SRC_DIR}/app/index.js`,
     output: {
@@ -81,16 +83,22 @@ if (isProd) {
     },
     devtool: 'sourcemap',
 
-  devServer: {
-    historyApiFallback: true,
-    proxy: {
-      '/api/**': {
-        target: 'http://localhost:5000/',
-        secure: false,
-        changeOrigin: true
+    devServer: {
+      historyApiFallback: true,
+      proxy: {
+        '/api/**': {
+          target: 'http://localhost:5000/',
+          secure: false,
+          changeOrigin: true
+        }
       }
-    }
-  },
+    },
+
+    stats: {
+
+      errors: true,
+      errorDetails: true
+    },
 
     module: {
       loaders: [
@@ -117,37 +125,16 @@ if (isProd) {
           use: ['html-loader']
         }, {
 
-  module: {
-    loaders: [
-      {
-        test: /\.js?/,
-        exclude: /node_modules/,
-        include: SRC_DIR,
-        loader: 'babel-loader',
-        query: {
-          presets: ['react', 'es2015', 'stage-2']
-        },
-      }, {
-        test: /\.(scss|sass)$/,
-        exclude: /node-modules/,
-        use: extractscss.extract({
-          fallback: 'style-loader',
-          use: ['css-loader', 'sass-loader']
-        })
-      }, {
-        test: /\.html$/,
-        exclude: /node-modules/,
-        use: ['html-loader']
-      }, {
+          test: /\.(jpg|png)$/,
+          exclude: /node-modules/,
+          loader: 'file-loader',
+          options: {
+            outputPath: 'img/'
+          }
 
-        test: /\.(jpg|png)$/,
-        exclude: /node-modules/,
-        loader: 'file-loader',
-        options: {
-          outputPath: 'img/'
         }
 
-      }
+      ]
 
     },
     plugins: [
@@ -158,15 +145,6 @@ if (isProd) {
       new HtmlPlugin({ template: './client/src/index.html', filename: './index.html', inject: 'body' })
     ]
 
-  },
-  plugins: [
-    new webpack
-      .optimize
-      .OccurrenceOrderPlugin(),
-    extractscss,
-    new HtmlPlugin({ template: './client/src/index.html', filename: './index.html', inject: 'body' }),
-  ]
-
-};
-
+  };
+}
 module.exports = config;
