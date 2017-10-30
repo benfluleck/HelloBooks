@@ -16,9 +16,13 @@ export const fetchBooksById = books => ({ type: FETCH_BOOKS_BY_USER_ID, books })
 export const fetchBooksByIdRejected = error => ({ type: FETCH_BOOKS_REJECTED_BY_USER_ID, error });
 export const fetchBooksByIdfufilled = books => ({ type: FETCH_BOOKS_FULFILLED_BY_USER_ID, books });
 
+
 /**
- * fetch books in thhe Library
- * @return {any} dispatches an action
+ *
+ * @param {*} offset
+ * @param {*} limit
+ * @return {any} response
+ *
  */
 export const fetchAllBooks = (offset, limit) => dispatch => api
   .book
@@ -31,6 +35,31 @@ export const fetchAllBooks = (offset, limit) => dispatch => api
     dispatch(fetchBooksRejected(error.response));
   });
 
+/**
+ *
+ * @param {*} offset
+ * @param {*} limit
+ * @return {any} response
+ *
+ */
+export const fetchBooksforDashboard = (offset, limit) => dispatch => api
+  .book
+  .fetchRecentbooks(offset, limit)
+  .then((response) => {
+    dispatch(fetchBooksfufilled(response));
+    return response;
+  })
+  .catch((error) => {
+    dispatch(fetchBooksRejected(error.response));
+  });
+
+/**
+ *
+ * @param {*} offset
+ * @param {*} limit
+ * @param {*} userid
+ * @return {*} any
+ */
 export const fetchAllBooksbyId = (offset, limit, userid) => dispatch => api
   .book
   .fetchbyUserId(offset, limit, userid)

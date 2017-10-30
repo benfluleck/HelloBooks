@@ -1,10 +1,8 @@
 import React from 'react'
-import css from '../css/style.scss'
 import {Row, Col} from 'react-materialize'
+import Header from '../components/presentation/common/header/Header'
+import { Bottom } from '../components/presentation/common/Footer'
 
-import {Header} from './Header';
-import {Bottom} from './Footer';
-import Welcome from './Welcome';
 
 /*
 eslint-disable
@@ -12,25 +10,26 @@ eslint-disable
 
 export class Root extends React.Component
 {
-    render() {
+  render() {
 
-        return (
-
-            <div className='root'>
-
-                <Header/>
-                <main>
-                    <Row>
-                        <div className="container">
-                            <Welcome/>
-                              {this.props.children}
-                        </div>
-                    </Row>
-                </main>
-                <Bottom/>
+    return (
+      <div className='root-wrapper'>
+        <div className ='header-wrapper'>
+          <Header/>
+            <Row>
+              <div className= 'header-text'><h1> Welcome!.</h1>
+                 <h4>to Hello Books</h4>
             </div>
+            </Row>
+        </div>
+        {/* <div className='body-wrapper'>
+          <Row> */}
+            {this.props.children}
 
-        )
-    }
+          {/* </Row>
+          </div> */}
+          <Bottom/>
+      </div>
+    )
+  }
 }
-

@@ -94,7 +94,7 @@ export default {
             .status(404)
             .send({
               success: false,
-              message: `${req.body.username} does not exist, Go to SignUp`
+              message: `${req.body.username} does not exist, Make sure you are signed up`
             });
         } else if (bcrypt.compareSync(req.body.password, user.password)) {
           const Userjwt = {

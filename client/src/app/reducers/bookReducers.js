@@ -18,7 +18,7 @@ import {
  *   error: null
  * }]
  * @param {any} action
- * @returns state
+ * @returns {any} state
  */
 export default function bookReducer(state = {
   books: [],

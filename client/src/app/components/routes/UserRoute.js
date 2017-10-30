@@ -27,8 +27,8 @@ const UserRoute = ({
 
 UserRoute.PropTypes = {
   component: PropTypes.func,
-  isAuthenticated: PropTypes.bool.isRequired,
-  name: PropTypes.string
+  // isAuthenticated: PropTypes.bool.isRequired,
+  // name: PropTypes.string
 
 };
 
