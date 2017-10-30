@@ -38,8 +38,7 @@ export const signUpUserSuccess = user => ({ type: SIGNUP_USER_SUCCESS, user });
 /**
  *
  * @param {*} data
- *
- *
+ * @returns {*} user.data
  */
 export const signup = data => dispatch => api
   .user
@@ -58,8 +57,8 @@ export const signup = data => dispatch => api
   .catch(error => dispatch(signInUserFailure(error.response)));
 
 /**
- * 
- * @param {*} credentials 
+ *
+ * @param {*} credentials
  */
 export const login = credentials => dispatch => api
   .user

@@ -44,7 +44,7 @@ class Register extends React.Component {
 
 Register.propTypes = {
 
-  signup: PropTypes.func
+  //signup: PropTypes.func
 
 };
 

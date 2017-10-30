@@ -111,9 +111,10 @@ export default {
   //     .catch(() => res.status(400).send({ success: false, message: 'Enter valid inputs!' }));
   // },
 
+
   /**
    * Route: GET: /books
-   * @description update a book
+   * @description returns a list of all books
    * @param {any} req
    * @param {any} res
    * @returns {any} books
@@ -125,7 +126,8 @@ export default {
     return Books
       .findAndCountAll({
         limit,
-        offset
+        offset,
+        order: [['createdAt', 'DESC']]
       })
       .then((books) => {
         if (books.count === 0) {

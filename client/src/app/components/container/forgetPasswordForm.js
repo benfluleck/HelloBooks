@@ -30,7 +30,7 @@ class Forgetpass extends React.Component {
 }
 
 Forgetpass.propTypes = {
-	resetPasswordRequest : PropTypes.func.isRequired
+	// resetPasswordRequest : PropTypes.func.isRequired
 }
 
 export default connect(null,{resetPasswordRequest})(Forgetpass);

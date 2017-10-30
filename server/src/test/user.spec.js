@@ -397,7 +397,7 @@ describe('HelloBooks', () => {
         .end((err, res) => {
           token = res.body.token;
           const response = res.body;
-          expect(response.message).to.equal('UnknownUser does not exist, Go to SignUp');
+          expect(response.message).to.equal('UnknownUser does not exist, Make sure you are signed up');
           expect(res.status)
             .to
             .equal(404);

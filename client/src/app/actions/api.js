@@ -13,9 +13,13 @@ export default {
     fetch: (offset, limit) => axios
       .get(`api/v1/books?offset=${offset}&limit=${limit}`)
       .then(res => res.data),
+    fetchRecentbooks: (offset, limit) => axios
+      .get(`api/v1/auth/books/recentbooks?offset=${offset}&limit=${limit}`)
+      .then(res => res.data),
     fetchbyUserId: (offset, user, limit) => axios
       .get(`api/v1/users/${user.id}/books?offset=${offset}&limit=${limit}&returned=false`)
       .then(res => res.data)
+
 
   }
 };

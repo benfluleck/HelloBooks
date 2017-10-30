@@ -1,17 +1,17 @@
 import express from 'express';
 import controller from '../controllers';
 import fieldValidationMiddleware from '../controllers/middleware/fieldValidations';
-import authenticate from '../controllers/middleware/authenticate';
 import nullvalidationMiddleware from '../controllers/middleware/nullValidation';
 
 const Router = express.Router();
 const UserController = controller.User;
 const BooksController = controller.Books;
 const UserBooksController = controller.UserBooks;
-const authorization = authenticate.authenticate;
 
 
 Router.get('/', (req, res) => res.status(200).send({ message: 'Welcome to the Hello Books!' }));
+
+Router.get('/auth/books/recentbooks', BooksController.getAllBooks);
 
 Router.post('/auth/users/signup', fieldValidationMiddleware, nullvalidationMiddleware, UserController.create);
 
