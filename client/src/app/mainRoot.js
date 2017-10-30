@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {render} from 'react-dom';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import {Root} from './components/Root'
-import LandingPage  from './components/presentation/LandingPage'
+import LandingPage  from './components/container/LandingPage'
 //import Login from '../app/components/container/Login'
 // import Register from './containers/Register'
 // import Profile from './components/Profile'
