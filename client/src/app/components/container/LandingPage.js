@@ -52,7 +52,7 @@ render() {
         <div className='overlay'>
           <h3>Latest Books Available: </h3>
           <hr/>
-          <h5> To Loan Login </h5>
+          <h5> To Borrow any Books, <a href>Login</a></h5>
 
             <p>Click a book for a look at the description</p>
               {[...getAllBooks]}
