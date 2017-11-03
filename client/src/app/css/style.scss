@@ -1,31 +1,41 @@
 // Variables
 $font-stack: 'Coiny', sans-serif;
 $font-stack2: 'Purple Purse', sans-serif;
+$base-orange: #f2751c;
 
 
 // body classes
 header {
 	top: 0;
-	font-family: $font-stack;
+	font-family: $font-stack2;
+	flex: 1 0 auto;
 }
 nav ul a {
-	font-size: 1.4rem;
+	font-size: 1rem;
+}
+
+a{
+font-family:$font-stack;
+}
+.nav-wrapper{
+	background-color:$base-orange;
 }
 body {
 	font-family: $font-stack2;
-
+	background-color: rgb(204, 204, 204);
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
 }
-#nav-change{
-	background-color:#f2751c;
+
+p{
+	font-family: $font-stack2;
 }
 
 
-
-
-// User named classes
+// User named class elements
 .root-wrapper {
 	min-height: 100%;
-
 }
 .header-wrapper {
 	width: 100%;
@@ -33,16 +43,12 @@ body {
 	background-image: url('../img/bg.jpg');
 	background-blend-mode: luminosity;
 	background-color: #f2751c;
-
 }
 
-
 .body-wrapper {
-	z-index: 3;
 	box-shadow: rgba(0, 0, 0, 0.14) 0px 16px 24px 2px, rgba(0, 0, 0, 0.12) 0px 6px 30px 5px,
 		rgba(0, 0, 0, 0.2) 0px 8px 10px -5px;
 	position: relative;
-	z-index: 3;
 	background: rgb(255, 255, 255);
 	margin: -60px 60px 0px;
 	border-radius: 8px;
@@ -52,7 +58,6 @@ body {
 	font-family: $font-stack2;
 	color: white;
 	text-align: center;
-	margin-top: 0.5em;
 	margin-left: 4rem;
 	margin-right: 4rem;
 	border-radius: 4px;
@@ -62,34 +67,46 @@ body {
 }
 
 .overlay-main {
-	margin-top: -25vh;
+	margin-top: -45vh;
 	padding: 50px;
 	width: calc(100% - 20px);
 	max-width: 1600px;
 	background-color: white;
-
 	clear: both;
+
 }
 .overlay {
 	clear: both;
 	overflow: hidden;
 	background-color: white;
 	color: black;
+
 }
 
+
+/**
+ *  Footer css
+ */
 .footer-copyright {
-	background-color: #f2751c !important;
+	background-color: $base-orange !important;
 }
 footer {
 	height: 3rem;
-	/* Height of the footer */
 	color: whitesmoke;
 	font-family: $font-stack;
 }
 
+.login{
+	display: table;
+  margin: 0 auto;
+
+	margin-top: 20vh;
+	height: 80vh;
+}
+
+.login-wrapper{
+	background-color:white;
+	width: calc(100% - 60px);
 
 
-
-body {
-	background-color: rgb(204, 204, 204);
 }

@@ -1,43 +1,19 @@
 import React, {Component} from 'react'
 import {NavLink} from 'react-router-dom'
 import {Navbar, NavItem, Row, Icon} from 'react-materialize'
-import Navigation from './NavigationBar';
+import Navigation from './NavigationBar.jsx';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
-/*
-eslint-disable
- */
 
 
 /**
- * Component for header and navigation
+ * @description Component for header and navigation
  * @class Header
  * @extends {Component}
  */
 class Header extends Component {
-  componentDidMount() {
 
-    document.addEventListener('scroll', this.handleScroll);
-  }
-  handleScroll() {
-    const top = document.documentElement.scrollTop;
-    const change = document.getElementById('nav-change');
-    if (top > 10) {
-      if (change.classList)
-        change.classList.remove('transparent');
-      }
-    else {
-      change
-        .classList
-        .add('transparent');
-    }
-  }
-  componentWillUnmount() {
-    document
-      .documentElement
-      .removeEventListener('scroll', this.handleScroll);
-  }
 
   render() {
     let navLinks = ['books'];
@@ -58,8 +34,7 @@ class Header extends Component {
           activeLink={this.props.activeLink}
           className="right hide-on-small-and-down"
           navLinks={navLinks}/>
-            />
-          />
+
       </header>
 
     );

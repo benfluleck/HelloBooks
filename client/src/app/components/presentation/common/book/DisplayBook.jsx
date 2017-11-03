@@ -1,12 +1,12 @@
 import React from 'react'
-import {  Col,Row, Card, CardTitle, Button, Modal } from 'react-materialize'
+import { Col,Row, Card, CardTitle, Button, Modal } from 'react-materialize'
 import PropTypes from 'prop-types'
 import ReactTooltip from 'react-tooltip'
 
 
-
-/*
-eslint-disable
+/**
+ * @description Book component taking book props
+ * @param {*} books
  */
 export const Book  = (books) =>{
       return(
@@ -23,9 +23,7 @@ export const Book  = (books) =>{
             </div>
           </div>
         </div>
-
         )
-
 }
 
 Book.propTypes ={

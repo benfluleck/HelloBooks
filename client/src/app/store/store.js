@@ -4,10 +4,9 @@ import throttle from 'lodash/throttle';
 import { createStore, applyMiddleware } from 'redux';
 import { createLogger } from 'redux-logger';
 import thunk from 'redux-thunk';
-// import { persistStore, autoRehydrate } from 'redux-persist';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import setAuthorizationToken from '../utils/setAuthorizationToken';
-import { setCurrentUser } from '../actions/auth';
+import { setCurrentUser } from '../actions/authenticate';
 import rootReducer from '../reducers/rootReducers';
 import { loadState, saveState } from '../utils/Localsave';
 
@@ -21,8 +20,7 @@ const store = createStore(
   ))
 );
 
-// const store = composeWithDevTools(   applyMiddleware(createLogger(), thunk),
-//  autoRehydrate() )(createStore)(rootReducer);
+
 
 if (localStorage.token) {
   setAuthorizationToken(localStorage.token);
@@ -32,6 +30,6 @@ if (localStorage.token) {
 store.subscribe(throttle(() => {
   saveState(store.getState());
 }), 1000);
-// persistStore(store);
+
 
 export default store;

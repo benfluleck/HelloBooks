@@ -5,7 +5,7 @@ import {
   FETCH_BOOKS_BY_USER_ID,
   FETCH_BOOKS_FULFILLED_BY_USER_ID,
   FETCH_BOOKS_REJECTED_BY_USER_ID
-} from '../actions/type';
+} from '../actions/actiontype.js';
 
 /**
  * *

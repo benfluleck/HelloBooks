@@ -5,7 +5,7 @@ import {
   USER_LOGGED_OUT,
   USER_SIGN_IN_FAILURE,
   SET_CURRENT_USER,
-  SIGNUP_USER_SUCCESS } from '../actions/type';
+  SIGNUP_USER_SUCCESS } from '../actions/actiontype';
 
 const INITIAL_STATE = {
   // isAuthenticated: null,

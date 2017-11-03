@@ -4,20 +4,20 @@ import {createStore, applyMiddleware} from 'redux'
 import {Provider} from 'react-redux'
 import thunk from 'redux-thunk'
 import store from './store/store'
-import MainRoot from './mainRoot'
+import MainRoot from './mainRoot.jsx'
 import setAuthorizationToken  from './utils/setAuthorizationToken'
 
 
 
 if (localStorage.getItem('token')) {
   setAuthorizationToken(localStorage.getItem('token'));
- 
+
 }
 
 class App extends React.Component {
 
   render() {
-    return (<MainRoot/>) 
+    return (<MainRoot/>)
   }
 }
 

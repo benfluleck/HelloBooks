@@ -103,7 +103,7 @@ if (isProd) {
     module: {
       loaders: [
         {
-          test: /\.js?/,
+          test: /\.jsx?/,
           exclude: /node_modules/,
           include: SRC_DIR,
           loader: 'babel-loader',

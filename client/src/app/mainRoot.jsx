@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
 import {render} from 'react-dom';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import {Root} from './components/Root'
-import LandingPage  from './components/container/LandingPage'
-//import Login from '../app/components/container/Login'
+import {Root} from './components/Root.jsx'
+import LandingPage  from './components/container/LandingPage.jsx'
+import Login from './components/presentation/authentication/SignInPage.jsx'
 // import Register from './containers/Register'
 // import Profile from './components/Profile'
 // import Books from './components/Books'
@@ -33,6 +33,7 @@ export default class MainRoot extends Component {
         <Root>
           <Switch>
             <Route exact path='/' component={LandingPage}/>
+            <Route exact path='/login' component={Login}/>
             {/* <Route exact path={'/register'} component={Register}/>
             <Route exact path={'/forgetpass'} component={Forgetpass}/>
             <UserRoute path={'/dashboard'} exact component={Dashboard}/>

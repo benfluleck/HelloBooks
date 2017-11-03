@@ -52,22 +52,18 @@ export default {
                       res
                         .status(201)
                         .send({
-                          success: true,
+                          user,
                           message: 'User has been added'
                         });
                     }
                   })
-                  .catch((error) => {
-                    res.status(400).send({ success: false, message: ` ${error.message}` });
-                  });
+
               }
             })
             .catch((error) => {
               res.status(400).send({ success: false, message: ` ${error.message}` });
             })
-            .catch((error) => {
-              res.status(400).send({ success: false, message: ` ${error.message}` });
-            });
+
         }
       });
   },

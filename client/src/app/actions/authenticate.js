@@ -4,7 +4,7 @@ import { USER_LOGGED_IN,
   USER_LOGGED_OUT,
   USER_SIGN_IN_FAILURE,
   SIGNUP_USER_SUCCESS,
-  SET_CURRENT_USER } from './type';
+  SET_CURRENT_USER } from './actiontype';
 
 import api from './api';
 import setAuthorizationToken from '../utils/setAuthorizationToken';
