@@ -1,12 +1,10 @@
 import React from 'react';
-import {Row} from 'react-materialize';
+import {Row, Preloader} from 'react-materialize';
 import PropTypes from 'prop-types';
 import {Book} from '../presentation/common/Book/DisplayBook.jsx';
 
 
-/*
-eslint-disable
- */
+
 class LandingPage extends React.Component{
 	constructor(props) {
     super(props);
@@ -25,7 +23,7 @@ class LandingPage extends React.Component{
 
 render() {
   if (!this.props.books) {
-    return <h5>Loading....</h5>
+    return <Preloader size='big' className="center-align"/>
   }
 
   const getAllBooks = this
@@ -42,6 +40,7 @@ render() {
               image={book.bookimage}/>);
       });
     return (
+
   <div>
         <div className ='header-wrapper'>
           <Row>
@@ -61,6 +60,7 @@ render() {
             <h5> To Borrow any Books, Please <a href>Login</a></h5>
 
               <p>Click a book for a look at the description</p>
+
                 {[...getAllBooks]}
 
           </div>
@@ -69,6 +69,7 @@ render() {
     </div>
       </Row>
 </div>
+
     );
   }
 }

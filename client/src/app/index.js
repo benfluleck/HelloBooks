@@ -6,6 +6,7 @@ import thunk from 'redux-thunk'
 import store from './store/store'
 import MainRoot from './mainRoot.jsx'
 import setAuthorizationToken  from './utils/setAuthorizationToken'
+import { Notifs } from 'redux-notifications';
 
 
 
@@ -23,5 +24,8 @@ class App extends React.Component {
 
 render(
   <Provider store={store}>
-  <App/>
+  <div>
+    <App/>
+    <Notifs />
+  </div>
 </Provider>, window.document.getElementById('app'))

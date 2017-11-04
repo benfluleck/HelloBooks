@@ -2,13 +2,17 @@
 $font-stack: 'Coiny', sans-serif;
 $font-stack2: 'Purple Purse', sans-serif;
 $base-orange: #f2751c;
+$base-white: white;
+$base-background: rgb(204, 204, 204);
+$secondary-color :#0089ec;
+
 
 
 // body classes
 header {
 	top: 0;
 	font-family: $font-stack2;
-	flex: 1 0 auto;
+
 }
 nav ul a {
 	font-size: 1rem;
@@ -32,6 +36,10 @@ p{
 	font-family: $font-stack2;
 }
 
+form p{
+
+	color:$secondary-color;
+}
 
 // User named class elements
 .root-wrapper {
@@ -42,21 +50,21 @@ p{
 	height: 80vh;
 	background-image: url('../img/bg.jpg');
 	background-blend-mode: luminosity;
-	background-color: #f2751c;
+	background-color: $base-orange;
 }
 
 .body-wrapper {
 	box-shadow: rgba(0, 0, 0, 0.14) 0px 16px 24px 2px, rgba(0, 0, 0, 0.12) 0px 6px 30px 5px,
 		rgba(0, 0, 0, 0.2) 0px 8px 10px -5px;
 	position: relative;
-	background: rgb(255, 255, 255);
+	background: $base-white;
 	margin: -60px 60px 0px;
 	border-radius: 8px;
 }
 
 .header-text {
 	font-family: $font-stack2;
-	color: white;
+	color: $base-white;
 	text-align: center;
 	margin-left: 4rem;
 	margin-right: 4rem;
@@ -71,14 +79,13 @@ p{
 	padding: 50px;
 	width: calc(100% - 20px);
 	max-width: 1600px;
-	background-color: white;
+	background-color: $base-white;
 	clear: both;
-
 }
 .overlay {
 	clear: both;
 	overflow: hidden;
-	background-color: white;
+	background-color: $base-white;
 	color: black;
 
 }
@@ -96,17 +103,53 @@ footer {
 	font-family: $font-stack;
 }
 
+/**
+ * Login Form
+ */
 .login{
 	display: table;
-  margin: 0 auto;
-
+	margin: 0 auto;
 	margin-top: 20vh;
-	height: 80vh;
+	height: 61vh;
+}
+
+.login-header{
+	background-color: $base-orange;
+	color: $base-white;
+	font-size:1.5em;
+	padding: 0.6em;
+	font-family:$font-stack;
+
+}
+
+.login-content{
+	padding: 5px;
+
 }
 
 .login-wrapper{
-	background-color:white;
-	width: calc(100% - 60px);
-
+	background-color: $base-white;
+	zoom: 1;
+	max-width: 90%;
+	width:500px;
+	padding-bottom : 5px;
 
 }
+
+.notif__container {
+	top: 100px !important;
+	right: 0 !important;
+	left: auto !important;
+}
+
+
+.btn{
+	background-color:black;
+	font-family:$font-stack;
+}
+
+.btn-google{
+	background-color: #dd4b39;
+}
+
+

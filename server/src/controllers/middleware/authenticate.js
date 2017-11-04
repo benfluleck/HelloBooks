@@ -2,8 +2,8 @@ import jwt from 'jsonwebtoken';
 
 
 /**
-* authenticates a the json web token  to be appended in routes that need to be authenticated
-* @public
+*
+* @description authenticates a the json web token  to be appended in routes that need to be authenticated
 * @param {object} req - request object
 * @param {object} res - response object
 * @param {function} next - next function to be called on the success
@@ -32,18 +32,12 @@ const authenticate = (req, res, next) => {
 /**
  * @description Generates a json web token with the supplied parameters
  * @param {number} id user id
- * @param  {String} email email address
- * @param  {String} username username
- * @param  {String} firstname firstname
  * @return {promise} signed token
  */
-const getJWT = (id, email, username, firstname) => new Promise((resolve, reject) => {
+const getJWT = (id) => new Promise((resolve, reject) => {
   jwt.sign(
     {
-      id,
-      email,
-      username,
-      firstname
+      id
     }, process.env.JWT_SECRET,
     {
       expiresIn: '4h'

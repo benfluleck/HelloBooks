@@ -19,6 +19,8 @@ import Login from './components/presentation/authentication/SignInPage.jsx'
 // import Dashboard from './components/Dashboard'
 // import UserRoute from './components/routes/UserRoute'
 import css from '../app/css/style.scss'
+// import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import 'redux-notifications/lib/styles.css';
 
 
 

@@ -94,10 +94,7 @@ export default {
             });
         } else if (bcrypt.compareSync(req.body.password, user.password)) {
           const Userjwt = {
-            id: user.id,
-            email: user.email,
-            username: user.username,
-            firstname: user.firstname
+            id: user.id
           };
           generateToken.getJWT(Userjwt)
             .then((token) => {
@@ -107,7 +104,11 @@ export default {
                   success: true,
                   message: ` ${req.body.username} is now logged in!`,
                   token: token.token,
-                  username: req.body.username
+                  username: user.username,
+                  email: user.email,
+                  firstname: user.firstname
+
+
                 });
             })
             .catch(error => res.status(500).send(error.message));

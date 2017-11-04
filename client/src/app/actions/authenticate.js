@@ -1,4 +1,6 @@
 import jwtdecode from 'jwt-decode';
+import Toast from 'react-materialize';
+import {showErrorNotification} from '../notifications/notifications';
 
 import { USER_LOGGED_IN,
   USER_LOGGED_OUT,
@@ -54,7 +56,11 @@ export const signup = data => dispatch => api
       return user.data;
     }
   })
-  .catch(error => dispatch(signInUserFailure(error.response)));
+  .catch((error) =>{
+    dispatch(showErrorNotification({ error }));
+    dispatch(signInUserFailure(error.response));
+
+  });
 
 /**
  *
@@ -64,22 +70,26 @@ export const login = credentials => dispatch => api
   .user
   .login(credentials)
   .then((user) => {
-    const token = user.data.token;
-    const username = user.data.username;
-
-    if (user.status !== 200) {
+   const token = user.data.token;
+    if (user.status !== 201) {
       dispatch(signInUserFailure(user));
       return Promise.reject(token);
     }
     localStorage.setItem('token', token);
-    localStorage.setItem('username', username);
+    // localStorage.setItem('username', username);
 
     setAuthorizationToken(token);
-    dispatch(userLoggedIn(user.data));
-    dispatch(setCurrentUser(jwtdecode(token)));
-    return user.data;
+    dispatch(userLoggedIn(user));
+    // dispatch(setCurrentUser(jwtdecode(token)));
+    Materialize.toast(user.data.message, 4000);
+    // return user;
   })
-  .catch(error => dispatch(signInUserFailure(error.response)));
+  .catch(error =>{
+    console.log(error.response.data.message , '????????')
+    dispatch(showErrorNotification({ error }))
+     // dispatch(signInUserFailure(error.response))
+
+    });
 
 
 /**
