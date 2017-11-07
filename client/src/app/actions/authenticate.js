@@ -1,10 +1,11 @@
 import jwtdecode from 'jwt-decode';
 import Toast from 'react-materialize';
-import {showErrorNotification} from '../notifications/notifications';
+import {showErrorNotification, showSuccessNotification} from '../notifications/notifications';
 
 import { USER_LOGGED_IN,
   USER_LOGGED_OUT,
-  USER_SIGN_IN_FAILURE,
+  USER_SIGN_UP_FAILURE,
+  SIGNUP_USER_FAILURE,
   SIGNUP_USER_SUCCESS,
   SET_CURRENT_USER } from './actiontype';
 
@@ -16,6 +17,14 @@ export const setCurrentUser = user =>
     type: SET_CURRENT_USER,
     user
   });
+
+
+/**
+ * create action: userLoggedIn: user
+ * @function userLoggedIn
+ * @param {object} response
+ * @returns {object} action: type and response
+ */
 export const userLoggedIn = user =>
   ({
     type: USER_LOGGED_IN,
@@ -31,40 +40,44 @@ export const userLoggedOut = user =>
 export const signInUserFailure = error =>
   ({
     type: USER_SIGN_IN_FAILURE,
-    isAuthenticated: false,
+    error
+  });
+  export const signUpUserFailure = error =>
+  ({
+    type: USER_SIGN_UP_FAILURE,
     error
   });
 export const signUpUserSuccess = user => ({ type: SIGNUP_USER_SUCCESS, user });
 
 
 /**
- *
- * @param {*} data
- * @returns {*} user.data
+ * async helper function: sign in user
+ * @function signup
+ * @param {object} credentials
+ * @returns {function} asynchronous action
  */
 export const signup = data => dispatch => api
   .user
   .signup(data)
   .then((user) => {
-    const data = user.data;
-    if (user.status !== 200) {
-      dispatch(signInUserFailure(user));
+    if (user.status !== 201) {
+      dispatch(signUpUserFailure(user));
       Promise.reject(data);
     } else {
+      dispatch(showSuccessNotification({user}));
       dispatch(signUpUserSuccess(user));
-
-      return user.data;
     }
   })
   .catch((error) =>{
     dispatch(showErrorNotification({ error }));
-    dispatch(signInUserFailure(error.response));
 
   });
 
 /**
- *
- * @param {*} credentials
+ * async helper function: sign in user
+ * @function login
+ * @param {object} credentials
+ * @returns {function} asynchronous action
  */
 export const login = credentials => dispatch => api
   .user
@@ -76,19 +89,12 @@ export const login = credentials => dispatch => api
       return Promise.reject(token);
     }
     localStorage.setItem('token', token);
-    // localStorage.setItem('username', username);
-
+     dispatch(showSuccessNotification({user}));
     setAuthorizationToken(token);
     dispatch(userLoggedIn(user));
-    // dispatch(setCurrentUser(jwtdecode(token)));
-    Materialize.toast(user.data.message, 4000);
-    // return user;
   })
   .catch(error =>{
-    console.log(error.response.data.message , '????????')
     dispatch(showErrorNotification({ error }))
-     // dispatch(signInUserFailure(error.response))
-
     });
 
 

@@ -7,35 +7,32 @@ import {connect} from 'react-redux'
 *
 *Routes for Authenticated users
 */
-const UserRoute = ({
+const GuestRoutes = ({
   isAuthenticated,
   component: Component,
   ...rest
 }) => {
-
   return (
-    
     <Route
       {...rest}
-      render={(props) => isAuthenticated
+      render={(props) => !isAuthenticated
       ? <Component{...props}/>
-      : <Redirect to='/'/>}/>
+      : <Redirect to='/login'/>}/>
 
   );
 
 };
 
-UserRoute.PropTypes = {
+GuestRoutes.PropTypes = {
   component: PropTypes.func,
-  // isAuthenticated: PropTypes.bool.isRequired,
-  // name: PropTypes.string
+  isAuthenticated: PropTypes.bool.isRequired,
 
 };
 
 const mapStateToProps = (state) => {
   return {
-    isAuthenticated: state.user.isAuthenticated
+    isAuthenticated: state.userReducer.isAuthenticated
   };
 }
 
-export default connect(mapStateToProps)(UserRoute);
+export default connect(mapStateToProps)(GuestRoutes);

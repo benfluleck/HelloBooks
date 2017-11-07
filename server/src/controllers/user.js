@@ -3,7 +3,6 @@ import models from '../models';
 // import sendResetPasswordEmail from '../mailer/mailer';
 import generateToken from '../controllers/middleware/authenticate';
 
-
 const User = models.User;
 
 export default {
@@ -53,7 +52,7 @@ export default {
                         .status(201)
                         .send({
                           user,
-                          message: 'User has been added'
+                          message: `${user.username} has been added`
                         });
                     }
                   })

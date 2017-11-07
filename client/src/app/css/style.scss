@@ -16,10 +16,12 @@ header {
 }
 nav ul a {
 	font-size: 1rem;
+	font-family:$font-stack;
 }
 
 a{
-font-family:$font-stack;
+font-family:$font-stack2;
+color: #EC3A00
 }
 .nav-wrapper{
 	background-color:$base-orange;
@@ -113,6 +115,12 @@ footer {
 	height: 61vh;
 }
 
+.signup{
+@extend .login;
+margin-top: 6vh;
+
+}
+
 .login-header{
 	background-color: $base-orange;
 	color: $base-white;
@@ -122,9 +130,17 @@ footer {
 
 }
 
+.signup-header{
+@extend .login-header
+}
+
 .login-content{
 	padding: 5px;
 
+}
+
+.signup-content{
+@extend.login-content
 }
 
 .login-wrapper{
@@ -133,7 +149,12 @@ footer {
 	max-width: 90%;
 	width:500px;
 	padding-bottom : 5px;
+}
 
+.signup-wrapper{
+@extend .login-wrapper;
+max-width:100%;
+width: 550px;
 }
 
 .notif__container {
@@ -152,4 +173,8 @@ footer {
 	background-color: #dd4b39;
 }
 
-
+@media screen and (max-width: 541px) {
+	.signup-wrapper{
+width:auto;
+	}
+}

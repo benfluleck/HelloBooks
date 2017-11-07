@@ -14,10 +14,15 @@ import PropTypes from 'prop-types';
  */
 class Header extends Component {
 
-
-  render() {
+/**
+   * render Navigation Bar
+   * @method render
+   * @member Header
+   * @returns {object} component
+   */
+render() {
     let navLinks = ['books'];
-    navLinks = this.props.isLoggedIn
+    navLinks = this.props.isAuthenticated
       ? [
         'dashboard', ...navLinks,
         'history',
@@ -28,13 +33,11 @@ class Header extends Component {
       ];
 
     return (
-
       <header className="header">
         <Navigation
           activeLink={this.props.activeLink}
           className="right hide-on-small-and-down"
           navLinks={navLinks}/>
-
       </header>
 
     );
@@ -43,7 +46,7 @@ class Header extends Component {
 
 Header.propTypes = {
   activeLink: PropTypes.string,
-  isLoggedIn: PropTypes.bool,
+  isAuthenticated: PropTypes.bool,
   user: PropTypes.object
 };
 

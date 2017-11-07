@@ -77,8 +77,6 @@ export default function bookReducer(state = {
         error: action.error.message
       };
     }
-
-    // case USER_LOGGED_OUT:   return { books: [], fetching: false };
     default:
       return state;
   }

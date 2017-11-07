@@ -4,7 +4,9 @@ import { Navbar, NavItem } from 'react-materialize';
 
 /**
  * @description Component for Navigation
- * @param {*} props
+ * @class NavigationBar
+ * @extends {Component}
+ * @return {object} Navigation fixed navigation bar
  */
 const Navigation = (props) => {
   const links = props.navLinks.map(link =>

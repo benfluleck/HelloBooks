@@ -1,6 +1,6 @@
 import React from 'react'
 import {Row, Col} from 'react-materialize'
-import Header from '../components/presentation/common/header/Header.jsx'
+import Header from '../components/container/header/Header.jsx'
 import { Bottom } from '../components/presentation/common/Footer.jsx'
 
 

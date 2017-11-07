@@ -3,13 +3,12 @@ import isEmpty from 'lodash/isEmpty';
 import {
   USER_LOGGED_IN,
   USER_LOGGED_OUT,
-  USER_SIGN_IN_FAILURE,
+  USER_SIGN_UP_FAILURE,
   SET_CURRENT_USER,
   SIGNUP_USER_SUCCESS } from '../actions/actiontype';
 
 const INITIAL_STATE = {
-  // isAuthenticated: null,
-  user: {}
+
 };
 
 
@@ -42,13 +41,12 @@ export default function user(state = INITIAL_STATE, action = {}) {
         isAuthenticated: !isEmpty(action.user),
         user: action.user
       };
-    case USER_SIGN_IN_FAILURE:
+    case USER_SIGN_UP_FAILURE:
       error = action.error.data.message;
       return {
         ...state,
         user: null,
-        isAuthenticated: false,
-        status: 'signup',
+        status: 'signUp',
         error
       };
     case USER_LOGGED_OUT:
