@@ -5,9 +5,9 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import setAuthorizationToken from '../utils/setAuthorizationToken';
 import rootReducer from '../reducers/rootReducers';
-import { saveState } from '../utils/Localsave';
+import {saveState, loadState} from '../utils/Localsave';
 
-const initialState = {};
+const initialState = loadState();
 const store = createStore(
   rootReducer,
   initialState,

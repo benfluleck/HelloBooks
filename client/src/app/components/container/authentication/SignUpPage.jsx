@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {signup} from '../../../actions/authenticate';
 import {connect} from 'react-redux';
-import SignUpform from '../../container/authentication/SignUpPage.jsx'
+import SignUpForm from '../../presentation/authentication/SignUpPage.jsx'
 
 
 class SignUpPage extends React.Component {
@@ -13,7 +13,6 @@ class SignUpPage extends React.Component {
 
   }
   render() {
-
       return (
           <SignUpForm submit={this.submit}/>
 

@@ -105,6 +105,11 @@ footer {
 	font-family: $font-stack;
 }
 
+#footer-link{
+	font-family: $font-stack2;
+
+}
+
 /**
  * Login Form
  */
@@ -172,6 +177,15 @@ width: 550px;
 .btn-google{
 	background-color: #dd4b39;
 }
+
+.main-wrapper{
+
+	background-color: $base-white;
+	max-width: 100%;
+	height: 90vh;
+
+}
+
 
 @media screen and (max-width: 541px) {
 	.signup-wrapper{

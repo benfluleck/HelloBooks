@@ -8,7 +8,8 @@ import {
   SIGNUP_USER_SUCCESS } from '../actions/actiontype';
 
 const INITIAL_STATE = {
-
+user:{},
+isAuthenticated: false
 };
 
 

@@ -13,9 +13,9 @@ const UserRoutes = ({
   component: Component,
   ...rest
 }) => {
-  if (!isAuthenticated) {
-    return <Preloader size='big' className="center-align"/>
-  }
+  // if (!isAuthenticated) {
+  //   return <Preloader size='big' className="center-align"/>
+  // }
   return (
     <Route
       {...rest}
@@ -35,7 +35,7 @@ UserRoutes.PropTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    isAuthenticated: state
+    isAuthenticated: !!state.userReducer.isAuthenticated
   };
 }
 

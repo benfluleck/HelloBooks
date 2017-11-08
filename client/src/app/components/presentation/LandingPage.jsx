@@ -47,7 +47,6 @@ class LandingPage extends React.Component {
           image={book.bookimage}/>);
       });
     return (
-
       <div>
         <div className='header-wrapper'>
           <Row>
@@ -59,7 +58,6 @@ class LandingPage extends React.Component {
           </Row>
         </div>
         <Row>
-
           <div className='body-wrapper'>
             <div className='overlay-main'>
               <Row>
@@ -71,18 +69,14 @@ class LandingPage extends React.Component {
                     To Borrow any Books, Please
                     <a href='/login'> Login</a>
                   </h5>
-
                   <p>Click a book for a look at the description</p>
-
                   {[...getAllBooks]}
-
                 </div>
               </Row>
             </div>
           </div>
         </Row>
       </div>
-
     );
   }
 }

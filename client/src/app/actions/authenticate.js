@@ -1,11 +1,7 @@
-import jwtdecode from 'jwt-decode';
-import Toast from 'react-materialize';
 import {showErrorNotification, showSuccessNotification} from '../notifications/notifications';
 
 import { USER_LOGGED_IN,
   USER_LOGGED_OUT,
-  USER_SIGN_UP_FAILURE,
-  SIGNUP_USER_FAILURE,
   SIGNUP_USER_SUCCESS,
   SET_CURRENT_USER } from './actiontype';
 
@@ -37,21 +33,15 @@ export const userLoggedOut = user =>
     isAuthenticated: false,
     user
   });
-export const signInUserFailure = error =>
-  ({
-    type: USER_SIGN_IN_FAILURE,
-    error
-  });
-  export const signUpUserFailure = error =>
-  ({
-    type: USER_SIGN_UP_FAILURE,
-    error
-  });
-export const signUpUserSuccess = user => ({ type: SIGNUP_USER_SUCCESS, user });
+export const signUpUserSuccess = user =>
+({
+  type: SIGNUP_USER_SUCCESS,
+  user
+});
 
 
 /**
- * async helper function: sign in user
+ * async helper function: sign up user
  * @function signup
  * @param {object} credentials
  * @returns {function} asynchronous action
@@ -60,13 +50,8 @@ export const signup = data => dispatch => api
   .user
   .signup(data)
   .then((user) => {
-    if (user.status !== 201) {
-      dispatch(signUpUserFailure(user));
-      Promise.reject(data);
-    } else {
-      dispatch(showSuccessNotification({user}));
-      dispatch(signUpUserSuccess(user));
-    }
+    dispatch(showSuccessNotification({user}));
+    dispatch(signUpUserSuccess(user));
   })
   .catch((error) =>{
     dispatch(showErrorNotification({ error }));
@@ -74,7 +59,7 @@ export const signup = data => dispatch => api
   });
 
 /**
- * async helper function: sign in user
+ * async helper function: log in user
  * @function login
  * @param {object} credentials
  * @returns {function} asynchronous action
@@ -84,12 +69,8 @@ export const login = credentials => dispatch => api
   .login(credentials)
   .then((user) => {
    const token = user.data.token;
-    if (user.status !== 201) {
-      dispatch(signInUserFailure(user));
-      return Promise.reject(token);
-    }
     localStorage.setItem('token', token);
-     dispatch(showSuccessNotification({user}));
+    dispatch(showSuccessNotification({user}));
     setAuthorizationToken(token);
     dispatch(userLoggedIn(user));
   })

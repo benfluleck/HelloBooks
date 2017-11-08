@@ -53,6 +53,7 @@ class SignInPage extends Component {
     this
       .props
       .submit(this.state)
+
   }
 
 /**
