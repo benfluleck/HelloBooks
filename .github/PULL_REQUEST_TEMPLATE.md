@@ -12,7 +12,6 @@
 <!--- Include details of your testing environment, and the tests you ran to -->
 <!--- see how your change affects other areas of the code, etc. -->
 
-#### How should this be manually tested?
 
 
 #### Screenshots (if appropriate):

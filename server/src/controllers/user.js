@@ -3,7 +3,6 @@ import models from '../models';
 // import sendResetPasswordEmail from '../mailer/mailer';
 import generateToken from '../controllers/middleware/authenticate';
 
-
 const User = models.User;
 
 export default {
@@ -52,22 +51,18 @@ export default {
                       res
                         .status(201)
                         .send({
-                          success: true,
-                          message: 'User has been added'
+                          user,
+                          message: `${user.username} has been added`
                         });
                     }
                   })
-                  .catch((error) => {
-                    res.status(400).send({ success: false, message: ` ${error.message}` });
-                  });
+
               }
             })
             .catch((error) => {
               res.status(400).send({ success: false, message: ` ${error.message}` });
             })
-            .catch((error) => {
-              res.status(400).send({ success: false, message: ` ${error.message}` });
-            });
+
         }
       });
   },
@@ -98,10 +93,7 @@ export default {
             });
         } else if (bcrypt.compareSync(req.body.password, user.password)) {
           const Userjwt = {
-            id: user.id,
-            email: user.email,
-            username: user.username,
-            firstname: user.firstname
+            id: user.id
           };
           generateToken.getJWT(Userjwt)
             .then((token) => {
@@ -111,7 +103,11 @@ export default {
                   success: true,
                   message: ` ${req.body.username} is now logged in!`,
                   token: token.token,
-                  username: req.body.username
+                  username: user.username,
+                  email: user.email,
+                  firstname: user.firstname
+
+
                 });
             })
             .catch(error => res.status(500).send(error.message));

@@ -5,9 +5,9 @@ import axios from 'axios';
  */
 export default {
   user: {
-    login: credentials => axios.post('api/v1/users/signin', credentials),
+    login: credentials => axios.post('api/v1/auth/users/signin', credentials),
 
-    signup: data => axios.post('api/v1/users/signup', data)
+    signup: data => axios.post('api/v1/auth/users/signup', data)
   },
   book: {
     fetch: (offset, limit) => axios

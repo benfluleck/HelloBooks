@@ -7,7 +7,7 @@ const fieldLength = {
   firstname: { max: 30, min: 2 },
   title: { max: 60, min: 2 },
   author: { max: 60, min: 2 },
-  description: { max: 200, min: 7 },
+  description: { min: 7 },
   category: { max: 50, min: 5 },
   email: { max: 50, min: 5 }
 };

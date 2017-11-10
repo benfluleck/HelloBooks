@@ -3,13 +3,13 @@ import isEmpty from 'lodash/isEmpty';
 import {
   USER_LOGGED_IN,
   USER_LOGGED_OUT,
-  USER_SIGN_IN_FAILURE,
+  USER_SIGN_UP_FAILURE,
   SET_CURRENT_USER,
-  SIGNUP_USER_SUCCESS } from '../actions/type';
+  SIGNUP_USER_SUCCESS } from '../actions/actiontype';
 
 const INITIAL_STATE = {
-  // isAuthenticated: null,
-  user: {}
+user:{},
+isAuthenticated: false
 };
 
 
@@ -21,7 +21,7 @@ const INITIAL_STATE = {
  * @param {any} [action={}]
  * @returns
  */
-export default function user(state = INITIAL_STATE, action = {}) {
+export default function userReducer (state = INITIAL_STATE, action = {}) {
   let error;
   switch (action.type) {
     case USER_LOGGED_IN:
@@ -36,26 +36,24 @@ export default function user(state = INITIAL_STATE, action = {}) {
         isAuthenticated: true,
         user: action.user
       };
-    case SET_CURRENT_USER:
-      return {
-        ...state,
-        isAuthenticated: !isEmpty(action.user),
-        user: action.user
-      };
-    case USER_SIGN_IN_FAILURE:
+    // case SET_CURRENT_USER:
+    //   return {
+    //     ...state,
+    //     isAuthenticated: !isEmpty(action.user),
+    //     user: action.user
+    //   };
+    case USER_SIGN_UP_FAILURE:
       error = action.error.data.message;
       return {
         ...state,
         user: null,
-        isAuthenticated: false,
-        status: 'signup',
+        status: 'signUp',
         error
       };
     case USER_LOGGED_OUT:
       return {
-        INITIAL_STATE,
         isAuthenticated: false,
-        user: null
+        user:{}
       };
     default:
       return state;

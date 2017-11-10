@@ -1,30 +1,55 @@
 // Variables
 $font-stack: 'Coiny', sans-serif;
 $font-stack2: 'Purple Purse', sans-serif;
+$base-orange: #f2751c;
+$base-white: white;
+$base-background: rgb(204, 204, 204);
+$secondary-color :#0089ec;
+
 
 
 // body classes
 header {
 	top: 0;
-	font-family: $font-stack;
+	font-family: $font-stack2;
+	flex: 1 0 auto;
+
 }
 nav ul a {
-	font-size: 1.4rem;
+	font-size: 1rem;
+	font-family:$font-stack;
+}
+
+a{
+font-family:$font-stack2;
+color: #EC3A00
+}
+.nav-wrapper{
+	background-color:$base-orange;
 }
 body {
 	font-family: $font-stack2;
-
+	background-color: rgb(204, 204, 204);
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
 }
-#nav-change{
-	background-color:#f2751c;
+
+p{
+	font-family: $font-stack2;
 }
 
+form p{
 
+	color:$secondary-color;
+}
 
-
-// User named classes
+// User named class elements
 .root-wrapper {
 	min-height: 100%;
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
 
 }
 .header-wrapper {
@@ -32,27 +57,24 @@ body {
 	height: 80vh;
 	background-image: url('../img/bg.jpg');
 	background-blend-mode: luminosity;
-	background-color: #f2751c;
+	background-color: $base-orange;
 
 }
 
-
 .body-wrapper {
-	z-index: 3;
 	box-shadow: rgba(0, 0, 0, 0.14) 0px 16px 24px 2px, rgba(0, 0, 0, 0.12) 0px 6px 30px 5px,
 		rgba(0, 0, 0, 0.2) 0px 8px 10px -5px;
 	position: relative;
-	z-index: 3;
-	background: rgb(255, 255, 255);
+	background: $base-white;
 	margin: -60px 60px 0px;
 	border-radius: 8px;
+	margin:auto;
 }
 
 .header-text {
 	font-family: $font-stack2;
-	color: white;
+	color: $base-white;
 	text-align: center;
-	margin-top: 0.5em;
 	margin-left: 4rem;
 	margin-right: 4rem;
 	border-radius: 4px;
@@ -62,34 +84,133 @@ body {
 }
 
 .overlay-main {
-	margin-top: -25vh;
+	margin-top: -45vh;
 	padding: 50px;
 	width: calc(100% - 20px);
 	max-width: 1600px;
-	background-color: white;
-
+	background-color: $base-white;
 	clear: both;
 }
 .overlay {
 	clear: both;
 	overflow: hidden;
-	background-color: white;
+	background-color: $base-white;
 	color: black;
+
 }
 
+.landing {
+  padding-top: 25vh;
+  margin: 0;
+  width: 100%;
+  height: auto;
+
+  a {
+    margin: 10px;
+  }
+}
+
+/**
+ *  Footer css
+ */
 .footer-copyright {
-	background-color: #f2751c !important;
+	background-color: $base-orange !important;
 }
 footer {
 	height: 3rem;
-	/* Height of the footer */
 	color: whitesmoke;
 	font-family: $font-stack;
 }
 
+#footer-link{
+	font-family: $font-stack;
+
+}
+
+/**
+ * Login Form
+ */
+.login{
+	display: table;
+	margin: 0 auto;
+	margin-top: 20vh;
+	height: 61vh;
+}
+
+.signup{
+@extend .login;
+margin-top: 6vh;
+
+}
+
+.login-header{
+	background-color: $base-orange;
+	color: $base-white;
+	font-size:1.5em;
+	padding: 0.6em;
+	font-family:$font-stack;
+
+}
+
+.signup-header{
+@extend .login-header
+}
+
+.login-content{
+	padding: 5px;
+
+}
+
+.signup-content{
+@extend.login-content
+}
+
+.login-wrapper{
+	background-color: $base-white;
+	zoom: 1;
+	max-width: 100%;
+	width:500px;
+	padding-bottom : 5px;
+}
+
+.signup-wrapper{
+@extend .login-wrapper;
+max-width:100%;
+width: 550px;
+}
+
+.notif__container {
+	top: 100px !important;
+	right: 0 !important;
+	left: auto !important;
+}
+
+#sidenav-overlay{
+z-index:2;
+background-color: $base-orange;
+color: $base-white;
+}
+
+.btn{
+	background-color:black;
+	font-family:$font-stack2;
+}
+
+.btn-google{
+	background-color: #dd4b39;
+}
+
+.main-wrapper{
+
+	background-color: $base-white;
+	max-width: 100%;
+	height: 90vh;
+
+}
 
 
-
-body {
-	background-color: rgb(204, 204, 204);
+@media screen and (max-width: 541px) {
+	.signup-wrapper{
+width:auto;
+	}
 }

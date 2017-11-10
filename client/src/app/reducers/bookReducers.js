@@ -5,7 +5,7 @@ import {
   FETCH_BOOKS_BY_USER_ID,
   FETCH_BOOKS_FULFILLED_BY_USER_ID,
   FETCH_BOOKS_REJECTED_BY_USER_ID
-} from '../actions/type';
+} from '../actions/actiontype.js';
 
 /**
  * *
@@ -20,12 +20,12 @@ import {
  * @param {any} action
  * @returns {any} state
  */
-export default function bookReducer(state = {
+export default function bookReducer (state = {
   books: [],
   fetching: false,
   fetched: false,
   error: null
-}, action) {
+}, action){
   switch (action.type) {
     case FETCH_BOOKS:
     {
@@ -77,8 +77,6 @@ export default function bookReducer(state = {
         error: action.error.message
       };
     }
-
-    // case USER_LOGGED_OUT:   return { books: [], fetching: false };
     default:
       return state;
   }

@@ -37,7 +37,7 @@ if (isProd) {
       loaders: [
         {
           test: /(\.css)$/,
-          use: ExtractTextPlugin.extract({ use: 'css-loader' })
+          use: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader' })
         }, {
           test: /\.scss$/,
           use: ExtractTextPlugin.extract({
@@ -103,7 +103,7 @@ if (isProd) {
     module: {
       loaders: [
         {
-          test: /\.js?/,
+          test: /\.jsx?/,
           exclude: /node_modules/,
           include: SRC_DIR,
           loader: 'babel-loader',
@@ -111,7 +111,11 @@ if (isProd) {
             presets: ['react', 'es2015', 'stage-2']
           },
           // rules:[
-        }, {
+        },{
+        test: /(\.css)$/,
+        use: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader' })
+        },
+        {
           test: /\.(scss|sass)$/,
           exclude: /node-modules/,
           use: extractscss.extract({

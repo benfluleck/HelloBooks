@@ -1,9 +1,12 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
 import {render} from 'react-dom';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import {Root} from './components/Root'
-import LandingPage  from './components/container/LandingPage'
-//import Login from '../app/components/container/Login'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {Root} from './components/Root.jsx';
+import LandingPage  from './components/container/LandingPage.jsx';
+import Login from './components/container/authentication/SignInPage.jsx';
+import SignUp from './components/container/authentication/SignUpPage.jsx'
+import MainPage from './components/presentation/MainPage.jsx'
+import Logout from './components/presentation/authentication/Logout.jsx'
 // import Register from './containers/Register'
 // import Profile from './components/Profile'
 // import Books from './components/Books'
@@ -17,8 +20,10 @@ import LandingPage  from './components/container/LandingPage'
 // import {Userlist} from './components/admin/Userlist'
 // import {EditUser} from './components/admin/EditUser'
 // import Dashboard from './components/Dashboard'
-// import UserRoute from './components/routes/UserRoute'
-import css from '../app/css/style.scss'
+import UserRoutes from './components/routes/UserRoutes'
+import css from '../app/css/style.scss';
+// import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import 'redux-notifications/lib/styles.css';
 
 
 
@@ -33,6 +38,11 @@ export default class MainRoot extends Component {
         <Root>
           <Switch>
             <Route exact path='/' component={LandingPage}/>
+            <Route exact path='/login' component={Login}/>
+            <Route exact path='/logout' component={Logout}/>
+            <Route exact path='/signup' component={SignUp}/>
+            <UserRoutes exact path='/mainpage' component={MainPage}/>
+
             {/* <Route exact path={'/register'} component={Register}/>
             <Route exact path={'/forgetpass'} component={Forgetpass}/>
             <UserRoute path={'/dashboard'} exact component={Dashboard}/>

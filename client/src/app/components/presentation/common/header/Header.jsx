@@ -1,47 +1,28 @@
 import React, {Component} from 'react'
 import {NavLink} from 'react-router-dom'
 import {Navbar, NavItem, Row, Icon} from 'react-materialize'
-import Navigation from './NavigationBar';
+import Navigation from './NavigationBar.jsx';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
-/*
-eslint-disable
- */
 
 
 /**
- * Component for header and navigation
+ * @description Component for header and navigation
  * @class Header
  * @extends {Component}
  */
 class Header extends Component {
-  componentDidMount() {
 
-    document.addEventListener('scroll', this.handleScroll);
-  }
-  handleScroll() {
-    const top = document.documentElement.scrollTop;
-    const change = document.getElementById('nav-change');
-    if (top > 10) {
-      if (change.classList)
-        change.classList.remove('transparent');
-      }
-    else {
-      change
-        .classList
-        .add('transparent');
-    }
-  }
-  componentWillUnmount() {
-    document
-      .documentElement
-      .removeEventListener('scroll', this.handleScroll);
-  }
-
-  render() {
+/**
+   * render Navigation Bar
+   * @method render
+   * @member Header
+   * @returns {object} component
+   */
+render() {
     let navLinks = ['books'];
-    navLinks = this.props.isLoggedIn
+    navLinks = this.props.isAuthenticated && this.props.tokenExists
       ? [
         'dashboard', ...navLinks,
         'history',
@@ -50,16 +31,12 @@ class Header extends Component {
       : [
         'login', 'sign up', ...navLinks
       ];
-
     return (
-
       <header className="header">
         <Navigation
           activeLink={this.props.activeLink}
           className="right hide-on-small-and-down"
           navLinks={navLinks}/>
-            />
-          />
       </header>
 
     );
@@ -68,7 +45,7 @@ class Header extends Component {
 
 Header.propTypes = {
   activeLink: PropTypes.string,
-  isLoggedIn: PropTypes.bool,
+  isAuthenticated: PropTypes.bool,
   user: PropTypes.object
 };
 
