@@ -21,7 +21,7 @@ isAuthenticated: false
  * @param {any} [action={}]
  * @returns
  */
-export default function user(state = INITIAL_STATE, action = {}) {
+export default function userReducer (state = INITIAL_STATE, action = {}) {
   let error;
   switch (action.type) {
     case USER_LOGGED_IN:
@@ -36,12 +36,12 @@ export default function user(state = INITIAL_STATE, action = {}) {
         isAuthenticated: true,
         user: action.user
       };
-    case SET_CURRENT_USER:
-      return {
-        ...state,
-        isAuthenticated: !isEmpty(action.user),
-        user: action.user
-      };
+    // case SET_CURRENT_USER:
+    //   return {
+    //     ...state,
+    //     isAuthenticated: !isEmpty(action.user),
+    //     user: action.user
+    //   };
     case USER_SIGN_UP_FAILURE:
       error = action.error.data.message;
       return {
@@ -52,9 +52,8 @@ export default function user(state = INITIAL_STATE, action = {}) {
       };
     case USER_LOGGED_OUT:
       return {
-        INITIAL_STATE,
         isAuthenticated: false,
-        user: null
+        user:{}
       };
     default:
       return state;

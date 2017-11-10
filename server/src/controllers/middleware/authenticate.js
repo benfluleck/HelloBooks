@@ -25,7 +25,7 @@ const authenticate = (req, res, next) => {
   } else {
     res
       .status(401)
-      .send({ success: false, message: 'Incorrect, Please try Login again' });
+      .send({ success: false, message: 'Unauthorised access' });
   }
 };
 

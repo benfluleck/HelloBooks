@@ -64,7 +64,7 @@ class SignInPage extends Component {
    */
   render() {
     return (
-      <Row>
+
         <div className='login center-align'>
           <div className='login-wrapper'>
             <Row>
@@ -97,9 +97,9 @@ class SignInPage extends Component {
                     <NavLink to='/forgetpass'>
                       <p>Forgotten Password</p>
                     </NavLink>
-                    <a to='/signup'>
+                    <NavLink to='/signup'>
                       <p>Sign Up</p>
-                    </a>
+                    </NavLink>
                   </Col>
                   <Col className='center' s={12}>
                     <div className='login-btn'>
@@ -118,7 +118,7 @@ class SignInPage extends Component {
 
           </div>
         </div>
-      </Row>
+
 
     );
   }

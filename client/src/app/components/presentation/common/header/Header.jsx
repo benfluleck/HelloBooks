@@ -22,7 +22,7 @@ class Header extends Component {
    */
 render() {
     let navLinks = ['books'];
-    navLinks = this.props.isAuthenticated
+    navLinks = this.props.isAuthenticated && this.props.tokenExists
       ? [
         'dashboard', ...navLinks,
         'history',
@@ -31,7 +31,6 @@ render() {
       : [
         'login', 'sign up', ...navLinks
       ];
-
     return (
       <header className="header">
         <Navigation

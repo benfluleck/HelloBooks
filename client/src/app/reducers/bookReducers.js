@@ -20,12 +20,12 @@ import {
  * @param {any} action
  * @returns {any} state
  */
-export default function bookReducer(state = {
+export default function bookReducer (state = {
   books: [],
   fetching: false,
   fetched: false,
   error: null
-}, action) {
+}, action){
   switch (action.type) {
     case FETCH_BOOKS:
     {

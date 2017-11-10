@@ -14,7 +14,6 @@ class SignInPage extends React.Component {
   render() {
       return (
           <SignInForm submit={this.submit}/>
-
     );
   }
 

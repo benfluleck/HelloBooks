@@ -9,7 +9,7 @@ import {Preloader} from 'react-materialize';
 *Routes for Authenticated users
 */
 const UserRoutes = ({
-  isAuthenticated,
+  isAuthenticated, tokenExists,
   component: Component,
   ...rest
 }) => {
@@ -19,7 +19,7 @@ const UserRoutes = ({
   return (
     <Route
       {...rest}
-      render={(props) => isAuthenticated
+      render={(props) => isAuthenticated && tokenExists
       ? <Component{...props}/>
       : <Redirect to='/login'/>}/>
 
@@ -35,7 +35,8 @@ UserRoutes.PropTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    isAuthenticated: !!state.userReducer.isAuthenticated
+    isAuthenticated: !!state.userReducer.isAuthenticated,
+    tokenExists: !!localStorage.getItem('token')
   };
 }
 

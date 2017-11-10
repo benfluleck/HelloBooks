@@ -4,7 +4,7 @@ import {Input, Col, Row, Icon, Button} from 'react-materialize';
 import PropTypes from 'prop-types';
 import {signup} from '../../../actions/authenticate';
 import {connect} from 'react-redux';
-import { validateSignupInput } from '../../../notifications/validator'
+import { validateSignupInput } from '../../../validators/validator'
 
 /**
  * SignUp component
@@ -154,11 +154,9 @@ return(
                   <NavLink to='/forgetpass'>
                     <p>Forgotten Password</p>
                   </NavLink>
-                  <a
-                  onClick={this.props.showSignIn}
-                 >
-                    <p>Sign In</p>
-                  </a>
+                  <NavLink to='/login'>
+                  <p>Sign In</p>
+                </NavLink>
               </Col>
             <Col s={12} className="center">
               <Button waves='light'>Sign Up</Button>

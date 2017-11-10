@@ -25,7 +25,6 @@ class App extends React.Component {
 render(
   <Provider store={store}>
   <div>
-    {/* <AuthorizationErrorHandler /> */}
     <App/>
     <Notifs />
   </div>

@@ -1,3 +1,4 @@
+import {showErrorNotification, showSuccessNotification} from './notifications';
 import {
   FETCH_BOOKS,
   FETCH_BOOKS_FULFILLED,
@@ -31,7 +32,7 @@ export const fetchAllBooks = (offset, limit) => dispatch => api
     return response;
   })
   .catch((error) => {
-    dispatch(fetchBooksRejected(error.response));
+    dispatch(showErrorNotification({ error }));
   });
 
 /**

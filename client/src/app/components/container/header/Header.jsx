@@ -4,7 +4,8 @@ import Header from '../../presentation/common/header/Header.jsx';
 
 const mapStateToProps = (state) => {
   return {
-    isAuthenticated: !!state.userReducer.isAuthenticated
+    isAuthenticated: !!state.userReducer.isAuthenticated,
+    tokenExists: !!localStorage.getItem('token')
   };
 }
 

@@ -1,6 +1,8 @@
 import {reducer as notifReducer, actions as notifActions, Notifs } from 'redux-notifications';
 const { notifSend } = notifActions;
-
+// import { push } from 'react-router-redux'
+import {Redirect, browserHistory} from 'react-router';
+import {React} from 'react';
 
 /**
  * @description async notifications: show error notification
@@ -10,6 +12,19 @@ const { notifSend } = notifActions;
  */
 export const showErrorNotification = ({ message, error }) => {
   return (dispatch) => {
+if (error.response.data.message === "Unauthorised access"){
+  dispatch(notifSend({
+    message: "Please Login Again",
+    kind: 'info',
+    dismissAfter: 5000
+  }));
+  localStorage.removeItem('state');
+  localStorage.removeItem('token');
+  setAuthorizationToken(false);
+
+
+}
+else{
     dispatch(notifSend({
       message: message || error.response.data.message,
       kind: 'danger',
@@ -17,10 +32,11 @@ export const showErrorNotification = ({ message, error }) => {
     }));
   };
 }
+}
 
 /**
  * async notifications: show success notification
- * @function showSuccessrNotification
+ * @function showSuccessNotification
  * @param {string} message
  * @param {object} response
  * @returns {function} asynchronous action

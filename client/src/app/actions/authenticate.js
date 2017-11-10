@@ -1,4 +1,5 @@
-import {showErrorNotification, showSuccessNotification} from '../notifications/notifications';
+import {showErrorNotification, showSuccessNotification} from './notifications';
+import {Toast} from 'react-materialize';
 
 import { USER_LOGGED_IN,
   USER_LOGGED_OUT,
@@ -68,6 +69,7 @@ export const login = credentials => dispatch => api
   .user
   .login(credentials)
   .then((user) => {
+console.log(user, '?????')
    const token = user.data.token;
     localStorage.setItem('token', token);
     dispatch(showSuccessNotification({user}));
@@ -80,12 +82,13 @@ export const login = credentials => dispatch => api
 
 
 /**
- *
- *  @param {*} dispatch
+ * async helper function: log out user
+ * @function logout
+ * @returns {function} asynchronous action
  */
 export const logout = () => (dispatch) => {
   localStorage.removeItem('token');
-  localStorage.removeItem('username');
+  localStorage.clear();
   setAuthorizationToken(false);
   dispatch(userLoggedOut());
 };

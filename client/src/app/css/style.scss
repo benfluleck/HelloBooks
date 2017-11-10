@@ -12,6 +12,7 @@ $secondary-color :#0089ec;
 header {
 	top: 0;
 	font-family: $font-stack2;
+	flex: 1 0 auto;
 
 }
 nav ul a {
@@ -46,6 +47,10 @@ form p{
 // User named class elements
 .root-wrapper {
 	min-height: 100%;
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+
 }
 .header-wrapper {
 	width: 100%;
@@ -53,6 +58,7 @@ form p{
 	background-image: url('../img/bg.jpg');
 	background-blend-mode: luminosity;
 	background-color: $base-orange;
+
 }
 
 .body-wrapper {
@@ -62,6 +68,7 @@ form p{
 	background: $base-white;
 	margin: -60px 60px 0px;
 	border-radius: 8px;
+	margin:auto;
 }
 
 .header-text {
@@ -92,6 +99,16 @@ form p{
 
 }
 
+.landing {
+  padding-top: 25vh;
+  margin: 0;
+  width: 100%;
+  height: auto;
+
+  a {
+    margin: 10px;
+  }
+}
 
 /**
  *  Footer css
@@ -106,7 +123,7 @@ footer {
 }
 
 #footer-link{
-	font-family: $font-stack2;
+	font-family: $font-stack;
 
 }
 
@@ -151,7 +168,7 @@ margin-top: 6vh;
 .login-wrapper{
 	background-color: $base-white;
 	zoom: 1;
-	max-width: 90%;
+	max-width: 100%;
 	width:500px;
 	padding-bottom : 5px;
 }
@@ -168,10 +185,15 @@ width: 550px;
 	left: auto !important;
 }
 
+#sidenav-overlay{
+z-index:2;
+background-color: $base-orange;
+color: $base-white;
+}
 
 .btn{
 	background-color:black;
-	font-family:$font-stack;
+	font-family:$font-stack2;
 }
 
 .btn-google{

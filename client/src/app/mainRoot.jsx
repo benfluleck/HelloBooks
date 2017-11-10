@@ -6,6 +6,7 @@ import LandingPage  from './components/container/LandingPage.jsx';
 import Login from './components/container/authentication/SignInPage.jsx';
 import SignUp from './components/container/authentication/SignUpPage.jsx'
 import MainPage from './components/presentation/MainPage.jsx'
+import Logout from './components/presentation/authentication/Logout.jsx'
 // import Register from './containers/Register'
 // import Profile from './components/Profile'
 // import Books from './components/Books'
@@ -38,6 +39,7 @@ export default class MainRoot extends Component {
           <Switch>
             <Route exact path='/' component={LandingPage}/>
             <Route exact path='/login' component={Login}/>
+            <Route exact path='/logout' component={Logout}/>
             <Route exact path='/signup' component={SignUp}/>
             <UserRoutes exact path='/mainpage' component={MainPage}/>
 
