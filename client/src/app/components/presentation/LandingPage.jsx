@@ -2,7 +2,8 @@ import React from 'react';
 import {Row, Preloader} from 'react-materialize';
 import PropTypes from 'prop-types';
 import {Book} from '../presentation/common/Book/DisplayBook.jsx';
-
+import WelcomeMessage from './messages/WelcomeMessage.jsx'
+import {Bottom} from '../presentation/common/Footer.jsx'
 
 /**
  * @description Component for Welcome Page for all users
@@ -67,10 +68,9 @@ class LandingPage extends React.Component {
                   <h3>Latest Books Available:
                   </h3>
                   <hr/>
-                  <h5>
-                    To Borrow any Books, Please
-                    <a href='/login'> Login</a>
-                  </h5>
+                  <div>
+                  {!this.props.isAuthenticated && <WelcomeMessage/>}
+                  </div>
                   <p>Click a book for a look at the Author</p>
                   {[...getAllBooks]}
                 </div>
@@ -78,6 +78,7 @@ class LandingPage extends React.Component {
             </div>
           </div>
         </Row>
+        <Bottom/>
       </div>
     );
   }

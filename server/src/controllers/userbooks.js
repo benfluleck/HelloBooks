@@ -10,7 +10,7 @@ const User = models.User;
 
 export default {
   /**
-   * Route: POST: /users/:userId/books
+   * Route: POST: /users/loanbook
    * @description Loan a book
    * @param {any} req
    * @param {any} res
@@ -18,6 +18,7 @@ export default {
    * @memmberOf UserBooks Controller
    */
   loanbook(req, res) {
+    req.params.userId = req.user.id.id;
     if (!req.body.returndate) {
       return res.status(404).send({ message: 'Please specify a valid return date' });
     }
@@ -84,16 +85,17 @@ export default {
   },
 
   /**
-   * Route: GET: /users/:userId/books
+   * Route: GET: /users/getborrowedBooklist
    * @description Get list of borrowed books
    * @param {any} req
    * @param {any} res
    * @returns {any} book list
    * @memmberOf UserBooks Controller
    */
-  getborrowerslist(req, res) {
+  getborrowedBooklist(req, res) {
     const offset = req.query.offset || 0;
     const limit = req.query.limit || 3;
+    req.params.userId = req.user.id.id;
     if (!req.query.returned) {
       return res
         .status(404).send({ message: 'Please specify a value for returned books' });
@@ -127,7 +129,7 @@ export default {
   },
 
   /**
-]  * Route: PUT: /users/:userId/books
+]  * Route: PUT: /users/returnbook
    * @description Return a book
    * @param {any} req
    * @param {any} res
@@ -135,6 +137,7 @@ export default {
    * @memmberOf UserBooks Controller
    */
   returnbook(req, res) {
+    req.params.userId = req.user.id.id;
     UserBooks.findOne({
       where: {
         bookid: req.body.bookId,

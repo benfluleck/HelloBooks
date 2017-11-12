@@ -4,15 +4,15 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Book} from '../../presentation/common/Book/DisplayBook.jsx';
 import SideNav from '../common/SideNav/index.jsx';
+import fetchAllBooks from '../../../actions/fetchbooks';
 import InlineNavigationBar from '../../presentation/common/InlineNavigationBar.jsx';
 
-class HomePage extends React.Component{
+class Dashoard extends React.Component{
 	constructor(props) {
     super(props);
     this.state = {
     };
   }
-
   componentWillReceiveProps(nextProps) {
     $(document).ready(function(){
       $('.button-collapse').sideNav({
@@ -64,4 +64,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect (mapStateToProps,{ fetchAllBooks})(HomePage);
+export default connect (mapStateToProps,{ fetchAllBooks})(Dashoard);

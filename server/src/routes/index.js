@@ -2,7 +2,10 @@ import express from 'express';
 import controller from '../controllers';
 import fieldValidationMiddleware from '../controllers/middleware/fieldValidations';
 import nullvalidationMiddleware from '../controllers/middleware/nullValidation';
+import decodeToken from '../controllers/middleware/authenticate';
 
+
+const authdecodeToken = decodeToken.decodeToken
 const Router = express.Router();
 const UserController = controller.User;
 const BooksController = controller.Books;
@@ -17,19 +20,17 @@ Router.post('/auth/users/signup', fieldValidationMiddleware, nullvalidationMiddl
 
 Router.post('/auth/users/signin', nullvalidationMiddleware, UserController.signin);
 
-
 Router.post('/books', nullvalidationMiddleware, BooksController.create);
 
 Router.put('/books/:bookId', nullvalidationMiddleware, BooksController.update);
 
 Router.get('/books/', BooksController.getAllBooks);
 
-Router.post('/users/:userId/books', UserBooksController.loanbook);
+Router.post('/users/loanbook', authdecodeToken,  UserBooksController.loanbook);
 
-Router.put('/users/:userId/books', UserBooksController.returnbook);
+Router.put('/users/returnbook',authdecodeToken, UserBooksController.returnbook);
 
-Router.get('/users/:userId/books', UserBooksController.getborrowerslist);
-
+Router.get('/users/borrowedbooks', authdecodeToken, UserBooksController.getborrowedBooklist);
 // Router.delete('books/:bookId', BooksController.destroybooks);
 // Router.put('/users/:userId', UserController.updateUserInfo);
 
