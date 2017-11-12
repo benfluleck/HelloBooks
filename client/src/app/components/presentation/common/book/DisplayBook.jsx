@@ -17,7 +17,7 @@ export const Book  = (books) =>{
 
             <div className="card-image"
             data-tip={`Title: ${books.title}<br/> Author: ${books.author}<br/> Category: ${books.category}<br/> ` } data-html={true} >
-              <img src={books.image} alt={'http://res.cloudinary.com/digpnxufx/image/upload/c_scale,h_499,w_325/v1507822148/bookplaceholder_kdbixx.png'}/>
+              <img src={books.image || 'http://res.cloudinary.com/digpnxufx/image/upload/c_scale,h_499,w_325/v1507822148/bookplaceholder_kdbixx.png' } alt={books.title}/>
 
             </div>
 

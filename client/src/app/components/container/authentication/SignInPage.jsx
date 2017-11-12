@@ -8,7 +8,7 @@ class SignInPage extends React.Component {
   submit = (data)=> {
   this.props.
     login(data)
-.then(()=>{this.props.history.push('/mainpage')})
+.then(()=>{this.props.history.push('/dashboard')})
 
   }
   render() {

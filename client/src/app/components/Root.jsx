@@ -1,7 +1,7 @@
 import React from 'react'
 import {Row, Col} from 'react-materialize'
 import Header from '../components/container/header/Header.jsx'
-import { Bottom } from '../components/presentation/common/Footer.jsx'
+
 
 
 /*
@@ -18,7 +18,7 @@ export class Root extends React.Component
           <Header/>
 
             {this.props.children}
-            <Bottom/>
+
       </div>
     )
   }

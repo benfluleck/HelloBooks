@@ -13,8 +13,12 @@ header {
 	top: 0;
 	font-family: $font-stack2;
 	flex: 1 0 auto;
-
 }
+
+.side-nav {
+		  width: 250px;
+		}
+
 nav ul a {
 	font-size: 1rem;
 	font-family:$font-stack;
@@ -44,14 +48,40 @@ form p{
 	color:$secondary-color;
 }
 
+.internal-navbar ul li{
+	padding: 10px;
+	display: inline-flex;
+
+	}
+
+	.internal-navbar ul li a{
+		color: black;
+	}
+	.internal-navbar ul li:hover{
+		font-weight: bolder;
+		text-decoration: underline;
+	}
+
 // User named class elements
 .root-wrapper {
 	min-height: 100%;
 	display: flex;
 	min-height: 100vh;
 	flex-direction: column;
-
 }
+
+.main-wrapper{
+
+		background-color: $base-white;
+		max-width: 100%;
+		height: 90vh;
+		padding-left:300px;
+	}
+
+.user-view{
+font-size:2em !important;
+}
+
 .header-wrapper {
 	width: 100%;
 	height: 80vh;
@@ -187,7 +217,6 @@ width: 550px;
 
 #sidenav-overlay{
 z-index:2;
-background-color: $base-orange;
 color: $base-white;
 }
 
@@ -200,17 +229,17 @@ color: $base-white;
 	background-color: #dd4b39;
 }
 
-.main-wrapper{
-
-	background-color: $base-white;
-	max-width: 100%;
-	height: 90vh;
-
-}
 
 
 @media screen and (max-width: 541px) {
 	.signup-wrapper{
-width:auto;
+		width:auto;
 	}
 }
+
+@media only screen and (max-width : 992px) {
+	header, .main-wrapper, footer {
+		padding-left: 0;
+	}
+}
+

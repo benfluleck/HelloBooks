@@ -3,6 +3,7 @@ import {Row, Preloader} from 'react-materialize';
 import PropTypes from 'prop-types';
 import {Book} from '../presentation/common/Book/DisplayBook.jsx';
 
+
 /**
  * @description Component for Welcome Page for all users
  * @class Landing Page
@@ -16,6 +17,7 @@ class LandingPage extends React.Component {
       offset: 0
     };
   }
+
   componentDidMount() {
     this
       .props
@@ -69,7 +71,7 @@ class LandingPage extends React.Component {
                     To Borrow any Books, Please
                     <a href='/login'> Login</a>
                   </h5>
-                  <p>Click a book for a look at the description</p>
+                  <p>Click a book for a look at the Author</p>
                   {[...getAllBooks]}
                 </div>
               </Row>

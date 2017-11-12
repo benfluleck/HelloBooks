@@ -5,8 +5,8 @@ import {Root} from './components/Root.jsx';
 import LandingPage  from './components/container/LandingPage.jsx';
 import Login from './components/container/authentication/SignInPage.jsx';
 import SignUp from './components/container/authentication/SignUpPage.jsx'
-import MainPage from './components/presentation/MainPage.jsx'
-import Logout from './components/presentation/authentication/Logout.jsx'
+import Dashboard from './components/presentation/dashboard/Dashboard.jsx'
+import Logout from './components/container/authentication/Logout.jsx'
 // import Register from './containers/Register'
 // import Profile from './components/Profile'
 // import Books from './components/Books'
@@ -20,7 +20,7 @@ import Logout from './components/presentation/authentication/Logout.jsx'
 // import {Userlist} from './components/admin/Userlist'
 // import {EditUser} from './components/admin/EditUser'
 // import Dashboard from './components/Dashboard'
-import UserRoutes from './components/routes/UserRoutes'
+import UserRoutes from './components/hoc/UserRoutes'
 import css from '../app/css/style.scss';
 // import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import 'redux-notifications/lib/styles.css';
@@ -41,7 +41,7 @@ export default class MainRoot extends Component {
             <Route exact path='/login' component={Login}/>
             <Route exact path='/logout' component={Logout}/>
             <Route exact path='/signup' component={SignUp}/>
-            <UserRoutes exact path='/mainpage' component={MainPage}/>
+            <UserRoutes exact path='/dashboard' component={Dashboard}/>
 
             {/* <Route exact path={'/register'} component={Register}/>
             <Route exact path={'/forgetpass'} component={Forgetpass}/>

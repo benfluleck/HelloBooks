@@ -3,6 +3,7 @@ import {NavLink} from 'react-router-dom';
 import {Input, Col, Row, Icon, Button} from 'react-materialize';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import {Bottom} from '../../../components/presentation/common/Footer.jsx'
 
 
 /**
@@ -64,7 +65,7 @@ class SignInPage extends Component {
    */
   render() {
     return (
-
+      <div>
         <div className='login center-align'>
           <div className='login-wrapper'>
             <Row>
@@ -118,7 +119,8 @@ class SignInPage extends Component {
 
           </div>
         </div>
-
+        <Bottom/>
+</div>
 
     );
   }

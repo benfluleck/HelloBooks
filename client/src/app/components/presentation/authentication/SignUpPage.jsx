@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import {signup} from '../../../actions/authenticate';
 import {connect} from 'react-redux';
 import { validateSignupInput } from '../../../validators/validator'
+import {Bottom} from '../../../components/presentation/common/Footer.jsx'
 
 /**
  * SignUp component
@@ -82,6 +83,7 @@ onSubmit = (e) => {
    */
 render(){
 return(
+<div>
 <Row>
   <div className='signup center-align'>
     <div className='signup-wrapper'>
@@ -170,9 +172,11 @@ return(
             </div>
           </form>
         </Row>
+      </div>
+    </div>
+  </Row>
+<Bottom/>
 </div>
-</div>
-</Row>
 );
 }
 
