@@ -2,6 +2,9 @@ import React from 'react';
 import {Row, Preloader} from 'react-materialize';
 import PropTypes from 'prop-types';
 import {Book} from '../presentation/common/Book/DisplayBook.jsx';
+import WelcomeMessage from './messages/WelcomeMessage.jsx'
+import {Bottom} from '../presentation/common/Footer.jsx'
+import DisplayLandingBooks from '../container/booklist/DisplayLandingBooks.jsx';
 
 /**
  * @description Component for Welcome Page for all users
@@ -11,17 +14,8 @@ import {Book} from '../presentation/common/Book/DisplayBook.jsx';
 class LandingPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      limit: 8,
-      offset: 0
-    };
-  }
-  componentDidMount() {
-    this
-      .props
-      .fetchBooksforDashboard(this.state.offset, this.state.limit)
-  }
 
+  }
   /**
    * render Landing page component
    * @method render
@@ -29,23 +23,6 @@ class LandingPage extends React.Component {
    * @returns {object} component
    */
   render() {
-    if (!this.props.books) {
-      return <Preloader size='big' className="center-align"/>
-    }
-
-    const getAllBooks = this
-      .props
-      .books
-      .map((book) => {
-        return (<Book
-          key={book.id}
-          title={book.title}
-          author
-          ={book.author}
-          category={book.category}
-          description={book.description}
-          image={book.bookimage}/>);
-      });
     return (
       <div>
         <div className='header-wrapper'>
@@ -65,17 +42,17 @@ class LandingPage extends React.Component {
                   <h3>Latest Books Available:
                   </h3>
                   <hr/>
-                  <h5>
-                    To Borrow any Books, Please
-                    <a href='/login'> Login</a>
-                  </h5>
-                  <p>Click a book for a look at the description</p>
-                  {[...getAllBooks]}
+                  <div>
+                  {!this.props.isAuthenticated && <WelcomeMessage/>}
+                  </div>
+                  <p>Click a book for a look at the Author</p>
+                 <DisplayLandingBooks/>
                 </div>
               </Row>
             </div>
           </div>
         </Row>
+        <Bottom/>
       </div>
     );
   }

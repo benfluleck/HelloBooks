@@ -5,7 +5,6 @@ import { Footer, Row } from 'react-materialize'
 /**
  * @description Component for Footer, named Bottom so as not to conflict with materialize footer
  * @class Bottom
- * @extends {Component}
  */
 export const Bottom = ()=>{
     return(

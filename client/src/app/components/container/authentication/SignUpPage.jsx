@@ -4,7 +4,11 @@ import {signup} from '../../../actions/authenticate';
 import {connect} from 'react-redux';
 import SignUpForm from '../../presentation/authentication/SignUpPage.jsx'
 
-
+/**
+ * handles registartion of users
+ * @class SignUpPage
+ * @extends {React.Component}
+ */
 class SignUpPage extends React.Component {
   submit = (data)=> {
   this.props.
@@ -12,6 +16,11 @@ class SignUpPage extends React.Component {
 .then(()=>{console.log('Nice to meet you')})
 
   }
+ /**
+ * handles signing in of users
+ * @class SignInPage
+ * @extends {React.Component}
+ */
   render() {
       return (
           <SignUpForm submit={this.submit}/>

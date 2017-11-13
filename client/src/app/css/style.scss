@@ -1,31 +1,40 @@
+@import '../../../../node_modules/react-tabs/style/react-tabs.scss';
+
+
 // Variables
 $font-stack: 'Coiny', sans-serif;
 $font-stack2: 'Purple Purse', sans-serif;
 $base-orange: #f2751c;
 $base-white: white;
 $base-background: rgb(204, 204, 204);
-$secondary-color :#0089ec;
-
-
+$secondary-color: #0089ec;
 
 // body classes
 header {
 	top: 0;
 	font-family: $font-stack2;
 	flex: 1 0 auto;
-
 }
+
+.side-nav {
+	width: 250px;
+}
+
 nav ul a {
 	font-size: 1rem;
-	font-family:$font-stack;
+	font-family: $font-stack;
 }
 
-a{
-font-family:$font-stack2;
-color: #EC3A00
+.navbar-fixed {
+	z-index: 99999999 !important;
 }
-.nav-wrapper{
-	background-color:$base-orange;
+
+a {
+	font-family: $font-stack2;
+	color: #ec3a00;
+}
+.nav-wrapper {
+	background-color: $base-orange;
 }
 body {
 	font-family: $font-stack2;
@@ -35,13 +44,25 @@ body {
 	flex-direction: column;
 }
 
-p{
+p {
 	font-family: $font-stack2;
 }
 
-form p{
+form p {
+	color: $secondary-color;
+}
 
-	color:$secondary-color;
+.internal-navbar ul li {
+	padding: 10px;
+	display: inline-flex;
+}
+
+.internal-navbar ul li a {
+	color: black;
+}
+.internal-navbar ul li:hover {
+	font-weight: bolder;
+	text-decoration: underline;
 }
 
 // User named class elements
@@ -50,15 +71,28 @@ form p{
 	display: flex;
 	min-height: 100vh;
 	flex-direction: column;
-
 }
+
+.card{
+	max-width:77%;
+}
+.main-wrapper {
+	background-color: $base-white;
+	max-width: 100%;
+	height: 100vh;
+	padding-left: 300px;
+}
+
+.user-view {
+	padding-top: 80px !important;
+}
+
 .header-wrapper {
 	width: 100%;
 	height: 80vh;
 	background-image: url('../img/bg.jpg');
 	background-blend-mode: luminosity;
 	background-color: $base-orange;
-
 }
 
 .body-wrapper {
@@ -68,7 +102,7 @@ form p{
 	background: $base-white;
 	margin: -60px 60px 0px;
 	border-radius: 8px;
-	margin:auto;
+
 }
 
 .header-text {
@@ -80,7 +114,7 @@ form p{
 	border-radius: 4px;
 	font-size: 4.5em;
 	padding: 40px;
-	background-color:rgba(0,0,0,0.42);
+	background-color: rgba(0, 0, 0, 0.42);
 }
 
 .overlay-main {
@@ -96,18 +130,17 @@ form p{
 	overflow: hidden;
 	background-color: $base-white;
 	color: black;
-
 }
 
 .landing {
-  padding-top: 25vh;
-  margin: 0;
-  width: 100%;
-  height: auto;
+	padding-top: 25vh;
+	margin: 0;
+	width: 100%;
+	height: auto;
 
-  a {
-    margin: 10px;
-  }
+	a {
+		margin: 10px;
+	}
 }
 
 /**
@@ -122,61 +155,57 @@ footer {
 	font-family: $font-stack;
 }
 
-#footer-link{
+#footer-link {
 	font-family: $font-stack;
-
 }
 
 /**
  * Login Form
  */
-.login{
+.login {
 	display: table;
 	margin: 0 auto;
 	margin-top: 20vh;
 	height: 61vh;
 }
 
-.signup{
-@extend .login;
-margin-top: 6vh;
-
+.signup {
+	@extend .login;
+	margin-top: 6vh;
 }
 
-.login-header{
+.login-header {
 	background-color: $base-orange;
 	color: $base-white;
-	font-size:1.5em;
+	font-size: 1.5em;
 	padding: 0.6em;
-	font-family:$font-stack;
-
+	font-family: $font-stack;
 }
 
-.signup-header{
-@extend .login-header
+.signup-header {
+	@extend .login-header;
 }
 
-.login-content{
+.login-content {
 	padding: 5px;
-
 }
 
-.signup-content{
-@extend.login-content
+.signup-content {
+	@extend.login-content;
 }
 
-.login-wrapper{
+.login-wrapper {
 	background-color: $base-white;
 	zoom: 1;
 	max-width: 100%;
-	width:500px;
-	padding-bottom : 5px;
+	width: 500px;
+	padding-bottom: 5px;
 }
 
-.signup-wrapper{
-@extend .login-wrapper;
-max-width:100%;
-width: 550px;
+.signup-wrapper {
+	@extend .login-wrapper;
+	max-width: 100%;
+	width: 550px;
 }
 
 .notif__container {
@@ -185,32 +214,63 @@ width: 550px;
 	left: auto !important;
 }
 
-#sidenav-overlay{
-z-index:2;
-background-color: $base-orange;
-color: $base-white;
+#sidenav-overlay {
+	z-index: 2;
+	color: $base-white;
 }
 
-.btn{
-	background-color:black;
-	font-family:$font-stack2;
+.btn {
+	background-color: black;
+	font-family: $font-stack2;
 }
 
-.btn-google{
+.btn-google {
 	background-color: #dd4b39;
 }
 
-.main-wrapper{
 
-	background-color: $base-white;
-	max-width: 100%;
-	height: 90vh;
+.react-tabs__tab-list{
+	padding-top: 15px;
+font-family:$font-stack;
+}
 
+.react-tabs__tab--selected {
+	background: $base-orange;
+	color: $base-white;
+}
+
+.main-text{
+	background-color:white;
+	}
+
+	.pagination li a{
+
+font-family: $font-stack !important;
+	}
+		.pagination li.active {
+	background-color: $base-orange !important;
+	border-radius: 15px !important;
 }
 
 
+
+
 @media screen and (max-width: 541px) {
-	.signup-wrapper{
-width:auto;
+	.signup-wrapper {
+		width: auto;
 	}
+}
+
+@media only screen and (max-width: 992px) {
+	header,
+	.main-wrapper,
+	footer {
+		padding-left: 0;
+	}
+
+	.body-wrapper{
+		margin: auto;
+	}
+
+
 }

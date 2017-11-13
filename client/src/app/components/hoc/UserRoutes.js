@@ -13,16 +13,12 @@ const UserRoutes = ({
   component: Component,
   ...rest
 }) => {
-  // if (!isAuthenticated) {
-  //   return <Preloader size='big' className="center-align"/>
-  // }
   return (
     <Route
       {...rest}
       render={(props) => isAuthenticated && tokenExists
       ? <Component{...props}/>
       : <Redirect to='/login'/>}/>
-
   );
 
 };

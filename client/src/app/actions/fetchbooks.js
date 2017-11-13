@@ -50,22 +50,22 @@ export const fetchBooksforDashboard = (offset, limit) => dispatch => api
     return response;
   })
   .catch((error) => {
-    dispatch(fetchBooksRejected(error.response));
+    dispatch(showErrorNotification({ error }));
   });
 
 /**
- *
- * @param {*} offset
- * @param {*} limit
- * @param {*} userid
- * @return {*} any
+ * async helper function: log in user
+ * @function fetchAllBooksbyId
+ * @param {object} offset
+ * @param {object} limit
+ * @returns {function} asynchronous action
  */
-export const fetchAllBooksbyId = (offset, limit, userid) => dispatch => api
+export const fetchAllBooksbyId = (offset, limit) => dispatch => api
   .book
-  .fetchbyUserId(offset, limit, userid)
+  .fetchbooksbyUserId(offset, limit)
   .then((response) => {
     dispatch(fetchBooksByIdfufilled(response));
   })
   .catch((error) => {
-    dispatch(fetchBooksByIdRejected(error.response));
+    dispatch(showErrorNotification({ error }));;
   });
