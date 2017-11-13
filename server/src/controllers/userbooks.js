@@ -18,7 +18,7 @@ export default {
    * @memmberOf UserBooks Controller
    */
   loanbook(req, res) {
-    req.params.userId = req.user.id.id;
+    req.params.userId = req.user.id.id || req.user.id;
     if (!req.body.returndate) {
       return res.status(404).send({ message: 'Please specify a valid return date' });
     }
@@ -95,7 +95,7 @@ export default {
   getborrowedBooklist(req, res) {
     const offset = req.query.offset || 0;
     const limit = req.query.limit || 3;
-    req.params.userId = req.user.id.id;
+    req.params.userId = req.user.id.id || req.user.id;
     if (!req.query.returned) {
       return res
         .status(404).send({ message: 'Please specify a value for returned books' });
@@ -137,7 +137,7 @@ export default {
    * @memmberOf UserBooks Controller
    */
   returnbook(req, res) {
-    req.params.userId = req.user.id.id;
+    req.params.userId = req.user.id.id || req.user.id;
     UserBooks.findOne({
       where: {
         bookid: req.body.bookId,
