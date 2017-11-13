@@ -4,16 +4,11 @@ import {Toast} from 'react-materialize';
 import { USER_LOGGED_IN,
   USER_LOGGED_OUT,
   SIGNUP_USER_SUCCESS,
-  SET_CURRENT_USER } from './actiontype';
+} from './actiontype';
 
 import api from './api';
 import setAuthorizationToken from '../utils/setAuthorizationToken';
 
-export const setCurrentUser = user =>
-  ({
-    type: SET_CURRENT_USER,
-    user
-  });
 
 
 /**
@@ -28,12 +23,26 @@ export const userLoggedIn = user =>
     isAuthenticated: true,
     user
   });
+
+/**
+ * create action: userLoggedIn: user
+ * @function userLoggedOut
+ * @param {object} response
+ * @returns {object} action: type and response
+ */
 export const userLoggedOut = user =>
   ({
     type: USER_LOGGED_OUT,
     isAuthenticated: false,
     user
   });
+
+/**
+ * create action: userLoggedIn: user
+ * @function signUpUserSuccess
+ * @param {object} response
+ * @returns {object} action: type and response
+ */
 export const signUpUserSuccess = user =>
 ({
   type: SIGNUP_USER_SUCCESS,
@@ -69,7 +78,6 @@ export const login = credentials => dispatch => api
   .user
   .login(credentials)
   .then((user) => {
-console.log(user, '?????')
    const token = user.data.token;
     localStorage.setItem('token', token);
     dispatch(showSuccessNotification({user}));

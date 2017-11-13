@@ -19,6 +19,13 @@ class LandingPage extends React.Component {
     };
   }
 
+/**
+   * dispatch actions that help load Side Nav,
+   * execute jquery function
+   * @method componentDidMount
+   * @memberof LandingPage
+   * @returns {void}
+   */
   componentDidMount() {
     this
       .props

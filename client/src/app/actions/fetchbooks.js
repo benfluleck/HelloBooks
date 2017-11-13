@@ -54,15 +54,15 @@ export const fetchBooksforDashboard = (offset, limit) => dispatch => api
   });
 
 /**
- *
- * @param {*} offset
- * @param {*} limit
- * @param {*} userid
- * @return {*} any
+ * async helper function: log in user
+ * @function fetchAllBooksbyId
+ * @param {object} offset
+ * @param {object} limit
+ * @returns {function} asynchronous action
  */
-export const fetchAllBooksbyId = (offset, limit, userid) => dispatch => api
+export const fetchAllBooksbyId = (offset, limit) => dispatch => api
   .book
-  .fetchbyUserId(offset, limit, userid)
+  .fetchbooksbyUserId(offset, limit)
   .then((response) => {
     dispatch(fetchBooksByIdfufilled(response));
   })

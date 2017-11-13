@@ -4,9 +4,9 @@ import { Navbar, NavItem } from 'react-materialize';
 
 /**
  * @description Component for Inline Navigation Bar
- * @class NavigationBar
+ * @class Inline NavigationBar
  * @extends {Component}
- * @return {object} Inline Navigation bar
+ * @param {object} props
  */
 const InlineNavigationBar = (props) => {
   const links = props.navLinks.map(link =>
