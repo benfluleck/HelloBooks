@@ -2,10 +2,12 @@ import React from 'react';
 import {Row, Preloader, Button} from 'react-materialize';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {Book} from '../../presentation/common/Book/DisplayBook.jsx';
-import SideNav from '../common/SideNav/index.jsx';
+// mport {Book} from '../../presentation/common/Book/DisplayBook.jsx';
+import SideNav from '../../presentation/common/SideNav/index.jsx';
 import {fetchAllBooksbyId} from '../../../actions/fetchbooks';
-import InlineNavigationBar from '../../presentation/common/InlineNavigationBar.jsx';
+import DisplayAllBorrowedBooks from '../booklist/DisplayAllBorrowedBooks.jsx';
+import DisplayAllBooks from  '../booklist/DisplayAllBooks.jsx';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 /**
  * Show User Dashboard
@@ -15,18 +17,7 @@ import InlineNavigationBar from '../../presentation/common/InlineNavigationBar.j
 class Dashoard extends React.Component{
 	constructor(props) {
     super(props);
-    this.state = {
-      limit: 8,
-      offset: 0
-    };
   }
-
-componentWillMount() {
-  this
-      .props
-      .fetchAllBooksbyId(this.state.offset, this.state.limit)
-
-}
 
 
 
@@ -43,6 +34,7 @@ componentWillMount() {
         closeOnClick: true
       });
 
+
     });
   }
 /**
@@ -51,47 +43,45 @@ componentWillMount() {
    * @returns {object} component
    */
 render() {
-console.log(this.props.books, '????')
-  const getAllBooks = this
-      .props
-      .books
-      .map((book) => {
-        return (<Book
-          key={book.book.id}
-          title={book.book.title}
-          author
-          ={book.book.author}
-          category={book.book.category}
-          description={book.book.description}
-          image={book.book.bookimage}/>);
-      });
 
-    const navLinks= ['dashboard' , 'all books', 'history']
     return (
     <div>
         <div className ='main-wrapper'>
         <SideNav
-        imageLink={'http://res.cloudinary.com/digpnxufx/image/upload/c_scale,w_400/v1510432964/generic-male-avatar_i935xq.png'}
+        imageLink={'http://res.cloudinary.com/digpnxufx/image/upload/v1510582526/boy_avatar_s1rb9m.svg'}
         username={this.props.username || ''}
         firstname={this.props.firstname || ''}
         email={this.props.email|| ''}
         />
         <div className= 'main-text'>
+
+      <Tabs>
+        <TabList>
+          <Tab>DASHBOARD</Tab>
+          <Tab>ALL BOOKS</Tab>
+          <Tab>BOOKS OVERDUE</Tab>
+          <Tab>LOAN HISTORY</Tab>
+        </TabList>
         <Row>
-        <InlineNavigationBar
-        activeLink={this.props.activeLink}
-        className="right"
-        navLinks={navLinks}
-        />
+          <TabPanel>
+            <DisplayAllBorrowedBooks/>
+          </TabPanel>
+
+          <TabPanel>
+            <DisplayAllBooks/>
+          </TabPanel>
+          <TabPanel>
+            <p> These books are overdue </p>
+          </TabPanel>
+          <TabPanel>
+            <p> THIS IS YOUR HISTORY</p>
+          </TabPanel>
         </Row>
+      </Tabs>
+
         <hr/>
-        <Row>
 
-        {[...getAllBooks]}
-        </Row>
           </div>
-
-
     </div>
 
 </div>
@@ -104,9 +94,8 @@ const mapStateToProps = (state) => {
   return {
     username: state.userReducer.user.data.username,
     firstname: state.userReducer.user.data.firstname,
-    books: state.bookReducer.borrowedbooks.books,
     email: state.userReducer.user.data.email
   };
 };
 
-export default connect (mapStateToProps,{ fetchAllBooksbyId })(Dashoard);
+export default connect (mapStateToProps)(Dashoard);

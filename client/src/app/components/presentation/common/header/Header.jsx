@@ -21,11 +21,11 @@ class Header extends Component {
    * @returns {object} component
    */
 render() {
-    let navLinks = ['api docs'];
+    let navLinks = ['dashboard'];
     navLinks = this.props.isAuthenticated && this.props.tokenExists
       ? [
        , ...navLinks,
-       'logout'
+       'api docs','logout'
       ]
       : [
         'login', 'sign up', ...navLinks

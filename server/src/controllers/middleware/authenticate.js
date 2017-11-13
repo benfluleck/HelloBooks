@@ -18,7 +18,7 @@ const authenticate = (req, res, next) => {
       if (error) {
         return res
           .status(401)
-          .json({message: 'Unauthorised access'});
+          .json({token:null, message: 'Unauthorised access'});
       }
       req.user = decoded;
       next();
@@ -26,7 +26,7 @@ const authenticate = (req, res, next) => {
   } else {
     res
       .status(401)
-      .send({success: false, message: 'Unauthorised access'});
+      .send({token:null, message: 'Unauthorised access'});
   }
 };
 

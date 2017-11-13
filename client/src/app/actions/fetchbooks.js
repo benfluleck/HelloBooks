@@ -50,7 +50,7 @@ export const fetchBooksforDashboard = (offset, limit) => dispatch => api
     return response;
   })
   .catch((error) => {
-    dispatch(fetchBooksRejected(error.response));
+    dispatch(showErrorNotification({ error }));
   });
 
 /**
@@ -67,5 +67,5 @@ export const fetchAllBooksbyId = (offset, limit) => dispatch => api
     dispatch(fetchBooksByIdfufilled(response));
   })
   .catch((error) => {
-    dispatch(fetchBooksByIdRejected(error.response));
+    dispatch(showErrorNotification({ error }));;
   });

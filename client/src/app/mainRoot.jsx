@@ -5,7 +5,7 @@ import {Root} from './components/Root.jsx';
 import LandingPage  from './components/container/LandingPage.jsx';
 import Login from './components/container/authentication/SignInPage.jsx';
 import SignUp from './components/container/authentication/SignUpPage.jsx'
-import Dashboard from './components/presentation/dashboard/Dashboard.jsx'
+import Dashboard from './components/container/dashboard/Dashboard.jsx'
 import Logout from './components/container/authentication/Logout.jsx'
 // import Register from './containers/Register'
 // import Profile from './components/Profile'

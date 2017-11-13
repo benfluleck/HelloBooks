@@ -22,6 +22,7 @@ import {
  */
 export default function bookReducer (state = {
   books: [],
+  borrowedbooks:[],
   fetching: false,
   fetched: false,
   error: null
@@ -59,22 +60,6 @@ export default function bookReducer (state = {
         fetching: false,
         fetched: true,
         borrowedbooks: action.books
-      };
-    }
-    case FETCH_BOOKS_REJECTED:
-    {
-      return {
-        ...state,
-        fetching: false,
-        error: action.error
-      };
-    }
-    case FETCH_BOOKS_REJECTED_BY_USER_ID:
-    {
-      return {
-        ...state,
-        fetching: false,
-        error: action.error.message
       };
     }
     default:

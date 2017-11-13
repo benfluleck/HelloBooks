@@ -4,6 +4,11 @@ import {login} from '../../../actions/authenticate';
 import {connect} from 'react-redux';
 import SignInForm from '../../presentation/authentication/SignInPage.jsx'
 
+/**
+ * handles signing in of users
+ * @class SignInPage
+ * @extends {React.Component}
+ */
 class SignInPage extends React.Component {
   submit = (data)=> {
   this.props.
@@ -11,6 +16,11 @@ class SignInPage extends React.Component {
 .then(()=>{this.props.history.push('/dashboard')})
 
   }
+ /**
+ * handles signing in of users
+ * @class SignInPage
+ * @extends {React.Component}
+ */
   render() {
       return (
           <SignInForm submit={this.submit}/>

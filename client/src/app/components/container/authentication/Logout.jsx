@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {Row} from 'react-materialize';
-
 import { logout } from '../../../actions/authenticate';
 
 /**
@@ -12,7 +11,7 @@ import { logout } from '../../../actions/authenticate';
  */
 class Logout extends Component{
 /**
-   * [componentDidMount description]
+   * @description redirects the user to the index page
    * @memberof Logout
    * @return {[type]} [description]
    */
