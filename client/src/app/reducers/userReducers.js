@@ -40,7 +40,7 @@ export default function userReducer (state = INITIAL_STATE, action = {}) {
         ...state,
         isAuthenticated: false,
         user: null,
-        status: 'Auth'
+        status: 'Auth_fail'
       };
     case USER_LOGGED_OUT:
       return {

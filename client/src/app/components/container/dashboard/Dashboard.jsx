@@ -2,11 +2,11 @@ import React from 'react';
 import {Row, Preloader, Button} from 'react-materialize';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-// mport {Book} from '../../presentation/common/Book/DisplayBook.jsx';
 import SideNav from '../../presentation/common/SideNav/index.jsx';
 import {fetchAllBooksbyId} from '../../../actions/fetchbooks';
 import DisplayAllBorrowedBooks from '../booklist/DisplayAllBorrowedBooks.jsx';
 import DisplayAllBooks from  '../booklist/DisplayAllBooks.jsx';
+
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 /**

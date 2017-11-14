@@ -74,7 +74,6 @@ export const signup = data => dispatch => api
   .user
   .signup(data)
   .then((user) => {
-    console.log(user,'user????????????????')
     dispatch(signUpUserSuccess(user));
     dispatch(showSuccessNotification({user}));
     return user;

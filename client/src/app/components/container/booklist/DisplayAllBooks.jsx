@@ -5,6 +5,7 @@ import  { fetchAllBooks } from '../../../actions/fetchbooks';
 import {PropTypes} from 'prop-types';
 import {Row, Preloader, Pagination} from 'react-materialize';
 
+
 /**
  * @description Component for Display Books on the Landing page for all users
  * @class DisplayLandingBooks
@@ -68,6 +69,7 @@ class DisplayAllBooks extends React.Component{
     if (!this.props.books) {
       return <Preloader size='big' className="center-align"/>
     }
+
     const getAllBooks = this
       .props
       .books

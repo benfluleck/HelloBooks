@@ -4,18 +4,18 @@ import {Row, Preloader} from 'react-materialize';
 import {Book} from '../../presentation/common/Book/DisplayBook.jsx';
 import {fetchAllBooksbyId} from '../../../actions/fetchbooks';
 import {PropTypes} from 'prop-types';
-
-
+import NoBooksMessage from '../../presentation/messages/NoBooksMessages.jsx';
+import {IsEmpty} from 'lodash';
 
 /**
  * @description Component for Display Books on the Landing page for all users
  * @class DisplayLandingBooks
  * @extends {Component}
  */
-class DisplayAllBorrowedBooks extends React.Component{
+class DisplayAllBorrowedBooks extends React.Component {
   constructor(props) {
     super(props);
-    this.state={
+    this.state = {
       limit: 8,
       offset: 0
     }
@@ -30,12 +30,12 @@ class DisplayAllBorrowedBooks extends React.Component{
    */
   componentWillMount() {
     this
-        .props
-        .fetchAllBooksbyId(this.state.offset, this.state.limit)
+      .props
+      .fetchAllBooksbyId(this.state.offset, this.state.limit)
 
   }
 
- /**
+  /**
    * render Landing page component
    * @method render
    * @member LandingPage
@@ -44,38 +44,35 @@ class DisplayAllBorrowedBooks extends React.Component{
   render() {
     if (!this.props.books) {
       return <Preloader size='big' className="center-align"/>
+    } else if (this.props.books.books === undefined) {
+      return <NoBooksMessage/>
     }
     const getAllBooks = this
-    .props
-    .books
-    .map((book) => {
-      return (<Book
-        key={book.book.id}
-        title={book.book.title}
-        author
-        ={book.book.author}
-        category={book.book.category}
-        description={book.book.description}
-        image={book.book.bookimage}/>);
-    });
+      .props
+      .books
+      .map((book) => {
+        return (<Book
+          key={book.book.id}
+          title={book.book.title}
+          author
+          ={book.book.author}
+          category={book.book.category}
+          description={book.book.description}
+          image={book.book.bookimage}/>);
+      });
     return (
-            <div>
-                {[...getAllBooks]}
-            </div>
+      <div>
+        {[...getAllBooks]}
+      </div>
     );
   }
-
 }
-
 DisplayAllBorrowedBooks.PropTypes = {
-  books: PropTypes.array,
-
+  books: PropTypes.array
 };
 
 const mapStateToProps = (state) => {
-  return {
-    books: state.bookReducer.borrowedbooks.books
-  };
+  return {books: state.bookReducer.borrowedbooks.books};
 };
 
-export default connect (mapStateToProps,{ fetchAllBooksbyId })(DisplayAllBorrowedBooks);
+export default connect(mapStateToProps, {fetchAllBooksbyId})(DisplayAllBorrowedBooks);
