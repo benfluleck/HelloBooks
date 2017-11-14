@@ -24,7 +24,9 @@ if (error.response.data.message === "Unauthorised access" && error.response.data
   setAuthorizationToken(false);
 }
 else{
+  console.log(error,'error????????????????')
     dispatch(notifSend({
+
       message: message || error.response.data.message,
       kind: 'danger',
       dismissAfter: 5000
@@ -41,7 +43,9 @@ else{
  * @returns {function} asynchronous action
  */
 export const showSuccessNotification =({ message, user })=> {
+
   return (dispatch) => {
+    console.log(user,'user ????????????????')
     dispatch(notifSend({
       message: message || user.data.message,
       kind: 'success',

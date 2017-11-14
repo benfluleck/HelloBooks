@@ -3,8 +3,7 @@ import isEmpty from 'lodash/isEmpty';
 import {
   USER_LOGGED_IN,
   USER_LOGGED_OUT,
-  USER_SIGN_UP_FAILURE,
-  SET_CURRENT_USER,
+  USER_AUTH_FAILURE,
   SIGNUP_USER_SUCCESS } from '../actions/actiontype';
 
 const INITIAL_STATE = {
@@ -33,22 +32,15 @@ export default function userReducer (state = INITIAL_STATE, action = {}) {
     case SIGNUP_USER_SUCCESS:
       return {
         ...state,
-        isAuthenticated: true,
+        isAuthenticated: false,
         user: action.user
       };
-    // case SET_CURRENT_USER:
-    //   return {
-    //     ...state,
-    //     isAuthenticated: !isEmpty(action.user),
-    //     user: action.user
-    //   };
-    case USER_SIGN_UP_FAILURE:
-      error = action.error.data.message;
+    case USER_AUTH_FAILURE:
       return {
         ...state,
+        isAuthenticated: false,
         user: null,
-        status: 'signUp',
-        error
+        status: 'Auth'
       };
     case USER_LOGGED_OUT:
       return {

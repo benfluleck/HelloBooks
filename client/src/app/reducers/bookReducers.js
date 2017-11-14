@@ -21,8 +21,8 @@ import {
  * @returns {any} state
  */
 export default function bookReducer (state = {
-  books: [],
-  borrowedbooks:[],
+  books: {books:[]},
+  borrowedbooks:{ books:[]},
   fetching: false,
   fetched: false,
   error: null

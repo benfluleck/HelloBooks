@@ -1,6 +1,8 @@
 
 export const USER_LOGGED_IN = 'USER_LOGGED_IN';
 
+export const USER_AUTH_FAILURE = 'USER_AUTH_FAILURE';
+
 export const USER_LOGGED_OUT = 'USER_LOGGED_OUT';
 
 export const USER_SIGN_UP_FAILURE = 'USER_SIGN_UP_FAILURE';

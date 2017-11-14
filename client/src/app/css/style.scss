@@ -274,3 +274,9 @@ font-family: $font-stack !important;
 
 
 }
+
+@media only screen and (min-width: 1600px){
+.overlay-main{
+	max-width: 100%;
+}
+}

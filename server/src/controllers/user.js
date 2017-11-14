@@ -52,7 +52,7 @@ export default {
                         .status(201)
                         .send({
                           user,
-                          message: `${user.username} has been added`
+                          message: `${user.username} has been added, Please Login`
                         });
                     }
                   })

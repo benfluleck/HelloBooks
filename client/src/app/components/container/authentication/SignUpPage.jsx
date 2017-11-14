@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {signup} from '../../../actions/authenticate';
 import {connect} from 'react-redux';
 import SignUpForm from '../../presentation/authentication/SignUpPage.jsx'
+import {Toast} from 'react-materialize';
 
 /**
  * handles registartion of users
@@ -13,7 +14,17 @@ class SignUpPage extends React.Component {
   submit = (data)=> {
   this.props.
     signup(data)
-.then(()=>{console.log('Nice to meet you')})
+.then((res)=>{
+if(res.statusText==="Created")
+  {
+    this.props.history.push('/login')
+  }
+else
+{
+  Materialize.toast('Please sign in again', 3000)
+}
+})
+.catch(()=>{console.log('No way through')})
 
   }
  /**
