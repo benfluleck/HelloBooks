@@ -1,9 +1,10 @@
-import {reducer as notifReducer, actions as notifActions, Notifs } from 'redux-notifications';
+import { reducer as notifReducer, actions as notifActions, Notifs } from 'redux-notifications';
+
 const { notifSend } = notifActions;
-import {Redirect, browserHistory} from 'react-router';
-import {React} from 'react';
+import { Redirect, browserHistory } from 'react-router';
+import { React } from 'react';
 import setAuthorizationToken from '../utils/setAuthorizationToken';
-import logout from '../actions/authenticate'
+import logout from '../actions/authenticate';
 
 /**
  * @description async notifications: show error notification
@@ -11,29 +12,24 @@ import logout from '../actions/authenticate'
  * @param {object} error
  * @returns {function} asynchronous action
  */
-export const showErrorNotification = ({ message, error }) => {
-  return (dispatch) => {
-if (error.response.data.message === "Unauthorised access" && error.response.data.token===null){
-  dispatch(notifSend({
-    message: "Please Login Again",
-    kind: 'info',
-    dismissAfter: 2000
-  }));
-  localStorage.removeItem('state');
-  localStorage.removeItem('token');
-  setAuthorizationToken(false);
-}
-else{
-  console.log(error,'error????????????????')
+export const showErrorNotification = ({ message, error }) => (dispatch) => {
+  if (error.response.data.message === 'Unauthorised access' && error.response.data.token === null) {
     dispatch(notifSend({
-
+      message: 'Please Login Again',
+      kind: 'info',
+      dismissAfter: 2000
+    }));
+    localStorage.removeItem('state');
+    localStorage.removeItem('token');
+    setAuthorizationToken(false);
+  } else {
+    dispatch(notifSend({
       message: message || error.response.data.message,
       kind: 'danger',
       dismissAfter: 5000
     }));
-  };
-}
-}
+  }
+};
 
 /**
  * async notifications: show success notification
@@ -42,14 +38,10 @@ else{
  * @param {object} response
  * @returns {function} asynchronous action
  */
-export const showSuccessNotification =({ message, user })=> {
-
-  return (dispatch) => {
-    console.log(user,'user ????????????????')
-    dispatch(notifSend({
-      message: message || user.data.message,
-      kind: 'success',
-      dismissAfter: 5000
-    }));
-  };
-}
+export const showSuccessNotification = ({ message, user }) => (dispatch) => {
+  dispatch(notifSend({
+    message: message || user.data.message,
+    kind: 'success',
+    dismissAfter: 5000
+  }));
+};

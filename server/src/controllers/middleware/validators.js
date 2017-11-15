@@ -13,13 +13,9 @@ const fieldLength = {
 };
 
 const emailRegex = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"|"_+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
-const validateEmail = emailAddress =>
-  emailRegex.test(emailAddress);
+const validateEmail = emailAddress => emailRegex.test(emailAddress);
 
-
-const modifiedIsLength = field => val =>
-  isLength(val, fieldLength[field] || {});
-
+const modifiedIsLength = field => val => isLength(val, fieldLength[field] || {});
 
 export const fieldValidationFnMap = {
   email: [validateEmail]
@@ -27,9 +23,7 @@ export const fieldValidationFnMap = {
 
 export const inValidFieldMessage = {
   email: 'This email address you have provided is invalid'
-
 };
-
 
 export const nullValidationFnMap = {
   email: [modifiedIsLength('email')],
@@ -42,7 +36,6 @@ export const nullValidationFnMap = {
   author: [modifiedIsLength('author')],
   category: [modifiedIsLength('category')],
   bookId: [isNumeric]
-
 };
 
 export const nullValidFieldMessage = {
@@ -53,7 +46,7 @@ export const nullValidFieldMessage = {
   lastname: 'Lastname is invalid',
   title: 'This book title is too short',
   description: 'More explanatory description needed',
-  author: 'This author\'s name is invalid',
+  author: "This author's name is invalid",
   category: 'Category is Invalid',
   bookId: 'This book format is wrong'
 };

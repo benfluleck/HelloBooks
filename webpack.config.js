@@ -12,7 +12,7 @@ if (isProd) {
   };
   config = {
     devtool: 'source-map',
-    entry: path.resolve(__dirname, 'client/src//app/index.js'),
+    entry: path.resolve(__dirname, 'client/src/app/index.jsx'),
     resolve: {
       extensions: ['.js', '.jsx']
     },
@@ -23,14 +23,10 @@ if (isProd) {
       filename: 'bundle.js'
     },
     plugins: [
-      new webpack
-        .optimize
-        .OccurrenceOrderPlugin(),
+      new webpack.optimize.OccurrenceOrderPlugin(),
       new webpack.DefinePlugin(GLOBALS),
       new ExtractTextPlugin('styles.css'),
-      new webpack
-        .optimize
-        .UglifyJsPlugin({ minimize: true }),
+      new webpack.optimize.UglifyJsPlugin({ minimize: true }),
       new HtmlPlugin({ template: './client/src/index.html', filename: './index.html', inject: 'body' })
     ],
     module: {
@@ -38,29 +34,32 @@ if (isProd) {
         {
           test: /(\.css)$/,
           use: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader' })
-        }, {
+        },
+        {
           test: /\.scss$/,
           use: ExtractTextPlugin.extract({
             use: ['css-loader', 'sass-loader']
           })
-        }, {
+        },
+        {
           test: /\.(js|jsx)$/,
           loader: 'babel-loader',
           exclude: /node_modules/,
           query: {
             presets: ['react', 'es2015', 'stage-2']
           }
-        }, {
+        },
+        {
           test: /\.(woff|woff2)$/,
           loader: 'url?prefix=font/&limit=5000'
-        }, {
+        },
+        {
           test: /\.(jpg|png)$/,
           exclude: /node-modules/,
           loader: 'file-loader',
           options: {
             outputPath: 'img/'
           }
-
         }
       ]
     },
@@ -75,7 +74,7 @@ if (isProd) {
   const SRC_DIR = path.resolve(__dirname, './client/src');
   const extractscss = new ExtractTextPlugin({ filename: 'style.css' });
   config = {
-    entry: `${SRC_DIR}/app/index.js`,
+    entry: `${SRC_DIR}/app/index.jsx`,
     output: {
       path: `${DIST_DIR}/app`,
       filename: 'bundle.js',
@@ -95,7 +94,6 @@ if (isProd) {
     },
 
     stats: {
-
       errors: true,
       errorDetails: true
     },
@@ -109,11 +107,12 @@ if (isProd) {
           loader: 'babel-loader',
           query: {
             presets: ['react', 'es2015', 'stage-2']
-          },
+          }
           // rules:[
-        },{
-        test: /(\.css)$/,
-        use: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader' })
+        },
+        {
+          test: /(\.css)$/,
+          use: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader' })
         },
         {
           test: /\.(scss|sass)$/,
@@ -122,33 +121,28 @@ if (isProd) {
             fallback: 'style-loader',
             use: ['css-loader', 'sass-loader']
           })
-        }, {
+        },
+        {
           test: /\.html$/,
           exclude: /node-modules/,
           // options:{ sourceMap: true},
           use: ['html-loader']
-        }, {
-
+        },
+        {
           test: /\.(jpg|png)$/,
           exclude: /node-modules/,
           loader: 'file-loader',
           options: {
             outputPath: 'img/'
           }
-
         }
-
       ]
-
     },
     plugins: [
-      new webpack
-        .optimize
-        .OccurrenceOrderPlugin(),
+      new webpack.optimize.OccurrenceOrderPlugin(),
       extractscss,
       new HtmlPlugin({ template: './client/src/index.html', filename: './index.html', inject: 'body' })
     ]
-
   };
 }
 module.exports = config;

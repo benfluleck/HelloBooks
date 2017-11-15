@@ -1,25 +1,19 @@
-import React from 'react'
-import {Row, Col} from 'react-materialize'
-import Header from '../components/container/header/Header.jsx'
+import React from 'react';
+import Header from '../components/container/header/Header.jsx';
+import UploadModal from './container/modal/UploadModal.jsx';
+// import BookCoverUpload from './presentation/common/modal/BookCoverUpload.jsx';
 
 
+/* eslint-disable */
+const Root = props => (
+  <div className="root-wrapper">
 
-/*
-eslint-disable
- */
+    <Header />
+    {props.children}
+    <UploadModal />
+    {/* <BookCoverUpload/> */}
+  </div>
+);
 
-export class Root extends React.Component
-{
-  render() {
 
-    return (
-      <div className='root-wrapper'>
-
-          <Header/>
-
-            {this.props.children}
-
-      </div>
-    )
-  }
-}
+export default Root;

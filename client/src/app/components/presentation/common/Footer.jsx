@@ -1,16 +1,21 @@
-import React from 'react'
-import { Footer, Row } from 'react-materialize'
-
+import React from 'react';
+import { Footer } from 'react-materialize';
 
 /**
- * @description Component for Footer, named Bottom so as not to conflict with materialize footer
+ * @description Component for Footer,
+ * named Bottom so as not to conflict with materialize footer
  * @class Bottom
  */
-export const Bottom = ()=>{
-    return(
-      <Footer className='transparent' copyrights="&copy; 2017 Copyright Benny Ogidan and Andela"
-        moreLinks={
-      <a id="footer-link" className="grey-text text-lighten-4 right" href="www.andela.com">Partners</a>}>
-      </Footer>
-    );
-};
+const Bottom = () => (
+  <Footer
+    className="transparent"
+    copyrights="&copy; 2017 Copyright Benny Ogidan and Andela"
+    moreLinks={
+      <a id="footer-link" className="grey-text text-lighten-4 right" href="www.andela.com">
+Partners
+      </a>
+}
+  />
+);
+
+export default Bottom;

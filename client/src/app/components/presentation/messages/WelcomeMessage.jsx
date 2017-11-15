@@ -1,13 +1,14 @@
-import React, {Component} from 'react';
-import {Link} from 'react-router-dom'
+import React from 'react';
+import { NavLink } from 'react-router-dom';
 
-const WelcomeMessage = () => {
-  return (
-    <h5>
-      To Borrow any Books, Please&nbsp;
-      <Link to={`/login`}>
-        Login</Link>
-    </h5>
-  )
-};
+/**
+ * @description Component for Welcome Mesage
+ * @class WelcomeMessage
+ */
+const WelcomeMessage = () => (
+  <h5>
+To Borrow any Books, Please&nbsp;
+<NavLink to="/login">Login</NavLink>
+  </h5>
+);
 export default WelcomeMessage;

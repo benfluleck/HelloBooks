@@ -1,17 +1,13 @@
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import LandingPage from '../presentation/LandingPage.jsx';
-import {PropTypes} from 'prop-types'
-
 
 LandingPage.PropTypes = {
-  isAuthenticated: PropTypes.bool.isRequired,
-
+  isAuthenticated: PropTypes.bool.isRequired
 };
 
-const mapStateToProps = (state) => {
-  return {
-    isAuthenticated: !!state.userReducer.isAuthenticated
-  };
-};
+const mapStateToProps = state => ({
+  isAuthenticated: !!state.userReducer.isAuthenticated
+});
 
-export default connect (mapStateToProps)(LandingPage);
+export default connect(mapStateToProps)(LandingPage);

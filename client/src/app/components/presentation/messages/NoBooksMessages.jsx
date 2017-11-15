@@ -1,10 +1,13 @@
-import React, {Component} from 'react';
+import React from 'react';
 
-const NoBooksMessage = () => {
-  return (
-    <h5>
+
+/**
+ * @description Component for Message for No Books
+ * @class NoBooksMessage
+ */
+const NoBooksMessage = () => (
+  <h5>
       You have not borrowed any books.
-    </h5>
-  )
-};
+  </h5>
+);
 export default NoBooksMessage;

@@ -3,9 +3,8 @@ import throttle from 'lodash/throttle';
 
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import setAuthorizationToken from '../utils/setAuthorizationToken';
 import rootReducer from '../reducers/rootReducers';
-import {saveState, loadState} from '../utils/localSave';
+import { saveState, loadState } from '../utils/localSave';
 
 const initialState = loadState();
 const store = createStore(

@@ -106,7 +106,7 @@ describe('HelloBooks', () => {
       };
       chai
         .request(app)
-        .post(`/api/v1/users/loanbook`)
+        .post('/api/v1/users/loanbook')
         .set('x-access-token', token)
         .send(userbook)
         .end((err, res) => {
@@ -122,7 +122,7 @@ describe('HelloBooks', () => {
       };
       chai
         .request(app)
-        .post(`/api/v1/users/loanbook`)
+        .post('/api/v1/users/loanbook')
         .set('x-access-token', token)
         .send(userbook)
         .end((err, res) => {
@@ -143,7 +143,7 @@ describe('HelloBooks', () => {
       };
       chai
         .request(app)
-        .post(`/api/v1/users/loanbook`)
+        .post('/api/v1/users/loanbook')
         .set('x-access-token', token)
         .send(userbook)
         .end((err, res) => {
@@ -165,7 +165,7 @@ describe('HelloBooks', () => {
       };
       chai
         .request(app)
-        .post(`/api/v1/users/loanbook`)
+        .post('/api/v1/users/loanbook')
         .set('x-access-token', token)
         .send(userbook)
         .end((err, res) => {
@@ -203,7 +203,7 @@ describe('HelloBooks', () => {
       };
       chai
         .request(app)
-        .post(`/api/v1/users/2/books`)
+        .post('/api/v1/users/2/books')
         .set('x-access-token', token)
         .send(userbook)
         .end((err, res) => {
@@ -224,7 +224,7 @@ describe('HelloBooks', () => {
       };
       chai
         .request(app)
-        .post(`/api/v1/users/loanbook`)
+        .post('/api/v1/users/loanbook')
         .set('x-access-token', token)
         .send(userbook)
         .end((err, res) => {
@@ -245,7 +245,7 @@ describe('HelloBooks', () => {
       };
       chai
         .request(app)
-        .post(`/api/v1/users/loanbook`)
+        .post('/api/v1/users/loanbook')
         .set('x-access-token', token)
         .send(userbook)
         .end((err, res) => {
@@ -267,7 +267,7 @@ describe('HelloBooks', () => {
       };
       chai
         .request(app)
-        .post(`/api/v1/users/loanbook`)
+        .post('/api/v1/users/loanbook')
         .set('x-access-token', token)
         .send(userbook)
         .end((err, res) => {
@@ -285,7 +285,7 @@ describe('HelloBooks', () => {
       };
       chai
         .request(app)
-        .post(`/api/v1/users/loanbook`)
+        .post('/api/v1/users/loanbook')
         .set('x-access-token', token)
         .send(userbook)
         .end((err, res) => {
@@ -305,7 +305,7 @@ describe('HelloBooks', () => {
     it('should return a list of books loaned by the user', (done) => {
       chai
         .request(app)
-        .get(`/api/v1/users/borrowedbooks`)
+        .get('/api/v1/users/borrowedbooks')
         .set('Accept', 'application/x-www-form-urlencoded')
         .query({ returned: false })
         .set('x-access-token', token)
@@ -319,7 +319,7 @@ describe('HelloBooks', () => {
     it('should not return a borrow list if return query is not set', (done) => {
       chai
         .request(app)
-        .get(`/api/v1/users/borrowedbooks`)
+        .get('/api/v1/users/borrowedbooks')
         .set('Accept', 'application/x-www-form-urlencoded')
         .set('x-access-token', token)
         .end((err, res) => {
@@ -337,7 +337,7 @@ describe('HelloBooks', () => {
     it('should be able to return a book with a book id', (done) => {
       chai
         .request(app)
-        .put(`/api/v1/users/returnbook`)
+        .put('/api/v1/users/returnbook')
         .set('x-access-token', token)
         .send({ bookId })
         .end((err, res) => {
@@ -350,7 +350,7 @@ describe('HelloBooks', () => {
     it('should not be able to return a book they have not borrowed', (done) => {
       chai
         .request(app)
-        .put(`/api/v1/users/returnbook`)
+        .put('/api/v1/users/returnbook')
         .set('x-access-token', token)
         .send({ bookId: 7 })
         .end((err, res) => {
@@ -365,7 +365,7 @@ describe('HelloBooks', () => {
     it('should not be able to return a book with an invalid id they have not borrowed', (done) => {
       chai
         .request(app)
-        .put(`/api/v1/users/returnbook`)
+        .put('/api/v1/users/returnbook')
         .set('x-access-token', token)
         .send({ bookId: 'one' })
         .end((err, res) => {
@@ -379,7 +379,7 @@ describe('HelloBooks', () => {
     it('should not return a book more than once', (done) => {
       chai
         .request(app)
-        .put(`/api/v1/users/returnbook`)
+        .put('/api/v1/users/returnbook')
         .set('x-access-token', token)
         .send({ bookId })
         .end((err, res) => {

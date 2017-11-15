@@ -1,11 +1,9 @@
 import {
   FETCH_BOOKS,
   FETCH_BOOKS_FULFILLED,
-  FETCH_BOOKS_REJECTED,
   FETCH_BOOKS_BY_USER_ID,
   FETCH_BOOKS_FULFILLED_BY_USER_ID,
-  FETCH_BOOKS_REJECTED_BY_USER_ID
-} from '../actions/actiontype.js';
+} from '../actions/actiontype';
 
 /**
  * *
@@ -17,16 +15,16 @@ import {
  *   fetched: false,
  *   error: null
  * }]
- * @param {any} action
- * @returns {any} state
+ * @param {object} action
+ * @returns {object} state
  */
-export default function bookReducer (state = {
-  books: {books:[]},
-  borrowedbooks:{ books:[]},
+export default function bookReducer(state = {
+  books: { books: [] },
+  borrowedbooks: { books: [] },
   fetching: false,
   fetched: false,
   error: null
-}, action){
+}, action) {
   switch (action.type) {
     case FETCH_BOOKS:
     {

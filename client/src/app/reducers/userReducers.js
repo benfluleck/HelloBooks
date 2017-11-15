@@ -1,5 +1,3 @@
-import isEmpty from 'lodash/isEmpty';
-
 import {
   USER_LOGGED_IN,
   USER_LOGGED_OUT,
@@ -7,21 +5,18 @@ import {
   SIGNUP_USER_SUCCESS } from '../actions/actiontype';
 
 const INITIAL_STATE = {
-user:{},
-isAuthenticated: false
+  user: {},
+  isAuthenticated: false
 };
 
-
 /**
- *
- *
  * @export
- * @param {any} [state=INITIAL_STATE]
- * @param {any} [action={}]
- * @returns
+ * @description this Reducer implements the authenbtication action for the user
+ * @param {object} [state=INITIAL_STATE]
+ * @param {object} [action={}]: action initiated
+ * @returns {object} action:return the action object
  */
-export default function userReducer (state = INITIAL_STATE, action = {}) {
-  let error;
+export default function userReducer(state = INITIAL_STATE, action = {}) {
   switch (action.type) {
     case USER_LOGGED_IN:
       return {
@@ -45,7 +40,7 @@ export default function userReducer (state = INITIAL_STATE, action = {}) {
     case USER_LOGGED_OUT:
       return {
         isAuthenticated: false,
-        user:{}
+        user: {}
       };
     default:
       return state;

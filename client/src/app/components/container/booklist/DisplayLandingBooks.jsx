@@ -1,23 +1,28 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {Book} from '../../presentation/common/Book/DisplayBook.jsx';
-import  { fetchBooksforDashboard } from '../../../actions/fetchbooks';
-import {PropTypes} from 'prop-types';
-import {Row, Preloader} from 'react-materialize';
+import { connect } from 'react-redux';
+import { PropTypes } from 'prop-types';
+import { Preloader } from 'react-materialize';
+import Book from '../../presentation/common/book/DisplayBook.jsx';
+import { fetchBooksforDashboard } from '../../../actions/fetchbooks';
 
 
 /**
  * @description Component for Display Books on the Landing page for all users
  * @class DisplayLandingBooks
- * @extends {Component}
+ * @extends {Component} DisplayLandingBooks
+ * @param {object} props
+ * @param {object} state
+ * @param {number} limit
+ * @param {number} offset
+ * @return {Component} DisplayLandingBooks
  */
-class DisplayLandingBooks extends React.Component{
+class DisplayLandingBooks extends React.Component {
   constructor(props) {
     super(props);
-    this.state={
+    this.state = {
       limit: 8,
       offset: 0
-    }
+    };
   }
 
   /**
@@ -30,9 +35,9 @@ class DisplayLandingBooks extends React.Component{
   componentDidMount() {
     this
       .props
-      .fetchBooksforDashboard(this.state.offset, this.state.limit)
+      .fetchBooksforDashboard(this.state.offset, this.state.limit);
   }
- /**
+  /**
    * render Landing page component
    * @method render
    * @member LandingPage
@@ -40,39 +45,31 @@ class DisplayLandingBooks extends React.Component{
    */
   render() {
     if (!this.props.books) {
-      return <Preloader size='big' className="center-align"/>
+      return <Preloader size="big" className="center-align" />;
     }
     const getAllBooks = this
       .props
       .books
-      .map((book) => {
-        return (<Book
-          key={book.id}
-          title={book.title}
-          author
-          ={book.author}
-          category={book.category}
-          description={book.description}
-          image={book.bookimage}/>);
-      });
+      .map(book => (<Book
+        key={book.id}
+        title={book.title}
+        author={book.author}
+        category={book.category}
+        description={book.description}
+        image={book.bookimage} 
+      />));
     return (
-            <div>
-                {[...getAllBooks]}
-            </div>
+      <div>
+        {[...getAllBooks]}
+      </div>
     );
   }
-
 }
 
 DisplayLandingBooks.PropTypes = {
-  books: PropTypes.array,
-
+  books: PropTypes.array
 };
 
-const mapStateToProps = (state) => {
-  return {
-    books: state.bookReducer.books.books
-  };
-};
+const mapStateToProps = state => ({ books: state.bookReducer.books.books });
 
-export default connect (mapStateToProps,{ fetchBooksforDashboard })(DisplayLandingBooks);
+export default connect(mapStateToProps, { fetchBooksforDashboard })(DisplayLandingBooks);

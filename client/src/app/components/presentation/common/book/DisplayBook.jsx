@@ -1,7 +1,6 @@
-import React from 'react'
-import { Col,Row, Card, CardTitle, Button, Modal } from 'react-materialize'
-import PropTypes from 'prop-types'
-import ReactTooltip from 'react-tooltip'
+import React from 'react';
+import PropTypes from 'prop-types';
+import ReactTooltip from 'react-tooltip';
 
 
 /**
@@ -9,36 +8,49 @@ import ReactTooltip from 'react-tooltip'
  * @param {object} books
  * @return {object} list of books
  */
-export const Book  = (books) =>{
-      return(
-        <div className="col l3">
-        <ReactTooltip/>
-          <div className="card">
+const Book = books => (
 
-            <div className="card-image"
-            data-tip={`Title: ${books.title}<br/> Author: ${books.author}<br/> Category: ${books.category}<br/> ` } data-html={true} >
-              <img src={books.image || 'http://res.cloudinary.com/digpnxufx/image/upload/c_scale,h_499,w_325/v1507822148/bookplaceholder_kdbixx.png' } alt={books.title}/>
-            </div>
-          </div>
+  <div className="col l3">
+    <ReactTooltip />
+    <div className="card" >
+      {/* <a
+          className="modal-trigger"
+          role="button"
+          href="#bookmodal"
+          tabIndex="-1"
+        > */}
 
-        </div>
-        )
-}
+      <div
+        className="card-image"
+        data-tip={`<h6>Title: ${books.title}</h6> <p>Author: ${books.author}</p>  <p>Category:${books.category}</p>`}
+        data-html
+      >
+        <img
+          src={books.image || 'http://res.cloudinary.com/digpnxufx/image/upload/c_scale,h_499,w_325/v1507822148' +
+            '/bookplaceholder_kdbixx.png'}
+          alt={books.title}
+        />
 
-Book.propTypes ={
+      </div>
+      {/* </a> */}
 
-    books : PropTypes.arrayOf(
-        PropTypes.shape({
-            title: PropTypes.string.isRequired,
-            category: PropTypes.string.isRequired,
-            author: PropTypes.string.isRequired,
-            quantity: PropTypes.number.isRequired,
-            description:PropTypes.string,
-            index:PropTypes.number
+    </div>
+    {/* </a> */}
 
-        })
-    )
+  </div>
+);
+
+Book.propTypes = {
+  books: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    category: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired,
+    quantity: PropTypes.number.isRequired,
+    description: PropTypes.string,
+    index: PropTypes.number
+  }))
+
+};
 
 
-
-}
+export default Book;
