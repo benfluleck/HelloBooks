@@ -1,6 +1,5 @@
 @import '../../../../node_modules/react-tabs/style/react-tabs.scss';
 
-
 // Variables
 $font-stack: 'Coiny', sans-serif;
 $font-stack2: 'Purple Purse', sans-serif;
@@ -73,8 +72,8 @@ form p {
 	flex-direction: column;
 }
 
-.card{
-	max-width:77%;
+.card {
+	max-width: 77%;
 }
 .main-wrapper {
 	background-color: $base-white;
@@ -102,7 +101,6 @@ form p {
 	background: $base-white;
 	margin: -60px 60px 0px;
 	border-radius: 8px;
-
 }
 
 .header-text {
@@ -228,10 +226,44 @@ footer {
 	background-color: #dd4b39;
 }
 
+.booktip {
+	position: relative;
+	display: inline-block;
+	// border: 2px dotted white;
+	// border : 3px solid #0B1341 !important;
+	// background-color: #FFDFC9!important;
+	color:  $base-white;
+	max-width: 45%;
+}
 
-.react-tabs__tab-list{
+.modal-header {
+
+
+	background-color: $base-orange;
+	color: $base-white;
+	
+}
+
+
+.modal-header h4{
+	padding-top: 10px;
+	padding-bottom:10px;
+	padding-left: 5px;
+}
+
+.modal-innercontent{
+	padding-left: 15px !important;
+}
+.modal-content{
+	padding-top:7px;
+	padding-right:0 !important;
+	padding-left:0 !important;
+	padding-top:0 !important;
+}
+
+.react-tabs__tab-list {
 	padding-top: 15px;
-font-family:$font-stack;
+	font-family: $font-stack;
 }
 
 .react-tabs__tab--selected {
@@ -239,21 +271,17 @@ font-family:$font-stack;
 	color: $base-white;
 }
 
-.main-text{
-	background-color:white;
-	}
+.main-text {
+	background-color: white;
+}
 
-	.pagination li a{
-
-font-family: $font-stack !important;
-	}
-		.pagination li.active {
+.pagination li a {
+	font-family: $font-stack !important;
+}
+.pagination li.active {
 	background-color: $base-orange !important;
 	border-radius: 15px !important;
 }
-
-
-
 
 @media screen and (max-width: 541px) {
 	.signup-wrapper {
@@ -268,15 +296,13 @@ font-family: $font-stack !important;
 		padding-left: 0;
 	}
 
-	.body-wrapper{
+	.body-wrapper {
 		margin: auto;
 	}
-
-
 }
 
-@media only screen and (min-width: 1600px){
-.overlay-main{
-	max-width: 100%;
-}
+@media only screen and (min-width: 1600px) {
+	.overlay-main {
+		max-width: 100%;
+	}
 }

@@ -21,9 +21,9 @@ const Book = books => (
         > */}
 
       <div
-        className="card-image"
-        data-tip={`<h6>Title: ${books.title}</h6> <p>Author: ${books.author}</p>  <p>Category:${books.category}</p>`}
-        data-html
+        className="card-image" 
+        data-tip={`<h6>Title: ${books.title}</h6> <p>Author: ${books.author}</p>  <p>Category:${books.category}</p> <p>Description:${books.description}</p>`}
+        data-html data-class="booktip"
       >
         <img
           src={books.image || 'http://res.cloudinary.com/digpnxufx/image/upload/c_scale,h_499,w_325/v1507822148' +

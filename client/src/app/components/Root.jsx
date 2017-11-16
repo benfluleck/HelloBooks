@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from '../components/container/header/Header.jsx';
-import UploadModal from './container/modal/UploadModal.jsx';
+import UploadModal from '../components/presentation/common/modal/UploadModal.jsx';
 // import BookCoverUpload from './presentation/common/modal/BookCoverUpload.jsx';
 
 
@@ -10,8 +10,8 @@ const Root = props => (
 
     <Header />
     {props.children}
-    <UploadModal />
-    {/* <BookCoverUpload/> */}
+  <UploadModal />
+    {/* <BookCoverU pload/> */}
   </div>
 );
 
