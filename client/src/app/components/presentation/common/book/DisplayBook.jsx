@@ -36,7 +36,6 @@ const Book = books => (
       </a>
 
     </div>
-    {/* </a> */}
       <DisplayModal 
       title={books.title} 
       image={books.image} 
