@@ -3,12 +3,12 @@ import {NavLink} from 'react-router-dom';
 import {Input, Col, Row, Icon, Button} from 'react-materialize';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {Bottom} from '../../../components/presentation/common/Footer.jsx'
-
+import Bottom from '../../../components/presentation/common/Footer.jsx'
 
 /**
  * SignIn component
  * @class SignIn
+ * @param {object}
  * @extends React.Component
  */
 class SignInPage extends Component {
@@ -27,7 +27,7 @@ class SignInPage extends Component {
       .bind(this);
   }
 
-    /**
+  /**
    * Handle onChange events on form inputs
    * @method onChange
    * @memberof SignIn
@@ -57,7 +57,7 @@ class SignInPage extends Component {
 
   }
 
-/**
+  /**
    * render login component
    * @method render
    * @member SignIn
@@ -120,7 +120,7 @@ class SignInPage extends Component {
           </div>
         </div>
         <Bottom/>
-</div>
+      </div>
 
     );
   }

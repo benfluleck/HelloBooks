@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import {Row} from 'react-materialize';
+import { Row } from 'react-materialize';
 import { logout } from '../../../actions/authenticate';
 
 /**
@@ -9,17 +9,17 @@ import { logout } from '../../../actions/authenticate';
  * @class Logout
  * @extends {Component}
  */
-class Logout extends Component{
+class Logout extends Component {
 /**
    * @description redirects the user to the index page
    * @memberof Logout
    * @return {[type]} [description]
    */
-  componentDidMount(){
+  componentDidMount() {
     this.props.logout();
     this.props.history.push('/');
   }
-/**
+  /**
    * renders component to DOM
    * @memberof Logout
    * @return {JSX} JSX reprresentation of DOM
@@ -33,11 +33,9 @@ class Logout extends Component{
       </Row>
     );
   }
-
 }
 
 Logout.propTypes = {
-  history: PropTypes.object.isRequired,
   logout: PropTypes.func.isRequired,
 };
 

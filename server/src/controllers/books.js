@@ -3,9 +3,7 @@ import paginationfunc from '../controllers/middleware/pagination';
 
 const Books = models.Books;
 
-
 export default {
-
   /**
    * Route: POST: /books
    * @description creates a book
@@ -15,32 +13,27 @@ export default {
    * @memmberOf BookController
   */
   create(req, res) {
-    Books
-      .findOne({
-        where: {
-          $and: [{ title: req.body.title },
-            { author: req.body.author }]
-        }
+    Books.findOne({
+      where: {
+        $and: [{ title: req.body.title }, { author: req.body.author }]
+      }
+    }).then((bookExists) => {
+      if (bookExists !== null) {
+        return res.status(409).send({
+          message: 'A book with the same title and author already exists in the library'
+        });
+      }
+      return Books.create({
+        title: req.body.title,
+        author: req.body.author,
+        category: req.body.category,
+        quantity: req.body.quantity,
+        description: req.body.description,
+        bookimage: req.body.bookimage
       })
-      .then((bookExists) => {
-        if (bookExists !== null) {
-          return res.status(409)
-            .send({
-              message: 'A book with the same title and author already exists in the library'
-            });
-        }
-        return Books
-          .create({
-            title: req.body.title,
-            author: req.body.author,
-            category: req.body.category,
-            quantity: req.body.quantity,
-            description: req.body.description,
-            bookimage: req.body.bookimage
-          })
-          .then(books => res.status(201).send({ message: `${books.title} has been added to the library` }))
-          .catch(error => res.status(401).send(error));
-      });
+        .then(books => res.status(201).send({ message: `${books.title} has been added to the library` }))
+        .catch(error => res.status(401).send(error));
+    });
   },
 
   /**
@@ -52,16 +45,13 @@ export default {
    * @memmberOf BookController
    */
   update(req, res) {
-    return Books
-      .findById(req.params.bookId)
+    return Books.findById(req.params.bookId)
       .then((book) => {
         if (req.params.bookId === null) {
           return res.send(404).send({ success: false, message: 'No book selected' });
         }
         if (!book) {
-          return res
-            .status(404)
-            .send({ message: 'Book does not exist in this database' });
+          return res.status(404).send({ message: 'Book does not exist in this database' });
         }
         return book
           .updateAttributes(req.body, {
@@ -77,7 +67,9 @@ export default {
               Description: book.description,
               Image: book.bookimage
             }))
-          .catch((error) => { res.status(400).send({ success: false, error }); });
+          .catch((error) => {
+            res.status(400).send({ success: false, error });
+          });
       })
       .catch(error => res.status(400).send({ success: false, error }));
   },
@@ -111,7 +103,6 @@ export default {
   //     .catch(() => res.status(400).send({ success: false, message: 'Enter valid inputs!' }));
   // },
 
-
   /**
    * Route: GET: /books
    * @description returns a list of all books
@@ -123,24 +114,21 @@ export default {
   getAllBooks(req, res) {
     const offset = req.query.offset || 0;
     const limit = req.query.limit || 3;
-    return Books
-      .findAndCountAll({
-        limit,
-        offset,
-        order: [['createdAt', 'DESC']]
-      })
+    return Books.findAndCountAll({
+      limit,
+      offset,
+      order: [['createdAt', 'DESC']]
+    })
       .then((books) => {
         if (books.count === 0) {
           res.json({ error: 'Empty', message: 'There are no books present in the database' });
         } else {
-          res
-            .status(200).send({
-              books: books.rows,
-              pagination: paginationfunc(offset, limit, books)
-            });
+          res.status(200).send({
+            books: books.rows,
+            pagination: paginationfunc(offset, limit, books)
+          });
         }
       })
       .catch(error => res.status(501).send(error.message));
   }
-
 };

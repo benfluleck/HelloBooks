@@ -1,28 +1,22 @@
-import isEmpty from 'lodash/isEmpty';
-
 import {
   USER_LOGGED_IN,
   USER_LOGGED_OUT,
-  USER_SIGN_UP_FAILURE,
-  SET_CURRENT_USER,
+  SIGNUP_USER_FAILURE,
   SIGNUP_USER_SUCCESS } from '../actions/actiontype';
 
 const INITIAL_STATE = {
-user:{},
-isAuthenticated: false
+  user: {},
+  isAuthenticated: false
 };
 
-
 /**
- *
- *
  * @export
- * @param {any} [state=INITIAL_STATE]
- * @param {any} [action={}]
- * @returns
+ * @description this Reducer implements the authenbtication action for the user
+ * @param {object} [state=INITIAL_STATE]
+ * @param {object} [action={}]: action initiated
+ * @returns {object} action:return the action object
  */
-export default function userReducer (state = INITIAL_STATE, action = {}) {
-  let error;
+export default function userReducer(state = INITIAL_STATE, action = {}) {
   switch (action.type) {
     case USER_LOGGED_IN:
       return {
@@ -33,27 +27,19 @@ export default function userReducer (state = INITIAL_STATE, action = {}) {
     case SIGNUP_USER_SUCCESS:
       return {
         ...state,
-        isAuthenticated: true,
         user: action.user
       };
-    // case SET_CURRENT_USER:
-    //   return {
-    //     ...state,
-    //     isAuthenticated: !isEmpty(action.user),
-    //     user: action.user
-    //   };
-    case USER_SIGN_UP_FAILURE:
-      error = action.error.data.message;
+    case SIGNUP_USER_FAILURE:
       return {
         ...state,
+        isAuthenticated: false,
         user: null,
-        status: 'signUp',
-        error
+        status: 'Auth_fail'
       };
     case USER_LOGGED_OUT:
       return {
         isAuthenticated: false,
-        user:{}
+        user: {}
       };
     default:
       return state;

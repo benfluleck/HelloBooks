@@ -1,51 +1,53 @@
-import React, {Component} from 'react'
-import {NavLink} from 'react-router-dom'
-import {Navbar, NavItem, Row, Icon} from 'react-materialize'
-import Navigation from './NavigationBar.jsx';
-import {connect} from 'react-redux';
+import React from 'react';
 import PropTypes from 'prop-types';
-
-
+import Navigation from './NavigationBar.jsx';
 
 /**
  * @description Component for header and navigation
  * @class Header
+ * @param {bool} isAuthenticated
+ * @param {bool} tokenExists
+ * @param {string} activeLink
  * @extends {Component}
  */
-class Header extends Component {
-
-/**
+const Header = ({isAuthenticated, tokenExists, activeLink}) => {
+  /**
    * render Navigation Bar
    * @method render
    * @member Header
    * @returns {object} component
    */
-render() {
-    let navLinks = ['dashboard'];
-    navLinks = this.props.isAuthenticated && this.props.tokenExists
-      ? [
-       , ...navLinks,
-       'api docs','logout'
-      ]
-      : [
-        'login', 'sign up', ...navLinks
-      ];
-    return (
-      <header className="header">
-        <Navigation
-          activeLink={this.props.activeLink}
-          className="right hide-on-small-and-down"
-          navLinks={navLinks}/>
-      </header>
 
-    );
-  }
-}
+  let navLinks = ['dashboard'];
+  navLinks = isAuthenticated && tokenExists
+    ? [
+      ...navLinks,
+      'logout'
+    ]
+    : [
+      'login', 'sign up', ...navLinks
+    ];
+  return (
+    <header className="header">
+      <Navigation
+        activeLink={activeLink}
+        className="right hide-on-small-and-down"
+        navLinks={navLinks}/>
+    </header>
+
+  );
+};
 
 Header.propTypes = {
   activeLink: PropTypes.string,
   isAuthenticated: PropTypes.bool,
-  user: PropTypes.object
+  tokenExists: PropTypes.bool
+};
+
+Header.defaultProps = {
+  activeLink: null,
+  isAuthenticated: false,
+  tokenExists: false
 };
 
 export default(Header);

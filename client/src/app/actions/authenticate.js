@@ -4,12 +4,11 @@ import {Toast} from 'react-materialize';
 import { USER_LOGGED_IN,
   USER_LOGGED_OUT,
   SIGNUP_USER_SUCCESS,
+  SIGNUP_USER_FAILURE
 } from './actiontype';
 
 import api from './api';
 import setAuthorizationToken from '../utils/setAuthorizationToken';
-
-
 
 /**
  * create action: userLoggedIn: user
@@ -20,7 +19,6 @@ import setAuthorizationToken from '../utils/setAuthorizationToken';
 export const userLoggedIn = user =>
   ({
     type: USER_LOGGED_IN,
-    isAuthenticated: true,
     user
   });
 
@@ -33,12 +31,23 @@ export const userLoggedIn = user =>
 export const userLoggedOut = user =>
   ({
     type: USER_LOGGED_OUT,
-    isAuthenticated: false,
     user
   });
 
 /**
- * create action: userLoggedIn: user
+ * create action: userAuthFailure : user
+ * @function userAuthFailure
+ * @param {object} response
+ * @returns {object} action: type and response
+ */
+export const signUpUserFailure = (user) =>
+({
+  type: SIGNUP_USER_FAILURE,
+  user
+});
+
+/**
+ * create action: signUpUserSuccess : user
  * @function signUpUserSuccess
  * @param {object} response
  * @returns {object} action: type and response
@@ -48,7 +57,6 @@ export const signUpUserSuccess = user =>
   type: SIGNUP_USER_SUCCESS,
   user
 });
-
 
 /**
  * async helper function: sign up user
@@ -60,12 +68,13 @@ export const signup = data => dispatch => api
   .user
   .signup(data)
   .then((user) => {
-    dispatch(showSuccessNotification({user}));
     dispatch(signUpUserSuccess(user));
+    dispatch(showSuccessNotification({user}));
+    return user;
   })
   .catch((error) =>{
     dispatch(showErrorNotification({ error }));
-
+    dispatch(signUpUserFailure(error));
   });
 
 /**
@@ -87,7 +96,6 @@ export const login = credentials => dispatch => api
   .catch(error =>{
     dispatch(showErrorNotification({ error }))
     });
-
 
 /**
  * async helper function: log out user
