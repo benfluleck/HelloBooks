@@ -4,13 +4,11 @@ import {Toast} from 'react-materialize';
 import { USER_LOGGED_IN,
   USER_LOGGED_OUT,
   SIGNUP_USER_SUCCESS,
-  USER_AUTH_FAILURE
+  SIGNUP_USER_FAILURE
 } from './actiontype';
 
 import api from './api';
 import setAuthorizationToken from '../utils/setAuthorizationToken';
-
-
 
 /**
  * create action: userLoggedIn: user
@@ -36,20 +34,17 @@ export const userLoggedOut = user =>
     user
   });
 
-
 /**
  * create action: userAuthFailure : user
  * @function userAuthFailure
  * @param {object} response
  * @returns {object} action: type and response
  */
-export const userAuthFailure = (user) =>
+export const signUpUserFailure = (user) =>
 ({
-  type: USER_AUTH_FAILURE,
+  type: SIGNUP_USER_FAILURE,
   user
 });
-
-
 
 /**
  * create action: signUpUserSuccess : user
@@ -62,7 +57,6 @@ export const signUpUserSuccess = user =>
   type: SIGNUP_USER_SUCCESS,
   user
 });
-
 
 /**
  * async helper function: sign up user
@@ -80,7 +74,7 @@ export const signup = data => dispatch => api
   })
   .catch((error) =>{
     dispatch(showErrorNotification({ error }));
-    dispatch(userAuthFailure(error));
+    dispatch(signUpUserFailure(error));
   });
 
 /**
@@ -102,7 +96,6 @@ export const login = credentials => dispatch => api
   .catch(error =>{
     dispatch(showErrorNotification({ error }))
     });
-
 
 /**
  * async helper function: log out user

@@ -22,7 +22,6 @@ const Header = ({isAuthenticated, tokenExists, activeLink}) => {
   navLinks = isAuthenticated && tokenExists
     ? [
       ...navLinks,
-      'api docs',
       'logout'
     ]
     : [

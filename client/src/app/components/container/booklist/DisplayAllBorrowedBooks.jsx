@@ -6,7 +6,7 @@ import { Preloader,Pagination, Row, Col } from 'react-materialize';
 import  Book  from '../../presentation/common/book/DisplayBook.jsx';
 import { fetchAllBooksbyId } from '../../../actions/fetchbooks';
 
-import NoBooksMessage from '../../presentation/messages/NoBooksMessages.jsx';
+import MessageforNoBooks from '../../presentation/messages/MessageforNoBooks.jsx';
 
 /**
  * @description Component for Display Books on the Landing page for all users
@@ -60,7 +60,7 @@ class DisplayAllBorrowedBooks extends React.Component {
     if (!this.props.books) {
       return <Preloader size="big" className="center-align" />;
     } else if (this.props.books.length === 0) {
-      return <NoBooksMessage />;
+      return <MessageforNoBooks />;
     }
     const getAllBooks = this.props.books.map((book) => {
       return (

@@ -23,5 +23,3 @@ export const imageUploadToCloud = (username, imageData) => (dispatch) => {
       UploadImageToCloudFailure(error)
     });
 }
-
-//  export const imageUploadToDb = ()=> (dispatch)=>  {  }

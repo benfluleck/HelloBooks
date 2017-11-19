@@ -4,10 +4,6 @@ import { Redirect, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 
-/*
-*
-*Routes for Authenticated users
-*/
 const UserRoutes = ({
   isAuthenticated,
   tokenExists,

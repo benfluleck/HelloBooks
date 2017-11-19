@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import ReactTooltip from 'react-tooltip';
 import { Modal } from 'react-materialize';
 import  DisplayModal from './DisplayBookModal.jsx';
-// import BookCoverUpload from '../modal/BookCoverUpload.jsx'
 
 /**
  * @description Book component taking book props

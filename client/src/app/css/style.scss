@@ -28,7 +28,7 @@ nav ul a {
 	z-index: 10 !important;
 }
 
-.side-nav{
+.side-nav {
 	z-index: 9 !important;
 }
 
@@ -84,27 +84,27 @@ form p {
 	max-width: 77%;
 }
 
-.card img, .card-image img{
-	box-shadow: 0.75rem 0.75rem 1.5rem 0 rgba(0,0,0,.5);
+.card img,
+.card-image img {
+	box-shadow: 0.75rem 0.75rem 1.5rem 0 rgba(0, 0, 0, .5);
 }
 
 /**
  * Modal 
  */
-.book-modal{
+.book-modal {
 	padding: 10px;
-
 }
 
-.modal-title{
+.modal-title {
 	font-size: 1.8em;
 }
 
-.modal-image{
+.modal-image {
 	padding-left: 15px;
 }
 
-.loan-book{
+.loan-book {
 	padding-top: 10px;
 }
 
@@ -255,8 +255,8 @@ footer {
 	font-family: $font-stack2;
 }
 
-.loan-button{
-margin-right:14px !important;
+.loan-button {
+	margin-right: 14px !important;
 }
 .btn-google {
 	background-color: #dd4b39;
@@ -265,33 +265,32 @@ margin-right:14px !important;
 .booktip {
 	position: relative;
 	display: inline-block;
-	color: #543A27 !important;
+	color: #543a27 !important;
 	max-width: 40%;
-	background-color: #FFDEC7 !important;
+	background-color: #ffdec7 !important;
 }
 
-.loan-status,.quantity{
-	font-size:1.5em;
+.loan-status,
+.quantity {
+	font-size: 1.5em;
 }
 
-.modal-header,.modal-content h4 {
+.modal-header,
+.modal-content h4 {
 	background-color: $base-orange;
 	color: $base-white;
 }
 
-
-
-.modal-header h4, .modal-content h4 {
+.modal-header h4,
+.modal-content h4 {
 	padding-top: 10px;
 	padding-bottom: 10px;
 	padding-left: 5px;
-	
 }
 
-.modal-content h4{
+.modal-content h4 {
 	@extend .modal-header;
 	padding-left: 25px;
-
 }
 
 .modal-innercontent {
@@ -302,10 +301,9 @@ margin-right:14px !important;
 	padding-right: 0 !important;
 	padding-left: 0 !important;
 	padding-top: 0 !important;
-
 }
 
-.react-datepicker-wrapper{
+.react-datepicker-wrapper {
 	padding-left: 15px !important;
 }
 
@@ -320,7 +318,7 @@ margin-right:14px !important;
 }
 
 .main-text {
-	background-color: white;
+	background-color: $base-white;
 }
 
 .pagination li a {
@@ -354,4 +352,3 @@ margin-right:14px !important;
 		max-width: 100%;
 	}
 }
-

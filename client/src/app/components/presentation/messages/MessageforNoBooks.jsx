@@ -3,11 +3,11 @@ import React from 'react';
 
 /**
  * @description Component for Message for No Books
- * @class NoBooksMessage
+ * @class MessageforNoBooks
  */
-const NoBooksMessage = () => (
+const MessageforNoBooks = () => (
   <h5>
       You have not borrowed any books.
   </h5>
 );
-export default NoBooksMessage;
+export default MessageforNoBooks;
