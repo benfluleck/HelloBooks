@@ -26,7 +26,7 @@ let bookId;
 let zerobookId;
 let testbookId;
 let token;
-const testdate = new Date('2017-11-18');
+const testdate = new Date('2018-11-18');
 const nulluserId = '';
 
 
@@ -196,7 +196,7 @@ describe('HelloBooks', () => {
           done();
         });
     });
-    it('should not be able to borrow book with previous route', (done) => {
+    it('should not be able to borrow book with previous functioning route', (done) => {
       const userbook = {
         bookId: bookId.toString(),
         returndate: testdate
