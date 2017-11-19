@@ -1,7 +1,7 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { Navbar } from 'react-materialize';
-import { PropTypes } from 'prop-types';
+import {NavLink} from 'react-router-dom';
+import {Navbar} from 'react-materialize';
+import {PropTypes} from 'prop-types';
 
 /**
  * @description Component for Navigation
@@ -11,16 +11,15 @@ import { PropTypes } from 'prop-types';
  * @return {object} Navigation fixed navigation bar
  */
 const Navigation = (props) => {
-  const links = props.navLinks.map(link =>
-    (
+  const links = props
+    .navLinks
+    .map(link => (
       <li
         key={link}
-        className={props.activeLink === link ? 'active' : ''}
-      >
-        <NavLink
-          to={`/${link.replace(' ', '')}`}
-          activeClassName="active"
-        >
+        className={props.activeLink === link
+        ? 'active'
+        : ''}>
+        <NavLink to={`/${link.replace(' ', '')}`} activeClassName="active">
           {link.toUpperCase()}
         </NavLink>
       </li>

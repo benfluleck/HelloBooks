@@ -18,11 +18,11 @@ export const fetchBooksByIdRejected = error => ({ type: FETCH_BOOKS_REJECTED_BY_
 export const fetchBooksByIdfufilled = books => ({ type: FETCH_BOOKS_FULFILLED_BY_USER_ID, books });
 
 /**
- *
- * @param {*} offset
- * @param {*} limit
- * @return {any} response
- *
+ * async helper function: log in user
+ * @function fetchAllBooks
+ * @param {integer} offset
+ * @param {integer} limit
+ * @returns {function} asynchronous action
  */
 export const fetchAllBooks = (offset, limit) => dispatch => api
   .book
@@ -36,11 +36,11 @@ export const fetchAllBooks = (offset, limit) => dispatch => api
   });
 
 /**
- *
- * @param {*} offset
- * @param {*} limit
- * @return {any} response
- *
+ * async helper function: log in user
+ * @function fetchBooksforDashboard
+ * @param {integer} offset
+ * @param {integer} limit
+ * @returns {function} asynchronous action
  */
 export const fetchBooksforDashboard = (offset, limit) => dispatch => api
   .book

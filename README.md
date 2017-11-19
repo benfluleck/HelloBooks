@@ -5,6 +5,30 @@
 
 HelloBooks is an application that helps manage a library and its processes like stocking, tracking and lending of books.This application enables users to be able to find and borrow books. Users  are managed by an admin who manages users as well as add, edit, delete books.
 
+
+#Table of Contents
+- [HelloBooks](#)
+	- [Getting Started](#)
+	- [Dependencies](#)
+	- [Installation](#)
+	- [Tests](#)
+	- [Usage](#)
+		- [Starting](#)
+		- [Features](#)
+		- [Authentication](#)
+		- [Users](#)
+		- [Admin Users](#)
+	- [Usage](#)
+	- [API Endpoints](#)
+	- [API Documentation](#)
+		- [Technology Stack](#)
+		- [Questions](#)
+		- [Support or Contribution](#)
+	- [Models](#)
+	- [Testing](#)
+	- [Express Routes](#)
+	- [state](#)
+
 ## Getting Started
 This is a javascript application built with [**Express**](https://expressjs.com/) framework on the nodejs platform. Authentication of users is done via [**JSON Web Tokens**](https://jwt.io/).
 
@@ -55,7 +79,8 @@ HelloBooks consists of the following features:
 
 ## Usage
 - Run database migration with `npm start:migrate`
-- Start app development with `npm run start:dev` or `npm start`
+- Start app development with `npm run start` or `npm start`
+- To start the client `npm run start:webdev`
 - Install **Postman** and use to test all endpoints
 
 ## API Endpoints
@@ -69,23 +94,25 @@ POST	     | /api/v1/auth/users/signin                       | Sign-in a register
 GET	         | /api/v1/books	                          | Authenticated user view all books
 POST	     | /api/v1/books	                          | Admin user create/add book
 PUT	         | /api/v1/books/:bookId	                  | Admin user modify book information
-POST         | /api/v1/users/:userId/books                | Authenticated User Borrow book
-PUT          | /api/v1/users/:userId/books                | Authenticated User Return book
-GET	         | /api/v1/users/:userId/books?returned=false | Authenticated User borrowed books but not returned
+POST         | /api/v1/users/loanbook                | Authenticated User Borrow book
+PUT          | /api/v1/users/returnbook                | Authenticated User Return book
+GET	         | /api/v1/users/borrowedbooks?returned=false | Authenticated User borrowed books but not returned
 
 ## API Documentation
-In progress
+You can view the API Documentation [here](https://staging-hellobooks.herokuapp.com/api-docs)
 
 ### Technology Stack
 **UI & Templates**
 1. HTML & CSS
 2. Materialize CSS Framework
 3. Javascript
+4. JQuery
 
 **Server Side**
 1. NodeJs
 2. Express
 3. Sequelize
+4. Validator.js
 
 **Client Side**
 1. React(Redux)
@@ -112,6 +139,5 @@ Testing is achieved through use of `chai-http`, `mocha` and `chai` packages. `ch
 Api endpoints were created using `express` router. The routes are defined under `server/routes`.
 
 
-
 ## state
-still on development
+still in the development stage

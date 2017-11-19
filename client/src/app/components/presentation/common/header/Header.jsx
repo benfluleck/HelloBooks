@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Navigation from './NavigationBar.jsx';
 
-
 /**
  * @description Component for header and navigation
  * @class Header
@@ -11,8 +10,8 @@ import Navigation from './NavigationBar.jsx';
  * @param {string} activeLink
  * @extends {Component}
  */
-const Header = ({ isAuthenticated, tokenExists, activeLink }) => {
-/**
+const Header = ({isAuthenticated, tokenExists, activeLink}) => {
+  /**
    * render Navigation Bar
    * @method render
    * @member Header
@@ -23,7 +22,8 @@ const Header = ({ isAuthenticated, tokenExists, activeLink }) => {
   navLinks = isAuthenticated && tokenExists
     ? [
       ...navLinks,
-      'api docs', 'logout'
+      'api docs',
+      'logout'
     ]
     : [
       'login', 'sign up', ...navLinks
@@ -33,8 +33,7 @@ const Header = ({ isAuthenticated, tokenExists, activeLink }) => {
       <Navigation
         activeLink={activeLink}
         className="right hide-on-small-and-down"
-        navLinks={navLinks}
-      />
+        navLinks={navLinks}/>
     </header>
 
   );

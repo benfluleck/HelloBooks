@@ -47,15 +47,18 @@ class DisplayLandingBooks extends React.Component {
     if (!this.props.books) {
       return <Preloader size="big" className="center-align" />;
     }
+    
     const getAllBooks = this
       .props
       .books
       .map(book => (<Book
         key={book.id}
+        id={book.id}
         title={book.title}
         author={book.author}
         category={book.category}
         description={book.description}
+        quantity={book.quantity}
         image={book.bookimage} 
       />));
     return (

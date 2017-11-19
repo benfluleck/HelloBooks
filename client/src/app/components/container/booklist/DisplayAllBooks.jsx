@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import  Book  from '../../presentation/common/book/DisplayBook.jsx';
 import { fetchAllBooks } from '../../../actions/fetchbooks';
 import { PropTypes } from 'prop-types';
-import { Row, Preloader, Pagination } from 'react-materialize';
+import { Row, Preloader, Pagination,Col } from 'react-materialize';
 
 /**
  * @description Component for Display Books on the Landing page for all users
@@ -62,19 +62,28 @@ class DisplayAllBooks extends React.Component {
 			return (
 				<Book
 					key={book.id}
+        	id={book.id}
 					title={book.title}
 					author={book.author}
 					category={book.category}
 					description={book.description}
 					image={book.bookimage}
+					quantity={book.quantity}
 				/>
 			);
 		});
 		const page = this.props.pagination;
 		return (
 			<div>
-				{[ ...getAllBooks ]}
+			<Row>
+      <Col l={12}>
+      {
+      [...getAllBooks]}
+      </Col>
+      </Row>
+			<Row>
 				<Pagination onSelect={this.onSelect} items={page.pageCount} activePage={page.page} maxButtons={5} />
+			</Row>
 			</div>
 		);
 	}

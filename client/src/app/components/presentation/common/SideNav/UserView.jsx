@@ -17,7 +17,7 @@ const UserView = ({
       <a className="modal-trigger" role="button" href="#user1" tabIndex="-1">
         <img className="circle" src={imageLink} alt={username} />
       </a>
-      <a href="#!name">
+      <a href="www.andela.com">
         <span className="black-text name">{username}</span>
       </a>
       <a href="#!name">

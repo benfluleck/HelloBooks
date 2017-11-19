@@ -27,7 +27,6 @@ export default function userReducer(state = INITIAL_STATE, action = {}) {
     case SIGNUP_USER_SUCCESS:
       return {
         ...state,
-        isAuthenticated: false,
         user: action.user
       };
     case USER_AUTH_FAILURE:

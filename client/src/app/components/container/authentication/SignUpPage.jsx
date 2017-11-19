@@ -24,7 +24,7 @@ else
   Materialize.toast('Please sign in again', 3000)
 }
 })
-.catch(()=>{console.log('No way through')})
+.catch(()=>{})
 
   }
  /**

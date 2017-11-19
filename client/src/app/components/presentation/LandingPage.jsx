@@ -9,8 +9,6 @@ import DisplayLandingBooks from '../container/booklist/DisplayLandingBooks.jsx';
  * @description Component for Landong Page presentaion component
  * @class LandingPage
  * @param {bool} isAuthenticated
- * @param {component} WelcomeMessage
- * @param {component} DisplayLandingBooks
  */
 const LandingPage = ({ isAuthenticated }) => (
   <div>

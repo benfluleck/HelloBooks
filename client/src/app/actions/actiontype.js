@@ -31,3 +31,6 @@ export const CLOUDINARY_UPLOAD_PRESET = 'yn0wpv0n';
 
 export const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/digpnxufx/upload';
 
+export const BORROW_BOOKS_SUCCESS = 'BORROW_BOOKS_SUCCESS';
+
+export const BORROW_BOOKS_FAIL = 'BORROW_BOOKS_FAIL';

@@ -29,6 +29,7 @@ const authenticate = (req, res, next) => {
 const decodeToken = (req, res, next) => {
   const token = req.headers['x-access-token'] || req.headers.authorization;
   if (token) {
+    console.log('')
     const decodedToken = jwtDecode(token);
     next(null, { userId: decodedToken.id.id });
   } else {

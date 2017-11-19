@@ -11,7 +11,6 @@ const Root = props => (
     <Header />
     {props.children}
   <UploadModal />
-    {/* <BookCoverU pload/> */}
   </div>
 );
 

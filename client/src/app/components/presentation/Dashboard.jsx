@@ -1,15 +1,12 @@
 import React from 'react';
 import { Row } from 'react-materialize';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import SideNav from '../../../presentation/common/SideNav/index.jsx';
-import DisplayAllBorrowedBooks from '../../booklist/DisplayAllBorrowedBooks.jsx';
-import DisplayAllBooks from '../../booklist/DisplayAllBooks.jsx';
-// import UploadModal from '../../../presentation/common/modal/UploadModal.jsx';
-//import UploadModal from '../components/presentation/common/modal/UploadModal.jsx';
-// import BookCoverUpload from './presentation/common/modal/BookCoverUpload.jsx';
+import SideNav from '../presentation/common/SideNav/index.jsx';
+import DisplayAllBorrowedBooks from '../container/booklist/DisplayAllBorrowedBooks.jsx';
+import DisplayAllBooks from '../container/booklist/DisplayAllBooks.jsx';
 
 /**
- * Show User Dashboard
+ * @description Show User Dashboard
  * @class DashboardView
  * @param {object} props
  */

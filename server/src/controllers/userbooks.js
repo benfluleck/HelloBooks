@@ -50,8 +50,7 @@ export default {
                   if (!booktoborrow || booktoborrow.quantity === 0) {
                     return res.status(404).send({
                       success: false,
-                      message:
-"Sorry we can't find this book or all copies of this book are on loan"
+                      message: "Sorry we can't find this book or all copies of this book are on loan"
                     });
                   }
                   booktoborrow

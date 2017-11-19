@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+//import {Col, Row, ProgressBar} from 'react-materialize';
 import {imageUploadToCloud, imageUploadToDb} from '../../../../actions/uploadImage';
 import ShowProgressBar from '../Preloader/ShowProgressBar.jsx'
 
@@ -34,11 +35,11 @@ class UploadModal extends React.Component {
       .onClick
       .bind(this);
   }
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.username && nextProps.username !== ''){
-      this.setState({username: nextProps.username})
-    }
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   if (nextProps.username && nextProps.username !== ''){
+  //     this.setState({username: nextProps.username})
+  //   }
+  // }
   /**
    * handle change in file input
    * @method onInputChange
@@ -61,7 +62,6 @@ class UploadModal extends React.Component {
       .imageUploadToCloud(this.props.username, profilePic)
       .then((response)=>{
         this.setState({isLoading: false})
-          console.log('this should happen', response)
           this.setState({filename});
           
       }
@@ -118,7 +118,7 @@ class UploadModal extends React.Component {
             <i className="fa fa-picture-o"/>
             {!this.props.image && 
             <span>
-            {this.state.username}
+            {this.props.username}
             </span>
            }
             <a
