@@ -253,6 +253,11 @@ footer {
 .btn {
 	background-color: black;
 	font-family: $font-stack2;
+	color: $base-white;
+}
+
+.btn:hover {
+	background-color: #FFB581;
 }
 
 .loan-button {

@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-//import {Col, Row, ProgressBar} from 'react-materialize';
 import {imageUploadToCloud, imageUploadToDb} from '../../../../actions/uploadImage';
 import ShowProgressBar from '../Preloader/ShowProgressBar.jsx'
 
@@ -21,8 +20,6 @@ class UploadModal extends React.Component {
     this.state = {
       username: '',
       isLoading: false
-      
-
 
     };
     this.triggerFileSelect = this
@@ -35,11 +32,7 @@ class UploadModal extends React.Component {
       .onClick
       .bind(this);
   }
-  // componentWillReceiveProps(nextProps) {
-  //   if (nextProps.username && nextProps.username !== ''){
-  //     this.setState({username: nextProps.username})
-  //   }
-  // }
+
   /**
    * handle change in file input
    * @method onInputChange
@@ -50,9 +43,7 @@ class UploadModal extends React.Component {
   onInputChange(event) {
     event.preventDefault();
     this.setState({isLoading: true});
-    // let reader = new FileReader();
     const profilePic = event.target.files[0];
-
     const fileExt = UploadModal.getFileExtension(event.target.files[0].name);
     const filename = `${this.props.username}.${fileExt}` || event.target.files[0].name;
 
@@ -62,15 +53,12 @@ class UploadModal extends React.Component {
       .imageUploadToCloud(this.props.username, profilePic)
       .then((response)=>{
         this.setState({isLoading: false})
-          this.setState({filename});
-          
+          this.setState({filename});   
       }
 
       )
       
   }
-
-
 
   onClick(event){
     event.preventDefault();
@@ -78,7 +66,7 @@ class UploadModal extends React.Component {
     if(this.state.filename)
       {
         console.log('I am here', this.props.secure_url)
-        // imageUploadToDb
+  
       }
 
   }
@@ -136,15 +124,6 @@ class UploadModal extends React.Component {
                 onChange={this.onInputChange}
                 className="hidden"/>
             </a>
-            {/* <Row>
-            <div className="pre-loader">
-            <Col l={4} s={4} m={4}>
-              {this.state.isLoading && <ProgressBar/>
-              && <div> Loading....</div>}
-              </Col>
-             
-            </div>
-            </Row> */}
             <div className="pre-loader">
             {this.state.isLoading && <ShowProgressBar/>}
             </div>
@@ -177,7 +156,7 @@ class UploadModal extends React.Component {
 UploadModal.propTypes = {
   updateProfilePicture: PropTypes.func,
   image: PropTypes.string,
-  username: PropTypes.string.isRequired
+  username: PropTypes.string
 };
 UploadModal.defaultProps = {
   image: null

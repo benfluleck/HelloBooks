@@ -47,7 +47,6 @@ class DisplayLandingBooks extends React.Component {
     if (!this.props.books) {
       return <Preloader size="big" className="center-align" />;
     }
-    
     const getAllBooks = this
       .props
       .books
@@ -59,7 +58,7 @@ class DisplayLandingBooks extends React.Component {
         category={book.category}
         description={book.description}
         quantity={book.quantity}
-        image={book.bookimage} 
+        image={book.bookimage}
       />));
     return (
       <div>

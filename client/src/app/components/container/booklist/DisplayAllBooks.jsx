@@ -82,7 +82,9 @@ class DisplayAllBooks extends React.Component {
       </Col>
       </Row>
 			<Row>
-				<Pagination onSelect={this.onSelect} items={page.pageCount} activePage={page.page} maxButtons={5} />
+				<Pagination onSelect={this.onSelect} 
+				items={page.pageCount} 
+				activePage={page.page} maxButtons={5} />
 			</Row>
 			</div>
 		);

@@ -9,7 +9,6 @@ import { borrowbooks } from '../../../../actions/borrowbooks';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
-// console.log(typeof(borrowedbooks));
 
 /**
  * @description DisplayBookModal for the Books
