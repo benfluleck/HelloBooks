@@ -1,94 +1,118 @@
-import jwtdecode from 'jwt-decode';
+import {showErrorNotification, showSuccessNotification} from './notifications';
+import {Toast} from 'react-materialize';
 
 import { USER_LOGGED_IN,
   USER_LOGGED_OUT,
-  USER_SIGN_IN_FAILURE,
   SIGNUP_USER_SUCCESS,
-  SET_CURRENT_USER } from './actiontype';
+  USER_AUTH_FAILURE
+} from './actiontype';
 
 import api from './api';
 import setAuthorizationToken from '../utils/setAuthorizationToken';
 
-export const setCurrentUser = user =>
-  ({
-    type: SET_CURRENT_USER,
-    user
-  });
-export const userLoggedIn = user =>
-  ({
-    type: USER_LOGGED_IN,
-    isAuthenticated: true,
-    user
-  });
-export const userLoggedOut = user =>
-  ({
-    type: USER_LOGGED_OUT,
-    isAuthenticated: false,
-    user
-  });
-export const signInUserFailure = error =>
-  ({
-    type: USER_SIGN_IN_FAILURE,
-    isAuthenticated: false,
-    error
-  });
-export const signUpUserSuccess = user => ({ type: SIGNUP_USER_SUCCESS, user });
 
 
 /**
- *
- * @param {*} data
- * @returns {*} user.data
+ * create action: userLoggedIn: user
+ * @function userLoggedIn
+ * @param {object} response
+ * @returns {object} action: type and response
+ */
+export const userLoggedIn = user =>
+  ({
+    type: USER_LOGGED_IN,
+    user
+  });
+
+/**
+ * create action: userLoggedIn: user
+ * @function userLoggedOut
+ * @param {object} response
+ * @returns {object} action: type and response
+ */
+export const userLoggedOut = user =>
+  ({
+    type: USER_LOGGED_OUT,
+    user
+  });
+
+
+/**
+ * create action: userAuthFailure : user
+ * @function userAuthFailure
+ * @param {object} response
+ * @returns {object} action: type and response
+ */
+export const userAuthFailure = (user) =>
+({
+  type: USER_AUTH_FAILURE,
+  user
+});
+
+
+
+/**
+ * create action: signUpUserSuccess : user
+ * @function signUpUserSuccess
+ * @param {object} response
+ * @returns {object} action: type and response
+ */
+export const signUpUserSuccess = user =>
+({
+  type: SIGNUP_USER_SUCCESS,
+  user
+});
+
+
+/**
+ * async helper function: sign up user
+ * @function signup
+ * @param {object} credentials
+ * @returns {function} asynchronous action
  */
 export const signup = data => dispatch => api
   .user
   .signup(data)
   .then((user) => {
-    const data = user.data;
-    if (user.status !== 200) {
-      dispatch(signInUserFailure(user));
-      Promise.reject(data);
-    } else {
-      dispatch(signUpUserSuccess(user));
-
-      return user.data;
-    }
+    dispatch(signUpUserSuccess(user));
+    dispatch(showSuccessNotification({user}));
+    return user;
   })
-  .catch(error => dispatch(signInUserFailure(error.response)));
+  .catch((error) =>{
+    dispatch(showErrorNotification({ error }));
+    dispatch(userAuthFailure(error));
+  });
 
 /**
- *
- * @param {*} credentials
+ * async helper function: log in user
+ * @function login
+ * @param {object} credentials
+ * @returns {function} asynchronous action
  */
 export const login = credentials => dispatch => api
   .user
   .login(credentials)
   .then((user) => {
-    const token = user.data.token;
-    const username = user.data.username;
-
-    if (user.status !== 200) {
-      dispatch(signInUserFailure(user));
-      return Promise.reject(token);
-    }
+   const token = user.data.token;
     localStorage.setItem('token', token);
-    localStorage.setItem('username', username);
-
+    dispatch(showSuccessNotification({user}));
     setAuthorizationToken(token);
-    dispatch(userLoggedIn(user.data));
-    dispatch(setCurrentUser(jwtdecode(token)));
-    return user.data;
+    dispatch(userLoggedIn(user));
   })
-  .catch(error => dispatch(signInUserFailure(error.response)));
+  .catch(error =>{
+    dispatch(showErrorNotification({ error }))
+    });
 
 
 /**
- *
- *  @param {*} dispatch
+ * async helper function: log out user
+ * @function logout
+ * @returns {function} asynchronous action
  */
 export const logout = () => (dispatch) => {
   localStorage.removeItem('token');
-  localStorage.removeItem('username');
+  localStorage.removeItem('state');
+  localStorage.clear();
   setAuthorizationToken(false);
   dispatch(userLoggedOut());
 };

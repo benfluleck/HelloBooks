@@ -1,9 +1,10 @@
 import jwt from 'jsonwebtoken';
-
+import jwtDecode from 'jwt-decode';
 
 /**
-* authenticates a the json web token  to be appended in routes that need to be authenticated
-* @public
+*
+* @description authenticates a the json web token  to be
+appended in routes that need to be authenticated
 * @param {object} req - request object
 * @param {object} res - response object
 * @param {function} next - next function to be called on the success
@@ -15,62 +16,56 @@ const authenticate = (req, res, next) => {
   if (token) {
     jwt.verify(token, process.env.JWT_SECRET, (error, decoded) => {
       if (error) {
-        return res
-          .status(401)
-          .json({ message: 'Unauthorised access' });
+        return res.status(401).json({ token: null, message: 'Unauthorised access' });
       }
       req.user = decoded;
       next();
     });
   } else {
-    res
-      .status(401)
-      .send({ success: false, message: 'Incorrect, Please try Login again' });
+    res.status(401).send({ token: null, message: 'Unauthorised access' });
+  }
+};
+
+const decodeToken = (req, res, next) => {
+  const token = req.headers['x-access-token'] || req.headers.authorization;
+  if (token) {
+    console.log('')
+    const decodedToken = jwtDecode(token);
+    next(null, { userId: decodedToken.id.id });
+  } else {
+    res.status(401).send({ message: 'Unauthoriised access' });
   }
 };
 
 /**
  * @description Generates a json web token with the supplied parameters
  * @param {number} id user id
- * @param  {String} email email address
- * @param  {String} username username
- * @param  {String} firstname firstname
  * @return {promise} signed token
  */
-const getJWT = (id, email, username, firstname) => new Promise((resolve, reject) => {
-  jwt.sign(
-    {
-      id,
-      email,
-      username,
-      firstname
-    }, process.env.JWT_SECRET,
-    {
-      expiresIn: '4h'
-    }, (error, token) => {
-      if (error) {
-        reject(new Error({
-          status: 'Error',
-          message: 'Error generating token'
-        }));
-      } else if (token) {
-        resolve({
-          status: 'Success',
-          token
-        });
-      } else {
-        reject(new Error({
-          status: 'Error',
-          message: 'Error generating token'
-        }));
+const getJWT = id =>
+  new Promise((resolve, reject) => {
+    jwt.sign(
+      {
+        id
+      },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: '4h'
+      },
+      (error, token) => {
+        if (error) {
+          reject(new Error({ status: 'Error', message: 'Error generating token' }));
+        } else if (token) {
+          resolve({ status: 'Success', token });
+        } else {
+          reject(new Error({ status: 'Error', message: 'Error generating token' }));
+        }
       }
-    }
-  );
-});
-
+    );
+  });
 
 module.exports = {
   getJWT,
   authenticate,
-
+  decodeToken
 };

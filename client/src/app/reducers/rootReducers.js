@@ -1,10 +1,11 @@
 import { combineReducers } from 'redux';
+import { reducer as notifReducer } from 'redux-notifications';
 
-
-import user from './user';
+import userReducer from './userReducers';
 import bookReducer from './bookReducers';
-// import persistReducer from './persistStateReducer';
+import imageReducer from './imageReducers';
+
 
 export default combineReducers({
-  user, bookReducer
+  userReducer, bookReducer, imageReducer, notifs: notifReducer
 });

@@ -1,11 +1,13 @@
-import {connect} from 'react-redux';
-import { fetchBooksforDashboard }  from '../../actions/fetchbooks';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import LandingPage from '../presentation/LandingPage.jsx';
 
-const mapStateToProps = (state) => {
-  return {
-    books: state.bookReducer.books.books
-  };
+LandingPage.PropTypes = {
+  isAuthenticated: PropTypes.bool.isRequired
 };
 
-export default connect (mapStateToProps,{ fetchBooksforDashboard })(LandingPage);
+const mapStateToProps = state => ({
+  isAuthenticated: !!state.userReducer.isAuthenticated
+});
+
+export default connect(mapStateToProps)(LandingPage);
