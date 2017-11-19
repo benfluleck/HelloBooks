@@ -6,6 +6,7 @@ import { connect }  from 'react-redux';
 import { Modal, Button, Row, Col } from 'react-materialize';
 import DisplayBook from './DisplayBook.jsx';
 import { borrowbooks } from '../../../../actions/borrowbooks';
+import { returnbook } from '../../../../actions/returnbooks';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -29,6 +30,16 @@ class DisplayBookModal extends React.Component {
   }
   
   handleChange = date => this.setState({ returndate: date });
+
+handleReturnClick = (event) =>{
+    event.preventDefault();
+    console.log({...this.state})
+    this.
+    props.
+    returnbook({...this.state})
+
+}
+
   handleClick = (event) => {
     event.preventDefault();
     const dateString = this.state.returndate.format("YYYY-MM-DD")
@@ -46,7 +57,6 @@ render(){
   
   });
 
-  // console.log(isBorrowed) console.log(isBorrowed)<div>{!isBorrowed ? }
 if(!this.props.isAuthenticated){
 return(
   <Modal id={`modal-${this.props.id}`} fixedFooter header="Loan Book">
@@ -77,7 +87,7 @@ else{
   return (
     <Modal id={`modal-${this.props.id}`} fixedFooter header="Loan Book" actions={<div>
       <Button className="loan-button" onClick={this.handleClick}> Loan </Button>  
-      <Button className="return-button"> Return </Button></div>}>
+      <Button className="return-button" onClick={this.handleReturnClick}> Return </Button></div>}>
       <Row>
       <div className="loan-book">
         <Col m={12}l={6}>
@@ -111,4 +121,4 @@ const mapStateToProps = state => ({
 });
 
 
-export default connect(mapStateToProps, {borrowbooks})(DisplayBookModal);
+export default connect(mapStateToProps,{returnbook,borrowbooks})(DisplayBookModal);

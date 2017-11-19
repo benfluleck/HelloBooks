@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {imageUploadToCloud, imageUploadToDb} from '../../../../actions/uploadImage';
+import { imageUploadToCloud, imageUploadToDb } from '../../../../actions/uploadImage';
 import ShowProgressBar from '../Preloader/ShowProgressBar.jsx'
 
 /**

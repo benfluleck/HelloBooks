@@ -36,7 +36,7 @@ export const fetchAllBooks = (offset, limit) => dispatch => api
   });
 
 /**
- * async helper function: log in user
+ * async helper function: fetch books to go on the dashboard
  * @function fetchBooksforDashboard
  * @param {integer} offset
  * @param {integer} limit
@@ -54,7 +54,7 @@ export const fetchBooksforDashboard = (offset, limit) => dispatch => api
   });
 
 /**
- * async helper function: log in user
+ * async helper function:fetch books by Id
  * @function fetchAllBooksbyId
  * @param {object} offset
  * @param {object} limit

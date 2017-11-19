@@ -17,7 +17,6 @@ export const borrowbooks = data => dispatch => api
   .book
   .loanbook(data)
   .then((response)=>{
-    console.log(response, '??????')
     dispatch(LoanBooksSuccess(response))
     dispatch(showSuccessNotification(response))
 

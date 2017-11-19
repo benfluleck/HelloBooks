@@ -4,7 +4,7 @@
 $font-stack: 'Coiny', sans-serif;
 $font-stack2: 'Purple Purse', sans-serif;
 $base-orange: #f2751c;
-$base-white: white;
+$base-white: #ffffff;
 $base-background: rgb(204, 204, 204);
 $secondary-color: #0089ec;
 
@@ -43,7 +43,7 @@ body {
 	font-family: $font-stack2;
 	background-color: rgb(204, 204, 204);
 	display: flex;
-	min-height: 100vh;
+	// min-height: 100vh;
 	flex-direction: column;
 }
 
@@ -76,7 +76,7 @@ form p {
 .root-wrapper {
 	min-height: 100%;
 	display: flex;
-	min-height: 100vh;
+	min-height: 95vh;
 	flex-direction: column;
 }
 

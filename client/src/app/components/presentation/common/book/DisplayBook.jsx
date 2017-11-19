@@ -20,8 +20,7 @@ const Book = books => (
         $(`#modal-${books.id}`).modal('open')
       }}
         tabIndex="-1">
-
-        <div
+       <div
           className="card-image"
           data-tip={`<h4>Title: ${books.title}</h4><hr/> <p>Author: ${books.author}</p> <p>Category:${books.category}</p> <p>Description:${books.description}</p>`}
           data-html

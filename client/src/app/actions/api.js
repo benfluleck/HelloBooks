@@ -17,6 +17,8 @@ export default {
       .get(`api/v1/users/borrowedbooks?offset=${offset}&limit=${limit}&returned=false`)
       .then(res => res.data),
     loanbook: data => axios.post('api/v1/users/loanbook', data)
+      .then(res => res.data),
+    returnbook: data => axios.put('api/v1/users/returnbook', data)
       .then(res => res.data)
     
   }
