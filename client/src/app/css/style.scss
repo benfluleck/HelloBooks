@@ -179,6 +179,7 @@ form p {
  */
 .footer-copyright {
 	background-color: $base-orange !important;
+	min-height:60px !important;
 }
 footer {
 	height: 3rem;
@@ -271,7 +272,7 @@ footer {
 	position: relative;
 	display: inline-block;
 	color: #543a27 !important;
-	max-width: 40%;
+	max-width: 35%;
 	background-color: #ffdec7 !important;
 }
 

@@ -30,7 +30,7 @@ const SideNav = ({
       />
 
       <li><div className="divider" /></li>
-      <li><a className="waves-effect" href="www.andela.com">Third Link With Waves</a></li>
+      <li><a className="waves-effect" href="www.andela.com">Categories</a></li>
     </ul>
   );
 
