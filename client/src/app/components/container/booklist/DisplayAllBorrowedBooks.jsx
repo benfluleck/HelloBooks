@@ -17,7 +17,7 @@ class DisplayAllBorrowedBooks extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      limit: 4,
+      limit: 8,
       offset: 0
     };
     this.onSelect = this.onSelect.bind(this);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
-import { Preloader } from 'react-materialize';
+import { Preloader,Row } from 'react-materialize';
 import Book from '../../presentation/common/book/DisplayBook.jsx';
 import { fetchBooksforDashboard } from '../../../actions/fetchbooks';
 
@@ -62,7 +62,9 @@ class DisplayLandingBooks extends React.Component {
       />));
     return (
       <div>
+        <Row>
         {[...getAllBooks]}
+        </Row>
       </div>
     );
   }

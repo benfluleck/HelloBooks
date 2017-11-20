@@ -203,5 +203,37 @@ export default {
         });
       })
       .catch(error => res.status(500).send(error.message));
+  },
+
+  getHistory(req, res){
+    const offset = req.query.offset || 0;
+    const limit = req.query.limit || 3;
+    req.params.userId = req.user.id.id || req.user.id;
+
+    return UserBooks.findAndCountAll({
+      where: {
+        userid: req.params.userId
+      },
+      include: [
+        {
+          model: Books,
+          as: 'book',
+          required: true
+        }
+      ],
+      limit,
+      offset
+    })
+      .then((book) => {
+        if (book.length === 0) {
+          return res.status(404).send({ success: false, message: 'You have no books on your loan list' });
+        }
+        res.status(200).send({
+          books: book.rows,
+          pagination: paginationfunc(offset, limit, book)
+        });
+      })
+      .catch(error => res.status(400).send(error.message));
+
   }
 };
