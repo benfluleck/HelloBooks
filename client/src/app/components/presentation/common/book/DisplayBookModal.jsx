@@ -52,10 +52,6 @@ handleReturnClick = (event) =>{
   
 
 render(){
-  const isBorrowed = this.props.borrowedbooks.map(book => {
-    return (book.bookid)
-  
-  });
 
 if(!this.props.isAuthenticated){
 return(
@@ -115,7 +111,6 @@ else{
 };
 
 const mapStateToProps = state => ({
-  borrowedbooks: state.bookReducer.borrowedbooks.books,
   books: state.bookReducer.books.books,
   isAuthenticated: !!state.userReducer.isAuthenticated
 });

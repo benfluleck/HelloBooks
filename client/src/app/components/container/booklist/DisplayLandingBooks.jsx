@@ -72,6 +72,8 @@ DisplayLandingBooks.PropTypes = {
   books: PropTypes.array
 };
 
-const mapStateToProps = state => ({ books: state.bookReducer.books.books });
+const mapStateToProps = state => ({ 
+  books: state.bookReducer.books.books 
+});
 
 export default connect(mapStateToProps, { fetchBooksforDashboard })(DisplayLandingBooks);
