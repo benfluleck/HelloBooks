@@ -1,7 +1,7 @@
 /**
  * saves application state to disk
  * @param  {Object} state application state
- * @return {undefined}    wites to disk
+ * @return {undefined} writes to disk
  */
 export const saveState = (state) => {
   try {

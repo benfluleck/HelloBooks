@@ -1,6 +1,5 @@
 import bcrypt from 'bcrypt';
 import models from '../models';
-// import sendResetPasswordEmail from '../mailer/mailer';
 import generateToken from '../controllers/middleware/authenticate';
 
 const User = models.User;
@@ -107,58 +106,4 @@ export default {
       })
       .catch(error => res.status(500).send(error.message));
   }
-
-  /**
-   *
-   *
-   * @param {any} req
-   * @param {any} res
-   * @returns {any} reset password
-   *
-   */
-  // reset_password(req, res) {
-  //   User
-  //     .findOne({ email: req.body.email })
-  //     .then((user) => {
-  //       if (user) {
-  //         sendResetPasswordEmail(user);
-  //         res.json({});
-  //       } else {
-  //         res
-  //           .status(400)
-  //           .json({
-  //             errors: {
-  //               global: 'There is no user with such email'
-  //             }
-  //           });
-  //       }
-  //     });
-  // },
-
-  /**
-   * Edit user Information
-   * @public
-   * @method
-   * @param  {object} req - express http request object
-   * @param  {object} res - express http response object
-   * @return {mixed}      - sends an http response
-   */
-  //   updateUserInfo(req, res) {
-  //     User
-  //       .findById(req.params.userId)
-  //       .then((user) => {
-  //         user
-  //           .update(req.body, {
-  //             returning: true,
-  //             plain: true
-  //           })
-  //           .then(() => res.status(202).send({ success: true, user, message:
-  //            'Your information was successfully updated' }), (error) => {
-  //             res
-  //               .status(500)
-  //               .send({ success: false, error });
-  //           });
-  //       })
-  //       .catch(error => res.status(500).send({ success: false, error }));
-  //   }
 };

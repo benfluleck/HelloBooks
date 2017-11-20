@@ -29,7 +29,5 @@ Router.post('/users/loanbook', authdecodeToken, UserBooksController.loanbook);
 Router.put('/users/returnbook', authdecodeToken, UserBooksController.returnbook);
 
 Router.get('/users/borrowedbooks', authdecodeToken, UserBooksController.getborrowedBooklist);
-// Router.delete('books/:bookId', BooksController.destroybooks);
-// Router.put('/users/:userId', UserController.updateUserInfo);
 
 export default Router;
