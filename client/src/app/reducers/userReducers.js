@@ -2,7 +2,9 @@ import {
   USER_LOGGED_IN,
   USER_LOGGED_OUT,
   SIGNUP_USER_FAILURE,
-  SIGNUP_USER_SUCCESS } from '../actions/actiontype';
+  SIGNUP_USER_SUCCESS,
+  USER_LOG_IN_FAILURE
+ } from '../actions/actiontype';
 
 const INITIAL_STATE = {
   user: {},
@@ -22,19 +24,24 @@ export default function userReducer(state = INITIAL_STATE, action = {}) {
       return {
         ...state,
         isAuthenticated: true,
-        user: action.user
+        user: action.data
       };
+
     case SIGNUP_USER_SUCCESS:
       return {
         ...state,
-        user: action.user
+        user: action.data
       };
     case SIGNUP_USER_FAILURE:
       return {
         ...state,
         isAuthenticated: false,
         user: null,
-        status: 'Auth_fail'
+      };
+    case USER_LOG_IN_FAILURE:
+      return {
+        ...state,
+        user: null,
       };
     case USER_LOGGED_OUT:
       return {

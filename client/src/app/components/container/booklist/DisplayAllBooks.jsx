@@ -4,6 +4,7 @@ import  Book  from '../../presentation/common/book/DisplayBook.jsx';
 import { fetchAllBooks } from '../../../actions/fetchbooks';
 import { PropTypes } from 'prop-types';
 import { Row, Preloader, Pagination,Col } from 'react-materialize';
+import PaginationWrapper from '../common/Pagination.jsx'
 
 /**
  * @description Component for Display Books on the Landing page for all users
@@ -17,25 +18,7 @@ class DisplayAllBooks extends React.Component {
 			limit: 8,
 			offset: 0
 		};
-		this.onSelect = this.onSelect.bind(this);
-		this.onChange = this.onChange.bind(this);
 	}
-
-	onChange = (pagenumber) => {
-		this.props.fetchAllBooks(pageLimit, this.state.limit);
-	};
-
-	onSelect = (pagenumber) => {
-		let pageOffset;
-		if (pagenumber === 1) {
-			pageOffset = 0;
-		} else {
-			pageOffset = pagenumber - 1;
-		}
-		let pageLimit = pageOffset * this.state.limit;
-		this.setState({ offset: pageLimit });
-		this.props.fetchAllBooks(pageLimit, this.state.limit);
-	};
 
 	/**
    * @description dispatch actions that help populate the dashboard with books
@@ -54,11 +37,12 @@ class DisplayAllBooks extends React.Component {
    * @returns {object} component
    */
 	render() {
-		if (!this.props.books) {
+		if (!this.props.allBooksList) {
 			return <Preloader size="big" className="center-align" />;
 		}
 
-		const getAllBooks = this.props.books.map((book) => {
+		const getAllBooks =
+			this.props.allBooksList.books.map((book) => {
 			return (
 				<Book
 					key={book.id}
@@ -72,7 +56,11 @@ class DisplayAllBooks extends React.Component {
 				/>
 			);
 		});
-		const page = this.props.pagination;
+		const { pagination } = this.props.allBooksList;
+		const config = { items: pagination.pageCount, 
+                    activePage: pagination.page
+                  };
+
 		return (
 			<div>
 			<Row>
@@ -81,24 +69,27 @@ class DisplayAllBooks extends React.Component {
       [...getAllBooks]}
       </Col>
       </Row>
-			<Row>
-				<Pagination onSelect={this.onSelect} 
-				items={page.pageCount} 
-				activePage={page.page} maxButtons={5} />
-			</Row>
+			<PaginationWrapper config={config} 
+                         numberOfRecords={this.state.limit}
+                         fetch={this.props.fetchAllBooks}
+												 />
+
 			</div>
 		);
 	}
 }
 
-DisplayAllBooks.PropTypes = {
-	books: PropTypes.array
+DisplayAllBooks.propTypes = {
+	allBooksList: PropTypes.object
+};
+
+DisplayAllBooks.defaultProps = {
+	allBooksList: null
 };
 
 const mapStateToProps = (state) => {
 	return {
-		books: state.bookReducer.books.books,
-		pagination: state.bookReducer.books.pagination
+		allBooksList: state.bookReducer.allBooksList,
 	};
 };
 

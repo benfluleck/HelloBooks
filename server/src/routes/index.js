@@ -28,6 +28,8 @@ Router.post('/users/loanbook', authdecodeToken, UserBooksController.loanbook);
 
 Router.put('/users/returnbook', authdecodeToken, UserBooksController.returnbook);
 
+Router.get('/users/getloanhistory', authdecodeToken, UserBooksController.getHistory);
+
 Router.get('/users/borrowedbooks', authdecodeToken, UserBooksController.getborrowedBooklist);
 
 export default Router;

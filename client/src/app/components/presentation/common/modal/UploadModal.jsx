@@ -71,7 +71,6 @@ class UploadModal extends React.Component {
 
   }
 
-
   static getFileExtension(filename) {
     return filename
       .split('.')

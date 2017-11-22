@@ -1,12 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
-
 import { Preloader,Pagination, Row, Col } from 'react-materialize';
+import PaginationWrapper from '../common/Pagination.jsx'
 import  Book  from '../../presentation/common/book/DisplayBook.jsx';
 import { fetchAllBooksbyId } from '../../../actions/fetchbooks';
-
-import MessageforNoBooks from '../../presentation/messages/MessageforNoBooks.jsx';
+import MessageforNoBooks from '../../presentation/messages/dashboardMessages/MessageforNoBooks.jsx';
 
 /**
  * @description Component for Display Books on the Landing page for all users
@@ -17,28 +16,12 @@ class DisplayAllBorrowedBooks extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      limit: 4,
+      limit: 8,
       offset: 0
     };
-    this.onSelect = this.onSelect.bind(this);
-		this.onChange = this.onChange.bind(this);
+ 
   }
 
-  onChange = (pagenumber) => {
-		this.props.fetchAllBooksbyId(pageLimit, this.state.limit);
-	};
-
-	onSelect = (pagenumber) => {
-		let pageOffset;
-		if (pagenumber === 1) {
-			pageOffset = 0;
-		} else {
-			pageOffset = pagenumber - 1;
-		}
-		let pageLimit = pageOffset * this.state.limit;
-		this.setState({ offset: pageLimit });
-		this.props.fetchAllBooksbyId(pageLimit, this.state.limit);
-	};
   /**
    * @description dispatch actions that help populate the dashboard with books
    * fetch books for the current user
@@ -46,7 +29,10 @@ class DisplayAllBorrowedBooks extends React.Component {
    * @memberof LandingPage
    * @returns {void}
    */
-  componentWillMount() {
+  componentDidMount() {
+    <div className="pre-loader">
+      {this.state.isLoading && <Preloader size="big"/>}
+    </div>
     this.props.fetchAllBooksbyId(this.state.offset, this.state.limit);
   }
 
@@ -57,12 +43,11 @@ class DisplayAllBorrowedBooks extends React.Component {
    * @returns {object} component
    */
   render() {
-    if (!this.props.books) {
-      return <Preloader size="big" className="center-align" />;
-    } else if (this.props.books.length === 0) {
+
+    if (!this.props.borrowedBooks || this.props.borrowedBooks.books.length === 0) {
       return <MessageforNoBooks />;
     }
-    const getAllBooks = this.props.books.map((book) => {
+    const getAllBooks = this.props.borrowedBooks.books.map((book) => {
       return (
 				<Book
           id={book.book.id}
@@ -76,7 +61,12 @@ class DisplayAllBorrowedBooks extends React.Component {
 				/>
       );
     });
-    const page = this.props.pagination;
+    const { pagination } = this.props.borrowedBooks;
+
+    const config = { items: pagination.pageCount, 
+                    activePage: pagination.page
+                  };
+
     return <div>
       <Row>
       <Col l={12}>
@@ -85,19 +75,28 @@ class DisplayAllBorrowedBooks extends React.Component {
       </div>
       </Col>
       </Row>
-    <Row>
-      <Pagination onSelect={this.onSelect} items={page.pageCount} activePage={page.page} maxButtons={5}/>
-    </Row>
+      <PaginationWrapper config={config} 
+                         numberOfRecords={this.state.limit}
+                         fetch={this.props.fetchAllBooksbyId}/>
+  
     </div>;
   }
 }
 DisplayAllBorrowedBooks.PropTypes = {
-  books: PropTypes.array,
- 
+  borrowedBooks: PropTypes.array
 };
 
-const mapStateToProps = (state) => ({ 
-  books: state.bookReducer.borrowedbooks.books, 
-  pagination: state.bookReducer.borrowedbooks.pagination });
+DisplayAllBorrowedBooks.defaultProps = {
+  boorowedBooks: null,
+
+};
+
+
+
+const mapStateToProps = ({bookReducer}) => ({ 
+  borrowedBooks: bookReducer.borrowedBooksList
+});
 
 export default connect(mapStateToProps, { fetchAllBooksbyId })(DisplayAllBorrowedBooks);
+
+

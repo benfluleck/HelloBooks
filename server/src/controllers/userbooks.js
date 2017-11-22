@@ -80,8 +80,7 @@ export default {
                 .status(404)
                 .send({
                   success: false,
-                  message:
-'There is a problem with this user or book, Please contact the administrator'
+                  message:'There is a problem with this user or book, Please contact the administrator'
                 });
             });
         });
@@ -135,7 +134,7 @@ export default {
   },
 
   /**
-]  * Route: PUT: /users/returnbook
+   * Route: PUT: /users/returnbook
    * @description Return a book
    * @param {any} req
    * @param {any} res
@@ -190,12 +189,14 @@ export default {
                 if (returnedBook.userReturndate > returnedBook.returndate) {
                   res.status(201).send({
                     success: true,
-                    message: `You have just returned ${returnedBook.title} late, A fine will be sent to you`
+                    message: `You have just returned ${returnedBook.title} late, A fine will be sent to you`,
+                    returnedBook
                   });
                 } else {
                   res.status(201).send({
                     success: true,
-                    message: `You have just returned ${returnedBook.title}`
+                    message: `You have just returned ${returnedBook.title}`,
+                    returnedBook
                   });
                 }
               });
@@ -203,5 +204,44 @@ export default {
         });
       })
       .catch(error => res.status(500).send(error.message));
+  },
+
+/**
+   * Route: PUT: /users/userhistory
+   * @description Get user loan history
+   * @param {any} req
+   * @param {any} res
+   * @returns {any} book
+   * @memmberOf UserBooks Controller
+   */
+  getHistory(req, res){
+    const offset = req.query.offset || 0;
+    const limit = req.query.limit || 3;
+    req.params.userId = req.user.id.id || req.user.id;
+    return UserBooks.findAndCountAll({
+      where: {
+        userid: req.params.userId
+      },
+      include: [
+        {
+          model: Books,
+          as: 'book',
+          required: true
+        }
+      ],
+      limit,
+      offset
+    })
+      .then((book) => {
+        if (book.length === 0) {
+          return res.status(404).send({ success: false, message: 'You have no books on your loan list' });
+        }
+        res.status(200).send({
+          books: book.rows,
+          pagination: paginationfunc(offset, limit, book)
+        });
+      })
+      .catch(error => res.status(400).send(error.message));
+
   }
 };

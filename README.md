@@ -12,7 +12,6 @@ HelloBooks is an application that helps manage a library and its processes like 
 - [Installation](#installation)
 - [Tests](#tests)
 - [Usage](#usage)
-- [API Endpoints](#api-endpoints)
 - [API Documentation](#api-documentation)
 - [Models](#models)
 - [Testing](#testing)
@@ -26,7 +25,6 @@ This is a javascript application built with [**Express**](https://expressjs.com/
 ## Dependencies
 * Postgres
 * Node
-* Postman
 
 ## Installation
 
@@ -101,20 +99,6 @@ HelloBooks consists of the following features:
 - To start the client `npm run start:webdev`
 - Install **Postman** and use to test all endpoints
 
-## API Endpoints
-
-**Do not forget to include token in header of all authenticated routes.**
-
-Request type | Endpoint                                   | Action
--------------|--------------------------------------------|--------------------------------------------------
-POST         | /api/v1/auth/users/signup                       | Sign-up a new user
-POST	     | /api/v1/auth/users/signin                       | Sign-in a registered user
-GET	         | /api/v1/books	                          | Authenticated user view all books
-POST	     | /api/v1/books	                          | Admin user create/add book
-PUT	         | /api/v1/books/:bookId	                  | Admin user modify book information
-POST         | /api/v1/users/loanbook                | Authenticated User Borrow book
-PUT          | /api/v1/users/returnbook                | Authenticated User Return book
-GET	         | /api/v1/users/borrowedbooks?returned=false | Authenticated User borrowed books but not returned
 
 ## API Documentation
 You can view the API Documentation [here](https://staging-hellobooks.herokuapp.com/api-docs)

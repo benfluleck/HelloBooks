@@ -9,10 +9,17 @@ Dashboard.propTypes = {
 
 };
 
-const mapStateToProps = state => ({
-  username: state.userReducer.user.data.username,
-  firstname: state.userReducer.user.data.firstname,
-  email: state.userReducer.user.data.email
+Dashboard.defaultProps = {
+  username: '',
+  firstname:'',
+  email: '',
+
+};
+
+const mapStateToProps = state=> ({
+ username: state.userReducer.user.username,
+  firstname: state.userReducer.user.firstname,
+  email: state.userReducer.user.email
 });
 
 export default connect(mapStateToProps)(Dashboard);

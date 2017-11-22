@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-
+import { Row }from 'react-materialize';
+import MessageforNoBooksHistory from '../messages/dashboardMessages/MessageforNoBooksHistory.jsx';
 
 /**
  * Table of Loan history
@@ -9,26 +10,27 @@ import moment from 'moment';
  * @returns {JSX} JSX representation of Books table
  */
 const BorrowHistoryTable = (props) => {
-  const rows = props.books && props.books.length ? props.books.map((book) => {
-    const returned = book.BorrowedBook.returned;
-    return (
-      <tr key={book.book.id}>
+  const rows = props.books && props.books.length ? props.books.map((book,index) => {
+    return ( 
+      <tr key={index}>
         <td>{book.book.title || 'N/A'}</td>
+        <td className='book-cover-on-table'><img src={book.book.bookimage || 'N/A'}/></td>
         <td>{book.book.author || 'N/A'}</td>
-        <td>{moment(book.book.createdAt).format('LLLL') || 'N/A'}</td>
-        <td>{moment(book.book.returndate).format('LLLL') || 'N/A'}</td>
-        <td>{moment(book.book.userReturndate).format('LLLL') || 'N/A'}</td>
-        <td>{book.book.returnstatus ? 'Returned' : 'Unreturned'}</td>
+        <td>{moment(book.createdAt).format('LLLL') || 'N/A'}</td>
+        <td>{moment(book.returndate).format('LLLL') || 'N/A'}</td>
+        <td>{book.userReturndate ? moment(book.userReturndate).format('LLLL') || 'N/A': "-"}</td>
+        <td>{book.returnstatus ? 'Returned' : 'Still Out on Loan'}</td>
       </tr>
     );
   }) : null;
   return (rows ?
-    <div className="row">
-      <div className="center" style={{ width: '95%', margin: 'auto' }}>
-        <table className="centered bordered history-table">
+    <Row>
+      <div className="center loanhistory-table">
+        <table className="centered highlight bordered history-table">
           <thead>
-            <tr>
+            <tr className='loan-header'>
               <th>Title</th>
+              <th>Cover</th>
               <th>Authors</th>
               <th>Date Borrowed</th>
               <th>Date To Be Returned</th>
@@ -41,14 +43,8 @@ const BorrowHistoryTable = (props) => {
           </tbody>
         </table>
       </div>
-    </div> :
-    <div className="row">
-      <div className="container">
-        <h3 className="center bold-text" style={{ color: '#aaa' }}>
-          You have no borrowing history. Head over to the library to get started
-        </h3>
-      </div>
-    </div>
+    </Row> :
+    <MessageforNoBooksHistory/>
   );
 };
 
