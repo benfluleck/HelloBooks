@@ -18,7 +18,6 @@ const SideNav = ({
   username = '',
   firstname = '',
   email = ''
-
 }) =>
   (
     <ul id="slide-out" className="side-nav fixed">

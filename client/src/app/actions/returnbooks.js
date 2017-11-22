@@ -5,7 +5,7 @@ import {
 } from './actiontype';
 import api from './api';
 
-export const ReturnBookSuccess = returnedbooks => ({ type: RETURN_BOOKS_SUCCESS, returnedbooks });
+export const ReturnBookSuccess = returnedBook => ({ type: RETURN_BOOKS_SUCCESS, returnedBook });
 export const ReturnBookRejected = error => ({ type: RETURN_BOOKS_FAIL, error });
 
 /**
@@ -17,9 +17,9 @@ export const returnbook = data => dispatch => api
 .book
 .returnbook(data)
 .then((response)=>{
-  const message = response.message; 
-  dispatch(showSuccessNotification({message}))
-  dispatch(ReturnBookSuccess(response))
+  dispatch(ReturnBookSuccess(response.returnedBook))  
+  dispatch(showSuccessNotification(response))
+
 })
 .catch((error)=>{
   dispatch(showErrorNotification({error}))

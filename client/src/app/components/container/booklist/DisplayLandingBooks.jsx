@@ -21,7 +21,8 @@ class DisplayLandingBooks extends React.Component {
     super(props);
     this.state = {
       limit: 8,
-      offset: 0
+      offset: 0,
+      isLoading: false
     };
   }
 
@@ -33,6 +34,10 @@ class DisplayLandingBooks extends React.Component {
    * @returns {void}
    */
   componentDidMount() {
+    this.setState({ isFetching: true })
+    if (this.props.books) {
+      return 
+    }
     this
       .props
       .fetchBooksforDashboard(this.state.offset, this.state.limit);
@@ -44,10 +49,12 @@ class DisplayLandingBooks extends React.Component {
    * @returns {object} component
    */
   render() {
-    if (!this.props.books) {
-      return <Preloader size="big" className="center-align" />;
-    }
-    const getAllBooks = this
+    const fetchingState = this.props.isFetching ?
+    <Preloader size="big" className="center-align" /> : null;
+  
+    const getAllBooks = (this
+      .props
+      .books)?this
       .props
       .books
       .map(book => (<Book
@@ -59,9 +66,10 @@ class DisplayLandingBooks extends React.Component {
         description={book.description}
         quantity={book.quantity}
         image={book.bookimage}
-      />));
+      />)) : [];
+
     return (
-      <div>
+      <div className='recent-books'>
         <Row>
         {[...getAllBooks]}
         </Row>
@@ -74,8 +82,13 @@ DisplayLandingBooks.PropTypes = {
   books: PropTypes.array
 };
 
-const mapStateToProps = state => ({ 
-  books: state.bookReducer.books.books 
+DisplayLandingBooks.defaultProps = {
+  books: null,
+};
+
+const mapStateToProps = ({bookReducer })=> ({ 
+  books: bookReducer.recentBooksList, 
+  isFetching: bookReducer.fetchingBooks
 });
 
 export default connect(mapStateToProps, { fetchBooksforDashboard })(DisplayLandingBooks);

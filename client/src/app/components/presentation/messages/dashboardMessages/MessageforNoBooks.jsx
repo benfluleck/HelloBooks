@@ -1,4 +1,5 @@
 import React from 'react';
+import { Row } from 'react-materialize';
 
 
 /**
@@ -6,8 +7,10 @@ import React from 'react';
  * @class MessageforNoBooks
  */
 const MessageforNoBooks = () => (
-  <h5>
-      You have not borrowed any books.
-  </h5>
+  <Row>
+    <h3 className='center bold-text nobooks-message'>
+        You have not borrowed any books.
+    </h3>
+  </Row>
 );
 export default MessageforNoBooks;

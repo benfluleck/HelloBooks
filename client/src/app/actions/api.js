@@ -10,7 +10,7 @@ export default {
     fetch: (offset, limit) => axios
       .get(`api/v1/books?offset=${offset}&limit=${limit}`)
       .then(res => res.data),
-    fetchRecentbooks: (offset, limit) => axios
+    fetchRecentBooks: (offset, limit) => axios
       .get(`api/v1/auth/books/recentbooks?offset=${offset}&limit=${limit}`)
       .then(res => res.data),
     fetchbooksbyUserId: (offset, limit) => axios
@@ -19,7 +19,9 @@ export default {
     loanbook: data => axios.post('api/v1/users/loanbook', data)
       .then(res => res.data),
     returnbook: data => axios.put('api/v1/users/returnbook', data)
+      .then(res => res.data),
+    loanhistory:(offset, limit) => axios
+      .get(`api/v1/users/getloanhistory?offset=${offset}&limit=${limit}`)
       .then(res => res.data)
-    
   }
 };

@@ -4,6 +4,8 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import SideNav from '../presentation/common/SideNav/index.jsx';
 import DisplayAllBorrowedBooks from '../container/booklist/DisplayAllBorrowedBooks.jsx';
 import DisplayAllBooks from '../container/booklist/DisplayAllBooks.jsx';
+import LoanHistoryTable from '../container/loanhistory/LoanHistory.jsx';
+import MessageforNoOverdueBooks from '../presentation/messages/dashboardMessages/MessageforNoOverdueBooks.jsx';
 
 /**
  * @description Show User Dashboard
@@ -36,14 +38,10 @@ const Dashoard = props =>
                 <DisplayAllBooks />
               </TabPanel>
               <TabPanel>
-                <p>
-                These books are overdue
-                </p>
+                <MessageforNoOverdueBooks/>
               </TabPanel>
               <TabPanel>
-                <p>
-                THIS IS YOUR HISTORY
-                </p>
+                  <LoanHistoryTable/>
               </TabPanel>
             </Row>
           </Tabs>

@@ -15,8 +15,7 @@ const LandingPage = ({ isAuthenticated }) => (
     <div className="header-wrapper">
       <Row>
         <div className="header-text">
-          <h1>Welcome!.</h1>
-          <h1>to Hello Books</h1>
+          <h1>Welcome to Hello Books! </h1>
         </div>
       </Row>
     </div>

@@ -7,6 +7,7 @@ $base-orange: #f2751c;
 $base-white: #ffffff;
 $base-background: rgb(204, 204, 204);
 $secondary-color: #0089ec;
+$base-light-orange: #ffdec7;
 
 // body classes
 header {
@@ -30,6 +31,7 @@ nav ul a {
 
 .side-nav {
 	z-index: 9 !important;
+	height: 100% !important
 }
 
 a {
@@ -43,7 +45,6 @@ body {
 	font-family: $font-stack2;
 	background-color: rgb(204, 204, 204);
 	display: flex;
-	// min-height: 100vh;
 	flex-direction: column;
 }
 
@@ -54,6 +55,16 @@ body {
 p {
 	font-family: $font-stack2;
 }
+
+
+/*
+* Landing Page
+*/
+.recent-books{
+	margin-left: 90px;
+	padding-top: 20px;
+}
+
 
 form p {
 	color: $secondary-color;
@@ -81,7 +92,7 @@ form p {
 }
 
 .card {
-	max-width: 77%;
+	max-width: 72%;
 }
 
 .card img,
@@ -89,6 +100,10 @@ form p {
 	box-shadow: 0.75rem 0.75rem 1.5rem 0 rgba(0, 0, 0, .5);
 }
 
+.book-cover-on-table img {
+	max-width: 39%;
+	box-shadow: 0 0.75rem 1.5rem 0 rgba(0, 0, 0, .5);
+}
 /**
  * Modal 
  */
@@ -102,10 +117,13 @@ form p {
 
 .modal-image {
 	padding-left: 15px;
+	max-width: 100% 
+
 }
 
 .loan-book {
 	padding-top: 10px;
+	
 }
 
 .main-wrapper {
@@ -132,7 +150,7 @@ form p {
 		rgba(0, 0, 0, 0.2) 0px 8px 10px -5px;
 	position: relative;
 	background: $base-white;
-	margin: -60px 60px 0px;
+	margin: -70px 75px 0px;
 	border-radius: 8px;
 }
 
@@ -149,7 +167,7 @@ form p {
 }
 
 .overlay-main {
-	margin-top: -45vh;
+	margin-top: -59vh;
 	padding: 50px;
 	width: calc(100% - 20px);
 	max-width: 1600px;
@@ -179,11 +197,11 @@ form p {
  */
 .footer-copyright {
 	background-color: $base-orange !important;
-	min-height:60px !important;
+	min-height: 60px !important;
 }
 footer {
 	height: 3rem;
-	color: whitesmoke;
+	color: rgb(245, 245, 245);
 	font-family: $font-stack;
 }
 
@@ -258,7 +276,7 @@ footer {
 }
 
 .btn:hover {
-	background-color: #FFB581;
+	background-color: #ffb581;
 }
 
 .loan-button {
@@ -333,6 +351,35 @@ footer {
 .pagination li.active {
 	background-color: $base-orange !important;
 	border-radius: 15px !important;
+}
+
+.loan-header {
+	background-color: $base-orange;
+	color: $base-white;
+}
+
+.loanhistory-table {
+	margin-top: 40px;
+	width: 95%;
+	margin-right: auto;
+	margin-bottom: auto;
+	margin-left: auto;
+}
+
+.nobooks-message {
+	color: #aaa;
+}
+
+/**
+ * 
+ * Modal
+ * */
+.return-date, .loan-status p {
+	display: inline-flex;
+}
+
+.react-datepicker__input-container {
+	margin-top: -15px;
 }
 
 @media screen and (max-width: 541px) {

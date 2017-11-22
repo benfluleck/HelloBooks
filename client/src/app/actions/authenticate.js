@@ -1,7 +1,7 @@
-import {showErrorNotification, showSuccessNotification} from './notifications';
-import {Toast} from 'react-materialize';
+import { showErrorNotification, showSuccessNotification } from './notifications';
 
 import { USER_LOGGED_IN,
+  USER_LOG_IN_FAILURE,
   USER_LOGGED_OUT,
   SIGNUP_USER_SUCCESS,
   SIGNUP_USER_FAILURE
@@ -16,10 +16,16 @@ import setAuthorizationToken from '../utils/setAuthorizationToken';
  * @param {object} response
  * @returns {object} action: type and response
  */
-export const userLoggedIn = user =>
+export const userLoggedIn = data =>
   ({
     type: USER_LOGGED_IN,
-    user
+    data
+  });
+
+  export const userLogInFailure = error =>
+  ({
+    type: USER_LOG_IN_FAILURE,
+    error
   });
 
 /**
@@ -91,10 +97,12 @@ export const login = credentials => dispatch => api
     localStorage.setItem('token', token);
     dispatch(showSuccessNotification({user}));
     setAuthorizationToken(token);
-    dispatch(userLoggedIn(user));
+
+    dispatch(userLoggedIn(user.data));
   })
   .catch(error =>{
-    dispatch(showErrorNotification({ error }))
+    dispatch(showErrorNotification({ error }));
+    dispatch(userLogInFailure(error))
     });
 
 /**

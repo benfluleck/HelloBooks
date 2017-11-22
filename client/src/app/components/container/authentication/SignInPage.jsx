@@ -20,7 +20,6 @@ class SignInPage extends React.Component {
           .history
           .push('/dashboard')
       })
-
   }
   /**
  * handles signing in of users
