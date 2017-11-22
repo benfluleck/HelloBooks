@@ -16,8 +16,8 @@ Dashboard.defaultProps = {
 
 };
 
-const mapStateToProps = state=> ({
- username: state.userReducer.user.username,
+const mapStateToProps = state => ({
+  username: state.userReducer.user.username,
   firstname: state.userReducer.user.firstname,
   email: state.userReducer.user.email
 });

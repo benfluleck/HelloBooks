@@ -5,17 +5,21 @@ import { Pagination, Row } from 'react-materialize';
 class PaginationWrapper extends React.Component {
   pageLimit = (pagenumber, numberOfRecords) => {
     let pageOffset;
-    pageOffset = (pagenumber  === 1) ? 0 : pagenumber - 1; 
-		return pageOffset * numberOfRecords;
+    pageOffset = (pagenumber === 1)
+      ? 0
+      : pagenumber - 1;
+    return pageOffset * numberOfRecords;
   }
 
   onSelect = (number) => {
-    const { numberOfRecords } = this.props; 
-    this.props.fetch(this.pageLimit(number, numberOfRecords), numberOfRecords);
+    const {numberOfRecords} = this.props;
+    this
+      .props
+      .fetch(this.pageLimit(number, numberOfRecords), numberOfRecords);
   }
 
-  render (){
-    return(
+  render() {
+    return (
       <Row>
         <Pagination onSelect={this.onSelect} {...this.props.config}/>
       </Row>
@@ -26,13 +30,13 @@ class PaginationWrapper extends React.Component {
 export default PaginationWrapper;
 
 PaginationWrapper.defaultProps = {
-  items: 0, 
+  items: 0,
   activePage: 1,
-  maxButtons: 5 
+  maxButtons: 5
 }
 
 PaginationWrapper.proptypes = {
-  items: PropTypes.number.isRequired, 
+  items: PropTypes.number.isRequired,
   activePage: PropTypes.number.isRequired,
-  maxButtons: PropTypes.number.isRequired 
-} 
+  maxButtons: PropTypes.number.isRequired
+}

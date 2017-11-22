@@ -1,4 +1,3 @@
-import { showErrorNotification } from './notifications';
 import {
   FETCH_ALL_RECENT_BOOKS,
   FETCH_ALL_BOOKS,
@@ -8,16 +7,12 @@ import {
 } from './actiontype';
 import api from './api';
 
-
 export const fetchBooksRejected = error => ({ type: FETCH_BOOKS_REJECTED, error });
 export const fetchRecentBooks = books => ({ type: FETCH_ALL_RECENT_BOOKS, books });
 export const fetchBooks = books => ({ type: FETCH_ALL_BOOKS, books });
 export const fetchBooksByUserId = books => ({ type: FETCH_BOOKS_BY_USER_ID, books });
 
-export const fetchingBooks = state => ({
-  type: FETCHING_BOOKS,
-  state,
-});
+export const fetchingBooks = state => ({ type: FETCHING_BOOKS, state });
 
 /**
  * async helper function: log in user
@@ -35,7 +30,7 @@ export const fetchAllBooks = (offset, limit) => dispatch => api
     return response;
   })
   .catch((error) => {
-    dispatch(fetchBooksRejected ({ error }));
+    dispatch(fetchBooksRejected({ error }));
     dispatch(fetchingBooks(false));
   });
 
@@ -46,8 +41,7 @@ export const fetchAllBooks = (offset, limit) => dispatch => api
  * @param {integer} limit
  * @returns {function} asynchronous action
  */
-export const fetchBooksforDashboard = (offset, limit) => dispatch =>
-api
+export const fetchBooksforDashboard = (offset, limit) => dispatch => api
   .book
   .fetchRecentBooks(offset, limit)
   .then((response) => {
@@ -56,7 +50,7 @@ api
     return response;
   })
   .catch((error) => {
-    dispatch(fetchBooksRejected ({ error }));
+    dispatch(fetchBooksRejected({ error }));
     dispatch(fetchingBooks(false));
   });
 
