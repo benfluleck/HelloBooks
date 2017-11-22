@@ -54,14 +54,7 @@ class DisplayBookModal extends React.Component {
           $(`#modal-${this.props.id}`).modal({opacity: 0})
       })
   }  
-
-
 render(){
-  const isBorrowed = (this.props.borrowedBooksList.books) ? this.props.borrowedBooksList.books.map(book => {
-      return (book.bookid)
-    }) : [];
-  const loanstatus = isBorrowed.includes(this.state.bookId)
-
 if(!this.props.isAuthenticated){
 return(
   <Modal id={`modal-${this.props.id}`} fixedFooter header="Loan Book">
@@ -87,7 +80,12 @@ return(
 }
 
 else{
+  const isBorrowed = (this.props.borrowedBooksList.books) ? this.props.borrowedBooksList.books.map(book => {
+      return (book.bookid)
+    }) : [];
+  const loanstatus = isBorrowed.includes(this.state.bookId)
   return (
+    
     <Modal id={`modal-${this.props.id}`} fixedFooter header="Loan Book" 
     actions={<div>{!loanstatus ?
       <Button className="loan-button" onClick={this.handleBorrowClick}> Loan </Button> : 

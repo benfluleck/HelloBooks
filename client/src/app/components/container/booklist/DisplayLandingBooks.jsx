@@ -51,12 +51,11 @@ class DisplayLandingBooks extends React.Component {
   render() {
     const fetchingState = this.props.isFetching ?
       <Preloader size="big" className="center-align" /> : null;
-
     const getAllBooks = (this
       .props
-      .books) ? this
+      .recentBooks) ? this
         .props
-        .books
+        .recentBooks
         .map(book => (<Book
           key={book.id}
           id={book.id}
@@ -71,7 +70,9 @@ class DisplayLandingBooks extends React.Component {
     return (
       <div className="recent-books">
         <Row>
+          <div className="landing-page-image">
           {[...getAllBooks]}
+          </div>
         </Row>
       </div>
     );
@@ -87,7 +88,7 @@ DisplayLandingBooks.defaultProps = {
 };
 
 const mapStateToProps = ({ bookReducer }) => ({
-  books: bookReducer.recentBooksList,
+  recentBooks: bookReducer.recentBooksList,
   isFetching: bookReducer.fetchingBooks
 });
 

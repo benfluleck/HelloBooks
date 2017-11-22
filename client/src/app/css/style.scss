@@ -65,6 +65,9 @@ p {
 	padding-top: 20px;
 }
 
+.landing-page-image .card{
+	max-width: 85% !important;
+}
 
 form p {
 	color: $secondary-color;
@@ -167,7 +170,7 @@ form p {
 }
 
 .overlay-main {
-	margin-top: -59vh;
+	margin-top: -56vh;
 	padding: 50px;
 	width: calc(100% - 20px);
 	max-width: 1600px;
