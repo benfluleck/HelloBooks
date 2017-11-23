@@ -102,13 +102,20 @@ else{
           <hr/>
           <div className="book-modal">Author: {this.props.author}</div>
           <div className="book-modal">Description: {this.props.description}</div>
+          {!loanstatus?(<div className="loan-function">
+
           <div className="book-modal loan-status">Loan Status: {!loanstatus?<p> Available</p> : <p>On Loan</p>} </div>
           <div className="book-modal return-date"> Specify Return Date:
           <DatePicker
             selected={this.state.returndate}
             onChange={this.handleChange.bind(this)}
+            minDate={moment().add('days')}
+            maxDate={moment().add(20, 'days')}
+            
             />
+            </div> 
             </div>
+          ):null}
         </Col>
         </div>
       </Row>   

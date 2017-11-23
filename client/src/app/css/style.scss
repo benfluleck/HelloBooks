@@ -385,6 +385,10 @@ footer {
 	margin-top: -15px;
 }
 
+.react-datepicker__header{
+	background-color: $base-light-orange;
+}
+
 @media screen and (max-width: 541px) {
 	.signup-wrapper {
 		width: auto;
