@@ -1,3 +1,4 @@
+import { showErrorNotification, showSuccessNotification } from './notifications';
 import request from 'superagent';
 
 import { UPLOAD_TO_CLOUD_IMAGE_SUCCESS,
@@ -19,6 +20,7 @@ export const imageUploadToCloud = (username, imageData) => (dispatch) => {
       return (response.body);
     })
     .catch((error) => {
+      dispatch(showErrorNotification({ error }))
       UploadImageToCloudFailure(error);
     });
 };

@@ -15,13 +15,14 @@ class LoanHistory extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      limit: 3,
+      limit: 5,
       offset: 0,
       isLoading: false
     };
   }
 
   componentDidMount() {
+    $("body").css("background-color","#ffff")
     this.props
       .loanhistory(this.state.offset, this.state.limit);
   }

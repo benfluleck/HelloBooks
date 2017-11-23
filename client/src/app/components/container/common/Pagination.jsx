@@ -21,7 +21,7 @@ class PaginationWrapper extends React.Component {
   render() {
     return (
       <Row>
-        <Pagination onSelect={this.onSelect} {...this.props.config}/>
+        <Pagination onSelect={this.onSelect} {...this.props.config}  maxButtons= {5}/>
       </Row>
     )
   }
@@ -31,8 +31,7 @@ export default PaginationWrapper;
 
 PaginationWrapper.defaultProps = {
   items: 0,
-  activePage: 1,
-  maxButtons: 5
+  activePage: 1
 }
 
 PaginationWrapper.proptypes = {

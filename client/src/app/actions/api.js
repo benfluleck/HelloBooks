@@ -13,6 +13,9 @@ export default {
     fetchRecentBooks: (offset, limit) => axios
       .get(`api/v1/auth/books/recentbooks?offset=${offset}&limit=${limit}`)
       .then(res => res.data),
+    fetchOverdueBooks: (offset,limit) => axios
+    .get(`api/v1/users/getoverduebooks?offset=${offset}&limit=${limit}`)
+    .then(res=>res.data),
     fetchbooksbyUserId: (offset, limit) => axios
       .get(`api/v1/users/borrowedbooks?offset=${offset}&limit=${limit}&returned=false`)
       .then(res => res.data),

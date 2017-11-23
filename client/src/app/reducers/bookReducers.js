@@ -9,18 +9,16 @@ import {
   RETURN_BOOKS_SUCCESS,
   LOAN_HISTORY_FAILURE,
   LOAN_HISTORY_SUCCESS,
-  FETCHING_BOOKS
+  FETCHING_BOOKS,
+  FETCH_ALL_OVERDUE_BOOKS
 } from '../actions/actiontype';
 
 /**
  * *
  *
  * @export
- * @param {boolean} [state={
- *   books: [],
- *   fetching: false,
- *   fetched: false,
- *   error: null
+ * @param {object} [state={
+ *  
  * }]
  * @param {object} action
  * @returns {object} state
@@ -33,6 +31,13 @@ export default function bookReducer(state = {
         ...state,
         fetchingBooks: action.state
       };
+    case FETCH_ALL_OVERDUE_BOOKS:
+    {
+      return {
+        ...state,
+        overdueBooksList: action.books
+      };
+    }
     case FETCH_BOOKS_BY_USER_ID:
       {
         return {
@@ -86,7 +91,15 @@ export default function bookReducer(state = {
               .borrowedBooksList
               .books
               .filter((book) => book.bookid !== action.returnedBook.id)
+          },
+          overdueBooksList:{
+            ...state.overdueBooksList,
+            books: state
+              .overdueBooksList
+              .books
+              .filter((book) => book.bookid !== action.returnedBook.id)
           }
+
         }
       }
     case RETURN_BOOKS_FAIL:

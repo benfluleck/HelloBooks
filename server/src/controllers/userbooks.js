@@ -301,7 +301,10 @@ export default {
         }
       ],
       limit,
-      offset
+      offset,
+      order: [
+    ['createdAt', 'DESC']
+      ]
     }).then((book) => {
       if (book.length === 0) {
         return res
