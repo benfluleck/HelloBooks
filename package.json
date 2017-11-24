@@ -10,14 +10,21 @@
 		"pretest": "rimraf server/dist && mkdir server/dist && npm run build && sequelize db:migrate:undo:all --env=test && sequelize db:migrate --env=test && sequelize db:seed:all --env=test ",
 		"test": "export NODE_ENV=test && mocha server/dist/test/index.spec.js --timeout 10000 && export NODE_ENV=development",
 		"client:test": "jest client/ --coverage",
-		"coverage": "export NODE_ENV=test && npm run pretest &&  nyc --reporter=lcov --reporter=text --reporter=lcovonly mocha --compilers js:babel-register server/src/test/* --exclude:['server/dist/','server/src/cron/','server/src/mailer/']",
+		"coverage": "export NODE_ENV=test && npm run pretest &&  nyc --reporter=lcov --reporter=text --reporter=lcovonly mocha --compilers js:babel-register server/src/test/*",
 		"start:migrate": "sequelize db:migrate",
 		"undo:migrate": "sequelize db:migrate:undo:all",
 		"start:dev": "babel-node server/dist/bin/www.js",
 		"start:webdev": "webpack -d && webpack-dev-server && --content-base client/src/ --inline --hot",
 		"start-prod": "babel server/src --out-dir server/dist --presets es2015 && npm run heroku-postbuild",
 		"heroku-postbuild": "rimraf client/dist && mkdir client/dist && npm run build && export NODE_ENV=production && webpack"
-	},
+  },
+  "nyc": {
+    "exclude": [
+      "server/dist/",
+      "server/src/cron/",
+      "server/src/mailer/"
+    ]
+  },
 	"engines": {
 		"npm": "5.3.0",
 		"node": "7.4.0"
