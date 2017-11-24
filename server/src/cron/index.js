@@ -12,8 +12,6 @@ export const sendSurchargeJob = () =>
     start: true
   });
 
-
-
 if (require.main === module) {
   sendSurchargeJob();
 }

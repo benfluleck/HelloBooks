@@ -30,7 +30,7 @@ Router.put('/users/returnbook', authdecodeToken, UserBooksController.returnBook)
 
 Router.get('/users/getloanhistory', authdecodeToken, UserBooksController.getLoanHistory);
 
-Router.get('/users/getoverduebooks', authdecodeToken, UserBooksController.getOverdueBooks)
+Router.get('/users/getoverduebooks', authdecodeToken, UserBooksController.getOverdueBooks);
 
 Router.get('/users/borrowedbooks', authdecodeToken, UserBooksController.getBorrowedBookList);
 
