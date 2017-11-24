@@ -5,7 +5,7 @@ import path from 'path';
 import dotenv from 'dotenv';
 import routes from './routes';
 import authenticate from './controllers/middleware/authenticate';
-import { sendSurchargeJob } from '../src/cron/index';
+import { sendSurchargeJob } from './cron/index';
 
 
 
