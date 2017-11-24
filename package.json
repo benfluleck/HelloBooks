@@ -10,7 +10,7 @@
 		"pretest": "rimraf server/dist && mkdir server/dist && npm run build && sequelize db:migrate:undo:all --env=test && sequelize db:migrate --env=test && sequelize db:seed:all --env=test ",
 		"test": "export NODE_ENV=test && mocha server/dist/test/index.spec.js --timeout 10000 && export NODE_ENV=development",
 		"client:test": "jest client/ --coverage",
-		"coverage": "export NODE_ENV=test && npm run pretest &&  nyc --reporter=lcov --reporter=text --reporter=lcovonly mocha --compilers js:babel-register server/src/test/* --exclude 'server/dist/', 'server/src/cron/', 'server/src/mailer/' ",
+		"coverage": "export NODE_ENV=test && npm run pretest &&  nyc --reporter=lcov --reporter=text --reporter=lcovonly mocha --compilers js:babel-register server/src/test/* --exclude:['server/dist/','server/src/cron/','server/src/mailer/']",
 		"start:migrate": "sequelize db:migrate",
 		"undo:migrate": "sequelize db:migrate:undo:all",
 		"start:dev": "babel-node server/dist/bin/www.js",
