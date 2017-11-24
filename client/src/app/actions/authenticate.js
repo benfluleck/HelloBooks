@@ -22,7 +22,7 @@ export const userLoggedIn = data =>
     data
   });
 
-  export const userLogInFailure = error =>
+export const userLogInFailure = error =>
   ({
     type: USER_LOG_IN_FAILURE,
     error
@@ -41,16 +41,16 @@ export const userLoggedOut = user =>
   });
 
 /**
- * create action: userAuthFailure : user
+ * create action: sign : user
  * @function userAuthFailure
  * @param {object} response
  * @returns {object} action: type and response
  */
-export const signUpUserFailure = (user) =>
-({
-  type: SIGNUP_USER_FAILURE,
-  user
-});
+export const signUpUserFailure = user =>
+  ({
+    type: SIGNUP_USER_FAILURE,
+    user
+  });
 
 /**
  * create action: signUpUserSuccess : user
@@ -59,10 +59,10 @@ export const signUpUserFailure = (user) =>
  * @returns {object} action: type and response
  */
 export const signUpUserSuccess = user =>
-({
-  type: SIGNUP_USER_SUCCESS,
-  user
-});
+  ({
+    type: SIGNUP_USER_SUCCESS,
+    user
+  });
 
 /**
  * async helper function: sign up user
@@ -75,10 +75,10 @@ export const signup = data => dispatch => api
   .signup(data)
   .then((user) => {
     dispatch(signUpUserSuccess(user));
-    dispatch(showSuccessNotification({user}));
+    dispatch(showSuccessNotification({ user }));
     return user;
   })
-  .catch((error) =>{
+  .catch((error) => {
     dispatch(showErrorNotification({ error }));
     dispatch(signUpUserFailure(error));
   });
@@ -93,17 +93,17 @@ export const login = credentials => dispatch => api
   .user
   .login(credentials)
   .then((user) => {
-   const token = user.data.token;
+    const token = user.data.token;
     localStorage.setItem('token', token);
-    dispatch(showSuccessNotification({user}));
+    dispatch(showSuccessNotification({ user }));
     setAuthorizationToken(token);
 
     dispatch(userLoggedIn(user.data));
   })
-  .catch(error =>{
+  .catch((error) => {
     dispatch(showErrorNotification({ error }));
-    dispatch(userLogInFailure(error))
-    });
+    dispatch(userLogInFailure(error));
+  });
 
 /**
  * async helper function: log out user

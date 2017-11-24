@@ -13,18 +13,16 @@ export const LoanBooksRejected = error => ({ type: BORROW_BOOKS_FAIL, error });
  * @function BorrowBooks
  * @returns {function} asynchronous action
  */
-export const borrowbooks = data => dispatch =>{ 
-return api
+export const borrowbooks = data => dispatch => api
   .book
   .loanbook(data)
-  .then((response)=>{
-    dispatch(LoanBooksSuccess(response))
-    dispatch(showSuccessNotification(response))
-    return (response)
+  .then((response) => {
+    dispatch(LoanBooksSuccess(response));
+    dispatch(showSuccessNotification(response));
+    return (response);
   })
-  .catch((error)=>{
-    dispatch(showErrorNotification({error}))
-    dispatch(LoanBooksRejected({error}))
-    return ({error})
-  })
-}
+  .catch((error) => {
+    dispatch(showErrorNotification({ error }));
+    dispatch(LoanBooksRejected({ error }));
+    return ({ error });
+  });

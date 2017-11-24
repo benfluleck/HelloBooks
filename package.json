@@ -10,14 +10,21 @@
 		"pretest": "rimraf server/dist && mkdir server/dist && npm run build && sequelize db:migrate:undo:all --env=test && sequelize db:migrate --env=test && sequelize db:seed:all --env=test ",
 		"test": "export NODE_ENV=test && mocha server/dist/test/index.spec.js --timeout 10000 && export NODE_ENV=development",
 		"client:test": "jest client/ --coverage",
-		"coverage": "export NODE_ENV=test && npm run pretest &&  nyc --reporter=lcov --reporter=text --reporter=lcovonly mocha --compilers js:babel-register server/src/test/* --exclude 'server/dist/' ",
+		"coverage": "export NODE_ENV=test && npm run pretest &&  nyc --reporter=lcov --reporter=text --reporter=lcovonly mocha --compilers js:babel-register server/src/test/*",
 		"start:migrate": "sequelize db:migrate",
 		"undo:migrate": "sequelize db:migrate:undo:all",
 		"start:dev": "babel-node server/dist/bin/www.js",
 		"start:webdev": "webpack -d && webpack-dev-server && --content-base client/src/ --inline --hot",
-    "start-prod": "babel server/src --out-dir server/dist --presets es2015 && npm run heroku-postbuild",
+		"start-prod": "babel server/src --out-dir server/dist --presets es2015 && npm run heroku-postbuild",
 		"heroku-postbuild": "rimraf client/dist && mkdir client/dist && npm run build && export NODE_ENV=production && webpack"
-	},
+  },
+  "nyc": {
+    "exclude": [
+      "server/dist/",
+      "server/src/cron/",
+      "server/src/mailer/"
+    ]
+  },
 	"engines": {
 		"npm": "5.3.0",
 		"node": "7.4.0"
@@ -45,6 +52,7 @@
 		"cheerio": "^1.0.0-rc.2",
 		"colors": "^1.1.2",
 		"concurrently": "^3.5.0",
+		"cron": "^1.3.0",
 		"cross-env": "^5.0.5",
 		"css-loader": "^0.28.7",
 		"debug": "^3.0.0",
@@ -69,12 +77,15 @@
 		"jsonwebtoken": "^7.4.1",
 		"jwt-decode": "^2.2.0",
 		"lodash": "^4.17.4",
+		"maildev": "^1.0.0-rc3",
 		"materialize-css": "^0.100.2",
 		"mocha": "^3.5.0",
 		"moment": "^2.19.2",
 		"morgan": "^1.8.2",
 		"muicss": "^0.9.25",
+		"node-cron": "^1.2.1",
 		"node-sass": "^4.5.3",
+		"nodemailer-mailgun-transport": "^1.3.5",
 		"nodemon": "^1.11.0",
 		"pg": "^7.0.2",
 		"pg-hstore": "^2.3.2",
@@ -127,7 +138,7 @@
 		"eslint-plugin-import": "^2.8.0",
 		"git-flow": "^0.2.0",
 		"mocha-lcov-reporter": "^1.3.0",
-		"nodemailer": "^4.1.0",
+		"nodemailer": "^4.4.0",
 		"nyc": "^11.1.0",
 		"path": "^0.12.7",
 		"prop-types": "^15.5.10",

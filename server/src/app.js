@@ -5,6 +5,9 @@ import path from 'path';
 import dotenv from 'dotenv';
 import routes from './routes';
 import authenticate from './controllers/middleware/authenticate';
+import { sendSurchargeJob } from './cron/index';
+
+
 
 dotenv.config();
 const app = express();
@@ -27,7 +30,10 @@ app.use((req, res, next) => {
   next();
 });
 
+sendSurchargeJob();
 
+
+ // We got a new email! 
 app.use('/api/v1', authenticateRoutes, routes);
 
 app.get('*', (req, res) => res.sendFile(path.join(__dirname, '../../client/dist/app/index.html')));

@@ -3,7 +3,7 @@
 // Variables
 $font-stack: 'Coiny', sans-serif;
 $font-stack2: 'Purple Purse', sans-serif;
-$base-orange: #f2751c;
+$base-orange: #fd6737;
 $base-white: #ffffff;
 $base-background: rgb(204, 204, 204);
 $secondary-color: #0089ec;
@@ -31,15 +31,14 @@ nav ul a {
 
 .side-nav {
 	z-index: 9 !important;
-	height: 100% !important
+	height: 100% !important;
 }
 
 a {
 	font-family: $font-stack2;
-	color: #ec3a00;
 }
 .nav-wrapper {
-	background-color: $base-orange;
+	background-color: #fd6737;
 }
 body {
 	font-family: $font-stack2;
@@ -56,15 +55,17 @@ p {
 	font-family: $font-stack2;
 }
 
-
 /*
 * Landing Page
 */
-.recent-books{
+.recent-books {
 	margin-left: 90px;
 	padding-top: 20px;
 }
 
+.landing-page-image .card {
+	max-width: 85% !important;
+}
 
 form p {
 	color: $secondary-color;
@@ -110,20 +111,26 @@ form p {
 .book-modal {
 	padding: 10px;
 }
-
+.loan-status-text{
+	color: $secondary-color;
+}
+.modal-image{
+	max-width : 90%;
+}
+.loan-status{
+	padding: 10px;
+}
 .modal-title {
 	font-size: 1.8em;
 }
 
 .modal-image {
 	padding-left: 15px;
-	max-width: 100% 
-
+	max-width: 100%;
 }
 
 .loan-book {
 	padding-top: 10px;
-	
 }
 
 .main-wrapper {
@@ -158,21 +165,22 @@ form p {
 	font-family: $font-stack2;
 	color: $base-white;
 	text-align: center;
-	margin-left: 4rem;
-	margin-right: 4rem;
+	margin-left: 4.5rem;
+	margin-right: 4.5rem;
 	border-radius: 4px;
 	font-size: 4.5em;
-	padding: 40px;
+	padding: 30px;
 	background-color: rgba(0, 0, 0, 0.42);
 }
 
 .overlay-main {
-	margin-top: -59vh;
+	margin-top: -56vh;
 	padding: 50px;
-	width: calc(100% - 20px);
+	width: calc(100% - 10px);
 	max-width: 1600px;
 	background-color: $base-white;
 	clear: both;
+	border-radius: 8px;
 }
 .overlay {
 	clear: both;
@@ -196,8 +204,8 @@ form p {
  *  Footer css
  */
 .footer-copyright {
-	background-color: $base-orange !important;
 	min-height: 60px !important;
+	background-color: $base-orange !important;
 }
 footer {
 	height: 3rem;
@@ -366,6 +374,9 @@ footer {
 	margin-left: auto;
 }
 
+.overdue{
+	color: $base-orange;
+}
 .nobooks-message {
 	color: #aaa;
 }
@@ -374,12 +385,32 @@ footer {
  * 
  * Modal
  * */
-.return-date, .loan-status p {
+.return-date,
+.loan-status p {
 	display: inline-flex;
 }
 
 .react-datepicker__input-container {
 	margin-top: -15px;
+}
+
+.react-datepicker__header {
+	background-color: $base-light-orange;
+}
+
+@media screen and (min-width: 776px) {
+	.overlay-main {
+		margin-top: -61vh;
+	}
+}
+@media screen and (max-width: 776px) {
+	.landing-page-image .card {
+		max-width: 73% !important;
+		margin-left: 10px;
+	}
+	.overlay-main {
+		margin-top: -51vh;
+	}
 }
 
 @media screen and (max-width: 541px) {
@@ -400,6 +431,11 @@ footer {
 	}
 }
 
+@media only screen and (min-width: 1078px) {
+	.overlay-main {
+		margin-top: -60vh;
+	}
+}
 @media only screen and (min-width: 1600px) {
 	.overlay-main {
 		max-width: 100%;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
-import { Preloader,Row } from 'react-materialize';
+import { Preloader, Row } from 'react-materialize';
 import Book from '../../presentation/common/book/DisplayBook.jsx';
 import { fetchBooksforDashboard } from '../../../actions/fetchbooks';
 
@@ -34,9 +34,9 @@ class DisplayLandingBooks extends React.Component {
    * @returns {void}
    */
   componentDidMount() {
-    this.setState({ isFetching: true })
+    this.setState({ isFetching: true });
     if (this.props.books) {
-      return 
+      return;
     }
     this
       .props
@@ -50,28 +50,29 @@ class DisplayLandingBooks extends React.Component {
    */
   render() {
     const fetchingState = this.props.isFetching ?
-    <Preloader size="big" className="center-align" /> : null;
-  
+      <Preloader size="big" className="center-align" /> : null;
     const getAllBooks = (this
       .props
-      .books)?this
-      .props
-      .books
-      .map(book => (<Book
-        key={book.id}
-        id={book.id}
-        title={book.title}
-        author={book.author}
-        category={book.category}
-        description={book.description}
-        quantity={book.quantity}
-        image={book.bookimage}
-      />)) : [];
+      .recentBooks) ? this
+        .props
+        .recentBooks
+        .map(book => (<Book
+          key={book.id}
+          id={book.id}
+          title={book.title}
+          author={book.author}
+          category={book.category}
+          description={book.description}
+          quantity={book.quantity}
+          image={book.bookimage}
+        />)) : [];
 
     return (
-      <div className='recent-books'>
+      <div className="recent-books">
         <Row>
-        {[...getAllBooks]}
+          <div className="landing-page-image">
+          {[...getAllBooks]}
+          </div>
         </Row>
       </div>
     );
@@ -86,8 +87,8 @@ DisplayLandingBooks.defaultProps = {
   books: null,
 };
 
-const mapStateToProps = ({bookReducer })=> ({ 
-  books: bookReducer.recentBooksList, 
+const mapStateToProps = ({ bookReducer }) => ({
+  recentBooks: bookReducer.recentBooksList,
   isFetching: bookReducer.fetchingBooks
 });
 

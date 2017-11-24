@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactTooltip from 'react-tooltip';
 import { Modal } from 'react-materialize';
-import  DisplayModal from './DisplayBookModal.jsx';
+import  DisplayBookModal from './DisplayBookModal.jsx';
 
 /**
  * @description Book component taking book props
@@ -29,12 +29,10 @@ const Book = books => (
             src={books.image || 'http://res.cloudinary.com/digpnxufx/image/upload/c_scale,h_499,w_325/v1507822148' +
             '/bookplaceholder_kdbixx.png'}
             alt={books.title}/>
-
         </div>
       </a>
-
     </div>
-      <DisplayModal 
+      <DisplayBookModal 
       title={books.title} 
       image={books.image} 
       category={books.category} 

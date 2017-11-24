@@ -2,10 +2,11 @@ import React from 'react';
 import { Row } from 'react-materialize';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import SideNav from '../presentation/common/SideNav/index.jsx';
-import DisplayAllBorrowedBooks from '../container/booklist/DisplayAllBorrowedBooks.jsx';
+import DisplayAllBorrowedBooks from '../container/booklist/DisplayBorrowedBooks.jsx';
 import DisplayAllBooks from '../container/booklist/DisplayAllBooks.jsx';
 import LoanHistoryTable from '../container/loanhistory/LoanHistory.jsx';
 import MessageforNoOverdueBooks from '../presentation/messages/dashboardMessages/MessageforNoOverdueBooks.jsx';
+import DisplayOverdueBooks from '../container/booklist/DisplayOverdueBooks.jsx';
 
 /**
  * @description Show User Dashboard
@@ -38,7 +39,7 @@ const Dashoard = props =>
                 <DisplayAllBooks />
               </TabPanel>
               <TabPanel>
-                <MessageforNoOverdueBooks/>
+                <DisplayOverdueBooks/>
               </TabPanel>
               <TabPanel>
                   <LoanHistoryTable/>

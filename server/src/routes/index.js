@@ -16,7 +16,7 @@ Router.get('/auth/books/recentbooks', BooksController.getAllBooks);
 
 Router.post('/auth/users/signup', fieldValidationMiddleware, nullvalidationMiddleware, UserController.create);
 
-Router.post('/auth/users/signin', nullvalidationMiddleware, UserController.signin);
+Router.post('/auth/users/signin', nullvalidationMiddleware, UserController.signIn);
 
 Router.post('/books', nullvalidationMiddleware, BooksController.create);
 
@@ -24,12 +24,14 @@ Router.put('/books/:bookId', nullvalidationMiddleware, BooksController.update);
 
 Router.get('/books/', BooksController.getAllBooks);
 
-Router.post('/users/loanbook', authdecodeToken, UserBooksController.loanbook);
+Router.post('/users/loanbook', authdecodeToken, UserBooksController.loanBook);
 
-Router.put('/users/returnbook', authdecodeToken, UserBooksController.returnbook);
+Router.put('/users/returnbook', authdecodeToken, UserBooksController.returnBook);
 
-Router.get('/users/getloanhistory', authdecodeToken, UserBooksController.getHistory);
+Router.get('/users/getloanhistory', authdecodeToken, UserBooksController.getLoanHistory);
 
-Router.get('/users/borrowedbooks', authdecodeToken, UserBooksController.getborrowedBooklist);
+Router.get('/users/getoverduebooks', authdecodeToken, UserBooksController.getOverdueBooks);
+
+Router.get('/users/borrowedbooks', authdecodeToken, UserBooksController.getBorrowedBookList);
 
 export default Router;

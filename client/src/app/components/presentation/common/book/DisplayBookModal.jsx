@@ -39,6 +39,52 @@ class DisplayBookModal extends React.Component {
     $(`#modal-${this.props.id}`).modal({opacity: 0})
 }
 
+bookActions = (loanStatus) => {
+  if (!loanStatus) 
+    return (
+      <div>
+      <Button className="loan-button" onClick={this.handleBorrowClick}>
+        Loan
+      </Button>
+      </div> 
+    )
+  else 
+    return (
+      <div>
+      <Button className="return-button" onClick={this.handleReturnClick}>
+        Return
+      </Button>
+      </div>
+    )
+}
+
+showDatePicker =(loanStatus) =>{
+  if(!loanStatus)
+    return(
+      <div className="book-modal">
+        <div className="loan-status">User's Loan Status: <p className="loan-status-text">Available to You</p>
+        </div>
+            <div className="return-date"> Specify Return Date:
+              <DatePicker
+                selected={this.state.returndate}
+                onChange={this.handleChange.bind(this)}
+                minDate={moment().add('days')}
+                maxDate={moment().add(20, 'days')}
+                />
+            </div>
+      </div>
+    )
+else
+  return(
+      <div className="loan-status">User's Loan Status: <p className="loan-status-text">Loaned</p> 
+      </div>
+    
+  )
+
+}
+
+
+
   handleBorrowClick = (event) => {
     event.preventDefault();
     const dateString = this.state.returndate.format("YYYY-MM-DD")
@@ -54,67 +100,30 @@ class DisplayBookModal extends React.Component {
           $(`#modal-${this.props.id}`).modal({opacity: 0})
       })
   }  
+    render(){
+    if(!this.props.isAuthenticated){
+    return(
+      <BookModal {...this.props}/>
+      )
+    }
 
-
-render(){
+else{
   const isBorrowed = (this.props.borrowedBooksList.books) ? this.props.borrowedBooksList.books.map(book => {
       return (book.bookid)
     }) : [];
-  const loanstatus = isBorrowed.includes(this.state.bookId)
+  const loanStatus = isBorrowed.includes(this.state.bookId)
 
-if(!this.props.isAuthenticated){
-return(
-  <Modal id={`modal-${this.props.id}`} fixedFooter header="Loan Book">
-    <Row>
-    <div className="loan-book">
-      <Col m={12}l={6}>
-        <div className="card-image modal-image">
-          <img src={this.props.image} alt={this.props.title}/>
-        </div>
-      </Col>
-      <Col  m={12} l={6}>  
-        <div className="book-modal modal-title">Title: {this.props.title}</div>
-        <hr/>
-        <div className="book-modal">Author: {this.props.author}</div>
-        <div className="book-modal">Category: {this.props.category}</div>
-        <div className="book-modal">Description: {this.props.description}</div>   
-      </Col>
-      </div>
-    </Row>   
-  </Modal>
-)
+  const bookModalActions = this.bookActions(loanStatus)
+  const chooseReturnDate = this.showDatePicker(loanStatus)
 
-}
 
-else{
+
   return (
-    <Modal id={`modal-${this.props.id}`} fixedFooter header="Loan Book" 
-    actions={<div>{!loanstatus ?
-      <Button className="loan-button" onClick={this.handleBorrowClick}> Loan </Button> : 
-      <Button className="return-button" onClick={this.handleReturnClick}> Return </Button>}</div>}>
-      <Row>
-      <div className="loan-book">
-        <Col m={12}l={6}>
-          <div className="card-image">
-            <img className="modal-image" src={this.props.image} alt={this.props.title}/>
-          </div>
-        </Col>
-        <Col  m={12} l={6}>  
-          <div className="book-modal modal-title">Title: {this.props.title}</div>
-          <hr/>
-          <div className="book-modal">Author: {this.props.author}</div>
-          <div className="book-modal">Description: {this.props.description}</div>
-          <div className="book-modal loan-status">Loan Status: {!loanstatus?<p> Available</p> : <p>On Loan</p>} </div>
-          <div className="book-modal return-date"> Specify Return Date:
-          <DatePicker
-            selected={this.state.returndate}
-            onChange={this.handleChange.bind(this)}
-            />
-            </div>
-        </Col>
-        </div>
-      </Row>   
-    </Modal>
+    <BookModal actions={bookModalActions} {...this.props}>
+      {
+        chooseReturnDate
+      }
+    </BookModal>
   )
 }
 }
@@ -130,3 +139,38 @@ const mapStateToProps = state => ({
 
 
 export default connect(mapStateToProps,{returnbook,borrowbooks})(DisplayBookModal);
+
+
+class BookModal extends React.Component{
+  constructor(props) {
+    super(props);
+  }
+  render(){
+    const { id,image,author,category,description,title,header,actions } = this.props;
+    return(
+    <Modal id={`modal-${id}`} fixedFooter header='Something Nice' actions={actions}>
+      <Row>
+      <div className="loan-book">
+        <Col m={12}l={6}>
+          <div className="card-image" >
+            <img className="modal-image" src={image} alt={title}/>
+          </div>
+        </Col>
+        <Col  m={12} l={6}>  
+          <div className="book-modal modal-title">Title: {title}</div>
+          <hr/>
+          <div className="book-modal">Author: {author}</div>
+          <div className="book-modal">Category: {category}</div>
+          <div className="book-modal">Description: {description}</div>   
+        </Col>
+        </div>
+        {this.props.children}
+      </Row>   
+    </Modal>
+    ) 
+  }
+
+}
+
+
+

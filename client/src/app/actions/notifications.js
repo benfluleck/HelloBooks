@@ -1,10 +1,8 @@
-import { reducer as notifReducer, actions as notifActions, Notifs } from 'redux-notifications';
+import { actions as notifActions } from 'redux-notifications';
+import setAuthorizationToken from '../utils/setAuthorizationToken';
 
 const { notifSend } = notifActions;
-import { Redirect, browserHistory } from 'react-router';
-import { React } from 'react';
-import setAuthorizationToken from '../utils/setAuthorizationToken';
-import logout from '../actions/authenticate';
+
 
 /**
  * @description async notifications: show error notification
@@ -40,7 +38,7 @@ export const showErrorNotification = ({ message, error }) => (dispatch) => {
  */
 export const showSuccessNotification = ({ message, user }) => (dispatch) => {
   dispatch(notifSend({
-    message: message || user.data.message || data.message,
+    message: message || user.data.message,
     kind: 'success',
     dismissAfter: 2500
   }));

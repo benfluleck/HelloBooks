@@ -70,7 +70,7 @@ export default {
    * @returns {void|Response} status, send
    *
    */
-  signin(req, res) {
+  signIn(req, res) {
     return User.findOne({
       where: {
         username: req.body.username

@@ -9,6 +9,7 @@ import Dashboard from './components/container/Dashboard.jsx';
 import Logout from './components/container/authentication/Logout.jsx';
 import UserRoutes from './components/hoc/UserRoutes.jsx';
 import '../app/css/style.scss';
+ 
 
 /**
  * 
