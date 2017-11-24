@@ -55,8 +55,8 @@ export default {
               required: true
             }
           ]
-        }).then((bookfound) => {
-          if (bookfound) {
+        }).then((bookFound) => {
+          if (bookFound) {
             return res
               .status(409)
               .send({success: false, message: 'You have already borrowed this book'});
@@ -70,20 +70,20 @@ export default {
                   id: req.body.bookId
                 }
               })
-                .then((booktoborrow) => {
-                  if (!booktoborrow || booktoborrow.quantity === 0) {
+                .then((bookToBorrow) => {
+                  if (!bookToBorrow || bookToBorrow.quantity === 0) {
                     return res
                       .status(404)
                       .send({success: false, message: "Sorry we can't find this book or all copies of this book are on loan"});
                   }
-                  booktoborrow
+                  bookToBorrow
                     .update({
-                    quantity: (booktoborrow.quantity -= 1)
+                    quantity: (bookToBorrow.quantity -= 1)
                   })
-                    .then((borrowedbook) => {
+                    .then((borrowedBook) => {
                       res
                         .status(201)
-                        .send({success: true, message: `${borrowedbook.title} succesfully loaned`});
+                        .send({success: true, message: `${borrowedBook.title} succesfully loaned`});
                     })
                     .catch(() => {
                       res
