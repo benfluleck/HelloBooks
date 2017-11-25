@@ -2,7 +2,6 @@ import sendSurcharge from './sendSurcharge';
 import { CronJob } from 'cron';
 
 
-
 export const setCron = props => new CronJob(props);
 
 export const sendSurchargeJob = () =>
