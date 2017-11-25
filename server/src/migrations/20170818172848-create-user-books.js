@@ -9,23 +9,23 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      bookid: {
+      bookId: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      userid: {
+      userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      returndate: {
+      returnDate: {
         type: Sequelize.DATE,
         allowNull: false,
       },
-      userReturndate: {
+      userReturnDate: {
         type: Sequelize.DATE,
         allowNull: true,
       },
-      returnstatus: {
+      returnStatus: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
         defaultValue: false,

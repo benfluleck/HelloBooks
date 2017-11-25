@@ -39,7 +39,11 @@ module.exports = {
         allowNull: false,
         defaultValue: 1
       },
-      bookimage: {
+      categoryId: {
+        allownull: false,
+        type: Sequelize.INTEGER
+      },
+      bookImage: {
         type: Sequelize.STRING,
       },
       status: {

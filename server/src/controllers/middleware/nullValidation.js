@@ -3,8 +3,8 @@ import { nullValidationFnMap, nullValidFieldMessage } from './validators';
 const fieldMap = (bookId, userId) => ({
   '/auth/users/signin': ['username', 'password'],
   '/auth/users/signup': ['email', 'password', 'username', 'firstname', 'lastname'],
-  '/books': ['title', 'description', 'author', 'category'],
-  [`/books/${bookId}`]: ['title', 'category', 'author', 'description'],
+  '/books': ['title', 'description', 'author'],
+  [`/books/${bookId}`]: ['title', 'author', 'description'],
   [`/users/${userId}/books`]: ['bookId']
 
 });

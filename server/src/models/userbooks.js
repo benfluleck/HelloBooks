@@ -1,24 +1,22 @@
-
-
 export default(sequelize, DataTypes) => {
   const UserBooks = sequelize.define('UserBooks', {
-    bookid: {
+    bookId: {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    userid: {
+    userId: {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    returndate: {
+    returnDate: {
       type: DataTypes.DATE,
       allowNull: false
     },
-    userReturndate: {
+    userReturnDate: {
       type: DataTypes.DATE,
       allowNull: true
     },
-    returnstatus: {
+    returnStatus: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: false
@@ -36,12 +34,13 @@ export default(sequelize, DataTypes) => {
   });
   UserBooks.associate = (models) => {
     UserBooks.belongsTo(models.Books, {
-      foreignKey: 'bookid',
+      foreignKey: 'bookId',
       as: 'book',
       onDelete: 'CASCADE'
     });
     UserBooks.belongsTo(models.User, {
-      foreignKey: 'userid',
+      foreignKey: 'userId',
+      as:'user',
       onDelete: 'CASCADE'
     });
   };

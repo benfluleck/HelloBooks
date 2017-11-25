@@ -34,14 +34,18 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      userlevel: {
+      userLevel: {
         type: Sequelize.INTEGER,
         allowNull: false,
         defaultValue: 1,
       },
-      userimage: {
+      userImage: {
         type: Sequelize.STRING,
         allowNull: true,
+      },
+      borrowCount: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
       },
       isAdmin: {
         type: Sequelize.BOOLEAN,

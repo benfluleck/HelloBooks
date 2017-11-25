@@ -8,7 +8,6 @@ const fieldLength = {
   title: { max: 60, min: 2 },
   author: { max: 60, min: 2 },
   description: { min: 7 },
-  category: { max: 50, min: 5 },
   email: { max: 50, min: 5 }
 };
 
@@ -34,7 +33,7 @@ export const nullValidationFnMap = {
   title: [modifiedIsLength('title')],
   description: [modifiedIsLength('description')],
   author: [modifiedIsLength('author')],
-  category: [modifiedIsLength('category')],
+  categoryId: [isNumeric],
   bookId: [isNumeric]
 };
 
@@ -47,6 +46,6 @@ export const nullValidFieldMessage = {
   title: 'This book title is too short',
   description: 'More explanatory description needed',
   author: "This author's name is invalid",
-  category: 'Category is Invalid',
+  categoryId: 'Category is Invalid',
   bookId: 'This book format is wrong'
 };
