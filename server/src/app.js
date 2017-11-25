@@ -29,11 +29,7 @@ app.use((req, res, next) => {
       'cess-token');
   next();
 });
-
-sendSurchargeJob();
-
-
- // We got a new email! 
+ 
 app.use('/api/v1', authenticateRoutes, routes);
 
 app.get('*', (req, res) => res.sendFile(path.join(__dirname, '../../client/dist/app/index.html')));
