@@ -50,6 +50,7 @@ const sendSurcharge = () => (UserBooks.findAll({
         console.log(error);
       } else {
         console.log('Email sent: ' + info.response);
+        process.exit(0);
       }
     })
   });  
