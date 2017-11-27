@@ -9,8 +9,7 @@ export default(sequelize, DataTypes) => {
       }
     }
   }, { paranoid: true });
-
-  // defines associations for category
+  
   Categories.associate = (models) => {
     Categories.hasMany(models.Books, {
       foreignKey: 'categoryId',

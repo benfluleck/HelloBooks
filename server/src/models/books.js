@@ -46,11 +46,10 @@ export default(sequelize, DataTypes) => {
           this.setDataValue('description', sentenceCase(val));
         }
       },
-
-      categoryId: {
-        allownull: false,
-        type: DataTypes.INTEGER
-      }
+    },
+    categoryId: {
+      allownull: false,
+      type: DataTypes.INTEGER
     },
     quantity: {
       type: DataTypes.INTEGER,
@@ -62,7 +61,6 @@ export default(sequelize, DataTypes) => {
         }
       }
     },
-
     bookImage: {
       type: DataTypes.STRING
     }

@@ -46,6 +46,10 @@ module.exports = {
       borrowCount: {
         allowNull: false,
         type: Sequelize.INTEGER,
+        defaultValue: 0
+      },
+      authId: {
+        type: Sequelize.STRING,
       },
       isAdmin: {
         type: Sequelize.BOOLEAN,

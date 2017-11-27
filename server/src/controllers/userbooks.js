@@ -1,10 +1,9 @@
 import { toDate } from 'validator';
 import models from '../models';
-import paginationfunc from '../controllers/middleware/pagination';
+import paginationFunc from '../controllers/middleware/pagination';
 
-const UserBooks = models.UserBooks;
-const Books = models.Books;
-const User = models.User;
+const { User,Books, Userlevel ,UserBooks, Notifications } = models;
+
 
 export default {
   /**
@@ -16,37 +15,56 @@ export default {
    * @memmberOf UserBooks Controller
    */
   loanBook(req, res) {
-    req.params.userId = req.user.id.id || req.user.id;
-    if (!req.body.returndate) {
+    const userId = req.user.id.id || req.user.id;
+    const bookId = req.body.bookId;
+    if (!req.body.returnDate) {
       return res
         .status(404)
         .send({message: 'Please specify a valid return date'});
-    }
-    const returndate = req.body.returndate;
-    if (toDate(returndate) <= Date.now() || !toDate(returndate) ) {
+    } 
+    if (toDate(req.body.returnDate) <= Date.now() || !toDate(req.body.returnDate) ) {
 
       return res
         .status(422)
         .send({message: 'Please provide a valid return date'});
     }
-    if (req.params.userId === '') {
-      return res
-        .send(404)
-        .send({success: false, message: 'User does not exist'});
-    }
+    const returnDate = new Date(req.body.returnDate);
     User
-      .findById(req.params.userId)
+      .findById(userId,
+      {
+        include: [{
+          model: Userlevel,
+          as: 'level',
+          attributes: ['levelName', 'maxBooks', 'maxDays']
+        }]
+      }
+      )
       .then((user) => {
+        const userLevelDate = new Date(Date.now() +
+        (user.level.maxDays * 24 * 60 * 60 * 1000));
         if (!user) {
           return res
             .status(404)
-            .send({message: 'User does not exist'});
+            .send({message: 'User does not exist, Please register to borrow'});
         }
+        if (returnDate > userLevelDate ){
+           return res
+           .status(409)
+           .send({message:'To loan this book for more days,' +  
+           ' You need to upgrade your user level, Please contact the administrator'})
+        }
+        if (user.borrowCount > user.level.maxBooks) {
+          return res.status(400)
+            .send({ message: 'You have exceeded your borrow limit, Why not return a book' });
+        }
+        user.update({
+          borrowCount: (user.borrowCount + 1)
+        });
         UserBooks.findOne({
           where: {
-            userid: req.params.userId,
-            bookid: req.body.bookId,
-            returnstatus: false
+            userId,
+            bookId,
+            returnStatus: false
           },
           include: [
             {
@@ -59,54 +77,60 @@ export default {
           if (bookFound) {
             return res
               .status(409)
-              .send({success: false, message: 'You have already borrowed this book'});
+              .send({success: false, 
+                    message: 'You have already borrowed this book'});
           }
           UserBooks
-            .create({userid: req.params.userId, bookid: req.body.bookId, returndate})
+            .create({ userId,
+                     bookId,
+                     returnDate
+                    })
             .then(() => {
               Books
                 .findOne({
                 where: {
-                  id: req.body.bookId
+                  id: bookId
                 }
               })
                 .then((bookToBorrow) => {
                   if (!bookToBorrow || bookToBorrow.quantity === 0) {
                     return res
                       .status(404)
-                      .send({success: false, message: "Sorry we can't find this book or all copies of this book are on loan"});
+                      .send({ success: false, 
+                              message: "Sorry we can't find this book or all copies of this book are on loan"});
                   }
                   bookToBorrow
                     .update({
                     quantity: (bookToBorrow.quantity -= 1)
                   })
-                    .then((borrowedBook) => {
-                      res
-                        .status(201)
-                        .send({success: true, message: `${borrowedBook.title} succesfully loaned`});
-                    })
-                    .catch(() => {
-                      res
-                        .status(500)
-                        .send({success: false, message: 'Error from the client end'});
-                    });
+            
+                  Notifications.create({
+                    userId,
+                    bookId,
+                    action: 'Book Borrowed',
+                  })
+                  .then((notification) => {
+                    const borrowedBook = {
+                      username: user.username,
+                      book: bookToBorrow.title,
+                      borrowed: bookToBorrow.createdAt,
+                      expectedReturnDate: bookToBorrow.returnDate,
+                      userLevel: user.level.levelName
+                    };
+                    res
+                      .status(201)
+                      .send({ success: true, 
+                              message: `${borrowedBook.book} succesfully loaned` 
+                            });
+                    })   
                 })
-                .catch(() => {
-                  res
-                    .status(500)
-                    .send({success: false, message: 'Error from the client end'});
-                });
+                
             })
-            .catch(() => {
-              res
-                .status(404)
-                .send({success: false, message: 'There is a problem with this user or book, Please contact the administrator'});
-            });
         });
       })
       .catch((error) => {
         res
-          .status(400)
+          .status(500)
           .send({success: false, message: ` ${error.message}`});
       });
   },
@@ -122,7 +146,7 @@ export default {
   getBorrowedBookList(req, res) {
     const offset = req.query.offset || 0;
     const limit = req.query.limit || 3;
-    req.params.userId = req.user.id.id || req.user.id;
+    const userId = req.user.id.id || req.user.id;
     if (!req.query.returned) {
       return res
         .status(404)
@@ -130,8 +154,8 @@ export default {
     }
     return UserBooks.findAndCountAll({
       where: {
-        userid: req.params.userId,
-        returnstatus: req
+        userId,
+        returnStatus: req
           .query
           .returned
           .trim()
@@ -149,13 +173,13 @@ export default {
       if (book.length === 0) {
         return res
           .status(404)
-          .send({success: false, message: 'You have no books on your loan list'});
+          .send({success: false, message: 'You have not loaned any books'});
       }
       res
         .status(200)
         .send({
           books: book.rows,
-          pagination: paginationfunc(offset, limit, book)
+          pagination: paginationFunc(offset, limit, book)
         });
     }).catch(error => res.status(400).send(error.message));
   },
@@ -169,12 +193,13 @@ export default {
    * @memmberOf UserBooks Controller
    */
   returnBook(req, res) {
-    req.params.userId = req.user.id.id || req.user.id;
+    const userId = req.user.id.id || req.user.id;
+    const bookId = req.body.bookId;
     UserBooks.findOne({
       where: {
-        bookid: req.body.bookId,
-        userid: req.params.userId,
-        returnstatus: false
+        bookId,
+        userId,
+        returnStatus: false
       },
       include: [
         {
@@ -183,48 +208,64 @@ export default {
           required: true
         }
       ]
-    }).then((book) => {
-      if (!book) {
+    }).then((history) => {
+      if (!history) {
         return res
           .status(409)
           .send({success: false, message: 'You did not borrow this book'});
       }
-      UserBooks.update({
-        returnstatus: true,
-        userReturndate: Date.now()
+      history.update({
+        returnStatus: true,
+        userReturnDate: Date.now()
       }, {
         where: {
-          userid: req.params.userId,
-          bookid: req.body.bookId
+          userId,
+          bookId
         }
       }).then(() => {
         Books
           .findOne({
           where: {
-            id: req.body.bookId
+            id: bookId
           }
         })
-          .then((bookToreturn) => {
-            if (!bookToreturn) {
+          .then((bookToReturn) => {
+            if (!bookToReturn) {
               return res
                 .status(404)
                 .send({message: 'The book is not in our library'});
             }
-            bookToreturn
+            bookToReturn
               .update({
-              quantity: bookToreturn.quantity + 1
+              quantity: bookToReturn.quantity + 1
             })
-              .then((returnedBook) => {
-                if (returnedBook.userReturndate > returnedBook.returndate) {
+            User.findById(userId)
+            .then((user) => {
+              user.update({
+                borrowCount: (user.borrowCount - 1),
+              });
+              Notifications.create({
+                userId,
+                bookId: history.bookId,
+                action: 'Book Returned',
+              }).then((notification) => {
+                const returnDetail = {
+                  username: user.username,
+                  book: bookToReturn.title,
+                  expectedReturnDate: history.returnDate,
+                  returnedOn: history.userReturnDate
+                };
+                if (returnDetail.expectedReturnDate < returnDetail.returnedOn) {
                   res
-                    .status(201)
-                    .send({success: true, message: `You have just returned ${returnedBook.title} late, A fine will be sent to you`, returnedBook});
+                    .status(200)
+                    .send({success: true, message: `You have just returned ${returnDetail.book} late, A fine will be sent to you`});
                 } else {
                   res
-                    .status(201)
-                    .send({success: true, message: `You have just returned ${returnedBook.title}`, returnedBook});
+                    .status(200)
+                    .send({success: true, message: `You have just returned ${returnDetail.book}`});
                 }
               });
+            });
           });
       });
     }).catch(error => res.status(500).send(error.message));
@@ -241,12 +282,12 @@ export default {
   getOverdueBooks(req, res) {
     const offset = req.query.offset || 0;
     const limit = req.query.limit || 3;
-    req.params.userId = req.user.id.id || req.user.id;
+    const userId = req.user.id.id || req.user.id;
     return UserBooks.findAndCountAll({
       where: {
-        userid: req.params.userId,
-        returnstatus: false,
-        returndate: {
+        userId,
+        returnStatus: false,
+        returnDate: {
           $lt: Date.now() - 24*60*60*1000
         }
       },
@@ -270,9 +311,9 @@ export default {
         .status(200)
         .send({
           books: book.rows,
-          pagination: paginationfunc(offset, limit, book)
+          pagination: paginationFunc(offset, limit, book)
         });
-    }).catch(error => res.status(400).send(error.message));
+    }).catch(error => res.status(500).send(error.message));
   },
 
 
@@ -288,10 +329,10 @@ export default {
   getLoanHistory(req, res) {
     const offset = req.query.offset || 0;
     const limit = req.query.limit || 3;
-    req.params.userId = req.user.id.id || req.user.id;
+    const userId = req.user.id.id || req.user.id;
     return UserBooks.findAndCountAll({
       where: {
-        userid: req.params.userId
+        userId
       },
       include: [
         {
@@ -315,7 +356,7 @@ export default {
         .status(200)
         .send({
           books: book.rows,
-          pagination: paginationfunc(offset, limit, book)
+          pagination: paginationFunc(offset, limit, book)
         });
     }).catch(error => res.status(400).send(error.message));
 

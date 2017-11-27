@@ -111,6 +111,9 @@ export default(sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       defaultValue: 0
     },
+    authId: {
+      type: DataTypes.STRING,
+    },
 
     isAdmin: {
       type: DataTypes.BOOLEAN,
@@ -123,18 +126,12 @@ export default(sequelize, DataTypes) => {
 
       beforeCreate: (user) => {
         if (user.password === user.passwordConfirmation) {
-          user.password = User.generateHash(user.password);
+          user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10));
         } else {
           throw new Error('Passwords do not match');
         }
-
+      
       },
-
-      beforeUpdate: (user) => {
-        if (user._changed.password) {
-          this.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
-        }
-      }
     }
   });
   User.associate = (models) => {

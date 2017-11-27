@@ -8,7 +8,8 @@ const fieldLength = {
   title: { max: 60, min: 2 },
   author: { max: 60, min: 2 },
   description: { min: 7 },
-  email: { max: 50, min: 5 }
+  email: { max: 50, min: 5 },
+  categoryName: { min: 3 , max:30},
 };
 
 const emailRegex = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"|"_+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
@@ -27,25 +28,31 @@ export const inValidFieldMessage = {
 export const nullValidationFnMap = {
   email: [modifiedIsLength('email')],
   password: [modifiedIsLength('password')],
+  newPassword: [modifiedIsLength('password')],
   username: [modifiedIsLength('username')],
   firstname: [modifiedIsLength('firstname'), isAlpha],
   lastname: [modifiedIsLength('lastname'), isAlpha],
   title: [modifiedIsLength('title')],
   description: [modifiedIsLength('description')],
   author: [modifiedIsLength('author')],
+  categoryName:[modifiedIsLength('categoryName')],
   categoryId: [isNumeric],
-  bookId: [isNumeric]
+  bookId: [isNumeric],
+  quantity: [isNumeric]
 };
 
 export const nullValidFieldMessage = {
   email: 'The email address you provided is invalid',
   password: 'Password is too short',
+  newPassword: 'Password is too short',
   username: 'Username is invalid',
   firstname: 'Firstname is invalid',
   lastname: 'Lastname is invalid',
   title: 'This book title is too short',
   description: 'More explanatory description needed',
   author: "This author's name is invalid",
-  categoryId: 'Category is Invalid',
-  bookId: 'This book format is wrong'
+  categoryId: 'Category Id is Invalid',
+  categoryName: 'The category name is too short',
+  bookId: 'This book format is wrong',
+  quantity: 'This quantity is in the wrong format'
 };

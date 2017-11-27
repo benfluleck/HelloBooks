@@ -41,11 +41,12 @@ const decodeToken = (req, res, next) => {
  * @param {number} id user id
  * @return {promise} signed token
  */
-const getJWT = id =>
+const getJWT = (id,isAdmin) =>
   new Promise((resolve, reject) => {
     jwt.sign(
       {
-        id
+        id,
+        isAdmin
       },
       process.env.JWT_SECRET,
       {

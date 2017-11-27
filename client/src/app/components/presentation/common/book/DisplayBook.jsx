@@ -26,8 +26,7 @@ const Book = books => (
           data-html
           data-class="booktip">
           <img
-            src={books.image || 'http://res.cloudinary.com/digpnxufx/image/upload/c_scale,h_499,w_325/v1507822148' +
-            '/bookplaceholder_kdbixx.png'}
+            src={books.image}
             alt={books.title}/>
         </div>
       </a>
