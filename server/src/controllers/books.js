@@ -23,39 +23,38 @@ export default {
         return res.status(404)
           .send({ message: 'Category does not exist' });
       }
-    Books.findOne({
-      where: {
-        $and: [{ title: req.body.title }, { author: req.body.author }]
-      }
-    }).then((bookExists) => {
-      if (bookExists !== null) {
-        return res.status(409).send({
-          message: 'A book with the same title and author already exists in the library'
-        });        
-      }
-      Books.create({
-        title: req.body.title,
-        author: req.body.author,
-        quantity: req.body.quantity,
-        categoryId: req.body.categoryId,
-        description: req.body.description,
-        bookImage: req.body.bookImage || process.env.DEFAULT_BOOK_COVER                                                                                                                                                                                                                                                    
-      })
-      .then(createdBook =>{
-        createdBook.getCategory()
-        .then(category =>{
-          const newBook ={
-              title : createdBook.title,
-              category: category.categoryName
-          };  
-          res.status(201).send({ 
-            message: `${newBook.title} has been added to the library, Category: ${newBook.category}`}) 
+      Books.findOne({
+        where: {
+          $and: [{ title: req.body.title }, { author: req.body.author }]
+        }
+      }).then((bookExists) => {
+        if (bookExists !== null) {
+          return res.status(409).send({
+            message: 'A book with the same title and author already exists in the library'
+          });
+        }
+        Books.create({
+          title: req.body.title,
+          author: req.body.author,
+          quantity: req.body.quantity,
+          categoryId: req.body.categoryId,
+          description: req.body.description,
+          bookImage: req.body.bookImage || process.env.DEFAULT_BOOK_COVER
         })
-    
-      })
-        .catch(error => res.status(400).send(error.message));
+          .then((createdBook) => {
+            createdBook.getCategory()
+              .then((category) => {
+                const newBook = {
+                  title: createdBook.title,
+                  category: category.categoryName
+                };
+                res.status(201).send({
+                  message: `${newBook.title} has been added to the library, Category: ${newBook.category}` });
+              });
+          })
+          .catch(error => res.status(400).send(error.message));
+      });
     });
-  });
   },
 
   /**
@@ -83,35 +82,33 @@ export default {
           if (bookExists !== null) {
             return res.status(409).send({
               message: 'A book with the same title and author already exists in the library'
-            });        
+            });
           }
-        return book
-          .updateAttributes(req.body, {
-            fields: Object.keys(req.body)
-          })
-          .then(createdBook =>{
-            createdBook.getCategory()
-            .then(category =>{
-              const newBook ={
-                  title : createdBook.title,
-                  category: category.categoryName
-              };  
-              res.status(201).send({ 
-                message: `${newBook.title} has been updated`, 
-                Title: createdBook.title,
-                Author: createdBook.author,
-                Quantity: createdBook.quantity,
-                Description: createdBook.description,
-                Category: newBook.category,
-                BookCover: newBook.bookImage
-                }) 
+          return book
+            .updateAttributes(req.body, {
+              fields: Object.keys(req.body)
             })
-        
-          })
-          
-      })
-      .catch(error => res.status(400).send(error.message));
-    }); 
+            .then((createdBook) => {
+              createdBook.getCategory()
+                .then((category) => {
+                  const newBook = {
+                    title: createdBook.title,
+                    category: category.categoryName
+                  };
+                  res.status(200).send({
+                    message: `${newBook.title} has been updated`,
+                    Title: createdBook.title,
+                    Author: createdBook.author,
+                    Quantity: createdBook.quantity,
+                    Description: createdBook.description,
+                    Category: newBook.category,
+                    BookCover: newBook.bookImage
+                  });
+                });
+            });
+        })
+          .catch(error => res.status(400).send(error.message));
+      });
   },
 
 
@@ -158,7 +155,7 @@ export default {
       }]
     };
     if (categoryId) {
-      whereSearch.$and = [{ categoryId: categoryId }];
+      whereSearch.$and = [{ categoryId }];
     }
     if (searchQuery === null) {
       return res.status(400)
@@ -179,14 +176,14 @@ export default {
         })
         .then((books) => {
           const booksFound = {
-            books: books.rows, 
+            books: books.rows,
             pagination: paginationFunc(offset, limit, books)
           };
           if (books.rows.length === 0) {
             return res.status(404)
               .send({ message: 'Sorry no books match your search criteria' });
           }
-          return res.status(200).send({ success: true , booksFound });
+          return res.status(200).send({ success: true, booksFound });
         })
         .catch(error => res.status(500).send(error.message));
     }
@@ -197,66 +194,66 @@ export default {
      * @param {object} res  HTTP response object
      * @returns {object} book
      */
-    viewBook(req, res) {
-      const bookId = parseInt(req.params.bookId);
-      if (isNaN(bookId)) {
-        return res.status(400).send({
-          message: 'Please enter a valid bookId'
-        });
-      }
-      Books.findById(bookId, {
-        include: [{
-          model: Categories,
-          as: 'category',
-          attributes: ['categoryName'],
-        }]
+  viewBook(req, res) {
+    const bookId = parseInt(req.params.bookId);
+    if (isNaN(bookId)) {
+      return res.status(400).send({
+        message: 'Please enter a valid bookId'
+      });
+    }
+    Books.findById(bookId, {
+      include: [{
+        model: Categories,
+        as: 'category',
+        attributes: ['categoryName'],
+      }]
+    })
+      .then((book) => {
+        if (!book) {
+          return res.status(404)
+            .send({ message: 'This book does not exist in the library' });
+        }
+        const selectedBook = { success: true, book };
+        res.status(200).send(selectedBook);
       })
-        .then((book) => {
-          if (!book) {
-            return res.status(404)
-              .send({ message: 'This book does not exist in the library' });
-          }
-          const selectedBook = { success: true, book };
-          res.status(200).send(selectedBook);
-        })
-        .catch(error => res.status(500).send(error.message));
-    },
+      .catch(error => res.status(500).send(error.message));
+  },
 
-    deleteBook(req, res) {
-      const bookId = parseInt(req.params.bookId);
-      if (isNaN(bookId)) {
-        return res.status(400).send({
-          message: 'Please enter a valid bookId'
-        });
-      }
-      Books.findById(bookId)
-        .then((book) => {
-          if (!book) {
-            return res.status(404).send({
-              message: 'Book does not exist',
-            });
+  deleteBook(req, res) {
+    const bookId = parseInt(req.params.bookId);
+    if (isNaN(bookId)) {
+      return res.status(400).send({
+        message: 'Please enter a valid bookId'
+      });
+    }
+    Books.findById(bookId)
+      .then((book) => {
+        if (!book) {
+          return res.status(404).send({
+            message: 'Book does not exist',
+          });
+        }
+        UserBooks.findOne({
+          where: {
+            $and: [{
+              bookId
+            }, { returnStatus: false }]
           }
-          UserBooks.findOne({
-            where: {
-              $and: [{
-                bookId
-              }, { returnStatus: false }]
-            }
-          })
-            .then((borrowedBooks) => {
-              if (borrowedBooks) {
-                return res.status(409).send({
-                  message: `You can't delete this ook while there is a copy still out on loan`
-                });
-              }
-              book
-                .destroy()
-                .then(() => res.status(200)
-                  .send({ message: `${book.title}  has been deleted` }))
-            })
         })
-        .catch(error => res.status(500).send(error.message));
-    },
-  
-   
+          .then((borrowedBooks) => {
+            if (borrowedBooks) {
+              return res.status(409).send({
+                message: 'You can\'t delete this ook while there is a copy still out on loan'
+              });
+            }
+            book
+              .destroy()
+              .then(() => res.status(200)
+                .send({ message: `${book.title}  has been deleted` }));
+          });
+      })
+      .catch(error => res.status(500).send(error.message));
+  },
+
+
 };

@@ -25,7 +25,6 @@ chai.use(chaiHttp);
 let bookId;
 let token;
 let limit;
-const nullid = null;
 
 describe('HelloBooks', () => {
   before((done) => {
@@ -164,7 +163,7 @@ describe('HelloBooks', () => {
         .send({
           title: 'The Chronicles of Andela',
           author: 'C.S. Lewis',
-          category: 'Action',
+          categoryId: '2',
           quantity: '23',
           description: 'This is a test',
           bookimage: 'Image'
@@ -172,7 +171,7 @@ describe('HelloBooks', () => {
         .end((err, res) => {
           expect(res.status)
             .to
-            .equal(202);
+            .equal(200);
           done();
         });
     });
@@ -185,7 +184,7 @@ describe('HelloBooks', () => {
         .send({
           title: 'The Chronicles of Andela',
           author: '',
-          category: 'Action',
+          category: 2,
           quantity: '23',
           description: 'This is a test',
           bookimage: 'Image'
@@ -197,16 +196,15 @@ describe('HelloBooks', () => {
           done();
         });
     });
-    it('should throw an error if the selected book is null', (done) => {
+    it('should throw an error if category Id is not defined', (done) => {
       chai
         .request(app)
-        .put(`/api/v1/books/${nullid}`)
+        .put('/api/v1/books/')
         .set('Accept', 'application/x-www-form-urlencoded')
         .set('x-access-token', token)
         .send({
           title: 'The Chronicles of Andela',
           author: 'C.S. Lewis',
-          category: 'Action',
           quantity: '23',
           description: 'This is a test',
           bookimage: 'Image'
@@ -214,7 +212,7 @@ describe('HelloBooks', () => {
         .end((err, res) => {
           expect(res.status)
             .to
-            .equal(400);
+            .equal(404);
           done();
         });
     });
@@ -227,7 +225,7 @@ describe('HelloBooks', () => {
         .send({
           title: 'The Chronicles of Andela',
           author: 'C.S. Lewis',
-          category: 'Action',
+          category: 4,
           quantity: '23',
           description: 'This is a test',
           bookimage: 'Image'

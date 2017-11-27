@@ -29,8 +29,8 @@ describe('HelloBooks', () => {
       .create({
         title: 'Shola comes home',
         author: 'Benny',
-        category: 'Fiction',
-        quantity: 20,
+        categoryId: '3',
+        quantity: '20',
         description: 'Testewfewwww',
         bookimage: 'Test Image'
       })
@@ -64,7 +64,7 @@ describe('HelloBooks', () => {
         done();
       })
       .catch((error) => {
-        console.log('Error in the User seeding', error);
+        console.log('Error in seeding the db', error);
         done();
       });
   });
@@ -100,7 +100,7 @@ describe('HelloBooks', () => {
   });
 
   describe('/POST  Signing up a user', () => {
-    it('should only all users are to register, Sign up successful', (done) => {
+    it('should sign up users who fill the correct parameters for the signup form', (done) => {
       const email = faker
         .internet
         .email();
@@ -123,6 +123,7 @@ describe('HelloBooks', () => {
           email
         })
         .end((err, res) => {
+          console.log(res,'>>>>>>>')
           expect(res.status)
             .to
             .equal(201);
@@ -328,10 +329,10 @@ describe('HelloBooks', () => {
         .send({
           title: 'Learn Java',
           author: 'Sleeping Master',
-          category: 'Learning',
-          quantity: 39,
+          categoryId: '2',
+          quantity: '39',
           description: 'Learn Java in 3hours',
-          bookimage: 'Test'
+          bookImage: 'Test'
         })
         .end((err, res) => {
           expect(res.status)
@@ -339,7 +340,7 @@ describe('HelloBooks', () => {
             .equal(201);
           expect(res.body.message)
             .to
-            .equal('Learn Java has been added to the library');
+            .equal('Learn Java has been added to the library, Category: Drama');
           done();
         });
     });
@@ -352,8 +353,8 @@ describe('HelloBooks', () => {
         .send({
           title: 'Shola comes home',
           author: 'Benny',
-          category: 'Fiction',
-          quantity: 20,
+          categoryId: '1',
+          quantity: '20',
           description: 'This needs to be a long description',
           bookimage: 'Test Image'
         })
@@ -376,8 +377,8 @@ describe('HelloBooks', () => {
         .send({
           title: 'Benedict goes to school',
           author: 'Benny',
-          category: 'Fiction',
-          quantity: 20,
+          categoryId: '3',
+          quantity: '20',
           description: 'This ',
           bookimage: 'Test Image'
         })
@@ -446,7 +447,7 @@ describe('HelloBooks', () => {
           token = res.body.token;
           expect(res.status)
             .to
-            .equal(201);
+            .equal(200);
           done();
         });
     });

@@ -26,7 +26,7 @@ let bookId;
 let zerobookId;
 let testbookId;
 let token;
-const testdate = new Date('2018-11-18');
+const testdate = new Date('2017-11-28');
 const nulluserId = '';
 
 
@@ -79,6 +79,7 @@ describe('HelloBooks', () => {
       username: 'Fidelis',
       password: 'bennyogidan',
       passwordConfirmation: 'bennyogidan',
+      userLevel: '3',
       email: faker
         .internet
         .email()
@@ -94,7 +95,7 @@ describe('HelloBooks', () => {
         done();
       })
       .catch(() => {
-        console.log('Error in the User seeding');
+        console.log('Error in the seeding of the db');
       });
   });
 
@@ -102,7 +103,7 @@ describe('HelloBooks', () => {
     it('should allow an authenticated user to loan a book', (done) => {
       const userbook = {
         bookId: bookId.toString(),
-        returndate: testdate
+        returnDate: testdate
       };
       chai
         .request(app)
@@ -112,7 +113,7 @@ describe('HelloBooks', () => {
         .end((err, res) => {
           expect(res.status)
             .to
-            .equal(201);
+            .equal(200);
           done();
         });
     });
@@ -139,7 +140,7 @@ describe('HelloBooks', () => {
     it('should be able to borrow another book after first loan', (done) => {
       const userbook = {
         bookId: testbookId.toString(),
-        returndate: testdate
+        returnDate: testdate
       };
       chai
         .request(app)
@@ -152,7 +153,7 @@ describe('HelloBooks', () => {
             .equal('Amarachi continues to go to school succesfully loaned');
           expect(res.status)
             .to
-            .equal(201);
+            .equal(200);
           expect(res.body).to.be.an('object');
           done();
         });
@@ -161,7 +162,7 @@ describe('HelloBooks', () => {
       const userbook = {
         userId,
         bookId: bookId.toString(),
-        returndate: testdate
+        returnDate: testdate
       };
       chai
         .request(app)
@@ -182,7 +183,7 @@ describe('HelloBooks', () => {
     it('should not be able to borrow book if the user id is invalid', (done) => {
       const userbook = {
         bookId: bookId.toString(),
-        returndate: testdate
+        returnDate: testdate
       };
       chai
         .request(app)
@@ -199,7 +200,7 @@ describe('HelloBooks', () => {
     it('should not be able to borrow book with previous functioning route', (done) => {
       const userbook = {
         bookId: bookId.toString(),
-        returndate: testdate
+        returnDate: testdate
       };
       chai
         .request(app)
@@ -220,7 +221,7 @@ describe('HelloBooks', () => {
     it('should not be able to borrow a book if bookId cannot be found', (done) => {
       const userbook = {
         bookId: 500,
-        returndate: testdate
+        returnDate: testdate
       };
       chai
         .request(app)
@@ -241,7 +242,7 @@ describe('HelloBooks', () => {
       const userbook = {
         userId,
         bookId: bookId.toString(),
-        returndate: 'Invalid date'
+        returnDate: 'Invalid date'
       };
       chai
         .request(app)
@@ -263,7 +264,7 @@ describe('HelloBooks', () => {
       const userbook = {
         userId,
         bookId: bookId.toString(),
-        returndate: 2108
+        returnDate: 2108
       };
       chai
         .request(app)
@@ -281,7 +282,7 @@ describe('HelloBooks', () => {
       const userbook = {
         userId,
         bookId: zerobookId,
-        returndate: testdate
+        returnDate: testdate
       };
       chai
         .request(app)
@@ -343,7 +344,7 @@ describe('HelloBooks', () => {
         .end((err, res) => {
           expect(res.status)
             .to
-            .equal(201);
+            .equal(200);
           done();
         });
     });

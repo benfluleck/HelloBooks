@@ -20,7 +20,7 @@ module.exports = {
         quantity: 25,
         description: faker.lorem.paragraphs(),
         ISBN: 1222221212,
-          createdAt: new Date(),
+        createdAt: new Date(),
         updatedAt: new Date(),
       },
       {

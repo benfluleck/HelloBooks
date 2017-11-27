@@ -2,7 +2,9 @@ import { toDate } from 'validator';
 import models from '../models';
 import paginationFunc from '../controllers/middleware/pagination';
 
-const { User,Books, Userlevel ,UserBooks, Notifications } = models;
+const {
+  User, Books, Userlevel, UserBooks, Notifications
+} = models;
 
 
 export default {
@@ -20,24 +22,24 @@ export default {
     if (!req.body.returnDate) {
       return res
         .status(404)
-        .send({message: 'Please specify a valid return date'});
-    } 
-    if (toDate(req.body.returnDate) <= Date.now() || !toDate(req.body.returnDate) ) {
-
+        .send({ message: 'Please specify a valid return date' });
+    }
+    if (toDate(req.body.returnDate) <= Date.now() || !toDate(req.body.returnDate)) {
       return res
         .status(422)
-        .send({message: 'Please provide a valid return date'});
+        .send({ message: 'Please provide a valid return date' });
     }
     const returnDate = new Date(req.body.returnDate);
     User
-      .findById(userId,
-      {
-        include: [{
-          model: Userlevel,
-          as: 'level',
-          attributes: ['levelName', 'maxBooks', 'maxDays']
-        }]
-      }
+      .findById(
+        userId,
+        {
+          include: [{
+            model: Userlevel,
+            as: 'level',
+            attributes: ['levelName', 'maxBooks', 'maxDays']
+          }]
+        }
       )
       .then((user) => {
         const userLevelDate = new Date(Date.now() +
@@ -45,13 +47,15 @@ export default {
         if (!user) {
           return res
             .status(404)
-            .send({message: 'User does not exist, Please register to borrow'});
+            .send({ message: 'User does not exist, Please register to borrow' });
         }
-        if (returnDate > userLevelDate ){
-           return res
-           .status(409)
-           .send({message:'To loan this book for more days,' +  
-           ' You need to upgrade your user level, Please contact the administrator'})
+        if (returnDate > userLevelDate) {
+          return res
+            .status(409)
+            .send({
+              message: 'To loan this book for more days,' +
+           ' You need to upgrade your user level, Please contact the administrator'
+            });
         }
         if (user.borrowCount > user.level.maxBooks) {
           return res.status(400)
@@ -77,61 +81,66 @@ export default {
           if (bookFound) {
             return res
               .status(409)
-              .send({success: false, 
-                    message: 'You have already borrowed this book'});
+              .send({
+                success: false,
+                message: 'You have already borrowed this book'
+              });
           }
           UserBooks
-            .create({ userId,
-                     bookId,
-                     returnDate
-                    })
+            .create({
+              userId,
+              bookId,
+              returnDate
+            })
             .then(() => {
               Books
                 .findOne({
-                where: {
-                  id: bookId
-                }
-              })
+                  where: {
+                    id: bookId
+                  }
+                })
                 .then((bookToBorrow) => {
                   if (!bookToBorrow || bookToBorrow.quantity === 0) {
                     return res
                       .status(404)
-                      .send({ success: false, 
-                              message: "Sorry we can't find this book or all copies of this book are on loan"});
+                      .send({
+                        success: false,
+                        message: "Sorry we can't find this book or all copies of this book are on loan"
+                      });
                   }
                   bookToBorrow
                     .update({
-                    quantity: (bookToBorrow.quantity -= 1)
-                  })
-            
+                      quantity: (bookToBorrow.quantity -= 1)
+                    });
+
                   Notifications.create({
                     userId,
                     bookId,
                     action: 'Book Borrowed',
                   })
-                  .then((notification) => {
-                    const borrowedBook = {
-                      username: user.username,
-                      book: bookToBorrow.title,
-                      borrowed: bookToBorrow.createdAt,
-                      expectedReturnDate: bookToBorrow.returnDate,
-                      userLevel: user.level.levelName
-                    };
-                    res
-                      .status(201)
-                      .send({ success: true, 
-                              message: `${borrowedBook.book} succesfully loaned` 
-                            });
-                    })   
-                })
-                
-            })
+                    .then(() => {
+                      const borrowedBook = {
+                        username: user.username,
+                        book: bookToBorrow.title,
+                        borrowed: bookToBorrow.createdAt,
+                        expectedReturnDate: bookToBorrow.returnDate,
+                        userLevel: user.level.levelName
+                      };
+                      res
+                        .status(200)
+                        .send({
+                          success: true,
+                          message: `${borrowedBook.book} succesfully loaned`
+                        });
+                    });
+                });
+            });
         });
       })
       .catch((error) => {
         res
           .status(500)
-          .send({success: false, message: ` ${error.message}`});
+          .send({ success: false, message: ` ${error.message}` });
       });
   },
 
@@ -150,7 +159,7 @@ export default {
     if (!req.query.returned) {
       return res
         .status(404)
-        .send({message: 'Please specify a value for returned books'});
+        .send({ message: 'Please specify a value for returned books' });
     }
     return UserBooks.findAndCountAll({
       where: {
@@ -173,7 +182,7 @@ export default {
       if (book.length === 0) {
         return res
           .status(404)
-          .send({success: false, message: 'You have not loaned any books'});
+          .send({ success: false, message: 'You have not loaned any books' });
       }
       res
         .status(200)
@@ -212,7 +221,7 @@ export default {
       if (!history) {
         return res
           .status(409)
-          .send({success: false, message: 'You did not borrow this book'});
+          .send({ success: false, message: 'You did not borrow this book' });
       }
       history.update({
         returnStatus: true,
@@ -225,47 +234,47 @@ export default {
       }).then(() => {
         Books
           .findOne({
-          where: {
-            id: bookId
-          }
-        })
+            where: {
+              id: bookId
+            }
+          })
           .then((bookToReturn) => {
             if (!bookToReturn) {
               return res
                 .status(404)
-                .send({message: 'The book is not in our library'});
+                .send({ message: 'The book is not in our library' });
             }
             bookToReturn
               .update({
-              quantity: bookToReturn.quantity + 1
-            })
+                quantity: bookToReturn.quantity + 1
+              });
             User.findById(userId)
-            .then((user) => {
-              user.update({
-                borrowCount: (user.borrowCount - 1),
+              .then((user) => {
+                user.update({
+                  borrowCount: (user.borrowCount - 1),
+                });
+                Notifications.create({
+                  userId,
+                  bookId: history.bookId,
+                  action: 'Book Returned',
+                }).then(() => {
+                  const returnDetail = {
+                    username: user.username,
+                    book: bookToReturn.title,
+                    expectedReturnDate: history.returnDate,
+                    returnedOn: history.userReturnDate
+                  };
+                  if (returnDetail.expectedReturnDate < returnDetail.returnedOn) {
+                    res
+                      .status(200)
+                      .send({ success: true, message: `You have just returned ${returnDetail.book} late, A fine will be sent to you` });
+                  } else {
+                    res
+                      .status(200)
+                      .send({ success: true, message: `You have just returned ${returnDetail.book}` });
+                  }
+                });
               });
-              Notifications.create({
-                userId,
-                bookId: history.bookId,
-                action: 'Book Returned',
-              }).then((notification) => {
-                const returnDetail = {
-                  username: user.username,
-                  book: bookToReturn.title,
-                  expectedReturnDate: history.returnDate,
-                  returnedOn: history.userReturnDate
-                };
-                if (returnDetail.expectedReturnDate < returnDetail.returnedOn) {
-                  res
-                    .status(200)
-                    .send({success: true, message: `You have just returned ${returnDetail.book} late, A fine will be sent to you`});
-                } else {
-                  res
-                    .status(200)
-                    .send({success: true, message: `You have just returned ${returnDetail.book}`});
-                }
-              });
-            });
           });
       });
     }).catch(error => res.status(500).send(error.message));
@@ -288,7 +297,7 @@ export default {
         userId,
         returnStatus: false,
         returnDate: {
-          $lt: Date.now() - 24*60*60*1000
+          $lt: Date.now() - 24 * 60 * 60 * 1000
         }
       },
       include: [
@@ -300,22 +309,21 @@ export default {
       ],
       limit,
       offset
-    }).
-    then((book) => {
-      if (book.length === 0) {
-        return res
-          .status(404)
-          .send({ message: 'You have no overdue books' });
-      }
-      res
-        .status(200)
-        .send({
-          books: book.rows,
-          pagination: paginationFunc(offset, limit, book)
-        });
-    }).catch(error => res.status(500).send(error.message));
+    })
+      .then((book) => {
+        if (book.length === 0) {
+          return res
+            .status(404)
+            .send({ message: 'You have no overdue books' });
+        }
+        res
+          .status(200)
+          .send({
+            books: book.rows,
+            pagination: paginationFunc(offset, limit, book)
+          });
+      }).catch(error => res.status(500).send(error.message));
   },
-
 
 
   /**
@@ -344,7 +352,7 @@ export default {
       limit,
       offset,
       order: [
-    ['createdAt', 'DESC']
+        ['createdAt', 'DESC']
       ]
     }).then((book) => {
       if (book.length === 0) {
@@ -359,6 +367,5 @@ export default {
           pagination: paginationFunc(offset, limit, book)
         });
     }).catch(error => res.status(400).send(error.message));
-
   }
 };

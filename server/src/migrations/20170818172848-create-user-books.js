@@ -30,6 +30,10 @@ module.exports = {
         allowNull: false,
         defaultValue: false,
       },
+      overdueAmount:{
+        type: Sequelize.INTEGER,
+        allowNull: true
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
