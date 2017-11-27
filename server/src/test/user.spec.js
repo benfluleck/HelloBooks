@@ -48,6 +48,7 @@ describe('HelloBooks', () => {
         .lastName(),
       username: 'Benny',
       password: 'benny',
+      isAdmin: false,
       passwordConfirmation: 'benny',
       email: faker
         .internet
@@ -58,8 +59,7 @@ describe('HelloBooks', () => {
         token = jwt.sign({
           id: user.id,
           email: user.email,
-          username: user.username,
-          firstname: user.firstname
+          isAdmin: true
         }, process.env.JWT_SECRET);
         done();
       })
@@ -115,15 +115,12 @@ describe('HelloBooks', () => {
           lastname: faker
             .name
             .lastName(),
-          username: faker
-            .internet
-            .userName(),
+          username: 'samplename',
           password: 'password',
           passwordConfirmation: 'password',
           email
         })
         .end((err, res) => {
-          console.log(res,'>>>>>>>')
           expect(res.status)
             .to
             .equal(201);
@@ -183,18 +180,6 @@ describe('HelloBooks', () => {
           done();
         });
     });
-    it('should allow only authenticated users allowed to create books', (done) => {
-      chai
-        .request(app)
-        .post('/api/v1/books/')
-        .set('Accept', 'application/x-www-form-urlencoded')
-        .end((err, res) => {
-          expect(res.status)
-            .to
-            .equal(401);
-          done();
-        });
-    });
     it('should allow only authenticated users allowed to loan', (done) => {
       chai
         .request(app)
@@ -234,7 +219,6 @@ describe('HelloBooks', () => {
         });
     });
   });
-
   describe('Authentication processes', () => {
     it('should reject invalid user', (done) => {
       chai
@@ -320,75 +304,6 @@ describe('HelloBooks', () => {
    Authenticated users Tests
    */
   describe('POST /books', () => {
-    it('should allow administrators to create books', (done) => {
-      chai
-        .request(app)
-        .post('/api/v1/books')
-        .set('Accept', 'application/x-www-form-urlencoded')
-        .set('x-access-token', token)
-        .send({
-          title: 'Learn Java',
-          author: 'Sleeping Master',
-          categoryId: '2',
-          quantity: '39',
-          description: 'Learn Java in 3hours',
-          bookImage: 'Test'
-        })
-        .end((err, res) => {
-          expect(res.status)
-            .to
-            .equal(201);
-          expect(res.body.message)
-            .to
-            .equal('Learn Java has been added to the library, Category: Drama');
-          done();
-        });
-    });
-    it('should reject the addition of the same book', (done) => {
-      chai
-        .request(app)
-        .post('/api/v1/books')
-        .set('Accept', 'application/x-www-form-urlencoded')
-        .set('x-access-token', token)
-        .send({
-          title: 'Shola comes home',
-          author: 'Benny',
-          categoryId: '1',
-          quantity: '20',
-          description: 'This needs to be a long description',
-          bookimage: 'Test Image'
-        })
-        .end((err, res) => {
-          expect(res.status)
-            .to
-            .equal(409);
-          expect(res.body.message)
-            .to
-            .equal('A book with the same title and author already exists in the library');
-          done();
-        });
-    });
-    it('Error in the desciption', (done) => {
-      chai
-        .request(app)
-        .post('/api/v1/books')
-        .set('Accept', 'application/x-www-form-urlencoded')
-        .set('x-access-token', token)
-        .send({
-          title: 'Benedict goes to school',
-          author: 'Benny',
-          categoryId: '3',
-          quantity: '20',
-          description: 'This ',
-          bookimage: 'Test Image'
-        })
-        .end((err, res) => {
-          expect(res.status)
-            .to
-            .equal(400);
-          done();
-        });
-    });
     it('should throw a 404 error for Users that do not exist', (done) => {
       chai
         .request(app)

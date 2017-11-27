@@ -3,10 +3,10 @@ import { nullValidationFnMap, nullValidFieldMessage } from './validators';
 const fieldMap = (bookId, categoryId) => ({
   '/auth/users/signin': ['username', 'password'],
   '/auth/users/signup': ['email', 'password', 'username', 'firstname', 'lastname'],
-  '/users/changepassword':['newPassword'],
-  '/admin/category': ['categoryName'],  
-  '/books': ['title', 'description', 'author','quantity', 'categoryId'],
-  [`/books/${bookId}`]: ['title', 'author', 'description'],
+  '/users/changepassword': ['newPassword'],
+  '/admin/category': ['categoryName'],
+  '/admin/books': ['title', 'description', 'author', 'quantity', 'categoryId'],
+  [`/admin/books/${bookId}`]: ['title', 'author', 'description', 'quantity'],
   [`/admin/category/${categoryId}`]: ['categoryName']
 });
 

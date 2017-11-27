@@ -26,22 +26,33 @@ const authenticate = (req, res, next) => {
   }
 };
 
+/**
+ * @description Decode Token for the server side processes
+ * @param {object} req
+ * @param {object} res
+ * @param {object} next
+ * @returns {object} res
+ */
 const decodeToken = (req, res, next) => {
   const token = req.headers['x-access-token'] || req.headers.authorization;
   if (token) {
     const decodedToken = jwtDecode(token);
-    next(null, { userId: decodedToken.id.id });
+    next(null, {
+      userId: decodedToken.id.id
+    });
   } else {
-    res.status(401).send({ message: 'Unauthoriised access' });
+    res.status(401).send({ message: 'Unauthorised access' });
   }
 };
 
+
 /**
  * @description Generates a json web token with the supplied parameters
- * @param {number} id user id
+ * @param {number} id
+ * @param {boolean} isAdmin
  * @return {promise} signed token
  */
-const getJWT = (id,isAdmin) =>
+const getJWT = (id, isAdmin) =>
   new Promise((resolve, reject) => {
     jwt.sign(
       {

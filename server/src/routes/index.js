@@ -3,6 +3,7 @@ import controller from '../controllers';
 import fieldValidationMiddleware from '../controllers/middleware/fieldValidations';
 import nullvalidationMiddleware from '../controllers/middleware/nullValidation';
 import decodeToken from '../controllers/middleware/authenticate';
+import checkAdmin from '../controllers/middleware/checkAdmin';
 
 const authdecodeToken = decodeToken.decodeToken;
 const Router = express.Router();
@@ -20,9 +21,9 @@ Router.post('/auth/users/signup', fieldValidationMiddleware, nullvalidationMiddl
 
 Router.post('/auth/users/signin', nullvalidationMiddleware, UserController.signIn);
 
-Router.post('/books', nullvalidationMiddleware, BooksController.createBook);
+Router.post('/admin/books', checkAdmin, nullvalidationMiddleware, BooksController.createBook);
 
-Router.put('/books/:bookId', nullvalidationMiddleware, BooksController.updateBook);
+Router.put('/admin/books/:bookId', checkAdmin, nullvalidationMiddleware, BooksController.updateBook);
 
 Router.get('/books/', BooksController.getAllBooks);
 
@@ -38,9 +39,9 @@ Router.get('/users/borrowedbooks', authdecodeToken, UserBooksController.getBorro
 
 Router.post('/admin/category', authdecodeToken, nullvalidationMiddleware, CategoryController.addCategory);
 
-Router.delete('/admin/category/:categoryId', CategoryController.deleteCategory);
+Router.delete('/admin/category/:categoryId', checkAdmin, CategoryController.deleteCategory);
 
-Router.put('/admin/category/:categoryId', nullvalidationMiddleware, CategoryController.editCategory);
+Router.put('/admin/category/:categoryId', checkAdmin, nullvalidationMiddleware, CategoryController.editCategory);
 
 Router.get('/books/listcategories', authdecodeToken, CategoryController.listCategories);
 
@@ -50,12 +51,12 @@ Router.get('/books/search', authdecodeToken, BooksController.searchBooks);
 
 Router.get('/books/:bookId', authdecodeToken, BooksController.viewBook);
 
-Router.delete('/admin/books/:bookId', authdecodeToken, BooksController.deleteBook);
+Router.delete('/admin/books/:bookId', authdecodeToken, checkAdmin, BooksController.deleteBook);
 
-Router.get('/admin/notifications', authdecodeToken, NotificationsController.displayNotification);
+Router.get('/admin/notifications', authdecodeToken, checkAdmin, NotificationsController.displayNotification);
 
-Router.put('/users/changepassword', nullvalidationMiddleware, authdecodeToken, UserController.changePassword);
+Router.put('/users/changepassword', authdecodeToken, nullvalidationMiddleware, UserController.changePassword);
 
-Router.put('/admin/changeuserlevel', UserController.changeLevel);
+Router.put('/admin/changeuserlevel', authdecodeToken, checkAdmin, UserController.changeLevel);
 
 export default Router;

@@ -9,7 +9,7 @@ const fieldLength = {
   author: { max: 60, min: 2 },
   description: { min: 7 },
   email: { max: 50, min: 5 },
-  categoryName: { min: 3 , max:30},
+  categoryName: { min: 3, max: 30 },
 };
 
 const emailRegex = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"|"_+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;

@@ -1,12 +1,11 @@
-import sendSurcharge from './sendSurcharge';
 import { CronJob } from 'cron';
-
+import sendSurcharge from './sendSurcharge';
 
 export const setCron = props => new CronJob(props);
 
 export const sendSurchargeJob = () =>
   setCron({
-    cronTime: '05 17 * * 1-7', 
+    cronTime: '05 17 * * 1-7',
     onTick: sendSurcharge,
     timeZone: 'Africa/Lagos',
     start: true
@@ -15,6 +14,4 @@ export const sendSurchargeJob = () =>
 if (require.main === module) {
   sendSurchargeJob();
 }
-export default {
 
-};

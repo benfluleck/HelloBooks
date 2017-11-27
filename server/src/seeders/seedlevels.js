@@ -4,7 +4,7 @@ module.exports = {
     queryInterface.bulkInsert('Userlevel', [
       {
         levelName: 'Bronze',
-        level:1,
+        level: 1,
         maxBooks: 2,
         maxDays: 3,
         createdAt: new Date(),
@@ -12,20 +12,21 @@ module.exports = {
       },
       {
         levelName: 'Silver',
-        level:2,
+        level: 2,
         maxDays: 5,
         maxBooks: 5,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        levelName: 'Gold',
-        level:3,
-        maxBooks: 10,
-        maxDays: 7,
+        levelName: 'Platinium',
+        level: 4,
+        maxBooks: 50,
+        maxDays: 14,
         createdAt: new Date(),
         updatedAt: new Date(),
-      }]),
+      }
+    ]),
 
   down: queryInterface =>
     queryInterface.bulkDelete('Userlevel', [{
@@ -34,5 +35,9 @@ module.exports = {
       levelName: 'Silver'
     }, {
       levelName: 'Gold'
-    }])
+    },
+    {
+      levelName: 'Platinumi'
+    }
+    ])
 };

@@ -1,7 +1,7 @@
 import models from '../models';
 
 
-const { Notifications, Books, User } = models ;
+const { Notifications, Books, User } = models;
 
 export default {
   /**  @description displays admin notifications

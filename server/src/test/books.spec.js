@@ -54,15 +54,14 @@ describe('HelloBooks', () => {
       username: 'Bunmi',
       password: 'bennyogidan',
       passwordConfirmation: 'bennyogidan',
+      isAdmin: true,
       email: faker
         .internet
         .email()
     }).then((user) => {
       token = jwt.sign({
         id: user.id,
-        email: user.email,
-        username: user.username,
-        firstname: user.firstname
+        isAdmin: user.isAdmin
       }, process.env.JWT_SECRET);
       done();
     })
@@ -151,13 +150,11 @@ describe('HelloBooks', () => {
         });
     });
   });
-
-
-  describe('/PUT Edit a  book', () => {
+  describe('/PUT Edit a book', () => {
     it('should edit a selected book from the database', (done) => {
       chai
         .request(app)
-        .put(`/api/v1/books/${bookId}`)
+        .put(`/api/v1/admin/books/${bookId}`)
         .set('Accept', 'application/x-www-form-urlencoded')
         .set('x-access-token', token)
         .send({
@@ -166,7 +163,7 @@ describe('HelloBooks', () => {
           categoryId: '2',
           quantity: '23',
           description: 'This is a test',
-          bookimage: 'Image'
+          bookImage: 'Image'
         })
         .end((err, res) => {
           expect(res.status)
@@ -178,13 +175,13 @@ describe('HelloBooks', () => {
     it('should not edit a selected book if a field value is set to empty', (done) => {
       chai
         .request(app)
-        .put(`/api/v1/books/${bookId}`)
+        .put(`/api/v1/admin/books/${bookId}`)
         .set('Accept', 'application/x-www-form-urlencoded')
         .set('x-access-token', token)
         .send({
           title: 'The Chronicles of Andela',
           author: '',
-          category: 2,
+          categoryId: '2',
           quantity: '23',
           description: 'This is a test',
           bookimage: 'Image'
@@ -199,7 +196,7 @@ describe('HelloBooks', () => {
     it('should throw an error if category Id is not defined', (done) => {
       chai
         .request(app)
-        .put('/api/v1/books/')
+        .put('/api/v1/admin/books')
         .set('Accept', 'application/x-www-form-urlencoded')
         .set('x-access-token', token)
         .send({
@@ -207,7 +204,7 @@ describe('HelloBooks', () => {
           author: 'C.S. Lewis',
           quantity: '23',
           description: 'This is a test',
-          bookimage: 'Image'
+          bookImage: 'Image'
         })
         .end((err, res) => {
           expect(res.status)
@@ -216,10 +213,92 @@ describe('HelloBooks', () => {
           done();
         });
     });
+    it('should allow administrators to create books', (done) => {
+      chai
+        .request(app)
+        .post('/api/v1/admin/books')
+        .set('Accept', 'application/x-www-form-urlencoded')
+        .set('x-access-token', token)
+        .send({
+          title: 'Learn Java',
+          author: 'Sleeping Master',
+          categoryId: '2',
+          quantity: '39',
+          description: 'Learn Java in 3hours',
+          bookImage: 'Test'
+        })
+        .end((err, res) => {
+          console.log(res,'?>>>>>>>>')
+          expect(res.status)
+            .to
+            .equal(201);
+          expect(res.body.message)
+            .to
+            .equal('Learn Java has been added to the library, Category: Drama');
+          done();
+        });
+    });
+    it('should reject the addition of the same book', (done) => {
+      chai
+        .request(app)
+        .post('/api/v1/admin/books')
+        .set('Accept', 'application/x-www-form-urlencoded')
+        .set('x-access-token', token)
+        .send({
+          title: 'Shola comes home',
+          author: 'Benny',
+          categoryId: '1',
+          quantity: '20',
+          description: 'This needs to be a long description',
+          bookimage: 'Test Image'
+        })
+        .end((err, res) => {
+          expect(res.status)
+            .to
+            .equal(409);
+          expect(res.body.message)
+            .to
+            .equal('A book with the same title and author already exists in the library');
+          done();
+        });
+    });
+    it('Error in the desciption', (done) => {
+      chai
+        .request(app)
+        .post('/api/v1/admin/books')
+        .set('Accept', 'application/x-www-form-urlencoded')
+        .set('x-access-token', token)
+        .send({
+          title: 'Benedict goes to school',
+          author: 'Benny',
+          categoryId: '3',
+          quantity: '20',
+          description: 'This ',
+          bookimage: 'Test Image'
+        })
+        .end((err, res) => {
+          expect(res.status)
+            .to
+            .equal(400);
+          done();
+        });
+    });
+    it('should allow only authenticated users allowed to create books', (done) => {
+      chai
+        .request(app)
+        .post('/api/v1/admin/books/')
+        .set('Accept', 'application/x-www-form-urlencoded')
+        .end((err, res) => {
+          expect(res.status)
+            .to
+            .equal(401);
+          done();
+        });
+    });
     it('should throw an error if the selected book undefined', (done) => {
       chai
         .request(app)
-        .put('/api/v1/books/')
+        .put('/api/v1/admin/books/')
         .set('Accept', 'application/x-www-form-urlencoded')
         .set('x-access-token', token)
         .send({

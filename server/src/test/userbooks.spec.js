@@ -36,10 +36,10 @@ describe('HelloBooks', () => {
       .create({
         title: 'Eze goes to school',
         author: 'Benny Ogidan',
-        category: 'Fiction',
-        quantity: 20,
+        categoryId: '2',
+        quantity: '20',
         description: 'Test',
-        bookimage: 'Test Image'
+        bookImage: 'Test Image'
       })
       .then((book) => {
         bookId = book.id;
@@ -48,10 +48,10 @@ describe('HelloBooks', () => {
       .create({
         title: 'Eze continues to go to school',
         author: 'Benny Ogidan',
-        category: 'Fiction',
-        quantity: 0,
+        categoryId: '1',
+        quantity: '0',
         description: 'Test',
-        bookimage: 'Test Image'
+        bookImage: 'Test Image'
       })
       .then((book) => {
         zerobookId = book.id;
@@ -61,10 +61,10 @@ describe('HelloBooks', () => {
       .create({
         title: 'Amarachi continues to go to school',
         author: 'Benny Ogidan',
-        category: 'Fiction',
-        quantity: 1,
+        categoryId: '2',
+        quantity: '1',
         description: 'Test',
-        bookimage: 'Test Image'
+        bookImage: 'Test Image'
       })
       .then((book) => {
         testbookId = book.id;
@@ -87,10 +87,7 @@ describe('HelloBooks', () => {
       .then((user) => {
         userId = user.id;
         token = jwt.sign({
-          id: user.id,
-          email: user.email,
-          username: user.username,
-          firstname: user.firstname
+          id: user.id
         }, process.env.JWT_SECRET);
         done();
       })
@@ -100,7 +97,7 @@ describe('HelloBooks', () => {
   });
 
   describe('/POST loan a book', () => {
-    it('should allow an authenticated user to loan a book', (done) => {
+    it('should allow an authenticated to loan a book', (done) => {
       const userbook = {
         bookId: bookId.toString(),
         returnDate: testdate
@@ -332,8 +329,6 @@ describe('HelloBooks', () => {
     });
   });
 
-
-  // Edit a book
   describe('/PUT Return book', () => {
     it('should be able to return a book with a book id', (done) => {
       chai
