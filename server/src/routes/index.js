@@ -37,7 +37,7 @@ Router.get('/users/getoverduebooks', authdecodeToken, UserBooksController.getOve
 
 Router.get('/users/borrowedbooks', authdecodeToken, UserBooksController.getBorrowedBookList);
 
-Router.post('/admin/category', authdecodeToken, nullvalidationMiddleware, CategoryController.addCategory);
+Router.post('/admin/category', checkAdmin, nullvalidationMiddleware, CategoryController.addCategory);
 
 Router.delete('/admin/category/:categoryId', checkAdmin, CategoryController.deleteCategory);
 
@@ -57,6 +57,6 @@ Router.get('/admin/notifications', authdecodeToken, checkAdmin, NotificationsCon
 
 Router.put('/users/changepassword', authdecodeToken, nullvalidationMiddleware, UserController.changePassword);
 
-Router.put('/admin/changeuserlevel', authdecodeToken, checkAdmin, UserController.changeLevel);
+Router.put('/admin/changeuserlevel', checkAdmin, UserController.changeLevel);
 
 export default Router;

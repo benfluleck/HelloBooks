@@ -21,6 +21,8 @@ const authenticate = (req, res, next) => {
       req.user = decoded;
       next();
     });
+  } else if (token === '') {
+    res.status(403).send({ token: null, message: 'Forbidden' });
   } else {
     res.status(401).send({ token: null, message: 'Unauthorised access' });
   }

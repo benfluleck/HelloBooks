@@ -26,7 +26,7 @@ let bookId;
 let zerobookId;
 let testbookId;
 let token;
-const testdate = new Date('2017-11-28');
+const testdate = new Date('2017-12-01');
 const nulluserId = '';
 
 
@@ -80,9 +80,7 @@ describe('HelloBooks', () => {
       password: 'bennyogidan',
       passwordConfirmation: 'bennyogidan',
       userLevel: '3',
-      email: faker
-        .internet
-        .email()
+      email: faker.internet.email()
     })
       .then((user) => {
         userId = user.id;
@@ -97,7 +95,7 @@ describe('HelloBooks', () => {
   });
 
   describe('/POST loan a book', () => {
-    it('should allow an authenticated to loan a book', (done) => {
+    it('should allow an authenticated user to loan a book', (done) => {
       const userbook = {
         bookId: bookId.toString(),
         returnDate: testdate
@@ -133,7 +131,6 @@ describe('HelloBooks', () => {
           done();
         });
     });
-
     it('should be able to borrow another book after first loan', (done) => {
       const userbook = {
         bookId: testbookId.toString(),
@@ -314,6 +311,7 @@ describe('HelloBooks', () => {
           done();
         });
     });
+    // /users/getloanhistory
     it('should not return a borrow list if return query is not set', (done) => {
       chai
         .request(app)
@@ -324,6 +322,32 @@ describe('HelloBooks', () => {
           expect(res.status)
             .to
             .equal(404);
+          done();
+        });
+    });
+    it('should return a user\'s loan history', (done) => {
+      chai
+        .request(app)
+        .get('/api/v1/users/getloanhistory')
+        .set('Accept', 'application/x-www-form-urlencoded')
+        .set('x-access-token', token)
+        .end((err, res) => {
+          expect(res.status)
+            .to
+            .equal(200);
+          done();
+        });
+    });
+    it('should return 404 for a user with no overdue books ', (done) => {
+      chai
+        .request(app)
+        .get('/api/v1/users/getoverduebooks')
+        .set('Accept', 'application/x-www-form-urlencoded')
+        .set('x-access-token', token)
+        .end((err, res) => {
+          expect(res.status)
+            .to
+            .equal(200);
           done();
         });
     });

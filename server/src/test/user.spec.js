@@ -21,6 +21,7 @@ chai.use(chaiHttp);
 let userId;
 let bookId;
 let token;
+let userToken;
 
 
 describe('HelloBooks', () => {
@@ -37,8 +38,6 @@ describe('HelloBooks', () => {
       .then((book) => {
         bookId = book.id;
       });
-
-    // Create a dummy user
     User.create({
       firstname: faker
         .name
@@ -56,7 +55,7 @@ describe('HelloBooks', () => {
     })
       .then((user) => {
         userId = user.id;
-        token = jwt.sign({
+        userToken = jwt.sign({
           id: user.id,
           email: user.email,
           isAdmin: true
@@ -99,7 +98,98 @@ describe('HelloBooks', () => {
     });
   });
 
-  describe('/POST  Signing up a user', () => {
+  describe('Authentication', () => {
+    it('should return 201 when a regular administrator is created', (done) => {
+      chai.request(app)
+        .post('/api/v1/auth/users/signup')
+        .set('Accept', 'application/x-www-form-urlencoded')
+        .send({
+          username: 'testadmin',
+          password: 'boooboo',
+          passwordConfirmation: 'boooboo',
+          firstname: 'Benny',
+          isAdmin: true,
+          email: faker.internet.email(),
+          lastname: faker.name.lastName()
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(201);
+          done();
+        });
+    });
+    it('should return 200 when a administrator signs in', (done) => {
+      chai.request(app)
+        .post('/api/v1/auth/users/signin')
+        .set('Accept', 'application/x-www-form-urlencoded')
+        .send({
+          username: 'testadmin',
+          password: 'boooboo'
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          token = res.body.token;
+          done();
+        });
+    });
+  });
+
+  describe('User level', () => {
+    it('should return 409 when level is the same as user level', (done) => {
+      chai.request(app).put('/api/v1/admin/changeuserlevel').set('x-access-token', token)
+        .send({
+          newLevelId: 1,
+          userId: 1
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(409);
+          done();
+        });
+    });
+    it('should return 200 when level change is successful', (done) => {
+      chai.request(app).put('/api/v1/admin/changeuserlevel').set('x-access-token', token)
+        .send({
+          newLevelId: 2,
+          userId: 1
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          done();
+        });
+    });
+    it('should return 400 when newLevelId is null', (done) => {
+      chai.request(app).put('/api/v1/admin/changeuserlevel').set('x-access-token', token)
+        .send({
+          userId: 1
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          done();
+        });
+    });
+    it('should return 404 when new level does not exist', (done) => {
+      chai.request(app).put('/api/v1/admin/changeuserlevel').set('x-access-token', token)
+        .send({
+          newLevelId: 20,
+          userId: 1
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          done();
+        });
+    });
+    it('should return 404 when the user is not found ', (done) => {
+      chai.request(app).put('/api/v1/admin/changeuserlevel').set('x-access-token', token)
+        .send({
+          newLevelId: 2,
+          userId: 445454
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          done();
+        });
+    });
+  });
+  describe('Signing up a user', () => {
     it('should sign up users who fill the correct parameters for the signup form', (done) => {
       const email = faker
         .internet
@@ -359,7 +449,7 @@ describe('HelloBooks', () => {
         .set('Accept', 'application/x-www-form-urlencoded')
         .send({ username: 'Benny', password: 'benny' })
         .end((err, res) => {
-          token = res.body.token;
+          userToken = res.body.token;
           expect(res.status)
             .to
             .equal(200);
@@ -371,7 +461,7 @@ describe('HelloBooks', () => {
         .request(app)
         .post('/api/v1/auth/users/signup')
         .set('Accept', 'application/x-www-form-urlencoded')
-        .set({ 'x-access-token': token })
+        .set({ 'x-access-token': userToken })
         .send({
           username: 'Benny',
           firstname: 'Benn',
@@ -393,7 +483,7 @@ describe('HelloBooks', () => {
         .request(app)
         .post('/api/v1/auth/users/signup')
         .set('Accept', 'application/x-www-form-urlencoded')
-        .set({ 'x-access-token': token })
+        .set({ 'x-access-token': userToken })
         .send({
           username: 'Homer',
           firstname: 'Homer',
@@ -416,7 +506,7 @@ describe('HelloBooks', () => {
         .request(app)
         .post('/api/v1/auth/users/signup')
         .set('Accept', 'application/x-www-form-urlencoded')
-        .set({ 'x-access-token': token })
+        .set({ 'x-access-token': userToken })
         .send({
           username: 'Homer',
           firstname: 'Homer',
@@ -474,6 +564,36 @@ describe('HelloBooks', () => {
             .to
             .be
             .equal(400);
+          done();
+        });
+    });
+  });
+  describe('Change password', () => {
+    it('should produce a 409 error message if the previous password is supplied', (done) => {
+      chai
+        .request(app)
+        .put('/api/v1/users/changepassword')
+        .set('Accept', 'application/x-www-form-urlencoded')
+        .set({ 'x-access-token': userToken })
+        .send({ newPassword: 'benny' })
+        .end((err, res) => {
+          expect(res.status)
+            .to
+            .equal(409);
+          done();
+        });
+    });
+    it('should be able to change a user\'s password provided a new password is specified', (done) => {
+      chai
+        .request(app)
+        .put('/api/v1/users/changepassword')
+        .set('Accept', 'application/x-www-form-urlencoded')
+        .set({ 'x-access-token': userToken })
+        .send({ newPassword: 'bbbbvvvvvvvv' })
+        .end((err, res) => {
+          expect(res.status)
+            .to
+            .equal(200);
           done();
         });
     });

@@ -16,10 +16,20 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        username: faker.internet.userName(),
-        password: bcrypt.hashSync('bookiiii', 10),
+        username: 'fakeadministrator',
+        password: bcrypt.hashSync('bennyogidan', bcrypt.genSaltSync(10)),
         email: 'sample@email.com',
         firstname: faker.name.firstName(),
+        lastname: faker.name.lastName(),
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        username: 'bennyogidan',
+        password: bcrypt.hashSync('bennyogidan', bcrypt.genSaltSync(10)),
+        email: 'benfluleck@gmail.com',
+        firstname: faker.name.firstName(),
+        isAdmin: true,
         lastname: faker.name.lastName(),
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -27,7 +37,6 @@ module.exports = {
     ]),
   down: queryInterface =>
     queryInterface.bulkDelete('User', [{
-      
     }])
 };
 

@@ -114,23 +114,20 @@ export default(sequelize, DataTypes) => {
     authId: {
       type: DataTypes.STRING,
     },
-
     isAdmin: {
       type: DataTypes.BOOLEAN,
-      allowNull: false,
+      allowNull: true,
       defaultValue: false
     }
   }, {
     freezeTableName: true,
     hooks: {
-
       beforeCreate: (user) => {
         if (user.password === user.passwordConfirmation) {
           user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10));
         } else {
           throw new Error('Passwords do not match');
         }
-      
       },
     }
   });

@@ -196,7 +196,7 @@ export default {
      * @returns {object} book
      */
   viewBook(req, res) {
-    const bookId = parseInt(req.params.bookId);
+    const bookId = parseInt(req.params.bookId, 10);
     if (isNaN(bookId)) {
       return res.status(400).send({
         message: 'Please enter a valid bookId'
@@ -221,7 +221,7 @@ export default {
   },
 
   deleteBook(req, res) {
-    const bookId = parseInt(req.params.bookId);
+    const bookId = parseInt(req.params.bookId, 10);
     if (isNaN(bookId)) {
       return res.status(400).send({
         message: 'Please enter a valid bookId'
@@ -244,7 +244,7 @@ export default {
           .then((borrowedBooks) => {
             if (borrowedBooks) {
               return res.status(409).send({
-                message: 'You can\'t delete this ook while there is a copy still out on loan'
+                message: 'You can\'t delete this book while there is a copy still out on loan'
               });
             }
             book

@@ -25,7 +25,7 @@ export default {
         categoryName
       })
         .then((categories) => {
-          res.status(200)
+          res.status(201)
             .send({
               message: `Category added!, ${categories.categoryName}`
             });
