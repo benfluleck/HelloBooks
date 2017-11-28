@@ -34,10 +34,10 @@ const sendSurcharge = () => (UserBooks.findAll({
     bookTitles.push(book.book.title);
   });
 
-  emails.forEach((email,index) => {
+  emails.forEach((email, index) => {
     const to = email;
     const bcc = null;
-    const subject = "Default on Returning Book";
+    const subject = 'Default on Returning Book';
     const html = `
     <p>Hello <strong>${usernames[index]}</strong>, </p>
     <p>This is to notify you that you have exceeded the borrowing duration </p>
@@ -45,20 +45,20 @@ const sendSurcharge = () => (UserBooks.findAll({
     <p>Please return the book <strong>${bookTitles[index]}</strong>
     <p>Thank you for the understanding</p><br/>
     <p>Kind regards,</p>`;
-    transporter.sendMail(mailOptions(to, bcc, subject, html), function (error, info) {
+    transporter.sendMail(mailOptions(to, bcc, subject, html), (error, info) => {
       if (error) {
         console.log(error);
       } else {
-        console.log('Email sent: ' + info.response);
+        console.log(`Email sent: ${ info.response}`);
         process.exit(0);
       }
-    })
-  });  
+    });
+  });
 })
-.catch((error) => { 
-  process.stdout.write(error.stack);   
-  process.exit(0);
-})
+  .catch((error) => {
+    process.stdout.write(error.stack);
+    process.exit(0);
+  })
 );
 
 export default sendSurcharge;

@@ -26,10 +26,6 @@ module.exports = {
         allowNull: false,
         defaultValue: () => randomId()
       },
-      category: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
       description: {
         type: Sequelize.TEXT,
         allowNull: true
@@ -39,13 +35,12 @@ module.exports = {
         allowNull: false,
         defaultValue: 1
       },
-      bookimage: {
-        type: Sequelize.STRING,
+      categoryId: {
+        allownull: false,
+        type: Sequelize.INTEGER
       },
-      status: {
-        type: Sequelize.BOOLEAN,
-        allowNull: false,
-        defaultValue: false
+      bookImage: {
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,
@@ -53,6 +48,10 @@ module.exports = {
       },
       updatedAt: {
         allowNull: false,
+        type: Sequelize.DATE
+      },
+      deletedAt: {
+        allowNull: true,
         type: Sequelize.DATE
       }
     });

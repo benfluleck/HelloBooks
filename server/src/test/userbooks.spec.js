@@ -26,7 +26,7 @@ let bookId;
 let zerobookId;
 let testbookId;
 let token;
-const testdate = new Date('2018-11-18');
+const testdate = new Date('2017-12-01');
 const nulluserId = '';
 
 
@@ -36,10 +36,10 @@ describe('HelloBooks', () => {
       .create({
         title: 'Eze goes to school',
         author: 'Benny Ogidan',
-        category: 'Fiction',
-        quantity: 20,
+        categoryId: '2',
+        quantity: '20',
         description: 'Test',
-        bookimage: 'Test Image'
+        bookImage: 'Test Image'
       })
       .then((book) => {
         bookId = book.id;
@@ -48,10 +48,10 @@ describe('HelloBooks', () => {
       .create({
         title: 'Eze continues to go to school',
         author: 'Benny Ogidan',
-        category: 'Fiction',
-        quantity: 0,
+        categoryId: '1',
+        quantity: '0',
         description: 'Test',
-        bookimage: 'Test Image'
+        bookImage: 'Test Image'
       })
       .then((book) => {
         zerobookId = book.id;
@@ -61,10 +61,10 @@ describe('HelloBooks', () => {
       .create({
         title: 'Amarachi continues to go to school',
         author: 'Benny Ogidan',
-        category: 'Fiction',
-        quantity: 1,
+        categoryId: '2',
+        quantity: '1',
         description: 'Test',
-        bookimage: 'Test Image'
+        bookImage: 'Test Image'
       })
       .then((book) => {
         testbookId = book.id;
@@ -79,22 +79,18 @@ describe('HelloBooks', () => {
       username: 'Fidelis',
       password: 'bennyogidan',
       passwordConfirmation: 'bennyogidan',
-      email: faker
-        .internet
-        .email()
+      userLevel: '3',
+      email: faker.internet.email()
     })
       .then((user) => {
         userId = user.id;
         token = jwt.sign({
-          id: user.id,
-          email: user.email,
-          username: user.username,
-          firstname: user.firstname
+          id: user.id
         }, process.env.JWT_SECRET);
         done();
       })
       .catch(() => {
-        console.log('Error in the User seeding');
+        console.log('Error in the seeding of the db');
       });
   });
 
@@ -102,7 +98,7 @@ describe('HelloBooks', () => {
     it('should allow an authenticated user to loan a book', (done) => {
       const userbook = {
         bookId: bookId.toString(),
-        returndate: testdate
+        returnDate: testdate
       };
       chai
         .request(app)
@@ -112,7 +108,7 @@ describe('HelloBooks', () => {
         .end((err, res) => {
           expect(res.status)
             .to
-            .equal(201);
+            .equal(200);
           done();
         });
     });
@@ -135,11 +131,10 @@ describe('HelloBooks', () => {
           done();
         });
     });
-
     it('should be able to borrow another book after first loan', (done) => {
       const userbook = {
         bookId: testbookId.toString(),
-        returndate: testdate
+        returnDate: testdate
       };
       chai
         .request(app)
@@ -152,7 +147,7 @@ describe('HelloBooks', () => {
             .equal('Amarachi continues to go to school succesfully loaned');
           expect(res.status)
             .to
-            .equal(201);
+            .equal(200);
           expect(res.body).to.be.an('object');
           done();
         });
@@ -161,7 +156,7 @@ describe('HelloBooks', () => {
       const userbook = {
         userId,
         bookId: bookId.toString(),
-        returndate: testdate
+        returnDate: testdate
       };
       chai
         .request(app)
@@ -182,7 +177,7 @@ describe('HelloBooks', () => {
     it('should not be able to borrow book if the user id is invalid', (done) => {
       const userbook = {
         bookId: bookId.toString(),
-        returndate: testdate
+        returnDate: testdate
       };
       chai
         .request(app)
@@ -199,7 +194,7 @@ describe('HelloBooks', () => {
     it('should not be able to borrow book with previous functioning route', (done) => {
       const userbook = {
         bookId: bookId.toString(),
-        returndate: testdate
+        returnDate: testdate
       };
       chai
         .request(app)
@@ -220,7 +215,7 @@ describe('HelloBooks', () => {
     it('should not be able to borrow a book if bookId cannot be found', (done) => {
       const userbook = {
         bookId: 500,
-        returndate: testdate
+        returnDate: testdate
       };
       chai
         .request(app)
@@ -241,7 +236,7 @@ describe('HelloBooks', () => {
       const userbook = {
         userId,
         bookId: bookId.toString(),
-        returndate: 'Invalid date'
+        returnDate: 'Invalid date'
       };
       chai
         .request(app)
@@ -263,7 +258,7 @@ describe('HelloBooks', () => {
       const userbook = {
         userId,
         bookId: bookId.toString(),
-        returndate: 2108
+        returnDate: 2108
       };
       chai
         .request(app)
@@ -281,7 +276,7 @@ describe('HelloBooks', () => {
       const userbook = {
         userId,
         bookId: zerobookId,
-        returndate: testdate
+        returnDate: testdate
       };
       chai
         .request(app)
@@ -316,6 +311,7 @@ describe('HelloBooks', () => {
           done();
         });
     });
+    // /users/getloanhistory
     it('should not return a borrow list if return query is not set', (done) => {
       chai
         .request(app)
@@ -329,10 +325,34 @@ describe('HelloBooks', () => {
           done();
         });
     });
+    it('should return a user\'s loan history', (done) => {
+      chai
+        .request(app)
+        .get('/api/v1/users/getloanhistory')
+        .set('Accept', 'application/x-www-form-urlencoded')
+        .set('x-access-token', token)
+        .end((err, res) => {
+          expect(res.status)
+            .to
+            .equal(200);
+          done();
+        });
+    });
+    it('should return 404 for a user with no overdue books ', (done) => {
+      chai
+        .request(app)
+        .get('/api/v1/users/getoverduebooks')
+        .set('Accept', 'application/x-www-form-urlencoded')
+        .set('x-access-token', token)
+        .end((err, res) => {
+          expect(res.status)
+            .to
+            .equal(200);
+          done();
+        });
+    });
   });
 
-
-  // Edit a book
   describe('/PUT Return book', () => {
     it('should be able to return a book with a book id', (done) => {
       chai
@@ -343,7 +363,7 @@ describe('HelloBooks', () => {
         .end((err, res) => {
           expect(res.status)
             .to
-            .equal(201);
+            .equal(200);
           done();
         });
     });

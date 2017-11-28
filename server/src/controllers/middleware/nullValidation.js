@@ -1,12 +1,13 @@
 import { nullValidationFnMap, nullValidFieldMessage } from './validators';
 
-const fieldMap = (bookId, userId) => ({
+const fieldMap = (bookId, categoryId) => ({
   '/auth/users/signin': ['username', 'password'],
   '/auth/users/signup': ['email', 'password', 'username', 'firstname', 'lastname'],
-  '/books': ['title', 'description', 'author', 'category'],
-  [`/books/${bookId}`]: ['title', 'category', 'author', 'description'],
-  [`/users/${userId}/books`]: ['bookId']
-
+  '/users/changepassword': ['newPassword'],
+  '/admin/category': ['categoryName'],
+  '/admin/books': ['title', 'description', 'author', 'quantity', 'categoryId'],
+  [`/admin/books/${bookId}`]: ['title', 'author', 'description', 'quantity'],
+  [`/admin/category/${categoryId}`]: ['categoryName']
 });
 
 /**
@@ -14,13 +15,13 @@ const fieldMap = (bookId, userId) => ({
  * @param {object} req
  * @param {object} res
  * @param {function} next
- * @returns {void}
+ * @returns {void} boolean
  */
 export default (req, res, next) => {
   const path = req.path;
   const bookId = req.params.bookId;
-  const userId = req.params.userId;
-  const nullField = fieldMap(bookId, userId)[path]
+  const categoryId = req.params.categoryId;
+  const nullField = fieldMap(bookId, categoryId)[path]
     .find((field) => {
       if (req.body[field]) {
         const validationFn = nullValidationFnMap[field];

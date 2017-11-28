@@ -98,46 +98,52 @@ export default(sequelize, DataTypes) => {
         }
       }
     },
-    userlevel: {
+    userLevel: {
       type: DataTypes.INTEGER,
       allowNull: false,
       defaultValue: 1
     },
-    userimage: {
+    userImage: {
       type: DataTypes.STRING,
       allowNull: true
     },
-
+    borrowCount: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    },
+    authId: {
+      type: DataTypes.STRING,
+    },
     isAdmin: {
       type: DataTypes.BOOLEAN,
-      allowNull: false,
+      allowNull: true,
       defaultValue: false
     }
   }, {
     freezeTableName: true,
     hooks: {
-
       beforeCreate: (user) => {
         if (user.password === user.passwordConfirmation) {
-          user.password = User.generateHash(user.password);
+          user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10));
         } else {
           throw new Error('Passwords do not match');
         }
-
       },
-
-      beforeUpdate: (user) => {
-        if (user._changed.password) {
-          this.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
-        }
-      }
     }
   });
   User.associate = (models) => {
     User.belongsToMany(models.Books, {
       as: 'userbooks',
       through: models.UserBooks,
-      foreignKey: 'userid'
+      foreignKey: 'id'
+    });
+    User.hasMany(models.Notifications, {
+      foreignKey: 'id',
+      as: 'Notifications',
+    });
+    User.belongsTo(models.Userlevel, {
+      as: 'level',
+      foreignKey: 'userLevel',
     });
   };
 

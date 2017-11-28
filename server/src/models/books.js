@@ -3,11 +3,10 @@ import sentenceCase from 'sentence-case';
 import uniqueRandom from 'unique-random';
 import dotenv from 'dotenv';
 
-
 dotenv.config();
 const randomId = uniqueRandom(process.env.ISBNRANDOM_MIN_ID, process.env.ISBNRANDOM_MAX_ID);
 
-export default (sequelize, DataTypes) => {
+export default(sequelize, DataTypes) => {
   const Books = sequelize.define('Books', {
     title: {
       type: DataTypes.STRING,
@@ -23,7 +22,7 @@ export default (sequelize, DataTypes) => {
       validate: {
         is: {
           arg: /\w+/g,
-          msg: 'Must be only letters',
+          msg: 'Must be only letters'
         }
       },
       set(val) {
@@ -37,28 +36,7 @@ export default (sequelize, DataTypes) => {
       allowNull: false,
       defaultValue: () => randomId()
     },
-    category: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      trim: true,
-      validate: {
-        is: {
-          arg: /\w+/g,
-          msg: 'Must be only letters',
-        },
-        len: {
-          args: [5, 20],
-          msg: 'Category name must be at least 5 chars and less than 20 characters'
-        }
-      },
-      set(val) {
-        if (val !== undefined) {
-          this.setDataValue('category', toTitleCase(val));
-        }
-      }
 
-
-    },
     description: {
       type: DataTypes.STRING,
       allowNull: true,
@@ -67,9 +45,11 @@ export default (sequelize, DataTypes) => {
         if (val !== undefined) {
           this.setDataValue('description', sentenceCase(val));
         }
-      }
-
-
+      },
+    },
+    categoryId: {
+      allownull: false,
+      type: DataTypes.INTEGER
     },
     quantity: {
       type: DataTypes.INTEGER,
@@ -79,21 +59,27 @@ export default (sequelize, DataTypes) => {
         isNumeric: {
           msg: 'Only numbers allowed'
         }
-      },
-
+      }
     },
-
-    bookimage: {
-      type: DataTypes.STRING,
-    },
+    bookImage: {
+      type: DataTypes.STRING
+    }
   }, {
     freezeTableName: true,
+    paranoid: true
   });
   Books.associate = (models) => {
     Books.belongsToMany(models.User, {
       as: 'userbooks',
       through: models.UserBooks,
-      foreignKey: 'bookid'
+      foreignKey: 'bookId'
+    });
+    Books.belongsTo(models.Categories, {
+      as: 'category',
+      foreignKey: 'categoryId'
+    });
+    Books.hasMany(models.Notifications, {
+      foreignKey: 'id'
     });
   };
 

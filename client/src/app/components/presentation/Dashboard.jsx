@@ -18,7 +18,7 @@ const Dashoard = props =>
     <div>
       <div className="main-wrapper">
         <SideNav
-          imageLink="http://res.cloudinary.com/digpnxufx/image/upload/v1510582526/boy_avatar_s1rb9m.svg"
+          imageLink={props.profilePic || ''}
           username={props.username || ''}
           firstname={props.firstname || ''}
           email={props.email || ''}

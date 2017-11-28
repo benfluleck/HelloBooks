@@ -21,6 +21,7 @@ chai.use(chaiHttp);
 let userId;
 let bookId;
 let token;
+let userToken;
 
 
 describe('HelloBooks', () => {
@@ -29,16 +30,14 @@ describe('HelloBooks', () => {
       .create({
         title: 'Shola comes home',
         author: 'Benny',
-        category: 'Fiction',
-        quantity: 20,
+        categoryId: '3',
+        quantity: '20',
         description: 'Testewfewwww',
         bookimage: 'Test Image'
       })
       .then((book) => {
         bookId = book.id;
       });
-
-    // Create a dummy user
     User.create({
       firstname: faker
         .name
@@ -48,6 +47,7 @@ describe('HelloBooks', () => {
         .lastName(),
       username: 'Benny',
       password: 'benny',
+      isAdmin: false,
       passwordConfirmation: 'benny',
       email: faker
         .internet
@@ -55,16 +55,15 @@ describe('HelloBooks', () => {
     })
       .then((user) => {
         userId = user.id;
-        token = jwt.sign({
+        userToken = jwt.sign({
           id: user.id,
           email: user.email,
-          username: user.username,
-          firstname: user.firstname
+          isAdmin: true
         }, process.env.JWT_SECRET);
         done();
       })
       .catch((error) => {
-        console.log('Error in the User seeding', error);
+        console.log('Error in seeding the db', error);
         done();
       });
   });
@@ -99,8 +98,99 @@ describe('HelloBooks', () => {
     });
   });
 
-  describe('/POST  Signing up a user', () => {
-    it('should only all users are to register, Sign up successful', (done) => {
+  describe('Authentication', () => {
+    it('should return 201 when a regular administrator is created', (done) => {
+      chai.request(app)
+        .post('/api/v1/auth/users/signup')
+        .set('Accept', 'application/x-www-form-urlencoded')
+        .send({
+          username: 'testadmin',
+          password: 'boooboo',
+          passwordConfirmation: 'boooboo',
+          firstname: 'Benny',
+          isAdmin: true,
+          email: faker.internet.email(),
+          lastname: faker.name.lastName()
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(201);
+          done();
+        });
+    });
+    it('should return 200 when a administrator signs in', (done) => {
+      chai.request(app)
+        .post('/api/v1/auth/users/signin')
+        .set('Accept', 'application/x-www-form-urlencoded')
+        .send({
+          username: 'testadmin',
+          password: 'boooboo'
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          token = res.body.token;
+          done();
+        });
+    });
+  });
+
+  describe('User level', () => {
+    it('should return 409 when level is the same as user level', (done) => {
+      chai.request(app).put('/api/v1/admin/changeuserlevel').set('x-access-token', token)
+        .send({
+          newLevelId: 1,
+          userId: 1
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(409);
+          done();
+        });
+    });
+    it('should return 200 when level change is successful', (done) => {
+      chai.request(app).put('/api/v1/admin/changeuserlevel').set('x-access-token', token)
+        .send({
+          newLevelId: 2,
+          userId: 1
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          done();
+        });
+    });
+    it('should return 400 when newLevelId is null', (done) => {
+      chai.request(app).put('/api/v1/admin/changeuserlevel').set('x-access-token', token)
+        .send({
+          userId: 1
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          done();
+        });
+    });
+    it('should return 404 when new level does not exist', (done) => {
+      chai.request(app).put('/api/v1/admin/changeuserlevel').set('x-access-token', token)
+        .send({
+          newLevelId: 20,
+          userId: 1
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          done();
+        });
+    });
+    it('should return 404 when the user is not found ', (done) => {
+      chai.request(app).put('/api/v1/admin/changeuserlevel').set('x-access-token', token)
+        .send({
+          newLevelId: 2,
+          userId: 445454
+        })
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          done();
+        });
+    });
+  });
+  describe('Signing up a user', () => {
+    it('should sign up users who fill the correct parameters for the signup form', (done) => {
       const email = faker
         .internet
         .email();
@@ -115,9 +205,7 @@ describe('HelloBooks', () => {
           lastname: faker
             .name
             .lastName(),
-          username: faker
-            .internet
-            .userName(),
+          username: 'samplename',
           password: 'password',
           passwordConfirmation: 'password',
           email
@@ -182,18 +270,6 @@ describe('HelloBooks', () => {
           done();
         });
     });
-    it('should allow only authenticated users allowed to create books', (done) => {
-      chai
-        .request(app)
-        .post('/api/v1/books/')
-        .set('Accept', 'application/x-www-form-urlencoded')
-        .end((err, res) => {
-          expect(res.status)
-            .to
-            .equal(401);
-          done();
-        });
-    });
     it('should allow only authenticated users allowed to loan', (done) => {
       chai
         .request(app)
@@ -233,7 +309,6 @@ describe('HelloBooks', () => {
         });
     });
   });
-
   describe('Authentication processes', () => {
     it('should reject invalid user', (done) => {
       chai
@@ -319,75 +394,6 @@ describe('HelloBooks', () => {
    Authenticated users Tests
    */
   describe('POST /books', () => {
-    it('should allow administrators to create books', (done) => {
-      chai
-        .request(app)
-        .post('/api/v1/books')
-        .set('Accept', 'application/x-www-form-urlencoded')
-        .set('x-access-token', token)
-        .send({
-          title: 'Learn Java',
-          author: 'Sleeping Master',
-          category: 'Learning',
-          quantity: 39,
-          description: 'Learn Java in 3hours',
-          bookimage: 'Test'
-        })
-        .end((err, res) => {
-          expect(res.status)
-            .to
-            .equal(201);
-          expect(res.body.message)
-            .to
-            .equal('Learn Java has been added to the library');
-          done();
-        });
-    });
-    it('should reject the addition of the same book', (done) => {
-      chai
-        .request(app)
-        .post('/api/v1/books')
-        .set('Accept', 'application/x-www-form-urlencoded')
-        .set('x-access-token', token)
-        .send({
-          title: 'Shola comes home',
-          author: 'Benny',
-          category: 'Fiction',
-          quantity: 20,
-          description: 'This needs to be a long description',
-          bookimage: 'Test Image'
-        })
-        .end((err, res) => {
-          expect(res.status)
-            .to
-            .equal(409);
-          expect(res.body.message)
-            .to
-            .equal('A book with the same title and author already exists in the library');
-          done();
-        });
-    });
-    it('Error in the desciption', (done) => {
-      chai
-        .request(app)
-        .post('/api/v1/books')
-        .set('Accept', 'application/x-www-form-urlencoded')
-        .set('x-access-token', token)
-        .send({
-          title: 'Benedict goes to school',
-          author: 'Benny',
-          category: 'Fiction',
-          quantity: 20,
-          description: 'This ',
-          bookimage: 'Test Image'
-        })
-        .end((err, res) => {
-          expect(res.status)
-            .to
-            .equal(400);
-          done();
-        });
-    });
     it('should throw a 404 error for Users that do not exist', (done) => {
       chai
         .request(app)
@@ -443,10 +449,10 @@ describe('HelloBooks', () => {
         .set('Accept', 'application/x-www-form-urlencoded')
         .send({ username: 'Benny', password: 'benny' })
         .end((err, res) => {
-          token = res.body.token;
+          userToken = res.body.token;
           expect(res.status)
             .to
-            .equal(201);
+            .equal(200);
           done();
         });
     });
@@ -455,7 +461,7 @@ describe('HelloBooks', () => {
         .request(app)
         .post('/api/v1/auth/users/signup')
         .set('Accept', 'application/x-www-form-urlencoded')
-        .set({ 'x-access-token': token })
+        .set({ 'x-access-token': userToken })
         .send({
           username: 'Benny',
           firstname: 'Benn',
@@ -477,7 +483,7 @@ describe('HelloBooks', () => {
         .request(app)
         .post('/api/v1/auth/users/signup')
         .set('Accept', 'application/x-www-form-urlencoded')
-        .set({ 'x-access-token': token })
+        .set({ 'x-access-token': userToken })
         .send({
           username: 'Homer',
           firstname: 'Homer',
@@ -500,7 +506,7 @@ describe('HelloBooks', () => {
         .request(app)
         .post('/api/v1/auth/users/signup')
         .set('Accept', 'application/x-www-form-urlencoded')
-        .set({ 'x-access-token': token })
+        .set({ 'x-access-token': userToken })
         .send({
           username: 'Homer',
           firstname: 'Homer',
@@ -558,6 +564,36 @@ describe('HelloBooks', () => {
             .to
             .be
             .equal(400);
+          done();
+        });
+    });
+  });
+  describe('Change password', () => {
+    it('should produce a 409 error message if the previous password is supplied', (done) => {
+      chai
+        .request(app)
+        .put('/api/v1/users/changepassword')
+        .set('Accept', 'application/x-www-form-urlencoded')
+        .set({ 'x-access-token': userToken })
+        .send({ newPassword: 'benny' })
+        .end((err, res) => {
+          expect(res.status)
+            .to
+            .equal(409);
+          done();
+        });
+    });
+    it('should be able to change a user\'s password provided a new password is specified', (done) => {
+      chai
+        .request(app)
+        .put('/api/v1/users/changepassword')
+        .set('Accept', 'application/x-www-form-urlencoded')
+        .set({ 'x-access-token': userToken })
+        .send({ newPassword: 'bbbbvvvvvvvv' })
+        .end((err, res) => {
+          expect(res.status)
+            .to
+            .equal(200);
           done();
         });
     });
