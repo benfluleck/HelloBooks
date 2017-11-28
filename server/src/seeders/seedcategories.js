@@ -12,7 +12,12 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        categoryName: 'Biography',
+        categoryName: 'Horror',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        categoryName: 'Thriller',
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -20,9 +25,17 @@ module.exports = {
         categoryName: 'Action',
         createdAt: new Date(),
         updatedAt: new Date(),
+      },
+      {
+        categoryName: 'Science',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        categoryName: 'Comedy',
+        createdAt: new Date(),
+        updatedAt: new Date(),
       }
-    
-    
     ]),
 
   down: queryInterface =>
