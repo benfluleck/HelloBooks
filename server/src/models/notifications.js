@@ -1,7 +1,4 @@
-'use strict';
-
 export default (sequelize, DataTypes) => {
-
   const Notifications = sequelize.define('Notifications', {
     userId: DataTypes.INTEGER,
     bookId: DataTypes.INTEGER,
