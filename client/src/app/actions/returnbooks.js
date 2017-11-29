@@ -8,6 +8,7 @@ export const ReturnBookRejected = error => ({ type: RETURN_BOOKS_FAIL, error });
 /**
  * async helper function: Return book
  * @function ReturnBooks
+ * @param {object} data
  * @returns {function} asynchronous action
  */
 export const returnbook = data => dispatch => api

@@ -2,6 +2,12 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 import { Pagination, Row } from 'react-materialize';
 
+/**
+ * 
+ * 
+ * @class PaginationWrapper
+ * @extends {React.Component}
+ */
 class PaginationWrapper extends React.Component {
   pageLimit = (pagenumber, numberOfRecords) => {
     let pageOffset;

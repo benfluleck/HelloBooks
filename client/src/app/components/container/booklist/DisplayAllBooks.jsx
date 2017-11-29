@@ -12,6 +12,13 @@ import PaginationWrapper from '../common/Pagination.jsx';
  * @extends {Component}
  */
 class DisplayAllBooks extends React.Component {
+  /**
+   * Creates an instance of DisplayAllBooks.
+   * @param {any} props
+   * @param {object} offset
+   * @param {object} limit
+   * @memberOf DisplayAllBooks
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -19,7 +26,6 @@ class DisplayAllBooks extends React.Component {
       offset: 0
     };
   }
-
   /**
    * @description dispatch actions that help populate the dashboard with books
    * fetch books for the dashboard
@@ -33,7 +39,7 @@ class DisplayAllBooks extends React.Component {
   /**
    * render Display All Books page component
    * @method render
-   * @member Display All Books
+   * @member DisplayAllBooks
    * @returns {object} component
    */
   render() {
@@ -47,9 +53,8 @@ this.props.allBooksList.books.map(book => (
     id={book.id}
     title={book.title}
     author={book.author}
-    category={book.category}
     description={book.description}
-    image={book.bookimage}
+    image={book.bookImage}
     quantity={book.quantity}
   />
 ));
@@ -58,7 +63,6 @@ this.props.allBooksList.books.map(book => (
       items: pagination.pageCount,
       activePage: pagination.page
     };
-
     return (
       <div>
         <Row>
@@ -72,15 +76,29 @@ this.props.allBooksList.books.map(book => (
           numberOfRecords={this.state.limit}
           fetch={this.props.fetchAllBooks}
         />
-
       </div>
     );
   }
 }
 
-// DisplayAllBooks.propTypes = {
-//   allBooksList: PropTypes.
-// };
+DisplayAllBooks.propTypes = {
+  allBooksList: PropTypes.shape({
+    title: PropTypes.string,
+    author: PropTypes.string,
+    quantity: PropTypes.number,
+    description: PropTypes.string,
+    id: PropTypes.number,
+    map: PropTypes.object,
+    pagination: PropTypes.object,
+    books: PropTypes.arrayOf(PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      author: PropTypes.string.isRequired,
+      quantity: PropTypes.number.isRequired,
+      description: PropTypes.string,
+    }))
+  }),
+  fetchAllBooks: PropTypes.func.isRequired
+};
 
 DisplayAllBooks.defaultProps = {
   allBooksList: null

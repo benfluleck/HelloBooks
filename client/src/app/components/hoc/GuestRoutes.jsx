@@ -3,6 +3,7 @@ import { PropTypes } from 'prop-types';
 import { Redirect, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+
 const GuestRoutes = ({
   isAuthenticated,
   component: Component,
@@ -18,7 +19,7 @@ const GuestRoutes = ({
 );
 
 GuestRoutes.propTypes = {
-  component: PropTypes.func,
+  component: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool.isRequired
 };
 

@@ -13,6 +13,13 @@ import MessageforNoOverdueBooks from '../../presentation/messages/dashboardMessa
  * @extends {Component}
  */
 class DisplayOverdueBooks extends React.Component {
+  /**
+   * Creates an instance of DisplayAllBorrowedBooks.
+   * @param {any} props
+   * @param {object} offset
+   * @param {object} limit
+   * @memberOf DisplayAllBorrowedBooks
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -29,10 +36,10 @@ class DisplayOverdueBooks extends React.Component {
    * @returns {void}
    */
   componentDidMount() {
-    <div className="pre-loader">
-      {this.state.isLoading && <Preloader size="big" />}
-    </div>;
-    this.props.fetchOverdueBookstoDashboard (this.state.offset, this.state.limit);
+    if (!this.props.overdueBooks) {
+      return <Preloader size="big" />;
+    }
+    this.props.fetchOverdueBookstoDashboard(this.state.offset, this.state.limit);
   }
   /**
    * render Landing page component
@@ -63,25 +70,42 @@ class DisplayOverdueBooks extends React.Component {
       activePage: pagination.page
     };
 
-    return (<div>
-      <Row>
-        <Col l={12}>
-          <div className="overdue-books">
-            {[...getAllBooks]}
-          </div>
-        </Col>
-      </Row>
-      <PaginationWrapper
-        config={config}
-        numberOfRecords={this.state.limit}
-       fetch={this.props.fetchOverdueBookstoDashboard}
-      />
-    </div>);
+    return (
+      <div>
+        <Row>
+          <Col l={12}>
+            <div className="overdue-books">
+              {[...getAllBooks]}
+            </div>
+          </Col>
+        </Row>
+        <PaginationWrapper
+          config={config}
+          numberOfRecords={this.state.limit}
+          fetch={this.props.fetchOverdueBookstoDashboard}
+        />
+      </div>);
   }
 }
-// DisplayOverdueBooks.PropTypes = {
-//   overdueBooks: PropTypes.array
-// };
+DisplayOverdueBooks.propTypes = {
+  overdueBooks: PropTypes.shape({
+    title: PropTypes.string,
+    author: PropTypes.string,
+    quantity: PropTypes.number,
+    description: PropTypes.string,
+    id: PropTypes.number,
+    map: PropTypes.object,
+    pagination: PropTypes.object,
+    books: PropTypes.arrayOf(PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      author: PropTypes.string.isRequired,
+      quantity: PropTypes.number.isRequired,
+      description: PropTypes.string,
+    }))
+  }),
+  fetchOverdueBookstoDashboard: PropTypes.func.isRequired
+
+};
 
 DisplayOverdueBooks.defaultProps = {
   overdueBooks: null,
@@ -93,4 +117,4 @@ const mapStateToProps = ({ bookReducer }) => ({
   overdueBooks: bookReducer.overdueBooksList
 });
 
-export default connect(mapStateToProps, { fetchOverdueBookstoDashboard})(DisplayOverdueBooks);
+export default connect(mapStateToProps, { fetchOverdueBookstoDashboard })(DisplayOverdueBooks);

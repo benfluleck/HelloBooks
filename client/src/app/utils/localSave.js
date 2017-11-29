@@ -24,6 +24,6 @@ export const loadState = () => {
     }
     return JSON.parse(serializedState);
   } catch (error) {
-    return;
+    console.log(error);
   }
 };

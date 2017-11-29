@@ -3,7 +3,7 @@ import { Row } from 'react-materialize';
 import PropTypes from 'prop-types';
 import WelcomeMessage from './messages/WelcomeMessage.jsx';
 import Bottom from '../presentation/common/Footer.jsx';
-import DisplayLandingBooks from '../container/booklist/DisplayLandingBooks.jsx';
+import DisplayRecentBooks from '../container/booklist/DisplayRecentBooks.jsx';
 
 /**
  * @description Component for Landong Page presentaion component
@@ -27,7 +27,7 @@ const LandingPage = ({ isAuthenticated }) => (
               <h3>Latest Books Available:</h3>
               <hr />
               <div>{!isAuthenticated && <WelcomeMessage />}</div>
-              <DisplayLandingBooks />
+              <DisplayRecentBooks />
             </div>
           </Row>
         </div>

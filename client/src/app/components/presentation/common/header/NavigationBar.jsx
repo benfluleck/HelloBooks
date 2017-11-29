@@ -1,7 +1,7 @@
 import React from 'react';
-import {NavLink} from 'react-router-dom';
-import {Navbar} from 'react-materialize';
-import {PropTypes} from 'prop-types';
+import { NavLink } from 'react-router-dom';
+import { Navbar } from 'react-materialize';
+import { PropTypes } from 'prop-types';
 
 /**
  * @description Component for Navigation
@@ -18,7 +18,8 @@ const Navigation = (props) => {
         key={link}
         className={props.activeLink === link
         ? 'active'
-        : ''}>
+        : ''}
+      >
         <NavLink to={`/${link.replace(' ', '')}`} activeClassName="active">
           {link.toUpperCase()}
         </NavLink>

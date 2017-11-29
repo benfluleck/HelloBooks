@@ -6,20 +6,21 @@ import { connect } from 'react-redux';
 const UserRoutes = ({
   isAuthenticated,
   tokenExists,
-  component: Component,
+  component : Component,
   ...rest
 }) => (
   <Route
     {...rest}
     render={props => (isAuthenticated && tokenExists
     ? <Component{...props} />
-    : <Redirect to="/login" />)} 
+    : <Redirect to="/login" />)}
   />
 );
 
 UserRoutes.propTypes = {
-  component: PropTypes.func,
-  isAuthenticated: PropTypes.bool.isRequired
+  component: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
+  tokenExists: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({

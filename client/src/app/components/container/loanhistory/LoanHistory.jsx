@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Preloader } from 'react-materialize';
 import PropTypes from 'prop-types';
@@ -12,21 +12,39 @@ import LoanHistoryTable from '../../presentation/loanhistory/LoanHistoryTable.js
  * @extends {React.Component}
  */
 class LoanHistory extends React.Component {
+  /**
+   * Creates an instance of DisplayAllBorrowedBooks.
+   * @param {any} props
+   * @param {object} offset
+   * @param {object} limit
+   * @memberOf DisplayAllBorrowedBooks
+   */
   constructor(props) {
     super(props);
     this.state = {
       limit: 5,
       offset: 0,
-      isLoading: false
     };
   }
 
+  /**
+   * @description dispatch actions that help populate the dashboard with loan history
+   * fetch books for the dashboard
+   * @method componentDidMount
+   * @memberof DisplayLandingBooks
+   * @returns {void}
+   */
   componentDidMount() {
-    $("body").css("background-color","#ffff")
+    $('body').css('background-color', '#ffff');
     this.props
       .loanhistory(this.state.offset, this.state.limit);
   }
-
+  /**
+   * render Loan History component
+   * @method render
+   * @member loanHistory
+   * @returns {object} component
+   */
   render() {
     if (!this.props.bookOperations) {
       return <Preloader size="big" className="center-align" />;
@@ -49,11 +67,25 @@ class LoanHistory extends React.Component {
   }
 }
 
+LoanHistory.propTypes = {
+  bookOperations: PropTypes.PropTypes.shape({
+    title: PropTypes.string,
+    author: PropTypes.string,
+    quantity: PropTypes.number,
+    description: PropTypes.string,
+    id: PropTypes.number,
+    map: PropTypes.object,
+    pagination: PropTypes.object,
+    books: PropTypes.arrayOf(PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      author: PropTypes.string.isRequired,
+      quantity: PropTypes.number.isRequired,
+      description: PropTypes.string,
+    }))
+  }),
+  loanhistory: PropTypes.func.isRequired
 
-// LoanHistory.propTypes = {
-//   bookOperations: PropTypes.array
-
-// };
+};
 
 
 LoanHistory.defaultProps = {

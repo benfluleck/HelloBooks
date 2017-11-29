@@ -11,7 +11,7 @@ Dashboard.propTypes = {
 
 Dashboard.defaultProps = {
   username: '',
-  firstname:'',
+  firstname: '',
   email: '',
 
 };
@@ -19,7 +19,8 @@ Dashboard.defaultProps = {
 const mapStateToProps = state => ({
   username: state.userReducer.user.username,
   firstname: state.userReducer.user.firstname,
-  email: state.userReducer.user.email
+  email: state.userReducer.user.email,
+  profilePic: state.userReducer.user.profilePic
 });
 
 export default connect(mapStateToProps)(Dashboard);

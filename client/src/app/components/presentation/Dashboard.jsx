@@ -5,7 +5,6 @@ import SideNav from '../presentation/common/SideNav/index.jsx';
 import DisplayAllBorrowedBooks from '../container/booklist/DisplayBorrowedBooks.jsx';
 import DisplayAllBooks from '../container/booklist/DisplayAllBooks.jsx';
 import LoanHistoryTable from '../container/loanhistory/LoanHistory.jsx';
-import MessageforNoOverdueBooks from '../presentation/messages/dashboardMessages/MessageforNoOverdueBooks.jsx';
 import DisplayOverdueBooks from '../container/booklist/DisplayOverdueBooks.jsx';
 
 /**
@@ -39,10 +38,10 @@ const Dashoard = props =>
                 <DisplayAllBooks />
               </TabPanel>
               <TabPanel>
-                <DisplayOverdueBooks/>
+                <DisplayOverdueBooks />
               </TabPanel>
               <TabPanel>
-                  <LoanHistoryTable/>
+                <LoanHistoryTable />
               </TabPanel>
             </Row>
           </Tabs>

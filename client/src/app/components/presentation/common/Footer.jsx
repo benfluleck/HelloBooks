@@ -12,7 +12,7 @@ const Bottom = () => (
     copyrights="&copy; 2017 Copyright Benny Ogidan and Andela"
     moreLinks={
       <a id="footer-link" className="grey-text text-lighten-4 right" href="www.andela.com">
-Partners
+          Partners
       </a>
 }
   />

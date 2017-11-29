@@ -20,7 +20,7 @@ const BorrowHistoryTable = (props) => {
       <td>{book.userReturndate ? moment(book.userReturndate).format('LL') || 'N/A' : '-'}</td>
       <td>{book.returnstatus ? 'Returned' : 'Still Out on Loan'}</td>
       {/* <td> {moment(book.returndate) > moment() ? <div>Overdue</div> : '-'}</td> */}
-      <td> {(moment(book.returndate) < moment() && book.returnstatus == false )? <div className="overdue">Overdue</div> : '-'}</td>
+      <td> {(moment(book.returndate) < moment() && book.returnstatus === false) ? <div className="overdue">Overdue</div> : '-'}</td>
     </tr>
   )) : null;
   return (rows ?
