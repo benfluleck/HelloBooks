@@ -30,7 +30,7 @@ class DisplayBookModal extends React.Component {
     }
   }
   
-  handleChange = date => this.setState({ returndate: date });
+  handleChange = date => this.setState({ returnDate: date });
 
   handleReturnClick = (event) =>{
     this.

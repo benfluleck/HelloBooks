@@ -9,8 +9,9 @@ import {
   RETURN_BOOKS_SUCCESS,
   LOAN_HISTORY_FAILURE,
   LOAN_HISTORY_SUCCESS,
-  FETCHING_BOOKS,
-  FETCH_ALL_OVERDUE_BOOKS
+  FETCH_ALL_OVERDUE_BOOKS,
+  SEARCH_BOOKS_SUCCESS,
+  SEARCH_BOOKS_FAILURE
 } from '../actions/actiontype';
 
 /**
@@ -25,11 +26,21 @@ import {
 export default function bookReducer(state = {
 }, action) {
   switch (action.type) {
-    case FETCHING_BOOKS:
+    case SEARCH_BOOKS_SUCCESS:
+    {
       return {
         ...state,
-        fetchingBooks: action.state
+        allBooksList:
+          action.books
       };
+    }
+    case SEARCH_BOOKS_FAILURE:
+    {
+      return {
+        ...state,
+        error: action.message
+      };
+    }
     case FETCH_ALL_OVERDUE_BOOKS:
     {
       return {

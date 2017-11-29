@@ -25,6 +25,9 @@ export default {
       .then(res => res.data),
     loanhistory: (offset, limit) => axios
       .get(`api/v1/users/getloanhistory?offset=${offset}&limit=${limit}`)
+      .then(res => res.data),
+    searchBooks: value => axios
+      .get(`api/v1/books/search?searchTerm=${value}`)
       .then(res => res.data)
   }
 };

@@ -4,7 +4,7 @@ import {
   FETCH_ALL_BOOKS,
   FETCH_BOOKS_REJECTED,
   FETCH_BOOKS_BY_USER_ID,
-  FETCHING_BOOKS,
+
   FETCH_ALL_OVERDUE_BOOKS
 } from './actiontype';
 import api from './api';
@@ -13,7 +13,6 @@ export const fetchBooksRejected = error => ({ type: FETCH_BOOKS_REJECTED, error 
 export const fetchRecentBooks = books => ({ type: FETCH_ALL_RECENT_BOOKS, books });
 export const fetchBooks = books => ({ type: FETCH_ALL_BOOKS, books });
 export const fetchBooksByUserId = books => ({ type: FETCH_BOOKS_BY_USER_ID, books });
-export const fetchingBooks = state => ({ type: FETCHING_BOOKS, state });
 export const fetchOverdueBooks = books => ({ type: FETCH_ALL_OVERDUE_BOOKS, books });
 
 /**
@@ -28,13 +27,11 @@ export const fetchAllBooks = (offset, limit) => dispatch => api
   .fetch(offset, limit)
   .then((response) => {
     dispatch(fetchBooks(response));
-    dispatch(fetchingBooks(false));
     return response;
   })
   .catch((error) => {
     dispatch(showErrorNotification({ error }));
     dispatch(fetchBooksRejected({ error }));
-    dispatch(fetchingBooks(false));
   });
 
   /**
@@ -69,13 +66,11 @@ export const fetchAllRecentBooks = (offset, limit) => dispatch => api
   .fetchRecentBooks(offset, limit)
   .then((response) => {
     dispatch(fetchRecentBooks(response));
-    dispatch(fetchingBooks(false));
     return response;
   })
   .catch((error) => {
     dispatch(showErrorNotification({ error }));
     dispatch(fetchBooksRejected({ error }));
-    dispatch(fetchingBooks(false));
   });
 
 /**

@@ -8,7 +8,7 @@ import { Row } from 'react-materialize';
  */
 const MessageforNoBooks = () => (
   <Row>
-    <h3 className='center bold-text nobooks-message'>
+    <h3 className="center bold-text nobooks-message">
         You have not borrowed any books.
     </h3>
   </Row>
