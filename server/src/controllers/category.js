@@ -59,7 +59,7 @@ export default {
         }).then((foundCategory) => {
           if (foundCategory) {
             return res.status(409)
-              .send({ message: 'You have not renamed the category' });
+              .send({ message: 'This Category already exists' });
           }
           category.update({
             categoryName: req.body.categoryName

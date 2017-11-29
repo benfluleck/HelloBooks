@@ -113,7 +113,7 @@ export default function bookReducer(state = {
     {
       return {
         ...state,
-        error
+        error: action
 
       };
     }

@@ -133,9 +133,9 @@ describe('Categories', () => {
     }
   );
   it('should return 200 when a category is modified', (done) => {
-    chai.request(app).put('/api/v1/admin/category/2').set('x-access-token', adminToken)
+    chai.request(app).put('/api/v1/admin/category/7').set('x-access-token', adminToken)
       .send({
-        categoryName: 'Thriller'
+        categoryName: 'Test Category'
       })
       .end((err, res) => {
         expect(res.status).to.equal(200);
@@ -155,7 +155,7 @@ describe('Categories', () => {
     (done) => {
       chai.request(app).put('/api/v1/admin/category/nkkkj').set('x-access-token', adminToken)
         .send({
-          name: 'Thriller'
+          name: 'Test Category'
         })
         .end((err, res) => {
           expect(res.status).to.equal(400);
@@ -168,7 +168,7 @@ describe('Categories', () => {
     (done) => {
       chai.request(app).put('/api/v1/admin/category/404').set('x-access-token', adminToken)
         .send({
-          categoryName: 'Thriller'
+          categoryName: 'Test Category'
         })
         .end((err, res) => {
           expect(res.status).to.equal(404);
@@ -181,7 +181,7 @@ describe('Categories', () => {
     (done) => {
       chai.request(app).put('/api/v1/admin/category/2').set('x-access-token', adminToken)
         .send({
-          categoryName: 'Thriller'
+          categoryName: 'Test Category'
         })
         .end((err, res) => {
           expect(res.status).to.equal(409);
@@ -192,7 +192,7 @@ describe('Categories', () => {
   it(
     'should return 200 when category is deleted',
     (done) => {
-      chai.request(app).delete('/api/v1/admin/category/5').set('x-access-token', adminToken)
+      chai.request(app).delete('/api/v1/admin/category/7').set('x-access-token', adminToken)
         .end((err, res) => {
           expect(res.status).to.equal(200);
           done();
@@ -202,9 +202,9 @@ describe('Categories', () => {
   it(
     'should return 404 when category to delete is not found',
     (done) => {
-      chai.request(app).put('/api/v1/admin/category/5').set('x-access-token', adminToken)
+      chai.request(app).put('/api/v1/admin/category/7').set('x-access-token', adminToken)
         .send({
-          categoryName: 'Thriller'
+          categoryName: 'Test Category'
         })
         .end((err, res) => {
           expect(res.status).to.equal(404);
