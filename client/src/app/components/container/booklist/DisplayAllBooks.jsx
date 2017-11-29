@@ -5,6 +5,7 @@ import { Row, Preloader, Col } from 'react-materialize';
 import Book from '../../presentation/common/book/DisplayBook.jsx';
 import { fetchAllBooks } from '../../../actions/fetchbooks';
 import PaginationWrapper from '../common/Pagination.jsx';
+import SearchBooks from '../../presentation/common/book/SearchBooks.jsx';
 
 /**
  * @description Component for Display Books on the Landing page for all users
@@ -65,6 +66,9 @@ this.props.allBooksList.books.map(book => (
     };
     return (
       <div>
+        <Row>
+          <SearchBooks />
+        </Row>
         <Row>
           <Col l={12}>
             {

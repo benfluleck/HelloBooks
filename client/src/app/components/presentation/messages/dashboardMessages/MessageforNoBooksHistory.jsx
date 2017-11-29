@@ -7,10 +7,10 @@ import { Row } from 'react-materialize';
  */
 const MessageforNoBooksHistory = () => (
   <Row>
-  <h3 className='center bold-text nobooks-message'>
+    <h3 className="center bold-text nobooks-message">
        You have no loan history. Go and search our collection and loan some books
-  </h3>
+    </h3>
   </Row>
 );
-export default MessageforNoBooksHistory
+export default MessageforNoBooksHistory;
 

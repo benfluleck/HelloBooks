@@ -1,18 +1,20 @@
 import React from 'react';
-import { Row } from 'react-materialize';
+import { Row, Icon, Col } from 'react-materialize';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import PropTypes from 'prop-types';
 import SideNav from '../presentation/common/SideNav/index.jsx';
 import DisplayAllBorrowedBooks from '../container/booklist/DisplayBorrowedBooks.jsx';
 import DisplayAllBooks from '../container/booklist/DisplayAllBooks.jsx';
 import LoanHistoryTable from '../container/loanhistory/LoanHistory.jsx';
 import DisplayOverdueBooks from '../container/booklist/DisplayOverdueBooks.jsx';
 
+
 /**
  * @description Show User Dashboard
  * @class DashboardView
  * @param {object} props
  */
-const Dashoard = props =>
+const Dashboard = props =>
   (
     <div>
       <div className="main-wrapper">
@@ -24,12 +26,19 @@ const Dashoard = props =>
         />
         <div className="main-text">
           <Tabs>
-            <TabList>
-              <Tab>DASHBOARD</Tab>
-              <Tab>ALL BOOKS</Tab>
-              <Tab>BOOKS OVERDUE</Tab>
-              <Tab>LOAN HISTORY</Tab>
-            </TabList>
+            <Row>
+
+              <TabList>
+                <Tab>DASHBOARD</Tab>
+                <Tab>ALL BOOKS</Tab>
+                <Tab>BOOKS OVERDUE</Tab>
+                <Tab>LOAN HISTORY</Tab>
+              </TabList>
+
+
+              {/* <Icon tiny>search
+                  </Icon> */}
+            </Row>
             <Row>
               <TabPanel>
                 <DisplayAllBorrowedBooks />
@@ -51,4 +60,12 @@ const Dashoard = props =>
     </div>
   );
 
-export default Dashoard;
+Dashboard.propTypes = {
+  firstname: PropTypes.string.isRequired,
+  username: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  profilePic: PropTypes.string.isRequired,
+};
+
+
+export default Dashboard;

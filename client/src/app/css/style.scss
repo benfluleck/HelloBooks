@@ -277,6 +277,20 @@ footer {
 	color: $base-white;
 }
 
+.autocomplete{
+	height: 2.4rem !important;
+}
+
+i.medium{
+	font-size: 2.5rem ;
+	padding-top: 14px ;
+//	margin-left: -6px;
+}
+
+.react-autosuggest__container{
+	padding-top: 5.5px;
+}
+
 .btn {
 	background-color: black;
 	font-family: $font-stack2;
