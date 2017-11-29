@@ -19,6 +19,14 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        levelName: 'Gold',
+        level: 3,
+        maxDays: 10,
+        maxBooks: 7,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
         levelName: 'Platinium',
         level: 4,
         maxBooks: 50,

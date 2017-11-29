@@ -13,6 +13,13 @@ import MessageforNoBooks from '../../presentation/messages/dashboardMessages/Mes
  * @extends {Component}
  */
 class DisplayAllBorrowedBooks extends React.Component {
+  /**
+   * Creates an instance of DisplayAllBorrowedBooks.
+   * @param {any} props
+   * @param {object} offset
+   * @param {object} limit
+   * @memberOf DisplayAllBorrowedBooks
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -20,7 +27,6 @@ class DisplayAllBorrowedBooks extends React.Component {
       offset: 0
     };
   }
-
   /**
    * @description dispatch actions that help populate the dashboard with books
    * fetch books for the current user
@@ -29,12 +35,11 @@ class DisplayAllBorrowedBooks extends React.Component {
    * @returns {void}
    */
   componentDidMount() {
-    <div className="pre-loader">
-      {this.state.isLoading && <Preloader size="big" />}
-    </div>;
+    if (!this.props.borrowedBooks) {
+      return <Preloader size="big" />;
+    }
     this.props.fetchAllBooksbyId(this.state.offset, this.state.limit);
   }
-
   /**
    * render Landing page component
    * @method render
@@ -51,7 +56,6 @@ class DisplayAllBorrowedBooks extends React.Component {
         key={book.book.id}
         title={book.book.title}
         author={book.book.author}
-        category={book.book.category}
         description={book.book.description}
         quantity={book.book.quantity}
         image={book.book.bookimage}
@@ -64,29 +68,44 @@ class DisplayAllBorrowedBooks extends React.Component {
       activePage: pagination.page
     };
 
-    return (<div>
-      <Row>
-        <Col l={12}>
-          <div className="borrowed-books">
-            {[...getAllBooks]}
-          </div>
-        </Col>
-      </Row>
-      
-      <PaginationWrapper
-        config={config}
-        numberOfRecords={this.state.limit}
-        fetch={this.props.fetchAllBooksbyId}
-      />
-    </div>);
+    return (
+      <div>
+        <Row>
+          <Col l={12}>
+            <div className="borrowed-books">
+              {[...getAllBooks]}
+            </div>
+          </Col>
+        </Row>
+        <PaginationWrapper
+          config={config}
+          numberOfRecords={this.state.limit}
+          fetch={this.props.fetchAllBooksbyId}
+        />
+      </div>);
   }
 }
-DisplayAllBorrowedBooks.PropTypes = {
-  borrowedBooks: PropTypes.array
+DisplayAllBorrowedBooks.propTypes = {
+  borrowedBooks: PropTypes.shape({
+    title: PropTypes.string,
+    author: PropTypes.string,
+    quantity: PropTypes.number,
+    description: PropTypes.string,
+    id: PropTypes.number,
+    map: PropTypes.object,
+    pagination: PropTypes.object,
+    books: PropTypes.arrayOf(PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      author: PropTypes.string.isRequired,
+      quantity: PropTypes.number.isRequired,
+      description: PropTypes.string,
+    }))
+  }),
+  fetchAllBooksbyId: PropTypes.func.isRequired
 };
 
 DisplayAllBorrowedBooks.defaultProps = {
-  boorowedBooks: null,
+  borrowedBooks: null
 
 };
 

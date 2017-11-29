@@ -1,4 +1,3 @@
-import jwtdecode from 'jwt-decode';
 import throttle from 'lodash/throttle';
 
 import { createStore, applyMiddleware } from 'redux';

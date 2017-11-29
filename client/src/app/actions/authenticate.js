@@ -13,7 +13,7 @@ import setAuthorizationToken from '../utils/setAuthorizationToken';
 /**
  * create action: userLoggedIn: user
  * @function userLoggedIn
- * @param {object} response
+ * @param {object} data
  * @returns {object} action: type and response
  */
 export const userLoggedIn = data =>
@@ -31,7 +31,7 @@ export const userLogInFailure = error =>
 /**
  * create action: userLoggedIn: user
  * @function userLoggedOut
- * @param {object} response
+ * @param {object} user
  * @returns {object} action: type and response
  */
 export const userLoggedOut = user =>
@@ -43,7 +43,7 @@ export const userLoggedOut = user =>
 /**
  * create action: sign : user
  * @function userAuthFailure
- * @param {object} response
+ * @param {object} user
  * @returns {object} action: type and response
  */
 export const signUpUserFailure = user =>
@@ -55,7 +55,7 @@ export const signUpUserFailure = user =>
 /**
  * create action: signUpUserSuccess : user
  * @function signUpUserSuccess
- * @param {object} response
+ * @param {object} user
  * @returns {object} action: type and response
  */
 export const signUpUserSuccess = user =>
@@ -67,7 +67,7 @@ export const signUpUserSuccess = user =>
 /**
  * async helper function: sign up user
  * @function signup
- * @param {object} credentials
+ * @param {object} data
  * @returns {function} asynchronous action
  */
 export const signup = data => dispatch => api

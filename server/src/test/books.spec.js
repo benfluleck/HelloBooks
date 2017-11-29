@@ -250,8 +250,8 @@ describe('HelloBooks', () => {
         .set('Accept', 'application/x-www-form-urlencoded')
         .set('x-access-token', token)
         .send({
-          title: 'Benny goes to school',
-          author: 'Andela Human',
+          title: 'Learn Java',
+          author: 'Sleeping Master',
           categoryId: '1',
           quantity: '20',
           description: 'This needs to be a long description',
@@ -310,7 +310,7 @@ describe('HelloBooks', () => {
         });
     });
     it('should return 200 when searching all books in a category', (done) => {
-      chai.request(app).get('/api/v1/books/search?searchTerm=Ben&categoryId=1').set('x-access-token', token)
+      chai.request(app).get('/api/v1/books/search?searchTerm=Sta&categoryId=1').set('x-access-token', token)
         .end((err, res) => {
           expect(res.status)
             .to

@@ -111,13 +111,13 @@ form p {
 .book-modal {
 	padding: 10px;
 }
-.loan-status-text{
+.loan-status-text {
 	color: $secondary-color;
 }
-.modal-image{
-	max-width : 90%;
+.modal-image {
+	max-width: 90%;
 }
-.loan-status{
+.loan-status {
 	padding: 10px;
 }
 .modal-title {
@@ -374,7 +374,7 @@ footer {
 	margin-left: auto;
 }
 
-.overdue{
+.overdue {
 	color: $base-orange;
 }
 .nobooks-message {
@@ -400,22 +400,29 @@ footer {
 
 @media screen and (min-width: 776px) {
 	.overlay-main {
-		margin-top: -61vh;
+		margin-top: -58vh;
 	}
 }
+
 @media screen and (max-width: 776px) {
 	.landing-page-image .card {
 		max-width: 73% !important;
 		margin-left: 10px;
 	}
 	.overlay-main {
-		margin-top: -51vh;
+		padding: 14px !important;
 	}
 }
 
 @media screen and (max-width: 541px) {
 	.signup-wrapper {
 		width: auto;
+	}
+}
+
+@media screen and (max-width: 979px) {
+	.overlay-main {
+		margin-top: -60vh;
 	}
 }
 
@@ -433,7 +440,7 @@ footer {
 
 @media only screen and (min-width: 1078px) {
 	.overlay-main {
-		margin-top: -60vh;
+		margin-top: -58vh;
 	}
 }
 @media only screen and (min-width: 1600px) {

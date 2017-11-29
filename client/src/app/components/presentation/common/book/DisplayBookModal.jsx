@@ -83,8 +83,6 @@ else
 
 }
 
-
-
   handleBorrowClick = (event) => {
     event.preventDefault();
     const dateString = this.state.returndate.format("YYYY-MM-DD")
