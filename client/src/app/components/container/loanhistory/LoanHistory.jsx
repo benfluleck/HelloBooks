@@ -59,7 +59,6 @@ class LoanHistory extends React.Component {
         <LoanHistoryTable books={this.props.bookOperations.books} />
         <PaginationWrapper
           config={config}
-          numberOfRecords={this.state.limit}
           fetch={this.props.loanhistory}
         />
       </div>
@@ -69,10 +68,6 @@ class LoanHistory extends React.Component {
 
 LoanHistory.propTypes = {
   bookOperations: PropTypes.PropTypes.shape({
-    title: PropTypes.string,
-    author: PropTypes.string,
-    quantity: PropTypes.number,
-    description: PropTypes.string,
     id: PropTypes.number,
     map: PropTypes.object,
     pagination: PropTypes.object,

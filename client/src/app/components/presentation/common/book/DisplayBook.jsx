@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactTooltip from 'react-tooltip';
 
-import DisplayBookModal from './DisplayBookModal.jsx';
+// import DisplayBookModal from './DisplayBookModal.jsx';
 
 /**
  * @description Book component taking book props
@@ -14,9 +14,16 @@ const Book = books => (
     <div className="card">
       <a
         className="modal-trigger"
-        href={`#modal-${books.id}`}
+        href="#modal"
         onClick={() => {
-        $(`#modal-${books.id}`).modal('open');
+        // / $(`#modal-${books.id}`).modal('open');
+        // const bookId = books.id;
+        $('#modal').modal('open');
+        $('#bookImage').attr('src', books.image);
+        $('#bookTitle').text(books.title);
+        $('#bookAuthor').text(books.author);
+        $('#bookDescription').text(books.description);
+        $('#bookId').text(books.id);
       }}
         tabIndex="-1"
       >
@@ -33,15 +40,6 @@ const Book = books => (
         </div>
       </a>
     </div>
-    {/* <DisplayBookModal
-      title={books.title}
-      image={books.image}
-      category={books.category}
-      description={books.description}
-      id={books.id}
-      author={books.author}
-      quantity={books.quantity}
-    /> */}
   </div>
 );
 

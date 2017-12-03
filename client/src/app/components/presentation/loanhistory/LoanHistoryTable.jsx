@@ -12,14 +12,11 @@ import MessageforNoBooksHistory from '../messages/dashboardMessages/MessageforNo
 const BorrowHistoryTable = (props) => {
   const rows = props.books && props.books.length ? props.books.map((book, index) => (
     <tr key={index}>
-      {/* <td>{book.book.title || 'N/A'}</td> */}
-      <td className="book-cover-on-table"><img src={book.book.bookimage || 'N/A'} alt={book.book.title} /></td>
-      {/* <td>{book.book.author || 'N/A'}</td> */}
+      <td className="book-cover-on-table"><img src={book.book.bookImage || 'N/A'} alt={book.book.title} /></td>
       <td>{moment(book.createdAt).format('LL') || 'N/A'}</td>
       <td>{moment(book.returndate).format('LL') || 'N/A'}</td>
       <td>{book.userReturndate ? moment(book.userReturndate).format('LL') || 'N/A' : '-'}</td>
       <td>{book.returnstatus ? 'Returned' : 'Still Out on Loan'}</td>
-      {/* <td> {moment(book.returndate) > moment() ? <div>Overdue</div> : '-'}</td> */}
       <td> {(moment(book.returndate) < moment() && book.returnstatus === false) ? <div className="overdue">Overdue</div> : '-'}</td>
     </tr>
   )) : null;
@@ -29,9 +26,7 @@ const BorrowHistoryTable = (props) => {
         <table className="centered highlight bordered history-table">
           <thead>
             <tr className="loan-header">
-              {/* <th>Title</th> */}
               <th>Book</th>
-              {/* <th>Authors</th> */}
               <th>Date Borrowed</th>
               <th>Date To Be Returned</th>
               <th>User Return Date</th>
@@ -50,7 +45,9 @@ const BorrowHistoryTable = (props) => {
 };
 
 BorrowHistoryTable.propTypes = {
-  books: PropTypes.array.isRequired,
+  books: PropTypes.arrayOf(PropTypes.shape({
+    index: PropTypes.number.isRequired
+  })).isRequired,
 };
 
 

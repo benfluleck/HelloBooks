@@ -11,7 +11,11 @@ import {
   LOAN_HISTORY_SUCCESS,
   FETCH_ALL_OVERDUE_BOOKS,
   SEARCH_BOOKS_SUCCESS,
-  SEARCH_BOOKS_FAILURE
+  SEARCH_BOOKS_FAILURE,
+  FETCH_CATEGORIES_SUCCESS,
+  FETCH_CATEGORIES_FAILURE,
+  FETCH_BOOKS_FOR_CATEGORIES_SUCCESS,
+  FETCH_BOOKS_FOR_CATEGORIES_FAILURE
 } from '../actions/actiontype';
 
 /**
@@ -39,6 +43,20 @@ export default function bookReducer(state = {
       return {
         ...state,
         error: action.message
+      };
+    }
+    case FETCH_CATEGORIES_SUCCESS:
+    {
+      return {
+        ...state,
+        categoryList: action.categories.categories
+      };
+    }
+    case FETCH_CATEGORIES_FAILURE:
+    {
+      return {
+        ...state,
+        error: action.error
       };
     }
     case FETCH_ALL_OVERDUE_BOOKS:
@@ -81,6 +99,21 @@ export default function bookReducer(state = {
       return {
         ...state,
         loanbooks: action
+      };
+    }
+    case FETCH_BOOKS_FOR_CATEGORIES_SUCCESS:
+    {
+      return {
+        ...state,
+        allBooksList:
+          action.books
+      };
+    }
+    case FETCH_BOOKS_FOR_CATEGORIES_FAILURE:
+    {
+      return {
+        ...state,
+        error: action
       };
     }
     case BORROW_BOOKS_FAIL:

@@ -1,11 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
-import { Row, Preloader, Col } from 'react-materialize';
+import { Row, Col } from 'react-materialize';
 import Book from '../../presentation/common/book/DisplayBook.jsx';
+import Loader from './Loader.jsx';
 import { fetchAllBooks } from '../../../actions/fetchbooks';
 import PaginationWrapper from '../common/Pagination.jsx';
 import SearchBooks from '../../presentation/common/book/SearchBooks.jsx';
+import CategoriesDropdown from '../categories/CategoriesDropdown.jsx';
+import getCategories from '../categories/getCategoriesWrapper.jsx';
+import MessageforNoCatBooks from '../../presentation/messages/dashboardMessages/MessageforNoCatBooks.jsx';
+
+
+const CategoriesDropdownList = getCategories(CategoriesDropdown);
 
 /**
  * @description Component for Display Books on the Landing page for all users
@@ -14,51 +21,36 @@ import SearchBooks from '../../presentation/common/book/SearchBooks.jsx';
  */
 class DisplayAllBooks extends React.Component {
   /**
-   * Creates an instance of DisplayAllBooks.
-   * @param {any} props
-   * @param {object} offset
-   * @param {object} limit
-   * @memberOf DisplayAllBooks
-   */
-  constructor(props) {
-    super(props);
-    this.state = {
-      limit: 8,
-      offset: 0
-    };
-  }
-  /**
-   * @description dispatch actions that help populate the dashboard with books
-   * fetch books for the dashboard
+   * @description dispatch actions that help populate the dashboard with all the books
    * @method componentDidMount
-   * @memberof DisplayLandingBooks
-   * @returns {void}
+   * @memberof DisplayAllBooks
+   * @returns {component} Loader
    */
-  componentDidMount() {
-    this.props.fetchAllBooks(this.state.offset, this.state.limit);
+  componentWillMount() {
+    return (<Loader
+      records={this.props.allBooksList}
+      callback={this.props.fetchAllBooks(this.props.offset, this.props.limit)}
+    />);
   }
   /**
    * render Display All Books page component
    * @method render
    * @member DisplayAllBooks
-   * @returns {object} component
+   * @returns {component} component
    */
   render() {
-    if (!this.props.allBooksList) {
-      return <Preloader size="big" className="center-align" />;
-    }
     const getAllBooks =
-this.props.allBooksList.books.map(book => (
-  <Book
-    key={book.id}
-    id={book.id}
-    title={book.title}
-    author={book.author}
-    description={book.description}
-    image={book.bookImage}
-    quantity={book.quantity}
-  />
-));
+      this.props.allBooksList.books.map(book => (
+        <Book
+          key={book.id}
+          id={book.id}
+          title={book.title}
+          author={book.author}
+          description={book.description}
+          image={book.bookImage}
+          quantity={book.quantity}
+        />
+      ));
     const { pagination } = this.props.allBooksList;
     const config = {
       items: pagination.pageCount,
@@ -67,17 +59,27 @@ this.props.allBooksList.books.map(book => (
     return (
       <div>
         <Row>
-          <SearchBooks />
+          <Col m={9} l={9}>
+            {this.props.allBooksList.books.length === 0 ?
+                null : <SearchBooks />
+          }
+          </Col>
+          <Col m={3} l={3}>
+            <div className="catdropdownlist">
+              <CategoriesDropdownList />
+            </div>
+          </Col>
         </Row>
         <Row>
           <Col l={12}>
-            {
-      [...getAllBooks]}
+            {this.props.allBooksList.books.length === 0 ?
+              <MessageforNoCatBooks /> : null
+           }
+            {[...getAllBooks]}
           </Col>
         </Row>
         <PaginationWrapper
           config={config}
-          numberOfRecords={this.state.limit}
           fetch={this.props.fetchAllBooks}
         />
       </div>
@@ -86,11 +88,9 @@ this.props.allBooksList.books.map(book => (
 }
 
 DisplayAllBooks.propTypes = {
+  offset: PropTypes.number,
+  limit: PropTypes.number,
   allBooksList: PropTypes.shape({
-    title: PropTypes.string,
-    author: PropTypes.string,
-    quantity: PropTypes.number,
-    description: PropTypes.string,
     id: PropTypes.number,
     map: PropTypes.object,
     pagination: PropTypes.object,
@@ -105,11 +105,13 @@ DisplayAllBooks.propTypes = {
 };
 
 DisplayAllBooks.defaultProps = {
-  allBooksList: null
+  allBooksList: null,
+  limit: 8,
+  offset: 0
 };
 
 const mapStateToProps = state => ({
-  allBooksList: state.bookReducer.allBooksList,
+  allBooksList: state.bookReducer.allBooksList || [],
 });
 
 export default connect(mapStateToProps, { fetchAllBooks })(DisplayAllBooks);

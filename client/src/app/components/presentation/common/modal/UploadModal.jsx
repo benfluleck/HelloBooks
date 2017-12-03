@@ -70,7 +70,7 @@ class UploadModal extends React.Component {
         this.setState({ filename });
       });
   }
-/**
+  /**
  *
  * @param {object} event
  * @returns {string} string
