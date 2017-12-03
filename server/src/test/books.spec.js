@@ -22,7 +22,7 @@ chai.use(chaiHttp);
 
 let bookId;
 let token = '';
-const testdate = new Date('2017-12-01');
+const testdate = new Date('2017-12-05');
 let limit;
 
 describe('HelloBooks', () => {
