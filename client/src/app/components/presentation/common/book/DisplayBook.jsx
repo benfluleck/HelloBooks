@@ -16,7 +16,7 @@ const Book = books => (
         className="modal-trigger"
         href="#modal"
         onClick={() => {
-        // $(`#modal-${books.id}`).modal('open');
+        // / $(`#modal-${books.id}`).modal('open');
         // const bookId = books.id;
         $('#modal').modal('open');
         $('#bookImage').attr('src', books.image);
