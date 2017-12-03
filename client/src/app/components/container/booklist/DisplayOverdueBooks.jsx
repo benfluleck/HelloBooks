@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
-import { Preloader, Row, Col } from 'react-materialize';
+import { Row, Col } from 'react-materialize';
 import PaginationWrapper from '../common/Pagination.jsx';
+import Loader from './Loader.jsx';
 import Book from '../../presentation/common/book/DisplayBook.jsx';
 import { fetchOverdueBookstoDashboard } from '../../../actions/fetchbooks';
 import MessageforNoOverdueBooks from '../../presentation/messages/dashboardMessages/MessageforNoOverdueBooks.jsx';
@@ -14,32 +15,16 @@ import MessageforNoOverdueBooks from '../../presentation/messages/dashboardMessa
  */
 class DisplayOverdueBooks extends React.Component {
   /**
-   * Creates an instance of DisplayAllBorrowedBooks.
-   * @param {any} props
-   * @param {object} offset
-   * @param {object} limit
-   * @memberOf DisplayAllBorrowedBooks
-   */
-  constructor(props) {
-    super(props);
-    this.state = {
-      limit: 8,
-      offset: 0
-    };
-  }
-
-  /**
-   * @description dispatch actions that help populate the dashboard with books
-   * fetch books for the current user
+   * @description dispatch actions that displays Overdue Books
    * @method componentDidMount
-   * @memberof LandingPage
+   * @memberof DisplayOverdueBooks
    * @returns {void}
    */
   componentDidMount() {
-    if (!this.props.overdueBooks) {
-      return <Preloader size="big" />;
-    }
-    this.props.fetchOverdueBookstoDashboard(this.state.offset, this.state.limit);
+    return (<Loader
+      records={this.props.overdueBooks}
+      callback={this.props.fetchOverdueBookstoDashboard(this.props.offset, this.props.limit)}
+    />);
   }
   /**
    * render Landing page component
@@ -64,7 +49,6 @@ class DisplayOverdueBooks extends React.Component {
       />
     ));
     const { pagination } = this.props.overdueBooks;
-
     const config = {
       items: pagination.pageCount,
       activePage: pagination.page
@@ -88,11 +72,9 @@ class DisplayOverdueBooks extends React.Component {
   }
 }
 DisplayOverdueBooks.propTypes = {
+  offset: PropTypes.number,
+  limit: PropTypes.number,
   overdueBooks: PropTypes.shape({
-    title: PropTypes.string,
-    author: PropTypes.string,
-    quantity: PropTypes.number,
-    description: PropTypes.string,
     id: PropTypes.number,
     map: PropTypes.object,
     pagination: PropTypes.object,
@@ -109,6 +91,8 @@ DisplayOverdueBooks.propTypes = {
 
 DisplayOverdueBooks.defaultProps = {
   overdueBooks: null,
+  limit: 8,
+  offset: 0
 
 };
 

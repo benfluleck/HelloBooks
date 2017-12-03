@@ -129,7 +129,8 @@ export default {
               return res.status(200)
                 .send({
                   message: 'Sorry there are no books in this category',
-                  books: books.rows
+                  books: books.rows,
+                  pagination: paginationFunc(offset, limit, books)
                 });
             }
             const categoryBooks = {

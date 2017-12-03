@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
-import { Preloader, Row, Col } from 'react-materialize';
+import { Row, Col } from 'react-materialize';
 import PaginationWrapper from '../common/Pagination.jsx';
 import Book from '../../presentation/common/book/DisplayBook.jsx';
+import Loader from './Loader.jsx';
 import { fetchAllBooksbyId } from '../../../actions/fetchbooks';
 import MessageforNoBooks from '../../presentation/messages/dashboardMessages/MessageforNoBooks.jsx';
 
@@ -14,20 +15,6 @@ import MessageforNoBooks from '../../presentation/messages/dashboardMessages/Mes
  */
 class DisplayAllBorrowedBooks extends React.Component {
   /**
-   * Creates an instance of DisplayAllBorrowedBooks.
-   * @param {any} props
-   * @param {object} offset
-   * @param {object} limit
-   * @memberOf DisplayAllBorrowedBooks
-   */
-  constructor(props) {
-    super(props);
-    this.state = {
-      limit: 8,
-      offset: 0
-    };
-  }
-  /**
    * @description dispatch actions that help populate the dashboard with books
    * fetch books for the current user
    * @method componentDidMount
@@ -35,10 +22,10 @@ class DisplayAllBorrowedBooks extends React.Component {
    * @returns {void}
    */
   componentDidMount() {
-    if (!this.props.borrowedBooks) {
-      return <Preloader size="big" />;
-    }
-    this.props.fetchAllBooksbyId(this.state.offset, this.state.limit);
+    return (<Loader
+      records={this.props.borrowedBooks}
+      callback={this.props.fetchAllBooksbyId(this.props.offset, this.props.limit)}
+    />);
   }
   /**
    * render Landing page component
@@ -58,7 +45,7 @@ class DisplayAllBorrowedBooks extends React.Component {
         author={book.book.author}
         description={book.book.description}
         quantity={book.book.quantity}
-        image={book.book.bookimage}
+        image={book.book.bookImage}
       />
     ));
     const { pagination } = this.props.borrowedBooks;
@@ -79,33 +66,28 @@ class DisplayAllBorrowedBooks extends React.Component {
         </Row>
         <PaginationWrapper
           config={config}
-          numberOfRecords={this.state.limit}
           fetch={this.props.fetchAllBooksbyId}
         />
       </div>);
   }
 }
 DisplayAllBorrowedBooks.propTypes = {
+  offset: PropTypes.number,
+  limit: PropTypes.number,
   borrowedBooks: PropTypes.shape({
-    title: PropTypes.string,
-    author: PropTypes.string,
-    quantity: PropTypes.number,
-    description: PropTypes.string,
-    id: PropTypes.number,
     map: PropTypes.object,
     pagination: PropTypes.object,
     books: PropTypes.arrayOf(PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      author: PropTypes.string.isRequired,
-      quantity: PropTypes.number.isRequired,
-      description: PropTypes.string,
+      title: PropTypes.string
     }))
   }),
   fetchAllBooksbyId: PropTypes.func.isRequired
 };
 
 DisplayAllBorrowedBooks.defaultProps = {
-  borrowedBooks: null
+  borrowedBooks: null,
+  limit: 8,
+  offset: 0
 
 };
 

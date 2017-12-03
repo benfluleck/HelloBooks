@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Icon, Col } from 'react-materialize';
+import { Row } from 'react-materialize';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import PropTypes from 'prop-types';
 import SideNav from '../presentation/common/SideNav/index.jsx';
@@ -27,24 +27,19 @@ const Dashboard = props =>
         <div className="main-text">
           <Tabs>
             <Row>
-
               <TabList>
-                <Tab>DASHBOARD</Tab>
                 <Tab>ALL BOOKS</Tab>
+                <Tab>DASHBOARD</Tab>
                 <Tab>BOOKS OVERDUE</Tab>
                 <Tab>LOAN HISTORY</Tab>
               </TabList>
-
-
-              {/* <Icon tiny>search
-                  </Icon> */}
             </Row>
             <Row>
               <TabPanel>
-                <DisplayAllBorrowedBooks />
+                <DisplayAllBooks />
               </TabPanel>
               <TabPanel>
-                <DisplayAllBooks />
+                <DisplayAllBorrowedBooks />
               </TabPanel>
               <TabPanel>
                 <DisplayOverdueBooks />

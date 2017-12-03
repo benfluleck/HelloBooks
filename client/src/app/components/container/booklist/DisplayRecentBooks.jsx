@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
-import { Preloader, Row } from 'react-materialize';
+import { Row } from 'react-materialize';
+import Loader from './Loader.jsx';
 import Book from '../../presentation/common/book/DisplayBook.jsx';
 import { fetchAllRecentBooks } from '../../../actions/fetchbooks';
 
@@ -14,34 +15,17 @@ import { fetchAllRecentBooks } from '../../../actions/fetchbooks';
  */
 class DisplayRecentBooks extends React.Component {
   /**
-   * Creates an instance of DisplayRecentBooks.
-   * @param {any} props
-   * @param {object} offset
-   * @param {object} limit
-   * @memberOf DisplayRecentBooks
-   */
-  constructor(props) {
-    super(props);
-    this.state = {
-      limit: 8,
-      offset: 0
-    };
-  }
-
-  /**
    * @description dispatch actions that help populate the dashboard with books
    * fetch books for the dashboard
    * @method componentDidMount
    * @memberof DisplayLandingBooks
    * @returns {void}
    */
-  componentWillMount() {
-    if (this.props.books) {
-      return <Preloader size="big" className="center-align" />;
-    }
-    this
-      .props
-      .fetchAllRecentBooks(this.state.offset, this.state.limit);
+  componentDidMount() {
+    return (<Loader
+      records={this.props.books}
+      callback={this.props.fetchAllRecentBooks(this.props.offset, this.props.limit)}
+    />);
   }
   /**
    * render Display Recent component
@@ -78,11 +62,9 @@ class DisplayRecentBooks extends React.Component {
 }
 
 DisplayRecentBooks.propTypes = {
+  offset: PropTypes.number,
+  limit: PropTypes.number,
   books: PropTypes.shape({
-    title: PropTypes.string,
-    author: PropTypes.string,
-    quantity: PropTypes.number,
-    description: PropTypes.string,
     id: PropTypes.number,
     map: PropTypes.object,
     pagination: PropTypes.object,
@@ -99,8 +81,10 @@ DisplayRecentBooks.propTypes = {
   }))
 };
 DisplayRecentBooks.defaultProps = {
-  books: null,
-  recentBooks: []
+  books: {},
+  recentBooks: [],
+  limit: 8,
+  offset: 0
 };
 
 const mapStateToProps = ({ bookReducer }) => ({

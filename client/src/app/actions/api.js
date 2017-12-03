@@ -28,6 +28,12 @@ export default {
       .then(res => res.data),
     searchBooks: value => axios
       .get(`api/v1/books/search?searchTerm=${value}`)
+      .then(res => res.data),
+    fetchAllCategories: () => axios
+      .get('api/v1/books/listcategories')
+      .then(res => res.data),
+    fetchAllBooksByCategories: (categoryId, offset, limit) => axios
+      .get(`api/v1/books/category/${categoryId}?offset=${offset}&limit=${limit}`)
       .then(res => res.data)
   }
 };

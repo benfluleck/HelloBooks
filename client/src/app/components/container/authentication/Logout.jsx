@@ -38,7 +38,7 @@ class Logout extends Component {
 Logout.propTypes = {
   logout: PropTypes.func.isRequired,
   history: PropTypes.shape({
-    push: PropTypes.object
+    push: PropTypes.func
   }).isRequired
 };
 

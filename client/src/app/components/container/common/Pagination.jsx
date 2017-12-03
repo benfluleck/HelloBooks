@@ -3,33 +3,51 @@ import { PropTypes } from 'prop-types';
 import { Pagination, Row } from 'react-materialize';
 
 /**
- * 
- * 
+ *
+ *
  * @class PaginationWrapper
  * @extends {React.Component}
  */
 class PaginationWrapper extends React.Component {
-  pageLimit = (pagenumber, numberOfRecords) => {
-    let pageOffset;
-    pageOffset = (pagenumber === 1)
-      ? 0
-      : pagenumber - 1;
-    return pageOffset * numberOfRecords;
-  }
-
-  onSelect = (number) => {
-    const {numberOfRecords} = this.props;
+  /**
+  * @param {number} number
+  *
+  * @memberOf PaginationWrapper
+  * @returns {function} Function fetch
+  */
+  onSelect(number) {
+    let numberOfRecords;
     this
       .props
       .fetch(this.pageLimit(number, numberOfRecords), numberOfRecords);
   }
-
+  /**
+   *
+   * @param {number} pagenumber
+   * @param {number} numberOfRecords
+   * @returns {number} pageOffset * numberOfRecords
+   *
+   * @memberOf PaginationWrapper
+   */
+  pageLimit(pagenumber, numberOfRecords) {
+    let pageOffset;
+    this.pageOffset = (pagenumber === 1)
+      ? 0
+      : pagenumber - 1;
+    return pageOffset * numberOfRecords;
+  }
+  /**
+   * render Pagination Wrapper
+   * @method render
+   * @member Pagination
+   * @returns {object} component
+   */
   render() {
     return (
       <Row>
-        <Pagination onSelect={this.onSelect} {...this.props.config}  maxButtons= {5}/>
+        <Pagination onSelect={this.onSelect} {...this.props.config} maxButtons={5} />
       </Row>
-    )
+    );
   }
 }
 
@@ -37,11 +55,15 @@ export default PaginationWrapper;
 
 PaginationWrapper.defaultProps = {
   items: 0,
-  activePage: 1
-}
+  activePage: 1,
+  maxButtons: 5,
+  // config: null
+};
 
-PaginationWrapper.proptypes = {
-  items: PropTypes.number.isRequired,
-  activePage: PropTypes.number.isRequired,
-  maxButtons: PropTypes.number.isRequired
-}
+PaginationWrapper.propTypes = {
+  items: PropTypes.number,
+  activePage: PropTypes.number,
+  maxButtons: PropTypes.number,
+  fetch: PropTypes.func.isRequired,
+  // config: PropTypes.func
+};

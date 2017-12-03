@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import UserView from './UserView.jsx';
+import CategoriesSideBar from '../../../container/categories/CategoriesSideBar.jsx';
+import getCategories from '../../../container/categories/getCategoriesWrapper.jsx';
 
 
+const CategoriesSideBarList = getCategories(CategoriesSideBar);
 /**
  * component that displays user image, username and groups
  * @function SideNav
@@ -27,10 +30,11 @@ const SideNav = ({
         firstname={firstname}
         email={email}
       />
-
       <li><div className="divider" /></li>
-      <li><a className="waves-effect" href="www.andela.com">Categories</a></li>
+      <CategoriesSideBarList />
+      <hr className="category-hr" />
     </ul>
+
   );
 
 SideNav.propTypes = {
