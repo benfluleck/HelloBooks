@@ -22,6 +22,7 @@ class DisplayRecentBooks extends React.Component {
    * @returns {void}
    */
   componentDidMount() {
+    $('body').css('background-color', 'rgb(204, 204, 204)');
     return (<Loader
       records={this.props.books}
       callback={this.props.fetchAllRecentBooks(this.props.offset, this.props.limit)}
@@ -40,13 +41,9 @@ class DisplayRecentBooks extends React.Component {
         .props
         .recentBooks
         .map(book => (<Book
+          onClick={this.handleClick}
           key={book.id}
-          id={book.id}
-          title={book.title}
-          author={book.author}
-          description={book.description}
-          quantity={book.quantity}
-          image={book.bookImage}
+          books={book}
         />)) : [];
 
     return (

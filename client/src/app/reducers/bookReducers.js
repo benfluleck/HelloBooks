@@ -15,7 +15,9 @@ import {
   FETCH_CATEGORIES_SUCCESS,
   FETCH_CATEGORIES_FAILURE,
   FETCH_BOOKS_FOR_CATEGORIES_SUCCESS,
-  FETCH_BOOKS_FOR_CATEGORIES_FAILURE
+  FETCH_BOOKS_FOR_CATEGORIES_FAILURE,
+  FETCH_SELECTED_BOOK_SUCCESS,
+  FETCH_SELECTED_BOOK_FAILURE
 } from '../actions/actiontype';
 
 /**
@@ -94,6 +96,20 @@ export default function bookReducer(state = {
         error: action
       };
     }
+    case FETCH_SELECTED_BOOK_SUCCESS:
+    {
+      return {
+        ...state,
+        book: action.book
+      };
+    }
+    case FETCH_SELECTED_BOOK_FAILURE:
+    {
+      return {
+        ...state,
+        error: action
+      };
+    }
     case BORROW_BOOKS_SUCCESS:
     {
       return {
@@ -133,14 +149,14 @@ export default function bookReducer(state = {
           books: state
             .borrowedBooksList
             .books
-            .filter(book => book.bookid !== action.returnedBook.id)
+            .filter(book => book.bookId !== action.returnedBook.id)
         },
         overdueBooksList: {
           ...state.overdueBooksList,
           books: state
             .overdueBooksList
             .books
-            .filter(book => book.bookid !== action.returnedBook.id)
+            .filter(book => book.bookId !== action.returnedBook.id)
         }
 
       };

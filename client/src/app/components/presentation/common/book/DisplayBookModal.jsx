@@ -32,8 +32,6 @@ class DisplayBookModal extends React.Component {
     super(props);
     this.state = {
       returnDate: moment(),
-      bookId: '',
-      error: ''
     };
   }
 
@@ -54,41 +52,8 @@ class DisplayBookModal extends React.Component {
   handleReturnClick = (event)=> {
     this
       .props
-      .returnbook({ ...this.state });
+      .returnbook({  bookId: this.props.book.id});
     $('#modal').modal({ opacity: 0 });
-  }
-
-
-  // componentWillMount(){
-  //   console.log(this.props,'VVVVVVVV')
-  // }
-
-  /**
-   *
-   *
-   *
-   * @param {param} loanStatus
-   * @returns {Component} Component
-   *
-   * @memberOf DisplayBookModal
-   */
-  bookActions = (loanStatus)=> {
-    if (!loanStatus) {
-      return (
-        <div>
-          <Button className="loan-button" onClick={this.handleBorrowClick}>
-        Loan
-          </Button>
-        </div>
-      );
-    }
-    return (
-      <div>
-        <Button className="return-button" onClick={this.handleReturnClick}>
-        Return
-        </Button>
-      </div>
-    );
   }
 
   /**
@@ -133,11 +98,10 @@ class DisplayBookModal extends React.Component {
    */
   handleBorrowClick =(event)=> {
     event.preventDefault();
-    const bookId = document.getElementById('bookId').innerHTML;
     const dateString = this.state.returnDate.format('YYYY-MM-DD');
     this
       .props
-      .borrowbooks({ bookId, returnDate: dateString })
+      .borrowbooks({ bookId: this.props.book.id , returnDate: dateString })
       .then((response) => {
         if (response.error) {
           return;
@@ -145,33 +109,60 @@ class DisplayBookModal extends React.Component {
         $('#modal').modal({ opacity: 0 });
       });
   }
+
   /**
    *
    *
-   * @returns
+   *
+   * @param {param} loanStatus
+   * @returns {Component} Component
+   *
+   * @memberOf DisplayBookModal
+   */
+  bookActions = (loanStatus)=> {
+    if (!loanStatus) {
+      return (
+        <div>
+          <Button className="loan-button" onClick={this.handleBorrowClick}>
+        Loan
+          </Button>
+        </div>
+      );
+    }
+    return (
+      <div>
+        <Button className="return-button" onClick={this.handleReturnClick}>
+        Return
+        </Button>
+      </div>
+    );
+  }
+  /**
+   *
+   *
+   * @description This render implements the isBorrowed logic checking whether a selected book has been borrowed
    * @memberof DisplayBookModal
    * @returns {Component} Component
    *
    * @memberOf DisplayBookModal
    */
   render() {
-   
     if (!this.props.isAuthenticated) {
       return (
-        <BookModal header="Book Details" />
+        <BookModal header="Book Details" books={this.props.book} />
       );
     }
-    // const id = document.getElementById('bookId').innerHTML;
-    // this.setState({bookId : id});
-    // console.log({...this.state},'>>>>>>>>>>')
+  
     const isBorrowed = (this.props.borrowedBooksList.books) ? this.props.borrowedBooksList.books.map(book => (book.bookId)) : [];
-    const loanStatus = isBorrowed.includes(this.state.bookId);
+    const loanStatus = isBorrowed.includes(this.props.book.id);
 
     const bookModalActions = this.bookActions(loanStatus);
     const chooseReturnDate = this.showDatePicker(loanStatus);
-
     return (
-      <BookModal header="Loan Book" actions={bookModalActions} >
+      
+      <BookModal 
+      
+      header="Loan Book" actions={bookModalActions}  books={this.props.book}>
         {
         chooseReturnDate
       }
@@ -180,10 +171,6 @@ class DisplayBookModal extends React.Component {
   }
 }
 
-DisplayBookModal.defaultProps = {
-
-
-};
 
 DisplayBookModal.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
@@ -192,7 +179,8 @@ DisplayBookModal.propTypes = {
 
 const mapStateToProps = state => ({
   isAuthenticated: !!state.userReducer.isAuthenticated,
-  borrowedBooksList: state.bookReducer.borrowedBooksList || []
+  borrowedBooksList: state.bookReducer.borrowedBooksList || [],
+  book: (state.bookReducer.book) ?state.bookReducer.book.book : [],
 });
 
 

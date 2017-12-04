@@ -1,47 +1,75 @@
 import React from 'react';
 import ReactTooltip from 'react-tooltip';
+import { connect } from 'react-redux';
+import { fetchBook } from '../../../../actions/fetchbooks';
 
-// import DisplayBookModal from './DisplayBookModal.jsx';
+
 
 /**
- * @description Book component taking book props
- * @param {object} books
- * @return {object} list of books
- */
-const Book = books => (
-  <div className="col l3">
-    <ReactTooltip />
-    <div className="card">
-      <a
-        className="modal-trigger"
-        href="#modal"
-        onClick={() => {
-        // / $(`#modal-${books.id}`).modal('open');
-        // const bookId = books.id;
-        $('#modal').modal('open');
-        $('#bookImage').attr('src', books.image);
-        $('#bookTitle').text(books.title);
-        $('#bookAuthor').text(books.author);
-        $('#bookDescription').text(books.description);
-        $('#bookId').text(books.id);
-      }}
-        tabIndex="-1"
-      >
-        <div
-          className="card-image"
-          data-tip={`<h4>Title: ${books.title}</h4><hr/> <p>Author: ${books.author}</p> <p>Description:${books.description}</p>`}
-          data-html
-          data-class="booktip"
-        >
-          <img
-            src={books.image}
-            alt={books.title}
-          />
+ *
+ *
+ *
+ * @class Book
+ * @extends {React.Component}
+* */
+class Book extends React.Component {
+  /**
+   * Creates an instance of Book.
+   * @param {object} props
+   *
+   * @memberOf Book
+   */
+  constructor(props) {
+    super(props);
+    this.state = {
+      
+    };
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(books){
+    this.props.fetchBook(books.id)
+  }
+
+
+  /**
+   *
+   *
+   *
+   * @returns {Component} Book
+   *
+   * @memberOf Book
+   */
+  render() {
+    return (
+      
+      <div className="col l3">
+        <ReactTooltip />
+        <div className="card">
+          <a
+            className="modal-trigger"
+            href="#modal"
+            onClick={() => this.handleClick(this.props.books)}
+
+            tabIndex="-1"
+          >
+            <div
+              className="card-image"
+              data-tip={`<h4>Title: ${this.props.books.title}</h4><hr/> <p>Author: ${this.props.books.author}</p> <p>Description:${this.props.books.description}</p>`}
+              data-html
+              data-class="booktip"
+            >
+              <img
+                src={this.props.books.bookImage}
+                alt={this.props.books.title}
+              />
+            </div>
+          </a>
         </div>
-      </a>
-    </div>
-  </div>
-);
+      </div>
+    );
+  }
+}
 
 
-export default Book;
+export default connect(null,{fetchBook})(Book);

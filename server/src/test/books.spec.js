@@ -155,7 +155,7 @@ describe('HelloBooks', () => {
           done();
         });
     });
-  }); 
+  });
   describe('Edit books', () => {
     it('should edit a selected book from the database', (done) => {
       chai
@@ -337,7 +337,7 @@ describe('HelloBooks', () => {
         });
     });
     it('should return 200 when getting a single book', (done) => {
-      chai.request(app).get('/api/v1/books/1').set('x-access-token', token)
+      chai.request(app).get('/api/v1/auth/books/1').set('x-access-token', token)
         .end((err, res) => {
           expect(res.status)
             .to
@@ -346,7 +346,7 @@ describe('HelloBooks', () => {
         });
     });
     it('should return 400 if the bookId is not valid', (done) => {
-      chai.request(app).get('/api/v1/books/sfgh').set('x-access-token', token)
+      chai.request(app).get('/api/v1/auth/books/sfgh').set('x-access-token', token)
         .end((err, res) => {
           expect(res.status)
             .to
@@ -357,7 +357,7 @@ describe('HelloBooks', () => {
     it(
       'should return 404 when getting a single book if it does not exist',
       (done) => {
-        chai.request(app).get('/api/v1/books/100').set('x-access-token', token)
+        chai.request(app).get('/api/v1/auth/books/100').set('x-access-token', token)
           .end((err, res) => {
             expect(res.status)
               .to
@@ -365,7 +365,7 @@ describe('HelloBooks', () => {
             done();
           });
       }
-     );
+    );
     it('should throw an error if the selected book undefined', (done) => {
       chai
         .request(app)

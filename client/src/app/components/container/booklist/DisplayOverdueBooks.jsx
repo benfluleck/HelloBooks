@@ -38,14 +38,8 @@ class DisplayOverdueBooks extends React.Component {
     }
     const getAllBooks = this.props.overdueBooks.books.map(book => (
       <Book
-        id={book.book.id}
         key={book.book.id}
-        title={book.book.title}
-        author={book.book.author}
-        category={book.book.category}
-        description={book.book.description}
-        quantity={book.book.quantity}
-        image={book.book.bookimage}
+        books={book.book}
       />
     ));
     const { pagination } = this.props.overdueBooks;

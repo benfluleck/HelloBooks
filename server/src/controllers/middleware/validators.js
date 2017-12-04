@@ -35,7 +35,7 @@ export const nullValidationFnMap = {
   title: [modifiedIsLength('title')],
   description: [modifiedIsLength('description')],
   author: [modifiedIsLength('author')],
-  categoryName:[modifiedIsLength('categoryName')],
+  categoryName: [modifiedIsLength('categoryName')],
   categoryId: [isNumeric],
   bookId: [isNumeric],
   quantity: [isNumeric]

@@ -34,6 +34,9 @@ export default {
       .then(res => res.data),
     fetchAllBooksByCategories: (categoryId, offset, limit) => axios
       .get(`api/v1/books/category/${categoryId}?offset=${offset}&limit=${limit}`)
-      .then(res => res.data)
+      .then(res => res.data),
+    fetchSelectedBookById: bookId => axios
+      .get(`api/v1/auth/books/${bookId}`)
+      .then(res => res.data),
   }
 };

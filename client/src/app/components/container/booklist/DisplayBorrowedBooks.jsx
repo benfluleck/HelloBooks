@@ -39,13 +39,8 @@ class DisplayAllBorrowedBooks extends React.Component {
     }
     const getAllBooks = this.props.borrowedBooks.books.map(book => (
       <Book
-        id={book.book.id}
         key={book.book.id}
-        title={book.book.title}
-        author={book.book.author}
-        description={book.book.description}
-        quantity={book.book.quantity}
-        image={book.book.bookImage}
+        books={book.book}
       />
     ));
     const { pagination } = this.props.borrowedBooks;
@@ -67,6 +62,7 @@ class DisplayAllBorrowedBooks extends React.Component {
         <PaginationWrapper
           config={config}
           fetch={this.props.fetchAllBooksbyId}
+          numberOfRecords={this.props.limit}
         />
       </div>);
   }
