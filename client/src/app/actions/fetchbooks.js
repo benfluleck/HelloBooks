@@ -4,8 +4,9 @@ import {
   FETCH_ALL_BOOKS,
   FETCH_BOOKS_REJECTED,
   FETCH_BOOKS_BY_USER_ID,
-
-  FETCH_ALL_OVERDUE_BOOKS
+  FETCH_ALL_OVERDUE_BOOKS,
+  FETCH_SELECTED_BOOK_FAILURE,
+  FETCH_SELECTED_BOOK_SUCCESS
 } from './actiontype';
 import api from './api';
 
@@ -14,6 +15,8 @@ export const fetchRecentBooks = books => ({ type: FETCH_ALL_RECENT_BOOKS, books 
 export const fetchBooks = books => ({ type: FETCH_ALL_BOOKS, books });
 export const fetchBooksByUserId = books => ({ type: FETCH_BOOKS_BY_USER_ID, books });
 export const fetchOverdueBooks = books => ({ type: FETCH_ALL_OVERDUE_BOOKS, books });
+export const fetchSelectedBook = book => ({ type: FETCH_SELECTED_BOOK_SUCCESS, book });
+export const fetchSelectedBookFailure = error => ({ type: FETCH_SELECTED_BOOK_FAILURE, error });
 
 /**
  * async helper function: log in user
@@ -90,3 +93,21 @@ export const fetchAllBooksbyId = (offset, limit) => dispatch => api
     dispatch(showErrorNotification({ error }));
     dispatch(fetchBooksRejected({ error }));
   });
+
+  /**
+ * async helper function:fetch selected book
+ * @function fetchSelectedBook
+ * @param {number} bookId
+ * @returns {function} asynchronous action
+ */
+export const fetchBook = bookId => dispatch => api
+  .book
+  .fetchSelectedBookById(bookId)
+  .then((response) => {
+    dispatch(fetchSelectedBook(response));
+  })
+  .catch((error) => {
+    dispatch(showErrorNotification({ error }));
+    dispatch(fetchSelectedBookFailure({ error }));
+  });
+

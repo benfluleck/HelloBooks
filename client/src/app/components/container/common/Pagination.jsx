@@ -15,8 +15,8 @@ class PaginationWrapper extends React.Component {
   * @memberOf PaginationWrapper
   * @returns {function} Function fetch
   */
-  onSelect(number) {
-    let numberOfRecords;
+  onSelect = (number) => {
+    const {numberOfRecords} = this.props;
     this
       .props
       .fetch(this.pageLimit(number, numberOfRecords), numberOfRecords);
@@ -29,9 +29,9 @@ class PaginationWrapper extends React.Component {
    *
    * @memberOf PaginationWrapper
    */
-  pageLimit(pagenumber, numberOfRecords) {
+  pageLimit = (pagenumber, numberOfRecords)=> {
     let pageOffset;
-    this.pageOffset = (pagenumber === 1)
+    pageOffset = (pagenumber === 1)
       ? 0
       : pagenumber - 1;
     return pageOffset * numberOfRecords;

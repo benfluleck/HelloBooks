@@ -24,7 +24,7 @@ export default {
         .status(404)
         .send({ message: 'Please specify a valid return date' });
     }
-    if (toDate(req.body.returnDate) <= Date.now() || !toDate(req.body.returnDate)) {
+    if (toDate(req.body.returnDate) <= (Date.now() - 24 * 60 * 60 * 1000)) {
       return res
         .status(422)
         .send({ message: 'Please provide a valid return date' });
@@ -260,6 +260,7 @@ export default {
                 }).then(() => {
                   const returnDetail = {
                     username: user.username,
+                    id: bookToReturn.id,
                     book: bookToReturn.title,
                     expectedReturnDate: history.returnDate,
                     returnedOn: history.userReturnDate
@@ -267,11 +268,11 @@ export default {
                   if (returnDetail.expectedReturnDate < returnDetail.returnedOn) {
                     res
                       .status(200)
-                      .send({ success: true, message: `You have just returned ${returnDetail.book} late, A fine will be sent to you` });
+                      .send({ success: true, message: `You have just returned ${returnDetail.book} late, A fine will be sent to you`, returnedBook: returnDetail });
                   } else {
                     res
                       .status(200)
-                      .send({ success: true, message: `You have just returned ${returnDetail.book}` });
+                      .send({ success: true, message: `You have just returned ${returnDetail.book}`, returnedBook: returnDetail });
                   }
                 });
               });
@@ -297,7 +298,7 @@ export default {
         userId,
         returnStatus: false,
         returnDate: {
-          $lt: Date.now() - 24 * 60 * 60 * 1000
+          $lt: (Date.now() - 24 * 60 * 60 * 1000)
         }
       },
       include: [

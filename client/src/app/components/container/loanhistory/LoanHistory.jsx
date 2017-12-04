@@ -13,21 +13,6 @@ import LoanHistoryTable from '../../presentation/loanhistory/LoanHistoryTable.js
  */
 class LoanHistory extends React.Component {
   /**
-   * Creates an instance of DisplayAllBorrowedBooks.
-   * @param {any} props
-   * @param {object} offset
-   * @param {object} limit
-   * @memberOf DisplayAllBorrowedBooks
-   */
-  constructor(props) {
-    super(props);
-    this.state = {
-      limit: 5,
-      offset: 0,
-    };
-  }
-
-  /**
    * @description dispatch actions that help populate the dashboard with loan history
    * fetch books for the dashboard
    * @method componentDidMount
@@ -35,9 +20,8 @@ class LoanHistory extends React.Component {
    * @returns {void}
    */
   componentDidMount() {
-    $('body').css('background-color', '#ffff');
     this.props
-      .loanhistory(this.state.offset, this.state.limit);
+      .loanhistory(this.props.offset, this.props.limit);
   }
   /**
    * render Loan History component
@@ -60,6 +44,7 @@ class LoanHistory extends React.Component {
         <PaginationWrapper
           config={config}
           fetch={this.props.loanhistory}
+          numberOfRecords={this.props.limit}
         />
       </div>
     );
@@ -72,9 +57,6 @@ LoanHistory.propTypes = {
     map: PropTypes.object,
     pagination: PropTypes.object,
     books: PropTypes.arrayOf(PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      author: PropTypes.string.isRequired,
-      quantity: PropTypes.number.isRequired,
       description: PropTypes.string,
     }))
   }),
@@ -84,7 +66,14 @@ LoanHistory.propTypes = {
 
 
 LoanHistory.defaultProps = {
-  bookOperations: null
+  bookOperations: null,
+  limit: 5,
+  offset: 0
+};
+
+LoanHistory.propTypes = {
+  limit: PropTypes.number,
+  offset: PropTypes.number
 };
 
 const mapStateToProps = state => ({

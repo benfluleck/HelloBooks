@@ -19,22 +19,22 @@ class BookModal extends React.Component {
    * @memberOf BookModal
    */
   render() {
-    const { header, actions } = this.props;
+    const { header, actions, books } = this.props;
     return (
       <Modal id="modal" fixedFooter header={header} actions={actions} >
         <Row>
           <div className="loan-book">
             <Col m={12}l={6}>
               <div className="card-image" >
-                <img className="modal-image" id="bookImage" alt="Title" />
+                <img className="modal-image" src={this.props.books.bookImage} alt="Title" />
               </div>
             </Col>
             <Col m={12} l={6}>
-              <div className="book-modal modal-title">Book Number: #<span id="bookId" /></div>
-              <div className="book-modal modal-title">Title: <span id="bookTitle" /></div>
+              <div className="book-modal modal-title">Book Number: # {this.props.books.id}<span id="bookId" /></div>
+              <div className="book-modal modal-title">Title: {this.props.books.title} </div>
               <hr />
-              <div className="book-modal">Author: <span id="bookAuthor" /></div>
-              <div className="book-modal">Description: <span id="bookDescription" /></div>
+              <div className="book-modal">Author: {this.props.books.author}</div>
+              <div className="book-modal">Description: {this.props.books.description}<span id="bookDescription" /></div>
             </Col>
           </div>
           {this.props.children}
@@ -45,3 +45,4 @@ class BookModal extends React.Component {
 }
 
 export default BookModal;
+

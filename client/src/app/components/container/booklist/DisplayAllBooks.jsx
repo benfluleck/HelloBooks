@@ -26,12 +26,14 @@ class DisplayAllBooks extends React.Component {
    * @memberof DisplayAllBooks
    * @returns {component} Loader
    */
-  componentWillMount() {
+  componentDidMount() {
+    $('body').css('background-color', '#ffff');
     return (<Loader
       records={this.props.allBooksList}
       callback={this.props.fetchAllBooks(this.props.offset, this.props.limit)}
     />);
   }
+
   /**
    * render Display All Books page component
    * @method render
@@ -43,12 +45,7 @@ class DisplayAllBooks extends React.Component {
       this.props.allBooksList.books.map(book => (
         <Book
           key={book.id}
-          id={book.id}
-          title={book.title}
-          author={book.author}
-          description={book.description}
-          image={book.bookImage}
-          quantity={book.quantity}
+          books={book}
         />
       ));
     const { pagination } = this.props.allBooksList;
@@ -81,6 +78,7 @@ class DisplayAllBooks extends React.Component {
         <PaginationWrapper
           config={config}
           fetch={this.props.fetchAllBooks}
+          numberOfRecords={this.props.limit}
         />
       </div>
     );

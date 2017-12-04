@@ -331,6 +331,7 @@ i.medium {
 }
 
 
+
 .modal-header,
 .modal-content h4 {
 	background-color: $base-orange;
@@ -475,6 +476,7 @@ i.medium {
 	}
 }
 
+
 @media screen and (max-width: 541px) {
 	.signup-wrapper {
 		width: auto;
@@ -507,5 +509,11 @@ i.medium {
 @media only screen and (min-width: 1600px) {
 	.overlay-main {
 		max-width: 100%;
+	}
+}
+
+@media screen and (min-width:400px) and (max-width:900px){
+	.material-icons {
+		margin-left: -20px;
 	}
 }

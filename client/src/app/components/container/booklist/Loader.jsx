@@ -9,8 +9,8 @@ const Loader = ({ records, callback }) => {
 
 
 Loader.propTypes = {
-  records: PropTypes.number.isRequired,
-  callback: PropTypes.func.isRequired
+  // records: PropTypes.number.isRequired,
+  // callback: PropTypes.func.isRequired
 };
 
 export default (Loader);
