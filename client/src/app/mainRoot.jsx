@@ -5,7 +5,8 @@ import Root from './components/Root.jsx';
 import LandingPage from './components/container/LandingPage.jsx';
 import Login from './components/container/authentication/SignInPage.jsx';
 import SignUp from './components/container/authentication/SignUpPage.jsx';
-import Dashboard from './components/container/Dashboard.jsx';
+import UserDashboard from './components/presentation/UserDashboard.jsx';
+import AdminDashboard from './components/presentation/admin/AdminDashboard.jsx';
 import Logout from './components/container/authentication/Logout.jsx';
 import UserRoutes from './components/hoc/UserRoutes.jsx';
 import '../app/css/style.scss';
@@ -19,7 +20,8 @@ const MainRoot = () => (
         <Route exact path="/login" component={Login} />
         <Route exact path="/logout" component={Logout} />
         <Route exact path="/signup" component={SignUp} />
-        <UserRoutes exact path="/dashboard" component={Dashboard} />
+        <UserRoutes exact path="/dashboard" component={UserDashboard} />
+        <Route exact path="/admin" component={AdminDashboard} />
 
 
         {/* <Route component={NotFound}/> */}

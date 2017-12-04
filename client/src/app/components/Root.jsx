@@ -2,7 +2,6 @@ import React from 'react';
 import Header from '../components/container/header/Header.jsx';
 
 import UploadModal from '../components/presentation/common/modal/UploadModal.jsx';
-
 import DisplayBookModal from './presentation/common/book/DisplayBookModal.jsx';
 
 

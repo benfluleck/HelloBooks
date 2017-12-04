@@ -88,7 +88,8 @@ export default {
                 username: user.username,
                 email: user.email,
                 profilePic: `${user.userImage}`,
-                firstname: user.firstname
+                firstname: user.firstname,
+                isAdmin: user.isAdmin
               });
             });
         } else {

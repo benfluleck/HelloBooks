@@ -14,7 +14,17 @@ class SignInPage extends React.Component {
     this
       .props
       .login(data)
-      .then(() => {
+      .then((response) => {
+        if(response.success && response.isAdmin)
+        {
+          
+         return  this
+          .props
+          .history
+          .push('/admin')
+          
+        }
+        
         this
           .props
           .history

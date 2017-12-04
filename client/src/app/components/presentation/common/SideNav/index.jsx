@@ -17,18 +17,16 @@ const CategoriesSideBarList = getCategories(CategoriesSideBar);
  * @return {object} component
  */
 const SideNav = ({
-  imageLink,
-  username = '',
-  firstname = '',
-  email = ''
+  props
 }) =>
   (
     <ul id="slide-out" className="side-nav fixed">
       <UserView
-        imageLink={imageLink}
-        username={username}
-        firstname={firstname}
-        email={email}
+        imageLink={props.profilePic}
+        username={props.username}
+        firstname={props.firstname}
+        email={props.email}
+        isAdmin={props.isAdmin}
       />
       <li><div className="divider" /></li>
       <CategoriesSideBarList />
@@ -37,19 +35,20 @@ const SideNav = ({
 
   );
 
+SideNav.defaultProps = {
+  profilePic: null,
+  email: '',
+  firstname: '',
+  username: '',
+  isAdmin: false
+};
+
 SideNav.propTypes = {
-  imageLink: PropTypes.string,
   username: PropTypes.string,
   firstname: PropTypes.string,
-  email: PropTypes.string
+  email: PropTypes.string,
+  profilePic: PropTypes.string,
+  isAdmin: PropTypes.bool
 };
-
-SideNav.defaultProps = {
-  imageLink: null,
-  username: null,
-  firstname: null,
-  email: null
-};
-
 
 export default SideNav;
