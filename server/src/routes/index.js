@@ -49,7 +49,7 @@ Router.get('/books/category/:categoryId', authdecodeToken, CategoryController.di
 
 Router.get('/books/search', authdecodeToken, BooksController.searchBooks);
 
-Router.get('/auth/books/:bookId', BooksController.viewBook);
+Router.get('/auth/books/:bookId', BooksController.viewBookDetails);
 
 Router.delete('/admin/books/:bookId', authdecodeToken, checkAdmin, BooksController.deleteBook);
 

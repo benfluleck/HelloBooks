@@ -44,7 +44,7 @@ export default(sequelize, DataTypes) => {
     });
     UserBooks.belongsTo(models.User, {
       foreignKey: 'userId',
-      as:'user',
+      as: 'user',
       onDelete: 'CASCADE'
     });
   };

@@ -7,7 +7,7 @@ import { Modal, Row, Col } from 'react-materialize';
  * @class BookModal
  * @extends {React.Component}
  */
-class BookModal extends React.Component {
+class BookModal extends React.PureComponent {
   constructor(props) {
     super(props);
   }
@@ -30,11 +30,11 @@ class BookModal extends React.Component {
               </div>
             </Col>
             <Col m={12} l={6}>
-              <div className="book-modal modal-title">Book Number: # {this.props.books.id}<span id="bookId" /></div>
+              <div className="book-modal modal-title">Book Number: # {this.props.books.id}</div>
               <div className="book-modal modal-title">Title: {this.props.books.title} </div>
               <hr />
               <div className="book-modal">Author: {this.props.books.author}</div>
-              <div className="book-modal">Description: {this.props.books.description}<span id="bookDescription" /></div>
+              <div className="book-modal">Description: {this.props.books.description}</div>
             </Col>
           </div>
           {this.props.children}

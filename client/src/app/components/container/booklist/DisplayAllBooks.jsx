@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
-import { Row, Col } from 'react-materialize';
+import { Row, Col, Button } from 'react-materialize';
 import Book from '../../presentation/common/book/DisplayBook.jsx';
 import Loader from './Loader.jsx';
 import { fetchAllBooks } from '../../../actions/fetchbooks';
@@ -60,6 +60,13 @@ class DisplayAllBooks extends React.Component {
             {this.props.allBooksList.books.length === 0 ?
                 null : <SearchBooks />
           }
+            {this.props.isAdmin ?
+              <div className="add-book">
+                <Button floating medium className="#ef6c00 orange darken-3 add-book-btn" waves="light" icon="add" />
+                ADD BOOK
+              </div> : null
+          }
+
           </Col>
           <Col m={3} l={3}>
             <div className="catdropdownlist">
@@ -88,6 +95,7 @@ class DisplayAllBooks extends React.Component {
 DisplayAllBooks.propTypes = {
   offset: PropTypes.number,
   limit: PropTypes.number,
+  isAdmin: PropTypes.bool.isRequired,
   allBooksList: PropTypes.shape({
     id: PropTypes.number,
     map: PropTypes.object,
@@ -110,6 +118,7 @@ DisplayAllBooks.defaultProps = {
 
 const mapStateToProps = state => ({
   allBooksList: state.bookReducer.allBooksList || [],
+  isAdmin: state.userReducer.user.isAdmin
 });
 
 export default connect(mapStateToProps, { fetchAllBooks })(DisplayAllBooks);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Button } from 'react-materialize';
+import { Row } from 'react-materialize';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import SideNav from '../common/SideNav/index.jsx';
 import DisplayAllBooks from '../../container/booklist/DisplayAllBooks.jsx';
@@ -39,7 +39,9 @@ class AdminDashboard extends React.PureComponent {
               <Row>
                 <TabPanel>
                   <DisplayAllBooks />
-                  <Button floating large className='red' waves='light' icon='add' />
+                </TabPanel>
+                <TabPanel>
+                  <p>Content here</p>
                 </TabPanel>
                 <TabPanel>
                   <p>Content here</p>

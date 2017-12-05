@@ -1,6 +1,7 @@
-'use strict';
+
+
 export default(sequelize, DataTypes) => {
- const Userlevel = sequelize.define('Userlevel', {
+  const Userlevel = sequelize.define('Userlevel', {
     maxBooks: {
       type: DataTypes.INTEGER,
       allowNull: false
@@ -17,7 +18,7 @@ export default(sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     }
-  }, {freezeTableName: true});
+  }, { freezeTableName: true });
   Userlevel.associate = (models) => {
     Userlevel.hasMany(models.User, {
       foreignKey: 'id',

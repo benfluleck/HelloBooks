@@ -32,7 +32,6 @@ class UploadModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
       isLoading: false
 
     };

@@ -140,7 +140,8 @@ class DisplayBookModal extends React.Component {
   /**
    *
    *
-   * @description This render implements the isBorrowed logic checking whether a selected book has been borrowed
+   * @description This render implements the isBorrowed logic checking
+   *  whether a selected book has been borrowed
    * @memberof DisplayBookModal
    * @returns {Component} Component
    *

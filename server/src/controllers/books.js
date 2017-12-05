@@ -193,7 +193,7 @@ export default {
      * @param {object} res  HTTP response object
      * @returns {object} book
      */
-  viewBook(req, res) {
+  viewBookDetails(req, res) {
     const bookId = parseInt(req.params.bookId, 10);
     if (isNaN(bookId)) {
       return res.status(400).send({

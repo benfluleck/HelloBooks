@@ -8,6 +8,6 @@ export default (req, res, next) => {
       isAdmin: decodedToken.id.isAdmin
     });
   } else {
-    res.status(403).send({ message: 'You are forbidden, Sorry' });
+    res.status(403).send({ token: null, message: 'You are forbidden, Sorry' });
   }
 };

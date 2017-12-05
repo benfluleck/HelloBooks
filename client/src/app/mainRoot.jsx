@@ -9,6 +9,7 @@ import UserDashboard from './components/presentation/UserDashboard.jsx';
 import AdminDashboard from './components/presentation/admin/AdminDashboard.jsx';
 import Logout from './components/container/authentication/Logout.jsx';
 import UserRoutes from './components/hoc/UserRoutes.jsx';
+import AdminRoutes from './components/hoc/AdminRoutes.jsx';
 import '../app/css/style.scss';
 
 
@@ -21,7 +22,7 @@ const MainRoot = () => (
         <Route exact path="/logout" component={Logout} />
         <Route exact path="/signup" component={SignUp} />
         <UserRoutes exact path="/dashboard" component={UserDashboard} />
-        <Route exact path="/admin" component={AdminDashboard} />
+        <AdminRoutes exact path="/admin" component={AdminDashboard} />
 
 
         {/* <Route component={NotFound}/> */}

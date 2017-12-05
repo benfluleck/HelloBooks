@@ -11,7 +11,7 @@ const { notifSend } = notifActions;
  * @returns {function} asynchronous action
  */
 export const showErrorNotification = ({ message, error }) => (dispatch) => {
-  if (error.response.data.message === 'Unauthorised access' && error.response.data.token === null) {
+  if (error.response.data.token === null) {
     dispatch(notifSend({
       message: 'Please Login Again',
       kind: 'info',
