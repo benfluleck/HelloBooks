@@ -1,5 +1,6 @@
 import React from 'react';
 import { Modal, Row, Col } from 'react-materialize';
+import PropTypes from 'prop-types';
 
 /**
  *
@@ -43,6 +44,28 @@ class BookModal extends React.PureComponent {
     );
   }
 }
+
+BookModal.defaultProps = {
+  // quantity: null,
+  children: null,
+  header: '',
+  actions: null
+};
+
+
+BookModal.propTypes = {
+  //  quantity: PropTypes.number
+  children: PropTypes.func,
+  books: PropTypes.shape(PropTypes.arrayOf({
+    title: PropTypes.string,
+    author: PropTypes.string,
+    quantity: PropTypes.number,
+    description: PropTypes.string,
+  })).isRequired,
+  header: PropTypes.string,
+  actions: PropTypes.func,
+};
+
 
 export default BookModal;
 

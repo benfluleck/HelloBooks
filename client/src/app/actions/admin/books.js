@@ -18,13 +18,11 @@ export const addBook = data => dispatch => api
   .admin
   .createBook(data)
   .then((response) => {
-    console.log(response, '>>>>>>>>>>>');
     dispatch(CreateBookSuccess(response));
     dispatch(showSuccessNotification(response));
     return (response);
   })
   .catch((error) => {
-    console.log({ error }, 'kbhkjnnjj', error.response, 'hmmmmmm', '>>>>>>>');
     dispatch(showErrorNotification({ error }));
     dispatch(CreateBookFailure({ error }));
     return ({ error });

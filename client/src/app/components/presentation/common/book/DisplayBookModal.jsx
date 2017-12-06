@@ -31,7 +31,7 @@ class DisplayBookModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      returnDate: moment(),
+      returnDate: moment()
     };
   }
 
@@ -184,6 +184,7 @@ DisplayBookModal.propTypes = {
 
 const mapStateToProps = state => ({
   isAuthenticated: !!state.userReducer.isAuthenticated,
+ // isAdmin: state.userReducer.user.isAdmin,
   borrowedBooksList: state.bookReducer.borrowedBooksList || {},
   book: (state.bookReducer.book) ?state.bookReducer.book.book : [],
 });

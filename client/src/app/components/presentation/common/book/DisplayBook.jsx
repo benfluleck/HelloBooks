@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactTooltip from 'react-tooltip';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { fetchBook } from '../../../../actions/fetchbooks';
 
 
@@ -69,5 +70,25 @@ class Book extends React.Component {
   }
 }
 
+Book.defaultProps = {
+  // quantity: null,
+  children: null,
+  header: '',
+  actions: null
+};
+
+
+Book.propTypes = {
+  //  quantity: PropTypes.number
+  children: PropTypes.func,
+  books: PropTypes.shape(PropTypes.arrayOf({
+    title: PropTypes.string,
+    author: PropTypes.string,
+    quantity: PropTypes.number,
+    description: PropTypes.string,
+  })).isRequired,
+  header: PropTypes.string,
+  actions: PropTypes.func,
+};
 
 export default connect(null, { fetchBook })(Book);
