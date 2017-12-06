@@ -65,15 +65,16 @@ class AdminBookModal extends React.Component {
       this.setState({ errors: {} });
       if (this.props.header === 'Add Book') {
         // const selectedCategory = $('#category').val();
-       
 
-        //console.log(this.state);
+
+        // console.log(this.state);
 
         this.props.addBook(this.state)
-        .then(()=>{
-          $('#admin-book-modal').modal('close');
-        })
-       
+          .then((response) => {
+            if (response) {
+              $('#admin-book-modal').modal('close');
+            }
+          });
       } else if (this.pros.header === 'Edit Book') {
         console.log(this.props.header, '??????');
       }
@@ -108,8 +109,8 @@ class AdminBookModal extends React.Component {
         sources: ['local', 'url'],
         max_file_size: 1500000,
         max_image_width: 325,
-       max_image_height: 499
-      
+        max_image_height: 499
+
       },
       (error, result) => {
         this.setState({
