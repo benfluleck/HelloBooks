@@ -38,5 +38,11 @@ export default {
     fetchSelectedBookById: bookId => axios
       .get(`api/v1/auth/books/${bookId}`)
       .then(res => res.data),
+  },
+  admin: {
+    createBook: data => axios.post('api/v1/admin/books', data)
+      .then(res => res.data)
+
   }
+
 };

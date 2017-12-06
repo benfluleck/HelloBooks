@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { fetchBook } from '../../../../actions/fetchbooks';
 
 
-
 /**
  *
  *
@@ -22,13 +21,13 @@ class Book extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      
+
     };
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick(books){
-    this.props.fetchBook(books.id)
+  handleClick(books) {
+    this.props.fetchBook(books.id);
   }
 
 
@@ -42,7 +41,6 @@ class Book extends React.Component {
    */
   render() {
     return (
-      
       <div className="col l3">
         <ReactTooltip />
         <div className="card">
@@ -72,4 +70,4 @@ class Book extends React.Component {
 }
 
 
-export default connect(null,{fetchBook})(Book);
+export default connect(null, { fetchBook })(Book);

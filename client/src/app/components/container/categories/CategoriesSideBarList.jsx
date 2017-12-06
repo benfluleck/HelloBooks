@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Collapsible, CollapsibleItem } from 'react-materialize';
+import getCategories from './getCategoriesWrapper.jsx';
 
 /**
  *
@@ -42,5 +43,6 @@ CategoriesSideBar.propTypes = {
   })).isRequired
 };
 
+const CategoriesSideBarList = getCategories(CategoriesSideBar);
 
-export default (CategoriesSideBar);
+export default CategoriesSideBarList;

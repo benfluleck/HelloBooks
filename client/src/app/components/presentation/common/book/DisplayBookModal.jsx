@@ -155,8 +155,12 @@ class DisplayBookModal extends React.Component {
     }
   
     const isBorrowed = (this.props.borrowedBooksList.books) ? this.props.borrowedBooksList.books.map(book => (book.bookId)) : [];
+    
+    // if(isBorrowed.length!==0){
+    //   console.log(isBorrowed,'??????')
     const loanStatus = isBorrowed.includes(this.props.book.id);
-
+    // }
+    // const loanStatus = false;
     const bookModalActions = this.bookActions(loanStatus);
     const chooseReturnDate = this.showDatePicker(loanStatus);
     return (
@@ -180,7 +184,7 @@ DisplayBookModal.propTypes = {
 
 const mapStateToProps = state => ({
   isAuthenticated: !!state.userReducer.isAuthenticated,
-  borrowedBooksList: state.bookReducer.borrowedBooksList || [],
+  borrowedBooksList: state.bookReducer.borrowedBooksList || {},
   book: (state.bookReducer.book) ?state.bookReducer.book.book : [],
 });
 

@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import UserView from './UserView.jsx';
-import CategoriesSideBar from '../../../container/categories/CategoriesSideBar.jsx';
-import getCategories from '../../../container/categories/getCategoriesWrapper.jsx';
+import CategoriesSideBarList from '../../../container/categories/CategoriesSideBarList.jsx';
 
 
-const CategoriesSideBarList = getCategories(CategoriesSideBar);
 /**
  * component that displays user image, username and groups
  * @function SideNav

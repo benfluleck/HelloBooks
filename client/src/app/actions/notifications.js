@@ -23,7 +23,7 @@ export const showErrorNotification = ({ message, error }) => (dispatch) => {
     setAuthorizationToken(false);
   } else {
     dispatch(notifSend({
-      message: message || error.response.data.message,
+      message: message || error.response.data.message || error.data.message,
       kind: 'danger',
       dismissAfter: 2500
     }));

@@ -49,7 +49,8 @@ export default {
                   category: category.categoryName
                 };
                 res.status(201).send({
-                  message: `${newBook.title} has been added to the library, Category: ${newBook.category}`
+                  message: `${newBook.title} has been added to the library, Category: ${newBook.category}`,
+                  createdBook
                 });
               });
           })

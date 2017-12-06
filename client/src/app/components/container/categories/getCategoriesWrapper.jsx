@@ -47,6 +47,7 @@ const getCategoriesWrapper = (WrappedComponent) => {
         );
       });
     }
+
     /**
    * render getCategories Wrapper
    * @method render
@@ -57,7 +58,7 @@ const getCategoriesWrapper = (WrappedComponent) => {
       if (!this.props.categoryList) {
         return <Preloader size="big" className="center-align" />;
       }
-      return <WrappedComponent onClick={this.handleClick} categories={this.props.categoryList} />;
+      return <WrappedComponent onChange={this.props.onChange} onClick={this.handleClick} categories={this.props.categoryList} />;
     }
   }
 

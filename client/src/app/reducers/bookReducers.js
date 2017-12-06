@@ -17,7 +17,9 @@ import {
   FETCH_BOOKS_FOR_CATEGORIES_SUCCESS,
   FETCH_BOOKS_FOR_CATEGORIES_FAILURE,
   FETCH_SELECTED_BOOK_SUCCESS,
-  FETCH_SELECTED_BOOK_FAILURE
+  FETCH_SELECTED_BOOK_FAILURE,
+  CREATE_BOOK_FAILURE,
+  CREATE_BOOK_SUCCESS
 } from '../actions/actiontype';
 
 /**
@@ -126,6 +128,31 @@ export default function bookReducer(state = {
       };
     }
     case FETCH_BOOKS_FOR_CATEGORIES_FAILURE:
+    {
+      return {
+        ...state,
+        error: action
+      };
+    }
+    case CREATE_BOOK_SUCCESS:
+    {
+      return {
+        ...state,
+        allBooksList: {
+          ...state.allBooksList,
+          books:
+          [action.book.createdBook,
+          ...state.allBooksList.books]
+          
+            // state.allBooksList.books.slice(0, action.book.createdBook.id)
+            //   .concat(action.book.createdBook)
+          // ...state.allBooksList,
+          // createdBook: action.book
+
+        }
+      };
+    }
+    case CREATE_BOOK_FAILURE:
     {
       return {
         ...state,

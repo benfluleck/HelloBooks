@@ -1,18 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
-import { Row, Col, Button } from 'react-materialize';
+import { Row, Col, Button, Preloader } from 'react-materialize';
 import Book from '../../presentation/common/book/DisplayBook.jsx';
 import Loader from './Loader.jsx';
 import { fetchAllBooks } from '../../../actions/fetchbooks';
 import PaginationWrapper from '../common/Pagination.jsx';
 import SearchBooks from '../../presentation/common/book/SearchBooks.jsx';
-import CategoriesDropdown from '../categories/CategoriesDropdown.jsx';
-import getCategories from '../categories/getCategoriesWrapper.jsx';
+import CategoriesDropdownList from '../categories/CategoriesDropdownList.jsx';
 import MessageforNoCatBooks from '../../presentation/messages/dashboardMessages/MessageforNoCatBooks.jsx';
 
-
-const CategoriesDropdownList = getCategories(CategoriesDropdown);
 
 /**
  * @description Component for Display Books on the Landing page for all users
@@ -26,12 +23,22 @@ class DisplayAllBooks extends React.Component {
    * @memberof DisplayAllBooks
    * @returns {component} Loader
    */
-  componentDidMount() {
+  componentWillMount() {
     $('body').css('background-color', '#ffff');
     return (<Loader
       records={this.props.allBooksList}
       callback={this.props.fetchAllBooks(this.props.offset, this.props.limit)}
     />);
+  }
+
+  /**
+   *
+   * @returns {function} openModal
+   * @memberof DisplayAllBooks
+   *
+   */
+  handleClick() {
+    $('#admin-book-modal').modal('open');
   }
 
   /**
@@ -41,6 +48,9 @@ class DisplayAllBooks extends React.Component {
    * @returns {component} component
    */
   render() {
+    if (!this.props.allBooksList.books) {
+      return <Preloader size="big" />;
+    }
     const getAllBooks =
       this.props.allBooksList.books.map(book => (
         <Book
@@ -62,7 +72,7 @@ class DisplayAllBooks extends React.Component {
           }
             {this.props.isAdmin ?
               <div className="add-book">
-                <Button floating medium className="#ef6c00 orange darken-3 add-book-btn" waves="light" icon="add" />
+                <Button floating onClick={() => this.handleClick()} className="#ef6c00 orange darken-3 add-book-btn" waves="light" icon="add" />
                 ADD BOOK
               </div> : null
           }
@@ -95,7 +105,7 @@ class DisplayAllBooks extends React.Component {
 DisplayAllBooks.propTypes = {
   offset: PropTypes.number,
   limit: PropTypes.number,
-  isAdmin: PropTypes.bool.isRequired,
+  isAdmin: PropTypes.bool,
   allBooksList: PropTypes.shape({
     id: PropTypes.number,
     map: PropTypes.object,
@@ -113,12 +123,14 @@ DisplayAllBooks.propTypes = {
 DisplayAllBooks.defaultProps = {
   allBooksList: null,
   limit: 8,
-  offset: 0
+  offset: 0,
+  isAdmin: false
 };
 
 const mapStateToProps = state => ({
-  allBooksList: state.bookReducer.allBooksList || [],
-  isAdmin: state.userReducer.user.isAdmin
+  allBooksList: (state.bookReducer.allBooksList) ? state.bookReducer.allBooksList : {},
+  isAdmin: (state.userReducer.user) ? state.userReducer.user.isAdmin : false,
 });
 
 export default connect(mapStateToProps, { fetchAllBooks })(DisplayAllBooks);
+

@@ -114,6 +114,7 @@
 		"redux": "^3.7.2",
 		"redux-devtools-extension": "^2.13.2",
 		"redux-form": "^6.0.0-rc.3",
+		"redux-immutable-state-invariant": "^2.1.0",
 		"redux-logger": "^3.0.6",
 		"redux-notifications": "^4.0.1",
 		"redux-persist": "^4.10.1",
