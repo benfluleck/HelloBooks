@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import CategoriesOptionList from '../../../container/categories/CategoriesOptionsList.jsx';
 import { bookDetail } from '../../../../validators/validator';
-import { addBook } from '../../../../actions/admin/books';
+import { updateBookDetails } from '../../../../actions/admin/books';
 
 /**
  *
@@ -12,7 +12,7 @@ import { addBook } from '../../../../actions/admin/books';
  * @class BookModal
  * @extends {React.Component}
  */
-class AdminBookModal extends React.Component {
+class EditBookModal extends React.Component {
   /**
    *
    * Creates an instance of AdminBookModal.
@@ -22,20 +22,52 @@ class AdminBookModal extends React.Component {
    */
   constructor(props) {
     super(props);
+    const {
+      title = '',
+      author = '',
+      description = '',
+      quantity = '',
+      bookImage = '',
+      categoryId = ''
+    } = this.props.book;
     this.state = {
-      title: this.props.title,
-      author: this.props.author,
-      description: this.props.description,
-      quantity: this.props.quantity,
+      title,
+      author,
+      description,
+      quantity,
+      bookImage,
       imageName: '',
-      categoryId: '',
-      bookImage: this.props.bookImage,
+      categoryId,
+      bookId: this.props.book.id,
       errors: {}
 
     };
     this.onChange = this.onChange.bind(this);
     this.uploadWidget = this.uploadWidget.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  /**
+   * [componentWillReceiveProps description]
+   * @method componentWillReceiveProps
+   * @param  {[type]}  nextProps [description]
+   * @return {[type]}  [description]
+   */
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.book && this.props.book !== nextProps.book) {
+      // Necessary to populate form when existing book is loaded directly
+
+      this.setState({
+        title: nextProps.book.title,
+        author: nextProps.book.author,
+        description: nextProps.book.description,
+        quantity: nextProps.book.quantity,
+        imageName: '',
+        categoryId: '',
+        bookImage: nextProps.book.bookImage,
+        bookId: nextProps.book.id
+      });
+    }
   }
 
   /**
@@ -53,7 +85,7 @@ class AdminBookModal extends React.Component {
     });
   }
   /**
-   * @description Handle submit events on form inputs
+   * @description Handle submit events on the form inputs
    * @method handleSubmit
    * @memberof AdminBookModal
    * @param {object} event
@@ -63,21 +95,7 @@ class AdminBookModal extends React.Component {
     event.preventDefault();
     if (this.isValid()) {
       this.setState({ errors: {} });
-      if (this.props.header === 'Add Book') {
-        // const selectedCategory = $('#category').val();
-
-
-        // console.log(this.state);
-
-        this.props.addBook(this.state)
-          .then((response) => {
-            if (response) {
-              $('#admin-book-modal').modal('close');
-            }
-          });
-      } else if (this.pros.header === 'Edit Book') {
-        console.log(this.props.header, '??????');
-      }
+      this.props.updateBookDetails(this.state.bookId, this.state);
     }
   }
 
@@ -101,6 +119,7 @@ class AdminBookModal extends React.Component {
      * @memberof AddBook
      */
   uploadWidget() {
+    /* eslint-disable */
     cloudinary.openUploadWidget(
       {
         cloud_name: 'digpnxufx',
@@ -109,7 +128,8 @@ class AdminBookModal extends React.Component {
         sources: ['local', 'url'],
         max_file_size: 1500000,
         max_image_width: 325,
-        max_image_height: 499
+        max_image_height: 499,
+        multiple: false
 
       },
       (error, result) => {
@@ -120,17 +140,17 @@ class AdminBookModal extends React.Component {
       }
     );
   }
+  /* eslint-enable */
+
 
   /**
-   *
-   *
    * @returns {Component} Component
    *
    * @memberOf BookModal
    */
   render() {
     const {
-      header, book
+      header
     } = this.props;
 
     /**
@@ -139,13 +159,14 @@ class AdminBookModal extends React.Component {
    * @returns {Component} Component
    *
    * @memberOf BookModal
+   *
    */
     return (
       <Modal
         id="admin-book-modal"
         fixedFooter
         header={header}
-        actions={<div><Button onClick={this.handleSubmit}>Submit</Button><Button>Close</Button></div>}
+        actions={<Button onClick={this.handleSubmit}>Submit</Button>}
       >
         <Row>
           <div className="bookform">
@@ -153,7 +174,7 @@ class AdminBookModal extends React.Component {
               s={6}
               label="Book Title"
               required
-             // value={this.state.bookTitle}
+              value={this.state.title}
               name="title"
               onChange={this.onChange}
               error={this.state.errors.title}
@@ -164,7 +185,7 @@ class AdminBookModal extends React.Component {
               s={6}
               label="Book Author"
               required
-              // value={this.state.bookAuthor}
+              value={this.state.author}
               name="author"
               onChange={this.onChange}
               error={this.state.errors.author}
@@ -176,7 +197,7 @@ class AdminBookModal extends React.Component {
               s={6}
               label="Book Quantity"
               required
-              // value={this.state.bookAuthor}
+              value={this.state.quantity}
               name="quantity"
               onChange={this.onChange}
               error={this.state.errors.quantity}
@@ -191,7 +212,7 @@ class AdminBookModal extends React.Component {
               label="Book Description"
               required
               type="textarea"
-              // value={this.state.bookDescription}
+              value={this.state.description}
               name="description"
               onChange={this.onChange}
               error={this.state.errors.description}
@@ -230,31 +251,26 @@ class AdminBookModal extends React.Component {
   }
 }
 
-AdminBookModal.defaultProps = {
-  title: '',
-  author: '',
-  description: '',
-  bookImage: null,
-  quantity: null,
+EditBookModal.defaultProps = {
+  header: 'Edit Book'
 };
 
 
-AdminBookModal.propTypes = {
-  title: PropTypes.string,
-  author: PropTypes.string,
-  description: PropTypes.string,
-  bookImage: PropTypes.func,
-  quantity: PropTypes.number
+EditBookModal.propTypes = {
+  book: PropTypes.shape(PropTypes.arrayOf({
+    title: PropTypes.string,
+    author: PropTypes.string,
+    quantity: PropTypes.string,
+    description: PropTypes.string,
+  })).isRequired,
+  header: PropTypes.string,
+  updateBookDetails: PropTypes.func.isRequired
 };
 
-// const mapStateToProps = state => ({
-//   // image: state.userReducer.user.profilePic,
-//   // username: (state.userReducer.user)
-//   //   ? state.userReducer.user.username
-//   //   : '',
-//   // secureUrl: state.imageReducer.url
+const mapStateToProps = state => ({
+  book: (state.bookReducer.book) ? state.bookReducer.book.book : [],
 
-// });
+});
 
 
-export default connect(null, { addBook })(AdminBookModal);
+export default connect(mapStateToProps, { updateBookDetails })(EditBookModal);

@@ -43,7 +43,7 @@ class DisplayRecentBooks extends React.Component {
         .map(book => (<Book
           onClick={this.handleClick}
           key={book.id}
-          books={book}
+          book={book}
         />)) : [];
 
     return (

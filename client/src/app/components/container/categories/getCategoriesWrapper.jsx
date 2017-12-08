@@ -67,11 +67,15 @@ const getCategoriesWrapper = (WrappedComponent) => {
       key: PropTypes.number
     })).isRequired,
     fetchAllCategories: PropTypes.func.isRequired,
-    fetchBooksForCategories: PropTypes.func
+    fetchBooksForCategories: PropTypes.func,
+    onChange: PropTypes.func
   };
 
   GetCategories.defaultProps = {
-    fetchBooksForCategories: null
+    fetchBooksForCategories: null,
+    onChange: null,
+  
+
   };
 
   const mapStateToProps = ({ bookReducer }) => ({

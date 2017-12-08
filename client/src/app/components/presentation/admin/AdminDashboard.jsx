@@ -5,7 +5,6 @@ import SideNav from '../common/SideNav/index.jsx';
 import DisplayAllBooks from '../../container/booklist/DisplayAllBooks.jsx';
 import getDashboardWrapper from '../../container/Dashboard.jsx';
 
-
 /**
  *
  *

@@ -3,7 +3,7 @@ import Header from '../components/container/header/Header.jsx';
 
 import UploadModal from '../components/presentation/common/modal/UploadModal.jsx';
 import DisplayBookModal from './presentation/common/book/DisplayBookModal.jsx';
-import AddBookModal from './presentation/common/modal/AddBookModal.jsx';
+// import AddBookModal from './presentation/common/modal/AddBookModal.jsx';
 
 
 /* eslint-disable */
@@ -14,7 +14,7 @@ const Root = props => (
     {props.children}
   <UploadModal />
  <DisplayBookModal />
- <AddBookModal />
+ 
   </div>
 );
 

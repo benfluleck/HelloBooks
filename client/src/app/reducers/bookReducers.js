@@ -19,7 +19,9 @@ import {
   FETCH_SELECTED_BOOK_SUCCESS,
   FETCH_SELECTED_BOOK_FAILURE,
   CREATE_BOOK_FAILURE,
-  CREATE_BOOK_SUCCESS
+  CREATE_BOOK_SUCCESS,
+  UPDATE_BOOK_SUCCESS,
+  UPDATE_BOOK_FAILURE
 } from '../actions/actiontype';
 
 /**
@@ -47,6 +49,20 @@ export default function bookReducer(state = {
       return {
         ...state,
         error: action.message
+      };
+    }
+    case UPDATE_BOOK_SUCCESS:
+    {
+      return {
+        ...state,
+        error: action.book
+      };
+    }
+    case UPDATE_BOOK_FAILURE:
+    {
+      return {
+        ...state,
+        error: action.book
       };
     }
     case FETCH_CATEGORIES_SUCCESS:
@@ -134,6 +150,7 @@ export default function bookReducer(state = {
         error: action
       };
     }
+
     case CREATE_BOOK_SUCCESS:
     {
       return {
@@ -142,13 +159,7 @@ export default function bookReducer(state = {
           ...state.allBooksList,
           books:
           [action.book.createdBook,
-          ...state.allBooksList.books]
-          
-            // state.allBooksList.books.slice(0, action.book.createdBook.id)
-            //   .concat(action.book.createdBook)
-          // ...state.allBooksList,
-          // createdBook: action.book
-
+            ...state.allBooksList.books]
         }
       };
     }

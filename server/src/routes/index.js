@@ -21,7 +21,7 @@ Router.post('/auth/users/signup', fieldValidationMiddleware, nullvalidationMiddl
 
 Router.post('/auth/users/signin', nullvalidationMiddleware, UserController.signIn);
 
-Router.post('/admin/books', checkAdmin, nullvalidationMiddleware, BooksController.createBook);
+Router.post('/admin/books', checkAdmin, nullvalidationMiddleware, BooksController.addBook);
 
 Router.put('/admin/books/:bookId', checkAdmin, nullvalidationMiddleware, BooksController.updateBook);
 

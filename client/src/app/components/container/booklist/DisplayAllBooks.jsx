@@ -9,7 +9,8 @@ import PaginationWrapper from '../common/Pagination.jsx';
 import SearchBooks from '../../presentation/common/book/SearchBooks.jsx';
 import CategoriesDropdownList from '../categories/CategoriesDropdownList.jsx';
 import MessageforNoCatBooks from '../../presentation/messages/dashboardMessages/MessageforNoCatBooks.jsx';
-
+import EditBookModal from '../../presentation/common/modal/EditBookModal.jsx';
+import AddBookModal from '../../presentation/common/modal/AddBookModal.jsx';
 
 /**
  * @description Component for Display Books on the Landing page for all users
@@ -38,7 +39,7 @@ class DisplayAllBooks extends React.Component {
    *
    */
   handleClick() {
-    $('#admin-book-modal').modal('open');
+    $('#add-admin-book-modal').modal('open');
   }
 
   /**
@@ -55,7 +56,7 @@ class DisplayAllBooks extends React.Component {
       this.props.allBooksList.books.map(book => (
         <Book
           key={book.id}
-          books={book}
+          book={book}
         />
       ));
     const { pagination } = this.props.allBooksList;
@@ -76,7 +77,6 @@ class DisplayAllBooks extends React.Component {
                 ADD BOOK
               </div> : null
           }
-
           </Col>
           <Col m={3} l={3}>
             <div className="catdropdownlist">
@@ -97,6 +97,9 @@ class DisplayAllBooks extends React.Component {
           fetch={this.props.fetchAllBooks}
           numberOfRecords={this.props.limit}
         />
+        {this.props.isAdmin && this.props.allBooksList ?
+          <div><EditBookModal /> <AddBookModal /> </div> : null
+        }
       </div>
     );
   }
@@ -111,9 +114,9 @@ DisplayAllBooks.propTypes = {
     map: PropTypes.object,
     pagination: PropTypes.object,
     books: PropTypes.arrayOf(PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      author: PropTypes.string.isRequired,
-      quantity: PropTypes.number.isRequired,
+      title: PropTypes.string,
+      author: PropTypes.string,
+      quantity: PropTypes.number,
       description: PropTypes.string,
     }))
   }),
@@ -121,10 +124,10 @@ DisplayAllBooks.propTypes = {
 };
 
 DisplayAllBooks.defaultProps = {
-  allBooksList: null,
+  allBooksList: {},
   limit: 8,
   offset: 0,
-  isAdmin: false
+  isAdmin: false,
 };
 
 const mapStateToProps = state => ({

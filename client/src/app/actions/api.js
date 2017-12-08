@@ -41,8 +41,9 @@ export default {
   },
   admin: {
     createBook: data => axios.post('api/v1/admin/books', data)
-      .then(res => res.data)
-
+      .then(res => res.data),
+    updateBook: (bookId, bookDetails) => axios.put(`api/v1/admin/books/${bookId}`, bookDetails)
+      .then(res => res.data),
   }
 
 };

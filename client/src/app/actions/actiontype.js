@@ -1,3 +1,4 @@
+export const CLEAR_BOOK_FIELD = 'CLEAR_BOOK_FIELD';
 
 export const USER_LOGGED_IN = 'USER_LOGGED_IN';
 
@@ -48,6 +49,10 @@ export const FETCH_BOOKS_FOR_CATEGORIES_FAILURE = 'FETCH_BOOKS_FOR_CATEGORIES_FA
 export const CLOUDINARY_UPLOAD_PRESET = 'yn0wpv0n';
 
 export const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/digpnxufx/upload';
+
+export const UPDATE_BOOK_SUCCESS = 'UPDATE_BOOK_SUCCESS';
+
+export const UPDATE_BOOK_FAILURE = 'UPDATE_BOOK_FAILURE';
 
 export const BORROW_BOOKS_SUCCESS = 'BORROW_BOOKS_SUCCESS';
 

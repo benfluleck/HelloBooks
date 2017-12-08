@@ -49,7 +49,7 @@ const sendSurcharge = () => (UserBooks.findAll({
       if (error) {
         console.log(error);
       } else {
-        console.log(`Email sent: ${ info.response}`);
+        console.log(`Email sent: ${info.response}`);
         process.exit(0);
       }
     });
