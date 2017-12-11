@@ -1,4 +1,4 @@
-import { showErrorNotification, showSuccessNotification } from '../notifications';
+import { showErrorNotification } from '../notifications';
 import {
   EDIT_CATEGORY_FAILURE,
   EDIT_CATEGORY_SUCCESS

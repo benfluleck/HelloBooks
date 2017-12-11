@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { Collection, CollectionItem, Icon, Preloader } from 'react-materialize';
 import swal from 'sweetalert2';
 import { editCategoryAction } from '../../../actions/admin/editCategory';
+import { deleteCategoryAction } from '../../../actions/admin/deleteCategory';
 
 /**
  *
@@ -22,12 +23,6 @@ class CategoriesCollectionList extends React.Component {
    */
   constructor(props) {
     super(props);
-    this.state = {
-      categoryId: '',
-      categoryName: ''
-    };
-
-
     this.editCategory = this
       .editCategory
       .bind(this);
@@ -71,7 +66,20 @@ class CategoriesCollectionList extends React.Component {
     });
   }
 
+  /**
+   *
+   *
+   * @param {any} id
+   * @memberof CategoriesCollectionList
+
+   *
+   *
+   * @param {any} id
+   *
+   * @memberOf CategoriesCollectionList
+   */
   deleteCategory(id) {
+    this.props.deleteCategoryAction(id);
     console.log('I am deleting');
   }
 
@@ -98,7 +106,7 @@ class CategoriesCollectionList extends React.Component {
           <div className="black-text">
             {category.categoryName}
             <span className="right">
-              <Link to="#" className="waves-effect " onClick={this.deleteCategory}>
+              <Link to="#" className="waves-effect " onClick={() => this.deleteCategory(category.id)}>
                 <Icon small className="icons">delete</Icon>
               </Link>
 
@@ -130,4 +138,4 @@ CategoriesCollectionList.propTypes = {
 
 const mapStateToProps = ({ bookReducer }) => ({ categories: bookReducer.categoryList });
 
-export default connect(mapStateToProps, { editCategoryAction })(CategoriesCollectionList);
+export default connect(mapStateToProps, { editCategoryAction, deleteCategoryAction })(CategoriesCollectionList);

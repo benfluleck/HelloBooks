@@ -179,7 +179,7 @@ export default {
         category
           .destroy()
           .then(() => res.status(200)
-            .send({ message: `Category ${category.categoryName}, has been deleted`, }))
+            .send({ message: `Category ${category.categoryName}, has been deleted`, category }))
           .catch(error => res.status(500).send(error));
       })
       .catch(error => res.status(500).send(error.message));

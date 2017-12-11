@@ -10,7 +10,7 @@ export const addCategoryFailure = error => ({ type: ADD_CATEGORY_FAILURE, error 
 
 
 /**
- * async helper function: add Book to the database
+ * async helper function: add Category to the database
  * @function addNewCategory
  * @param {string} category
  * @returns {function} asynchronous action

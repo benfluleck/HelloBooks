@@ -27,7 +27,9 @@ import {
   ADD_CATEGORY_SUCCESS,
   ADD_CATEGORY_FAILURE,
   EDIT_CATEGORY_SUCCESS,
-  EDIT_CATEGORY_FAILURE
+  EDIT_CATEGORY_FAILURE,
+  DELETE_CATEGORY_FAILURE,
+  DELETE_CATEGORY_SUCCESS
 } from '../actions/actiontype';
 
 /**
@@ -112,6 +114,24 @@ export default function bookReducer(state = {
       };
     }
     case EDIT_CATEGORY_FAILURE:
+    {
+      return {
+        ...state,
+        error: action.error
+      };
+    }
+    case DELETE_CATEGORY_SUCCESS:
+    {
+      console.log(action,'>>>>>>>mmmm')
+      return {
+        ...state,
+        categoryList:
+          state.categoryList
+            .filter(category => category.id !== action.deletedCategory.category.id)
+        
+      };
+    }
+    case DELETE_CATEGORY_FAILURE:
     {
       return {
         ...state,

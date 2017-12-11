@@ -16,7 +16,7 @@ export const LoanBooksRejected = error => ({ type: BORROW_BOOKS_FAIL, error });
  */
 export const borrowbooks = book => dispatch => api
   .book
-  .loanbook(book)
+  .loanBook(book)
   .then((response) => {
     dispatch(LoanBooksSuccess(response));
     dispatch(showSuccessNotification(response));

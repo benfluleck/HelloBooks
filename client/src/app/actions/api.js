@@ -16,14 +16,14 @@ export default {
     fetchOverdueBooks: (offset, limit) => axios
       .get(`api/v1/users/getoverduebooks?offset=${offset}&limit=${limit}`)
       .then(res => res.data),
-    fetchbooksbyUserId: (offset, limit) => axios
+    fetchBooksByUserId: (offset, limit) => axios
       .get(`api/v1/users/borrowedbooks?offset=${offset}&limit=${limit}&returned=false`)
       .then(res => res.data),
-    loanbook: book => axios.post('api/v1/users/loanbook', book)
+    loanBook: book => axios.post('api/v1/users/loanbook', book)
       .then(res => res.data),
-    returnbook: book => axios.put('api/v1/users/returnbook', book)
+    returnBook: book => axios.put('api/v1/users/returnbook', book)
       .then(res => res.data),
-    loanhistory: (offset, limit) => axios
+    loanHistory: (offset, limit) => axios
       .get(`api/v1/users/getloanhistory?offset=${offset}&limit=${limit}`)
       .then(res => res.data),
     searchBooks: value => axios
@@ -49,6 +49,8 @@ export default {
     addCategory: categoryName => axios.post('api/v1/admin/category', categoryName)
       .then(res => res.data),
     editCategory: (categoryName, categoryId) => axios.put(`api/v1/admin/category/${categoryId}`, categoryName)
+      .then(res => res.data),
+    deleteCategory: categoryId => axios.delete(`api/v1/admin/category/${categoryId}`)
       .then(res => res.data),
   }
 };
