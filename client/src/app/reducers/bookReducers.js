@@ -21,7 +21,13 @@ import {
   CREATE_BOOK_FAILURE,
   CREATE_BOOK_SUCCESS,
   UPDATE_BOOK_SUCCESS,
-  UPDATE_BOOK_FAILURE
+  UPDATE_BOOK_FAILURE,
+  DELETE_BOOK_FAILURE,
+  DELETE_BOOK_SUCCESS,
+  ADD_CATEGORY_SUCCESS,
+  ADD_CATEGORY_FAILURE,
+  EDIT_CATEGORY_SUCCESS,
+  EDIT_CATEGORY_FAILURE
 } from '../actions/actiontype';
 
 /**
@@ -62,7 +68,7 @@ export default function bookReducer(state = {
     {
       return {
         ...state,
-        error: action.book
+        book: action.book
       };
     }
     case FETCH_CATEGORIES_SUCCESS:
@@ -73,6 +79,39 @@ export default function bookReducer(state = {
       };
     }
     case FETCH_CATEGORIES_FAILURE:
+    {
+      return {
+        ...state,
+        error: action.error
+      };
+    }
+    case ADD_CATEGORY_SUCCESS:
+    {
+      return {
+        ...state,
+        categoryList: [
+          ...state.categoryList,
+          action.category.category
+        ]
+      };
+    }
+    case ADD_CATEGORY_FAILURE:
+    {
+      return {
+        ...state,
+        error: action.error
+      };
+    }
+    case EDIT_CATEGORY_SUCCESS:
+    {
+      return {
+        ...state,
+        categoryList: state.categoryList.map(category =>
+          ((category.id !== action.category.updatedCategory.id) ?
+            category : action.category.updatedCategory))
+      };
+    }
+    case EDIT_CATEGORY_FAILURE:
     {
       return {
         ...state,
@@ -220,6 +259,31 @@ export default function bookReducer(state = {
       return {
         ...state,
         bookOperations: action.bookOperations
+      };
+    }
+    case DELETE_BOOK_SUCCESS:
+    {
+      return {
+        ...state,
+        allBooksList: {
+          ...state.allBooksList,
+          books: state
+            .allBooksList
+            .books
+            .filter(book => book.id !== action.book.deletedBookId),
+          // pagination: state
+          //   .allBooksList
+          //   .pagination
+          //   .totalCount - 1
+        },
+      };
+    }
+    case DELETE_BOOK_FAILURE:
+    {
+      return {
+        ...state,
+        error: action
+
       };
     }
 

@@ -302,7 +302,7 @@ export default {
           }
           book
             .destroy()
-            .then(() => res.status(200).send({ message: `${book.title}  has been deleted` }));
+            .then(() => res.status(200).send({ message: `${book.title}  has been deleted`, deletedBookId: bookId }));
         });
       })
       .catch(error => res.status(500).send(error.message));

@@ -6,7 +6,9 @@ import getCategories from './getCategoriesWrapper.jsx';
 
 /**
  *
+ *
  * @param {object} props
+ * @returns {component} Collapsible
  */
 const CategoriesSideBar = (props) => {
   const categoryNames = props.categories

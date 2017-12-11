@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Button } from 'react-materialize';
 import UserView from './UserView.jsx';
 import CategoriesSideBarList from '../../../container/categories/CategoriesSideBarList.jsx';
 

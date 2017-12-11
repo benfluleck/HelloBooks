@@ -11,12 +11,12 @@ export const LoanBooksRejected = error => ({ type: BORROW_BOOKS_FAIL, error });
 /**
  * async helper function: log in user
  * @function BorrowBooks
- * @param {object} data
+ * @param {object} book
  * @returns {function} asynchronous action
  */
-export const borrowbooks = data => dispatch => api
+export const borrowbooks = book => dispatch => api
   .book
-  .loanbook(data)
+  .loanbook(book)
   .then((response) => {
     dispatch(LoanBooksSuccess(response));
     dispatch(showSuccessNotification(response));

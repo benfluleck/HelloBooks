@@ -5,6 +5,7 @@ import { Row, Col, Button, Preloader } from 'react-materialize';
 import Book from '../../presentation/common/book/DisplayBook.jsx';
 import Loader from './Loader.jsx';
 import { fetchAllBooks } from '../../../actions/fetchbooks';
+import { fetchAllCategories } from '../../../actions/fetchcategories';
 import PaginationWrapper from '../common/Pagination.jsx';
 import SearchBooks from '../../presentation/common/book/SearchBooks.jsx';
 import CategoriesDropdownList from '../categories/CategoriesDropdownList.jsx';
@@ -26,6 +27,7 @@ class DisplayAllBooks extends React.Component {
    */
   componentWillMount() {
     $('body').css('background-color', '#ffff');
+    this.props.fetchAllCategories();
     return (<Loader
       records={this.props.allBooksList}
       callback={this.props.fetchAllBooks(this.props.offset, this.props.limit)}
@@ -120,7 +122,8 @@ DisplayAllBooks.propTypes = {
       description: PropTypes.string,
     }))
   }),
-  fetchAllBooks: PropTypes.func.isRequired
+  fetchAllBooks: PropTypes.func.isRequired,
+  fetchAllCategories: PropTypes.func.isRequired,
 };
 
 DisplayAllBooks.defaultProps = {
@@ -135,5 +138,8 @@ const mapStateToProps = state => ({
   isAdmin: (state.userReducer.user) ? state.userReducer.user.isAdmin : false,
 });
 
-export default connect(mapStateToProps, { fetchAllBooks })(DisplayAllBooks);
+export default connect(mapStateToProps, {
+  fetchAllCategories,
+  fetchAllBooks
+})(DisplayAllBooks);
 

@@ -101,7 +101,6 @@ form p {
 .card-image img {
 	box-shadow: 0.75rem 0.75rem 1.5rem 0 rgba(0, 0, 0, .5);
 	width: auto !important;
-
 }
 
 .book-cover-on-table img {
@@ -319,6 +318,11 @@ i.medium {
 	background-color: #ffb581;
 }
 
+.btn:active,
+.btn-focus {
+	background-color: $base-light-orange;
+}
+
 #autocomplete-input {
 	margin-top: -15px !important;
 }
@@ -330,13 +334,26 @@ i.medium {
 	background-color: #dd4b39;
 }
 
+.icons {
+	color: #d2623e;
+}
+
 .booktip {
 	position: relative;
 	display: inline-block;
 	color: #543a27 !important;
-	max-width: 35%;
-	max-height: 90%;
+	max-width: 500px;
+	// max-height: 90%;
 	background-color: #ffdec7 !important;
+}
+
+.collapsible-white {
+	background-color: $base-black;
+}
+
+.accordion-item {
+	background-color: $base-orange !important;
+	color: $base-black !important;
 }
 
 .loan-status,
@@ -431,9 +448,12 @@ i.medium {
 
 .collapsible-header {
 	padding-left: 32px !important;
-	color: $base-white;
 }
 
+.add-category-btn {
+	margin-left: 35px;
+	background-color: $base-orange !important;
+}
 .category-name {
 	padding-left: 45px !important;
 	color: #000000 !important;
@@ -474,6 +494,44 @@ i.medium {
 	background-color: $base-light-orange;
 }
 
+.swal-icon,
+.swal-icon--warning,
+.swal-text,
+.swal-title {
+	color: white !important;
+	border-color: white !important;
+	background-color: $base-orange;
+}
+
+.swal-icon--warning__body,
+.swal-icon--warning__dot {
+	background-color: white !important;
+}
+.swal-button--danger,
+.swal-button--confirm,
+.swal-button {
+	background-color: white !important;
+	color: $base-orange !important;
+}
+.swal-icon--success__ring {
+	border-color: $base-light-orange !important;
+}
+.swal-icon--success__line,
+.swal-icon--success__line--long .swal-icon--success__line--tip {
+	background-color: #a5dc86 !important;
+}
+.swal-icon--success:before,
+.swal-icon--success:after,
+.swal-icon--success__hide-corners {
+	background-color: $base-orange !important;
+}
+
+.book-icons-1,
+.book-icons {
+	bottom: -15px !important;
+	right: -69px !important;;
+}
+
 @media screen and (min-width: 776px) {
 	.overlay-main {
 		margin-top: -57vh;
@@ -511,8 +569,7 @@ i.medium {
 
 	.card img,
 	.card-image img {
-	
-		height: 180px
+		height: 180px;
 	}
 	.body-wrapper {
 		margin: auto;
@@ -528,39 +585,48 @@ i.medium {
 	.overlay-main {
 		max-width: 100%;
 	}
-}
 	
-	@media only screen and (max-width: 438px) {
-		.card img,
-		.card-image img {
-			width:100% !important;
-			height:auto !important;
-		}
+}
 
+@media only screen and (max-width: 438px) {
+	.card img,
+	.card-image img {
+		width: 100% !important;
+		height: auto !important;
+	}
 }
 @media only screen and (min-width: 1200px) {
 	.card img,
 	.card-image img {
-		height: 340px
+		height: 340px;
+	}
+	.book-icons,
+	.book-icons-1{
+		right: -159px !important;
 	}
 }
 
-@media screen and (min-width: 400px) and (max-width: 900px) {
-	.material-icons {
-		margin-left: -20px;
+
+
+@media screen and (min-width: 900px) {
+	.book-icons,
+	.book-icons-1 {
+		//margin-left: 50px;
+	}
+	.book-icons-1 {
+		// right: -40px;
 	}
 }
-	@media screen and (min-width: 992px) and (max-width: 1199px) {
-
-		.card img,
-		.card-image img {
-			height: 214px
-		}
-	}
-
-@media  (max-width: 991px) {
+@media screen and (min-width: 992px) and (max-width: 1199px) {
 	.card img,
 	.card-image img {
-		height: 180px
+		height: 214px;
+	}
+}
+
+@media (max-width: 991px) {
+	.card img,
+	.card-image img {
+		height: 180px;
 	}
 }

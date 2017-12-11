@@ -4,6 +4,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import SideNav from '../common/SideNav/index.jsx';
 import DisplayAllBooks from '../../container/booklist/DisplayAllBooks.jsx';
 import getDashboardWrapper from '../../container/Dashboard.jsx';
+import CategoryAdminTab from '../../container/categories/CategoriesAdminTab.jsx';
 
 /**
  *
@@ -43,7 +44,7 @@ class AdminDashboard extends React.PureComponent {
                   <p>Content here</p>
                 </TabPanel>
                 <TabPanel>
-                  <p>Content here</p>
+                  <CategoryAdminTab />
                 </TabPanel>
               </Row>
             </Tabs>

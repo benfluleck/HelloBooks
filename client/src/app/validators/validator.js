@@ -1,10 +1,10 @@
-import { isAlpha,  isLength } from 'validator';
+import { isAlpha, isLength } from 'validator';
 import { isEmpty } from 'lodash';
 
 const emailRegex = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"|"_+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
 const validateEmail = emailAddress => emailRegex.test(emailAddress);
 
-const bookDetail = (state) => {
+const bookDetailValidator = (state) => {
   const errors = {};
 
   if (!isLength(state.author, 4, 30)) {
@@ -78,4 +78,18 @@ const validateForgotPasswordEmail = (state) => {
   return { isValid: isEmpty(errors) };
 };
 
-export { validateSignupInput, validateForgotPasswordEmail, bookDetail };
+const validateCategoryInput = (state) => {
+  const errors = {};
+  if (!isLength(state.categoryName, 3, 35)) {
+    errors.categoryName = 'Category name is too short';
+  } else if (!isAlpha(state.categoryName)) {
+    errors.categoryName = 'Category should be only alphabet characters';
+  }
+  return { errors, isValid: isEmpty(errors) };
+};
+
+
+export { validateSignupInput,
+  validateForgotPasswordEmail,
+  bookDetailValidator,
+  validateCategoryInput };

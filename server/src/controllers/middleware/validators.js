@@ -35,7 +35,7 @@ export const nullValidationFnMap = {
   title: [modifiedIsLength('title')],
   description: [modifiedIsLength('description')],
   author: [modifiedIsLength('author')],
-  categoryName: [modifiedIsLength('categoryName')],
+  categoryName: [modifiedIsLength('categoryName'), isAlpha],
   categoryId: [isNumeric],
   bookId: [isNumeric],
   quantity: [isNumeric]
@@ -52,7 +52,7 @@ export const nullValidFieldMessage = {
   description: 'More explanatory description needed',
   author: "This author's name is invalid",
   categoryId: 'Category Id is Invalid',
-  categoryName: 'The category name is too short',
+  categoryName: 'The category name is Invalid',
   bookId: 'This book format is wrong',
   quantity: 'This quantity is in the wrong format'
 };

@@ -33,6 +33,7 @@ export default (req, res, next) => {
   if (nullField) {
     return res.status(400).send({
       message: nullValidFieldMessage[nullField]
+
     });
   }
   next();

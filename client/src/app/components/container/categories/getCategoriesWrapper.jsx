@@ -1,17 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { Preloader } from 'react-materialize';
-import { fetchAllCategories, fetchBooksForCategories } from '../../../actions/fetchcategories';
-
+import {connect} from 'react-redux';
+import {Preloader} from 'react-materialize';
+import {fetchBooksForCategories} from '../../../actions/fetchcategories';
 
 const getCategoriesWrapper = (WrappedComponent) => {
-/**
+  /**
  * @class getCategoriesWrapper
  * @extends {React.Component}
  */
   class GetCategories extends React.Component {
-  /**
+    /**
    * Creates an instance of GetCategories.
    * @param {object} props
    * @memberOf Categories
@@ -23,15 +22,9 @@ const getCategoriesWrapper = (WrappedComponent) => {
         limit: 8,
         offset: 0
       };
-      this.handleClick = this.handleClick.bind(this);
-    }
-    /**
-   *
-   * @returns {object} categoriesList
-   * @memberOf GetCategories
-   */
-    componentDidMount() {
-      this.props.fetchAllCategories();
+      this.handleClick = this
+        .handleClick
+        .bind(this);
     }
 
     /**
@@ -40,14 +33,14 @@ const getCategoriesWrapper = (WrappedComponent) => {
    * @memberOf GetCategories
    */
     handleClick(id) {
-      this.setState({ categoryId: id }, () => {
-        this.props.fetchBooksForCategories(
-          this.state.categoryId, this.state.offset,
-          this.state.limit
-        );
+      this.setState({
+        categoryId: id
+      }, () => {
+        this
+          .props
+          .fetchBooksForCategories(this.state.categoryId, this.state.offset, this.state.limit);
       });
     }
-
     /**
    * render getCategories Wrapper
    * @method render
@@ -56,36 +49,31 @@ const getCategoriesWrapper = (WrappedComponent) => {
    */
     render() {
       if (!this.props.categoryList) {
-        return <Preloader size="big" className="center-align" />;
+        return <Preloader size="big" className="center-align"/>;
       }
-      return <WrappedComponent onChange={this.props.onChange} onClick={this.handleClick} categories={this.props.categoryList} />;
+      return (<WrappedComponent
+        onChange={this.props.onChange}
+        onClick={this.handleClick}
+        categories={this.props.categoryList}/>);
     }
   }
 
   GetCategories.propTypes = {
-    categoryList: PropTypes.arrayOf(PropTypes.shape({
-      key: PropTypes.number
-    })).isRequired,
-    fetchAllCategories: PropTypes.func.isRequired,
+    categoryList: PropTypes
+      .arrayOf(PropTypes.shape({key: PropTypes.number}))
+      .isRequired,
     fetchBooksForCategories: PropTypes.func,
     onChange: PropTypes.func
   };
 
   GetCategories.defaultProps = {
     fetchBooksForCategories: null,
-    onChange: null,
-  
-
+    onChange: null
   };
 
-  const mapStateToProps = ({ bookReducer }) => ({
-    categoryList: bookReducer.categoryList
-  });
+  const mapStateToProps = ({bookReducer}) => ({categoryList: bookReducer.categoryList});
 
-  return connect(mapStateToProps, {
-    fetchAllCategories,
-    fetchBooksForCategories
-  })(GetCategories);
+  return connect(mapStateToProps, {fetchBooksForCategories})(GetCategories);
 };
 
 export default getCategoriesWrapper;
