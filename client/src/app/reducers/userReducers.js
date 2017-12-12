@@ -3,8 +3,10 @@ import {
   USER_LOGGED_OUT,
   SIGNUP_USER_FAILURE,
   SIGNUP_USER_SUCCESS,
-  USER_LOG_IN_FAILURE
- } from '../actions/actiontype';
+  USER_LOG_IN_FAILURE,
+  GET_USER_LIST_SUCCESS,
+  GET_USER_LIST_FAILURE
+} from '../actions/actiontype';
 
 const INITIAL_STATE = {
   user: {},
@@ -47,6 +49,12 @@ export default function userReducer(state = INITIAL_STATE, action = {}) {
       return {
         isAuthenticated: false,
         user: {}
+      };
+    case GET_USER_LIST_SUCCESS:
+      return {
+        ...state,
+        userList: action.userList
+
       };
     default:
       return state;

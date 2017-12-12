@@ -52,5 +52,7 @@ export default {
       .then(res => res.data),
     deleteCategory: categoryId => axios.delete(`api/v1/admin/category/${categoryId}`)
       .then(res => res.data),
+    getUserList: (offset, limit) => axios.get(`api/v1/admin/getuserlist/?offset=${offset}&limit=${limit}`)
+      .then(res => res.data),
   }
 };

@@ -150,18 +150,18 @@ Book.propTypes = {
   deleteBookAction: PropTypes.func.isRequired,
   offset: PropTypes.number,
   limit: PropTypes.number,
-  book: PropTypes.shape(PropTypes.arrayOf({
-    title: PropTypes.string,
-    author: PropTypes.string,
-    quantity: PropTypes.string,
-    description: PropTypes.string,
-  })),
+  // book: PropTypes.shape(PropTypes.arrayOf({
+  //   title: PropTypes.string,
+  //   author: PropTypes.string,
+  //   quantity: PropTypes.string,
+  //   description: PropTypes.string,
+  // })),
 };
 
 Book.defaultProps = {
   offset: 0,
   limit: 8,
-  book: null,
+  // book: null,
   fetchAllBooks: null
 };
 

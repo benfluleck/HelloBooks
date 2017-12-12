@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt';
 import models from '../models';
 import generateToken from '../controllers/middleware/authenticate';
+import paginationFunc from '../controllers/middleware/pagination';
 
 const { User, Userlevel } = models;
 
@@ -172,5 +173,47 @@ export default {
           });
       })
       .catch(error => res.status(500).send(error.message));
+  },
+
+  /**
+   * Gets a list of users in tha library
+   * @method get
+   * @param {object} req
+   * @param {object} res
+   * @return {object} response
+   */
+  getUserList(req, res) { // get user(s) in the database
+    const offset = req.query.offset || 0;
+    const limit = req.query.limit || 3;
+    return User
+      .findAndCountAll({
+        limit,
+        offset,
+        attributes: [
+          'firstname',
+          'lastname',
+          'email',
+          'username',
+          'userImage',
+          'userLevel',
+          'createdAt',
+          'updatedAt'],
+        order: [
+          ['createdAt', 'DESC']
+        ]
+      })
+      .then((users) => {
+        if (users.count === 0) {
+          res.json({ error: 'Empty', message: 'There are no books present in the database' });
+        } else {
+          res
+            .status(200)
+            .send({
+              users: users.rows,
+              pagination: paginationFunc(offset, limit, users)
+            });
+        }
+      })
+      .catch(error => res.status(501).send(error.message));
   }
 };

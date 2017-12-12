@@ -178,9 +178,9 @@ class DisplayBookModal extends React.Component {
 DisplayBookModal.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   borrowbooks: PropTypes.func.isRequired,
-  book: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number
-  })).isRequired
+  // book: PropTypes.arrayOf(PropTypes.shape({
+  //   id: PropTypes.number
+  // })).isRequired
 };
 
 const mapStateToProps = state => ({

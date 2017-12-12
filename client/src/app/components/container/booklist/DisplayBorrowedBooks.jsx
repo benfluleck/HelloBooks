@@ -87,7 +87,6 @@ DisplayAllBorrowedBooks.defaultProps = {
 
 };
 
-
 const mapStateToProps = ({ bookReducer }) => ({
   borrowedBooks: bookReducer.borrowedBooksList
 });

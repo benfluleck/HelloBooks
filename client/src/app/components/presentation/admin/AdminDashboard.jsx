@@ -5,6 +5,7 @@ import SideNav from '../common/SideNav/index.jsx';
 import DisplayAllBooks from '../../container/booklist/DisplayAllBooks.jsx';
 import getDashboardWrapper from '../../container/Dashboard.jsx';
 import CategoryAdminTab from '../../container/categories/CategoriesAdminTab.jsx';
+import UserList from '../../container/userlists/container/UserList.jsx';
 
 /**
  *
@@ -41,7 +42,7 @@ class AdminDashboard extends React.PureComponent {
                   <DisplayAllBooks />
                 </TabPanel>
                 <TabPanel>
-                  <p>Content here</p>
+                  <UserList />
                 </TabPanel>
                 <TabPanel>
                   <CategoryAdminTab />

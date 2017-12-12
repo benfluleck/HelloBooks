@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {Preloader} from 'react-materialize';
-import {fetchBooksForCategories} from '../../../actions/fetchcategories';
+import { connect } from 'react-redux';
+import { Preloader } from 'react-materialize';
+import { fetchBooksForCategories } from '../../../actions/fetchcategories';
 
 const getCategoriesWrapper = (WrappedComponent) => {
   /**
@@ -49,18 +49,19 @@ const getCategoriesWrapper = (WrappedComponent) => {
    */
     render() {
       if (!this.props.categoryList) {
-        return <Preloader size="big" className="center-align"/>;
+        return <Preloader size="big" className="center-align" />;
       }
       return (<WrappedComponent
         onChange={this.props.onChange}
         onClick={this.handleClick}
-        categories={this.props.categoryList}/>);
+        categories={this.props.categoryList}
+      />);
     }
   }
 
   GetCategories.propTypes = {
     categoryList: PropTypes
-      .arrayOf(PropTypes.shape({key: PropTypes.number}))
+      .arrayOf(PropTypes.shape({ key: PropTypes.number }))
       .isRequired,
     fetchBooksForCategories: PropTypes.func,
     onChange: PropTypes.func
@@ -71,9 +72,9 @@ const getCategoriesWrapper = (WrappedComponent) => {
     onChange: null
   };
 
-  const mapStateToProps = ({bookReducer}) => ({categoryList: bookReducer.categoryList});
+  const mapStateToProps = ({ bookReducer }) => ({ categoryList: bookReducer.categoryList });
 
-  return connect(mapStateToProps, {fetchBooksForCategories})(GetCategories);
+  return connect(mapStateToProps, { fetchBooksForCategories })(GetCategories);
 };
 
 export default getCategoriesWrapper;

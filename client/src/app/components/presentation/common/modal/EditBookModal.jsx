@@ -26,7 +26,7 @@ class EditBookModal extends React.Component {
       title = '',
       author = '',
       description = '',
-      quantity = '',
+      quantity = null,
       bookImage = '',
       categoryId = ''
     } = this.props.book;
@@ -257,12 +257,12 @@ EditBookModal.defaultProps = {
 
 
 EditBookModal.propTypes = {
-  book: PropTypes.shape(PropTypes.arrayOf({
-    title: PropTypes.string,
-    author: PropTypes.string,
-    quantity: PropTypes.string,
-    description: PropTypes.string,
-  })).isRequired,
+  // book: PropTypes.shape(PropTypes.arrayOf({
+  //   title: PropTypes.string,
+  //   author: PropTypes.string,
+  //   quantity: PropTypes.string,
+  //   description: PropTypes.string,
+  // })).isRequired,
   header: PropTypes.string,
   updateBookDetails: PropTypes.func.isRequired
 };

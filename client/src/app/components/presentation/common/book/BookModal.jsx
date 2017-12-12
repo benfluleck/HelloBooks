@@ -45,18 +45,18 @@ class BookModal extends React.PureComponent {
 BookModal.defaultProps = {
   children: null,
   header: '',
-  books: null
+  // books: null
 };
 
 
 BookModal.propTypes = {
   children: PropTypes.element,
-  books: PropTypes.shape(PropTypes.arrayOf({
-    title: PropTypes.string,
-    author: PropTypes.string,
-    quantity: PropTypes.number,
-    description: PropTypes.string,
-  })),
+  // books: PropTypes.shape(PropTypes.arrayOf({
+  //   title: PropTypes.string,
+  //   author: PropTypes.string,
+  //   quantity: PropTypes.number,
+  //   description: PropTypes.string,
+  // })),
   header: PropTypes.string,
 
 };

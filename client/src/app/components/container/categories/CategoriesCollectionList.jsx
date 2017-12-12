@@ -67,22 +67,41 @@ class CategoriesCollectionList extends React.Component {
   }
 
   /**
-   *
-   *
-   * @param {any} id
-   * @memberof CategoriesCollectionList
-
-   *
-   *
-   * @param {any} id
-   *
+   * @param {integer} id
+   * @returns {function} deleteCategory
    * @memberOf CategoriesCollectionList
    */
   deleteCategory(id) {
-    this.props.deleteCategoryAction(id);
-    console.log('I am deleting');
+    swal({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      type: 'warning',
+      showCancelButton: true,
+      // confirmButtonColor: '#3085d6',
+      // cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+      confirmButtonClass: 'btn btn-success',
+      cancelButtonClass: 'btn btn-danger',
+      buttonsStyling: false,
+      reverseButtons: true
+    }).then((result) => {
+      if (result) {
+        this.props.deleteCategoryAction(id);
+        swal(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        );
+      } else {
+        swal(
+          'Cancelled',
+          'Your book is safe',
+          'error'
+        );
+      }
+    });
   }
-
   /**
    *
    *
@@ -126,16 +145,21 @@ class CategoriesCollectionList extends React.Component {
 }
 
 CategoriesCollectionList.defaultProps = {
-  editCategoryAction: null
+  editCategoryAction: null,
+  deleteCategoryAction: null
 };
 
 CategoriesCollectionList.propTypes = {
   categories: PropTypes
     .arrayOf(PropTypes.shape({ map: PropTypes.object }))
     .isRequired,
-  editCategoryAction: PropTypes.func
+  editCategoryAction: PropTypes.func,
+  deleteCategoryAction: PropTypes.func
 };
 
 const mapStateToProps = ({ bookReducer }) => ({ categories: bookReducer.categoryList });
 
-export default connect(mapStateToProps, { editCategoryAction, deleteCategoryAction })(CategoriesCollectionList);
+export default connect(mapStateToProps, {
+  editCategoryAction,
+  deleteCategoryAction
+})(CategoriesCollectionList);

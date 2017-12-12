@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { Button, Input, Icon, Col } from 'react-materialize';
 import { addNewCategory } from '../../../actions/admin/addCategory';
 import { validateCategoryInput } from '../../../validators/validator';
@@ -29,33 +30,12 @@ class AddCategory extends React.Component {
       .onChange
       .bind(this);
   }
-  /**
- *
- *
- * @param {any} nextProps
- * @memberof AddCategory
-
- *
- *
- * @param {any} nextProps
- *
- * @memberOf AddCategory
- */
-  componentWillReceiveProps(nextProps) {
-    console.log(nextProps, '=========nextProps=======');
-  }
 
   /**
    *
-   *
-   * @param {any} event
+   * @returns {object} Setstate
+   * @param {function} event
    * @memberof AddCategory
-
-   *
-   *
-   * @param {any} event
-   *
-   * @memberOf AddCategory
    */
   onChange(event) {
     event.preventDefault();
@@ -81,15 +61,11 @@ class AddCategory extends React.Component {
 
   /**
    *
-   *
-   * @memberof AddCategory
-
-   *
-   *
-   *
+   * @returns {function} setState
+   * @param {object} event
    * @memberOf AddCategory
    */
-  handleClick() {
+  handleClick(event) {
     event.preventDefault();
     if (this.isValid()) {
       this.setState({ errors: {} });
@@ -130,5 +106,14 @@ class AddCategory extends React.Component {
     );
   }
 }
+
+AddCategory.defaultProps = {
+  addNewCategory: null
+};
+
+AddCategory.propTypes = {
+  addNewCategory: PropTypes.func
+};
+
 
 export default connect(null, { addNewCategory })(AddCategory);

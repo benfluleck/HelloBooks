@@ -135,7 +135,7 @@ describe('Categories', () => {
   it('should return 200 when a category is modified', (done) => {
     chai.request(app).put('/api/v1/admin/category/7').set('x-access-token', adminToken)
       .send({
-        categoryName: 'Test Category'
+        categoryName: 'TestCategory'
       })
       .end((err, res) => {
         expect(res.status).to.equal(200);
@@ -168,7 +168,7 @@ describe('Categories', () => {
     (done) => {
       chai.request(app).put('/api/v1/admin/category/404').set('x-access-token', adminToken)
         .send({
-          categoryName: 'Test Category'
+          categoryName: 'TestCategory'
         })
         .end((err, res) => {
           expect(res.status).to.equal(404);
@@ -181,7 +181,7 @@ describe('Categories', () => {
     (done) => {
       chai.request(app).put('/api/v1/admin/category/2').set('x-access-token', adminToken)
         .send({
-          categoryName: 'Test Category'
+          categoryName: 'TestCategory'
         })
         .end((err, res) => {
           expect(res.status).to.equal(409);
@@ -204,7 +204,7 @@ describe('Categories', () => {
     (done) => {
       chai.request(app).put('/api/v1/admin/category/7').set('x-access-token', adminToken)
         .send({
-          categoryName: 'Test Category'
+          categoryName: 'TestCategory'
         })
         .end((err, res) => {
           expect(res.status).to.equal(404);

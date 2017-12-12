@@ -13,7 +13,7 @@ const UserBooksController = controller.UserBooks;
 const CategoryController = controller.Category;
 const NotificationsController = controller.Notifications;
 
-Router.get('/', (req, res) => res.status(200).send({ message: 'Welcome to the Hello Books!' }));
+Router.get('/', (req, res) => res.status(200).send({message: 'Welcome to the Hello Books!'}));
 
 Router.get('/auth/books/recentbooks', BooksController.getAllBooks);
 
@@ -58,5 +58,7 @@ Router.get('/admin/notifications', authdecodeToken, checkAdmin, NotificationsCon
 Router.put('/users/changepassword', authdecodeToken, nullvalidationMiddleware, UserController.changePassword);
 
 Router.put('/admin/changeuserlevel', checkAdmin, UserController.changeLevel);
+
+Router.get('/admin/getuserlist', checkAdmin, UserController.getUserList);
 
 export default Router;
