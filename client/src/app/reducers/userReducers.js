@@ -5,7 +5,13 @@ import {
   SIGNUP_USER_SUCCESS,
   USER_LOG_IN_FAILURE,
   GET_USER_LIST_SUCCESS,
-  GET_USER_LIST_FAILURE
+  GET_USER_LIST_FAILURE,
+  GET_USER_LEVEL_LIST_SUCCESS,
+  GET_USER_LEVEL_LIST_FAILURE,
+  CHANGE_USER_LEVEL_FAILURE,
+  CHANGE_USER_LEVEL_SUCCESS,
+  GET_USER_SUCCESS,
+  GET_USER_FAILURE
 } from '../actions/actiontype';
 
 const INITIAL_STATE = {
@@ -54,7 +60,43 @@ export default function userReducer(state = INITIAL_STATE, action = {}) {
       return {
         ...state,
         userList: action.userList
-
+      };
+    case GET_USER_LIST_FAILURE:
+      return {
+        ...state,
+        error: action.error
+      };
+    case GET_USER_LEVEL_LIST_SUCCESS:
+      return {
+        ...state,
+        userLevels: action.userLevelList
+      };
+    case GET_USER_LEVEL_LIST_FAILURE:
+      return {
+        ...state,
+        error: action.error
+      };
+    case CHANGE_USER_LEVEL_SUCCESS:
+    {
+      return {
+        ...state,
+        selectedUserLevel: action.userLevel,
+      };
+    }
+    case CHANGE_USER_LEVEL_FAILURE:
+      return {
+        ...state,
+        error: action.error
+      };
+    case GET_USER_SUCCESS:
+      return {
+        ...state,
+        selectedUser: action.user
+      };
+    case GET_USER_FAILURE:
+      return {
+        ...state,
+        error: action.error
       };
     default:
       return state;

@@ -6,6 +6,7 @@ import { getUserListAction } from '../../../../actions/admin/getUserList';
 import PaginationWrapper from '../../common/Pagination.jsx';
 import UserListTable from '../UserListTable.jsx';
 
+
 /**
  * handles the state of the User List table
  * @class Userlists

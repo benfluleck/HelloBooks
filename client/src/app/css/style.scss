@@ -343,7 +343,6 @@ i.medium {
 	display: inline-block;
 	color: #543a27 !important;
 	max-width: 500px;
-	// max-height: 90%;
 	background-color: #ffdec7 !important;
 }
 
@@ -477,6 +476,26 @@ i.medium {
 	margin-top: -1px;
 }
 
+
+.change-level-modal{
+	width: 50%;
+	padding-top: 10px;
+	margin: 0 auto;
+}
+
+.user-level-info{
+	color: #dd4b39;
+	margin-left: 20px;
+}
+
+.userlevel{
+	display: inline-flex;
+}
+
+.disabled{
+	font-size: 35px
+}
+
 /**
  * 
  * Modal
@@ -528,9 +547,10 @@ i.medium {
 
 .book-icons-1,
 .book-icons {
-	bottom: -15px !important;
+	bottom: -25px !important;
 	right: -69px !important;;
 }
+
 
 @media screen and (min-width: 776px) {
 	.overlay-main {

@@ -11,7 +11,7 @@ export default {
   * @description Create a new user
   * @param {Object} req request object
   * @param {Object} res response object
-  * @returns {void|Response} status, send
+  * @returns {void|Response} response
   */
   create(req, res) {
     if (req.body.password !== req.body.passwordConfirmation) {
@@ -100,6 +100,30 @@ export default {
       .catch(error => res.status(500).send(error.message));
   },
 
+
+  /**
+   * @description Get user details
+   * @method getUser
+   * @param {object} req HTTP request object
+   * @param {object} res HTTP response object
+   * @returns {object} response
+   */
+  getUser(req, res) {
+    const id = req.params.userId;
+    User
+      .findOne({
+        where: id ? { id } : null,
+        attributes: [
+          'userLevel',
+          'username',
+          'id'],
+      })
+      .then(user => res
+        .status(200)
+        .send({
+          user
+        }));
+  },
   /** @description changes user password
     * @param {object} req HTTP request object
     * @param {object} res HTTP response object
@@ -166,9 +190,10 @@ export default {
               .then((newLevel) => {
                 const userDetails = {
                   username: user.username,
-                  level: newLevel.levelName
+                  levelName: newLevel.levelName,
+                  level: newLevel.level
                 };
-                res.status(200).send({ message: 'Level changed Successfully', userDetails });
+                res.status(200).send({ message: `Level changed Successfully, New Level "${userDetails.levelName}"`, userDetails });
               });
           });
       })
@@ -190,6 +215,7 @@ export default {
         limit,
         offset,
         attributes: [
+          'id',
           'firstname',
           'lastname',
           'email',
@@ -215,5 +241,25 @@ export default {
         }
       })
       .catch(error => res.status(501).send(error.message));
+  },
+
+  getUserLevelList(req, res) {
+    return Userlevel
+      .all({
+        attributes: ['maxBooks',
+          'maxDays',
+          'level',
+          'levelName'],
+        order: [['level', 'ASC']]
+      })
+      .then((userLevels) => {
+        if (Object.keys(userLevels).length < 1) {
+          return res.status(200)
+            .send({ message: 'sorry there are no user levels available' });
+        }
+        const allUserLevels = { userLevels };
+        res.status(200).send(allUserLevels);
+      })
+      .catch(error => res.status(500).send(error.message));
   }
 };

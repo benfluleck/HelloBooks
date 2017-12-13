@@ -13,7 +13,7 @@ export const ReturnBookRejected = error => ({ type: RETURN_BOOKS_FAIL, error });
  */
 export const returnbook = book => dispatch => api
   .book
-  .returnBook(book)
+  .returnbook(book)
   .then((response) => {
     dispatch(ReturnBookSuccess(response.returnedBook));
     dispatch(showSuccessNotification(response));

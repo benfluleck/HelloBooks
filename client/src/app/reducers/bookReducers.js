@@ -29,7 +29,7 @@ import {
   EDIT_CATEGORY_SUCCESS,
   EDIT_CATEGORY_FAILURE,
   DELETE_CATEGORY_FAILURE,
-  DELETE_CATEGORY_SUCCESS
+  DELETE_CATEGORY_SUCCESS,
 } from '../actions/actiontype';
 
 /**
@@ -122,13 +122,11 @@ export default function bookReducer(state = {
     }
     case DELETE_CATEGORY_SUCCESS:
     {
-      console.log(action,'>>>>>>>mmmm')
       return {
         ...state,
         categoryList:
           state.categoryList
             .filter(category => category.id !== action.deletedCategory.category.id)
-        
       };
     }
     case DELETE_CATEGORY_FAILURE:
@@ -291,10 +289,6 @@ export default function bookReducer(state = {
             .allBooksList
             .books
             .filter(book => book.id !== action.book.deletedBookId),
-          // pagination: state
-          //   .allBooksList
-          //   .pagination
-          //   .totalCount - 1
         },
       };
     }

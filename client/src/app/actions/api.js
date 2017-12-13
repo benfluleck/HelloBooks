@@ -54,5 +54,11 @@ export default {
       .then(res => res.data),
     getUserList: (offset, limit) => axios.get(`api/v1/admin/getuserlist/?offset=${offset}&limit=${limit}`)
       .then(res => res.data),
+    getUserLevelList: () => axios.get('api/v1/auth/getuserlevellist')
+      .then(res => res.data),
+    changeUserlevel: (newLevelId, userId) => axios.put('api/v1/admin/changeuserlevel', newLevelId, userId)
+      .then(res => res.data),
+    getUser: userId => axios.get(`api/v1/admin/users/${userId}`)
+      .then(res => res.data)
   }
 };

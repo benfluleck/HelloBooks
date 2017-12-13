@@ -7,7 +7,8 @@ const fieldMap = (bookId, categoryId) => ({
   '/admin/category': ['categoryName'],
   '/admin/books': ['title', 'description', 'author', 'quantity', 'categoryId'],
   [`/admin/books/${bookId}`]: ['title', 'author', 'description'],
-  [`/admin/category/${categoryId}`]: ['categoryName']
+  [`/admin/category/${categoryId}`]: ['categoryName'],
+  '/admin/changeuserlevel': ['newLevelId']
 });
 
 /**

@@ -1,4 +1,4 @@
-import { isLength, isAlpha, isNumeric } from 'validator';
+import { isLength, isAlpha, isNumeric, isEmpty, isAlphanumeric } from 'validator';
 
 const fieldLength = {
   password: { max: 21, min: 5 },
@@ -35,10 +35,11 @@ export const nullValidationFnMap = {
   title: [modifiedIsLength('title')],
   description: [modifiedIsLength('description')],
   author: [modifiedIsLength('author')],
-  categoryName: [modifiedIsLength('categoryName'), isAlpha],
+  categoryName: [modifiedIsLength('categoryName'), isAlphanumeric],
   categoryId: [isNumeric],
   bookId: [isNumeric],
-  quantity: [isNumeric]
+  quantity: [isNumeric],
+  newLevelId: [isEmpty],
 };
 
 export const nullValidFieldMessage = {
@@ -54,5 +55,6 @@ export const nullValidFieldMessage = {
   categoryId: 'Category Id is Invalid',
   categoryName: 'The category name is Invalid',
   bookId: 'This book format is wrong',
-  quantity: 'This quantity is in the wrong format'
+  quantity: 'This quantity is in the wrong format',
+  newLevelId: 'Please select a valid level'
 };
