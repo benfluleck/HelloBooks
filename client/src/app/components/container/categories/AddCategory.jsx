@@ -98,7 +98,7 @@ class AddCategory extends React.Component {
           <Icon>book</Icon>
         </Input>
         <Col s={6} l={3}>
-          <Button className="add-category-btn" onClick={() => this.handleClick()}>
+          <Button className="add-category-btn" onClick={() => this.handleClick(event)}>
             Add Category
           </Button>
         </Col>
