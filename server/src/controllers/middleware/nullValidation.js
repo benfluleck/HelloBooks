@@ -25,13 +25,11 @@ export default (req, res, next) => {
   const nullField = fieldMap(bookId, categoryId)[path]
     .find((field) => {
       if (req.body[field]) {
-        console.log(req.body.newLevelId, '>>>>>>>>>>>>>>>>>>>>>>>>>>')
         const validationFn = nullValidationFnMap[field];
         return !validationFn.every(fn => fn(req.body[field]));
       }
       return true;
     });
-
   if (nullField) {
     return res.status(400).send({
       message: nullValidFieldMessage[nullField]
