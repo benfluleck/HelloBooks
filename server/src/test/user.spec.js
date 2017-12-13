@@ -137,7 +137,7 @@ describe('HelloBooks', () => {
     it('should return 409 when level is the same as user level', (done) => {
       chai.request(app).put('/api/v1/admin/changeuserlevel').set('x-access-token', token)
         .send({
-          newLevelId: 1,
+          newLevelId: '1',
           userId: 1
         })
         .end((err, res) => {
@@ -148,7 +148,7 @@ describe('HelloBooks', () => {
     it('should return 200 when level change is successful', (done) => {
       chai.request(app).put('/api/v1/admin/changeuserlevel').set('x-access-token', token)
         .send({
-          newLevelId: 2,
+          newLevelId: '2',
           userId: 1
         })
         .end((err, res) => {
@@ -169,7 +169,7 @@ describe('HelloBooks', () => {
     it('should return 404 when new level does not exist', (done) => {
       chai.request(app).put('/api/v1/admin/changeuserlevel').set('x-access-token', token)
         .send({
-          newLevelId: 20,
+          newLevelId: '20',
           userId: 1
         })
         .end((err, res) => {
@@ -180,7 +180,7 @@ describe('HelloBooks', () => {
     it('should return 404 when the user is not found ', (done) => {
       chai.request(app).put('/api/v1/admin/changeuserlevel').set('x-access-token', token)
         .send({
-          newLevelId: 2,
+          newLevelId: '2',
           userId: 445454
         })
         .end((err, res) => {

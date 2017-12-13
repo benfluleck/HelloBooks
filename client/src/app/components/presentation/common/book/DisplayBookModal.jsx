@@ -31,7 +31,7 @@ class DisplayBookModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      returnDate: moment(),
+      returnDate: moment()
     };
   }
 
@@ -140,7 +140,8 @@ class DisplayBookModal extends React.Component {
   /**
    *
    *
-   * @description This render implements the isBorrowed logic checking whether a selected book has been borrowed
+   * @description This render implements the isBorrowed logic checking
+   *  whether a selected book has been borrowed
    * @memberof DisplayBookModal
    * @returns {Component} Component
    *
@@ -154,6 +155,8 @@ class DisplayBookModal extends React.Component {
     }
   
     const isBorrowed = (this.props.borrowedBooksList.books) ? this.props.borrowedBooksList.books.map(book => (book.bookId)) : [];
+    
+
     const loanStatus = isBorrowed.includes(this.props.book.id);
 
     const bookModalActions = this.bookActions(loanStatus);
@@ -174,12 +177,16 @@ class DisplayBookModal extends React.Component {
 
 DisplayBookModal.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
-  borrowbooks: PropTypes.func.isRequired
+  borrowbooks: PropTypes.func.isRequired,
+  // book: PropTypes.arrayOf(PropTypes.shape({
+  //   id: PropTypes.number
+  // })).isRequired
 };
 
 const mapStateToProps = state => ({
   isAuthenticated: !!state.userReducer.isAuthenticated,
-  borrowedBooksList: state.bookReducer.borrowedBooksList || [],
+ // isAdmin: state.userReducer.user.isAdmin,
+  borrowedBooksList: state.bookReducer.borrowedBooksList || {},
   book: (state.bookReducer.book) ?state.bookReducer.book.book : [],
 });
 

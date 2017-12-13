@@ -17,11 +17,15 @@ Router.get('/', (req, res) => res.status(200).send({ message: 'Welcome to the He
 
 Router.get('/auth/books/recentbooks', BooksController.getAllBooks);
 
+Router.get('/auth/getuserlevellist', UserController.getUserLevelList);
+
 Router.post('/auth/users/signup', fieldValidationMiddleware, nullvalidationMiddleware, UserController.create);
 
 Router.post('/auth/users/signin', nullvalidationMiddleware, UserController.signIn);
 
-Router.post('/admin/books', checkAdmin, nullvalidationMiddleware, BooksController.createBook);
+Router.get('/admin/users/:userId', UserController.getUser);
+
+Router.post('/admin/books', checkAdmin, nullvalidationMiddleware, BooksController.addBook);
 
 Router.put('/admin/books/:bookId', checkAdmin, nullvalidationMiddleware, BooksController.updateBook);
 
@@ -49,7 +53,7 @@ Router.get('/books/category/:categoryId', authdecodeToken, CategoryController.di
 
 Router.get('/books/search', authdecodeToken, BooksController.searchBooks);
 
-Router.get('/auth/books/:bookId', BooksController.viewBook);
+Router.get('/auth/books/:bookId', BooksController.viewBookDetails);
 
 Router.delete('/admin/books/:bookId', authdecodeToken, checkAdmin, BooksController.deleteBook);
 
@@ -57,6 +61,8 @@ Router.get('/admin/notifications', authdecodeToken, checkAdmin, NotificationsCon
 
 Router.put('/users/changepassword', authdecodeToken, nullvalidationMiddleware, UserController.changePassword);
 
-Router.put('/admin/changeuserlevel', checkAdmin, UserController.changeLevel);
+Router.put('/admin/changeuserlevel', checkAdmin, nullvalidationMiddleware, UserController.changeLevel);
+
+Router.get('/admin/getuserlist', checkAdmin, UserController.getUserList);
 
 export default Router;

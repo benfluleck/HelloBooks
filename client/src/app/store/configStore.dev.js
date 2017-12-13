@@ -4,6 +4,7 @@ import { createStore, applyMiddleware } from 'redux';
 import { createLogger } from 'redux-logger';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import reduxImmutableStateInVariant from 'redux-immutable-state-invariant';
 
 import rootReducer from '../reducers/rootReducers';
 import { saveState, loadState } from '../utils/localSave';
@@ -14,7 +15,7 @@ const store = createStore(
   initialState,
   composeWithDevTools(applyMiddleware(
     createLogger(),
-    thunk
+    thunk, reduxImmutableStateInVariant()
   ))
 );
 

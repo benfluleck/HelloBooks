@@ -97,8 +97,8 @@ export const login = credentials => dispatch => api
     localStorage.setItem('token', token);
     dispatch(showSuccessNotification({ user }));
     setAuthorizationToken(token);
-
     dispatch(userLoggedIn(user.data));
+    return (user.data);
   })
   .catch((error) => {
     dispatch(showErrorNotification({ error }));

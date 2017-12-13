@@ -8,12 +8,12 @@ export const ReturnBookRejected = error => ({ type: RETURN_BOOKS_FAIL, error });
 /**
  * async helper function: Return book
  * @function ReturnBooks
- * @param {object} data
+ * @param {object} book
  * @returns {function} asynchronous action
  */
-export const returnbook = data => dispatch => api
+export const returnbook = book => dispatch => api
   .book
-  .returnbook(data)
+  .returnbook(book)
   .then((response) => {
     dispatch(ReturnBookSuccess(response.returnedBook));
     dispatch(showSuccessNotification(response));

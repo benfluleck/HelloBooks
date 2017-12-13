@@ -11,19 +11,17 @@ const { notifSend } = notifActions;
  * @returns {function} asynchronous action
  */
 export const showErrorNotification = ({ message, error }) => (dispatch) => {
-  if (error.response.data.message === 'Unauthorised access' && error.response.data.token === null) {
+  if (error.response.data.token === null) {
     dispatch(notifSend({
       message: 'Please Login Again',
       kind: 'info',
       dismissAfter: 2500
     }));
-    // localStorage.removeItem('state');
     localStorage.clear();
-    // localStorage.removeItem('token');
     setAuthorizationToken(false);
   } else {
     dispatch(notifSend({
-      message: message || error.response.data.message,
+      message: message || error.response.data.message || error.data.message,
       kind: 'danger',
       dismissAfter: 2500
     }));

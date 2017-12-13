@@ -17,7 +17,7 @@ export const loanhistoryFailure = error => ({ type: LOAN_HISTORY_FAILURE, error 
  */
 export const loanhistory = (offset, limit) => dispatch => api
   .book
-  .loanhistory(offset, limit)
+  .loanHistory(offset, limit)
   .then((response) => {
     dispatch(loanhistorySuccess(response));
     return response;

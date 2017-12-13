@@ -19,17 +19,6 @@ export default(sequelize, DataTypes) => {
       allowNull: false,
       trim: true,
       unique: 'compositeIndex',
-      validate: {
-        is: {
-          arg: /\w+/g,
-          msg: 'Must be only letters'
-        }
-      },
-      set(val) {
-        if (val !== undefined) {
-          this.setDataValue('author', toTitleCase(val));
-        }
-      }
     },
     ISBN: {
       type: DataTypes.INTEGER,

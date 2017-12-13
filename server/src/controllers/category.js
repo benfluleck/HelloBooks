@@ -24,10 +24,11 @@ export default {
       Categories.create({
         categoryName
       })
-        .then((categories) => {
+        .then((category) => {
           res.status(201)
             .send({
-              message: `Category added!, ${categories.categoryName}`
+              message: `Category added!, ${category.categoryName}`,
+              category
             });
         });
     })
@@ -40,7 +41,7 @@ export default {
     * @returns {object} edited category
     */
   editCategory(req, res) {
-    const categoryId = parseInt(req.params.categoryId);
+    const categoryId = parseInt(req.params.categoryId, 10);
     if (isNaN(categoryId)) {
       return res.status(400).send({
         message: 'Please enter a valid category Id'
@@ -96,7 +97,7 @@ export default {
   },
 
   displayBookwithCategories(req, res) {
-    const categoryId = parseInt(req.params.categoryId);
+    const categoryId = parseInt(req.params.categoryId, 10);
     if (isNaN(categoryId)) {
       return res.status(400).send({
         message: 'Please enter a valid category'
@@ -152,7 +153,7 @@ export default {
    * @memmberOf BookController
    */
   deleteCategory(req, res) {
-    const categoryId = parseInt(req.params.categoryId);
+    const categoryId = parseInt(req.params.categoryId, 10);
     if (isNaN(categoryId)) {
       return res.status(400).send({
         message: 'Please enter a valid CategoryId'
@@ -178,7 +179,7 @@ export default {
         category
           .destroy()
           .then(() => res.status(200)
-            .send({ message: `Category ${category.categoryName}, has been deleted`, }))
+            .send({ message: `Category ${category.categoryName}, has been deleted`, category }))
           .catch(error => res.status(500).send(error));
       })
       .catch(error => res.status(500).send(error.message));

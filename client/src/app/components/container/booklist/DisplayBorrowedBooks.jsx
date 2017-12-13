@@ -40,7 +40,7 @@ class DisplayAllBorrowedBooks extends React.Component {
     const getAllBooks = this.props.borrowedBooks.books.map(book => (
       <Book
         key={book.book.id}
-        books={book.book}
+        book={book.book}
       />
     ));
     const { pagination } = this.props.borrowedBooks;
@@ -86,7 +86,6 @@ DisplayAllBorrowedBooks.defaultProps = {
   offset: 0
 
 };
-
 
 const mapStateToProps = ({ bookReducer }) => ({
   borrowedBooks: bookReducer.borrowedBooksList

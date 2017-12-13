@@ -17,7 +17,19 @@ import {
   FETCH_BOOKS_FOR_CATEGORIES_SUCCESS,
   FETCH_BOOKS_FOR_CATEGORIES_FAILURE,
   FETCH_SELECTED_BOOK_SUCCESS,
-  FETCH_SELECTED_BOOK_FAILURE
+  FETCH_SELECTED_BOOK_FAILURE,
+  CREATE_BOOK_FAILURE,
+  CREATE_BOOK_SUCCESS,
+  UPDATE_BOOK_SUCCESS,
+  UPDATE_BOOK_FAILURE,
+  DELETE_BOOK_FAILURE,
+  DELETE_BOOK_SUCCESS,
+  ADD_CATEGORY_SUCCESS,
+  ADD_CATEGORY_FAILURE,
+  EDIT_CATEGORY_SUCCESS,
+  EDIT_CATEGORY_FAILURE,
+  DELETE_CATEGORY_FAILURE,
+  DELETE_CATEGORY_SUCCESS,
 } from '../actions/actiontype';
 
 /**
@@ -47,6 +59,20 @@ export default function bookReducer(state = {
         error: action.message
       };
     }
+    case UPDATE_BOOK_SUCCESS:
+    {
+      return {
+        ...state,
+        error: action.book
+      };
+    }
+    case UPDATE_BOOK_FAILURE:
+    {
+      return {
+        ...state,
+        book: action.book
+      };
+    }
     case FETCH_CATEGORIES_SUCCESS:
     {
       return {
@@ -55,6 +81,55 @@ export default function bookReducer(state = {
       };
     }
     case FETCH_CATEGORIES_FAILURE:
+    {
+      return {
+        ...state,
+        error: action.error
+      };
+    }
+    case ADD_CATEGORY_SUCCESS:
+    {
+      return {
+        ...state,
+        categoryList: [
+          ...state.categoryList,
+          action.category.category
+        ]
+      };
+    }
+    case ADD_CATEGORY_FAILURE:
+    {
+      return {
+        ...state,
+        error: action.error
+      };
+    }
+    case EDIT_CATEGORY_SUCCESS:
+    {
+      return {
+        ...state,
+        categoryList: state.categoryList.map(category =>
+          ((category.id !== action.category.updatedCategory.id) ?
+            category : action.category.updatedCategory))
+      };
+    }
+    case EDIT_CATEGORY_FAILURE:
+    {
+      return {
+        ...state,
+        error: action.error
+      };
+    }
+    case DELETE_CATEGORY_SUCCESS:
+    {
+      return {
+        ...state,
+        categoryList:
+          state.categoryList
+            .filter(category => category.id !== action.deletedCategory.category.id)
+      };
+    }
+    case DELETE_CATEGORY_FAILURE:
     {
       return {
         ...state,
@@ -132,6 +207,26 @@ export default function bookReducer(state = {
         error: action
       };
     }
+
+    case CREATE_BOOK_SUCCESS:
+    {
+      return {
+        ...state,
+        allBooksList: {
+          ...state.allBooksList,
+          books:
+          [action.book.createdBook,
+            ...state.allBooksList.books]
+        }
+      };
+    }
+    case CREATE_BOOK_FAILURE:
+    {
+      return {
+        ...state,
+        error: action
+      };
+    }
     case BORROW_BOOKS_FAIL:
     {
       return {
@@ -182,6 +277,27 @@ export default function bookReducer(state = {
       return {
         ...state,
         bookOperations: action.bookOperations
+      };
+    }
+    case DELETE_BOOK_SUCCESS:
+    {
+      return {
+        ...state,
+        allBooksList: {
+          ...state.allBooksList,
+          books: state
+            .allBooksList
+            .books
+            .filter(book => book.id !== action.book.deletedBookId),
+        },
+      };
+    }
+    case DELETE_BOOK_FAILURE:
+    {
+      return {
+        ...state,
+        error: action
+
       };
     }
 

@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Button } from 'react-materialize';
 import UserView from './UserView.jsx';
-import CategoriesSideBar from '../../../container/categories/CategoriesSideBar.jsx';
-import getCategories from '../../../container/categories/getCategoriesWrapper.jsx';
+import CategoriesSideBarList from '../../../container/categories/CategoriesSideBarList.jsx';
 
 
-const CategoriesSideBarList = getCategories(CategoriesSideBar);
 /**
  * component that displays user image, username and groups
  * @function SideNav
@@ -17,18 +16,16 @@ const CategoriesSideBarList = getCategories(CategoriesSideBar);
  * @return {object} component
  */
 const SideNav = ({
-  imageLink,
-  username = '',
-  firstname = '',
-  email = ''
+  props
 }) =>
   (
     <ul id="slide-out" className="side-nav fixed">
       <UserView
-        imageLink={imageLink}
-        username={username}
-        firstname={firstname}
-        email={email}
+        imageLink={props.profilePic}
+        username={props.username}
+        firstname={props.firstname}
+        email={props.email}
+        isAdmin={props.isAdmin}
       />
       <li><div className="divider" /></li>
       <CategoriesSideBarList />
@@ -37,19 +34,20 @@ const SideNav = ({
 
   );
 
+SideNav.defaultProps = {
+  profilePic: null,
+  email: '',
+  firstname: '',
+  username: '',
+  isAdmin: false
+};
+
 SideNav.propTypes = {
-  imageLink: PropTypes.string,
   username: PropTypes.string,
   firstname: PropTypes.string,
-  email: PropTypes.string
+  email: PropTypes.string,
+  profilePic: PropTypes.string,
+  isAdmin: PropTypes.bool
 };
-
-SideNav.defaultProps = {
-  imageLink: null,
-  username: null,
-  firstname: null,
-  email: null
-};
-
 
 export default SideNav;

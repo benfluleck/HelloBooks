@@ -85,7 +85,7 @@ export const fetchAllRecentBooks = (offset, limit) => dispatch => api
  */
 export const fetchAllBooksbyId = (offset, limit) => dispatch => api
   .book
-  .fetchbooksbyUserId(offset, limit)
+  .fetchBooksbyUserId(offset, limit)
   .then((response) => {
     dispatch(fetchBooksByUserId(response));
   })

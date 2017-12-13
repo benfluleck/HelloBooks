@@ -26,7 +26,7 @@ let bookId;
 let zerobookId;
 let testbookId;
 let token;
-const testdate = new Date('2017-12-05');
+const testdate = new Date('2017-12-14');
 const nulluserId = '';
 
 
@@ -94,7 +94,7 @@ describe('HelloBooks', () => {
       });
   });
 
-  describe('/POST loan a book', () => {
+  describe('Loan', () => {
     it('should allow an authenticated user to loan a book', (done) => {
       const userbook = {
         bookId: bookId.toString(),

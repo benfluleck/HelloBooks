@@ -6,8 +6,9 @@ const fieldMap = (bookId, categoryId) => ({
   '/users/changepassword': ['newPassword'],
   '/admin/category': ['categoryName'],
   '/admin/books': ['title', 'description', 'author', 'quantity', 'categoryId'],
-  [`/admin/books/${bookId}`]: ['title', 'author', 'description', 'quantity'],
-  [`/admin/category/${categoryId}`]: ['categoryName']
+  [`/admin/books/${bookId}`]: ['title', 'author', 'description'],
+  [`/admin/category/${categoryId}`]: ['categoryName'],
+  '/admin/changeuserlevel': ['newLevelId']
 });
 
 /**
@@ -29,10 +30,10 @@ export default (req, res, next) => {
       }
       return true;
     });
-
   if (nullField) {
     return res.status(400).send({
       message: nullValidFieldMessage[nullField]
+
     });
   }
   next();

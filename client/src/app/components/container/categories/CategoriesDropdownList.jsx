@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Dropdown, NavItem, Button } from 'react-materialize';
+import getCategories from './getCategoriesWrapper.jsx';
 
 
 const CategoriesDropdown = (props) => {
@@ -41,4 +42,6 @@ CategoriesDropdown.propTypes = {
   })).isRequired
 };
 
-export default CategoriesDropdown;
+const CategoriesDropdownList = getCategories(CategoriesDropdown);
+
+export default CategoriesDropdownList;
