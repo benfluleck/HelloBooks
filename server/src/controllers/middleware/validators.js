@@ -39,7 +39,7 @@ export const nullValidationFnMap = {
   categoryId: [isNumeric],
   bookId: [isNumeric],
   quantity: [isNumeric],
-  newLevelId: [isEmpty],
+  newLevelId: [isNumeric],
 };
 
 export const nullValidFieldMessage = {

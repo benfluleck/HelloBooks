@@ -174,7 +174,7 @@ export default {
         if (!user) {
           return res.status(404).send({ message: 'User not found' });
         }
-        if (newLevelId === user.userLevel) {
+        if (parseInt(newLevelId, 10) === user.userLevel) {
           return res.status(409)
             .send({ message: 'This user is already on this level' });
         }
