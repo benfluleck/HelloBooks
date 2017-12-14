@@ -8,7 +8,9 @@ let config = {};
 
 if (isProd) {
   const GLOBALS = {
-    'process.env.NODE_ENV': JSON.stringify('production')
+    'process.env.NODE_ENV': JSON.stringify('production'),
+    GOOGLE_CLIENT_ID: JSON.stringify('701806023399-vgqondt26qh10vcuei77r7' +
+    'nsbcd8oa8k.apps.googleusercontent.com')
   };
   config = {
     devtool: 'source-map',
@@ -50,7 +52,7 @@ if (isProd) {
           }
         },
         {
-          test: /\.(woff|woff2)$/,
+          test: /\.(woff|png|jpg|gif)$/,
           loader: 'url?prefix=font/&limit=5000'
         },
         {
@@ -141,7 +143,12 @@ if (isProd) {
     plugins: [
       new webpack.optimize.OccurrenceOrderPlugin(),
       extractscss,
-      new HtmlPlugin({ template: './client/src/index.html', filename: './index.html', inject: 'body' })
+      new HtmlPlugin({ template: './client/src/index.html', filename: './index.html', inject: 'body' }),
+      new webpack.DefinePlugin({
+        
+        GOOGLE_CLIENT_ID: JSON.stringify('701806023399-vgqondt26qh10vcuei77r7' +
+        'nsbcd8oa8k.apps.googleusercontent.com')
+      })
     ]
   };
 }
