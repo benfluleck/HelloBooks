@@ -111,7 +111,7 @@ export default(sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       defaultValue: 0
     },
-    authId: {
+    googleId: {
       type: DataTypes.STRING,
     },
     isAdmin: {

@@ -37,6 +37,7 @@ export default {
                   userImage: req.body.userImage || process.env.PROFILE_PIC,
                   passwordConfirmation: req.body.passwordConfirmation.trim(),
                   email: req.body.email.trim(),
+                  googleId: req.body.googleId || null,
                   isAdmin: req.body.isAdmin
                 }).then((user) => {
                   if (user) {
@@ -63,6 +64,7 @@ export default {
    *
    */
   signIn(req, res) {
+    const googleId = req.body.googleId || null;    
     return User.findOne({
       where: {
         username: req.body.username
@@ -70,6 +72,9 @@ export default {
     })
       .then((user) => {
         if (!user) {
+          if (googleId) {
+            return create(req, res);
+          }
           return res.status(404).send({
             success: false,
             message: `${req.body.username} does not exist, Make sure you are signed up`
@@ -94,7 +99,7 @@ export default {
               });
             });
         } else {
-          res.status(400).send({ success: false, message: 'Wrong Credentials' });
+          res.status(403).send({ success: false, message: 'Wrong Credentials' });
         }
       })
       .catch(error => res.status(500).send(error.message));

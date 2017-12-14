@@ -48,7 +48,7 @@ module.exports = {
       type: Sequelize.INTEGER,
       defaultValue: 0
     },
-    authId: {
+    googleId: {
       type: Sequelize.STRING,
     },
     isAdmin: {
