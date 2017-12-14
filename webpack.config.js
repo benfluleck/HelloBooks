@@ -9,8 +9,8 @@ let config = {};
 if (isProd) {
   const GLOBALS = {
     'process.env.NODE_ENV': JSON.stringify('production'),
-    GOOGLE_CLIENT_ID: JSON.stringify('701806023399-vgqondt26qh10vcuei77r7' +
-    'nsbcd8oa8k.apps.googleusercontent.com')
+    GOOGLE_CLIENT_ID: JSON.stringify('733763885774-2tktr5a165kk4q9b2lr0cnghl9hgtdo8.' +
+    'apps.googleusercontent.com')
   };
   config = {
     devtool: 'source-map',
@@ -51,10 +51,10 @@ if (isProd) {
             presets: ['react', 'es2015', 'stage-2']
           }
         },
-        {
-          test: /\.(woff|png|jpg|gif)$/,
-          loader: 'url?prefix=font/&limit=5000'
-        },
+        // {
+        //   test: /\.(woff|png|jpg|gif)$/,
+        //   loader: 'url?prefix=font/&limit=5000'
+        // },
         {
           test: /\.(jpg|png)$/,
           exclude: /node-modules/,
@@ -144,10 +144,9 @@ if (isProd) {
       new webpack.optimize.OccurrenceOrderPlugin(),
       extractscss,
       new HtmlPlugin({ template: './client/src/index.html', filename: './index.html', inject: 'body' }),
-      new webpack.DefinePlugin({
-        
-        GOOGLE_CLIENT_ID: JSON.stringify('701806023399-vgqondt26qh10vcuei77r7' +
-        'nsbcd8oa8k.apps.googleusercontent.com')
+      new webpack.DefinePlugin({   
+        GOOGLE_CLIENT_ID: JSON.stringify('733763885774-2tktr5a165kk4q9b2lr0cnghl9hgtdo8.' +
+        'apps.googleusercontent.com')
       })
     ]
   };
