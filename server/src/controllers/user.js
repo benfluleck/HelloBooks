@@ -140,8 +140,13 @@ export default {
         if (!user) {
           return res.status(404).send({ message: 'User not logged In' });
         }
-        const comparePasswords = bcrypt.compareSync(req.body.newPassword, user.password);
-        if (comparePasswords) {
+        const compareOldPasswords = bcrypt.compareSync(req.body.oldPassword, user.password);
+        if (!compareOldPasswords) {
+          return res.status(409)
+            .send({ message: 'Your current password does not match our records, Please Re-enter' });
+        }
+        const compareNewPasswords = bcrypt.compareSync(req.body.newPassword, user.password);
+        if (compareNewPasswords) {
           return res.status(409)
             .send({ message: 'You cannot use a previous password' });
         }

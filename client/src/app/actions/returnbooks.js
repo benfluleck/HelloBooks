@@ -11,9 +11,9 @@ export const ReturnBookRejected = error => ({ type: RETURN_BOOKS_FAIL, error });
  * @param {object} book
  * @returns {function} asynchronous action
  */
-export const returnbook = book => dispatch => api
+export const returnBookAction = book => dispatch => api
   .book
-  .returnbook(book)
+  .returnBook(book)
   .then((response) => {
     dispatch(ReturnBookSuccess(response.returnedBook));
     dispatch(showSuccessNotification(response));

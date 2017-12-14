@@ -6,8 +6,8 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { connect } from 'react-redux';
 import { Button } from 'react-materialize';
 import BookModal from './BookModal.jsx';
-import { borrowbooks } from '../../../../actions/borrowbooks';
-import { returnbook } from '../../../../actions/returnbooks';
+import { borrowBookAction } from '../../../../actions/borrowbooks';
+import { returnBookAction } from '../../../../actions/returnbooks';
 
 
 /**
@@ -52,7 +52,7 @@ class DisplayBookModal extends React.Component {
   handleReturnClick = (event)=> {
     this
       .props
-      .returnbook({  bookId: this.props.book.id});
+      .returnBookAction({ bookId: this.props.book.id});
     $('#modal').modal({ opacity: 0 });
   }
 
@@ -101,7 +101,7 @@ class DisplayBookModal extends React.Component {
     const dateString = this.state.returnDate.format('YYYY-MM-DD');
     this
       .props
-      .borrowbooks({ bookId: this.props.book.id , returnDate: dateString })
+      .borrowBookAction({ bookId: this.props.book.id , returnDate: dateString })
       .then((response) => {
         if (response.error) {
           return;
@@ -177,7 +177,7 @@ class DisplayBookModal extends React.Component {
 
 DisplayBookModal.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
-  borrowbooks: PropTypes.func.isRequired,
+  borrowBookAction: PropTypes.func.isRequired,
   // book: PropTypes.arrayOf(PropTypes.shape({
   //   id: PropTypes.number
   // })).isRequired
@@ -191,4 +191,4 @@ const mapStateToProps = state => ({
 });
 
 
-export default connect(mapStateToProps, { returnbook, borrowbooks })(DisplayBookModal);
+export default connect(mapStateToProps, { returnBookAction, borrowBookAction })(DisplayBookModal);

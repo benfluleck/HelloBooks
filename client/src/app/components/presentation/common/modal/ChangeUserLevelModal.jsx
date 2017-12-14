@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Input, Button, Row, Col } from 'react-materialize';
+import { Modal, Input, Button, Row, Col, Preloader } from 'react-materialize';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getUserLevelListAction } from '../../../../actions/admin/getUserLevelList';
@@ -100,6 +100,9 @@ class ChangeUserLvlModal extends React.Component {
    * @memberOf ChangeUserLvlModal
    */
   render() {
+    if (!this.props.userLevels) {
+      return <Preloader size="big" className="center-align" />;
+    }
     const userLevelNames = this.props.userLevels
       .map(userLevel => (
         <option
@@ -172,9 +175,8 @@ ChangeUserLvlModal.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  userLevels: state.userReducer.userLevels.userLevels,
-  selectedUser: state.userReducer.selectedUser.user
-
+  userLevels: (state.userReducer.userLevels) ? state.userReducer.userLevels.userLevels : [],
+  selectedUser: (state.userReducer.selectedUser) ? state.userReducer.selectedUser.user : []
 });
 
 export default connect(

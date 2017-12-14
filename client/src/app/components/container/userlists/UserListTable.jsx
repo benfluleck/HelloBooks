@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Row, Button } from 'react-materialize';
 import { connect } from 'react-redux';
-import ChangeUserLvlModal from '../../presentation/common/modal/ChangeUserLvlModal.jsx';
+import ChangeUserLvlModal from '../../presentation/common/modal/ChangeUserLevelModal.jsx';
 import { getSelectedUser } from '../../../actions/admin/getSelectedUser';
 
 
@@ -72,7 +72,7 @@ class UserListTable extends React.Component {
               {rows}
             </tbody>
           </table>
-          <ChangeUserLvlModal />
+          <ChangeUserLevelModal />
         </div>
       </Row> :
       null

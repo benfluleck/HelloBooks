@@ -4,7 +4,7 @@ import swal from 'sweetalert2';
 import { Button } from 'react-materialize';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchBook } from '../../../../actions/fetchbooks';
+import { fetchSelectedBook, fetchAllBooks } from '../../../../actions/fetchbooks';
 import { deleteBookAction } from '../../../../actions/admin/books';
 
 /**
@@ -35,7 +35,7 @@ class Book extends React.Component {
    * @memberOf Book
    */
   handleBookClick(book) {
-    this.props.fetchBook(book.id);
+    this.props.fetchSelectedBook(book.id);
   }
 
   /**
@@ -88,8 +88,8 @@ class Book extends React.Component {
    * @param {object} book
    * @returns {function} a function that fetches the book id
    */
-  handleEdit(book) {
-    this.props.fetchBook(book.id);
+  handleEdit(book) {  
+    this.props.fetchSelectedBook(book.id);
     $('#admin-book-modal').modal('open');
   }
   /**
@@ -144,8 +144,8 @@ class Book extends React.Component {
 
 
 Book.propTypes = {
-  isAdmin: PropTypes.bool.isRequired,
-  fetchBook: PropTypes.func.isRequired,
+  isAdmin: PropTypes.bool,
+  fetchSelectedBook: PropTypes.func.isRequired,
   fetchAllBooks: PropTypes.func,
   deleteBookAction: PropTypes.func.isRequired,
   offset: PropTypes.number,
@@ -162,7 +162,8 @@ Book.defaultProps = {
   offset: 0,
   limit: 8,
   // book: null,
-  fetchAllBooks: null
+  fetchAllBooks: null,
+  isAdmin: null
 };
 
 const mapStateToProps = state => ({
@@ -173,5 +174,9 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { deleteBookAction, fetchBook }
+  {
+    deleteBookAction,
+    fetchAllBooks,
+    fetchSelectedBook
+  }
 )(Book);

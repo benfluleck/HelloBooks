@@ -5,8 +5,8 @@ import {
 } from './actiontype';
 import api from './api';
 
-export const LoanBooksSuccess = books => ({ type: BORROW_BOOKS_SUCCESS, books });
-export const LoanBooksRejected = error => ({ type: BORROW_BOOKS_FAIL, error });
+export const BorrowBooksSuccess = books => ({ type: BORROW_BOOKS_SUCCESS, books });
+export const BorrowBooksRejected = error => ({ type: BORROW_BOOKS_FAIL, error });
 
 /**
  * async helper function: log in user
@@ -14,16 +14,16 @@ export const LoanBooksRejected = error => ({ type: BORROW_BOOKS_FAIL, error });
  * @param {object} book
  * @returns {function} asynchronous action
  */
-export const borrowbooks = book => dispatch => api
+export const borrowBookAction = book => dispatch => api
   .book
-  .loanBook(book)
+  .borrowBook(book)
   .then((response) => {
-    dispatch(LoanBooksSuccess(response));
+    dispatch(BorrowBooksSuccess(response));
     dispatch(showSuccessNotification(response));
     return (response);
   })
   .catch((error) => {
     dispatch(showErrorNotification({ error }));
-    dispatch(LoanBooksRejected({ error }));
+    dispatch(BorrowBooksRejected({ error }));
     return ({ error });
   });

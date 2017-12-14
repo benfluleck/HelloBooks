@@ -4,7 +4,10 @@ export default {
   user: {
     login: credentials => axios.post('api/v1/auth/users/signin', credentials),
 
-    signup: data => axios.post('api/v1/auth/users/signup', data)
+    signup: data => axios.post('api/v1/auth/users/signup', data),
+
+    changePassword: (password, oldpassword) => axios.put('api/v1/users/changepassword', password, oldpassword)
+
   },
   book: {
     fetch: (offset, limit) => axios
@@ -19,7 +22,7 @@ export default {
     fetchBooksByUserId: (offset, limit) => axios
       .get(`api/v1/users/borrowedbooks?offset=${offset}&limit=${limit}&returned=false`)
       .then(res => res.data),
-    loanBook: book => axios.post('api/v1/users/loanbook', book)
+    borrowBook: book => axios.post('api/v1/users/loanbook', book)
       .then(res => res.data),
     returnBook: book => axios.put('api/v1/users/returnbook', book)
       .then(res => res.data),

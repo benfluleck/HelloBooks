@@ -35,6 +35,7 @@ class AdminDashboard extends React.PureComponent {
                   <Tab>ALL BOOKS</Tab>
                   <Tab>USERS</Tab>
                   <Tab>CATEGORIES</Tab>
+                  <Tab>NOTIFICATIONS</Tab>
                 </TabList>
               </Row>
               <Row>
@@ -46,6 +47,9 @@ class AdminDashboard extends React.PureComponent {
                 </TabPanel>
                 <TabPanel>
                   <CategoryAdminTab />
+                </TabPanel>
+                <TabPanel>
+                  <p>Something light</p>
                 </TabPanel>
               </Row>
             </Tabs>

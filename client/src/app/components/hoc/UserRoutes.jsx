@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 const UserRoutes = ({
   isAuthenticated,
   tokenExists,
-  component : Component,
+  component: Component,
   ...rest
 }) => (
   <Route
@@ -18,7 +18,6 @@ const UserRoutes = ({
 );
 
 UserRoutes.propTypes = {
-  component: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
   tokenExists: PropTypes.bool.isRequired
 };

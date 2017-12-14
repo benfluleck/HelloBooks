@@ -11,7 +11,9 @@ import {
   CHANGE_USER_LEVEL_FAILURE,
   CHANGE_USER_LEVEL_SUCCESS,
   GET_USER_SUCCESS,
-  GET_USER_FAILURE
+  GET_USER_FAILURE,
+  PASSWORD_CHANGED_SUCCESS,
+  PASSWORD_CHANGED_FAILURE
 } from '../actions/actiontype';
 
 const INITIAL_STATE = {
@@ -94,6 +96,16 @@ export default function userReducer(state = INITIAL_STATE, action = {}) {
         selectedUser: action.user
       };
     case GET_USER_FAILURE:
+      return {
+        ...state,
+        error: action.error
+      };
+    case PASSWORD_CHANGED_SUCCESS:
+      return {
+        ...state,
+        data: action.data
+      };
+    case PASSWORD_CHANGED_FAILURE:
       return {
         ...state,
         error: action.error

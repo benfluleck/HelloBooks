@@ -15,7 +15,7 @@ export const fetchRecentBooks = books => ({ type: FETCH_ALL_RECENT_BOOKS, books 
 export const fetchBooks = books => ({ type: FETCH_ALL_BOOKS, books });
 export const fetchBooksByUserId = books => ({ type: FETCH_BOOKS_BY_USER_ID, books });
 export const fetchOverdueBooks = books => ({ type: FETCH_ALL_OVERDUE_BOOKS, books });
-export const fetchSelectedBook = book => ({ type: FETCH_SELECTED_BOOK_SUCCESS, book });
+export const fetchSelectedBookSuccess = book => ({ type: FETCH_SELECTED_BOOK_SUCCESS, book });
 export const fetchSelectedBookFailure = error => ({ type: FETCH_SELECTED_BOOK_FAILURE, error });
 
 /**
@@ -83,9 +83,9 @@ export const fetchAllRecentBooks = (offset, limit) => dispatch => api
  * @param {object} limit
  * @returns {function} asynchronous action
  */
-export const fetchAllBooksbyId = (offset, limit) => dispatch => api
+export const fetchAllBorrowedBooks = (offset, limit) => dispatch => api
   .book
-  .fetchBooksbyUserId(offset, limit)
+  .fetchBooksByUserId(offset, limit)
   .then((response) => {
     dispatch(fetchBooksByUserId(response));
   })
@@ -100,11 +100,11 @@ export const fetchAllBooksbyId = (offset, limit) => dispatch => api
  * @param {number} bookId
  * @returns {function} asynchronous action
  */
-export const fetchBook = bookId => dispatch => api
+export const fetchSelectedBook = bookId => dispatch => api
   .book
   .fetchSelectedBookById(bookId)
   .then((response) => {
-    dispatch(fetchSelectedBook(response));
+    dispatch(fetchSelectedBookSuccess(response));
   })
   .catch((error) => {
     dispatch(showErrorNotification({ error }));

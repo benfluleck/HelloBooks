@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
 import { Button } from 'react-materialize';
 import UserView from './UserView.jsx';
 import CategoriesSideBarList from '../../../container/categories/CategoriesSideBarList.jsx';
@@ -28,6 +29,7 @@ const SideNav = ({
         isAdmin={props.isAdmin}
       />
       <li><div className="divider" /></li>
+      <li><NavLink to="/changepassword">Change Password</NavLink></li>
       <CategoriesSideBarList />
       <hr className="category-hr" />
     </ul>
