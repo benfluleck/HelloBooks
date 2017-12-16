@@ -1,9 +1,19 @@
-import { showErrorNotification, showSuccessNotification } from './notifications';
-import { PASSWORD_CHANGED_SUCCESS, PASSWORD_CHANGED_FAILURE } from './actiontype';
+import {
+  showErrorNotification,
+  showSuccessNotification
+} from './notifications';
+import {
+  PASSWORD_CHANGED_SUCCESS,
+  PASSWORD_CHANGED_FAILURE
+} from './actiontype';
 import api from './api';
 
-export const changePasswordSuccess = data => ({ type: PASSWORD_CHANGED_SUCCESS, data });
-export const changePasswordRejected = error => ({ type: PASSWORD_CHANGED_FAILURE, error });
+export const changePasswordSuccess = data => ({
+  type: PASSWORD_CHANGED_SUCCESS, data
+});
+export const changePasswordRejected = error => ({
+  type: PASSWORD_CHANGED_FAILURE, error
+});
 
 /**
  * async helper function: Change password

@@ -1,4 +1,7 @@
-import { showErrorNotification, showSuccessNotification } from '../notifications';
+import {
+  showErrorNotification,
+  showSuccessNotification
+} from '../notifications';
 import {
   CHANGE_USER_LEVEL_FAILURE,
   CHANGE_USER_LEVEL_SUCCESS
@@ -8,7 +11,11 @@ import api from '../api';
 export const changeUserLevelSuccess = userLevel => (
   { type: CHANGE_USER_LEVEL_SUCCESS, userLevel }
 );
-export const changeUserLevelFailure = error => ({ type: CHANGE_USER_LEVEL_FAILURE, error });
+export const changeUserLevelFailure = error =>
+  ({
+    type: CHANGE_USER_LEVEL_FAILURE,
+    error
+  });
 
 
 /**

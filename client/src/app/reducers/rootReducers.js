@@ -4,8 +4,13 @@ import { reducer as notifReducer } from 'redux-notifications';
 import userReducer from './userReducers';
 import bookReducer from './bookReducers';
 import imageReducer from './imageReducers';
+import notifierReducer from './notifierReducers';
 
 
 export default combineReducers({
-  userReducer, bookReducer, imageReducer, notifs: notifReducer
+  notifierReducer,
+  userReducer,
+  bookReducer,
+  imageReducer,
+  notifs: notifReducer
 });

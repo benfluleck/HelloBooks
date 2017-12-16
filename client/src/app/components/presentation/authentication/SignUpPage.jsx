@@ -173,13 +173,13 @@ class SignUpPage extends Component {
                     <Col s={12} className="center">
                       <Button waves="light">Sign Up</Button>
                     </Col>
-                    <Col s={12} className="center">
+                    {/* <Col s={12} className="center">
                       <br/>
                       <a className="btn btn-social btn-google">
                         <span className="fa fa-google"/>
                         Sign in with Google
                       </a>
-                    </Col>
+                    </Col> */}
                   </div>
                 </form>
               </Row>

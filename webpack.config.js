@@ -9,7 +9,8 @@ let config = {};
 if (isProd) {
   const GLOBALS = {
     'process.env.NODE_ENV': JSON.stringify('production'),
-    GOOGLE_CLIENT_ID: JSON.stringify('733763885774-2tktr5a165kk4q9b2lr0cnghl9hgtdo8.' +
+    GOOGLE_CLIENT_ID:
+    JSON.stringify('733763885774-2tktr5a165kk4q9b2lr0cnghl9hgtdo8.' +
     'apps.googleusercontent.com')
   };
   config = {
@@ -29,13 +30,19 @@ if (isProd) {
       new webpack.DefinePlugin(GLOBALS),
       new ExtractTextPlugin('styles.css'),
       new webpack.optimize.UglifyJsPlugin({ minimize: true }),
-      new HtmlPlugin({ template: './client/src/index.html', filename: './index.html', inject: 'body' })
+      new HtmlPlugin({
+        template: './client/src/index.html',
+        filename: './index.html',
+        inject: 'body'
+      })
     ],
     module: {
       loaders: [
         {
           test: /(\.css)$/,
-          use: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader' })
+          use: ExtractTextPlugin.extract({
+            fallback: 'style-loader', use: 'css-loader'
+          })
         },
         {
           test: /\.scss$/,
@@ -114,7 +121,9 @@ if (isProd) {
         },
         {
           test: /(\.css)$/,
-          use: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader' })
+          use: ExtractTextPlugin.extract({
+            fallback: 'style-loader', use: 'css-loader'
+          })
         },
         {
           test: /\.(scss|sass)$/,
@@ -143,9 +152,14 @@ if (isProd) {
     plugins: [
       new webpack.optimize.OccurrenceOrderPlugin(),
       extractscss,
-      new HtmlPlugin({ template: './client/src/index.html', filename: './index.html', inject: 'body' }),
-      new webpack.DefinePlugin({   
-        GOOGLE_CLIENT_ID: JSON.stringify('733763885774-2tktr5a165kk4q9b2lr0cnghl9hgtdo8.' +
+      new HtmlPlugin({
+        template: './client/src/index.html',
+        filename: './index.html',
+        inject: 'body'
+      }),
+      new webpack.DefinePlugin({
+        GOOGLE_CLIENT_ID:
+        JSON.stringify('733763885774-2tktr5a165kk4q9b2lr0cnghl9hgtdo8.' +
         'apps.googleusercontent.com')
       })
     ]

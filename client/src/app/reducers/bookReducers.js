@@ -45,90 +45,42 @@ export default function bookReducer(state = {
 }, action) {
   switch (action.type) {
     case SEARCH_BOOKS_SUCCESS:
-    {
-      return {
-        ...state,
-        allBooksList:
-          action.books
-      };
-    }
+      return { ...state, allBooksList: action.books };
     case SEARCH_BOOKS_FAILURE:
-    {
-      return {
-        ...state,
-        error: action.message
-      };
-    }
+      return { ...state, error: action.message };
     case UPDATE_BOOK_SUCCESS:
-    {
-      return {
-        ...state,
-        error: action.book
-      };
-    }
+      return { ...state, error: action.book };
     case UPDATE_BOOK_FAILURE:
-    {
-      return {
-        ...state,
-        book: action.book
-      };
-    }
+      return { ...state, book: action.book };
     case FETCH_CATEGORIES_SUCCESS:
-    {
-      return {
-        ...state,
-        categoryList: action.categories.categories
-      };
-    }
+      return { ...state, categoryList: action.categories.categories };
     case FETCH_CATEGORIES_FAILURE:
-    {
-      return {
-        ...state,
-        error: action.error
-      };
-    }
+      return { ...state, error: action.error };
     case ADD_CATEGORY_SUCCESS:
-    {
       return {
         ...state,
-        categoryList: [
-          ...state.categoryList,
+        categoryList: [...state.categoryList,
           action.category.category
         ]
       };
-    }
     case ADD_CATEGORY_FAILURE:
-    {
-      return {
-        ...state,
-        error: action.error
-      };
-    }
+      return { ...state, error: action.error };
     case EDIT_CATEGORY_SUCCESS:
-    {
       return {
         ...state,
         categoryList: state.categoryList.map(category =>
           ((category.id !== action.category.updatedCategory.id) ?
             category : action.category.updatedCategory))
       };
-    }
     case EDIT_CATEGORY_FAILURE:
-    {
-      return {
-        ...state,
-        error: action.error
-      };
-    }
+      return { ...state, error: action.error };
     case DELETE_CATEGORY_SUCCESS:
-    {
       return {
         ...state,
-        categoryList:
-          state.categoryList
-            .filter(category => category.id !== action.deletedCategory.category.id)
+        categoryList: state.categoryList
+          .filter(category =>
+            category.id !== action.deletedCategory.category.id)
       };
-    }
     case DELETE_CATEGORY_FAILURE:
     {
       return {

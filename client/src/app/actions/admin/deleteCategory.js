@@ -1,4 +1,7 @@
-import { showErrorNotification, showSuccessNotification } from '../notifications';
+import {
+  showErrorNotification,
+  showSuccessNotification
+} from '../notifications';
 import {
   DELETE_CATEGORY_SUCCESS,
   DELETE_CATEGORY_FAILURE
@@ -8,7 +11,11 @@ import api from '../api';
 export const deleteCategorySuccess = deletedCategory => (
   { type: DELETE_CATEGORY_SUCCESS, deletedCategory }
 );
-export const deleteCategoryFailure = error => ({ type: DELETE_CATEGORY_FAILURE, error });
+export const deleteCategoryFailure = error =>
+  ({
+    type: DELETE_CATEGORY_FAILURE,
+    error
+  });
 
 
 /**

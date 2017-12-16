@@ -39,7 +39,9 @@ export default {
           if (bookExists !== null) {
             return res
               .status(409)
-              .send({ message: 'A book with the same title and author already exists in the library' });
+              .send({ message:
+                'A book with the same title and author already exists in the library'
+              });
           }
           Books
             .create({

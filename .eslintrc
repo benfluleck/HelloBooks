@@ -1,10 +1,8 @@
 {
 	"root": true,
-	"extends": ["airbnb","react"],
+	"extends": "airbnb",
 	"plugins": [
-		"import",
-		"react",
-		"jsx-a11y"
+		"react"
 	],
 	"env": {
 		"jquery": true,
@@ -27,6 +25,20 @@
 		"prefer-destructuring": [ "error", { "object": false, "array": false } ],
 		"import/no-unresolved": [ 2, { "commonjs": true } ],
 		"no-shadow": [ "error", { "allow": [ "req", "res", "err" ] } ],
+		"max-len":[
+			1,
+			80,
+			2
+		],
+    "react/no-unknown-property": [
+      2,
+      {
+        "ignore": [
+          "class",
+          "for"
+        ]
+      }
+    ],
 		"valid-jsdoc": [
 			"error",
 			{

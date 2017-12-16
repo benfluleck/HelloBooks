@@ -4,7 +4,8 @@ import { Preloader } from 'react-materialize';
 import PropTypes from 'prop-types';
 import { loanhistory } from '../../../actions/loanhistory';
 import PaginationWrapper from '../common/Pagination.jsx';
-import LoanHistoryTable from '../../presentation/loanhistory/LoanHistoryTable.jsx';
+import LoanHistoryTable
+  from '../../presentation/loanhistory/LoanHistoryTable.jsx';
 
 /**
  * handles the state of the Loan history table
@@ -13,8 +14,8 @@ import LoanHistoryTable from '../../presentation/loanhistory/LoanHistoryTable.js
  */
 class LoanHistory extends React.Component {
   /**
-   * @description dispatch actions that help populate the dashboard with loan history
-   * fetch books for the dashboard
+   * @description dispatch actions that help populated
+   * the dashboard with loan history
    * @method componentDidMount
    * @memberof DisplayLandingBooks
    * @returns {void}

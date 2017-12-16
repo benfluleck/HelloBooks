@@ -7,7 +7,8 @@ HelloBooks is an application that helps manage a library and its processes like 
 
 # Table of Contents
 - [Getting Started](#getting-started)
-- [Dependencies](#dependencies)
+- [Technology Stack](#technology-stack)
+  * [Dependencies](#dependencies)
 - [Installation and Usage](#installation)
 - [Tests](#tests)
 - [API Documentation](#api-documentation)
@@ -15,16 +16,14 @@ HelloBooks is an application that helps manage a library and its processes like 
 - [Testing](#testing)
 - [Express Routes](#express-routes)
 - [License](#license)
+- [FAQ](#faqs)
 - [Current state](#current-state)
 
 ## Getting Started
 This is a javascript application built with [**Express**](https://expressjs.com/) framework on the nodejs platform. Authentication of users is done via [**JSON Web Tokens**](https://jwt.io/).
 
-## Dependencies
-* Postgres
-* Node
 
-### Technology Stack
+## Technology Stack
 **UI & Templates**
 1. HTML & CSS
 2. Materialize CSS Framework
@@ -32,12 +31,16 @@ This is a javascript application built with [**Express**](https://expressjs.com/
 4. JQuery
 
 **Server Side**
-1. NodeJs
+1. NodeJS
 2. Express
 3. Sequelize
 
 **Client Side**
 1. React(Redux)
+
+### Dependencies
+* Postgres
+* Node
 
 
 ## Installation
@@ -156,6 +159,8 @@ This project is authored by **Benny Ogidan** (benny.ogidan@andela.com) and is li
 [license]: LICENSE
 [author]: benny-ogidan
 
+## FAQ
+See the Hello Books wiki
 
 ## Current state
 Client side testing phase

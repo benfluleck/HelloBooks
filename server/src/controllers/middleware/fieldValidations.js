@@ -6,11 +6,15 @@ const fieldMap = {
 };
 
 /**
- * middleware for field format validations
+ * @description middleware for field format validations
+ *
  * @param {object} req
+ *
  * @param {object} res
+ *
  * @param {function} next
- * @returns {void}
+ *
+ * @returns {bool} validation error
  */
 export default (req, res, next) => {
   const path = req.path;

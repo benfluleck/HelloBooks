@@ -1,12 +1,22 @@
-import { showErrorNotification } from '../notifications';
+import {
+  showErrorNotification,
+} from '../notifications';
 import {
   EDIT_CATEGORY_FAILURE,
   EDIT_CATEGORY_SUCCESS
 } from '../actiontype';
 import api from '../api';
 
-export const editCategorySuccess = category => ({ type: EDIT_CATEGORY_SUCCESS, category });
-export const editCategoryFailure = error => ({ type: EDIT_CATEGORY_FAILURE, error });
+export const editCategorySuccess = category =>
+  ({
+    type: EDIT_CATEGORY_SUCCESS,
+    category
+  });
+export const editCategoryFailure = error =>
+  ({
+    type: EDIT_CATEGORY_FAILURE,
+    error
+  });
 
 
 /**

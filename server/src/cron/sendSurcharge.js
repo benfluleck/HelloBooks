@@ -1,4 +1,3 @@
-import moment from 'moment';
 import model from '../models';
 import { transporter, mailOptions } from '../mailer/mailer';
 
@@ -8,7 +7,7 @@ const sendSurcharge = () => (UserBooks.findAll({
   where: {
     returnstatus: false,
     returndate: {
-      $lt: Date.now() - 24 * 1000
+      $lt: Date.now() - (24 * 1000)
     }
   },
   include: [
@@ -41,7 +40,8 @@ const sendSurcharge = () => (UserBooks.findAll({
     const html = `
     <p>Hello <strong>${usernames[index]}</strong>, </p>
     <p>This is to notify you that you have exceeded the borrowing duration </p>
-    <p>for one of our books you will be be sent a daily fine till you return the book </p>
+    <p>for one of our books you will 
+    be be sent a daily fine till you return the book </p>
     <p>Please return the book <strong>${bookTitles[index]}</strong>
     <p>Thank you for the understanding</p><br/>
     <p>Kind regards,</p>`;

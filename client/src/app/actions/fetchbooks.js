@@ -10,13 +10,34 @@ import {
 } from './actiontype';
 import api from './api';
 
-export const fetchBooksRejected = error => ({ type: FETCH_BOOKS_REJECTED, error });
-export const fetchRecentBooks = books => ({ type: FETCH_ALL_RECENT_BOOKS, books });
-export const fetchBooks = books => ({ type: FETCH_ALL_BOOKS, books });
-export const fetchBooksByUserId = books => ({ type: FETCH_BOOKS_BY_USER_ID, books });
-export const fetchOverdueBooks = books => ({ type: FETCH_ALL_OVERDUE_BOOKS, books });
-export const fetchSelectedBookSuccess = book => ({ type: FETCH_SELECTED_BOOK_SUCCESS, book });
-export const fetchSelectedBookFailure = error => ({ type: FETCH_SELECTED_BOOK_FAILURE, error });
+export const fetchBooksRejected = error => ({
+  type: FETCH_BOOKS_REJECTED,
+  error
+});
+export const fetchRecentBooks = books => ({
+  type: FETCH_ALL_RECENT_BOOKS,
+  books
+});
+export const fetchBooks = books => ({
+  type: FETCH_ALL_BOOKS,
+  books
+});
+export const fetchBooksByUserId = books => ({
+  type: FETCH_BOOKS_BY_USER_ID,
+  books
+});
+export const fetchOverdueBooks = books => ({
+  type: FETCH_ALL_OVERDUE_BOOKS,
+  books
+});
+export const fetchSelectedBookSuccess = book => ({
+  type: FETCH_SELECTED_BOOK_SUCCESS,
+  book
+});
+export const fetchSelectedBookFailure = error => ({
+  type: FETCH_SELECTED_BOOK_FAILURE,
+  error
+});
 
 /**
  * async helper function: log in user
@@ -93,7 +114,6 @@ export const fetchAllBorrowedBooks = (offset, limit) => dispatch => api
     dispatch(showErrorNotification({ error }));
     dispatch(fetchBooksRejected({ error }));
   });
-
   /**
  * async helper function:fetch selected book
  * @function fetchSelectedBook

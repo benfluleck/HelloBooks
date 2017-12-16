@@ -1,8 +1,10 @@
-import React, {Component} from 'react';
-import {NavLink} from 'react-router-dom';
-import {Input, Col, Row, Icon, Button} from 'react-materialize';
+import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
+import { Input, Col, Row, Icon, Button } from 'react-materialize';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
+import { GoogleLogin } from 'react-google-login';
+import { login } from '../../../actions/authenticate';
 import Bottom from '../../../components/presentation/common/Footer.jsx'
 
 /**
@@ -24,6 +26,9 @@ class SignInPage extends Component {
       .bind(this);
     this.onSubmit = this
       .onSubmit
+      .bind(this);
+    this.handleGoogleLogin = this
+      .handleGoogleLogin
       .bind(this);
   }
 
@@ -47,16 +52,62 @@ class SignInPage extends Component {
    * This is called when the submit button is clicked
    * @method submit
    * @memberof SignIn
-   * @returns {void}
+   * @returns {function}
    */
   onSubmit = (e) => {
     e.preventDefault();
     this
-      .props
-      .submit(this.state)
+    .props
+    .login(this.state)
+    .then((response) => {
+      console.log(response,'>>>>>>>>>>>??????>>>')
+      if(response.success && response.isAdmin)
+      
+      {
+        console.log(response,'ADMIIIIN')
+       return  
+       this
+        .props
+        .history
+        .push('/admin')
+        
+      }
+      console.log(response,'>>>>>>>>>>>>>>')
+      this
+        .props
+        .history
+        .push('/dashboard')
+    })
+    .catch(()=>{
+
+    })
+
 
   }
 
+  /**
+   * @returns {*} void
+   * @param {any} response
+   * @memberof Login
+   */
+  handleGoogleLogin(response) {
+     this
+      .props
+      .login(
+        response.profileObj
+      )
+      .then((res) => {
+        if (res) {
+          this
+            .props
+            .history
+            .push('/dashboard');
+        }
+      });
+    // if (response.error) {
+    //   Materialize.toast('Please resume google login', 4000, '');
+    // }
+  }
   /**
    * render login component
    * @method render
@@ -95,9 +146,9 @@ class SignInPage extends Component {
                   </Input>
 
                   <Col s={12} l={8}>
-                    <NavLink to='/forgetpass'>
+                    {/* <NavLink to='/forgetpass'>
                       <p>Forgotten Password</p>
-                    </NavLink>
+                    </NavLink> */}
                     <NavLink to='/signup'>
                       <p>Sign Up</p>
                     </NavLink>
@@ -110,8 +161,15 @@ class SignInPage extends Component {
                   <Col className='center' s={12}>
                     <br/>
                     <a className="btn btn-social btn-google">
-                      <span className="fa fa-google"></span>
-                      Sign in with Google</a>
+                    <span className="fa fa-google"></span>
+                      <GoogleLogin
+                        clientId={GOOGLE_CLIENT_ID}
+                        onSuccess={this.handleGoogleLogin}
+                        onFailure={this.handleGoogleLogin}>
+                        
+                        Sign in with Google
+                      </GoogleLogin>
+                    </a>
                   </Col>
                 </div>
               </form>
@@ -127,4 +185,4 @@ class SignInPage extends Component {
 
 }
 
-export default SignInPage;
+export default connect(null, {login})(SignInPage);

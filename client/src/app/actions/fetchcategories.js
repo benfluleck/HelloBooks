@@ -47,8 +47,15 @@ export const fetchAllCategories = () => dispatch => api
     dispatch(showErrorNotification({ error }));
     dispatch(fetchCategoriesFailure({ error }));
   });
-
-export const fetchBooksForCategories = (categoryId, offset, limit) => (dispatch) => {
+/**
+ * @description fetches all books and groups them category
+ * @param {number} categoryId
+ * @param {number} offset
+ * @param {number} limit
+ * @returns {object} asynchronous action
+ */
+export
+const fetchBooksForCategories = (categoryId, offset, limit) => (dispatch) => {
   api
     .book
     .fetchAllBooksByCategories(categoryId, offset, limit)

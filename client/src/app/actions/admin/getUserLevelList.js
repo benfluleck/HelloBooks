@@ -8,7 +8,11 @@ import api from '../api';
 export const getUserLevelListSuccess = userLevelList => (
   { type: GET_USER_LEVEL_LIST_SUCCESS, userLevelList }
 );
-export const getUserLevelListFailure = error => ({ type: GET_USER_LEVEL_LIST_FAILURE, error });
+export const getUserLevelListFailure = error =>
+  ({
+    type: GET_USER_LEVEL_LIST_FAILURE,
+    error
+  });
 
 
 /**

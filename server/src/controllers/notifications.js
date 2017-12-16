@@ -27,7 +27,7 @@ export default {
         order: [['createdAt', 'DESC']],
       })
       .then((notifications) => {
-        const allNotifications = { success: true, notifications };
+        const allNotifications = { notifications };
         res.status(200).send(allNotifications);
       })
       .catch(error => res.status(500).send(error.message));
