@@ -3,7 +3,9 @@ import axios from 'axios';
 export default {
   user: {
     login: credentials => axios.post('api/v1/auth/users/signin', credentials),
+
     signup: data => axios.post('api/v1/auth/users/signup', data),
+
     changePassword: (password, oldPassword) =>
       axios.put(
         'api/v1/users/changepassword',
@@ -16,18 +18,15 @@ export default {
       .then(res => res.data),
 
     fetchRecentBooks: (offset, limit) => axios
-      .get(`api/v1/auth/books/recentbooks?offset
-      =${offset}&limit=${limit}`)
+      .get(`api/v1/auth/books/recentbooks?offset=${offset}&limit=${limit}`)
       .then(res => res.data),
 
     fetchOverdueBooks: (offset, limit) => axios
-      .get(`api/v1/users/getoverduebooks?offset
-      =${offset}&limit=${limit}`)
+      .get(`api/v1/users/getoverduebooks?offset=${offset}&limit=${limit}`)
       .then(res => res.data),
 
     fetchBooksByUserId: (offset, limit) => axios
-      .get(`api/v1/users/borrowedbooks?offset=
-      ${offset}&limit=${limit}&returned=false`)
+      .get(`api/v1/users/borrowedbooks?offset=${offset}&limit=${limit}&returned=false`)
       .then(res => res.data),
 
     borrowBook: book => axios.post('api/v1/users/loanbook', book)
@@ -49,8 +48,7 @@ export default {
       .then(res => res.data),
 
     fetchAllBooksByCategories: (categoryId, offset, limit) => axios
-      .get(`api/v1/books/category
-      /${categoryId}?offset=${offset}&limit=${limit}`)
+      .get(`api/v1/books/category/${categoryId}?offset=${offset}&limit=${limit}`)
       .then(res => res.data),
 
     fetchSelectedBookById: bookId => axios

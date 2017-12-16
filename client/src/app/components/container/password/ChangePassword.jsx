@@ -9,14 +9,17 @@ import { changePasswordAction } from '../../../actions/changePassword';
  *
  *
  * @class ChangePassword
+ *
  * @extends {Component}
  */
 class ChangePassword extends Component {
 /**
- * Creates an instance of ChangePassword.
- * Creates an instance of ChangePassword.
+ * Creates an instance of ChangePassword
+ *
+ *
  * @param {object} props
- * @returns {any} state
+ *
+ *
  * @memberOf ChangePassword
  */
   constructor(props) {
@@ -32,10 +35,14 @@ class ChangePassword extends Component {
   }
 
   /**
-   * Handle onChange events for Change PAssword
+   * Handle onChange events for Change Password
+   *
    * @method onChange
-   * @memberof ChangePAssword
+   *
+   * @memberof ChangePassword
+   *
    * @param {object} event
+   *
    * @returns {function} a function that handles change event on inputs
    */
   onChange(event) {

@@ -20,8 +20,11 @@ export const deleteCategoryFailure = error =>
 
 /**
  * async helper function: delete Category
+ *
  * @function deleteCategory
+ *
  * @param {number} categoryId
+ *
  * @returns {function} asynchronous action
  */
 export const deleteCategoryAction = categoryId => dispatch => api

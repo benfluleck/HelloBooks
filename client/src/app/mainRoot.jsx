@@ -9,6 +9,7 @@ import UserDashboard from './components/presentation/UserDashboard.jsx';
 import AdminDashboard from './components/presentation/admin/AdminDashboard.jsx';
 import Logout from './components/container/authentication/Logout.jsx';
 import UserRoutes from './components/hoc/UserRoutes.jsx';
+import GuestRoutes from './components/hoc/GuestRoutes.jsx';
 import AdminRoutes from './components/hoc/AdminRoutes.jsx';
 import ChangePassword from './components/container/password/ChangePassword.jsx';
 

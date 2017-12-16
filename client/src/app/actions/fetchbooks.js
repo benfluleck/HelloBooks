@@ -41,9 +41,13 @@ export const fetchSelectedBookFailure = error => ({
 
 /**
  * async helper function: log in user
+ *
  * @function fetchAllBooks
+ *
  * @param {integer} offset
+ *
  * @param {integer} limit
+ *
  * @returns {function} asynchronous action
  */
 export const fetchAllBooks = (offset, limit) => dispatch => api

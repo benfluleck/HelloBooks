@@ -15,7 +15,8 @@ const fieldLength = {
 const emailRegex = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"|"_+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
 const validateEmail = emailAddress => emailRegex.test(emailAddress);
 
-const modifiedIsLength = field => val => isLength(val, fieldLength[field] || {});
+const modifiedIsLength =
+field => val => isLength(val, fieldLength[field] || {});
 
 export const fieldValidationFnMap = {
   email: [validateEmail]

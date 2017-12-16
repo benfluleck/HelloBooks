@@ -1,17 +1,20 @@
 import React from 'react';
-import { Collapsible, CollapsibleItem, Col, Row } from 'react-materialize';
+import { Col, Row } from 'react-materialize';
 import CategoryCollectionList from './CategoriesCollectionList.jsx';
 import AddCategory from './AddCategory.jsx';
 
 
 /**
  * @class CategoriesAdmin
+ *
  * @extends {React.Component}
  */
 const CategoriesAdminTab = () => (
   /**
    * Creates an instance of CategoriesAdmin.
+   *
    * @param {object} props
+   *
    * @memberof CategoriesAdmin
    */
   <div className="accordion-category">

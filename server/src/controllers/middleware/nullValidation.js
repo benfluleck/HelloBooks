@@ -1,20 +1,28 @@
 import { nullValidationFnMap, nullValidFieldMessage } from './validators';
 
 const fieldMap = (bookId, categoryId) => ({
-  '/auth/users/signin':
-  ['username', 'password'],
+  '/auth/users/signin': ['username',
+    'password'],
 
-  '/auth/users/signup':
-  ['email', 'password', 'username', 'firstname', 'lastname'],
+  '/auth/users/signup': ['email',
+    'password',
+    'username',
+    'firstname',
+    'lastname'],
 
   '/users/changepassword': ['newPassword'],
 
   '/admin/category': ['categoryName'],
 
-  '/admin/books':
-  ['title', 'description', 'author', 'quantity', 'categoryId'],
+  '/admin/books': ['title',
+    'description',
+    'author',
+    'quantity',
+    'categoryId'],
 
-  [`/admin/books/${bookId}`]: ['title', 'author', 'description'],
+  [`/admin/books/${bookId}`]: ['title',
+    'author',
+    'description'],
 
   [`/admin/category/${categoryId}`]: ['categoryName'],
 
@@ -24,8 +32,11 @@ const fieldMap = (bookId, categoryId) => ({
 /**
  * middleware to check for null validations and other bad requests
  * @param {object} req
+ *
  * @param {object} res
+ *
  * @param {function} next
+ *
  * @returns {void} boolean
  */
 export default (req, res, next) => {

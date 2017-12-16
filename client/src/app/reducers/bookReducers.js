@@ -12,8 +12,8 @@ import {
   FETCH_ALL_OVERDUE_BOOKS,
   SEARCH_BOOKS_SUCCESS,
   SEARCH_BOOKS_FAILURE,
-  FETCH_CATEGORIES_SUCCESS,
-  FETCH_CATEGORIES_FAILURE,
+  // FETCH_CATEGORIES_SUCCESS,
+  // FETCH_CATEGORIES_FAILURE,
   FETCH_BOOKS_FOR_CATEGORIES_SUCCESS,
   FETCH_BOOKS_FOR_CATEGORIES_FAILURE,
   FETCH_SELECTED_BOOK_SUCCESS,
@@ -24,12 +24,12 @@ import {
   UPDATE_BOOK_FAILURE,
   DELETE_BOOK_FAILURE,
   DELETE_BOOK_SUCCESS,
-  ADD_CATEGORY_SUCCESS,
-  ADD_CATEGORY_FAILURE,
-  EDIT_CATEGORY_SUCCESS,
-  EDIT_CATEGORY_FAILURE,
-  DELETE_CATEGORY_FAILURE,
-  DELETE_CATEGORY_SUCCESS,
+  // ADD_CATEGORY_SUCCESS,
+  // ADD_CATEGORY_FAILURE,
+  // EDIT_CATEGORY_SUCCESS,
+  // EDIT_CATEGORY_FAILURE,
+  // DELETE_CATEGORY_FAILURE,
+  // DELETE_CATEGORY_SUCCESS,
 } from '../actions/actiontype';
 
 /**
@@ -38,7 +38,9 @@ import {
  * @export
  * @param {object} [state={
  * }]
+ *
  * @param {object} action
+ *
  * @returns {object} state
  */
 export default function bookReducer(state = {
@@ -52,42 +54,42 @@ export default function bookReducer(state = {
       return { ...state, error: action.book };
     case UPDATE_BOOK_FAILURE:
       return { ...state, book: action.book };
-    case FETCH_CATEGORIES_SUCCESS:
-      return { ...state, categoryList: action.categories.categories };
-    case FETCH_CATEGORIES_FAILURE:
-      return { ...state, error: action.error };
-    case ADD_CATEGORY_SUCCESS:
-      return {
-        ...state,
-        categoryList: [...state.categoryList,
-          action.category.category
-        ]
-      };
-    case ADD_CATEGORY_FAILURE:
-      return { ...state, error: action.error };
-    case EDIT_CATEGORY_SUCCESS:
-      return {
-        ...state,
-        categoryList: state.categoryList.map(category =>
-          ((category.id !== action.category.updatedCategory.id) ?
-            category : action.category.updatedCategory))
-      };
-    case EDIT_CATEGORY_FAILURE:
-      return { ...state, error: action.error };
-    case DELETE_CATEGORY_SUCCESS:
-      return {
-        ...state,
-        categoryList: state.categoryList
-          .filter(category =>
-            category.id !== action.deletedCategory.category.id)
-      };
-    case DELETE_CATEGORY_FAILURE:
-    {
-      return {
-        ...state,
-        error: action.error
-      };
-    }
+    // case FETCH_CATEGORIES_SUCCESS:
+    //   return { ...state, categoryList: action.categories.categories };
+    // case FETCH_CATEGORIES_FAILURE:
+    //   return { ...state, error: action.error };
+    // case ADD_CATEGORY_SUCCESS:
+    //   return {
+    //     ...state,
+    //     categoryList: [...state.categoryList,
+    //       action.category.category
+    //     ]
+    //   };
+    // case ADD_CATEGORY_FAILURE:
+    //   return { ...state, error: action.error };
+    // case EDIT_CATEGORY_SUCCESS:
+    //   return {
+    //     ...state,
+    //     categoryList: state.categoryList.map(category =>
+    //       ((category.id !== action.category.updatedCategory.id) ?
+    //         category : action.category.updatedCategory))
+    //   };
+    // case EDIT_CATEGORY_FAILURE:
+    //   return { ...state, error: action.error };
+    // case DELETE_CATEGORY_SUCCESS:
+    //   return {
+    //     ...state,
+    //     categoryList: state.categoryList
+    //       .filter(category =>
+    //         category.id !== action.deletedCategory.category.id)
+    //   };
+    // case DELETE_CATEGORY_FAILURE:
+    // {
+    //   return {
+    //     ...state,
+    //     error: action.error
+    //   };
+    // }
     case FETCH_ALL_OVERDUE_BOOKS:
     {
       return {
@@ -148,8 +150,7 @@ export default function bookReducer(state = {
     {
       return {
         ...state,
-        allBooksList:
-          action.books
+        allBooksList: action.books
       };
     }
     case FETCH_BOOKS_FOR_CATEGORIES_FAILURE:

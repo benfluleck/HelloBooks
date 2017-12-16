@@ -95,4 +95,9 @@ const mapStateToProps = ({ bookReducer }) => ({
   overdueBooks: bookReducer.overdueBooksList
 });
 
-export default connect(mapStateToProps, { fetchOverdueBookstoDashboard })(DisplayOverdueBooks);
+export default connect(
+  mapStateToProps,
+  {
+    fetchOverdueBookstoDashboard
+  }
+)(DisplayOverdueBooks);

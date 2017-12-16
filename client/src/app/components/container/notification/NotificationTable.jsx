@@ -6,8 +6,8 @@ import NoNotificationsMessage from
 
 /**
  *
+ * @class NotificationTable
  *
- * @class UserListTable
  * @extends {React.Component}
  */
 const NotificationTable = ({ notificationList }) => {
@@ -45,12 +45,11 @@ const NotificationTable = ({ notificationList }) => {
   );
 };
 
-// NotificationTable.propTypes = {
-//   users: PropTypes.arrayOf(PropTypes.shape({
-//     index: PropTypes.number
-//   })).isRequired,
-// // getSelectedUser: PropTypes.func.isRequired
-// };
+NotificationTable.propTypes = {
+  notificationList: PropTypes.arrayOf(PropTypes.shape({
+    user: PropTypes.object
+  })).isRequired,
+};
 
 
 export default (NotificationTable);

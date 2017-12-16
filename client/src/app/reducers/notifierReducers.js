@@ -10,8 +10,11 @@ const INITIAL_STATE = {
  *
  * @export
  * @param {any} [state=INITIAL_STATE]
+ *
  * @param {any} [action={}]
+ *
  * @param {object}  error
+ *
  * @returns {object}  state
  */
 export default function notifierReducer(state = INITIAL_STATE, action = {}) {

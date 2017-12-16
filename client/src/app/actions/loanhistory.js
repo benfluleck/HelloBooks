@@ -6,13 +6,19 @@ export const loanhistorySuccess = bookOperations => ({
   type: LOAN_HISTORY_SUCCESS,
   bookOperations
 });
-export const loanhistoryFailure = error => ({ type: LOAN_HISTORY_FAILURE, error });
+export const loanhistoryFailure = error => ({
+  type: LOAN_HISTORY_FAILURE, error
+});
 
 /**
  * async helper function: loan history
+ *
  * @function loanhistory
+ *
  * @param {integer} offset
+ *
  * @param {integer} limit
+ *
  * @returns {function} asynchronous action
  */
 export const loanhistory = (offset, limit) => dispatch => api

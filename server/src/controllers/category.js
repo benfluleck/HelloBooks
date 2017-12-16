@@ -5,8 +5,11 @@ const { Categories, Books } = models;
 
 export default {
   /** @description creates a category
+   *
    * @param {object} req HTTP request object
+   *
    * @param {object} res HTTP response object
+   *
    * @returns {object} created category Name
    */
   addCategory(req, res) {
@@ -36,8 +39,11 @@ export default {
   },
 
   /** @description Edits a specified category
+   *
     * @param {object} req HTTP request object
+    *
     * @param {object} res HTTP response object
+    *
     * @returns {object} edited category
     */
   editCategory(req, res) {
@@ -78,8 +84,11 @@ export default {
   },
 
   /** @description Displays all categories in the app
+   *
     * @param {object} req HTTP request object
+    *
     * @param {object} res HTTP response object
+    *
     * @returns {object} All Categories
     */
   listCategories(req, res) {
@@ -146,10 +155,15 @@ export default {
   },
   /**
    * Route: DELETE: /category/:categoryId
+   *
    * @description Deletes a selected book
+   *
    * @param {object} req
+   *
    * @param {object} res
+   *
    * @returns {object} books
+   *
    * @memmberOf BookController
    */
   deleteCategory(req, res) {
@@ -173,13 +187,17 @@ export default {
         }
         if (category.books.length > 0) {
           return res.status(409).send({
-            message: 'You cannot delete this Category as there are still books in it',
+            message: 'You cannot delete this' +
+            'Category as there are still books in it',
           });
         }
         category
           .destroy()
           .then(() => res.status(200)
-            .send({ message: `Category ${category.categoryName}, has been deleted`, category }))
+            .send({
+              message: `Category ${category.categoryName}, has been deleted`,
+              category
+            }))
           .catch(error => res.status(500).send(error));
       })
       .catch(error => res.status(500).send(error.message));

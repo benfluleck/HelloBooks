@@ -17,9 +17,13 @@ export const changePasswordRejected = error => ({
 
 /**
  * async helper function: Change password
+ *
  * @function changePassword
+ *
  * @param {string} password
+ *
  * @param {string} oldPassword
+ *
  * @returns {function} asynchronous action
  */
 export const changePasswordAction = (password, oldPassword) => dispatch => api

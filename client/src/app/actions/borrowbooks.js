@@ -21,8 +21,11 @@ export const BorrowBooksRejected = error =>
 
 /**
  * async helper function: log in user
+ *
  * @function BorrowBooks
+ *
  * @param {object} book
+ *
  * @returns {function} asynchronous action
  */
 export const borrowBookAction = book => dispatch => api

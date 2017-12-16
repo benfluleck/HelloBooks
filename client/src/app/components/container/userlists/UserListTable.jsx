@@ -11,13 +11,17 @@ import { getSelectedUser } from '../../../actions/admin/getSelectedUser';
  *
  *
  * @class UserListTable
+ *
  * @extends {React.Component}
  */
 class UserListTable extends React.Component {
   /**
     * @param {object} id
+    *
     * @memberof UserListTable
+    *
     * @returns {function} getSelectedUser
+    *
     * @memberOf UserListTable
    * */
   onClick(id) {
@@ -28,6 +32,7 @@ class UserListTable extends React.Component {
    *
    *
    * @returns {Component} Component
+   *
    * @memberof UserListTable
    *
    */

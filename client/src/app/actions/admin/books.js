@@ -46,8 +46,11 @@ export const DeleteBookFailure = error =>
 
 /**
  * async helper function: add Book to the database
+ *
  * @function addBook
+ *
  * @param {object} bookDetails
+ *
  * @returns {function} asynchronous action
  */
 export const addBook = bookDetails => dispatch => api

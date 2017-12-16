@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Preloader } from 'react-materialize';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { getAdminNotificationAction }
   from '../../../actions/admin/getAdminNotifications';
 // import PaginationWrapper from '../common/Pagination.jsx';
@@ -40,7 +40,7 @@ class NotificationTab extends React.Component {
     if (!this.props.notifications) {
       return <Preloader size="big" className="center-align" />;
     }
-    return (    
+    return (
       <div>
         <NotificationTable notificationList={this.props.notifications} />
         {/* <PaginationWrapper
@@ -54,21 +54,18 @@ class NotificationTab extends React.Component {
 }
 
 NotificationTab.propTypes = {
-  // bookOperations: PropTypes.PropTypes.shape({
-  //   id: PropTypes.number,
-  //   map: PropTypes.object,
-  //   pagination: PropTypes.object,
-  //   books: PropTypes.arrayOf(PropTypes.shape({
-  //     description: PropTypes.string,
-  //   }))
-  // }),
-  // loanhistory: PropTypes.func.isRequired
+  notifications: PropTypes.PropTypes.shape({
+    notificationList: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number
+    }))
+  }),
+  getAdminNotificationAction: PropTypes.func.isRequired
 
 };
 
 
 NotificationTab.defaultProps = {
-  // bookOperations: null,
+  notifications: null,
   // limit: 5,
   // offset: 0
 };

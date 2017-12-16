@@ -17,7 +17,9 @@ export const getUserLevelListFailure = error =>
 
 /**
  * async helper function: get User Lists
- * @function getUserLevelListaction
+ *
+ * @function getUserLevelListactioN
+ *
  * @returns {function} asynchronous action
  */
 export const getUserLevelListAction = () => dispatch => api

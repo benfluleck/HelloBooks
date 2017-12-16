@@ -32,8 +32,10 @@ export const fetchBooksCategoriesSuccess = books =>
 
 
 /**
- * async helper function: fetch categories
+ * async helper function: fetch all categories
+ *
  * @function fetchAllCategories
+ *
  * @returns {function} asynchronous action
  */
 export const fetchAllCategories = () => dispatch => api
@@ -49,9 +51,13 @@ export const fetchAllCategories = () => dispatch => api
   });
 /**
  * @description fetches all books and groups them category
+ *
  * @param {number} categoryId
+ *
  * @param {number} offset
+ *
  * @param {number} limit
+ *
  * @returns {object} asynchronous action
  */
 export

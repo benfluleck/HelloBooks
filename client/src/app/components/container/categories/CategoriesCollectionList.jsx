@@ -11,12 +11,14 @@ import { deleteCategoryAction } from '../../../actions/admin/deleteCategory';
  *
  *
  * @class CategoriesCollection
+ *
  * @extends {React.Component}
  */
 class CategoriesCollectionList extends React.Component {
   /**
    * *
    * @param {object} props
+   *
    * @memberof CategoriesCollection
    *
    *
@@ -35,6 +37,7 @@ class CategoriesCollectionList extends React.Component {
   *
   *
   * @param {object} id
+  *
   * @memberof CategoriesCollectionList
   *
   * @returns {function} function
@@ -68,7 +71,9 @@ class CategoriesCollectionList extends React.Component {
 
   /**
    * @param {integer} id
+   *
    * @returns {function} deleteCategory
+   *
    * @memberOf CategoriesCollectionList
    */
   deleteCategory(id) {
@@ -157,7 +162,10 @@ CategoriesCollectionList.propTypes = {
   deleteCategoryAction: PropTypes.func
 };
 
-const mapStateToProps = ({ bookReducer }) => ({ categories: bookReducer.categoryList });
+const mapStateToProps = ({ categoryReducer }) =>
+  ({
+    categories: categoryReducer.categoryList
+  });
 
 export default connect(mapStateToProps, {
   editCategoryAction,

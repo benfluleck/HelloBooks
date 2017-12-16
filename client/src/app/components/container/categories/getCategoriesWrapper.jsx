@@ -7,12 +7,15 @@ import { fetchBooksForCategories } from '../../../actions/fetchcategories';
 const getCategoriesWrapper = (WrappedComponent) => {
   /**
  * @class getCategoriesWrapper
+ *
  * @extends {React.Component}
  */
   class GetCategories extends React.Component {
     /**
    * Creates an instance of GetCategories.
+   *
    * @param {object} props
+   *
    * @memberOf Categories
    */
     constructor(props) {
@@ -29,7 +32,9 @@ const getCategoriesWrapper = (WrappedComponent) => {
 
     /**
    * @param {object} id
+   *
    * @returns {object} state
+   *
    * @memberOf GetCategories
    */
     handleClick(id) {
@@ -38,13 +43,20 @@ const getCategoriesWrapper = (WrappedComponent) => {
       }, () => {
         this
           .props
-          .fetchBooksForCategories(this.state.categoryId, this.state.offset, this.state.limit);
+          .fetchBooksForCategories(
+            this.state.categoryId,
+            this.state.offset,
+            this.state.limit
+          );
       });
     }
     /**
    * render getCategories Wrapper
+   *
    * @method render
+   *
    * @returns {Component} Collapsible
+   *
    * @memberOf GetCategories
    */
     render() {
@@ -72,9 +84,16 @@ const getCategoriesWrapper = (WrappedComponent) => {
     onChange: null
   };
 
-  const mapStateToProps = ({ bookReducer }) => ({ categoryList: bookReducer.categoryList });
+  const mapStateToProps = ({
+    categoryReducer
+  }) => ({
+    categoryList: categoryReducer.categoryList
+  });
 
-  return connect(mapStateToProps, { fetchBooksForCategories })(GetCategories);
+  return connect(
+    mapStateToProps,
+    { fetchBooksForCategories }
+  )(GetCategories);
 };
 
 export default getCategoriesWrapper;

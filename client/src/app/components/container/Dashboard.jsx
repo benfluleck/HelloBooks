@@ -4,14 +4,18 @@ import { connect } from 'react-redux';
 
 /**
  * @returns {component} Dashboard
+ *
  * @param {component} DashboardWrapper
  */
 const getDashboardWrapper = (DashboardWrapper) => {
   /**
    *
    * @class Dashboard
+   *
    * @extends {React.PureComponent}
+   *
    * @param {object} props
+   *
    * @returns {component} Dashboard
    */
   class Dashboard extends React.PureComponent {

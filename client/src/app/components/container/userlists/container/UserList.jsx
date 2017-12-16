@@ -9,14 +9,20 @@ import UserListTable from '../UserListTable.jsx';
 
 /**
  * handles the state of the User List table
+ *
  * @class Userlists
+ *
  * @extends {React.Component}
  */
 class UserList extends React.Component {
   /**
-   * @description dispatch actions that help populate the admin dashboard with userlists
+   * @description dispatch actions that
+   * help populate the admin dashboard with userlists
+   *
    * @method componentDidMount
+   *
    * @memberof UserLists
+   *
    * @returns {void}
    */
   componentDidMount() {
@@ -25,9 +31,12 @@ class UserList extends React.Component {
   }
   /**
    * render User Lists component
+   *
    * @method render
+   *
    * @member UserLists
-   * @returns {object} component
+   *
+   * @return {JSX} JSX representation of DOM
    */
   render() {
     if (!this.props.userList) {

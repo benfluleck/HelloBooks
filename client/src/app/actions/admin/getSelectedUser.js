@@ -13,8 +13,11 @@ export const getUserFailure = error => ({ type: GET_USER_FAILURE, error });
 
 /**
  * async helper function: get User Lists
+ *
  * @function getUserLists
+ *
  * @param {integer} userId
+ *
  * @returns {function} asynchronous action
  */
 export const getSelectedUser = userId => dispatch => api

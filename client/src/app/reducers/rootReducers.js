@@ -5,6 +5,7 @@ import userReducer from './userReducers';
 import bookReducer from './bookReducers';
 import imageReducer from './imageReducers';
 import notifierReducer from './notifierReducers';
+import categoryReducer from './categoryReducers';
 
 
 export default combineReducers({
@@ -12,5 +13,6 @@ export default combineReducers({
   userReducer,
   bookReducer,
   imageReducer,
+  categoryReducer,
   notifs: notifReducer
 });

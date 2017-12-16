@@ -1,8 +1,18 @@
-import { showErrorNotification, showSuccessNotification } from './notifications';
-import { RETURN_BOOKS_FAIL, RETURN_BOOKS_SUCCESS } from './actiontype';
+import {
+  showErrorNotification,
+  showSuccessNotification
+} from './notifications';
+import { RETURN_BOOKS_FAIL,
+  RETURN_BOOKS_SUCCESS
+}
+  from './actiontype';
 import api from './api';
 
-export const ReturnBookSuccess = returnedBook => ({ type: RETURN_BOOKS_SUCCESS, returnedBook });
+export const ReturnBookSuccess = returnedBook =>
+  ({
+    type: RETURN_BOOKS_SUCCESS,
+    returnedBook
+  });
 export const ReturnBookRejected = error => ({ type: RETURN_BOOKS_FAIL, error });
 
 /**

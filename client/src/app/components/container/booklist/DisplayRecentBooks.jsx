@@ -88,4 +88,9 @@ const mapStateToProps = ({ bookReducer }) => ({
   recentBooks: bookReducer.recentBooksList
 });
 
-export default connect(mapStateToProps, { fetchAllRecentBooks })(DisplayRecentBooks);
+export default connect(
+  mapStateToProps,
+  {
+    fetchAllRecentBooks
+  }
+)(DisplayRecentBooks);

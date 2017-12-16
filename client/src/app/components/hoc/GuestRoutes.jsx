@@ -13,7 +13,7 @@ const GuestRoutes = ({
     {...rest}
     render={props => (!isAuthenticated
     ? <Component{...props} />
-    : <Redirect to="/login" />)}
+    : <Redirect to="/dashboard" />)}
   />
 
 );
@@ -23,6 +23,9 @@ GuestRoutes.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired
 };
 
-const mapStateToProps = state => ({ isAuthenticated: state.userReducer.isAuthenticated });
+const mapStateToProps = state =>
+  ({
+    isAuthenticated: state.userReducer.isAuthenticated
+  });
 
 export default connect(mapStateToProps)(GuestRoutes);

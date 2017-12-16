@@ -21,9 +21,13 @@ export const editCategoryFailure = error =>
 
 /**
  * async helper function: add Book to the database
+ *
  * @function editNewCategory
+ *
  * @param {string} categoryName
+ *
  * @param {number} categoryId
+ *
  * @returns {function} asynchronous action
  */
 export const editCategoryAction = (categoryName, categoryId) => dispatch =>

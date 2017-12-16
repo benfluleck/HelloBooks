@@ -3,8 +3,9 @@ import { Row } from 'react-materialize';
 
 
 /**
- * @description Component for Message for No Books
- * @class MessageforNoBooks
+ * @description Component for No notifications
+ *
+ * @class NoNotificationsMessage
  */
 const NoNotificationsMessage = () => (
   <Row>

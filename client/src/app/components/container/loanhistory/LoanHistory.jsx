@@ -9,15 +9,21 @@ import LoanHistoryTable
 
 /**
  * handles the state of the Loan history table
+ *
  * @class LoanHistory
+ *
  * @extends {React.Component}
  */
 class LoanHistory extends React.Component {
   /**
    * @description dispatch actions that help populated
+   *
    * the dashboard with loan history
+   *
    * @method componentDidMount
+   *
    * @memberof DisplayLandingBooks
+   *
    * @returns {void}
    */
   componentDidMount() {
@@ -26,8 +32,11 @@ class LoanHistory extends React.Component {
   }
   /**
    * render Loan History component
+   *
    * @method render
+   *
    * @member loanHistory
+   *
    * @returns {object} component
    */
   render() {

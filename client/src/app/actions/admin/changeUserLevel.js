@@ -20,9 +20,13 @@ export const changeUserLevelFailure = error =>
 
 /**
  * async helper function: User Level
+ *
  * @function changeUserLevelAction
+ *
  * @param {number} newLevelId
+ *
  * @param {string} userId
+ *
  * @returns {function} asynchronous action
  */
 export const changeUserLevelAction = (newLevelId, userId) => dispatch => api
