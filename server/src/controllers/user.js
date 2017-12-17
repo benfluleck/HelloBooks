@@ -48,9 +48,8 @@ const userController = {
                 }).then((user) => {
                   if (user) {
                     res.status(201).send({
-                      message:
-                       `${user.username} has been added to the library,
-                       Please Login, you will be only required to do this once`
+                      message: `${user.username} has been added to the library,` +
+                       'Please Login, you will be only required to do this once'
                     });
                   }
                 });
@@ -87,8 +86,8 @@ const userController = {
           }
           return res.status(404).send({
             success: false,
-            message: `${req.body.username} 
-            does not exist, Make sure you are signed up`
+            message: `${req.body.username} ` +
+            'does not exist, Make sure you are signed up'
           });
         } else if (bcrypt.compareSync(req.body.password, user.password)) {
           const Userjwt = {
@@ -121,9 +120,13 @@ const userController = {
 
   /**
    * @description Get user details
+   *
    * @method getUser
+   *
    * @param {object} req HTTP request object
+   *
    * @param {object} res HTTP response object
+   *
    * @returns {object} response
    */
   getUser(req, res) {
@@ -143,8 +146,11 @@ const userController = {
         }));
   },
   /** @description changes user password
+   *
     * @param {object} req HTTP request object
+    *
     * @param {object} res HTTP response object
+    *
     * @returns {object} Message object
     */
   changePassword(req, res) {
@@ -186,8 +192,11 @@ const userController = {
       .catch(error => res.status(500).send(error.message));
   },
   /** Changes a users level
+   *
     * @param {object} req HTTP request object
+    *
     * @param {object} res HTTP response object
+    *
      * @returns {object} response object
      */
   changeLevel(req, res) {
@@ -224,8 +233,8 @@ const userController = {
                 };
                 res.status(200).send({
                   message:
-                  `Level changed Successfully,
-                   New Level "${userDetails.levelName}"`,
+                  'Level changed Successfully,' +
+                   `New Level "${userDetails.levelName}"`,
                   userDetails
                 });
               });
@@ -236,12 +245,16 @@ const userController = {
 
   /**
    * Gets a list of users in tha library
+   *
    * @method get
+   *
    * @param {object} req
+   *
    * @param {object} res
+   *
    * @return {object} response
    */
-  getUserList(req, res) { // get user(s) in the database
+  getUserList(req, res) {
     const offset = req.query.offset || 0;
     const limit = req.query.limit || 3;
     return User
@@ -280,6 +293,16 @@ const userController = {
       .catch(error => res.status(501).send(error.message));
   },
 
+  /**
+   *
+   * @description UserLevelList fetches the list of the user levels
+   *
+   * @param {object} req
+   *
+   * @param {object} res
+   *
+   * @returns {object} response
+   */
   getUserLevelList(req, res) {
     return Userlevel
       .all({
@@ -292,7 +315,7 @@ const userController = {
       .then((userLevels) => {
         if (Object.keys(userLevels).length < 1) {
           return res.status(200)
-            .send({ message: 'sorry there are no user levels available' });
+            .send({ message: 'Sorry there are no user levels available' });
         }
         const allUserLevels = { userLevels };
         res.status(200).send(allUserLevels);

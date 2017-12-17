@@ -41,7 +41,7 @@ export default {
               .status(409)
               .send({
                 message:
-                'A book with the same title' +
+                'A book with the same title ' +
                  'and author already exists in the library'
               });
           }
@@ -65,8 +65,8 @@ export default {
                   res
                     .status(201)
                     .send({
-                      message: `${newBook.title}
-                    has been added to the library, Category: ${newBook.category}`,
+                      message: `${newBook.title} ` +
+                    `has been added to the library, Category: ${newBook.category}`,
                       createdBook
                     });
                 });

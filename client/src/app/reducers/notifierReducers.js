@@ -1,7 +1,7 @@
 import {
   GET_NOTIFICATIONS_FAILURE,
   GET_NOTIFICATIONS_SUCCESS
-} from '../actions/actiontype';
+} from '../actions/actionType';
 
 const INITIAL_STATE = {
 };
@@ -22,7 +22,7 @@ export default function notifierReducer(state = INITIAL_STATE, action = {}) {
     case GET_NOTIFICATIONS_SUCCESS:
       return {
         ...state,
-        notifications: action.data.notifications
+        notifications: action.data
       };
     case GET_NOTIFICATIONS_FAILURE:
       return {

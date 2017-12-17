@@ -5,7 +5,7 @@ import {
 import {
   DELETE_CATEGORY_SUCCESS,
   DELETE_CATEGORY_FAILURE
-} from '../actiontype';
+} from '../actionType';
 import api from '../api';
 
 export const deleteCategorySuccess = deletedCategory => (

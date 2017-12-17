@@ -4,7 +4,7 @@ import { Preloader } from 'react-materialize';
 import PropTypes from 'prop-types';
 import { getAdminNotificationAction }
   from '../../../actions/admin/getAdminNotifications';
-// import PaginationWrapper from '../common/Pagination.jsx';
+import PaginationWrapper from '../common/Pagination.jsx';
 import NotificationTable from './NotificationTable.jsx';
 
 /**
@@ -25,7 +25,7 @@ class NotificationTab extends React.Component {
    * @returns {void}
    */
   componentDidMount() {
-    this.props.getAdminNotificationAction();
+    this.props.getAdminNotificationAction(this.props.offset, this.props.limit);
   }
   /**
    * render Notification Tab component
@@ -40,14 +40,21 @@ class NotificationTab extends React.Component {
     if (!this.props.notifications) {
       return <Preloader size="big" className="center-align" />;
     }
+    const { pagination } = this.props.notifications;
+    const config = {
+      items: pagination.pageCount,
+      activePage: pagination.page
+    };
     return (
       <div>
-        <NotificationTable notificationList={this.props.notifications} />
-        {/* <PaginationWrapper
+        <NotificationTable
+          notificationList={this.props.notifications.notifications}
+        />
+        <PaginationWrapper
           config={config}
-          fetch={this.props.loanhistory}
+          fetch={this.props.getAdminNotificationAction}
           numberOfRecords={this.props.limit}
-        /> */}
+        />
       </div>
     );
   }
@@ -55,24 +62,27 @@ class NotificationTab extends React.Component {
 
 NotificationTab.propTypes = {
   notifications: PropTypes.PropTypes.shape({
-    notificationList: PropTypes.arrayOf(PropTypes.shape({
+    pagination: PropTypes.object,
+    notifications: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.number
     }))
   }),
-  getAdminNotificationAction: PropTypes.func.isRequired
+  getAdminNotificationAction: PropTypes.func.isRequired,
+  limit: PropTypes.number,
+  offset: PropTypes.number
 
 };
 
 
 NotificationTab.defaultProps = {
   notifications: null,
-  // limit: 5,
-  // offset: 0
+  limit: 5,
+  offset: 0
 };
 
 const mapStateToProps = state => ({
-  notifications:
-  state.notifierReducer.notifications
+  notifications: (state.notifierReducer.notifications) ?
+    state.notifierReducer.notifications : {}
 });
 
 export default

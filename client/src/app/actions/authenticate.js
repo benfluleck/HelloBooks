@@ -1,11 +1,14 @@
-import { showErrorNotification, showSuccessNotification } from './notifications';
+import
+{ showErrorNotification,
+  showSuccessNotification
+} from './notifications';
 
 import { USER_LOGGED_IN,
   USER_LOG_IN_FAILURE,
   USER_LOGGED_OUT,
   SIGNUP_USER_SUCCESS,
   SIGNUP_USER_FAILURE
-} from './actiontype';
+} from './actionType';
 
 import api from './api';
 import setAuthorizationToken from '../utils/setAuthorizationToken';

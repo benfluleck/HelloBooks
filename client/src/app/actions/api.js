@@ -101,8 +101,8 @@ export default {
       axios.get(`api/v1/admin/users/${userId}`)
         .then(res => res.data),
 
-    getAdminNotifications: () =>
-      axios.get('api/v1/admin/notifications')
+    getAdminNotifications: (offset, limit) =>
+      axios.get(`api/v1/admin/notifications/?offset=${offset}&limit=${limit}`)
         .then(res => res.data)
   }
 };

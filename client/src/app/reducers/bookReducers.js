@@ -30,7 +30,7 @@ import {
   // EDIT_CATEGORY_FAILURE,
   // DELETE_CATEGORY_FAILURE,
   // DELETE_CATEGORY_SUCCESS,
-} from '../actions/actiontype';
+} from '../actions/actionType';
 
 /**
  * *

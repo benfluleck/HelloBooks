@@ -5,15 +5,23 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { GoogleLogin } from 'react-google-login';
 import { login } from '../../../actions/authenticate';
-import Bottom from '../../../components/presentation/common/Footer.jsx'
+import Bottom from '../../../components/presentation/common/Footer.jsx';
 
 /**
  * SignIn component
+ *
  * @class SignIn
- * @param {object}
+ *
  * @extends React.Component
  */
 class SignInPage extends Component {
+  /**
+   * Creates an instance of SignInPage.
+   *
+   * @param {object} props
+   *
+   * @memberOf SignInPage
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -36,53 +44,47 @@ class SignInPage extends Component {
    * Handle onChange events on form inputs
    * @method onChange
    * @memberof SignIn
-   * @param {object} event
+   * @param {object} e
    * @returns {function} a function that handles change event on inputs
    */
-  onChange = e => {
+  onChange = (e) => {
     e.preventDefault();
     this.setState({
       ...this.state,
       [e.target.name]: e.target.value
-    })
+    });
   }
 
   /**
    * Submit state
-   * This is called when the submit button is clicked
+   * @description This is called when the submit button is clicked
+   *
    * @method submit
+   *
+   * @param {object} e
+   *
    * @memberof SignIn
-   * @returns {function}
+   *
+   * @returns {function} response
    */
   onSubmit = (e) => {
     e.preventDefault();
     this
-    .props
-    .login(this.state)
-    .then((response) => {
-      console.log(response,'>>>>>>>>>>>??????>>>')
-      if(response.success && response.isAdmin)
-      
-      {
-        console.log(response,'ADMIIIIN')
-       return  
-       this
-        .props
-        .history
-        .push('/admin')
-        
-      }
-      console.log(response,'>>>>>>>>>>>>>>')
-      this
-        .props
-        .history
-        .push('/dashboard')
-    })
-    .catch(()=>{
+      .props
+      .login(this.state)
+      .then((response) => {   
+        if (response.success && response.isAdmin) {  
+          return this.props.history.push('/admin');
+        }
 
-    })
+        this
+          .props
+          .history
+          .push('/dashboard');
+      })
+      .catch(() => {
 
-
+      });
   }
 
   /**
@@ -91,11 +93,9 @@ class SignInPage extends Component {
    * @memberof Login
    */
   handleGoogleLogin(response) {
-     this
+    this
       .props
-      .login(
-        response.profileObj
-      )
+      .login(response.profileObj)
       .then((res) => {
         if (res) {
           this
@@ -104,9 +104,6 @@ class SignInPage extends Component {
             .push('/dashboard');
         }
       });
-    // if (response.error) {
-    //   Materialize.toast('Please resume google login', 4000, '');
-    // }
   }
   /**
    * render login component
@@ -117,31 +114,33 @@ class SignInPage extends Component {
   render() {
     return (
       <div>
-        <div className='login center-align'>
-          <div className='login-wrapper'>
+        <div className="login center-align">
+          <div className="login-wrapper">
             <Row>
-              <div className='login-header'>
+              <div className="login-header">
                 LOGIN
               </div>
               <form onSubmit={this.onSubmit}>
-                <div className='login-content'>
+                <div className="login-content">
                   <Input
                     s={12}
                     label="Username"
                     required
-                    name='username'
+                    name="username"
                     value={this.state.username}
-                    onChange={this.onChange}>
+                    onChange={this.onChange}
+                  >
                     <Icon>account_circle</Icon>
                   </Input>
                   <Input
                     type="password"
                     label="Password"
-                    name='password'
+                    name="password"
                     value={this.state.password}
                     required
                     s={12}
-                    onChange={this.onChange}>
+                    onChange={this.onChange}
+                  >
                     <Icon>lock</Icon>
                   </Input>
 
@@ -149,24 +148,25 @@ class SignInPage extends Component {
                     {/* <NavLink to='/forgetpass'>
                       <p>Forgotten Password</p>
                     </NavLink> */}
-                    <NavLink to='/signup'>
+                    <NavLink to="/signup">
                       <p>Sign Up</p>
                     </NavLink>
                   </Col>
-                  <Col className='center' s={12}>
-                    <div className='login-btn'>
-                      <Button waves='light'>Login</Button>
+                  <Col className="center" s={12}>
+                    <div className="login-btn">
+                      <Button waves="light">Login</Button>
                     </div>
                   </Col>
-                  <Col className='center' s={12}>
-                    <br/>
+                  <Col className="center" s={12}>
+                    <br />
                     <a className="btn btn-social btn-google">
-                    <span className="fa fa-google"></span>
+                      <span className="fa fa-google" />
                       <GoogleLogin
                         clientId={GOOGLE_CLIENT_ID}
                         onSuccess={this.handleGoogleLogin}
-                        onFailure={this.handleGoogleLogin}>
-                        
+                        onFailure={this.handleGoogleLogin}
+                      >
+
                         Sign in with Google
                       </GoogleLogin>
                     </a>
@@ -177,12 +177,10 @@ class SignInPage extends Component {
 
           </div>
         </div>
-        <Bottom/>
+        <Bottom />
       </div>
-
     );
   }
-
 }
 
-export default connect(null, {login})(SignInPage);
+export default connect(null, { login })(SignInPage);

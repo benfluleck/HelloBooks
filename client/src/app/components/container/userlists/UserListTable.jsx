@@ -60,7 +60,6 @@ class UserListTable extends React.Component {
             >Edit
             </Button>
           </td>
-
         </tr>
       )) : null;
     return (rows ?

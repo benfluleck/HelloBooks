@@ -5,7 +5,7 @@ import {
 import {
   PASSWORD_CHANGED_SUCCESS,
   PASSWORD_CHANGED_FAILURE
-} from './actiontype';
+} from './actionType';
 import api from './api';
 
 export const changePasswordSuccess = data => ({

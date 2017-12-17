@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Preloader } from 'react-materialize';
-import { fetchBooksForCategories } from '../../../actions/fetchcategories';
+import { fetchBooksForCategories } from '../../../actions/fetchCategories';
 
 const getCategoriesWrapper = (WrappedComponent) => {
   /**
@@ -87,7 +87,8 @@ const getCategoriesWrapper = (WrappedComponent) => {
   const mapStateToProps = ({
     categoryReducer
   }) => ({
-    categoryList: categoryReducer.categoryList
+    categoryList: (categoryReducer.categoryList)
+      ? categoryReducer.categoryList : {}
   });
 
   return connect(

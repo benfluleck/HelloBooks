@@ -6,8 +6,8 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { connect } from 'react-redux';
 import { Button } from 'react-materialize';
 import BookModal from './BookModal.jsx';
-import { borrowBookAction } from '../../../../actions/borrowbooks';
-import { returnBookAction } from '../../../../actions/returnbooks';
+import { borrowBookAction } from '../../../../actions/borrowBooks';
+import { returnBookAction } from '../../../../actions/returnBooks';
 
 
 /**
@@ -93,7 +93,7 @@ class DisplayBookModal extends React.Component {
    *
    *
    * @param {event} event
-   * @returns {function} borrowbooks
+   * @returns {function} borrowBooks
    * @memberOf DisplayBookModal
    */
   handleBorrowClick =(event) => {
@@ -181,6 +181,7 @@ class DisplayBookModal extends React.Component {
 DisplayBookModal.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   borrowBookAction: PropTypes.func.isRequired,
+  returnBookAction: PropTypes.func.isRequired
   // book: PropTypes.arrayOf(PropTypes.shape({
   //   id: PropTypes.number
   // })).isRequired

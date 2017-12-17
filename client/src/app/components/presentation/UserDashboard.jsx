@@ -2,7 +2,8 @@ import React from 'react';
 import { Row } from 'react-materialize';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import SideNav from '../presentation/common/SideNav/index.jsx';
-import DisplayAllBorrowedBooks from '../container/booklist/DisplayBorrowedBooks.jsx';
+import DisplayAllBorrowedBooks from
+  '../container/booklist/DisplayBorrowedBooks.jsx';
 import DisplayAllBooks from '../container/booklist/DisplayAllBooks.jsx';
 import LoanHistoryTable from '../container/loanhistory/LoanHistory.jsx';
 import DisplayOverdueBooks from '../container/booklist/DisplayOverdueBooks.jsx';

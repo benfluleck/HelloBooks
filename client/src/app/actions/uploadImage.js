@@ -5,7 +5,7 @@ import { showErrorNotification } from './notifications';
 import { UPLOAD_TO_CLOUD_IMAGE_SUCCESS,
   UPLOAD_TO_CLOUD_IMAGE_FAILURE,
   CLOUDINARY_UPLOAD_PRESET,
-  CLOUDINARY_UPLOAD_URL } from './actiontype';
+  CLOUDINARY_UPLOAD_URL } from './actionType';
 
 export const UploadImageToCloud = response =>
   ({

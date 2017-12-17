@@ -4,7 +4,7 @@ import { PropTypes } from 'prop-types';
 import { Row } from 'react-materialize';
 import Loader from './Loader.jsx';
 import Book from '../../presentation/common/book/DisplayBook.jsx';
-import { fetchAllRecentBooks } from '../../../actions/fetchbooks';
+import { fetchAllRecentBooks } from '../../../actions/fetchBooks';
 
 
 /**
@@ -17,16 +17,35 @@ class DisplayRecentBooks extends React.Component {
   /**
    * @description dispatch actions that help populate the dashboard with books
    * fetch books for the dashboard
+   *
    * @method componentDidMount
+   *
    * @memberof DisplayLandingBooks
+   *
    * @returns {void}
    */
   componentDidMount() {
     $('body').css('background-color', 'rgb(204, 204, 204)');
     return (<Loader
       records={this.props.books}
-      callback={this.props.fetchAllRecentBooks(this.props.offset, this.props.limit)}
+      callback={this.props.fetchAllRecentBooks(
+       this.props.offset,
+       this.props.limit
+)}
     />);
+  }
+
+  /**
+   *
+   *
+   * @memberof DisplayRecentBooks
+   *
+   * @returns {object} void
+   *
+   * @memberOf DisplayRecentBooks
+  * */
+  componentWillUnmount() {
+    $('body').css('background-color', 'rgb(204, 204, 204)');
   }
   /**
    * render Display Recent component
@@ -68,7 +87,7 @@ DisplayRecentBooks.propTypes = {
     books: PropTypes.arrayOf(PropTypes.shape({
       title: PropTypes.string.isRequired,
       author: PropTypes.string.isRequired,
-      quantity: PropTypes.number.isRequired,
+      // quantity: PropTypes.number.isRequired,
       description: PropTypes.string,
     }))
   }),

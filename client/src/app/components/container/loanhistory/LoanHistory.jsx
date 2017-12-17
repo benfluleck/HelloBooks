@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Preloader } from 'react-materialize';
 import PropTypes from 'prop-types';
-import { loanhistory } from '../../../actions/loanhistory';
+import { loanHistoryAction } from '../../../actions/loanHistory';
 import PaginationWrapper from '../common/Pagination.jsx';
 import LoanHistoryTable
   from '../../presentation/loanhistory/LoanHistoryTable.jsx';
@@ -28,7 +28,7 @@ class LoanHistory extends React.Component {
    */
   componentDidMount() {
     this.props
-      .loanhistory(this.props.offset, this.props.limit);
+      .loanHistoryAction(this.props.offset, this.props.limit);
   }
   /**
    * render Loan History component
@@ -53,7 +53,7 @@ class LoanHistory extends React.Component {
         <LoanHistoryTable books={this.props.bookOperations.books} />
         <PaginationWrapper
           config={config}
-          fetch={this.props.loanhistory}
+          fetch={this.props.loanHistoryAction}
           numberOfRecords={this.props.limit}
         />
       </div>
@@ -70,7 +70,9 @@ LoanHistory.propTypes = {
       description: PropTypes.string,
     }))
   }),
-  loanhistory: PropTypes.func.isRequired
+  loanHistoryAction: PropTypes.func.isRequired,
+  limit: PropTypes.number,
+  offset: PropTypes.number
 
 };
 
@@ -81,14 +83,10 @@ LoanHistory.defaultProps = {
   offset: 0
 };
 
-LoanHistory.propTypes = {
-  limit: PropTypes.number,
-  offset: PropTypes.number
-};
 
 const mapStateToProps = state => ({
   bookOperations: state.bookReducer.bookOperations
 });
 
-export default connect(mapStateToProps, { loanhistory })(LoanHistory);
+export default connect(mapStateToProps, { loanHistoryAction })(LoanHistory);
 

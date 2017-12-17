@@ -58,7 +58,8 @@ class UploadModal extends React.Component {
     this.setState({ isLoading: true });
     const profilePic = event.target.files[0];
     const fileExt = UploadModal.getFileExtension(event.target.files[0].name);
-    const filename = `${this.props.username}.${fileExt}` || event.target.files[0].name;
+    const filename = `${this.props.username}.${fileExt}`
+     || event.target.files[0].name;
 
 
     this
@@ -78,9 +79,6 @@ class UploadModal extends React.Component {
   onClick(event) {
     event.preventDefault();
     this.setState({ isLoading: true });
-    if (this.state.filename) {
-      console.log('I am here', this.props.secureUrl);
-    }
   }
 
   /**
@@ -136,7 +134,8 @@ class UploadModal extends React.Component {
             </div>
 
           </div>
-          <div className="modal-footer">{this.state.footer} {(this.state.filename)
+          <div className="modal-footer">
+            {this.state.footer} {(this.state.filename)
               ? (
                 <div>
                   <span className="selected-file-intro">Selected File :
@@ -165,13 +164,13 @@ UploadModal.propTypes = {
   imageUploadToCloud: PropTypes.func,
   image: PropTypes.string,
   username: PropTypes.string,
-  secureUrl: PropTypes.string
+
 };
 UploadModal.defaultProps = {
   image: null,
   imageUploadToCloud: null,
   username: '',
-  secureUrl: ''
+
 };
 
 const mapStateToProps = state => ({

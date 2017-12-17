@@ -14,7 +14,7 @@ import UserListTable from '../UserListTable.jsx';
  *
  * @extends {React.Component}
  */
-class UserList extends React.Component {
+class UserListTab extends React.Component {
   /**
    * @description dispatch actions that
    * help populate the admin dashboard with userlists
@@ -60,7 +60,7 @@ class UserList extends React.Component {
   }
 }
 
-UserList.propTypes = {
+UserListTab.propTypes = {
   userList: PropTypes.PropTypes.shape({
     id: PropTypes.number,
     map: PropTypes.object,
@@ -74,20 +74,20 @@ UserList.propTypes = {
 };
 
 
-UserList.defaultProps = {
+UserListTab.defaultProps = {
   userList: null,
   limit: 5,
   offset: 0
 };
 
-UserList.propTypes = {
+UserListTab.propTypes = {
   limit: PropTypes.number,
   offset: PropTypes.number
 };
 
 const mapStateToProps = state => ({
-  userList: state.userReducer.userList
+  userList: (state.userReducer.userList) ? state.userReducer.userList : {}
 });
 
-export default connect(mapStateToProps, { getUserListAction })(UserList);
+export default connect(mapStateToProps, { getUserListAction })(UserListTab);
 

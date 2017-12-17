@@ -4,7 +4,8 @@ import swal from 'sweetalert2';
 import { Button } from 'react-materialize';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchSelectedBook, fetchAllBooks } from '../../../../actions/fetchbooks';
+import { fetchSelectedBook, fetchAllBooks }
+  from '../../../../actions/fetchBooks';
 import { deleteBookAction } from '../../../../actions/admin/books';
 
 /**
@@ -29,9 +30,13 @@ class Book extends React.Component {
 
   /**
    * @description fetches the book with the specific id
+   *
    * @method handleBookClick
+   *
    * @param {object} book
-   * @returns {function} fetchBook
+   *
+   * @returns {function} fetchSelectedBook
+   *
    * @memberOf Book
    */
   handleBookClick(book) {
@@ -40,9 +45,13 @@ class Book extends React.Component {
 
   /**
    * @description Deletes a book from the library
+   *
    * @method handleDelete
+   *
    * @param {object} id
+   *
    * @returns {function} id
+   *
    * @memberOf Book
    */
   handleDelete(id) {
@@ -88,7 +97,7 @@ class Book extends React.Component {
    * @param {object} book
    * @returns {function} a function that fetches the book id
    */
-  handleEdit(book) {  
+  handleEdit(book) {
     this.props.fetchSelectedBook(book.id);
     $('#admin-book-modal').modal('open');
   }
@@ -108,8 +117,22 @@ class Book extends React.Component {
             { this.props.isAdmin === true ?
             (
               <div>
-                <Button onClick={() => this.handleEdit(this.props.book)} floating icon="mode_edit" className="#f57c00 orange darken-2 book-icons-1" waves="light" >Edit</Button>
-                <Button onClick={() => this.handleDelete(this.props.book.id)} floating icon="delete" waves="light" className="#f57c00 orange darken-2 book-icons">Delete</Button>
+                <Button
+                  onClick={() => this.handleEdit(this.props.book)}
+                  floating
+                  icon="mode_edit"
+                  className="#f57c00 orange darken-2 book-icons-1"
+                  waves="light"
+                >Edit
+                </Button>
+                <Button
+                  onClick={() => this.handleDelete(this.props.book.id)}
+                  floating
+                  icon="delete"
+                  waves="light"
+                  className="#f57c00 orange darken-2 book-icons"
+                >Delete
+                </Button>
               </div>) : null}
           </div>
           <div className="card">

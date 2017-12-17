@@ -1,7 +1,7 @@
 import {
   UPLOAD_TO_CLOUD_IMAGE_SUCCESS,
   UPLOAD_TO_CLOUD_IMAGE_FAILURE
-} from '../actions/actiontype';
+} from '../actions/actionType';
 
 const INITIAL_STATE = {
   body: {}

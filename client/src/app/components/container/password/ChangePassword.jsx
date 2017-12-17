@@ -62,7 +62,7 @@ class ChangePassword extends Component {
  */
   onClick() {
     if (this.isValid()) {
-      this.setState({ errors: {} }); 
+      this.setState({ errors: {} });
       this.props.changePasswordAction({
         newPassword: this.state.password,
         oldPassword: this.state.oldPassword

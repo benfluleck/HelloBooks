@@ -9,7 +9,7 @@ import {
   UPDATE_BOOK_FAILURE,
   DELETE_BOOK_FAILURE,
   DELETE_BOOK_SUCCESS
-} from '../actiontype';
+} from '../actionType';
 import api from '../api';
 
 export const CreateBookSuccess = book =>

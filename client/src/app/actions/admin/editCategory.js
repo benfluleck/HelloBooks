@@ -4,7 +4,7 @@ import {
 import {
   EDIT_CATEGORY_FAILURE,
   EDIT_CATEGORY_SUCCESS
-} from '../actiontype';
+} from '../actionType';
 import api from '../api';
 
 export const editCategorySuccess = category =>

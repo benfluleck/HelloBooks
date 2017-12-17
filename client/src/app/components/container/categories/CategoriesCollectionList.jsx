@@ -130,11 +130,19 @@ class CategoriesCollectionList extends React.Component {
           <div className="black-text">
             {category.categoryName}
             <span className="right">
-              <Link to="#" className="waves-effect " onClick={() => this.deleteCategory(category.id)}>
+              <Link
+                to="#"
+                className="waves-effect "
+                onClick={() => this.deleteCategory(category.id)}
+              >
                 <Icon small className="icons">delete</Icon>
               </Link>
 
-              <Link to="#" className="waves-effect" onClick={() => this.editCategory(category.id)}>
+              <Link
+                to="#"
+                className="waves-effect"
+                onClick={() => this.editCategory(category.id)}
+              >
                 <Icon small className="icons">edit</Icon>
               </Link>
             </span>

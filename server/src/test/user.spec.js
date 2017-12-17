@@ -438,7 +438,7 @@ describe('HelloBooks', () => {
           expect(response.message).to.equal('Wrong Credentials');
           expect(res.status)
             .to
-            .equal(400);
+            .equal(403);
           done();
         });
     });
@@ -575,7 +575,7 @@ describe('HelloBooks', () => {
         .put('/api/v1/users/changepassword')
         .set('Accept', 'application/x-www-form-urlencoded')
         .set({ 'x-access-token': userToken })
-        .send({ newPassword: 'benny', oldPassword: 'bebrb'})
+        .send({ newPassword: 'benny', oldPassword: 'bebrb' })
         .end((err, res) => {
           expect(res.status)
             .to

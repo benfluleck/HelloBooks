@@ -5,7 +5,7 @@ import {
 import {
   GET_NOTIFICATIONS_SUCCESS,
   GET_NOTIFICATIONS_FAILURE
-} from '../actiontype';
+} from '../actionType';
 import api from '../api';
 
 export const getNotificationSuccess = data => ({
@@ -23,11 +23,15 @@ export const getNotificationFailure = error => ({
  *
  * @function getNotification
  *
+ * @param {integer} offset
+ *
+ * @param {integer} limit
+ *
  * @returns {function} asynchronous action
  */
-export const getAdminNotificationAction = () => dispatch => api
+export const getAdminNotificationAction = (offset, limit) => dispatch => api
   .admin
-  .getAdminNotifications()
+  .getAdminNotifications(offset, limit)
   .then((response) => {
     dispatch(getNotificationSuccess(response));
     return response;

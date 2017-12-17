@@ -5,7 +5,7 @@ import {
 import {
   ADD_CATEGORY_FAILURE,
   ADD_CATEGORY_SUCCESS
-} from '../actiontype';
+} from '../actionType';
 import api from '../api';
 
 export const addCategorySuccess = category =>

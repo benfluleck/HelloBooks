@@ -14,7 +14,7 @@ import {
   GET_USER_FAILURE,
   PASSWORD_CHANGED_SUCCESS,
   PASSWORD_CHANGED_FAILURE
-} from '../actions/actiontype';
+} from '../actions/actionType';
 
 const INITIAL_STATE = {
   user: {},

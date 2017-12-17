@@ -46,8 +46,10 @@ class ChangeUserLevelModal extends React.Component {
     this.props.getUserLevelListAction();
   }
   /**
-   * @param {any} nextProps
-   * @memberof ChangeUserLvlModal
+   * @param {object} nextProps
+   *
+   * @memberof ChangeUserLevelModal
+   *
    * @returns {void} value
    */
   componentWillReceiveProps(nextProps) {
@@ -60,7 +62,7 @@ class ChangeUserLevelModal extends React.Component {
    *
    *
    *
-   * @param {any} event
+   * @param {object} event
    *
    * @returns {object} state
    *
@@ -84,7 +86,10 @@ class ChangeUserLevelModal extends React.Component {
    */
   onClick(event) {
     event.preventDefault();
-    this.props.changeUserLevelAction({ newLevelId: this.state.newLevelId, userId: this.props.selectedUser.id })
+    this.props.changeUserLevelAction({
+      newLevelId: this.state.newLevelId,
+      userId: this.props.selectedUser.id
+    })
       .then(() => {
         this.setState({
           userLevel: this.state.newLevelId
@@ -116,8 +121,8 @@ class ChangeUserLevelModal extends React.Component {
         <option
           value={userLevel.level}
           className="black-text"
-          name={userLevel.maxDays}
         >
+          key={userLevel.id}
           {userLevel.levelName}
         </option>
 
@@ -174,23 +179,25 @@ class ChangeUserLevelModal extends React.Component {
 
 
 ChangeUserLevelModal.propTypes = {
-  userLevels: PropTypes.shape(PropTypes.arrayOf({
-    map: PropTypes.arrayOf({
-      level: PropTypes.number
-    })
-  })).isRequired,
-  selectedUser: PropTypes.shape(PropTypes.arrayOf({
-    username: PropTypes.string,
-    level: PropTypes.number
-  })).isRequired,
+  // userLevels: PropTypes.arrayOf(PropTypes.arrayOf({
+  //   map: PropTypes.arrayOf({
+  //     level: PropTypes.number
+  //   })
+  // })).isRequired,
+  // selectedUser: PropTypes.shape(PropTypes.arrayOf({
+  //   username: PropTypes.string,
+  //   level: PropTypes.number
+  // })).isRequired,
   getUserListAction: PropTypes.func.isRequired,
   changeUserLevelAction: PropTypes.func.isRequired,
   getUserLevelListAction: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
-  userLevels: (state.userReducer.userLevels) ? state.userReducer.userLevels.userLevels : [],
-  selectedUser: (state.userReducer.selectedUser) ? state.userReducer.selectedUser.user : []
+  userLevels: (state.userReducer.userLevels)
+    ? state.userReducer.userLevels.userLevels : [],
+  selectedUser: (state.userReducer.selectedUser)
+    ? state.userReducer.selectedUser.user : []
 });
 
 export default connect(

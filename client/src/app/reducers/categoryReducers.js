@@ -7,7 +7,7 @@ import {
   DELETE_CATEGORY_SUCCESS,
   FETCH_CATEGORIES_SUCCESS,
   FETCH_CATEGORIES_FAILURE,
-} from '../actions/actiontype';
+} from '../actions/actionType';
 
 const INITIAL_STATE = {
 };

@@ -2,7 +2,7 @@ import { showErrorNotification } from '../notifications';
 import {
   GET_USER_LEVEL_LIST_FAILURE,
   GET_USER_LEVEL_LIST_SUCCESS
-} from '../actiontype';
+} from '../actionType';
 import api from '../api';
 
 export const getUserLevelListSuccess = userLevelList => (
