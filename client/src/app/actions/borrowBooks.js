@@ -19,7 +19,7 @@ export const BorrowBooksRejected = error =>
     error
   });
 
-/**
+/*
  * async helper function: log in user
  *
  * @function BorrowBooks
