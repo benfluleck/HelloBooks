@@ -7,7 +7,6 @@ import {
 } from './actionType';
 import api from './api';
 
-
 export const fetchCategoriesFailure = error =>
   ({
     type: FETCH_CATEGORIES_FAILURE,
