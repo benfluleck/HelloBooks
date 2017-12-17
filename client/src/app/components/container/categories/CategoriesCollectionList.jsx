@@ -11,12 +11,14 @@ import { deleteCategoryAction } from '../../../actions/admin/deleteCategory';
  *
  *
  * @class CategoriesCollection
+ *
  * @extends {React.Component}
  */
 class CategoriesCollectionList extends React.Component {
   /**
    * *
    * @param {object} props
+   *
    * @memberof CategoriesCollection
    *
    *
@@ -35,6 +37,7 @@ class CategoriesCollectionList extends React.Component {
   *
   *
   * @param {object} id
+  *
   * @memberof CategoriesCollectionList
   *
   * @returns {function} function
@@ -68,7 +71,9 @@ class CategoriesCollectionList extends React.Component {
 
   /**
    * @param {integer} id
+   *
    * @returns {function} deleteCategory
+   *
    * @memberOf CategoriesCollectionList
    */
   deleteCategory(id) {
@@ -125,11 +130,19 @@ class CategoriesCollectionList extends React.Component {
           <div className="black-text">
             {category.categoryName}
             <span className="right">
-              <Link to="#" className="waves-effect " onClick={() => this.deleteCategory(category.id)}>
+              <Link
+                to="#"
+                className="waves-effect "
+                onClick={() => this.deleteCategory(category.id)}
+              >
                 <Icon small className="icons">delete</Icon>
               </Link>
 
-              <Link to="#" className="waves-effect" onClick={() => this.editCategory(category.id)}>
+              <Link
+                to="#"
+                className="waves-effect"
+                onClick={() => this.editCategory(category.id)}
+              >
                 <Icon small className="icons">edit</Icon>
               </Link>
             </span>
@@ -157,7 +170,10 @@ CategoriesCollectionList.propTypes = {
   deleteCategoryAction: PropTypes.func
 };
 
-const mapStateToProps = ({ bookReducer }) => ({ categories: bookReducer.categoryList });
+const mapStateToProps = ({ categoryReducer }) =>
+  ({
+    categories: categoryReducer.categoryList
+  });
 
 export default connect(mapStateToProps, {
   editCategoryAction,

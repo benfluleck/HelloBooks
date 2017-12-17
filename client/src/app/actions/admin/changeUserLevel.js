@@ -1,21 +1,32 @@
-import { showErrorNotification, showSuccessNotification } from '../notifications';
+import {
+  showErrorNotification,
+  showSuccessNotification
+} from '../notifications';
 import {
   CHANGE_USER_LEVEL_FAILURE,
   CHANGE_USER_LEVEL_SUCCESS
-} from '../actiontype';
+} from '../actionType';
 import api from '../api';
 
 export const changeUserLevelSuccess = userLevel => (
   { type: CHANGE_USER_LEVEL_SUCCESS, userLevel }
 );
-export const changeUserLevelFailure = error => ({ type: CHANGE_USER_LEVEL_FAILURE, error });
+export const changeUserLevelFailure = error =>
+  ({
+    type: CHANGE_USER_LEVEL_FAILURE,
+    error
+  });
 
 
 /**
  * async helper function: User Level
+ *
  * @function changeUserLevelAction
+ *
  * @param {number} newLevelId
+ *
  * @param {string} userId
+ *
  * @returns {function} asynchronous action
  */
 export const changeUserLevelAction = (newLevelId, userId) => dispatch => api

@@ -39,7 +39,11 @@ export default {
           if (bookExists !== null) {
             return res
               .status(409)
-              .send({ message: 'A book with the same title and author already exists in the library' });
+              .send({
+                message:
+                'A book with the same title ' +
+                 'and author already exists in the library'
+              });
           }
           Books
             .create({
@@ -60,7 +64,11 @@ export default {
                   };
                   res
                     .status(201)
-                    .send({ message: `${newBook.title} has been added to the library, Category: ${newBook.category}`, createdBook });
+                    .send({
+                      message: `${newBook.title} ` +
+                    `has been added to the library, Category: ${newBook.category}`,
+                      createdBook
+                    });
                 });
             })
             .catch(error => res.status(400).send(error.message));
@@ -101,7 +109,8 @@ export default {
             ]
           }
         }).then((bookExists) => {
-          if (bookExists !== null && bookExists.id !== parseInt(req.params.bookId, 10)) {
+          if (bookExists !== null &&
+            bookExists.id !== parseInt(req.params.bookId, 10)) {
             return res
               .status(409)
               .send({ message: 'A book with the same title and author already exists in the library' });
@@ -120,7 +129,10 @@ export default {
                   };
                   res
                     .status(200)
-                    .send({ message: `${newBook.title} has been updated`, createdBook });
+                    .send({
+                      message: `${newBook.title} has been updated`,
+                      createdBook
+                    });
                 });
             });
         }).catch(error => res.status(400).send(error.message));
@@ -147,7 +159,10 @@ export default {
       })
       .then((books) => {
         if (books.count === 0) {
-          res.json({ error: 'Empty', message: 'There are no books present in the database' });
+          res.json({
+            error: 'Empty',
+            message: 'There are no books present in the database'
+          });
         } else {
           res
             .status(200)
@@ -298,11 +313,17 @@ export default {
           if (borrowedBooks) {
             return res
               .status(409)
-              .send({ message: 'You can\'t delete this book while there is a copy still out on loan' });
+              .send({ 
+                message: 'You can\'t delete this' +
+                'book while there is a copy still out on loan'
+              });
           }
           book
             .destroy()
-            .then(() => res.status(200).send({ message: `${book.title}  has been deleted`, deletedBookId: bookId }));
+            .then(() => res.status(200).send({
+              message: `${book.title}  has been deleted`,
+              deletedBookId: bookId
+            }));
         });
       })
       .catch(error => res.status(500).send(error.message));

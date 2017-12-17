@@ -7,13 +7,17 @@ import { validateCategoryInput } from '../../../validators/validator';
 
 /**
  * handles the state of the Loan history table
+ *
  * @class LoanHistory
+ *
  * @extends {React.Component}
  */
 class AddCategory extends React.Component {
   /**
    * Creates an instance of AddCategoryButton.
+   *
    * @param {object} props
+   *
    * @memberof AddCategoryButton
    */
   constructor(props) {
@@ -33,8 +37,10 @@ class AddCategory extends React.Component {
 
   /**
    *
-   * @returns {object} Setstate
+   * @returns {void}
+   *
    * @param {function} event
+   *
    * @memberof AddCategory
    */
   onChange(event) {
@@ -46,9 +52,12 @@ class AddCategory extends React.Component {
 
   /**
    * Handle onChange events on form inputs
+   *
    * @method isValid
+   *
    * @memberof SignIn
-   * @returns {function} a validation function and returns errors in string format
+   *
+   * @returns {bool} true/false
    */
   isValid() {
     const { errors, isValid } = validateCategoryInput(this.state);
@@ -61,8 +70,10 @@ class AddCategory extends React.Component {
 
   /**
    *
-   * @returns {function} setState
+   * @returns {object} setState
+   *
    * @param {object} event
+   *
    * @memberOf AddCategory
    */
   handleClick(event) {
@@ -78,8 +89,11 @@ class AddCategory extends React.Component {
 
   /**
    * render Loan History component
+   *
    * @method render
+   *
    * @member loanHistory
+   *
    * @returns {object} component
    */
   render() {

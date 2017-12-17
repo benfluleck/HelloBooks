@@ -1,4 +1,7 @@
-import { showErrorNotification, showSuccessNotification } from '../notifications';
+import {
+  showErrorNotification,
+  showSuccessNotification
+} from '../notifications';
 import {
   CREATE_BOOK_SUCCESS,
   CREATE_BOOK_FAILURE,
@@ -6,22 +9,48 @@ import {
   UPDATE_BOOK_FAILURE,
   DELETE_BOOK_FAILURE,
   DELETE_BOOK_SUCCESS
-} from '../actiontype';
+} from '../actionType';
 import api from '../api';
 
-export const CreateBookSuccess = book => ({ type: CREATE_BOOK_SUCCESS, book });
-export const CreateBookFailure = error => ({ type: CREATE_BOOK_FAILURE, error });
+export const CreateBookSuccess = book =>
+  ({
+    type: CREATE_BOOK_SUCCESS,
+    book
+  });
+export const CreateBookFailure = error =>
+  ({
+    type: CREATE_BOOK_FAILURE,
+    error
+  });
 
-export const UpdateBookSuccess = book => ({ type: UPDATE_BOOK_SUCCESS, book });
-export const UpdateBookFailure = error => ({ type: UPDATE_BOOK_FAILURE, error });
-
-export const DeleteBookSuccess = book => ({ type: DELETE_BOOK_SUCCESS, book });
-export const DeleteBookFailure = error => ({ type: DELETE_BOOK_FAILURE, error });
+export const UpdateBookSuccess = book =>
+  ({
+    type: UPDATE_BOOK_SUCCESS,
+    book
+  });
+export const UpdateBookFailure = error =>
+  ({
+    type: UPDATE_BOOK_FAILURE,
+    error
+  });
+export const DeleteBookSuccess = book =>
+  ({
+    type: DELETE_BOOK_SUCCESS,
+    book
+  });
+export const DeleteBookFailure = error =>
+  ({
+    type: DELETE_BOOK_FAILURE,
+    error
+  });
 
 /**
  * async helper function: add Book to the database
+ *
  * @function addBook
+ *
  * @param {object} bookDetails
+ *
  * @returns {function} asynchronous action
  */
 export const addBook = bookDetails => dispatch => api

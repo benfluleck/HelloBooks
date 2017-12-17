@@ -5,8 +5,9 @@ import { Row, Col } from 'react-materialize';
 import PaginationWrapper from '../common/Pagination.jsx';
 import Book from '../../presentation/common/book/DisplayBook.jsx';
 import Loader from './Loader.jsx';
-import { fetchAllBooksbyId } from '../../../actions/fetchbooks';
-import MessageforNoBooks from '../../presentation/messages/dashboardMessages/MessageforNoBooks.jsx';
+import { fetchAllBorrowedBooks } from '../../../actions/fetchBooks';
+import MessageforNoBooks from
+  '../../presentation/messages/dashboardMessages/MessageforNoBooks.jsx';
 
 /**
  * @description Component for Display Books on the Landing page for all users
@@ -24,7 +25,8 @@ class DisplayAllBorrowedBooks extends React.Component {
   componentDidMount() {
     return (<Loader
       records={this.props.borrowedBooks}
-      callback={this.props.fetchAllBooksbyId(this.props.offset, this.props.limit)}
+      callback=
+        {this.props.fetchAllBorrowedBooks(this.props.offset, this.props.limit)}
     />);
   }
   /**
@@ -61,7 +63,7 @@ class DisplayAllBorrowedBooks extends React.Component {
         </Row>
         <PaginationWrapper
           config={config}
-          fetch={this.props.fetchAllBooksbyId}
+          fetch={this.props.fetchAllBorrowedBooks}
           numberOfRecords={this.props.limit}
         />
       </div>);
@@ -77,7 +79,7 @@ DisplayAllBorrowedBooks.propTypes = {
       title: PropTypes.string
     }))
   }),
-  fetchAllBooksbyId: PropTypes.func.isRequired
+  fetchAllBorrowedBooks: PropTypes.func.isRequired
 };
 
 DisplayAllBorrowedBooks.defaultProps = {
@@ -91,5 +93,5 @@ const mapStateToProps = ({ bookReducer }) => ({
   borrowedBooks: bookReducer.borrowedBooksList
 });
 
-export default connect(mapStateToProps, { fetchAllBooksbyId })(DisplayAllBorrowedBooks);
+export default connect(mapStateToProps, { fetchAllBorrowedBooks })(DisplayAllBorrowedBooks);
 

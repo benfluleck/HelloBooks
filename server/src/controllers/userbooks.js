@@ -24,7 +24,7 @@ export default {
         .status(404)
         .send({ message: 'Please specify a valid return date' });
     }
-    if (toDate(req.body.returnDate) <= (Date.now() - 24 * 60 * 60 * 1000)) {
+    if (toDate(req.body.returnDate) <= (Date.now() - (24 * 60 * 60 * 1000))) {
       return res
         .status(422)
         .send({ message: 'Please provide a valid return date' });
@@ -43,7 +43,7 @@ export default {
       )
       .then((user) => {
         const userLevelDate = new Date(Date.now() +
-        (user.level.maxDays * 24 * 60 * 60 * 1000));
+        (user.level.maxDays * (24 * 60 * 60 * 1000)));
         if (!user) {
           return res
             .status(404)
@@ -298,7 +298,7 @@ export default {
         userId,
         returnStatus: false,
         returnDate: {
-          $lt: (Date.now() - 24 * 60 * 60 * 1000)
+          $lt: (Date.now() - (24 * 60 * 60 * 1000))
         }
       },
       include: [

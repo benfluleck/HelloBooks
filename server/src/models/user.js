@@ -48,7 +48,7 @@ export default(sequelize, DataTypes) => {
         },
         len: {
           args: [
-            4, 30
+            4, 60
           ],
           msg: 'Username must be at least 2 chars and less than 30 chars'
         }
@@ -61,7 +61,7 @@ export default(sequelize, DataTypes) => {
       validate: {
         len: {
           arg: [
-            5, 16
+            5, 40
           ],
           msg: 'Length between 5 and 16 please'
         },
@@ -111,7 +111,7 @@ export default(sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       defaultValue: 0
     },
-    authId: {
+    googleId: {
       type: DataTypes.STRING,
     },
     isAdmin: {
@@ -124,7 +124,8 @@ export default(sequelize, DataTypes) => {
     hooks: {
       beforeCreate: (user) => {
         if (user.password === user.passwordConfirmation) {
-          user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10));
+          user.password =
+          bcrypt.hashSync(user.password, bcrypt.genSaltSync(10));
         } else {
           throw new Error('Passwords do not match');
         }
@@ -147,7 +148,8 @@ export default(sequelize, DataTypes) => {
     });
   };
 
-  User.generateHash = password => bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
+  User.generateHash =
+  password => bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
 
   return User;
 };

@@ -26,7 +26,7 @@ class EditBookModal extends React.Component {
       title = '',
       author = '',
       description = '',
-      quantity = null,
+      quantity = '',
       bookImage = '',
       categoryId = ''
     } = this.props.book;
@@ -72,9 +72,13 @@ class EditBookModal extends React.Component {
 
   /**
    * @description Handle onChange events on form inputs
+   *
    * @method onChange
+   *
    * @memberof AdminBookModal
+   *
    * @param {object} event
+   *
    * @returns {function} a function that handles change event on inputs
    */
   onChange(event) {
@@ -86,9 +90,13 @@ class EditBookModal extends React.Component {
   }
   /**
    * @description Handle submit events on the form inputs
+   *
    * @method handleSubmit
+   *
    * @memberof AdminBookModal
+   *
    * @param {object} event
+   *
    * @returns {function} a function that handles change event on inputs
    */
   handleSubmit(event) {
@@ -101,9 +109,13 @@ class EditBookModal extends React.Component {
 
   /**
    * Handle onChange events on form inputs
+   *
    * @method isValid
+   *
    * @memberof SignIn
-   * @returns {function} a validation function and returns errors in string format
+   *
+   * @returns {function} a validation function and
+   * returns errors in string format
    */
   isValid() {
     const { errors, isValid } = bookDetail(this.state);

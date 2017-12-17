@@ -1,6 +1,8 @@
 /**
  * saves application state to disk
+ *
  * @param  {Object} state application state
+ *
  * @return {undefined} writes to disk
  */
 export const saveState = (state) => {
@@ -14,6 +16,7 @@ export const saveState = (state) => {
 
 /**
  * loads state from disk
+ *
  * @return {Object} State Object
  */
 export const loadState = () => {

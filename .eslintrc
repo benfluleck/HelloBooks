@@ -1,11 +1,8 @@
 {
 	"root": true,
+	"parser": "babel-eslint",
 	"extends": "airbnb",
-	"plugins": [
-		"import",
-		"react",
-		"jsx-a11y"
-	],
+	"plugins": [ "react" ],
 	"env": {
 		"jquery": true,
 		"node": true,
@@ -25,8 +22,15 @@
 		"comma-dangle": 0,
 		"curly": [ "error", "multi-line" ],
 		"prefer-destructuring": [ "error", { "object": false, "array": false } ],
-		"import/no-unresolved": [ 2, { "commonjs": true } ],
+		"import/no-unresolved": "off",
 		"no-shadow": [ "error", { "allow": [ "req", "res", "err" ] } ],
+		"max-len": [ 1, 80, 2 ],
+		"react/no-unknown-property": [
+			2,
+			{
+				"ignore": [ "class", "for" ]
+			}
+		],
 		"valid-jsdoc": [
 			"error",
 			{

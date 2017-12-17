@@ -1,22 +1,24 @@
 import React from 'react';
-import { Modal, Input, Button, Row, Col } from 'react-materialize';
+import { Modal, Input, Button, Row, Col, Preloader } from 'react-materialize';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getUserLevelListAction } from '../../../../actions/admin/getUserLevelList';
-import { changeUserLevelAction } from '../../../../actions/admin/changeUserLevel';
+import { getUserLevelListAction }
+  from '../../../../actions/admin/getUserLevelList';
+import { changeUserLevelAction } from
+  '../../../../actions/admin/changeUserLevel';
 import { getUserListAction } from '../../../../actions/admin/getUserList';
 
 /**
  *
  *
+ * @class ChangeUserLevelModal
  *
- *
- * @class ChangeUserLvlModal
  * @extends {React.Component}
  */
-class ChangeUserLvlModal extends React.Component {
+class ChangeUserLevelModal extends React.Component {
   /**
-   * Creates an instance of ChangeUserLvlModal.
+   * Creates an instance of ChangeUserLvlModal
+   *
    * @param {object} props
    *
    * @memberOf ChangeUserLvlModal
@@ -34,8 +36,9 @@ class ChangeUserLvlModal extends React.Component {
   }
   /**
    *
-   * @returns {function} ChangeUserLvModal
-   * @memberof ChangeUserLvlModal
+   * @returns {function} ChangeUserLevelModal
+   *
+   * @memberof componentDidMount
    *
    * @memberOf ChangeUserLvlModal
    */
@@ -43,8 +46,10 @@ class ChangeUserLvlModal extends React.Component {
     this.props.getUserLevelListAction();
   }
   /**
-   * @param {any} nextProps
-   * @memberof ChangeUserLvlModal
+   * @param {object} nextProps
+   *
+   * @memberof ChangeUserLevelModal
+   *
    * @returns {void} value
    */
   componentWillReceiveProps(nextProps) {
@@ -57,8 +62,10 @@ class ChangeUserLvlModal extends React.Component {
    *
    *
    *
-   * @param {any} event
+   * @param {object} event
+   *
    * @returns {object} state
+   *
    * @memberOf ChangeUserLvlModal
    */
   onChange(event) {
@@ -71,13 +78,18 @@ class ChangeUserLvlModal extends React.Component {
    *
    *
    * @param {event} event
+   *
    * @returns {object} function
+   *
    * @memberof ChangeUserLvlModal
    *
    */
   onClick(event) {
     event.preventDefault();
-    this.props.changeUserLevelAction({ newLevelId: this.state.newLevelId, userId: this.props.selectedUser.id })
+    this.props.changeUserLevelAction({
+      newLevelId: this.state.newLevelId,
+      userId: this.props.selectedUser.id
+    })
       .then(() => {
         this.setState({
           userLevel: this.state.newLevelId
@@ -94,19 +106,23 @@ class ChangeUserLvlModal extends React.Component {
    *
    *
    *
-   * @memberof ChangeUserLvlModal
+   * @memberof ChangeUserLevelModal
+   *
    * @returns {Component} Compent
    *
-   * @memberOf ChangeUserLvlModal
+   * @memberOf ChangeUserLevelModal
    */
   render() {
+    if (!this.props.userLevels) {
+      return <Preloader size="big" className="center-align" />;
+    }
     const userLevelNames = this.props.userLevels
       .map(userLevel => (
         <option
           value={userLevel.level}
           className="black-text"
-          name={userLevel.maxDays}
         >
+          key={userLevel.id}
           {userLevel.levelName}
         </option>
 
@@ -119,10 +135,16 @@ class ChangeUserLvlModal extends React.Component {
       >
         <div className="change-level-modal">
           <Row>
-            <div className="disabled"><h5> Username : &nbsp;{this.props.selectedUser.username}</h5></div>
+            <div className="disabled">
+              <h5> Username : &nbsp;{this.props.selectedUser.username}
+              </h5>
+            </div>
           </Row>
           <Row>
-            <div className="disabled"><h5> Current Userlevel : &nbsp;{this.state.userLevel}</h5></div>
+            <div className="disabled">
+              <h5> Current Userlevel : &nbsp;{this.state.userLevel}
+              </h5>
+            </div>
           </Row>
           <Row>
             <Col>
@@ -156,25 +178,26 @@ class ChangeUserLvlModal extends React.Component {
 }
 
 
-ChangeUserLvlModal.propTypes = {
-  userLevels: PropTypes.shape(PropTypes.arrayOf({
-    map: PropTypes.arrayOf({
-      level: PropTypes.number
-    })
-  })).isRequired,
-  selectedUser: PropTypes.shape(PropTypes.arrayOf({
-    username: PropTypes.string,
-    level: PropTypes.number
-  })).isRequired,
+ChangeUserLevelModal.propTypes = {
+  // userLevels: PropTypes.arrayOf(PropTypes.arrayOf({
+  //   map: PropTypes.arrayOf({
+  //     level: PropTypes.number
+  //   })
+  // })).isRequired,
+  // selectedUser: PropTypes.shape(PropTypes.arrayOf({
+  //   username: PropTypes.string,
+  //   level: PropTypes.number
+  // })).isRequired,
   getUserListAction: PropTypes.func.isRequired,
   changeUserLevelAction: PropTypes.func.isRequired,
   getUserLevelListAction: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
-  userLevels: state.userReducer.userLevels.userLevels,
-  selectedUser: state.userReducer.selectedUser.user
-
+  userLevels: (state.userReducer.userLevels)
+    ? state.userReducer.userLevels.userLevels : [],
+  selectedUser: (state.userReducer.selectedUser)
+    ? state.userReducer.selectedUser.user : []
 });
 
 export default connect(
@@ -184,4 +207,4 @@ export default connect(
     changeUserLevelAction,
     getUserListAction
   }
-)(ChangeUserLvlModal);
+)(ChangeUserLevelModal);

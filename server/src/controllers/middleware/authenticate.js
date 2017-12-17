@@ -5,10 +5,14 @@ import jwtDecode from 'jwt-decode';
 *
 * @description authenticates a the json web token  to be
 appended in routes that need to be authenticated
+*
 * @param {object} req - request object
+*
 * @param {object} res - response object
+*
 * @param {function} next - next function to be called on the success
-* @return {undefined} if not defined send a response to the server indicating this
+*
+* @return {object}  message
 */
 const authenticate = (req, res, next) => {
   if (req.url.startsWith('/auth')) return next();

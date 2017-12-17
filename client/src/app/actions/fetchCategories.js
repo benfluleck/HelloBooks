@@ -4,7 +4,7 @@ import {
   FETCH_CATEGORIES_FAILURE,
   FETCH_BOOKS_FOR_CATEGORIES_SUCCESS,
   FETCH_BOOKS_FOR_CATEGORIES_FAILURE
-} from './actiontype';
+} from './actionType';
 import api from './api';
 
 
@@ -32,8 +32,10 @@ export const fetchBooksCategoriesSuccess = books =>
 
 
 /**
- * async helper function: fetch categories
+ * async helper function: fetch all categories
+ *
  * @function fetchAllCategories
+ *
  * @returns {function} asynchronous action
  */
 export const fetchAllCategories = () => dispatch => api
@@ -47,8 +49,19 @@ export const fetchAllCategories = () => dispatch => api
     dispatch(showErrorNotification({ error }));
     dispatch(fetchCategoriesFailure({ error }));
   });
-
-export const fetchBooksForCategories = (categoryId, offset, limit) => (dispatch) => {
+/**
+ * @description fetches all books and groups them category
+ *
+ * @param {number} categoryId
+ *
+ * @param {number} offset
+ *
+ * @param {number} limit
+ *
+ * @returns {object} asynchronous action
+ */
+export
+const fetchBooksForCategories = (categoryId, offset, limit) => (dispatch) => {
   api
     .book
     .fetchAllBooksByCategories(categoryId, offset, limit)

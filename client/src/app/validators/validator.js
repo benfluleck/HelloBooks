@@ -28,6 +28,25 @@ const bookDetailValidator = (state) => {
   return { errors, isValid: isEmpty(errors) };
 };
 
+const validatePasswordInput = (state) => {
+  const errors = {};
+
+  if (!isLength(state.password, 5, 20)) {
+    errors.password = 'Password ahould be a minimum of 5 characters and max. of 20.';
+  }
+
+  if (state.passwordConfirmation !== state.password) {
+    errors.passwordConfirmation = 'Passwords do not match';
+  }
+
+  if (!isEmpty) {
+    errors.oldpassword = 'Please fill this field';
+  }
+  
+  return { errors, isValid: isEmpty(errors) };
+};
+
+
 const validateSignupInput = (state) => {
   const errors = {};
 
@@ -40,6 +59,7 @@ const validateSignupInput = (state) => {
   } else if (state.username.charAt(0) === ' ') {
     errors.username = 'Username cannot begin with space characters';
   }
+
 
   if (!isAlpha(state.firstname)) {
     errors.firstname = 'Firstname should consist of only alphabets';
@@ -92,4 +112,5 @@ const validateCategoryInput = (state) => {
 export { validateSignupInput,
   validateForgotPasswordEmail,
   bookDetailValidator,
-  validateCategoryInput };
+  validateCategoryInput,
+  validatePasswordInput };

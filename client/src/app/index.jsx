@@ -13,7 +13,9 @@ if (localStorage.getItem('token')) {
 /**
  *
  * @class App
+ *
  * @extends {React.Component}
+ *
  * @returns {object} Component
  */
 const App = () => <MainRoot />;

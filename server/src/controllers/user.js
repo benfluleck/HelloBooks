@@ -5,7 +5,7 @@ import paginationFunc from '../controllers/middleware/pagination';
 
 const { User, Userlevel } = models;
 
-export default {
+const userController = {
   /**
   * Route: POST: /auth/users/signin
   * @description Create a new user
@@ -15,19 +15,25 @@ export default {
   */
   create(req, res) {
     if (req.body.password !== req.body.passwordConfirmation) {
-      return res.status(422).send({ message: 'Password and Password confirmation do not match' });
+      return res.status(422).send({
+        message: 'Password and Password confirmation do not match'
+      });
     }
     User.findOne({ where: { username: req.body.username } })
       .then((usernameExists) => {
         if (usernameExists) {
-          res.status(409).json({ success: false, message: 'This username is already in use' });
+          res.status(409).json({
+            success: false, message: 'This username is already in use'
+          });
         } else {
           User.findOne({
             where: { email: req.body.email }
           })
             .then((userExists) => {
               if (userExists) {
-                res.status(409).json({ success: false, message: 'This email is already in use' });
+                res.status(409).json({
+                  success: false, message: 'This email is already in use'
+                });
               } else {
                 User.create({
                   firstname: req.body.firstname.trim(),
@@ -37,18 +43,22 @@ export default {
                   userImage: req.body.userImage || process.env.PROFILE_PIC,
                   passwordConfirmation: req.body.passwordConfirmation.trim(),
                   email: req.body.email.trim(),
+                  googleId: req.body.googleId || null,
                   isAdmin: req.body.isAdmin
                 }).then((user) => {
                   if (user) {
                     res.status(201).send({
-                      message: `${user.username} has been added, Please Login`
+                      message: `${user.username} has been added to the library,` +
+                       'Please Login, you will be only required to do this once'
                     });
                   }
                 });
               }
             })
             .catch((error) => {
-              res.status(400).send({ success: false, message: ` ${error.message}` });
+              res.status(400).send({
+                success: false, message: ` ${error.message}`
+              });
             });
         }
       });
@@ -63,6 +73,7 @@ export default {
    *
    */
   signIn(req, res) {
+    const googleId = req.body.googleId || null;
     return User.findOne({
       where: {
         username: req.body.username
@@ -70,9 +81,13 @@ export default {
     })
       .then((user) => {
         if (!user) {
+          if (googleId) {
+            return userController.create(req, res);
+          }
           return res.status(404).send({
             success: false,
-            message: `${req.body.username} does not exist, Make sure you are signed up`
+            message: `${req.body.username} ` +
+            'does not exist, Make sure you are signed up'
           });
         } else if (bcrypt.compareSync(req.body.password, user.password)) {
           const Userjwt = {
@@ -94,7 +109,9 @@ export default {
               });
             });
         } else {
-          res.status(400).send({ success: false, message: 'Wrong Credentials' });
+          res.status(403).send({
+            success: false, message: 'Wrong Credentials'
+          });
         }
       })
       .catch(error => res.status(500).send(error.message));
@@ -103,9 +120,13 @@ export default {
 
   /**
    * @description Get user details
+   *
    * @method getUser
+   *
    * @param {object} req HTTP request object
+   *
    * @param {object} res HTTP response object
+   *
    * @returns {object} response
    */
   getUser(req, res) {
@@ -125,8 +146,11 @@ export default {
         }));
   },
   /** @description changes user password
+   *
     * @param {object} req HTTP request object
+    *
     * @param {object} res HTTP response object
+    *
     * @returns {object} Message object
     */
   changePassword(req, res) {
@@ -140,8 +164,19 @@ export default {
         if (!user) {
           return res.status(404).send({ message: 'User not logged In' });
         }
-        const comparePasswords = bcrypt.compareSync(req.body.newPassword, user.password);
-        if (comparePasswords) {
+        const compareOldPasswords =
+        bcrypt.compareSync(req.body.oldPassword, user.password);
+        if (!compareOldPasswords) {
+          return res.status(409)
+            .send({
+              message:
+              'Your current password does not match our records,'
+              + 'Please Re-enter'
+            });
+        }
+        const compareNewPasswords =
+        bcrypt.compareSync(req.body.newPassword, user.password);
+        if (compareNewPasswords) {
           return res.status(409)
             .send({ message: 'You cannot use a previous password' });
         }
@@ -157,8 +192,11 @@ export default {
       .catch(error => res.status(500).send(error.message));
   },
   /** Changes a users level
+   *
     * @param {object} req HTTP request object
+    *
     * @param {object} res HTTP response object
+    *
      * @returns {object} response object
      */
   changeLevel(req, res) {
@@ -193,7 +231,12 @@ export default {
                   levelName: newLevel.levelName,
                   level: newLevel.level
                 };
-                res.status(200).send({ message: `Level changed Successfully, New Level "${userDetails.levelName}"`, userDetails });
+                res.status(200).send({
+                  message:
+                  'Level changed Successfully,' +
+                   `New Level "${userDetails.levelName}"`,
+                  userDetails
+                });
               });
           });
       })
@@ -202,12 +245,16 @@ export default {
 
   /**
    * Gets a list of users in tha library
+   *
    * @method get
+   *
    * @param {object} req
+   *
    * @param {object} res
+   *
    * @return {object} response
    */
-  getUserList(req, res) { // get user(s) in the database
+  getUserList(req, res) {
     const offset = req.query.offset || 0;
     const limit = req.query.limit || 3;
     return User
@@ -230,7 +277,10 @@ export default {
       })
       .then((users) => {
         if (users.count === 0) {
-          res.json({ error: 'Empty', message: 'There are no books present in the database' });
+          res.json({
+            error: 'Empty',
+            message: 'There are no books present in the database'
+          });
         } else {
           res
             .status(200)
@@ -243,6 +293,16 @@ export default {
       .catch(error => res.status(501).send(error.message));
   },
 
+  /**
+   *
+   * @description UserLevelList fetches the list of the user levels
+   *
+   * @param {object} req
+   *
+   * @param {object} res
+   *
+   * @returns {object} response
+   */
   getUserLevelList(req, res) {
     return Userlevel
       .all({
@@ -255,7 +315,7 @@ export default {
       .then((userLevels) => {
         if (Object.keys(userLevels).length < 1) {
           return res.status(200)
-            .send({ message: 'sorry there are no user levels available' });
+            .send({ message: 'Sorry there are no user levels available' });
         }
         const allUserLevels = { userLevels };
         res.status(200).send(allUserLevels);
@@ -263,3 +323,6 @@ export default {
       .catch(error => res.status(500).send(error.message));
   }
 };
+
+
+export default userController;

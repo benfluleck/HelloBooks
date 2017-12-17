@@ -4,18 +4,18 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import SideNav from '../common/SideNav/index.jsx';
 import DisplayAllBooks from '../../container/booklist/DisplayAllBooks.jsx';
 import getDashboardWrapper from '../../container/Dashboard.jsx';
-import CategoryAdminTab from '../../container/categories/CategoriesAdminTab.jsx';
-import UserList from '../../container/userlists/container/UserList.jsx';
-
+import
+CategoryAdminTab from '../../container/categories/CategoriesAdminTab.jsx';
+import UserListTab from '../../container/userlists/container/UserListTab.jsx';
+import NotificationTab from '../../container/notification/NotificationTab.jsx';
 /**
  *
- *
  * @class AdminDashboard
+ *
  * @extends {React.PureComponent}
  */
 class AdminDashboard extends React.PureComponent {
   /**
-   *
    *
    * @returns {Component} Component
    *
@@ -35,6 +35,7 @@ class AdminDashboard extends React.PureComponent {
                   <Tab>ALL BOOKS</Tab>
                   <Tab>USERS</Tab>
                   <Tab>CATEGORIES</Tab>
+                  <Tab>NOTIFICATIONS</Tab>
                 </TabList>
               </Row>
               <Row>
@@ -42,10 +43,13 @@ class AdminDashboard extends React.PureComponent {
                   <DisplayAllBooks />
                 </TabPanel>
                 <TabPanel>
-                  <UserList />
+                  <UserListTab />
                 </TabPanel>
                 <TabPanel>
                   <CategoryAdminTab />
+                </TabPanel>
+                <TabPanel>
+                  <NotificationTab />
                 </TabPanel>
               </Row>
             </Tabs>

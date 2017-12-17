@@ -1,41 +1,45 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { signup } from '../../../actions/authenticate';
 import { connect } from 'react-redux';
+import { signup } from '../../../actions/authenticate';
 import SignUpForm from '../../presentation/authentication/SignUpPage.jsx';
-import { Toast } from 'react-materialize';
 
 /**
  * handles registartion of users
+ *
+ * @param {object} data
+ *
  * @class SignUpPage
- * @extends {React.Component}
+ *
+ * @extends {Component}
  */
-class SignUpPage extends React.Component {
+class SignUpPage extends Component {
   submit = (data) => {
     this
       .props
       .signup(data)
       .then((res) => {
-        if (res.statusText === "Created") {
+        if (res.statusText === 'Created') {
           this
             .props
             .history
-            .push('/login')
+            .push('/login');
         } else {
-          Materialize.toast('Please sign in again', 3000)
+          Materialize.toast('Please sign in again', 3000);
         }
       })
-      .catch(() => {})
+      .catch(() => {});
   }
   /**
  * handles signing in of users
+ *
  * @class SignInPage
+ *
  * @extends {React.Component}
  */
   render() {
-    return (<SignUpForm submit={this.submit}/>);
+    return (<SignUpForm submit={this.submit} />);
   }
-
 }
 
 SignUpPage.propTypes = {
@@ -43,4 +47,4 @@ SignUpPage.propTypes = {
 
 };
 
-export default connect(null, {signup})(SignUpPage);
+export default connect(null, { signup })(SignUpPage);

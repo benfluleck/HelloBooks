@@ -6,13 +6,17 @@ import { logout } from '../../../actions/authenticate';
 
 /**
  * handles logging a user out
+ *
  * @class Logout
+ *
  * @extends {Component}
  */
 class Logout extends Component {
 /**
    * @description redirects the user to the index page
+   *
    * @memberof Logout
+   *
    * @return {[type]} [description]
    */
   componentDidMount() {
@@ -21,8 +25,10 @@ class Logout extends Component {
   }
   /**
    * renders component to DOM
+   *
    * @memberof Logout
-   * @return {JSX} JSX reprresentation of DOM
+   *
+   * @return {JSX} JSX representation of DOM
    */
   render() {
     return (

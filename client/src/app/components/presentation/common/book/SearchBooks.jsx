@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Col, Icon, Autocomplete } from 'react-materialize';
-import { searchAllBooks } from '../../../../actions/searchbooks';
-import { fetchAllBooks } from '../../../../actions/fetchbooks';
+import { searchAllBooks } from '../../../../actions/searchBooks';
+import { fetchAllBooks } from '../../../../actions/fetchBooks';
 
 /**
  *

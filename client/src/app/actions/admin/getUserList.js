@@ -2,20 +2,31 @@ import { showErrorNotification } from '../notifications';
 import {
   GET_USER_LIST_FAILURE,
   GET_USER_LIST_SUCCESS
-} from '../actiontype';
+} from '../actionType';
 import api from '../api';
 
 export const getUserListSuccess = userList => (
-  { type: GET_USER_LIST_SUCCESS, userList }
+  {
+    type: GET_USER_LIST_SUCCESS,
+    userList
+  }
 );
-export const getUserListFailure = error => ({ type: GET_USER_LIST_FAILURE, error });
+export const getUserListFailure = error =>
+  ({
+    type: GET_USER_LIST_FAILURE,
+    error
+  });
 
 
 /**
  * async helper function: get User Lists
+ *
  * @function getUserLists
+ *
  * @param {integer} offset
+ *
  * @param {integer} limit
+ *
  * @returns {function} asynchronous action
  */
 export const getUserListAction = (offset, limit) => dispatch => api

@@ -1,19 +1,25 @@
-import { showErrorNotification, showSuccessNotification } from './notifications';
+import
+{ showErrorNotification,
+  showSuccessNotification
+} from './notifications';
 
 import { USER_LOGGED_IN,
   USER_LOG_IN_FAILURE,
   USER_LOGGED_OUT,
   SIGNUP_USER_SUCCESS,
   SIGNUP_USER_FAILURE
-} from './actiontype';
+} from './actionType';
 
 import api from './api';
 import setAuthorizationToken from '../utils/setAuthorizationToken';
 
 /**
  * create action: userLoggedIn: user
+ *
  * @function userLoggedIn
+ *
  * @param {object} data
+ *
  * @returns {object} action: type and response
  */
 export const userLoggedIn = data =>
@@ -30,8 +36,11 @@ export const userLogInFailure = error =>
 
 /**
  * create action: userLoggedIn: user
+ *
  * @function userLoggedOut
+ *
  * @param {object} user
+ *
  * @returns {object} action: type and response
  */
 export const userLoggedOut = user =>
@@ -42,8 +51,11 @@ export const userLoggedOut = user =>
 
 /**
  * create action: sign : user
+ *
  * @function userAuthFailure
+ *
  * @param {object} user
+ *
  * @returns {object} action: type and response
  */
 export const signUpUserFailure = user =>
@@ -54,8 +66,11 @@ export const signUpUserFailure = user =>
 
 /**
  * create action: signUpUserSuccess : user
+ *
  * @function signUpUserSuccess
+ *
  * @param {object} user
+ *
  * @returns {object} action: type and response
  */
 export const signUpUserSuccess = user =>
@@ -66,8 +81,11 @@ export const signUpUserSuccess = user =>
 
 /**
  * async helper function: sign up user
+ *
  * @function signup
+ *
  * @param {object} data
+ *
  * @returns {function} asynchronous action
  */
 export const signup = data => dispatch => api
@@ -85,8 +103,11 @@ export const signup = data => dispatch => api
 
 /**
  * async helper function: log in user
+ *
  * @function login
+ *
  * @param {object} credentials
+ *
  * @returns {function} asynchronous action
  */
 export const login = credentials => dispatch => api
@@ -107,7 +128,9 @@ export const login = credentials => dispatch => api
 
 /**
  * async helper function: log out user
+ *
  * @function logout
+ *
  * @returns {function} asynchronous action
  */
 export const logout = () => (dispatch) => {

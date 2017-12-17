@@ -4,12 +4,13 @@ import { PropTypes } from 'prop-types';
 import { Row, Col, Button, Preloader } from 'react-materialize';
 import Book from '../../presentation/common/book/DisplayBook.jsx';
 import Loader from './Loader.jsx';
-import { fetchAllBooks } from '../../../actions/fetchbooks';
-import { fetchAllCategories } from '../../../actions/fetchcategories';
+import { fetchAllBooks } from '../../../actions/fetchBooks';
+import { fetchAllCategories } from '../../../actions/fetchCategories';
 import PaginationWrapper from '../common/Pagination.jsx';
 import SearchBooks from '../../presentation/common/book/SearchBooks.jsx';
 import CategoriesDropdownList from '../categories/CategoriesDropdownList.jsx';
-import MessageforNoCatBooks from '../../presentation/messages/dashboardMessages/MessageforNoCatBooks.jsx';
+import MessageforNoCatBooks from
+  '../../presentation/messages/dashboardMessages/MessageforNoCatBooks.jsx';
 import EditBookModal from '../../presentation/common/modal/EditBookModal.jsx';
 import AddBookModal from '../../presentation/common/modal/AddBookModal.jsx';
 
@@ -20,7 +21,8 @@ import AddBookModal from '../../presentation/common/modal/AddBookModal.jsx';
  */
 class DisplayAllBooks extends React.Component {
   /**
-   * @description dispatch actions that help populate the dashboard with all the books
+   * @description dispatch actions that help
+   * populate the dashboard with all the books
    * @method componentDidMount
    * @memberof DisplayAllBooks
    * @returns {component} Loader
@@ -75,7 +77,13 @@ class DisplayAllBooks extends React.Component {
           }
             {this.props.isAdmin ?
               <div className="add-book">
-                <Button floating onClick={() => this.handleClick()} className="#ef6c00 orange darken-3 add-book-btn" waves="light" icon="add" />
+                <Button
+                  floating
+                  onClick={() => this.handleClick()}
+                  className="#ef6c00 orange darken-3 add-book-btn"
+                  waves="light"
+                  icon="add"
+                />
                 ADD BOOK
               </div> : null
           }
@@ -134,7 +142,8 @@ DisplayAllBooks.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  allBooksList: (state.bookReducer.allBooksList) ? state.bookReducer.allBooksList : {},
+  allBooksList: (state.bookReducer.allBooksList)
+    ? state.bookReducer.allBooksList : {},
   isAdmin: (state.userReducer.user) ? state.userReducer.user.isAdmin : false,
 });
 

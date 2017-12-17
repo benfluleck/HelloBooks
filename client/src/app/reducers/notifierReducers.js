@@ -1,10 +1,9 @@
 import {
-  UPLOAD_TO_CLOUD_IMAGE_SUCCESS,
-  UPLOAD_TO_CLOUD_IMAGE_FAILURE
+  GET_NOTIFICATIONS_FAILURE,
+  GET_NOTIFICATIONS_SUCCESS
 } from '../actions/actionType';
 
 const INITIAL_STATE = {
-  body: {}
 };
 
 /**
@@ -18,19 +17,17 @@ const INITIAL_STATE = {
  *
  * @returns {object}  state
  */
-export default function imageReducer(state = INITIAL_STATE, action = {}) {
+export default function notifierReducer(state = INITIAL_STATE, action = {}) {
   switch (action.type) {
-    case UPLOAD_TO_CLOUD_IMAGE_SUCCESS:
+    case GET_NOTIFICATIONS_SUCCESS:
       return {
         ...state,
-        body: action.response,
-        url: action.response.secureUrl,
-        upload: 'Success'
+        notifications: action.data
       };
-    case UPLOAD_TO_CLOUD_IMAGE_FAILURE:
+    case GET_NOTIFICATIONS_FAILURE:
       return {
         ...state,
-        error: action.response
+        error: action.error
       };
     default:
       return state;

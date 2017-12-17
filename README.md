@@ -5,26 +5,43 @@
 
 HelloBooks is an application that helps manage a library and its processes like stocking, tracking and lending of books.This application enables users to be able to find and borrow books. Users  are managed by an admin who manages users as well as add, edit, delete books.
 
-
 # Table of Contents
 - [Getting Started](#getting-started)
-- [Dependencies](#dependencies)
-- [Installation](#installation)
+- [Technology Stack](#technology-stack)
+  * [Dependencies](#dependencies)
+- [Installation and Usage](#installation)
 - [Tests](#tests)
-- [Usage](#usage)
 - [API Documentation](#api-documentation)
 - [Models](#models)
 - [Testing](#testing)
 - [Express Routes](#express-routes)
 - [License](#license)
+- [FAQ](#faqs)
 - [Current state](#current-state)
 
 ## Getting Started
 This is a javascript application built with [**Express**](https://expressjs.com/) framework on the nodejs platform. Authentication of users is done via [**JSON Web Tokens**](https://jwt.io/).
 
-## Dependencies
+
+## Technology Stack
+**UI & Templates**
+1. HTML & CSS
+2. Materialize CSS Framework
+3. Javascript
+4. JQuery
+
+**Server Side**
+1. NodeJS
+2. Express
+3. Sequelize
+
+**Client Side**
+1. React(Redux)
+
+### Dependencies
 * Postgres
 * Node
+
 
 ## Installation
 
@@ -54,20 +71,21 @@ npm run start:dev
 npm run build:dev
 ```
 
+## Usage
+- Run database migration with `npm start:migrate`
+- Start app development with `npm run start` or `npm start`
+- To start the client `npm run start:webdev`
+- Install **Postman** and use to test all endpoints
+
 ## Limitations
 The limitations with this current version of Hello Books includes:
-* The Administrator has no control overs users on the client side
-* Users cannot contribute books to the application based on their location
-* Users can rent books for an indefinite amount of time
+- Authenticated Users can not read books
 
 ## Tests
 
 Sever side tests - Run `npm test` on the terminal while within the **project root directory**.
 Client side tests - Run `npm client:test` on the terminal while within the **project root directory**.
 
-
-### Starting
-In the project root, run `npm start`.
 
 ### Features
 HelloBooks consists of the following features:
@@ -79,45 +97,32 @@ HelloBooks consists of the following features:
 - Token is perpetually verified to check the state of the user if logged in or not.
 - Admin User will br pre-seeded into the application with administrative priviledges
 
-### Users
+### Unauthenticated Users
+- Unauthenticated users can look at the recent books in the library
+- Unauthenticated users can look at the users levels in the library
 
-- Users can register
-- Users can log in
-- Users can view all books in the library
-- Users can borrow books
-- Users can return books
-- User can view borrowing history
+### Authenticated Users
+- Authenticated Users can register
+- Authenticated Users can log in
+- Authenticated Users can view all books in the library
+- Authenticated Users can borrow books
+- Authenticated Users can return books
+- Authenticated Users can view borrowing history
+- Authenticated Users can search through a list of books
+
 
 ### Admin Users
 - Admins can edit books
 - Admins can add new books
-
-
-## Usage
-- Run database migration with `npm start:migrate`
-- Start app development with `npm run start` or `npm start`
-- To start the client `npm run start:webdev`
-- Install **Postman** and use to test all endpoints
-
+- Admins can delete books
+- Admins can change user levels for authenticated users
+- Admins can add  a new category
+- Admins can edit a category
+- Admins can delete a category
+- Admin can see a list of users
 
 ## API Documentation
 You can view the API Documentation [here](https://staging-hellobooks.herokuapp.com/api-docs)
-
-### Technology Stack
-**UI & Templates**
-1. HTML & CSS
-2. Materialize CSS Framework
-3. Javascript
-4. JQuery
-
-**Server Side**
-1. NodeJs
-2. Express
-3. Sequelize
-
-**Client Side**
-1. React(Redux)
-
 
 ### Questions
 For more details contact benny.ogidan@andela.com
@@ -154,6 +159,8 @@ This project is authored by **Benny Ogidan** (benny.ogidan@andela.com) and is li
 [license]: LICENSE
 [author]: benny-ogidan
 
+## FAQ
+See the Hello Books wiki
 
 ## Current state
-still in the development stage
+Client side testing phase

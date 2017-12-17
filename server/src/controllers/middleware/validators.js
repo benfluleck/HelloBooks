@@ -1,8 +1,8 @@
-import { isLength, isAlpha, isNumeric, isEmpty, isAlphanumeric } from 'validator';
+import { isLength, isAlpha, isNumeric, isAlphanumeric } from 'validator';
 
 const fieldLength = {
-  password: { max: 21, min: 5 },
-  username: { max: 30, min: 5 },
+  password: { max: 50, min: 5 },
+  username: { max: 40, min: 5 },
   lastname: { max: 30, min: 2 },
   firstname: { max: 30, min: 2 },
   title: { max: 60, min: 2 },
@@ -15,7 +15,8 @@ const fieldLength = {
 const emailRegex = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"|"_+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
 const validateEmail = emailAddress => emailRegex.test(emailAddress);
 
-const modifiedIsLength = field => val => isLength(val, fieldLength[field] || {});
+const modifiedIsLength =
+field => val => isLength(val, fieldLength[field] || {});
 
 export const fieldValidationFnMap = {
   email: [validateEmail]

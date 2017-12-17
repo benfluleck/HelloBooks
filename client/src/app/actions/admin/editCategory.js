@@ -1,19 +1,33 @@
-import { showErrorNotification } from '../notifications';
+import {
+  showErrorNotification,
+} from '../notifications';
 import {
   EDIT_CATEGORY_FAILURE,
   EDIT_CATEGORY_SUCCESS
-} from '../actiontype';
+} from '../actionType';
 import api from '../api';
 
-export const editCategorySuccess = category => ({ type: EDIT_CATEGORY_SUCCESS, category });
-export const editCategoryFailure = error => ({ type: EDIT_CATEGORY_FAILURE, error });
+export const editCategorySuccess = category =>
+  ({
+    type: EDIT_CATEGORY_SUCCESS,
+    category
+  });
+export const editCategoryFailure = error =>
+  ({
+    type: EDIT_CATEGORY_FAILURE,
+    error
+  });
 
 
 /**
  * async helper function: add Book to the database
+ *
  * @function editNewCategory
+ *
  * @param {string} categoryName
+ *
  * @param {number} categoryId
+ *
  * @returns {function} asynchronous action
  */
 export const editCategoryAction = (categoryName, categoryId) => dispatch =>

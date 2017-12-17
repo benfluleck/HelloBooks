@@ -14,6 +14,7 @@ module.exports = {
         lastname: faker.name.lastName(),
         createdAt: new Date(),
         updatedAt: new Date(),
+        userImage: 'http://res.cloudinary.com/digpnxufx/image/upload/v1510582526/boy_avatar_s1rb9m.svg'
       },
       {
         username: 'bennyogidan',
