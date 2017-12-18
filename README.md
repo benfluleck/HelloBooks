@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/benfluleck/HelloBooks.png)](https://travis-ci.org/benfluleck/HelloBooks.svg?branch=staging)
 [![Coverage Status](https://coveralls.io/repos/github/benfluleck/HelloBooks/badge.svg?branch=staging)](https://coveralls.io/github/benfluleck/HelloBooks?branch=staging)
+[![Maintainability](https://api.codeclimate.com/v1/badges/65310d93aa5d31790cc1/maintainability)](https://codeclimate.com/github/benfluleck/HelloBooks/maintainability)
 
 # HelloBooks
 
