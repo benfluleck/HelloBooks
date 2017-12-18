@@ -16,15 +16,21 @@ import AddBookModal from '../../presentation/common/modal/AddBookModal.jsx';
 
 /**
  * @description Component for Display Books on the Landing page for all users
+ *
  * @class DisplayLandingBooks
+ *
  * @extends {Component}
  */
 class DisplayAllBooks extends React.Component {
   /**
    * @description dispatch actions that help
+   *
    * populate the dashboard with all the books
+   *
    * @method componentDidMount
+   *
    * @memberof DisplayAllBooks
+   *
    * @returns {component} Loader
    */
   componentWillMount() {
@@ -39,6 +45,7 @@ class DisplayAllBooks extends React.Component {
   /**
    *
    * @returns {function} openModal
+   *
    * @memberof DisplayAllBooks
    *
    */
@@ -48,8 +55,11 @@ class DisplayAllBooks extends React.Component {
 
   /**
    * render Display All Books page component
+   *
    * @method render
+   *
    * @member DisplayAllBooks
+   *
    * @returns {component} component
    */
   render() {
@@ -108,7 +118,10 @@ class DisplayAllBooks extends React.Component {
           numberOfRecords={this.props.limit}
         />
         {this.props.isAdmin && this.props.allBooksList ?
-          <div><EditBookModal /> <AddBookModal /> </div> : null
+          <div>
+            <EditBookModal />
+            <AddBookModal />
+          </div> : null
         }
       </div>
     );
@@ -142,8 +155,7 @@ DisplayAllBooks.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  allBooksList: (state.bookReducer.allBooksList)
-    ? state.bookReducer.allBooksList : {},
+  allBooksList: state.bookReducer.allBooksList,
   isAdmin: (state.userReducer.user) ? state.userReducer.user.isAdmin : false,
 });
 

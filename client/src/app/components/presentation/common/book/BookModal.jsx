@@ -4,13 +4,12 @@ import PropTypes from 'prop-types';
 
 /**
  *
- *
  * @class BookModal
+ *
  * @extends {React.Component}
  */
 class BookModal extends React.PureComponent {
   /**
-   *
    *
    * @returns {Component} Component
    *

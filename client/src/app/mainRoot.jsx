@@ -3,7 +3,7 @@ import 'redux-notifications/lib/styles.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Root from './components/Root.jsx';
 import LandingPage from './components/container/LandingPage.jsx';
-import Login from './components/presentation/authentication/SignInPage.jsx';
+import SignInPage from './components/presentation/authentication/SignInPage.jsx';
 import SignUp from './components/container/authentication/SignUpPage.jsx';
 import UserDashboard from './components/presentation/UserDashboard.jsx';
 import AdminDashboard from './components/presentation/admin/AdminDashboard.jsx';
@@ -22,7 +22,7 @@ const MainRoot = () => (
     <Root>
       <Switch>
         <Route exact path="/" component={LandingPage} />
-        <Route exact path="/login" component={Login} />
+        <Route exact path="/login" component={SignInPage} />
         <Route exact path="/logout" component={Logout} />
         <Route exact path="/signup" component={SignUp} />
         <UserRoutes exact path="/dashboard" component={UserDashboard} />

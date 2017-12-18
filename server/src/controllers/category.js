@@ -99,7 +99,7 @@ export default {
           return res.status(200)
             .send({ message: 'sorry there are no categories available' });
         }
-        const allCategories = { sucess: 'true', categories };
+        const allCategories = { categories };
         res.status(200).send(allCategories);
       })
       .catch(error => res.status(500).send(error.message));

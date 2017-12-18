@@ -330,9 +330,22 @@ i.medium {
 .loan-button {
 	margin-right: 14px !important;
 }
-.btn-google {
-	background-color: #dd4b39;
+.btn-google, .google-btn{
+
+	// padding: 0px;
+	font-family: $font-stack2;
+	display: inline-block;
+	background: rgb(209, 72, 54);
+	color: rgb(255, 255, 255);
+	padding-bottom: 10px;
+	border-radius: 2px;
+	border: 1px solid transparent;
+	font-size: 16px;
+	font-weight: bold;
+	
 }
+
+
 
 .icons {
 	color: #d2623e;
