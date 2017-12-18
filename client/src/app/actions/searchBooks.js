@@ -1,21 +1,16 @@
-import { showErrorNotification } from './notifications';
-import {
-  SEARCH_BOOKS_SUCCESS,
-  SEARCH_BOOKS_FAILURE
-} from './actionType';
 import api from './api';
+import { SEARCH_BOOKS_SUCCESS } from './actionType';
+import { showErrorNotification } from './notifications';
 
-export const SearchBookSuccess = books =>
+/**
+ * 
+ * @param {object} books 
+ */
+export const searchBookSuccess = books =>
   ({
     type: SEARCH_BOOKS_SUCCESS,
     books
   });
-export const SearchBookFailure = error =>
-  ({
-    type: SEARCH_BOOKS_FAILURE,
-    error
-  });
-
 
 /**
  * async helper function: search Books
@@ -30,11 +25,8 @@ export const searchAllBooks = value => dispatch => api
   .book
   .searchBooks(value)
   .then((response) => {
-    dispatch(SearchBookSuccess(response.booksFound));
-    return (response);
+    dispatch(searchBookSuccess(response.booksFound));
   })
   .catch((error) => {
     dispatch(showErrorNotification({ error }));
-    dispatch(SearchBookFailure({ error }));
-    return error;
   });

@@ -3,7 +3,7 @@ import { Modal, Row, Input, Icon, Button } from 'react-materialize';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import CategoriesOptionList from '../../../container/categories/CategoriesOptionsList.jsx';
-import { bookDetail } from '../../../../validators/validator';
+import { bookDetailValidator } from '../../../../validators/validator';
 import { updateBookDetails } from '../../../../actions/admin/books';
 
 /**
@@ -121,7 +121,7 @@ class EditBookModal extends React.Component {
    * returns errors in string format
    */
   isValid() {
-    const { errors, isValid } = bookDetail(this.state);
+    const { errors, isValid } = bookDetailValidator(this.state);
     if (!isValid) {
       this.setState({ errors });
     } else {

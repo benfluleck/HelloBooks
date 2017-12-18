@@ -129,7 +129,6 @@ export default {
                       res
                         .status(200)
                         .send({
-                          success: true,
                           message: `${borrowedBook.book} succesfully loaned`
                         });
                     });

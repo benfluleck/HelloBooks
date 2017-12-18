@@ -4,20 +4,22 @@ import {
 } from './notifications';
 import {
   BORROW_BOOKS_SUCCESS,
-  BORROW_BOOKS_FAIL
 } from './actionType';
 import api from './api';
 
-export const BorrowBooksSuccess = books =>
+
+/**
+ * =
+ * @param {param} book
+ *
+ * @returns {void}
+ */
+export const borrowBooksSuccess = book =>
   ({
     type: BORROW_BOOKS_SUCCESS,
-    books
+    book
   });
-export const BorrowBooksRejected = error =>
-  ({
-    type: BORROW_BOOKS_FAIL,
-    error
-  });
+
 
 /*
  * async helper function: log in user
@@ -32,12 +34,11 @@ export const borrowBookAction = book => dispatch => api
   .book
   .borrowBook(book)
   .then((response) => {
-    dispatch(BorrowBooksSuccess(response));
+    dispatch(borrowBooksSuccess(response));
     dispatch(showSuccessNotification(response));
     return (response);
   })
   .catch((error) => {
     dispatch(showErrorNotification({ error }));
-    dispatch(BorrowBooksRejected({ error }));
     return ({ error });
   });

@@ -4,34 +4,22 @@ import {
 } from '../notifications';
 import {
   CREATE_BOOK_SUCCESS,
-  CREATE_BOOK_FAILURE,
   UPDATE_BOOK_SUCCESS,
-  UPDATE_BOOK_FAILURE,
   DELETE_BOOK_FAILURE,
   DELETE_BOOK_SUCCESS
 } from '../actionType';
 import api from '../api';
 
-export const CreateBookSuccess = book =>
+export const createBookSuccess = book =>
   ({
     type: CREATE_BOOK_SUCCESS,
     book
   });
-export const CreateBookFailure = error =>
-  ({
-    type: CREATE_BOOK_FAILURE,
-    error
-  });
 
-export const UpdateBookSuccess = book =>
+export const updateBookSuccess = book =>
   ({
     type: UPDATE_BOOK_SUCCESS,
     book
-  });
-export const UpdateBookFailure = error =>
-  ({
-    type: UPDATE_BOOK_FAILURE,
-    error
   });
 export const DeleteBookSuccess = book =>
   ({
@@ -57,14 +45,11 @@ export const addBook = bookDetails => dispatch => api
   .admin
   .createBook(bookDetails)
   .then((response) => {
-    dispatch(CreateBookSuccess(response));
+    dispatch(createBookSuccess(response));
     dispatch(showSuccessNotification(response));
-    return (response);
   })
   .catch((error) => {
     dispatch(showErrorNotification({ error }));
-    dispatch(CreateBookFailure({ error }));
-    return ({ error });
   });
 
 /**
@@ -78,14 +63,11 @@ export const updateBookDetails = (bookId, bookDetails) => dispatch => api
   .admin
   .updateBook(bookId, bookDetails)
   .then((response) => {
-    dispatch(UpdateBookSuccess(response));
+    dispatch(updateBookSuccess(response));
     dispatch(showSuccessNotification(response));
-    return (response);
   })
   .catch((error) => {
     dispatch(showErrorNotification({ error }));
-    dispatch(UpdateBookFailure({ error }));
-    return ({ error });
   });
 
 export const deleteBookAction = bookId => dispatch => api

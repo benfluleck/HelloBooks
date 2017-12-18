@@ -9,7 +9,7 @@ import {
   FETCH_CATEGORIES_FAILURE,
 } from '../actions/actionType';
 
-const INITIAL_STATE = {
+const InitialBooksState = {
 };
 
 /**
@@ -23,7 +23,7 @@ const INITIAL_STATE = {
  *
  * @returns {object}  state
  */
-export default function categoryReducer(state = INITIAL_STATE, action = {}) {
+export default function categoryReducer(state = InitialBooksState, action = {}) {
   switch (action.type) {
     case FETCH_CATEGORIES_SUCCESS:
       return { ...state, categoryList: action.categories.categories };

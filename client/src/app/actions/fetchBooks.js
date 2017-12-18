@@ -3,7 +3,7 @@ import {
   FETCH_ALL_RECENT_BOOKS,
   FETCH_ALL_BOOKS,
   FETCH_BOOKS_REJECTED,
-  FETCH_BOOKS_BY_USER_ID,
+  FETCH_BORROWED_BOOKS,
   FETCH_ALL_OVERDUE_BOOKS,
   FETCH_SELECTED_BOOK_FAILURE,
   FETCH_SELECTED_BOOK_SUCCESS
@@ -22,8 +22,8 @@ export const fetchBooks = books => ({
   type: FETCH_ALL_BOOKS,
   books
 });
-export const fetchBooksByUserId = books => ({
-  type: FETCH_BOOKS_BY_USER_ID,
+export const fetchBorrowedBooks = books => ({
+  type: FETCH_BORROWED_BOOKS,
   books
 });
 export const fetchOverdueBooks = books => ({
@@ -112,10 +112,9 @@ export const fetchAllBorrowedBooks = (offset, limit) => dispatch => api
   .book
   .fetchBooksByUserId(offset, limit)
   .then((response) => {
-    dispatch(fetchBooksByUserId(response));
+    dispatch(fetchBorrowedBooks(response));
   })
   .catch((error) => {
-    dispatch(showErrorNotification({ error }));
     dispatch(fetchBooksRejected({ error }));
   });
   /**

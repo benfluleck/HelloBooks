@@ -119,19 +119,19 @@ export default {
             .updateAttributes(req.body, {
               fields: Object.keys(req.body)
             })
-            .then((createdBook) => {
-              createdBook
+            .then((updatedBook) => {
+              updatedBook
                 .getCategory()
                 .then((category) => {
                   const newBook = {
-                    title: createdBook.title,
+                    title: updatedBook.title,
                     category: category.categoryName
                   };
                   res
                     .status(200)
                     .send({
                       message: `${newBook.title} has been updated`,
-                      createdBook
+                      updatedBook
                     });
                 });
             });

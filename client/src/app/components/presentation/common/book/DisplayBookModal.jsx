@@ -72,12 +72,12 @@ class DisplayBookModal extends React.Component {
           <div className="loan-status">User Loan Status: <p className="loan-status-text">Available to You</p>
           </div>
           <div className="return-date"> Specify Return Date:
-              <DatePicker
-                selected={this.state.returnDate}
-                onChange={this.handleChange.bind(this)}
-                minDate={moment().add('days')}
-                maxDate={moment().add(20, 'days')}
-              />
+            <DatePicker
+              selected={this.state.returnDate}
+              onChange={this.handleChange.bind(this)}
+              minDate={moment().add('days')}
+              maxDate={moment().add(20, 'days')}
+            />
           </div>
         </div>
       );
