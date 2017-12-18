@@ -49,8 +49,11 @@ class EditBookModal extends React.Component {
 
   /**
    * [componentWillReceiveProps description]
+   *
    * @method componentWillReceiveProps
+   *
    * @param  {[type]}  nextProps [description]
+   *
    * @return {[type]}  [description]
    */
   componentWillReceiveProps(nextProps) {

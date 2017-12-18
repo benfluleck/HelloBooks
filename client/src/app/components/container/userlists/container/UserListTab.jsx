@@ -6,7 +6,6 @@ import { getUserListAction } from '../../../../actions/admin/getUserList';
 import PaginationWrapper from '../../common/Pagination.jsx';
 import UserListTable from '../UserListTable.jsx';
 
-
 /**
  * handles the state of the User List table
  *
@@ -86,7 +85,7 @@ UserListTab.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  userList: (state.userReducer.userList) ? state.userReducer.userList : {}
+  userList: state.userReducer.userList
 });
 
 export default connect(mapStateToProps, { getUserListAction })(UserListTab);

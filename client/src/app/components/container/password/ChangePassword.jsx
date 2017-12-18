@@ -35,6 +35,18 @@ class ChangePassword extends Component {
   }
 
   /**
+   * @method componentDidMount
+   *
+   * @memberof DisplayRecentBooks
+   *
+   * @returns {object} void
+   *
+   * @memberOf DisplayRecentBooks
+  * */
+  componentWillMount() {
+    $('body').css('background-color', 'rgb(204, 204, 204)');
+  }
+  /**
    * Handle onChange events for Change Password
    *
    * @method onChange
@@ -89,6 +101,7 @@ class ChangePassword extends Component {
       return isValid;
     }
   }
+
   /**
    *
    *
@@ -104,7 +117,7 @@ class ChangePassword extends Component {
           <div className="signup center-align">
             <div className="signup-wrapper" id="change-password">
               <Row>
-                
+
                 <div className="signup-header">
                   Change Password
                 </div>

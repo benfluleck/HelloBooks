@@ -78,8 +78,7 @@ class SignUpPage extends Component {
     e.preventDefault();
     if (this.isValid()) {
       this.setState({ errors: {} });
-      this
-        .props
+      this.props
         .submit(this.state);
     }
   }

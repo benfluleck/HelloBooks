@@ -11,28 +11,35 @@ import MessageforNoBooks from
 
 /**
  * @description Component for Display Books on the Landing page for all users
+ *
  * @class DisplayLandingBooks
+ *
  * @extends {Component}
  */
 class DisplayAllBorrowedBooks extends React.Component {
   /**
    * @description dispatch actions that help populate the dashboard with books
    * fetch books for the current user
+   *
    * @method componentDidMount
+   *
    * @memberof LandingPage
+   *
    * @returns {void}
    */
   componentDidMount() {
     return (<Loader
       records={this.props.borrowedBooks}
-      callback=
-        {this.props.fetchAllBorrowedBooks(this.props.offset, this.props.limit)}
+      callback={this.props.fetchAllBorrowedBooks(this.props.offset, this.props.limit)}
     />);
   }
   /**
    * render Landing page component
+   *
    * @method render
+   *
    * @member LandingPage
+   *
    * @returns {object} component
    */
   render() {

@@ -42,9 +42,13 @@ class SignInPage extends Component {
 
   /**
    * Handle onChange events on form inputs
+   *
    * @method onChange
+   *
    * @memberof SignIn
+   *
    * @param {object} e
+   *
    * @returns {function} a function that handles change event on inputs
    */
   onChange = (e) => {
@@ -72,13 +76,12 @@ class SignInPage extends Component {
     this
       .props
       .login(this.state)
-      .then((response) => {   
-        if (response.success && response.isAdmin) {  
-          return this.props.history.push('/admin');
+      .then((response) => {
+        if (response.success && response.isAdmin) {
+          return (this.props.history.push('/admin'));
         }
 
-        this
-          .props
+        this.props
           .history
           .push('/dashboard');
       })
@@ -89,7 +92,9 @@ class SignInPage extends Component {
 
   /**
    * @returns {*} void
+   *
    * @param {any} response
+   *
    * @memberof Login
    */
   handleGoogleLogin(response) {
@@ -98,8 +103,7 @@ class SignInPage extends Component {
       .login(response.profileObj)
       .then((res) => {
         if (res) {
-          this
-            .props
+          this.props
             .history
             .push('/dashboard');
         }
@@ -107,8 +111,11 @@ class SignInPage extends Component {
   }
   /**
    * render login component
+   *
    * @method render
+   *
    * @member SignIn
+   *
    * @returns {object} component
    */
   render() {
@@ -162,11 +169,11 @@ class SignInPage extends Component {
                     <a className="btn btn-social btn-google">
                       <span className="fa fa-google" />
                       <GoogleLogin
+                       className="google-btn"
                         clientId={GOOGLE_CLIENT_ID}
                         onSuccess={this.handleGoogleLogin}
                         onFailure={this.handleGoogleLogin}
                       >
-
                         Sign in with Google
                       </GoogleLogin>
                     </a>
@@ -174,7 +181,6 @@ class SignInPage extends Component {
                 </div>
               </form>
             </Row>
-
           </div>
         </div>
         <Bottom />

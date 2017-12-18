@@ -2,10 +2,8 @@ import React from 'react';
 import { Modal, Input, Button, Row, Col, Preloader } from 'react-materialize';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getUserLevelListAction }
-  from '../../../../actions/admin/getUserLevelList';
-import { changeUserLevelAction } from
-  '../../../../actions/admin/changeUserLevel';
+import { getUserLevelListAction } from '../../../../actions/admin/getUserLevelList';
+import { changeUserLevelAction } from '../../../../actions/admin/changeUserLevel';
 import { getUserListAction } from '../../../../actions/admin/getUserList';
 
 /**
@@ -17,7 +15,7 @@ import { getUserListAction } from '../../../../actions/admin/getUserList';
  */
 class ChangeUserLevelModal extends React.Component {
   /**
-   * Creates an instance of ChangeUserLvlModal
+   * Creates an instance of ChangeUserLevelModal
    *
    * @param {object} props
    *
@@ -114,15 +112,15 @@ class ChangeUserLevelModal extends React.Component {
    */
   render() {
     if (!this.props.userLevels) {
-      return <Preloader size="big" className="center-align" />;
+      return (<Preloader size="big" className="center-align" />);
     }
     const userLevelNames = this.props.userLevels
       .map(userLevel => (
         <option
           value={userLevel.level}
           className="black-text"
+          key={userLevel.level}
         >
-          key={userLevel.id}
           {userLevel.levelName}
         </option>
 

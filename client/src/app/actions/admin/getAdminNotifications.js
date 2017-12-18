@@ -1,7 +1,4 @@
-import {
-  showErrorNotification,
-  showSuccessNotification
-} from '../notifications';
+
 import {
   GET_NOTIFICATIONS_SUCCESS,
   GET_NOTIFICATIONS_FAILURE

@@ -2,8 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Preloader } from 'react-materialize';
 import PropTypes from 'prop-types';
-import { getAdminNotificationAction }
-  from '../../../actions/admin/getAdminNotifications';
+import { getAdminNotificationAction } from '../../../actions/admin/getAdminNotifications';
 import PaginationWrapper from '../common/Pagination.jsx';
 import NotificationTable from './NotificationTable.jsx';
 
@@ -81,8 +80,7 @@ NotificationTab.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  notifications: (state.notifierReducer.notifications) ?
-    state.notifierReducer.notifications : {}
+  notifications: state.notifierReducer.notifications
 });
 
 export default

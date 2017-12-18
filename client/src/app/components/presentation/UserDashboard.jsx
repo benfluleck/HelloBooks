@@ -8,6 +8,7 @@ import DisplayAllBooks from '../container/booklist/DisplayAllBooks.jsx';
 import LoanHistoryTable from '../container/loanhistory/LoanHistory.jsx';
 import DisplayOverdueBooks from '../container/booklist/DisplayOverdueBooks.jsx';
 import getDashboardWrapper from '../container/Dashboard.jsx';
+import DisplayBookModal from '../../components/presentation/common/book/DisplayBookModal.jsx';
 
 
 /**
@@ -60,6 +61,7 @@ class UserDashboard extends React.PureComponent {
             <hr />
           </div>
         </div>
+        {/* <DisplayBookModal /> */}
       </div>
     );
   }

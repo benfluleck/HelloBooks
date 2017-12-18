@@ -36,7 +36,7 @@ class DisplayRecentBooks extends React.Component {
   }
 
   /**
-   *
+   * @method componentDidMount
    *
    * @memberof DisplayRecentBooks
    *
@@ -49,8 +49,11 @@ class DisplayRecentBooks extends React.Component {
   }
   /**
    * render Display Recent component
+   *
    * @method render
+   *
    * @member DisplayRecentBooks
+   *
    * @returns {object} component
    */
   render() {

@@ -117,7 +117,6 @@ if (isProd) {
           query: {
             presets: ['react', 'es2015', 'stage-2']
           }
-          // rules:[
         },
         {
           test: /(\.css)$/,
