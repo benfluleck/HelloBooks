@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import CategoriesOptionList from '../../../container/categories/CategoriesOptionsList.jsx';
 import { bookDetailValidator } from '../../../../validators/validator';
 import { updateBookDetails } from '../../../../actions/admin/books';
+import BookDetailForm from './BookDetailForm.jsx';
 
 /**
  *
@@ -22,26 +23,27 @@ class EditBookModal extends React.Component {
    */
   constructor(props) {
     super(props);
-    const {
-      title = '',
-      author = '',
-      description = '',
-      quantity = '',
-      bookImage = '',
-      categoryId = ''
-    } = this.props.book;
     this.state = {
-      title,
-      author,
-      description,
-      quantity,
-      bookImage,
-      imageName: '',
-      categoryId,
-      bookId: this.props.book.id,
-      errors: {}
-
+      books: {
+        title: '',
+        author: '',
+        description: '',
+        quantity: '',
+        bookImage: '',
+        imageName: '',
+        categoryId: '',
+        bookId: ''
+      },
+      errors: {
+        title: '',
+        author: '',
+        description: '',
+        quantity: '',
+        bookImage: '',
+        categoryId: ''
+      }
     };
+
     this.onChange = this.onChange.bind(this);
     this.uploadWidget = this.uploadWidget.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -182,8 +184,10 @@ class EditBookModal extends React.Component {
         fixedFooter
         header={header}
         actions={<Button onClick={this.handleSubmit}>Submit</Button>}
+
       >
-        <Row>
+        <BookDetailForm book={this.props.book} errors={this.state.errors}  onChange={this.onChange} />
+        {/* <Row>
           <div className="bookform">
             <Input
               s={6}
@@ -260,7 +264,7 @@ class EditBookModal extends React.Component {
               <span className="help-text">{this.state.errors.bookImage}</span> }
             </Row>
           </div>
-        </Row>
+        </Row> */}
       </Modal>
     );
   }

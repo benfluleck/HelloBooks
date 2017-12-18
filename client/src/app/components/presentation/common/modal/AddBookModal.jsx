@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import CategoriesOptionList from '../../../container/categories/CategoriesOptionsList.jsx';
 import { bookDetailValidator } from '../../../../validators/validator';
 import { addBook } from '../../../../actions/admin/books';
+import BookDetailForm from './BookDetailForm.jsx';
+
 
 /**
  *
@@ -16,6 +18,7 @@ class AddBookModal extends React.Component {
   /**
    *
    * Creates an instance of AdminBookModal.
+   *
    * @param {any} props
    *
    * @memberOf AdminBookModal
@@ -23,14 +26,23 @@ class AddBookModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: '',
-      author: '',
-      description: '',
-      quantity: '',
-      bookImage: '',
-      imageName: '',
-      categoryId: '',
-      errors: {}
+      book: {
+        title: '',
+        author: '',
+        description: '',
+        quantity: '',
+        bookImage: '',
+        imageName: '',
+        categoryId: ''
+      },
+      errors: {
+        title: '',
+        author: '',
+        description: '',
+        quantity: '',
+        bookImage: '',
+        categoryId: ''
+      }
 
     };
     this.onChange = this.onChange.bind(this);
@@ -41,9 +53,13 @@ class AddBookModal extends React.Component {
 
   /**
    * @description Handle onChange events on form inputs
+   *
    * @method onChange
+   *
    * @memberof AdminBookModal
+   *
    * @param {object} event
+   *
    * @returns {function} a function that handles change event on inputs
    */
   onChange(event) {
@@ -55,9 +71,13 @@ class AddBookModal extends React.Component {
   }
   /**
    * @description Handle submit events on form inputs
+   *
    * @method handleSubmit
+   *
    * @memberof AdminBookModal
+   *
    * @param {object} event
+   *
    * @returns {function} a function that handles change event on inputs
    */
   handleSubmit(event) {
@@ -82,8 +102,11 @@ class AddBookModal extends React.Component {
 
   /**
    * Handle onChange events on form inputs
+   *
    * @method isValid
+   *
    * @memberof SignIn
+   *
    * @returns {function} a validation function and returns errors in string format
    */
   isValid() {
@@ -141,84 +164,7 @@ class AddBookModal extends React.Component {
         header={header}
         actions={<Button onClick={this.handleSubmit}>Submit</Button>}
       >
-        <Row>
-          <div className="bookform">
-            <Input
-              s={6}
-              label="Book Title"
-              required
-              value={this.state.title}
-              name="title"
-              onChange={this.onChange}
-              error={this.state.errors.title}
-            >
-              <Icon>book</Icon>
-            </Input>
-            <Input
-              s={6}
-              label="Book Author"
-              required
-              value={this.state.author}
-              name="author"
-              onChange={this.onChange}
-              error={this.state.errors.author}
-            >
-              <Icon>face</Icon>
-            </Input>
-
-            <Input
-              s={6}
-              label="Book Quantity"
-              required
-              value={this.state.quantity}
-              name="quantity"
-              onChange={this.onChange}
-              error={this.state.errors.quantity}
-            >
-              <Icon>collections</Icon>
-            </Input>
-            <Row>
-              <CategoriesOptionList onChange={this.onChange} />
-            </Row>
-            <Input
-              s={12}
-              label="Book Description"
-              required
-              type="textarea"
-              value={this.state.description}
-              name="description"
-              onChange={this.onChange}
-              error={this.state.errors.description}
-            >
-              <Icon>view_headline</Icon>
-            </Input>
-            <h6>Image (Book Cover)</h6>
-            <p> If this is blank, no worries a default cover will be selected</p>
-            <Row>
-              {this.state.imageName}
-              <img
-                src={this.state.bookImage}
-                value={this.state.bookImage}
-                name="image"
-                alt={this.state.title}
-              />
-            </Row>
-            <Row>
-              <div className="upload" id="filename">
-                <button
-                  onClick={this.uploadWidget}
-                  className="btn btn-primary btn-sm upload-button"
-                >
-                  {this.state.imageName === '' && <span>Add BookCover</span>}
-
-                  {this.state.imageName !== '' && <span>Change Book Cover</span>}
-                </button>
-              </div>
-              {this.state.errors.bookImage &&
-              <span className="help-text">{this.state.errors.bookImage}</span> }
-            </Row>
-          </div>
-        </Row>
+        <BookDetailForm book={this.state.book} errors={this.state.errors}/>
       </Modal>
     );
   }

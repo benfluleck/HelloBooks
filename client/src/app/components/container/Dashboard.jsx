@@ -22,7 +22,6 @@ const getDashboardWrapper = (DashboardWrapper) => {
     /**
      *
      *
-     *
      * @returns {component} DashboardWrapper
      *
      * @memberOf Dashboard

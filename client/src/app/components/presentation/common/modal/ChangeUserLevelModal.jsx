@@ -128,12 +128,12 @@ class ChangeUserLevelModal extends React.Component {
     return (
       <Modal
         id="change-user-level-modal"
-        fixedFooter
         header="Change User Level"
       >
         <div className="change-level-modal">
           <Row>
             <div className="disabled">
+              <img src={this.props.selectedUser.bookImage} alt={this.props.title} />
               <h5> Username : &nbsp;{this.props.selectedUser.username}
               </h5>
             </div>
