@@ -102,7 +102,7 @@ class Book extends React.Component {
     this
       .props
       .fetchSelectedBook(book.id);
-    // $('#admin-book-modal').modal('open');
+    $('#admin-book-modal').modal('open');
   }
   /**
    *
@@ -123,7 +123,6 @@ class Book extends React.Component {
                   <Button
                     floating
                     icon="mode_edit"
-                    href="#admin-book-modal"
                     onClick={() => this.handleEdit(this.props.book)}
                     className="#f57c00 orange darken-2 book-icons-1 modal-trigger"
                     waves="light"
