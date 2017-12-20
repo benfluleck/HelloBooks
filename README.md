@@ -148,8 +148,8 @@ Contributions to this project are welcomed by all, If you need to contribute to 
 * **Fork** the repository
 * Follow [Installation and Setup](#installation-and-setup) as explained earlier
 * Create a branch off **development** for the feature you wish to add
-* Make neccessary changes, commit and raise a pull request against develop
-**Note** when making contributions, please endevour to follow the [Airbnb](https://github.com/airbnb/javascript) javascript style guide. check out the [wiki]
+* Make neccessary changes, commit and raise a pull request against develop, conventions can be found on the wiki page
+**Note** when making contributions, please endevour to follow the [Airbnb](https://github.com/airbnb/javascript) javascript style guide. check out the [wiki page](https://github.com/benfluleck/HelloBooks/wiki)
 
 ## License
 This project is authored by **Benny Ogidan** (benny.ogidan@andela.com) and is licensed for your use, modification and distribution under the **MIT** license.
