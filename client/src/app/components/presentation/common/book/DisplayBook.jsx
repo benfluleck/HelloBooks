@@ -124,7 +124,7 @@ class Book extends React.Component {
                     floating
                     icon="mode_edit"
                     onClick={() => this.handleEdit(this.props.book)}
-                    className="#f57c00 orange darken-2 book-icons-1 modal-trigger"
+                    className="#f57c00 orange darken-2 book-icons-1"
                     waves="light"
                   >
                     Edit
@@ -144,7 +144,6 @@ class Book extends React.Component {
           </div>
           <div className="card">
             <a
-              className="modal-trigger"
               href="#modal"
               onClick={() => this.handleBookClick(this.props.book)}
               tabIndex="-1"
