@@ -1,8 +1,7 @@
 import React from 'react';
-import { Modal, Row, Input, Icon, Button } from 'react-materialize';
+import { Modal, Button } from 'react-materialize';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import CategoriesOptionList from '../../../container/categories/CategoriesOptionsList.jsx';
 import { bookDetailValidator } from '../../../../validators/validator';
 import { updateBookDetails } from '../../../../actions/admin/books';
 import BookDetailForm from './BookDetailForm.jsx';
@@ -24,7 +23,7 @@ class EditBookModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      books: {
+      book: {
         title: '',
         author: '',
         description: '',
@@ -68,7 +67,7 @@ class EditBookModal extends React.Component {
         description: nextProps.book.description,
         quantity: nextProps.book.quantity,
         imageName: '',
-        categoryId: '',
+        categoryId: nextProps.book.categoryId,
         bookImage: nextProps.book.bookImage,
         bookId: nextProps.book.id
       });
@@ -106,6 +105,7 @@ class EditBookModal extends React.Component {
    */
   handleSubmit(event) {
     event.preventDefault();
+
     if (this.isValid()) {
       this.setState({ errors: {} });
       this.props.updateBookDetails(this.state.bookId, this.state);
@@ -146,8 +146,9 @@ class EditBookModal extends React.Component {
         max_file_size: 1500000,
         max_image_width: 325,
         max_image_height: 499,
-        multiple: false
-
+        multiple: false,
+        cropping: "server",
+        resource_type: "image"
       },
       (error, result) => {
         this.setState({
@@ -186,102 +187,29 @@ class EditBookModal extends React.Component {
         actions={<Button onClick={this.handleSubmit}>Submit</Button>}
 
       >
-        <BookDetailForm book={this.props.book} errors={this.state.errors}  onChange={this.onChange} />
-        {/* <Row>
-          <div className="bookform">
-            <Input
-              s={6}
-              label="Book Title"
-              required
-              value={this.state.title}
-              name="title"
-              onChange={this.onChange}
-              error={this.state.errors.title}
-            >
-              <Icon>book</Icon>
-            </Input>
-            <Input
-              s={6}
-              label="Book Author"
-              required
-              value={this.state.author}
-              name="author"
-              onChange={this.onChange}
-              error={this.state.errors.author}
-            >
-              <Icon>face</Icon>
-            </Input>
-
-            <Input
-              s={6}
-              label="Book Quantity"
-              required
-              value={this.state.quantity}
-              name="quantity"
-              onChange={this.onChange}
-              error={this.state.errors.quantity}
-            >
-              <Icon>collections</Icon>
-            </Input>
-            <Row>
-              <CategoriesOptionList onChange={this.onChange} />
-            </Row>
-            <Input
-              s={12}
-              label="Book Description"
-              required
-              type="textarea"
-              value={this.state.description}
-              name="description"
-              onChange={this.onChange}
-              error={this.state.errors.description}
-            >
-              <Icon>view_headline</Icon>
-            </Input>
-            <h6>Image (Book Cover)</h6>
-            <p> If this is blank, no worries a default cover will be selected</p>
-            <Row>
-              {this.state.imageName}
-              <img
-                src={this.state.bookImage}
-                value={this.state.bookImage}
-                name="image"
-                alt={this.state.title}
-              />
-            </Row>
-            <Row>
-              <div className="upload" id="filename">
-                <button
-                  onClick={this.uploadWidget}
-                  className="btn btn-primary btn-sm upload-button"
-                >
-                  {this.state.imageName === '' && <span>Add BookCover</span>}
-
-                  {this.state.imageName !== '' && <span>Change Book Cover</span>}
-                </button>
-              </div>
-              {this.state.errors.bookImage &&
-              <span className="help-text">{this.state.errors.bookImage}</span> }
-            </Row>
-          </div>
-        </Row> */}
+        <BookDetailForm
+          book={this.state}
+          onChange={this.onChange}
+          uploadWidget={this.uploadWidget}
+          errors={this.state.errors}
+        />
       </Modal>
     );
   }
 }
 
 EditBookModal.defaultProps = {
-  header: 'Edit Book'
+  header: 'Edit Book',
+  book: null
 };
 
 
 EditBookModal.propTypes = {
-  // book: PropTypes.shape(PropTypes.arrayOf({
-  //   title: PropTypes.string,
-  //   author: PropTypes.string,
-  //   quantity: PropTypes.string,
-  //   description: PropTypes.string,
-  // })).isRequired,
+  book: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.object
+  ]),
   header: PropTypes.string,
   updateBookDetails: PropTypes.func.isRequired
 };

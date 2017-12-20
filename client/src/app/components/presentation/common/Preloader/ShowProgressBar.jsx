@@ -9,7 +9,7 @@ const ShowProgressBar = () => (
   <Row>
     <Col l={4} s={4} m={4}>
           Loading....
-        <ProgressBar />
+      <ProgressBar />
     </Col>
   </Row>
 );

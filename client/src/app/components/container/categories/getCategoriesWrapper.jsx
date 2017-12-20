@@ -73,8 +73,7 @@ const getCategoriesWrapper = (WrappedComponent) => {
 
   GetCategories.propTypes = {
     categoryList: PropTypes
-      .arrayOf(PropTypes.shape({ key: PropTypes.number }))
-      ,
+      .arrayOf(PropTypes.shape({ key: PropTypes.number })),
     fetchBooksForCategories: PropTypes.func,
     onChange: PropTypes.func
   };
@@ -88,7 +87,7 @@ const getCategoriesWrapper = (WrappedComponent) => {
   const mapStateToProps = ({
     categoryReducer
   }) => ({
-    categoryList: categoryReducer.categoryList
+    categoryList: categoryReducer.categoryList,
   });
 
   return connect(

@@ -76,8 +76,7 @@ class AddCategory extends React.Component {
    *
    * @memberOf AddCategory
    */
-  handleClick(event) {
-    event.preventDefault();
+  handleClick() {
     if (this.isValid()) {
       this.setState({ errors: {} });
       this
@@ -112,7 +111,10 @@ class AddCategory extends React.Component {
           <Icon>book</Icon>
         </Input>
         <Col s={6} l={3}>
-          <Button className="add-category-btn" onClick={() => this.handleClick(event)}>
+          <Button
+            className="add-category-btn"
+            onClick={() => this.handleClick()}
+          >
             Add Category
           </Button>
         </Col>

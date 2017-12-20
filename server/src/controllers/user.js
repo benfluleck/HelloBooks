@@ -8,9 +8,13 @@ const { User, Userlevel } = models;
 const userController = {
   /**
   * Route: POST: /auth/users/signin
+  *
   * @description Create a new user
+  *
   * @param {Object} req request object
+  *
   * @param {Object} res response object
+  *
   * @returns {void|Response} response
   */
   create(req, res) {
@@ -66,9 +70,13 @@ const userController = {
   /**
    *
    * Route: POST: /auth/users/sigin
+   *
    * @description User sign in
+   *
    * @param {Object} req request object
+   *
    * @param {Object} res response object
+   *
    * @returns {void|Response} status, send
    *
    */

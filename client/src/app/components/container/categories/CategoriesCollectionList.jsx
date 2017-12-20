@@ -82,8 +82,6 @@ class CategoriesCollectionList extends React.Component {
       text: "You won't be able to revert this!",
       type: 'warning',
       showCancelButton: true,
-      // confirmButtonColor: '#3085d6',
-      // cancelButtonColor: '#d33',
       confirmButtonText: 'Yes, delete it!',
       cancelButtonText: 'No, cancel!',
       confirmButtonClass: 'btn btn-success',
@@ -132,18 +130,17 @@ class CategoriesCollectionList extends React.Component {
             <span className="right">
               <Link
                 to="#"
-                className="waves-effect "
-                onClick={() => this.deleteCategory(category.id)}
-              >
-                <Icon small className="icons">delete</Icon>
-              </Link>
-
-              <Link
-                to="#"
                 className="waves-effect"
                 onClick={() => this.editCategory(category.id)}
               >
                 <Icon small className="icons">edit</Icon>
+              </Link>
+              <Link
+                to="#"
+                className="waves-effect "
+                onClick={() => this.deleteCategory(category.id)}
+              >
+                <Icon small className="icons">delete</Icon>
               </Link>
             </span>
           </div>

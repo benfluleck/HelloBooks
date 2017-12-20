@@ -15,7 +15,7 @@ const bookDetailValidator = (state) => {
     errors.title = 'The book title should be between 2 and 30.';
   }
 
-  if (!isLength(state.description, 10, 200)) {
+  if (!isLength(state.description, 10)) {
     errors.description = 'The book description should be between 10 and 300.';
   }
 

@@ -26,7 +26,7 @@ let bookId;
 let zerobookId;
 let testbookId;
 let token;
-const testdate = new Date('2017-12-18');
+const testdate = new Date('2017-12-20');
 const nulluserId = '';
 
 

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Input, Col, Row, Icon, Button } from 'react-materialize';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { GoogleLogin } from 'react-google-login';
 import { login } from '../../../actions/authenticate';
@@ -40,6 +39,16 @@ class SignInPage extends Component {
       .bind(this);
   }
 
+  /**
+   *
+   *
+   * @memberof SignInPage
+   *
+   * @returns {void}
+   */
+  componentWillMount() {
+    localStorage.removeItem('state');
+  }
   /**
    * Handle onChange events on form inputs
    *
@@ -152,9 +161,6 @@ class SignInPage extends Component {
                   </Input>
 
                   <Col s={12} l={8}>
-                    {/* <NavLink to='/forgetpass'>
-                      <p>Forgotten Password</p>
-                    </NavLink> */}
                     <NavLink to="/signup">
                       <p>Sign Up</p>
                     </NavLink>
@@ -169,7 +175,7 @@ class SignInPage extends Component {
                     <a className="btn btn-social btn-google">
                       <span className="fa fa-google" />
                       <GoogleLogin
-                       className="google-btn"
+                        className="google-btn"
                         clientId={GOOGLE_CLIENT_ID}
                         onSuccess={this.handleGoogleLogin}
                         onFailure={this.handleGoogleLogin}

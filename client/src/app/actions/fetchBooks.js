@@ -74,7 +74,6 @@ export const fetchOverdueBookstoDashboard = (offset, limit) => dispatch => api
   .fetchOverdueBooks(offset, limit)
   .then((response) => {
     dispatch(fetchOverdueBooks(response));
-    return response;
   })
   .catch((error) => {
     dispatch(showErrorNotification({ error }));
@@ -94,18 +93,20 @@ export const fetchAllRecentBooks = (offset, limit) => dispatch => api
   .fetchRecentBooks(offset, limit)
   .then((response) => {
     dispatch(fetchRecentBooks(response));
-    return response;
   })
   .catch((error) => {
-    dispatch(showErrorNotification({ error }));
     dispatch(fetchBooksRejected({ error }));
   });
 
 /**
  * async helper function:fetch books by Id
- * @function fetchAllBooksbyId
+ *
+ * @function fetchAllBorrowedooks
+ *
  * @param {object} offset
+ *
  * @param {object} limit
+ *
  * @returns {function} asynchronous action
  */
 export const fetchAllBorrowedBooks = (offset, limit) => dispatch => api
@@ -115,12 +116,16 @@ export const fetchAllBorrowedBooks = (offset, limit) => dispatch => api
     dispatch(fetchBorrowedBooks(response));
   })
   .catch((error) => {
+    dispatch(showErrorNotification({ error }));
     dispatch(fetchBooksRejected({ error }));
   });
   /**
  * async helper function:fetch selected book
+ *
  * @function fetchSelectedBook
+ *
  * @param {number} bookId
+ *
  * @returns {function} asynchronous action
  */
 export const fetchSelectedBook = bookId => dispatch => api

@@ -2,8 +2,10 @@ import React from 'react';
 import { Modal, Input, Button, Row, Col, Preloader } from 'react-materialize';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getUserLevelListAction } from '../../../../actions/admin/getUserLevelList';
-import { changeUserLevelAction } from '../../../../actions/admin/changeUserLevel';
+import { getUserLevelListAction } from
+  '../../../../actions/admin/getUserLevelList';
+import { changeUserLevelAction } from
+  '../../../../actions/admin/changeUserLevel';
 import { getUserListAction } from '../../../../actions/admin/getUserList';
 
 /**
@@ -26,8 +28,7 @@ class ChangeUserLevelModal extends React.Component {
     this.state = {
       newLevelId: '',
       userLevel: '',
-      maxDays: '',
-      maxBooks: ''
+
     };
     this.onChange = this.onChange.bind(this);
     this.onClick = this.onClick.bind(this);
@@ -133,7 +134,10 @@ class ChangeUserLevelModal extends React.Component {
         <div className="change-level-modal">
           <Row>
             <div className="disabled">
-              <img src={this.props.selectedUser.bookImage} alt={this.props.title} />
+              <img
+                src={this.props.selectedUser.bookImage}
+                alt={this.props.selectedUser.title}
+              />
               <h5> Username : &nbsp;{this.props.selectedUser.username}
               </h5>
             </div>
@@ -176,16 +180,22 @@ class ChangeUserLevelModal extends React.Component {
 }
 
 
+ChangeUserLevelModal.defaultProps = {
+  selectedUser: [],
+  userLevels: []
+};
+
 ChangeUserLevelModal.propTypes = {
-  // userLevels: PropTypes.arrayOf(PropTypes.arrayOf({
-  //   map: PropTypes.arrayOf({
-  //     level: PropTypes.number
-  //   })
-  // })).isRequired,
-  // selectedUser: PropTypes.shape(PropTypes.arrayOf({
-  //   username: PropTypes.string,
-  //   level: PropTypes.number
-  // })).isRequired,
+  userLevels: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.array
+  ]),
+  selectedUser: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.array
+  ]),
   getUserListAction: PropTypes.func.isRequired,
   changeUserLevelAction: PropTypes.func.isRequired,
   getUserLevelListAction: PropTypes.func.isRequired,

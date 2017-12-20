@@ -27,11 +27,13 @@ export default function imageReducer(state = INITIAL_STATE, action = {}) {
         url: action.response.secureUrl,
         upload: 'Success'
       };
+
     case UPLOAD_TO_CLOUD_IMAGE_FAILURE:
       return {
         ...state,
         error: action.response
       };
+
     default:
       return state;
   }

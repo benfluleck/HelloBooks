@@ -80,5 +80,4 @@ export const deleteBookAction = bookId => dispatch => api
   .catch((error) => {
     dispatch(showErrorNotification({ error }));
     dispatch(DeleteBookFailure({ error }));
-    return ({ error });
   });

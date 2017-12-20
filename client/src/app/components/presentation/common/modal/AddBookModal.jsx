@@ -1,8 +1,7 @@
 import React from 'react';
-import { Modal, Row, Input, Icon, Button } from 'react-materialize';
+import { Modal, Button } from 'react-materialize';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import CategoriesOptionList from '../../../container/categories/CategoriesOptionsList.jsx';
 import { bookDetailValidator } from '../../../../validators/validator';
 import { addBook } from '../../../../actions/admin/books';
 import BookDetailForm from './BookDetailForm.jsx';
@@ -107,7 +106,8 @@ class AddBookModal extends React.Component {
    *
    * @memberof SignIn
    *
-   * @returns {function} a validation function and returns errors in string format
+   * @returns {function} a validation function
+   *  and returns errors in string format
    */
   isValid() {
     const { errors, isValid } = bookDetailValidator(this.state);
@@ -133,7 +133,9 @@ class AddBookModal extends React.Component {
         max_file_size: 1500000,
         max_image_width: 325,
         max_image_height: 499,
-        multiple: false
+        multiple: false,
+        cropping: "server",
+        resource_type: "image"
 
       },
       (error, result) => {
@@ -164,7 +166,12 @@ class AddBookModal extends React.Component {
         header={header}
         actions={<Button onClick={this.handleSubmit}>Submit</Button>}
       >
-        <BookDetailForm book={this.state.book} errors={this.state.errors}/>
+        <BookDetailForm
+          book={this.state}
+          onChange={this.onChange}
+          errors={this.state.errors}
+          uploadWidget={this.uploadWidget}
+        />
       </Modal>
     );
   }

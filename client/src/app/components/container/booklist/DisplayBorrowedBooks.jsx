@@ -30,7 +30,10 @@ class DisplayAllBorrowedBooks extends React.Component {
   componentDidMount() {
     return (<Loader
       records={this.props.borrowedBooks}
-      callback={this.props.fetchAllBorrowedBooks(this.props.offset, this.props.limit)}
+      callback={this.props.fetchAllBorrowedBooks(
+        this.props.offset,
+        this.props.limit
+      )}
     />);
   }
   /**
@@ -43,7 +46,8 @@ class DisplayAllBorrowedBooks extends React.Component {
    * @returns {object} component
    */
   render() {
-    if (!this.props.borrowedBooks || this.props.borrowedBooks.books.length === 0) {
+    if (!this.props.borrowedBooks ||
+      this.props.borrowedBooks.books.length === 0) {
       return <MessageforNoBooks />;
     }
     const getAllBooks = this.props.borrowedBooks.books.map(book => (

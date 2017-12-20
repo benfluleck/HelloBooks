@@ -9,8 +9,11 @@ import { fetchAllRecentBooks } from '../../../actions/fetchBooks';
 
 /**
  * @description Component for Display Books on the Landing page for all users
+ *
  * @class DisplayLandingBooks
+ *
  * @extends {React.Component} DisplayLandingBooks
+ *
  * @return {Component} DisplayLandingBooks
  */
 class DisplayRecentBooks extends React.Component {
@@ -89,9 +92,6 @@ DisplayRecentBooks.propTypes = {
     pagination: PropTypes.object,
     books: PropTypes.arrayOf(PropTypes.shape({
       title: PropTypes.string.isRequired,
-      author: PropTypes.string.isRequired,
-      // quantity: PropTypes.number.isRequired,
-      description: PropTypes.string,
     }))
   }),
   fetchAllRecentBooks: PropTypes.func.isRequired,

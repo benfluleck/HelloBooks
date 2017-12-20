@@ -14,7 +14,6 @@ import {
   FETCH_BOOKS_FOR_CATEGORIES_FAILURE,
   FETCH_SELECTED_BOOK_SUCCESS,
   FETCH_SELECTED_BOOK_FAILURE,
-  CREATE_BOOK_FAILURE,
   CREATE_BOOK_SUCCESS,
   UPDATE_BOOK_SUCCESS,
   DELETE_BOOK_FAILURE,
@@ -46,7 +45,7 @@ export default function bookReducer(state = {
             ...state
               .allBooksList
               .books
-              .filter(book => book.bookId !== action.book.updatedBook.id),
+              .filter(book => book.id !== action.book.updatedBook.id),
           ]
         }
       };
@@ -95,13 +94,6 @@ export default function bookReducer(state = {
         error: action
       };
 
-    case BORROW_BOOKS_SUCCESS:
-
-      return {
-        ...state,
-        loanbooks: action
-      };
-
     case FETCH_BOOKS_FOR_CATEGORIES_SUCCESS:
 
       return {
@@ -126,12 +118,6 @@ export default function bookReducer(state = {
             ...state.allBooksList.books]
         }
       };
-    case CREATE_BOOK_FAILURE:
-
-      return {
-        ...state,
-        error: action
-      };
 
     case RETURN_BOOKS_SUCCESS:
 
@@ -152,14 +138,6 @@ export default function bookReducer(state = {
             .filter(book => book.bookId !== action.returnedBook.id)
         }
 
-      };
-
-    case RETURN_BOOKS_FAIL:
-
-      return {
-        ...state,
-        returnedbooks: {},
-        error: action
       };
 
     case LOAN_HISTORY_FAILURE:

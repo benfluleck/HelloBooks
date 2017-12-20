@@ -37,7 +37,7 @@ const fieldMap = (bookId, categoryId) => ({
  *
  * @param {function} next
  *
- * @returns {void} boolean
+ * @returns {void|response} res
  */
 export default (req, res, next) => {
   const path = req.path;

@@ -1,3 +1,16 @@
+/**
+  * Route: POST: /auth/users/signin
+  *
+  * @description Middleware that signs user in with google Authentication
+  *
+  * @param {object} req request object
+  *
+  * @param {object} res response object
+  *
+  * @param {object} next
+
+  * @returns {next} response
+  */
 export default (req, res, next) => {
   if (req.body.googleId) {
     const googleId = req.body.googleId;

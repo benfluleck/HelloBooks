@@ -66,11 +66,9 @@ const fetchBooksForCategories = (categoryId, offset, limit) => (dispatch) => {
     .fetchAllBooksByCategories(categoryId, offset, limit)
     .then((response) => {
       dispatch(fetchBooksCategoriesSuccess(response));
-      return response;
     })
     .catch((error) => {
       dispatch(showErrorNotification({ error }));
       dispatch(fetchBooksCategoriesFailure({ error }));
-      return error;
     });
 };

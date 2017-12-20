@@ -44,7 +44,7 @@ class DisplayAllBooks extends React.Component {
 
   /**
    *
-   * @returns {function} openModal
+   * @returns {function} openAdminBook Modal
    *
    * @memberof DisplayAllBooks
    *
@@ -52,6 +52,7 @@ class DisplayAllBooks extends React.Component {
   handleClick() {
     $('#add-admin-book-modal').modal('open');
   }
+
 
   /**
    * render Display All Books page component

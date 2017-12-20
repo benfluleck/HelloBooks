@@ -3,8 +3,9 @@ import { SEARCH_BOOKS_SUCCESS } from './actionType';
 import { showErrorNotification } from './notifications';
 
 /**
- * 
- * @param {object} books 
+ * @description Search all books
+ * @param {object} books
+ * @returns {void}
  */
 export const searchBookSuccess = books =>
   ({

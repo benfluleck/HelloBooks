@@ -313,7 +313,7 @@ export default {
           if (borrowedBooks) {
             return res
               .status(409)
-              .send({ 
+              .send({
                 message: 'You can\'t delete this' +
                 'book while there is a copy still out on loan'
               });

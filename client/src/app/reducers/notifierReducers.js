@@ -24,11 +24,13 @@ export default function notifierReducer(state = INITIAL_STATE, action = {}) {
         ...state,
         notifications: action.data
       };
+
     case GET_NOTIFICATIONS_FAILURE:
       return {
         ...state,
         error: action.error
       };
+
     default:
       return state;
   }

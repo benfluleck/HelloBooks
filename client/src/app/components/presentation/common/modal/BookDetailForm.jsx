@@ -1,8 +1,11 @@
 import React from 'react';
-import { Row, Input, Icon } from 'react-materialize';
+import { Row, Col } from 'react-materialize';
 import PropTypes from 'prop-types';
 // import { connect } from 'react-redux';
-import CategoriesOptionList from '../../../container/categories/CategoriesOptionsList.jsx';
+import
+CategoriesOptionList from
+  '../../../container/categories/CategoriesOptionsList.jsx';
+import TextInput from './form/TextInput.jsx';
 // import { bookDetailValidator } from '../../../../validators/validator';
 // import { updateBookDetails } from '../../../../actions/admin/books';
 
@@ -21,75 +24,74 @@ class BookDetailForm extends React.PureComponent {
   /**
    *
    *
-   * @returns
+   * @returns {Component} Bookdetails
+   *
    * @memberof BookDetailsForm
-
-   *
-   *
-   * @returns
-   *
-   * @memberOf BookDetailsForm
    */
   render() {
     const {
-      title, author, quantity, description, bookImage, imageName
+      title, author, quantity, description, bookImage, imageName, categoryId
     } = this.props.book;
- 
+
     const { errors } = this.props;
     const onChange = this.props.onChange;
-
+    const onClick = this.props.uploadWidget;
     return (
       <Row>
-        <div className="bookform">
-          <Input
-            s={6}
-            label="Book Title"
-            required
-            defaultValue={title}
-            name="title"
-            onChange={onChange}
-            error={errors.title}
-          >
-            <Icon>book</Icon>
-          </Input>
-          <Input
-            s={6}
-            label="Book Author"
-            required
-            defaultValue={author}
-            name="author"
-            onChange={onChange}
-            error={errors.author}
-          >
-            <Icon>face</Icon>
-          </Input>
 
-          <Input
-            s={6}
-            label="Book Quantity"
-            required
-            defaultValue={quantity}
-            name="quantity"
-            onChange={onChange}
-            error={errors.quantity}
-          >
-            <Icon>collections</Icon>
-          </Input>
+        <div className="bookform">
           <Row>
-            <CategoriesOptionList onChange={onChange} />
+            <Col l={6}>
+              <TextInput
+                name="title"
+                value={title}
+                label="Title"
+                type="text"
+                onChange={onChange}
+                errors={errors.title}
+                prefix="book"
+              />
+            </Col>
+            <Col l={6}>
+              <TextInput
+                type="text"
+                name="author"
+                value={author}
+                onChange={onChange}
+                errors={errors.author}
+                label="Author"
+                prefix="face"
+              />
+            </Col>
           </Row>
-          <Input
-            s={12}
-            label="Book Description"
-            required
+          <Row>
+            <Col l={6} m={3} s={6}>
+              <TextInput
+                name="quantity"
+                type="text"
+                value={quantity}
+                onChange={onChange}
+                errors={errors.quantity}
+                label="Quantity"
+                prefix="collections"
+              />
+            </Col>
+            <Col l={6} m={9} s={12}>
+              <CategoriesOptionList
+                categoryId={categoryId}
+                onChange={onChange}
+              />
+            </Col>
+          </Row>
+          <TextInput
             type="textarea"
-            defaultValue={description}
             name="description"
+            value={description}
             onChange={onChange}
-            error={errors.description}
-          >
-            <Icon>view_headline</Icon>
-          </Input>
+            errors={errors.description}
+            label="Description"
+            prefix="view_headline"
+          />
           <h6>Image (Book Cover)</h6>
           <p> If this is blank, no worries a default cover will be selected</p>
           <Row>
@@ -104,7 +106,7 @@ class BookDetailForm extends React.PureComponent {
           <Row>
             <div className="upload" id="filename">
               <button
-                onClick={this.props.uploadWidget}
+                onClick={onClick}
                 className="btn btn-primary btn-sm upload-button"
               >
                 {imageName === '' && <span>Add BookCover</span>}
@@ -121,5 +123,26 @@ class BookDetailForm extends React.PureComponent {
   }
 }
 
+BookDetailForm.propTypes = {
+  book: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.object
+  ]),
+  errors: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.object
+  ]),
+  onChange: PropTypes.func.isRequired,
+  uploadWidget: PropTypes.func
+
+};
+
+BookDetailForm.defaultProps = {
+  book: [],
+  errors: {},
+  uploadWidget: null
+};
 
 export default BookDetailForm;

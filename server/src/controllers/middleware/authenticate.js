@@ -20,15 +20,27 @@ const authenticate = (req, res, next) => {
   if (token) {
     jwt.verify(token, process.env.JWT_SECRET, (error, decoded) => {
       if (error) {
-        return res.status(401).json({ token: null, message: 'Unauthorised access' });
+        return res.status(401).json({
+          token: null,
+          state: {},
+          message: 'Unauthorised access'
+        });
       }
       req.user = decoded;
       next();
     });
   } else if (token === '') {
-    res.status(403).send({ token: null, message: 'Forbidden' });
+    res.status(403).send({
+      token: null,
+      state: null,
+      message: 'Forbidden'
+    });
   } else {
-    res.status(401).send({ token: null, message: 'Unauthorised access' });
+    res.status(401).send({
+      token: null,
+      state: {},
+      message: 'Unauthorised access'
+    });
   }
 };
 
@@ -71,11 +83,17 @@ const getJWT = (id, isAdmin) =>
       },
       (error, token) => {
         if (error) {
-          reject(new Error({ status: 'Error', message: 'Error generating token' }));
+          reject(new Error({
+            status: 'Error',
+            message: 'Error generating token'
+          }));
         } else if (token) {
           resolve({ status: 'Success', token });
         } else {
-          reject(new Error({ status: 'Error', message: 'Error generating token' }));
+          reject(new Error({
+            status: 'Error',
+            message: 'Error generating token'
+          }));
         }
       }
     );

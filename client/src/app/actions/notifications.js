@@ -20,7 +20,8 @@ export const showErrorNotification = ({ message, error }) => (dispatch) => {
       kind: 'info',
       dismissAfter: 2500
     }));
-    localStorage.clear();
+    localStorage.removeItem('state');
+    localStorage.removeItem('token');
     setAuthorizationToken(false);
   } else {
     dispatch(notifSend({
