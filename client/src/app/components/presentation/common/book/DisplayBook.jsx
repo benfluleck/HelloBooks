@@ -102,7 +102,9 @@ class Book extends React.Component {
     this
       .props
       .fetchSelectedBook(book.id);
-      //  $('#admin-book-modal').modal('open');
+    $(document).ready(() => {
+      $('#admin-book-modal').modal('open');
+    });
   }
   /**
    *
