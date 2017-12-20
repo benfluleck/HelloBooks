@@ -91,7 +91,8 @@ class DisplayAllBooks extends React.Component {
                 <Button
                   floating
                   onClick={() => this.handleClick()}
-                  className="#ef6c00 orange darken-3 add-book-btn"
+                  className="#ef6c00 orange darken-3 add-book-btn modal-trigger"
+                  href="#add-admin-book-modal"
                   waves="light"
                   icon="add"
                 />
