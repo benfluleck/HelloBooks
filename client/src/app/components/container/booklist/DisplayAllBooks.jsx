@@ -121,12 +121,10 @@ class DisplayAllBooks extends React.Component {
           fetch={this.props.fetchAllBooks}
           numberOfRecords={this.props.limit}
         />
-        {this.props.isAdmin && this.props.allBooksList ?
-          <div>
-            <EditBookModal />
-            <AddBookModal />
-          </div> : null
-        }
+        <div>
+          <EditBookModal />
+          <AddBookModal />
+        </div>
       </div>
     );
   }

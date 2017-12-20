@@ -122,16 +122,13 @@ class Book extends React.Component {
             {this.props.isAdmin === true
               ? (
                 <div>
-                  <Button
-                    floating
-                    icon="mode_edit"
+                  <a
                     href="#admin-book-modal"
                     onClick={() => this.handleEdit(this.props.book)}
-                    className="#f57c00 orange darken-2 book-icons-1 modal-trigger"
-                    waves="light"
-                  >
+                    className="btn-floating #f57c00 orange  waves-effect waves-light darken-2 book-icons-1 modal-trigger"
+                  ><i class="large material-icons">mode_edit</i>
                     Edit
-                  </Button>
+                  </a>
 
                   <Button
                     onClick={() => this.handleDelete(this.props.book.id)}
