@@ -301,7 +301,7 @@ describe('HelloBooks', () => {
         });
     });
     it('should return 200 when searching all books', (done) => {
-      chai.request(app).get('/api/v1/books/search?searchTerm=Ben').set('x-access-token', token)
+      chai.request(app).get('/api/v1/books/search?searchTerm=Sta').set('x-access-token', token)
         .end((err, res) => {
           expect(res.status)
             .to

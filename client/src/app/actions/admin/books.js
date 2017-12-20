@@ -5,7 +5,6 @@ import {
 import {
   CREATE_BOOK_SUCCESS,
   UPDATE_BOOK_SUCCESS,
-  DELETE_BOOK_FAILURE,
   DELETE_BOOK_SUCCESS
 } from '../actionType';
 import api from '../api';
@@ -21,16 +20,12 @@ export const updateBookSuccess = book =>
     type: UPDATE_BOOK_SUCCESS,
     book
   });
-export const DeleteBookSuccess = book =>
+export const deleteBookSuccess = book =>
   ({
     type: DELETE_BOOK_SUCCESS,
     book
   });
-export const DeleteBookFailure = error =>
-  ({
-    type: DELETE_BOOK_FAILURE,
-    error
-  });
+
 
 /**
  * async helper function: add Book to the database
@@ -74,10 +69,9 @@ export const deleteBookAction = bookId => dispatch => api
   .admin
   .deleteBook(bookId)
   .then((response) => {
-    dispatch(DeleteBookSuccess(response));
+    dispatch(deleteBookSuccess(response));
     dispatch(showSuccessNotification(response));
   })
   .catch((error) => {
     dispatch(showErrorNotification({ error }));
-    dispatch(DeleteBookFailure({ error }));
   });

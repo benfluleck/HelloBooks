@@ -5,9 +5,13 @@ import { PropTypes } from 'prop-types';
 
 /**
  * @description Component for Navigation
+ *
  * @class NavigationBar
+ *
  * @param {object} props
+ *
  * @extends {Component}
+ *
  * @return {object} Navigation fixed navigation bar
  */
 const Navigation = (props) => {

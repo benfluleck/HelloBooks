@@ -46,9 +46,13 @@ const authenticate = (req, res, next) => {
 
 /**
  * @description Decode Token for the server side processes
+ *
  * @param {object} req
+ *
  * @param {object} res
+ *
  * @param {object} next
+ *
  * @returns {object} res
  */
 const decodeToken = (req, res, next) => {

@@ -2,10 +2,14 @@ import bookReducer from '../../src/app/reducers/bookReducers';
 import { searchBookSuccess } from '../../src/app/actions/searchBooks';
 import { fetchBorrowedBooks,
   fetchBooks,
+  fetchRecentBooks,
   fetchSelectedBookSuccess,
 } from '../../src/app/actions/fetchBooks';
-import { createBookSuccess,
+import { loanHistorySuccess } from '../../src/app/actions/loanHistory';
+import {
+  createBookSuccess,
   updateBookSuccess,
+  deleteBookSuccess
 } from '../../src/app/actions/admin/books';
 import {
   fetchBooksCategoriesSuccess
@@ -14,6 +18,13 @@ import { returnBookSuccess } from '../../src/app/actions/returnBooks';
 
 let action;
 let newState;
+
+const initialState = {
+  allBooksList: {},
+  borrowedBooksList: { },
+  overdueBooksList: { books: [] },
+  bookOperations: {}
+};
 
 const allBooksList = {
   books: [
@@ -29,12 +40,24 @@ const allBooksList = {
   }
 };
 
+const borrowedBookData = {
+  books: [
+    {
+      id: 1, bookId: 1, title: 'AndelaOne', author: 'Dinobi', quantity: 10
+    }
+  ],
+  pagination: {
+    pageSize: 1, pageNumber: 1, pageCount: 1, totalCount: 1
+  }
+};
+
 const newBook = {
   createdBook: {
     id: 3, title: 'Sterling', author: 'Oare', quantity: 2
   },
-  updatedBook: {
-    id: 2, title: 'Amarachi', author: 'Akon'
+  updatedBookData: {
+    message: 'Amarachi has been updated successfully',
+    updatedBook: { id: 2, title: 'Amarachi', author: 'Akon' }
   },
   bookToBorrow: {
     id: 4, title: 'Amarachi', author: 'Akon', categoryId: 1, quantity: 4
@@ -49,7 +72,7 @@ describe('Book Reducer', () => {
 
   it('should handle action type SEARCH_BOOK_SUCCESS', () => {
     action = searchBookSuccess(allBooksList);
-    newState = bookReducer({}, action);
+    newState = bookReducer(initialState, action);
     expect(newState.allBooksList).toEqual(allBooksList);
     expect(newState.allBooksList.books).toEqual(allBooksList.books);
   });
@@ -62,61 +85,77 @@ describe('Book Reducer', () => {
   });
 
   it('should handle action type UPDATE_BOOK_SUCCESS', () => {
-    console.log(newState,'oldey but goodey00000000000000');
-    action = updateBookSuccess(newBook.updatedBook);
-    console.log(action,'----------');
+    action = updateBookSuccess(newBook.updatedBookData);
     newState = bookReducer(newState, action);
-    console.log(newState,'newbie00000000000000');
     expect(newState.allBooksList.books).toHaveLength(3);
-    //expect(newState.allBooksList.books[0]).toEqual(newBook.updatedBook);
+    expect(newState.allBooksList.books[0])
+      .toEqual(newBook.updatedBookData.updatedBook);
+    expect(newState.allBooksList.books[0].title)
+      .not.toEqual('PewdiPie');
   });
 
-  // it('should handle action to FETCH_BORROWED_BOOKS', () => {
-  //   action = fetchBorrowedBooks(allBooksList.books);
-  //   newState = bookReducer(newState, action);
-  //   expect(newState).not.toEqual(bookReducer({}, action));
-  //   expect(newState.borrowedBooksList).toEqual(allBooksList.books);
-  //   expect(newState.borrowedBooksList[1].id).toBe(2);
-  // });
+  it('should handle action to FETCH_BORROWED_BOOKS', () => {
+    action = fetchBorrowedBooks(borrowedBookData);
+    newState = bookReducer(newState, action);
+    expect(newState).not.toEqual(bookReducer({}, action));
+    expect(newState.borrowedBooksList.books).toEqual(borrowedBookData.books);
+    expect(newState.borrowedBooksList.books[0].id).toBe(1);
+  });
 
-  // it('should handle action to FETCH_ALL_BOOKS', () => {
-  //   action = fetchBooks(allBooksList.books);
-  //   newState = bookReducer(newState, action);
-  //   expect(newState).not.toEqual(bookReducer({}, action));
-  //   expect(newState.borrowedBooksList).toEqual(allBooksList.books);
-  //   expect(newState.borrowedBooksList[1].id).toBe(2);
-  // });
+  it('should handle action to FETCH_ALL_BOOKS', () => {
+    action = fetchBooks(allBooksList);
+    newState = bookReducer(newState, action);
+    expect(newState).not.toEqual(bookReducer({}, action));
+    expect(newState.allBooksList).toEqual(allBooksList);
+  });
 
-  // it('should handle action to FETCH_SELECTED_BOOK_SUCCESS', () => {
-  //   action = fetchSelectedBookSuccess(newBook.createdBook);
-  //   newState = bookReducer(newState, action);
-  //   expect(newState).not.toEqual(bookReducer({}, action));
-  //   expect(newState.book).toEqual(newBook.createdBook);
-  // });
+  it('should handle action to FETCH_ALL_RECENT_BOOKS', () => {
+    action = fetchRecentBooks(allBooksList);
+    newState = bookReducer(newState, action);
+    expect(newState).not.toEqual(bookReducer({}, action));
+    expect(newState.allBooksList).toEqual(allBooksList);
+  });
 
-  // it('should handle action to FETCH_SELECTED_BOOK_SUCCESS', () => {
-  //   action = fetchSelectedBookSuccess(newBook.createdBook);
-  //   newState = bookReducer(newState, action);
-  //   expect(newState).not.toEqual(bookReducer({}, action));
-  //   expect(newState.book).toEqual(newBook.createdBook);
-  // });
+  it('should handle action to FETCH_SELECTED_BOOK_SUCCESS', () => {
+    action = fetchSelectedBookSuccess(newBook.createdBook);
+    newState = bookReducer(newState, action);
+    expect(newState).not.toEqual(bookReducer({}, action));
+    expect(newState.book).toEqual(newBook.createdBook);
+  });
 
-  // it('should handle action to FETCH_BOOKS_FOR_CATEGORIES_SUCCESS', () => {
-  //   action = fetchBooksCategoriesSuccess(allBooksList.books);
-  //   newState = bookReducer(newState, action);
-  //   expect(newState).not.toEqual(bookReducer({}, action));
-  //   expect(newState.allBooksList).toEqual(allBooksList.books);
-  // });
+  it('should handle action to FETCH_SELECTED_BOOK_SUCCESS', () => {
+    action = fetchSelectedBookSuccess(newBook.createdBook);
+    newState = bookReducer(newState, action);
+    expect(newState).not.toEqual(bookReducer({}, action));
+    expect(newState.book).toEqual(newBook.createdBook);
+  });
 
-  // it('should handle action to RETURN_BOOK_SUCCESS', () => {
-  //   console.log(newState, '=======');
-  //   action = returnBookSuccess(allBooksList.books[1]);
-  //   console.log(action, 'i Am an action');
-  //   newState = bookReducer(newState, action);
-  //   console.log(newState, '....................');
-  //   // console.log(newState,'vvvvvvv', action, '>>>>>>>>>????')
+  it('should handle action to FETCH_BOOKS_FOR_CATEGORIES_SUCCESS', () => {
+    action = fetchBooksCategoriesSuccess(allBooksList);
+    newState = bookReducer(newState, action);
+    expect(newState).not.toEqual(bookReducer({}, action));
+    expect(newState.allBooksList).toEqual(allBooksList);
+  });
 
-  //   // expect(newState).not.toEqual(bookReducer({}, action));
-  //   // expect(newState.returnedBook).toEqual(newBook.bookToBorrow);
-  // });
+  it('should handle action to RETURN_BOOK_SUCCESS', () => {
+    action = returnBookSuccess(borrowedBookData.books[0]);
+    newState = bookReducer(newState, action);
+    expect(newState.borrowedBooksList.books).toHaveLength(0);
+    expect(newState.borrowedBooksList.books).toEqual([]);
+  });
+
+  it('should handle action to LOAN_HISTORY_SUCCESS', () => {
+    action = loanHistorySuccess(borrowedBookData);
+    newState = bookReducer(newState, action);
+    expect(newState.bookOperations.books).toHaveLength(1);
+    expect(newState.bookOperations.books).toEqual(borrowedBookData.books);
+  });
+
+  it('should handle action to DELETE_BOOK_SUCCESS', () => {
+    action = deleteBookSuccess(allBooksList.books[0]);
+    newState = bookReducer(newState, action);
+    console.log(newState,'>>>>>>>',action)
+    // expect(newState.borrowedBooksList.books).toHaveLength(0);
+    // expect(newState.borrowedBooksList.books).toEqual([]);
+  });
 });

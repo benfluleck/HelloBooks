@@ -1,5 +1,9 @@
 import jwtDecode from 'jwt-decode';
 
+/**
+ * 
+ * 
+ */
 export default (req, res, next) => {
   const token = req.headers['x-access-token'] || req.headers.authorization;
   const decodedToken = jwtDecode(token);

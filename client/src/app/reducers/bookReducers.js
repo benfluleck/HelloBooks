@@ -3,8 +3,6 @@ import {
   FETCH_BORROWED_BOOKS,
   FETCH_ALL_BOOKS,
   FETCH_BOOKS_REJECTED,
-  BORROW_BOOKS_SUCCESS,
-  RETURN_BOOKS_FAIL,
   RETURN_BOOKS_SUCCESS,
   LOAN_HISTORY_FAILURE,
   LOAN_HISTORY_SUCCESS,
@@ -16,7 +14,6 @@ import {
   FETCH_SELECTED_BOOK_FAILURE,
   CREATE_BOOK_SUCCESS,
   UPDATE_BOOK_SUCCESS,
-  DELETE_BOOK_FAILURE,
   DELETE_BOOK_SUCCESS,
 } from '../actions/actionType';
 
@@ -50,14 +47,12 @@ export default function bookReducer(state = {
         }
       };
     case FETCH_ALL_OVERDUE_BOOKS:
-
       return {
         ...state,
         overdueBooksList: action.books
       };
 
     case FETCH_BORROWED_BOOKS:
-
       return {
         ...state,
         borrowedBooksList: action.books
@@ -167,15 +162,6 @@ export default function bookReducer(state = {
             .filter(book => book.id !== action.book.deletedBookId),
         },
       };
-
-    case DELETE_BOOK_FAILURE:
-
-      return {
-        ...state,
-        error: action
-
-      };
-
 
     default:
       return state;

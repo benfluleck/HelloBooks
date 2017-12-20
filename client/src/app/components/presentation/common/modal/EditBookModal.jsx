@@ -200,16 +200,16 @@ class EditBookModal extends React.Component {
 
 EditBookModal.defaultProps = {
   header: 'Edit Book',
-  book: null
+  // book: null
 };
 
 
 EditBookModal.propTypes = {
-  book: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-    PropTypes.object
-  ]),
+  // book: PropTypes.oneOfType([
+  //   PropTypes.string,
+  //   PropTypes.number,
+  //   PropTypes.object
+  // ]),
   header: PropTypes.string,
   updateBookDetails: PropTypes.func.isRequired
 };

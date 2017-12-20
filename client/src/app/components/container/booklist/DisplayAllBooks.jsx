@@ -50,9 +50,8 @@ class DisplayAllBooks extends React.Component {
    *
    */
   handleClick() {
-    $(document).ready(() => {
       $('#add-admin-book-modal').modal('open');
-    });
+ 
   }
 
 

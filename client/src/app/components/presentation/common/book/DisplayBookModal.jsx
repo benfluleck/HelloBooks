@@ -46,7 +46,9 @@ class DisplayBookModal extends React.Component {
    *
    *
    * @param {param} event
+   *
    * @returns {function} function
+   *
    * @memberOf DisplayBookModal
    */
   handleReturnClick = () => {
@@ -61,6 +63,7 @@ class DisplayBookModal extends React.Component {
    *
    *
    * @param {param} loanStatus
+   *
    * @returns {Component} Component
    *
    * @memberOf DisplayBookModal
@@ -183,7 +186,7 @@ class DisplayBookModal extends React.Component {
 }
 
 DisplayBookModal.defaultProps = {
-  book: {},
+  book: [],
   borrowedBooksList: []
 };
 

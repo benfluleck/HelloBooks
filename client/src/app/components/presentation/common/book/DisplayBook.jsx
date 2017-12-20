@@ -80,8 +80,7 @@ class Book extends React.Component {
         this
           .props
           .deleteBookAction(id);
-        this
-          .props
+        this.props
           .fetchAllBooks(this.props.offset, this.props.limit);
         swal('Deleted!', 'Your file has been deleted.', 'success');
       } else {
@@ -93,7 +92,9 @@ class Book extends React.Component {
    *
    *
    * @description Edit button click
+   *
    * @method handleEdit
+   *
    * @memberof Book
    * @param {object} book
    * @returns {function} a function that fetches the book id
@@ -102,9 +103,7 @@ class Book extends React.Component {
     this
       .props
       .fetchSelectedBook(book.id);
-    $(document).ready(() => {
-      $('#admin-book-modal').modal('open');
-    });
+    $('#admin-book-modal').modal('open');
   }
   /**
    *
@@ -122,13 +121,16 @@ class Book extends React.Component {
             {this.props.isAdmin === true
               ? (
                 <div>
-                  <a
+                  <Button
+                    floating
+                    icon="mode_edit"
                     href="#admin-book-modal"
                     onClick={() => this.handleEdit(this.props.book)}
-                    className="btn-floating #f57c00 orange  waves-effect waves-light darken-2 book-icons-1 modal-trigger"
-                  ><i class="large material-icons">mode_edit</i>
+                    className="#f57c00 orange darken-2 book-icons-1 modal-trigger"
+                    waves="light"
+                  >
                     Edit
-                  </a>
+                  </Button>
 
                   <Button
                     onClick={() => this.handleDelete(this.props.book.id)}
