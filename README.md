@@ -11,10 +11,10 @@ HelloBooks is an application that helps manage a library and its processes like 
 - [Technology Stack](#technology-stack)
   * [Dependencies](#dependencies)
 - [Installation and Usage](#installation)
-- [Tests](#tests)
-- [API Documentation](#api-documentation)
-- [Models](#models)
 - [Testing](#testing)
+- [Features](#features)
+- [Models](#models)
+- [API Documentation](#api-documentation)
 - [Express Routes](#express-routes)
 - [License](#license)
 - [FAQ](#faqs)
@@ -82,13 +82,19 @@ npm run build:dev
 The limitations with this current version of Hello Books includes:
 - Authenticated Users can not read books
 
-## Tests
+## Testing
 
 Sever side tests - Run `npm test` on the terminal while within the **project root directory**.
 Client side tests - Run `npm client:test` on the terminal while within the **project root directory**.
 
+Server side testing is achieved through use of `chai-http`, `mocha` and `chai` packages. `chai-http` is used to make requests to the api and `mocha` is the testing framework and `chai` is the exception library. They will both be installed when you run `npm install` and the tests will run when you run `npm test`.
 
-### Features
+Client side testing is achieved through the use of `jest` package. `jest` is used to test javascript code in
+React applications.
+
+
+
+## Features
 HelloBooks consists of the following features:
 
 ### Authentication
@@ -111,7 +117,6 @@ HelloBooks consists of the following features:
 - Authenticated Users can view borrowing history
 - Authenticated Users can search through a list of books
 
-
 ### Admin Users
 - Admins can edit books
 - Admins can add new books
@@ -122,8 +127,16 @@ HelloBooks consists of the following features:
 - Admins can delete a category
 - Admin can see a list of users
 
+## Models
+
+Three models are defined: `Users`, `Books` and `UserBooks`. `Book` must have a unique title and title  on their creation. A `User` can borrow a book `Book`. The routes are defined under `models/index`.
+
 ## API Documentation
 You can view the API Documentation [here](https://staging-hellobooks.herokuapp.com/api-docs)
+
+## Express Routes
+
+Api endpoints were created using `express` router. The routes are defined under `server/routes`.  
 
 ### Questions
 For more details contact benny.ogidan@andela.com
@@ -137,21 +150,6 @@ Contributions to this project are welcomed by all, If you need to contribute to 
 * Create a branch off **development** for the feature you wish to add
 * Make neccessary changes, commit and raise a pull request against develop
 **Note** when making contributions, please endevour to follow the [Airbnb](https://github.com/airbnb/javascript) javascript style guide. check out the [wiki]
-
-## Models
-
-Three models are defined: `Users`, `Books` and `UserBooks`. `Book` must have a unique title and title  on their creation. A `User` can borrow a book `Book`. The routes are defined under `models/index`.
-
-## Testing
-
-Server side testing is achieved through use of `chai-http`, `mocha` and `chai` packages. `chai-http` is used to make requests to the api and `mocha` is the testing framework and `chai` is the exception library. They will both be installed when you run `npm install` and the tests will run when you run `npm test`.
-
-Client side testing is achieved through the use of `jest` package. `jest` is used to test javascript code in
-React applications.
-
-## Express Routes
-
-Api endpoints were created using `express` router. The routes are defined under `server/routes`.
 
 ## License
 This project is authored by **Benny Ogidan** (benny.ogidan@andela.com) and is licensed for your use, modification and distribution under the **MIT** license.
