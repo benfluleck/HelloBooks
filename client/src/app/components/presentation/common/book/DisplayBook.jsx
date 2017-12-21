@@ -154,7 +154,9 @@ class Book extends React.Component {
 
               <div
                 className="card-image"
-                data-tip={`<h4>Title: ${this.props.book.title}</h4><hr/> <p>Author: ${this.props.book.author}</p> <p>Description:${this.props.book.description}</p>`}
+                data-tip={`<h4>Title: ${this.props.book.title}</h4><hr/> 
+                <p>Author: ${this.props.book.author}</p> 
+                <p>Description:${this.props.book.description}</p>`}
                 data-html
                 data-class="booktip"
               >

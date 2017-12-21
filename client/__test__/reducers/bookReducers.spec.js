@@ -4,15 +4,20 @@ import { fetchBorrowedBooks,
   fetchBooks,
   fetchRecentBooks,
   fetchSelectedBookSuccess,
+  fetchSelectedBookFailure,
+  fetchBooksRejected,
+  fetchOverdueBooks
 } from '../../src/app/actions/fetchBooks';
-import { loanHistorySuccess } from '../../src/app/actions/loanHistory';
+import { loanHistorySuccess,
+  loanHistoryFailure } from '../../src/app/actions/loanHistory';
 import {
   createBookSuccess,
   updateBookSuccess,
   deleteBookSuccess
 } from '../../src/app/actions/admin/books';
 import {
-  fetchBooksCategoriesSuccess
+  fetchBooksCategoriesSuccess,
+  fetchBooksCategoriesFailure
 } from '../../src/app/actions/fetchCategories';
 import { returnBookSuccess } from '../../src/app/actions/returnBooks';
 
@@ -20,7 +25,7 @@ let action;
 let newState;
 
 const initialState = {
-  allBooksList: {},
+  allBooksList: { books: [] },
   borrowedBooksList: { },
   overdueBooksList: { books: [] },
   bookOperations: {}
@@ -39,6 +44,30 @@ const allBooksList = {
     pageSize: 1, pageNumber: 1, pageCount: 1, totalCount: 1
   }
 };
+
+const overdueBooksData = {
+
+  books: [
+    {
+      id: 3,
+      bookId: 3,
+      title: 'Andela The Great',
+      author: 'Solomon Grundy',
+      quantity: 10
+    },
+    {
+      id: 4,
+      bookId: 4,
+      title: 'PewdiPie from YouTube',
+      author: 'Dinobi',
+      quantity: 5
+    }
+  ],
+  pagination: {
+    pageSize: 1, pageNumber: 1, pageCount: 1, totalCount: 1
+  }
+};
+
 
 const borrowedBookData = {
   books: [
@@ -61,6 +90,11 @@ const newBook = {
   },
   bookToBorrow: {
     id: 4, title: 'Amarachi', author: 'Akon', categoryId: 1, quantity: 4
+  },
+  bookTodelete: {
+    message: 'AndelOne has been deleted',
+    deletedBookId: 2
+
   }
 
 };
@@ -137,7 +171,8 @@ describe('Book Reducer', () => {
     expect(newState.allBooksList).toEqual(allBooksList);
   });
 
-  it('should handle action to RETURN_BOOK_SUCCESS', () => {
+  it('should handle action to RETURN_BOOK_SUCCESS to'
+  + 'return a Borrowed book', () => {
     action = returnBookSuccess(borrowedBookData.books[0]);
     newState = bookReducer(newState, action);
     expect(newState.borrowedBooksList.books).toHaveLength(0);
@@ -152,10 +187,61 @@ describe('Book Reducer', () => {
   });
 
   it('should handle action to DELETE_BOOK_SUCCESS', () => {
-    action = deleteBookSuccess(allBooksList.books[0]);
+    action = deleteBookSuccess(newBook.bookTodelete);
     newState = bookReducer(newState, action);
-    console.log(newState,'>>>>>>>',action)
-    // expect(newState.borrowedBooksList.books).toHaveLength(0);
-    // expect(newState.borrowedBooksList.books).toEqual([]);
+    expect(newState.allBooksList.books).toHaveLength(1);
+    expect(newState.allBooksList.books).toContain(allBooksList.books[0]);
+    expect(newState.allBooksList.books).not.toContain(allBooksList.books[1]);
+  });
+
+  it('should handle action to FETCH_ALL_OVERDUE_BOOKS', () => {
+    action = fetchOverdueBooks(overdueBooksData);
+    newState = bookReducer(newState, action);
+    expect(newState.overdueBooksList.books).toHaveLength(2);
+    expect(newState.overdueBooksList.books)
+      .toContain(overdueBooksData.books[0]);
+  });
+
+  it('should handle action to RETURN_BOOK_SUCCESS' +
+  'to return an Overdue Book ', () => {
+    action = returnBookSuccess(overdueBooksData.books[0]);
+    newState = bookReducer(newState, action);
+    expect(newState.overdueBooksList.books).toHaveLength(1);
+  });
+
+  it('should handle action to FETCH_SELECTED_BOOK_FAILURE', () => {
+    action = fetchSelectedBookFailure();
+    newState = bookReducer(initialState, action);
+    expect(newState.error).toEqual({
+      error: undefined,
+      type: 'FETCH_SELECTED_BOOK_FAILURE'
+    });
+  });
+
+  it('should handle action to FETCH_BOOKS_REJECTED', () => {
+    action = fetchBooksRejected();
+    newState = bookReducer(initialState, action);
+    expect(newState.error).toEqual({
+      error: undefined,
+      type: 'FETCH_BOOKS_REJECTED'
+    });
+  });
+
+  it('should handle action to LOAN_HISTORY_FAILURE', () => {
+    action = loanHistoryFailure();
+    newState = bookReducer(initialState, action);
+    expect(newState.error).toEqual({
+      error: undefined,
+      type: 'LOAN_HISTORY_FAILURE'
+    });
+  });
+
+  it('should handle action to FETCH_BOOKS_FOR_CATEGORIES_FAILURE ', () => {
+    action = fetchBooksCategoriesFailure();
+    newState = bookReducer(initialState, action);
+    expect(newState.error).toEqual({
+      error: undefined,
+      type: 'FETCH_BOOKS_FOR_CATEGORIES_FAILURE'
+    });
   });
 });

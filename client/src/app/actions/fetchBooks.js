@@ -1,4 +1,3 @@
-import { showErrorNotification } from './notifications';
 import {
   FETCH_ALL_RECENT_BOOKS,
   FETCH_ALL_BOOKS,
@@ -58,7 +57,6 @@ export const fetchAllBooks = (offset, limit) => dispatch => api
     return response;
   })
   .catch((error) => {
-    dispatch(showErrorNotification({ error }));
     dispatch(fetchBooksRejected({ error }));
   });
 
@@ -76,7 +74,6 @@ export const fetchOverdueBookstoDashboard = (offset, limit) => dispatch => api
     dispatch(fetchOverdueBooks(response));
   })
   .catch((error) => {
-    dispatch(showErrorNotification({ error }));
     dispatch(fetchBooksRejected({ error }));
   });
 
@@ -116,7 +113,6 @@ export const fetchAllBorrowedBooks = (offset, limit) => dispatch => api
     dispatch(fetchBorrowedBooks(response));
   })
   .catch((error) => {
-    dispatch(showErrorNotification({ error }));
     dispatch(fetchBooksRejected({ error }));
   });
   /**
@@ -135,7 +131,6 @@ export const fetchSelectedBook = bookId => dispatch => api
     dispatch(fetchSelectedBookSuccess(response));
   })
   .catch((error) => {
-    dispatch(showErrorNotification({ error }));
     dispatch(fetchSelectedBookFailure({ error }));
   });
 

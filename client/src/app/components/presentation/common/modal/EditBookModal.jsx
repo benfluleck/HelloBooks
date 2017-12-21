@@ -185,7 +185,7 @@ class EditBookModal extends React.Component {
         fixedFooter
         header={header}
         actions={<Button onClick={this.handleSubmit}>Submit</Button>}
-
+        modalOptions={{ dismissible: true, inDuration: 30 }}
       >
         <BookDetailForm
           book={this.state}
