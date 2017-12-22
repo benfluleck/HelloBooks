@@ -42,17 +42,17 @@ class DisplayAllBooks extends React.Component {
     />);
   }
 
-  /**
-   *
-   * @returns {function} openAdminBook Modal
-   *
-   * @memberof DisplayAllBooks
-   *
-   */
-  handleClick() {
-      $('#add-admin-book-modal').modal('open');
+  // /**
+  //  *
+  //  * @returns {function} openAdminBook Modal
+  //  *
+  //  * @memberof DisplayAllBooks
+  //  *
+  //  */
+  // handleClick() {
+  //     $('#add-admin-book-modal').modal('open');
  
-  }
+  // }
 
 
   /**
@@ -91,7 +91,7 @@ class DisplayAllBooks extends React.Component {
               <div className="add-book">
                 <Button
                   floating
-                  onClick={() => this.handleClick()}
+                 // onClick={() => this.handleClick()}
                   className="#ef6c00 orange darken-3 add-book-btn modal-trigger"
                   href="#add-admin-book-modal"
                   waves="light"

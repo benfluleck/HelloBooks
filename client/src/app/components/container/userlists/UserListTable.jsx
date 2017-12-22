@@ -26,7 +26,7 @@ class UserListTable extends React.Component {
    * */
   onClick(id) {
     this.props.getSelectedUser(id);
-    $('#change-user-level-modal').modal('open');
+    // $('#change-user-level-modal').modal('open');
   }
   /**
    *
@@ -54,6 +54,7 @@ class UserListTable extends React.Component {
               icon="mode_edit"
               className="#f57c00 orange darken-2"
               waves="light"
+              href="#change-user-level-modal"
               onClick={() => {
               this.onClick(user.id);
  }}
