@@ -34,6 +34,7 @@ class DisplayAllBooks extends React.Component {
    * @returns {component} Loader
    */
   componentWillMount() {
+    $('.modal').modal();
     $('body').css('background-color', '#ffff');
     this.props.fetchAllCategories();
     return (<Loader
