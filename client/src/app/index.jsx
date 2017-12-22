@@ -9,6 +9,7 @@ import setAuthorizationToken from './utils/setAuthorizationToken';
 
 if (localStorage.getItem('token')) {
   setAuthorizationToken(localStorage.getItem('token'));
+  $('.modal').modal();
 }
 /**
  *

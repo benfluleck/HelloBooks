@@ -34,7 +34,7 @@ class DisplayAllBooks extends React.Component {
    * @returns {component} Loader
    */
   componentWillMount() {
-    $('.modal').modal();
+    // $('.modal').modal();
     $('body').css('background-color', '#ffff');
     this.props.fetchAllCategories();
     return (<Loader
@@ -55,7 +55,7 @@ class DisplayAllBooks extends React.Component {
    * @memberOf DisplayAllBooks
   * */
   componentDidMount() {
-    $('.modal').modal();
+    // $('.modal').modal();
   }
 
   // /**
