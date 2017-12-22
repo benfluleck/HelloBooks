@@ -49,6 +49,20 @@ class EditBookModal extends React.Component {
   }
 
   /**
+   *
+   * @method componentDidMount
+   *
+   * @memberof DisplayAllBooks
+   *
+   * @returns {void}
+   *
+   *
+   * @memberOf DisplayAllBooks
+  * */
+  componentDidMount() {
+    $('.modal').modal();
+  }
+  /**
    * [componentWillReceiveProps description]
    *
    * @method componentWillReceiveProps
@@ -73,6 +87,7 @@ class EditBookModal extends React.Component {
       });
     }
   }
+
 
   /**
    * @description Handle onChange events on form inputs

@@ -47,6 +47,21 @@ class UploadModal extends React.Component {
   }
 
   /**
+   *
+   * @method componentDidMount
+   *
+   * @memberof DisplayAllBooks
+   *
+   * @returns {void}
+   *
+   *
+   * @memberOf DisplayAllBooks
+  * */
+  componentDidMount() {
+    $('.modal').modal();
+  }
+
+  /**
    * handle change in file input
    * @method onInputChange
    * @memberof UploadPictureModal
