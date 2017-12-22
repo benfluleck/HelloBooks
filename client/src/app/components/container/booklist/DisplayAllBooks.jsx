@@ -27,7 +27,7 @@ class DisplayAllBooks extends React.Component {
    *
    * populate the dashboard with all the books
    *
-   * @method componentDidMount
+   * @method componentWillMount
    *
    * @memberof DisplayAllBooks
    *
@@ -42,6 +42,21 @@ class DisplayAllBooks extends React.Component {
     />);
   }
 
+  /**
+   *
+   * @method componentDidMount
+   *
+   * @memberof DisplayAllBooks
+   *
+   * @returns {void}
+   *
+   *
+   * @memberOf DisplayAllBooks
+  * */
+  componentDidMount() {
+    $('.modal').modal();
+  }
+
   // /**
   //  *
   //  * @returns {function} openAdminBook Modal
@@ -51,7 +66,7 @@ class DisplayAllBooks extends React.Component {
   //  */
   // handleClick() {
   //     $('#add-admin-book-modal').modal('open');
- 
+
   // }
 
 
