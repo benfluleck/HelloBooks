@@ -121,8 +121,8 @@ class DisplayAllBooks extends React.Component {
           numberOfRecords={this.props.limit}
         />
         <div>
-          {/* <EditBookModal />
-          <AddBookModal /> */}
+          <EditBookModal />
+          <AddBookModal />
         </div>
       </div>
     );

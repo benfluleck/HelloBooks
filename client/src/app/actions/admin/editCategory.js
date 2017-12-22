@@ -39,7 +39,6 @@ export const editCategoryAction = (categoryName, categoryId) => dispatch =>
       return (response);
     })
     .catch((error) => {
-      dispatch(editCategoryFailure({ error }));
       dispatch(showErrorNotification({ error }));
     });
 

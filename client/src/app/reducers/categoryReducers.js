@@ -1,9 +1,6 @@
 import {
   ADD_CATEGORY_SUCCESS,
-  ADD_CATEGORY_FAILURE,
   EDIT_CATEGORY_SUCCESS,
-  EDIT_CATEGORY_FAILURE,
-  DELETE_CATEGORY_FAILURE,
   DELETE_CATEGORY_SUCCESS,
   FETCH_CATEGORIES_SUCCESS,
   FETCH_CATEGORIES_FAILURE,
@@ -40,10 +37,6 @@ export default function categoryReducer(
           action.category.category
         ]
       };
-
-    case ADD_CATEGORY_FAILURE:
-      return { ...state, error: action.error };
-
     case EDIT_CATEGORY_SUCCESS:
       return {
         ...state,
@@ -52,9 +45,6 @@ export default function categoryReducer(
             category : action.category.updatedCategory))
       };
 
-    case EDIT_CATEGORY_FAILURE:
-      return { ...state, error: action.error };
-
     case DELETE_CATEGORY_SUCCESS:
       return {
         ...state,
@@ -62,9 +52,6 @@ export default function categoryReducer(
           .filter(category =>
             category.id !== action.deletedCategory.category.id)
       };
-
-    case DELETE_CATEGORY_FAILURE:
-      return { ...state, error: action.error };
 
     default:
       return state;

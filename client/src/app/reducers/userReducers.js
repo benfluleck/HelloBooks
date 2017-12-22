@@ -10,8 +10,6 @@ import {
   CHANGE_USER_LEVEL_SUCCESS,
   GET_USER_SUCCESS,
   GET_USER_FAILURE,
-  PASSWORD_CHANGED_SUCCESS,
-  PASSWORD_CHANGED_FAILURE
 } from '../actions/actionType';
 
 const INITIAL_STATE = {
@@ -41,6 +39,7 @@ export default function userReducer(state = INITIAL_STATE, action = {}) {
     case SIGNUP_USER_SUCCESS:
       return {
         ...state,
+        isAuthenticated: false,
         user: action.data
       };
 
@@ -96,18 +95,6 @@ export default function userReducer(state = INITIAL_STATE, action = {}) {
       };
 
     case GET_USER_FAILURE:
-      return {
-        ...state,
-        error: action.error
-      };
-
-    case PASSWORD_CHANGED_SUCCESS:
-      return {
-        ...state,
-        data: action.data
-      };
-
-    case PASSWORD_CHANGED_FAILURE:
       return {
         ...state,
         error: action.error

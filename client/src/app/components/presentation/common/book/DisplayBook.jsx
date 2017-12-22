@@ -4,12 +4,8 @@ import swal from 'sweetalert2';
 import { Button } from 'react-materialize';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchSelectedBook,
-  fetchAllBooks
-} from '../../../../actions/fetchBooks';
-import {
-  deleteBookAction
-} from '../../../../actions/admin/books';
+import { fetchSelectedBook, fetchAllBooks } from '../../../../actions/fetchBooks';
+import { deleteBookAction } from '../../../../actions/admin/books';
 
 /**
  *
@@ -80,7 +76,8 @@ class Book extends React.Component {
         this
           .props
           .deleteBookAction(id);
-        this.props
+        this
+          .props
           .fetchAllBooks(this.props.offset, this.props.limit);
         swal('Deleted!', 'Your file has been deleted.', 'success');
       } else {
@@ -103,7 +100,7 @@ class Book extends React.Component {
     this
       .props
       .fetchSelectedBook(book.id);
-    $('#admin-book-modal').modal('open');
+    // $('#admin-book-modal').modal('open');
   }
   /**
    *
@@ -154,16 +151,11 @@ class Book extends React.Component {
 
               <div
                 className="card-image"
-                data-tip={`<h4>Title: ${this.props.book.title}</h4><hr/> 
-                <p>Author: ${this.props.book.author}</p> 
-                <p>Description:${this.props.book.description}</p>`}
+                data-tip={`<h4>Title: ${this.props.book.title}</h4><hr/> <p>Author: ${this.props.book.author}</p> <p>Description:${this.props.book.description}</p>`}
                 data-html
                 data-class="booktip"
               >
-                <img
-                  src={this.props.book.bookImage}
-                  alt={this.props.book.title}
-                />
+                <img src={this.props.book.bookImage} alt={this.props.book.title} />
               </div>
             </a>
 
@@ -182,11 +174,7 @@ Book.propTypes = {
   deleteBookAction: PropTypes.func.isRequired,
   offset: PropTypes.number,
   limit: PropTypes.number,
-  book: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-    PropTypes.object
-  ]),
+  book: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object])
 };
 
 Book.defaultProps = {

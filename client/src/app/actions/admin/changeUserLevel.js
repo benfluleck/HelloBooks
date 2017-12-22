@@ -35,9 +35,7 @@ export const changeUserLevelAction = (newLevelId, userId) => dispatch => api
   .then((response) => {
     dispatch(changeUserLevelSuccess(response));
     dispatch(showSuccessNotification(response));
-    return response;
   })
   .catch((error) => {
     dispatch(showErrorNotification({ error }));
-    dispatch(changeUserLevelFailure({ error }));
   });
