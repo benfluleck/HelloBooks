@@ -45,17 +45,19 @@ class DisplayAllBooks extends React.Component {
 
   /**
    *
-   * @method componentDidMount
+   * @method componentReceiveProps
    *
    * @memberof DisplayAllBooks
+   *
+   * @param {opbject} nextProps
    *
    * @returns {void}
    *
    *
-   * @memberOf DisplayAllBooks
+   *
   * */
-  componentDidMount() {
-    // $('.modal').modal();
+  componentWillReceiveProps(nextProps) {
+    $('.modal').modal();
   }
 
   // /**
