@@ -6,10 +6,15 @@ const { Categories, Books, UserBooks } = models;
 export default {
   /**
    * Route: POST: /books
+   *
    * @description add a book
+   *
    * @param {req} req
+   *
    * @param {res} res
+   *
    * @returns {object} book
+   *
    * @memmberOf BookController
   */
   addBook(req, res) {
@@ -78,10 +83,15 @@ export default {
 
   /**
    * Route: PUT: /books/:bookId
+   *
    * @description update a book
+   *
    * @param {req} req
+   *
    * @param {res} res
+   *
    * @returns {object} book
+   *
    * @memmberOf BookController
    */
   updateBook(req, res) {
@@ -113,7 +123,10 @@ export default {
             bookExists.id !== parseInt(req.params.bookId, 10)) {
             return res
               .status(409)
-              .send({ message: 'A book with the same title and author already exists in the library' });
+              .send({
+                message: 'A book with the same title and' +
+                'author already exists in the library'
+              });
           }
           return book
             .updateAttributes(req.body, {
@@ -176,10 +189,15 @@ export default {
   },
   /**
    * Route: GET: /books/search
+   *
    * @description returns a list of all books that match the search criteria
+   *
    * @param {req} req
+   *
    * @param {res} res
+   *
    * @returns {object} books
+   *
    * @memmberOf BookController
    */
   searchBooks(req, res) {
@@ -240,9 +258,12 @@ export default {
     }
   },
 
-  /** displays the book matching the booKId parameters
-    * @param {req} req
+  /** displays the book matching the bookId parameters
+   *
+   * @param {req} req
+   *
    * @param {res} res
+   *
    * @returns {object} book
      */
   viewBookDetails(req, res) {
@@ -280,8 +301,11 @@ export default {
   },
 
   /** deletes the book matching the booKId parameters
-    * @param {req} req
+   *
+   * @param {req} req
+   *
    * @param {res} res
+   *
    * @returns {string} message
      */
   deleteBook(req, res) {

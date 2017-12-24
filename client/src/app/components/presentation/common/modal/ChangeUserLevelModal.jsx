@@ -130,6 +130,7 @@ class ChangeUserLevelModal extends React.Component {
       <Modal
         id="change-user-level-modal"
         header="Change User Level"
+        modalOptions={{ dismissible: true, inDuration: 30 }}
       >
         <div className="change-level-modal">
           <Row>

@@ -18,7 +18,7 @@ class BookModal extends React.PureComponent {
   render() {
     const { header, actions, books } = this.props;
     return (
-      <Modal id="modal" fixedFooter header={header} actions={actions} >
+      <Modal id="modal" fixedFooter header={header} actions={actions} modalOptions={{ dismissible: true, inDuration: 30 }} >
         <Row>
           <div className="loan-book">
             <Col m={12}l={6}>

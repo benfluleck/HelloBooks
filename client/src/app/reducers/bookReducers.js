@@ -14,7 +14,7 @@ import {
   FETCH_SELECTED_BOOK_FAILURE,
   CREATE_BOOK_SUCCESS,
   UPDATE_BOOK_SUCCESS,
-  DELETE_BOOK_SUCCESS,
+  DELETE_BOOK_SUCCESS
 } from '../actions/actionType';
 
 /**
@@ -29,20 +29,27 @@ import {
  * @returns {object} state
  */
 export default function bookReducer(state = {
+  overdueBooksList: {
+    books: [],
+    pagination: {}
+  }
 }, action) {
   switch (action.type) {
     case SEARCH_BOOKS_SUCCESS:
-      return { ...state, allBooksList: action.books };
+      return {
+        ...state,
+        allBooksList: action.books
+      };
     case UPDATE_BOOK_SUCCESS:
       return {
         ...state,
         allBooksList: {
           ...state.allBooksList,
-          books: [action.book.updatedBook,
-            ...state
+          books: [
+            action.book.updatedBook, ...state
               .allBooksList
               .books
-              .filter(book => book.id !== action.book.updatedBook.id),
+              .filter(book => book.id !== action.book.updatedBook.id)
           ]
         }
       };
@@ -73,7 +80,7 @@ export default function bookReducer(state = {
     case FETCH_BOOKS_REJECTED:
       return {
         ...state,
-        error: action
+        error: action.error
       };
     case FETCH_SELECTED_BOOK_SUCCESS:
 
@@ -86,7 +93,7 @@ export default function bookReducer(state = {
 
       return {
         ...state,
-        error: action
+        error: action.error
       };
 
     case FETCH_BOOKS_FOR_CATEGORIES_SUCCESS:
@@ -100,7 +107,7 @@ export default function bookReducer(state = {
 
       return {
         ...state,
-        error: action
+        error: action.error
       };
 
     case CREATE_BOOK_SUCCESS:
@@ -108,14 +115,13 @@ export default function bookReducer(state = {
         ...state,
         allBooksList: {
           ...state.allBooksList,
-          books:
-          [action.book.createdBook,
-            ...state.allBooksList.books]
+          books: [
+            action.book.createdBook, ...state.allBooksList.books
+          ]
         }
       };
 
     case RETURN_BOOKS_SUCCESS:
-
       return {
         ...state,
         borrowedBooksList: {
@@ -132,14 +138,13 @@ export default function bookReducer(state = {
             .books
             .filter(book => book.bookId !== action.returnedBook.id)
         }
-
       };
 
     case LOAN_HISTORY_FAILURE:
 
       return {
         ...state,
-        error: action
+        error: action.error
 
       };
 
@@ -159,8 +164,8 @@ export default function bookReducer(state = {
           books: state
             .allBooksList
             .books
-            .filter(book => book.id !== action.book.deletedBookId),
-        },
+            .filter(book => book.id !== action.book.deletedBookId)
+        }
       };
 
     default:

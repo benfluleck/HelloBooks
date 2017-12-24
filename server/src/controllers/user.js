@@ -52,7 +52,8 @@ const userController = {
                 }).then((user) => {
                   if (user) {
                     res.status(201).send({
-                      message: `${user.username} has been added to the library,` +
+                      message: `${user.username} has
+                       been added to the library, ` +
                        'Please Login, you will be only required to do this once'
                     });
                   }

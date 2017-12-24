@@ -34,7 +34,6 @@ class DisplayAllBooks extends React.Component {
    * @returns {component} Loader
    */
   componentWillMount() {
-    // $('.modal').modal();
     $('body').css('background-color', '#ffff');
     this.props.fetchAllCategories();
     return (<Loader
@@ -49,28 +48,15 @@ class DisplayAllBooks extends React.Component {
    *
    * @memberof DisplayAllBooks
    *
-   * @param {opbject} nextProps
    *
    * @returns {void}
    *
    *
    *
   * */
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps() {
     $('.modal').modal();
   }
-
-  // /**
-  //  *
-  //  * @returns {function} openAdminBook Modal
-  //  *
-  //  * @memberof DisplayAllBooks
-  //  *
-  //  */
-  // handleClick() {
-  //     $('#add-admin-book-modal').modal('open');
-
-  // }
 
 
   /**

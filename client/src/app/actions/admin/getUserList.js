@@ -1,4 +1,3 @@
-import { showErrorNotification } from '../notifications';
 import {
   GET_USER_LIST_FAILURE,
   GET_USER_LIST_SUCCESS
@@ -37,6 +36,5 @@ export const getUserListAction = (offset, limit) => dispatch => api
     return response;
   })
   .catch((error) => {
-    dispatch(showErrorNotification({ error }));
     dispatch(getUserListFailure({ error }));
   });

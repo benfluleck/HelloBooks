@@ -49,9 +49,13 @@ export const addBook = bookDetails => dispatch => api
 
 /**
  * async helper function: add Book to the database
+ *
  * @function editBook
+ *
  * @param {number} bookId
+ *
  * @param {object} bookDetails
+ *
  * @returns {function} asynchonrous action
  */
 export const updateBookDetails = (bookId, bookDetails) => dispatch => api

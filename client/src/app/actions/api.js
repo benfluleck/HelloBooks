@@ -26,7 +26,8 @@ export default {
       .then(res => res.data),
 
     fetchBooksByUserId: (offset, limit) => axios
-      .get(`api/v1/users/borrowedbooks?offset=${offset}&limit=${limit}&returned=false`)
+      .get(`api/v1/users/borrowedbooks?offset=${offset}&limit=${limit}
+      &returned=false`)
       .then(res => res.data),
 
     borrowBook: book => axios.post('api/v1/users/loanbook', book)

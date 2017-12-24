@@ -164,6 +164,7 @@ class AddBookModal extends React.Component {
         id="add-admin-book-modal"
         fixedFooter
         header={header}
+        modalOptions={{ dismissible: true, inDuration: 30 }}
         actions={<Button onClick={this.handleSubmit}>Submit</Button>}
       >
         <BookDetailForm

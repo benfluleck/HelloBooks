@@ -6,7 +6,6 @@ import {
   GET_USER_LIST_FAILURE,
   GET_USER_LEVEL_LIST_SUCCESS,
   GET_USER_LEVEL_LIST_FAILURE,
-  CHANGE_USER_LEVEL_FAILURE,
   CHANGE_USER_LEVEL_SUCCESS,
   GET_USER_SUCCESS,
   GET_USER_FAILURE,
@@ -81,12 +80,6 @@ export default function userReducer(state = INITIAL_STATE, action = {}) {
         selectedUserLevel: action.userLevel,
       };
     }
-
-    case CHANGE_USER_LEVEL_FAILURE:
-      return {
-        ...state,
-        error: action.error
-      };
 
     case GET_USER_SUCCESS:
       return {

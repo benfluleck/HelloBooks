@@ -10,10 +10,15 @@ const {
 export default {
   /**
    * Route: POST: /users/loanbook
+   *
    * @description Loan a book
+   *
    * @param {any} req
+   *
    * @param {any} res
+   *
    * @returns {any} book
+   *
    * @memmberOf UserBooks Controller
    */
   loanBook(req, res) {
@@ -47,19 +52,25 @@ export default {
         if (!user) {
           return res
             .status(404)
-            .send({ message: 'User does not exist, Please register to borrow' });
+            .send({
+              message: 'User does not exist, Please register to borrow'
+            });
         }
         if (returnDate > userLevelDate) {
           return res
             .status(409)
             .send({
               message: 'To loan this book for more days,' +
-           ' You need to upgrade your user level, Please contact the administrator'
+           ' You need to upgrade your user level,'
+           + 'Please contact the administrator'
             });
         }
         if (user.borrowCount > user.level.maxBooks) {
           return res.status(400)
-            .send({ message: 'You have exceeded your borrow limit, Why not return a book' });
+            .send({
+              message:
+              'You have exceeded your borrow limit, Why not return a book'
+            });
         }
         user.update({
           borrowCount: (user.borrowCount + 1)
@@ -105,7 +116,8 @@ export default {
                       .status(404)
                       .send({
                         success: false,
-                        message: "Sorry we can't find this book or all copies of this book are on loan"
+                        message: "Sorry we can't find this book or " +
+                         'all copies of this book are on loan'
                       });
                   }
                   bookToBorrow
@@ -145,10 +157,15 @@ export default {
 
   /**
    * Route: GET: /users/getborrowedBooklist
+   *
    * @description Get list of borrowed books
+   *
    * @param {any} req
+   *
    * @param {any} res
+   *
    * @returns {any} book list
+   *
    * @memmberOf UserBooks Controller
    */
   getBorrowedBookList(req, res) {
@@ -194,10 +211,15 @@ export default {
 
   /**
    * Route: PUT: /users/returnbook
+   *
    * @description Return a book
+   *
    * @param {any} req
+   *
    * @param {any} res
+   *
    * @returns {any} book
+   *
    * @memmberOf UserBooks Controller
    */
   returnBook(req, res) {
@@ -264,14 +286,23 @@ export default {
                     expectedReturnDate: history.returnDate,
                     returnedOn: history.userReturnDate
                   };
-                  if (returnDetail.expectedReturnDate < returnDetail.returnedOn) {
+                  if (returnDetail.expectedReturnDate <
+                    (returnDetail.returnedOn - (24 * 60 * 60 * 1000))) {
                     res
                       .status(200)
-                      .send({ success: true, message: `You have just returned ${returnDetail.book} late, A fine will be sent to you`, returnedBook: returnDetail });
+                      .send({
+                        message:
+                        `You have just returned ${returnDetail.book} 
+                         late, A fine will be sent to you`,
+                        returnedBook: returnDetail
+                      });
                   } else {
                     res
                       .status(200)
-                      .send({ success: true, message: `You have just returned ${returnDetail.book}`, returnedBook: returnDetail });
+                      .send({
+                        message: `You have just returned ${returnDetail.book}`,
+                        returnedBook: returnDetail
+                      });
                   }
                 });
               });
@@ -282,10 +313,15 @@ export default {
 
   /**
    * Route: GET: /users/overduebooks
+   *
    * @description Get user overdue books
+   *
    * @param {any} req
+   *
    * @param {any} res
+   *
    * @returns {any} book
+   *
    * @memmberOf UserBooks Controller
    */
   getOverdueBooks(req, res) {

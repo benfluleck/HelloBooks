@@ -88,8 +88,8 @@ class CategoriesCollectionList extends React.Component {
       cancelButtonClass: 'btn btn-danger',
       buttonsStyling: false,
       reverseButtons: true
-    }).then((result) => {
-      if (result) {
+    }).then((response) => {
+      if (response.message === 'This category has been deleted') {
         this.props.deleteCategoryAction(id);
         swal(
           'Deleted!',
@@ -99,11 +99,18 @@ class CategoriesCollectionList extends React.Component {
       } else {
         swal(
           'Cancelled',
-          'Your book is safe',
+          'This category has books in it',
           'error'
         );
       }
-    });
+    })
+      .catch(() => {
+        swal(
+          'Operation Cancelled',
+          'Category is safe from deletion',
+          'error'
+        );
+      });
   }
   /**
    *

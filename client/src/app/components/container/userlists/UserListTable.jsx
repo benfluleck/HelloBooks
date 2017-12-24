@@ -16,6 +16,21 @@ import { getSelectedUser } from '../../../actions/admin/getSelectedUser';
  */
 class UserListTable extends React.Component {
   /**
+   *
+   * @method componentReceiveProps
+   *
+   * @memberof DisplayAllBooks
+   *
+   *
+   * @returns {void}
+   *
+   *
+   *
+  * */
+  componentWillReceiveProps() {
+    $('.modal').modal();
+  }
+  /**
     * @param {object} id
     *
     * @memberof UserListTable
@@ -52,7 +67,7 @@ class UserListTable extends React.Component {
             <Button
               floating
               icon="mode_edit"
-              className="#f57c00 orange darken-2"
+              className="#f57c00 orange darken-2 modal-trigger"
               waves="light"
               href="#change-user-level-modal"
               onClick={() => {

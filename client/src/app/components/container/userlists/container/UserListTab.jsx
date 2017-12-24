@@ -25,10 +25,10 @@ class UserListTab extends React.Component {
    * @returns {void}
    */
   componentDidMount() {
-    $('.modal').modal();
     this.props
       .getUserListAction(this.props.offset, this.props.limit);
   }
+
   /**
    * render User Lists component
    *

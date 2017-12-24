@@ -92,8 +92,9 @@ export const login = credentials => dispatch => api
   .user
   .login(credentials)
   .then((user) => {
+    // console.log(user,'>>>>>>>BBB')
     const token = user.data.token;
-    localStorage.setItem('token', token);
+    // localStorage.setItem('token', token);
     dispatch(showSuccessNotification({ user }));
     setAuthorizationToken(token);
     dispatch(userLoggedIn(user.data));
