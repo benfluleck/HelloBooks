@@ -13,7 +13,7 @@ import mockItems from '../../__mocks__/mockItems';
 
 describe('addCategory action creator', () => {
   test(
-    `dispatches an action with type ADD_CATEGORY_SUCCESS
+    `should succesfully dispatch an action with type ADD_CATEGORY_SUCCESS
     when the api request is successfully executed`,
     () => {
       const store = mockStore({ category: {} });
@@ -43,7 +43,7 @@ describe('addCategory action creator', () => {
   );
 
   test(
-    `dispatch an action with the type ADD CATEGORY FAILURE
+    `should succesfully dispatch an action with the type ADD CATEGORY FAILURE
     when api request fails`,
     () => {
       const store = mockStore({ category: {} });
@@ -61,7 +61,7 @@ describe('addCategory action creator', () => {
 });
 
 describe('edit Category action creator', () => {
-  test('successfully edits a category in the library', () => {
+  test('should successfully edit a category in the library', () => {
     const store = mockStore({ category: { } });
     const sucessMessage =
     'Physics has been updated!';

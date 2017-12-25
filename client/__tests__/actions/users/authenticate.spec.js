@@ -43,7 +43,7 @@ describe('signup action creator', () => {
 
 
 describe('login action creator', () => {
-  test('successfully login by authenticated users', () => {
+  test('should successfully login an authenticated users', () => {
     const store = mockStore({ user: { } });
     const successMessage = 'You are now logged in as bennytest';
     mock.onPost().replyOnce(

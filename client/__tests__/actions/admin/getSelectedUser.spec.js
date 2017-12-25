@@ -8,7 +8,7 @@ import {
 import mockItems from '../../__mocks__/mockItems';
 
 describe('Get selected user action creator', () => {
-  test('successfully returns a selected user', () => {
+  test('should successfully return a selected user', () => {
     const store = mockStore({ user: { } });
     mock.onGet().replyOnce(
       200,

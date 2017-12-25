@@ -5,9 +5,11 @@ import {
 import api from './api';
 
 /**
+ * @description action to borrow book
  *
  * @param {object} book
- * @returns {void}
+ *
+ * @returns {object} response
  */
 const borrowBookAction = book => dispatch => api
   .book

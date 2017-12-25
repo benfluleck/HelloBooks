@@ -97,7 +97,7 @@ export default {
       .then((categories) => {
         if (Object.keys(categories).length < 1) {
           return res.status(200)
-            .send({ message: 'sorry there are no categories available' });
+            .send({ message: 'Sorry there are no categories available' });
         }
         const allCategories = { categories };
         res.status(200).send(allCategories);

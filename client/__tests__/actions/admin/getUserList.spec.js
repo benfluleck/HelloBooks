@@ -8,7 +8,7 @@ import {
 import mockItems from '../../__mocks__/mockItems';
 
 describe('User list action', () => {
-  test('successfully returns a user list', () => {
+  test('should successfully returns a user list', () => {
     const store = mockStore({ userList: { } });
     mock.onGet().replyOnce(
       200,

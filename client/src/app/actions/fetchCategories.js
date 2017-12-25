@@ -65,6 +65,7 @@ const fetchBooksForCategories = (categoryId, offset, limit) => (dispatch) => {
     .book
     .fetchAllBooksByCategories(categoryId, offset, limit)
     .then((response) => {
+      console.log(response, 'ERRORllllllll')
       dispatch(fetchBooksCategoriesSuccess(response));
     })
     .catch((error) => {

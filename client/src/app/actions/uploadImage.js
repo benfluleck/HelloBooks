@@ -37,6 +37,5 @@ export const imageUploadToCloud = (username, imageData) => dispatch => request
     return (response.body);
   })
   .catch((error) => {
-    dispatch(showErrorNotification({ error }));
     UploadImageToCloudFailure(error);
   });

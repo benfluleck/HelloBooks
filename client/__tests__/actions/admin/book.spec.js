@@ -11,7 +11,7 @@ import mockItems from '../../__mocks__/mockItems';
 
 
 describe('addBook action creator', () => {
-  test('successfully adds a book to library', () => {
+  test('should successfully add a book to library', () => {
     const store = mockStore({ books: {} });
     const sucessMessage = 'Book added!, Sheep';
     mock.onPost().replyOnce(
@@ -39,7 +39,7 @@ describe('addBook action creator', () => {
 });
 
 describe('updatedBook action creator', () => {
-  test('successfully updates a book\'s details in the library', () => {
+  test('should successfully update a book\'s details in the library', () => {
     const store = mockStore({ books: { } });
     const sucessMessage =
     'Sheep has been updated!';
@@ -70,7 +70,7 @@ describe('updatedBook action creator', () => {
   });
 
   describe('deleteBook action creator', () => {
-    test('successfully deletes a book to library', () => {
+    test('should successfully delete a book in the library', () => {
       const store = mockStore({ books: {} });
       const sucessMessage = 'Sheep has been deleted';
       mock.onDelete().replyOnce(

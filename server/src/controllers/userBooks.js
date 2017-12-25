@@ -242,7 +242,7 @@ export default {
       if (!history) {
         return res
           .status(409)
-          .send({ success: false, message: 'You did not borrow this book' });
+          .send({ message: 'You did not borrow this book' });
       }
       history.update({
         returnStatus: true,
@@ -364,10 +364,15 @@ export default {
 
   /**
    * Route: GET: /users/userhistory
+   *
    * @description Get user loan history
+   *
    * @param {any} req
+   *
    * @param {any} res
+   *
    * @returns {any} book
+   *
    * @memmberOf UserBooks Controller
    */
   getLoanHistory(req, res) {

@@ -15,7 +15,7 @@ const userController = {
   *
   * @param {Object} res response object
   *
-  * @returns {void|Response} response
+  * @returns {void|object} response
   */
   create(req, res) {
     if (req.body.password !== req.body.passwordConfirmation) {

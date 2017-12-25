@@ -8,7 +8,7 @@ import {
 import mockItems from '../../__mocks__/mockItems';
 
 describe('Admin Notifications action creator', () => {
-  test('successfully lists admin notifications', () => {
+  test('should successfully list the admin notifications', () => {
     const store = mockStore({ notifications: { } });
     mock.onGet().replyOnce(
       200,

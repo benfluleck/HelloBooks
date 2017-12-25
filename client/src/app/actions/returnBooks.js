@@ -29,7 +29,6 @@ export const returnBookAction = book => dispatch => api
   .then((response) => {
     dispatch(showSuccessNotification(response));
     dispatch(returnBookSuccess(response.returnedBook));
-
     return (response);
   })
   .catch((error) => {

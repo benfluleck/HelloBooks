@@ -8,7 +8,7 @@ import {
 import mockItems from '../../__mocks__/mockItems';
 
 describe('User Level list action', () => {
-  test('successfully returns a user level list', () => {
+  test('should successfully return a user level list', () => {
     const store = mockStore({ userList: { } });
     mock.onGet().replyOnce(
       200,

@@ -1,13 +1,11 @@
 import { mock, mockStore } from '../../__mocks__/mockConfig';
-import {
-  BORROW_BOOKS_SUCCESS,
-} from '../../../src/app/actions/index';
+
 import borrowBooksAction from '../../../src/app/actions/borrowBooks';
 
 import mockItems from '../../__mocks__/mockItems';
 
-describe('User list action', () => {
-  test('successfully returns a user list', () => {
+describe('Borrow books action', () => {
+  test('should successfully borrow a book', () => {
     const successMessage = 'Andela One successfully loaned';
     const store = mockStore({ borrowBooksList: { } });
     mock.onPost().replyOnce(
@@ -21,7 +19,7 @@ describe('User list action', () => {
         expect(actions[0].type).toEqual('NOTIF_SEND');
       });
   });
-  test('should returns an error when you try to borrow'
+  test('should return an error when you try to borrow'
   + 'a book with no id', () => {
     const errorMessage
     = "Sorry we can't find this book or all copies of this book are on loan";
