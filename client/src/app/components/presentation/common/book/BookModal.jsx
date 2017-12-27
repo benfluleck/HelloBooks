@@ -18,7 +18,13 @@ class BookModal extends React.PureComponent {
   render() {
     const { header, actions, books } = this.props;
     return (
-      <Modal id="modal" fixedFooter header={header} actions={actions} modalOptions={{ dismissible: true, inDuration: 30 }} >
+      <Modal
+        id="modal"
+        fixedFooter
+        header={header}
+        actions={actions}
+        modalOptions={{ dismissible: true, inDuration: 30 }}
+      >
         <Row>
           <div className="loan-book">
             <Col m={12}l={6}>
@@ -56,18 +62,18 @@ class BookModal extends React.PureComponent {
 BookModal.defaultProps = {
   children: null,
   header: '',
-  books: {},
+  // books: {},
   actions: null
 };
 
 
 BookModal.propTypes = {
   children: PropTypes.element,
-  books: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-    PropTypes.object
-  ]),
+  // books: PropTypes.oneOfType([
+  //   PropTypes.string,
+  //   PropTypes.number,
+  //   PropTypes.object
+  // ]),
   header: PropTypes.string,
   actions: PropTypes.element
 };

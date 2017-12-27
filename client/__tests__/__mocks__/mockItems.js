@@ -119,8 +119,38 @@ export default {
       updatedAt: new Date(),
     },
   ],
+  allBooksList: {
+    books: [
+      {
+        id: 1,
+        title: 'Capital',
+        author: 'Thomas Piketty',
+        categoryId: 1,
+        quantity: '21',
+        description: 'This is a test book description',
+        bookImage: 'http://res.cloudinary.com/digpnxufx/image/upload/c_scale,h_499,w_325/v1507396539/Capital_in_the_First_Century_bc4bfw.webp',
+        ISBN: 12163242,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        id: 2,
+        title: 'The House on the Borderland',
+        author: 'William Hope Hodgson',
+        categoryId: 1,
+        quantity: '21',
+        description: 'This is another description',
+        bookImage: 'http://res.cloudinary.com/digpnxufx/image/upload/c_scale,h_499,w_325/v1507396518/51iMfGw6LcL._AC_UL320_SR202_320__ret7dc.jpg',
+        ISBN: 124363242,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      }
+    ],
+    message: 'success',
+    pagination: {}
+  },
 
-  allBooksList: [
+  allBooksListObject: [
     {
       id: 1,
       title: 'Capital',

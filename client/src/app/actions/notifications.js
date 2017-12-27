@@ -18,7 +18,7 @@ export const showErrorNotification = ({ message, error }) => (dispatch) => {
     dispatch(notifSend({
       message: 'Please Login Again',
       kind: 'info',
-      dismissAfter: 2500
+      dismissAfter: 3500
     }));
     localStorage.removeItem('state');
     localStorage.removeItem('token');
@@ -27,7 +27,7 @@ export const showErrorNotification = ({ message, error }) => (dispatch) => {
     dispatch(notifSend({
       message: message || error.response.data.message || error.data.message,
       kind: 'danger',
-      dismissAfter: 2500
+      dismissAfter: 3500
     }));
   }
 };
@@ -47,6 +47,6 @@ export const showSuccessNotification = ({ message, user }) => (dispatch) => {
   dispatch(notifSend({
     message: message || user.data.message,
     kind: 'success',
-    dismissAfter: 2500
+    dismissAfter: 3500
   }));
 };

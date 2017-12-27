@@ -1,50 +1,24 @@
-
-
 import $ from 'jquery';
 import { configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-15';
-
+import Adapter from 'enzyme-adapter-react-16';
 
 configure({ adapter: new Adapter() });
 
 window.$ = $;
-global.jQuery = $;
+$.prototype.ready = (fn) => {
+  fn();
+};
 $.prototype.sideNav = () => { };
-$.prototype.material_select = () => { };
-$.prototype.modal = () => { };
-$.prototype.tooltip = () => { };
-$.prototype.collapsible = () => { };
-$.prototype.materialbox = () => { };
-$.prototype.carousel = () => { };
-$.prototype.click = callback => callback();
-$.prototype.width = () => 500;
+$.prototype.width = () => 250;
+$.prototype.show = () => { };
+$.prototype.hide = () => { };
 
-$.prototype.prop = (string) => {
-  switch (string) {
-    case 'clientHeight':
-      return 400;
-    case 'scrollTop':
-      return 200;
-    case 'scrollHeight':
-      return 400;
-    default:
-      return null;
+global.CLOUDINARY_UPLOAD_URL = 'imageUrl';
+global.CLOUDINARY_UPLOAD_PRESET = 'imagePreset';
+global.CLIENT_ID = '11223344556677';
+global.Materialize = {};
+global.Materialize.toast = (param, param2, param3, fn) => {
+  if (fn) {
+    fn();
   }
 };
-
-$.deparam = () => ({
-  u: 'er',
-  p: 1,
-  t: ''
-});
-
-window.resizeTo = (width) => {
-  global.window.innerWidth = width || global.window.innerWidth;
-  global.window.dispatchEvent(new Event('resize'));
-};
-
-
-global.CLOUDINARY_IMG_URL_STUB = 'cloudinary-stub';
-
-window.setInterval = fn => fn();
-window.setTimeout = fn => fn();

@@ -6,7 +6,7 @@ import { Footer } from 'react-materialize';
  * named Bottom so as not to conflict with materialize footer
  * @class Bottom
  */
-const Bottom = () => (
+const SiteFooter = () => (
   <Footer
     className="transparent"
     copyrights="&copy; 2017 Copyright Benny Ogidan and Andela"
@@ -18,4 +18,4 @@ const Bottom = () => (
   />
 );
 
-export default Bottom;
+export default SiteFooter;

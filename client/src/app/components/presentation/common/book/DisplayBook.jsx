@@ -4,7 +4,8 @@ import swal from 'sweetalert2';
 import { Button } from 'react-materialize';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchSelectedBook, fetchAllBooks } from '../../../../actions/fetchBooks';
+import { fetchSelectedBook, fetchAllBooks } from
+  '../../../../actions/fetchBooks';
 import { deleteBookAction } from '../../../../actions/admin/books';
 
 /**
@@ -100,7 +101,6 @@ class Book extends React.Component {
     this
       .props
       .fetchSelectedBook(book.id);
-    // $('#admin-book-modal').modal('open');
   }
   /**
    *
@@ -121,7 +121,7 @@ class Book extends React.Component {
                   <Button
                     floating
                     icon="mode_edit"
-                    href="#admin-book-modal"
+                    href="#edit-admin-book-modal"
                     onClick={() => this.handleEdit(this.props.book)}
                     className="#f57c00 orange darken-2 book-icons-1 modal-trigger"
                     waves="light"
@@ -151,7 +151,9 @@ class Book extends React.Component {
 
               <div
                 className="card-image"
-                data-tip={`<h4>Title: ${this.props.book.title}</h4><hr/> <p>Author: ${this.props.book.author}</p> <p>Description:${this.props.book.description}</p>`}
+                data-tip={`<h4>Title: ${this.props.book.title}</h4><hr/> 
+                <p>Author: ${this.props.book.author}</p> 
+                <p>Description:${this.props.book.description}</p>`}
                 data-html
                 data-class="booktip"
               >

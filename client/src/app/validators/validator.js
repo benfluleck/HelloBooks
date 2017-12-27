@@ -42,14 +42,12 @@ const validatePasswordInput = (state) => {
   if (!isEmpty) {
     errors.oldpassword = 'Please fill this field';
   }
-  
   return { errors, isValid: isEmpty(errors) };
 };
 
 
-const validateSignupInput = (state) => {
+const validateSignUpInput = (state) => {
   const errors = {};
-
   if (!validateEmail(state.email)) {
     errors.email = 'Email is Invalid';
   }
@@ -70,15 +68,18 @@ const validateSignupInput = (state) => {
   }
 
   if (!isLength(state.password, 5, 20)) {
-    errors.password = 'Password ahould be a minimum of 5 characters and max. of 20.';
+    errors.password =
+    'Password ahould be a minimum of 5 characters and max. of 20.';
   }
 
   if (!isLength(state.firstname, 4, 30)) {
-    errors.firstname = 'Firstname ahould be a minimum of 4 characters and max. of 30.';
+    errors.firstname =
+    'Firstname ahould be a minimum of 4 characters and max. of 30.';
   }
 
   if (!isLength(state.lastname, 4, 30)) {
-    errors.lastname = 'Lastname ahould be a minimum of 4 characters and max. of 30.';
+    errors.lastname =
+    'Lastname ahould be a minimum of 4 characters and max. of 30.';
   }
 
   if (state.passwordConfirmation !== state.password) {
@@ -109,7 +110,7 @@ const validateCategoryInput = (state) => {
 };
 
 
-export { validateSignupInput,
+export { validateSignUpInput,
   validateForgotPasswordEmail,
   bookDetailValidator,
   validateCategoryInput,

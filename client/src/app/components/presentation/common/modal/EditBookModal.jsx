@@ -196,7 +196,7 @@ class EditBookModal extends React.Component {
    */
     return (
       <Modal
-        id="admin-book-modal"
+        id="edit-admin-book-modal"
         fixedFooter
         header={header}
         actions={<Button onClick={this.handleSubmit}>Submit</Button>}

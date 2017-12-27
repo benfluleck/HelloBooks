@@ -2,10 +2,6 @@ global.requestAnimationFrame = (callback) => {
   setTimeout(callback, 0);
 };
 
-global.requestAnimationFrame = (callback) => {
-  setTimeout(callback, 0);
-};
-
 global.URLSearchParams = jest.fn();
 global.URL = jest.fn(() => ({
   searchParams: {
@@ -29,6 +25,7 @@ global.FileReader = jest.fn();
 document.getElementById = jest.fn(() => ({
   click: jest.fn()
 }));
+
 // window.localStorage = localStorage;
 
 window.localStorage = jest.fn({

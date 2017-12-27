@@ -60,16 +60,15 @@ export const fetchAllCategories = () => dispatch => api
  * @returns {object} asynchronous action
  */
 export
-const fetchBooksForCategories = (categoryId, offset, limit) => (dispatch) => {
+const fetchBooksForCategories = (categoryId, offset, limit) => dispatch =>
   api
     .book
     .fetchAllBooksByCategories(categoryId, offset, limit)
     .then((response) => {
-      console.log(response, 'ERRORllllllll')
       dispatch(fetchBooksCategoriesSuccess(response));
     })
     .catch((error) => {
       dispatch(showErrorNotification({ error }));
       dispatch(fetchBooksCategoriesFailure({ error }));
     });
-};
+

@@ -62,9 +62,13 @@ export const fetchAllBooks = (offset, limit) => dispatch => api
 
   /**
  * async helper function: log in user
+ *
  * @function fetchOverdueBooks
+ *
  * @param {integer} offset
+ *
  * @param {integer} limit
+ *
  * @returns {function} asynchronous action
  */
 export const fetchOverdueBookstoDashboard = (offset, limit) => dispatch => api

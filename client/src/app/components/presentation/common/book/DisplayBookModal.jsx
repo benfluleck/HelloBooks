@@ -33,6 +33,9 @@ class DisplayBookModal extends React.Component {
     this.state = {
       returnDate: moment()
     };
+    this.handleChange = this
+      .handleChange
+      .bind(this);
   }
 
   /**
@@ -41,7 +44,7 @@ class DisplayBookModal extends React.Component {
    * @returns {state} state
    * @memberOf DisplayBookModal
    */
-  handleChange = (date) => { this.setState({ returnDate: date }); }
+  handleChange(date) { this.setState({ returnDate: date }); }
   /**
    *
    *
@@ -55,7 +58,9 @@ class DisplayBookModal extends React.Component {
     this
       .props
       .returnBookAction({ bookId: this.props.book.id });
-    $('#modal').modal({ opacity: 0 });
+    // $('#modal').modal({ opacity: 0 });
+    $('#modal').modal('close');
+    // $('#modal').closeModal({ dismissible: true });
   }
 
   /**
@@ -78,7 +83,7 @@ class DisplayBookModal extends React.Component {
           <div className="return-date"> Specify Return Date:
             <DatePicker
               selected={this.state.returnDate}
-              onChange={this.handleChange.bind(this)}
+              onChange={this.handleChange}
               minDate={moment().add('days')}
               maxDate={moment().add(20, 'days')}
             />
@@ -110,7 +115,7 @@ class DisplayBookModal extends React.Component {
         if (response.error) {
           return;
         }
-        $('#modal').modal({ opacity: 0 });
+        $('#modal').modal('close');
       });
   }
 
@@ -186,7 +191,7 @@ class DisplayBookModal extends React.Component {
 }
 
 DisplayBookModal.defaultProps = {
-  book: [],
+  // book: {},
   borrowedBooksList: []
 };
 
@@ -194,11 +199,11 @@ DisplayBookModal.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   borrowBookAction: PropTypes.func.isRequired,
   returnBookAction: PropTypes.func.isRequired,
-  book: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-    PropTypes.object
-  ]),
+  // book: PropTypes.oneOfType([
+  //   PropTypes.string,
+  //   PropTypes.number,
+  //   PropTypes.object
+  // ]),
   borrowedBooksList: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,

@@ -28,12 +28,12 @@ describe('Upload Image action', () => {
 
     mock.onGet().replyOnce(
       404,
-      {response: mockItems.user }
+      { body: mockItems.user }
     );
     store.dispatch(imageUploadToCloud(mockItems.user.username, mockItems.imageData))
       .then(() => store.getActions())
       .then((error) => {
-        console.log(error,'>>>>>GG>G>G')
+        console.log(error,'>>>>>GG>G>G');
       });
   });
 });
