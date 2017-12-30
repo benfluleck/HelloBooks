@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
  *
  * @extends {React.Component}
  */
-class BookModal extends React.PureComponent {
+class BaseBookModal extends React.PureComponent {
   /**
    *
    * @returns {Component} Component
@@ -31,24 +31,24 @@ class BookModal extends React.PureComponent {
               <div className="card-image" >
                 <img
                   className="modal-image"
-                  src={this.props.books.bookImage}
+                  src={books.bookImage}
                   alt="Title"
                 />
               </div>
             </Col>
             <Col m={12} l={6}>
               <div className="book-modal modal-title">
-                Book Number: # {this.props.books.id}
+                Book Number: # {books.id}
               </div>
               <div className="book-modal modal-title">
-                Title: {this.props.books.title}
+                Title: {books.title}
               </div>
               <hr />
               <div className="book-modal">
-                Author: {this.props.books.author}
+                Author: {books.author}
               </div>
               <div className="book-modal">
-                Description: {this.props.books.description}
+                Description: {books.description}
               </div>
             </Col>
           </div>
@@ -59,25 +59,14 @@ class BookModal extends React.PureComponent {
   }
 }
 
-BookModal.defaultProps = {
-  children: null,
-  header: '',
-  // books: {},
-  actions: null
-};
 
-
-BookModal.propTypes = {
+BaseBookModal.propTypes = {
   children: PropTypes.element,
-  // books: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number,
-  //   PropTypes.object
-  // ]),
+  books: PropTypes.object,
   header: PropTypes.string,
   actions: PropTypes.element
 };
 
 
-export default BookModal;
+export default BaseBookModal;
 

@@ -25,7 +25,7 @@ const SignUpPage = props => (
                       name="firstname"
                       value={props.user.firstname}
                       onChange={props.onChange}
-                      errors={props.user.errors.firstname}
+                      errors={props.errors.firstname}
                       prefix="contacts"
                     />
                   </Col>
@@ -36,7 +36,7 @@ const SignUpPage = props => (
                       type="text"
                       value={props.user.lastname}
                       onChange={props.onChange}
-                      errors={props.user.errors.lastname}
+                      errors={props.errors.lastname}
                       prefix="contacts"
                     />
                   </Col>
@@ -47,7 +47,7 @@ const SignUpPage = props => (
                       type="text"
                       value={props.user.username}
                       onChange={props.onChange}
-                      errors={props.user.errors.username}
+                      errors={props.errors.username}
                       prefix="account_circle"
                     />
                   </Col>
@@ -58,7 +58,7 @@ const SignUpPage = props => (
                       type="email"
                       value={props.user.email}
                       onChange={props.onChange}
-                      errors={props.user.errors.email}
+                      errors={props.errors.email}
                       prefix="mail"
                     />
                   </Col>
@@ -69,7 +69,7 @@ const SignUpPage = props => (
                       type="password"
                       value={props.user.password}
                       onChange={props.onChange}
-                      errors={props.user.errors.password}
+                      errors={props.errors.password}
                       prefix="lock"
                     />
                   </Col>
@@ -80,7 +80,7 @@ const SignUpPage = props => (
                       type="password"
                       value={props.user.passwordConfirmation}
                       onChange={props.onChange}
-                      errors={props.user.errors.passwordConfirmation}
+                      errors={props.errors.passwordConfirmation}
                       prefix="lock"
                     />
                   </Col>
@@ -102,21 +102,14 @@ const SignUpPage = props => (
   </div>
 );
 
-SignUpPage.defaultProps = {
-  onSignUpSubmit: null,
-  onChange: null,
-  user: {}
-};
-
 SignUpPage.propTypes = {
   onSignUpSubmit: PropTypes.func,
   onChange: PropTypes.func,
-  user: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object
-  ])
+  user: PropTypes.object,
+  errors: PropTypes.object
 };
 
 const AuthSignUpPage = AuthenticationWrapper(SignUpPage);
 
+export { SignUpPage };
 export default AuthSignUpPage;

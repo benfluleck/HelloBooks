@@ -1,5 +1,6 @@
 import React from 'react';
 import 'redux-notifications/lib/styles.css';
+import 'react-datepicker/dist/react-datepicker.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Root from './components/Root.jsx';
 import LandingPage from './components/container/LandingPage.jsx';

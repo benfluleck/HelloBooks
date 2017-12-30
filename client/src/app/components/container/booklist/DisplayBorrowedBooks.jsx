@@ -83,26 +83,24 @@ class DisplayAllBorrowedBooks extends React.Component {
 DisplayAllBorrowedBooks.propTypes = {
   offset: PropTypes.number,
   limit: PropTypes.number,
-  borrowedBooks: PropTypes.shape({
-    map: PropTypes.object,
-    pagination: PropTypes.object,
-    books: PropTypes.arrayOf(PropTypes.shape({
-      title: PropTypes.string
-    }))
-  }),
+  borrowedBooks: PropTypes.object,
   fetchAllBorrowedBooks: PropTypes.func.isRequired
 };
 
 DisplayAllBorrowedBooks.defaultProps = {
-  borrowedBooks: null,
   limit: 8,
   offset: 0
 
 };
 
+export { DisplayAllBorrowedBooks };
+
 const mapStateToProps = ({ bookReducer }) => ({
   borrowedBooks: bookReducer.borrowedBooksList
 });
 
-export default connect(mapStateToProps, { fetchAllBorrowedBooks })(DisplayAllBorrowedBooks);
+export default connect(
+  mapStateToProps,
+  { fetchAllBorrowedBooks }
+)(DisplayAllBorrowedBooks);
 

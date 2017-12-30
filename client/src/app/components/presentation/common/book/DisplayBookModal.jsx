@@ -2,10 +2,9 @@ import React from 'react';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import PropTypes from 'prop-types';
-import 'react-datepicker/dist/react-datepicker.css';
 import { connect } from 'react-redux';
 import { Button } from 'react-materialize';
-import BookModal from './BookModal.jsx';
+import BaseBookModal from './BaseBookModal.jsx';
 import borrowBookAction from '../../../../actions/borrowBooks';
 import { returnBookAction } from '../../../../actions/returnBooks';
 
@@ -24,6 +23,7 @@ import { returnBookAction } from '../../../../actions/returnBooks';
 class DisplayBookModal extends React.Component {
   /**
    * Creates an instance of DisplayBookModal.
+   *
    * @param {object} props
    *
    * @memberOf DisplayBookModal
@@ -41,7 +41,9 @@ class DisplayBookModal extends React.Component {
   /**
    *
    * @param {param} date
+   *
    * @returns {state} state
+   *
    * @memberOf DisplayBookModal
    */
   handleChange(date) { this.setState({ returnDate: date }); }
@@ -58,9 +60,7 @@ class DisplayBookModal extends React.Component {
     this
       .props
       .returnBookAction({ bookId: this.props.book.id });
-    // $('#modal').modal({ opacity: 0 });
     $('#modal').modal('close');
-    // $('#modal').closeModal({ dismissible: true });
   }
 
   /**
@@ -103,11 +103,12 @@ class DisplayBookModal extends React.Component {
    *
    *
    * @param {event} event
+   *
    * @returns {function} borrowBooks
+   *
    * @memberOf DisplayBookModal
    */
   handleBorrowClick =(event) => {
-    event.preventDefault();
     const dateString = this.state.returnDate.format('YYYY-MM-DD');
     this.props
       .borrowBookAction({ bookId: this.props.book.id, returnDate: dateString })
@@ -161,7 +162,7 @@ class DisplayBookModal extends React.Component {
   render() {
     if (!this.props.isAuthenticated) {
       return (
-        <BookModal header="Book Details" books={this.props.book} />
+        <BaseBookModal header="Book Details" books={this.props.book} />
       );
     }
 
@@ -176,40 +177,30 @@ class DisplayBookModal extends React.Component {
     const chooseReturnDate = this.showDatePicker(loanStatus);
     return (
 
-      <BookModal
+      <BaseBookModal
 
         header="Loan Book"
         actions={bookModalActions}
         books={this.props.book}
       >
         {
-        chooseReturnDate
-      }
-      </BookModal>
+          chooseReturnDate
+        }
+      </BaseBookModal>
     );
   }
 }
 
-DisplayBookModal.defaultProps = {
-  // book: {},
-  borrowedBooksList: []
-};
 
 DisplayBookModal.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   borrowBookAction: PropTypes.func.isRequired,
   returnBookAction: PropTypes.func.isRequired,
-  // book: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number,
-  //   PropTypes.object
-  // ]),
-  borrowedBooksList: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-    PropTypes.object
-  ])
+  book: PropTypes.object,
+  borrowedBooksList: PropTypes.object
 };
+
+export { DisplayBookModal };
 
 const mapStateToProps = state => ({
   isAuthenticated: !!state.userReducer.isAuthenticated,

@@ -3,7 +3,7 @@ import { Row } from 'react-materialize';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import SideNav from '../common/SideNav/index.jsx';
 import DisplayAllBooks from '../../container/booklist/DisplayAllBooks.jsx';
-import getDashboardWrapper from '../../container/Dashboard.jsx';
+import GetDashboardWrapper from '../../container/common/Dashboard.jsx';
 import
 CategoryAdminTab from '../../container/categories/CategoriesAdminTab.jsx';
 import UserListTab from '../../container/userlists/container/UserListTab.jsx';
@@ -62,7 +62,7 @@ class AdminDashboard extends React.PureComponent {
 }
 
 
-const AdministratorDashboard = getDashboardWrapper(AdminDashboard);
+const AdministratorDashboard = GetDashboardWrapper(AdminDashboard);
 
 
 export default AdministratorDashboard;

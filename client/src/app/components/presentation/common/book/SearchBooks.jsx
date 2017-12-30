@@ -36,7 +36,6 @@ class SearchBooks extends React.Component {
    * @memberOf SearchBooks
    */
   onChange(event, value) {
-    event.preventDefault();
     if (value.length > 1) {
       this.props.searchAllBooks(value);
     } else {
@@ -73,11 +72,8 @@ class SearchBooks extends React.Component {
   }
 }
 
-SearchBooks.defaultProps = {
-  searchAllBooks: '',
-  fetchAllBooks: ''
 
-};
+export { SearchBooks };
 
 SearchBooks.propTypes = {
   searchAllBooks: PropTypes.func,

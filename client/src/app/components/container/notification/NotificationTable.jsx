@@ -15,11 +15,11 @@ const NotificationTable = ({ notificationList }) => {
     notificationList.map(notification =>
       (
         <tr key={notification.id}>
-          <td>{notification.user ? notification.user.username
-              : 'User not found'}
+          <td>{notification.user ? notification.user.username :
+            'User not found'}
           </td>
-          <td>{notification.book ? notification.book.title
-              : 'Book not found'}
+          <td>{notification.book ? notification.book.title :
+            'Book not found'}
           </td>
           <td>{notification.action || 'N/A'}
           </td>

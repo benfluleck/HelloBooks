@@ -1,35 +1,54 @@
 {
 	"root": true,
-	"parser": "babel-eslint",
-	"extends": "airbnb",
-	"plugins": [ "react" ],
+	"extends": [
+		"airbnb-base",
+		"react"
+	],
 	"env": {
-		"jquery": true,
 		"node": true,
 		"es6": true,
 		"mocha": true,
-		"jest": true
+		"jquery": true,
+		"jest":true
 	},
-	"globals": {
-		"describe": true,
-		"expect": true
+	"settings": {
+		"import/resolver": "node"
 	},
 	"rules": {
 		"one-var": 0,
+		"indent": [
+			"error",
+			2
+		],
 		"one-var-declaration-per-line": 0,
+		"import/no-named-as-default": 0,
 		"new-cap": 0,
 		"consistent-return": 0,
 		"no-param-reassign": 0,
 		"comma-dangle": 0,
-		"curly": [ "error", "multi-line" ],
-		"prefer-destructuring": [ "error", { "object": false, "array": false } ],
-		"import/no-unresolved": "off",
-		"no-shadow": [ "error", { "allow": [ "req", "res", "err" ] } ],
-		"max-len": [ 1, 80, 2 ],
-		"react/no-unknown-property": [
+		"curly": [
+			"error",
+			"multi-line"
+		],
+		"max-len": [
+			1,
+			80,
+			2
+		],
+		"import/no-unresolved": [
 			2,
 			{
-				"ignore": [ "class", "for" ]
+				"commonjs": true
+			}
+		],
+		"no-shadow": [
+			"error",
+			{
+				"allow": [
+					"req",
+					"res",
+					"err"
+				]
 			}
 		],
 		"valid-jsdoc": [
@@ -51,8 +70,5 @@
 				}
 			}
 		]
-	},
-	"settings": {
-		"import/resolver": "node"
 	}
 }

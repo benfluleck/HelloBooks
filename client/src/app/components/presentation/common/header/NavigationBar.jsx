@@ -20,9 +20,9 @@ const Navigation = (props) => {
     .map(link => (
       <li
         key={link}
-        className={props.activeLink === link
-        ? 'active'
-        : ''}
+        className={props.activeLink === link ?
+          'active' :
+          ''}
       >
         <NavLink to={`/${link.replace(' ', '')}`} activeClassName="active">
           {link.toUpperCase()}
@@ -40,9 +40,5 @@ Navigation.propTypes = {
   navLinks: PropTypes.arrayOf(PropTypes.string)
 };
 
-Navigation.defaultProps = {
-  activeLink: null,
-  navLinks: null
-};
 
 export default Navigation;

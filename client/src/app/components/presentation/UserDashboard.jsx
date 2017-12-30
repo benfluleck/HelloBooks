@@ -7,7 +7,7 @@ import DisplayAllBorrowedBooks from
 import DisplayAllBooks from '../container/booklist/DisplayAllBooks.jsx';
 import LoanHistoryTable from '../container/loanhistory/LoanHistory.jsx';
 import DisplayOverdueBooks from '../container/booklist/DisplayOverdueBooks.jsx';
-import getDashboardWrapper from '../container/Dashboard.jsx';
+import GetDashboardWrapper from '../container/common/Dashboard.jsx';
 
 
 /**
@@ -66,7 +66,7 @@ class UserDashboard extends React.PureComponent {
 }
 
 
-const ClientDashboard = getDashboardWrapper(UserDashboard);
+const ClientDashboard = GetDashboardWrapper(UserDashboard);
 
 
 export default ClientDashboard;

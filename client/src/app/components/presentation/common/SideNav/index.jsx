@@ -22,11 +22,11 @@ const SideNav = ({
   (
     <ul id="slide-out" className="side-nav fixed">
       <UserView
-        imageLink={props.profilePic}
-        username={props.username}
-        firstname={props.firstname}
-        email={props.email}
-        isAdmin={props.isAdmin}
+        imageLink={props.user.profilePic}
+        username={props.user.username}
+        firstname={props.user.firstname}
+        email={props.user.email}
+        isAdmin={props.user.isAdmin}
       />
       <li><div className="divider" /></li>
       <li><NavLink to="/changepassword">Change Password</NavLink></li>
@@ -36,20 +36,9 @@ const SideNav = ({
 
   );
 
-SideNav.defaultProps = {
-  profilePic: null,
-  email: '',
-  firstname: '',
-  username: '',
-  isAdmin: false
-};
 
 SideNav.propTypes = {
-  username: PropTypes.string,
-  firstname: PropTypes.string,
-  email: PropTypes.string,
-  profilePic: PropTypes.string,
-  isAdmin: PropTypes.bool
+  user: PropTypes.object
 };
 
 export default SideNav;

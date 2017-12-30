@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 import AuthenticationWrapper from './AuthenticationWrapper.jsx';
 import TextInput from '../../presentation/common/modal/form/TextInput.jsx';
 
-
 const SignInPage = props => (
   <div>
     <div className="login center-align">
@@ -24,9 +23,8 @@ const SignInPage = props => (
                   type="text"
                   value={props.user.username}
                   onChange={props.onChange}
-                  errors={props.user.errors.username}
-                  prefix="account_circle"
-                />
+                  errors={props.errors.username}
+                  prefix="account_circle" />
               </Col>
               <Col s={12} l={12}>
                 <TextInput
@@ -35,9 +33,8 @@ const SignInPage = props => (
                   type="password"
                   value={props.user.password}
                   onChange={props.onChange}
-                  errors={props.user.errors.password}
-                  prefix="lock"
-                />
+                  errors={props.errors.password}
+                  prefix="lock" />
               </Col>
               <Col s={12} l={8}>
                 <NavLink to="/signup">
@@ -57,8 +54,7 @@ const SignInPage = props => (
                     className="google-btn"
                     clientId={GOOGLE_CLIENT_ID}
                     onSuccess={props.handleGoogleLogin}
-                    onFailure={props.handleGoogleLogin}
-                  >
+                    onFailure={props.handleGoogleLogin}>
                     Sign in with Google
                   </GoogleLogin>
                 </a>
@@ -71,24 +67,15 @@ const SignInPage = props => (
   </div>
 );
 
-SignInPage.defaultProps = {
-  onSignInSubmit: null,
-  onChange: null,
-  handleGoogleLogin: null,
-  user: {}
-};
-
 SignInPage.propTypes = {
   onSignInSubmit: PropTypes.func,
   onChange: PropTypes.func,
   handleGoogleLogin: PropTypes.func,
-  user: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object
-  ])
+  user: PropTypes.object
 };
 
-
 const AuthSignInPage = AuthenticationWrapper(SignInPage);
+
+export { SignInPage };
 
 export default AuthSignInPage;

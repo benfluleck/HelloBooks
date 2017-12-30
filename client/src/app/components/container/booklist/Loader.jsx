@@ -9,13 +9,11 @@ const Loader = ({ records, callback }) => {
   callback();
 };
 
-Loader.defaultProps = {
-};
-
 Loader.propTypes = {
+  records: PropTypes.object,
   callback: PropTypes.oneOfType([
     PropTypes.object
-  ]).isRequired
+  ])
 };
 
 export default (Loader);

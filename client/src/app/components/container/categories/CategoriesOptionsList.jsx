@@ -63,10 +63,12 @@ CategoriesOptions.defaultProps = {
 CategoriesOptions.propTypes = {
   categories: PropTypes.arrayOf(PropTypes.shape({
     map: PropTypes.object,
-  })).isRequired,
+  })),
   categoryId: PropTypes.string,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func
 };
+
+export { CategoriesOptions };
 
 const mapStateToProps = ({ categoryReducer }) => (
   {

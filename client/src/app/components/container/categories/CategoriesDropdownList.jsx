@@ -42,6 +42,9 @@ CategoriesDropdown.propTypes = {
   })).isRequired
 };
 
+
 const CategoriesDropdownList = GetCategories(CategoriesDropdown);
+
+export { CategoriesDropdown };
 
 export default CategoriesDropdownList;

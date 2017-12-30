@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactTooltip from 'react-tooltip';
 import swal from 'sweetalert2';
-import { Button } from 'react-materialize';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { fetchSelectedBook, fetchAllBooks } from
@@ -18,6 +17,7 @@ import { deleteBookAction } from '../../../../actions/admin/books';
 class Book extends React.Component {
   /**
    * Creates an instance of Book.
+   *
    * @param {object} props
    *
    * @memberOf Book
@@ -29,6 +29,9 @@ class Book extends React.Component {
       .bind(this);
     this.handleEdit = this
       .handleEdit
+      .bind(this);
+    this.handleDelete = this
+      .handleDelete
       .bind(this);
   }
 
@@ -43,10 +46,10 @@ class Book extends React.Component {
    *
    * @memberOf Book
    */
-  handleBookClick(book) {
+  handleBookClick() {
     this
       .props
-      .fetchSelectedBook(book.id);
+      .fetchSelectedBook(this.props.book.id);
   }
 
   /**
@@ -54,14 +57,14 @@ class Book extends React.Component {
    *
    * @method handleDelete
    *
-   * @param {object} id
    *
-   * @returns {function} id
+   *
+   * @returns {void}
    *
    * @memberOf Book
    */
-  handleDelete(id) {
-    swal({
+  handleDelete() {
+    return swal({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
       type: 'warning',
@@ -76,7 +79,7 @@ class Book extends React.Component {
       if (result) {
         this
           .props
-          .deleteBookAction(id);
+          .deleteBookAction(this.props.book.id);
         this
           .props
           .fetchAllBooks(this.props.offset, this.props.limit);
@@ -84,7 +87,7 @@ class Book extends React.Component {
       } else {
         swal('Cancelled', 'Your book is safe', 'error');
       }
-    });
+    }).catch(() => {});
   }
   /**
    *
@@ -94,13 +97,15 @@ class Book extends React.Component {
    * @method handleEdit
    *
    * @memberof Book
+   *
    * @param {object} book
+   *
    * @returns {function} a function that fetches the book id
    */
-  handleEdit(book) {
+  handleEdit() {
     this
       .props
-      .fetchSelectedBook(book.id);
+      .fetchSelectedBook(this.props.book.id);
   }
   /**
    *
@@ -112,42 +117,36 @@ class Book extends React.Component {
   render() {
     return (
       <div className="col l3">
-        <ReactTooltip />
+        <ReactTooltip/>
         <div>
           <div>
-            {this.props.isAdmin === true
-              ? (
+            {this.props.isAdmin === true ?
+              (
                 <div>
-                  <Button
-                    floating
-                    icon="mode_edit"
+                  <a
                     href="#edit-admin-book-modal"
-                    onClick={() => this.handleEdit(this.props.book)}
-                    className="#f57c00 orange darken-2 book-icons-1 modal-trigger"
-                    waves="light"
-                  >
+                    onClick={this.handleEdit}
+                    className="#f57c00 btn-floating orange edit-btn-class waves-light darken-2 book-icons-1 modal-trigger">
+                    <i className="material-icons">mode_edit</i>
                     Edit
-                  </Button>
+                  </a>
 
-                  <Button
-                    onClick={() => this.handleDelete(this.props.book.id)}
-                    floating
-                    icon="delete"
-                    waves="light"
-                    className="#f57c00 orange darken-2 book-icons"
-                  >Delete
-                  </Button>
+                  <a
+                    onClick={this.handleDelete}
+                    className="#f57c00 btn-floating delete-book-btn waves-light orange darken-2 book-icons">
+                    <i className="material-icons">delete</i>
+                    Delete
+                  </a>
                 </div>
-              )
-              : null}
+              ) :
+              null}
           </div>
           <div className="card">
             <a
               className="modal-trigger"
               href="#modal"
-              onClick={() => this.handleBookClick(this.props.book)}
-              tabIndex="-1"
-            >
+              onClick={this.handleBookClick}
+              tabIndex="-1">
 
               <div
                 className="card-image"
@@ -155,9 +154,9 @@ class Book extends React.Component {
                 <p>Author: ${this.props.book.author}</p> 
                 <p>Description:${this.props.book.description}</p>`}
                 data-html
-                data-class="booktip"
-              >
-                <img src={this.props.book.bookImage} alt={this.props.book.title} />
+                data-class="booktip">
+                <img src={this.props.book.bookImage}
+                  alt={this.props.book.title}/>
               </div>
             </a>
 
@@ -176,22 +175,28 @@ Book.propTypes = {
   deleteBookAction: PropTypes.func.isRequired,
   offset: PropTypes.number,
   limit: PropTypes.number,
-  book: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object])
+  book: PropTypes.object
 };
 
 Book.defaultProps = {
   offset: 0,
-  limit: 8,
-  book: [],
-  fetchAllBooks: null,
-  isAdmin: null
+  limit: 8
 };
 
+export { Book };
+
 const mapStateToProps = state => ({
-  isAdmin: (state.userReducer.user)
-    ? state.userReducer.user.isAdmin
-    : false
+  isAdmin: (state.userReducer.user) ?
+    state.userReducer.user.isAdmin :
+    false
 
 });
 
-export default connect(mapStateToProps, { deleteBookAction, fetchAllBooks, fetchSelectedBook })(Book);
+export default connect(
+  mapStateToProps,
+  {
+    deleteBookAction,
+    fetchAllBooks,
+    fetchSelectedBook
+  }
+)(Book);

@@ -4,14 +4,15 @@ import Adapter from 'enzyme-adapter-react-16';
 
 configure({ adapter: new Adapter() });
 
-window.$ = $;
+global.$ = $;
 $.prototype.ready = (fn) => {
   fn();
 };
-$.prototype.sideNav = () => { };
+$.prototype.sideNav = () => {};
 $.prototype.width = () => 250;
-$.prototype.show = () => { };
-$.prototype.hide = () => { };
+$.prototype.show = () => {};
+$.prototype.hide = () => {};
+$.prototype.modal = () => { };
 
 global.CLOUDINARY_UPLOAD_URL = 'imageUrl';
 global.CLOUDINARY_UPLOAD_PRESET = 'imagePreset';
@@ -22,3 +23,12 @@ global.Materialize.toast = (param, param2, param3, fn) => {
     fn();
   }
 };
+
+global.Materialize = {
+  toast: () => {}
+};
+
+global.GOOGLE_CLIENT_ID = '999394939493493943949944344334';
+
+global.swal = jest.fn(() => Promise.resolve({ result: '' }));
+

@@ -30,10 +30,13 @@ describe('Upload Image action', () => {
       404,
       { body: mockItems.user }
     );
-    store.dispatch(imageUploadToCloud(mockItems.user.username, mockItems.imageData))
+    store.dispatch(imageUploadToCloud(
+      mockItems.user.username,
+      mockItems.imageData
+    ))
       .then(() => store.getActions())
       .then((error) => {
-        console.log(error,'>>>>>GG>G>G');
+       // console.log(error,'>>>>>GG>G>G');
       });
   });
 });

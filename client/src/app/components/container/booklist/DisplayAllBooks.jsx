@@ -35,11 +35,14 @@ class DisplayAllBooks extends React.Component {
    */
   componentWillMount() {
     $('body').css('background-color', '#ffff');
-    this.props.fetchAllCategories();
+    this
+      .props
+      .fetchAllCategories();
     return (<Loader
       records={this.props.allBooksList}
-      callback={this.props.fetchAllBooks(this.props.offset, this.props.limit)}
-    />);
+      callback={this
+        .props
+        .fetchAllBooks(this.props.offset, this.props.limit)}/>);
   }
 
   /**
@@ -49,15 +52,16 @@ class DisplayAllBooks extends React.Component {
    * @memberof DisplayAllBooks
    *
    *
+   *
    * @returns {void}
    *
    *
    *
   * */
   componentWillReceiveProps() {
+    this.setState({ modalInit: true });
     $('.modal').modal();
   }
-
 
   /**
    * render Display All Books page component
@@ -70,15 +74,13 @@ class DisplayAllBooks extends React.Component {
    */
   render() {
     if (!this.props.allBooksList.books) {
-      return <Preloader size="big" />;
+      return <Preloader size="big"/>;
     }
-    const getAllBooks =
-      this.props.allBooksList.books.map(book => (
-        <Book
-          key={book.id}
-          book={book}
-        />
-      ));
+    const getAllBooks = this
+      .props
+      .allBooksList
+      .books
+      .map(book => (<Book key={book.id} book={book}/>));
     const { pagination } = this.props.allBooksList;
     const config = {
       items: pagination.pageCount,
@@ -89,44 +91,44 @@ class DisplayAllBooks extends React.Component {
         <Row>
           <Col m={9} l={9}>
             {this.props.allBooksList.books.length === 0 ?
-                null : <SearchBooks />
-          }
+              null :
+              <SearchBooks/>
+            }
             {this.props.isAdmin ?
               <div className="add-book">
                 <Button
                   floating
-                 // onClick={() => this.handleClick()}
                   className="#ef6c00 orange darken-3 add-book-btn modal-trigger"
                   href="#add-admin-book-modal"
                   waves="light"
-                  icon="add"
-                />
-                ADD BOOK
-              </div> : null
-          }
+                  icon="add"/>
+                  ADD BOOK
+              </div> :
+              null
+            }
           </Col>
           <Col m={3} l={3}>
             <div className="catdropdownlist">
-              <CategoriesDropdownList />
+              <CategoriesDropdownList/>
             </div>
           </Col>
         </Row>
         <Row>
           <Col l={12}>
             {this.props.allBooksList.books.length === 0 ?
-              <MessageforNoCatBooks /> : null
-           }
+              <MessageforNoCatBooks/> :
+              null
+            }
             {[...getAllBooks]}
           </Col>
         </Row>
         <PaginationWrapper
           config={config}
           fetch={this.props.fetchAllBooks}
-          numberOfRecords={this.props.limit}
-        />
+          numberOfRecords={this.props.limit}/>
         <div>
-          <EditBookModal />
-          <AddBookModal />
+          <EditBookModal/>
+          <AddBookModal/>
         </div>
       </div>
     );
@@ -149,23 +151,25 @@ DisplayAllBooks.propTypes = {
     }))
   }),
   fetchAllBooks: PropTypes.func.isRequired,
-  fetchAllCategories: PropTypes.func.isRequired,
+  fetchAllCategories: PropTypes.func.isRequired
 };
 
 DisplayAllBooks.defaultProps = {
   allBooksList: {},
   limit: 8,
-  offset: 0,
-  isAdmin: false,
+  offset: 0
 };
 
 const mapStateToProps = state => ({
   allBooksList: state.bookReducer.allBooksList,
-  isAdmin: (state.userReducer.user) ? state.userReducer.user.isAdmin : false,
+  isAdmin: (state.userReducer.user) ?
+    state.userReducer.user.isAdmin :
+    false
 });
+
+export { DisplayAllBooks };
 
 export default connect(mapStateToProps, {
   fetchAllCategories,
   fetchAllBooks
 })(DisplayAllBooks);
-

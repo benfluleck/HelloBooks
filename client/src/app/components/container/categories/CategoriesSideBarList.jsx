@@ -10,7 +10,7 @@ import GetCategories from './GetCategoriesWrapper.jsx';
  * @param {object} props
  * @returns {component} Collapsible
  */
-const CategoriesSideBar = (props) => {
+export const CategoriesSideBar = (props) => {
   const categoryNames = props.categories
     .map(category => (
       <Link

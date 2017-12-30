@@ -32,24 +32,12 @@ class DisplayRecentBooks extends React.Component {
     return (<Loader
       records={this.props.books}
       callback={this.props.fetchAllRecentBooks(
-       this.props.offset,
-       this.props.limit
-)}
+        this.props.offset,
+        this.props.limit
+      )}
     />);
   }
 
-  /**
-   * @method componentDidMount
-   *
-   * @memberof DisplayRecentBooks
-   *
-   * @returns {object} void
-   *
-   * @memberOf DisplayRecentBooks
-  * */
-  componentWillUnmount() {
-    $('body').css('background-color', 'rgb(204, 204, 204)');
-  }
   /**
    * render Display Recent component
    *
@@ -86,22 +74,16 @@ class DisplayRecentBooks extends React.Component {
 DisplayRecentBooks.propTypes = {
   offset: PropTypes.number,
   limit: PropTypes.number,
-  books: PropTypes.shape({
-    id: PropTypes.number,
-    map: PropTypes.object,
-    pagination: PropTypes.object,
-    books: PropTypes.arrayOf(PropTypes.shape({
-      title: PropTypes.string.isRequired,
-    }))
-  }),
+  books: PropTypes.object,
   fetchAllRecentBooks: PropTypes.func.isRequired,
   recentBooks: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.integer
   }))
 };
+
+export { DisplayRecentBooks };
+
 DisplayRecentBooks.defaultProps = {
-  books: {},
-  recentBooks: [],
   limit: 8,
   offset: 0
 };

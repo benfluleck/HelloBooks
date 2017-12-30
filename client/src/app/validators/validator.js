@@ -39,7 +39,7 @@ const validatePasswordInput = (state) => {
     errors.passwordConfirmation = 'Passwords do not match';
   }
 
-  if (!isEmpty) {
+  if (isEmpty(state.oldpassword)) {
     errors.oldpassword = 'Please fill this field';
   }
   return { errors, isValid: isEmpty(errors) };
@@ -89,16 +89,6 @@ const validateSignUpInput = (state) => {
   return { errors, isValid: isEmpty(errors) };
 };
 
-const validateForgotPasswordEmail = (state) => {
-  const errors = {};
-
-  if (trim(state.email).length === 0) {
-    errors.email = 'Email is empty';
-  }
-
-  return { isValid: isEmpty(errors) };
-};
-
 const validateCategoryInput = (state) => {
   const errors = {};
   if (!isLength(state.categoryName, 3, 35)) {
@@ -111,7 +101,6 @@ const validateCategoryInput = (state) => {
 
 
 export { validateSignUpInput,
-  validateForgotPasswordEmail,
   bookDetailValidator,
   validateCategoryInput,
   validatePasswordInput };

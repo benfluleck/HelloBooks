@@ -37,11 +37,5 @@ UserView.propTypes = {
   email: PropTypes.string
 };
 
-UserView.defaultProps = {
-  imageLink: null,
-  username: null,
-  firstname: null,
-  email: null
-};
 
 export default UserView;
