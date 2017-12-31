@@ -35,12 +35,6 @@ class AddBookModal extends React.Component {
         categoryId: ''
       },
       errors: {
-        title: '',
-        author: '',
-        description: '',
-        quantity: '',
-        bookImage: '',
-        categoryId: ''
       }
 
     };
@@ -62,7 +56,6 @@ class AddBookModal extends React.Component {
    * @returns {function} a function that handles change event on inputs
    */
   onChange(event) {
-    event.preventDefault();
     this.setState({
       ...this.state,
       [event.target.name]: event.target.value
@@ -93,7 +86,7 @@ class AddBookModal extends React.Component {
               quantity: '',
               bookImage: ''
             });
-            $('#add-admin-book-modal').modal({ dismissible: true });
+            $('#add-admin-book-modal').modal('close');
           }
         });
     }
@@ -185,8 +178,10 @@ AddBookModal.defaultProps = {
 
 AddBookModal.propTypes = {
   header: PropTypes.string,
-  addBook: PropTypes.func.isRequired
+  addBook: PropTypes.func
 };
+
+export { AddBookModal };
 
 
 export default connect(null, { addBook })(AddBookModal);

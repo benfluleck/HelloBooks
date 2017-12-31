@@ -8,7 +8,8 @@ const bookDetailValidator = (state) => {
   const errors = {};
 
   if (!isLength(state.author, 4, 30)) {
-    errors.author = 'The author\'s name  should be between 4 and 30 characters.';
+    errors.author =
+    'The author\'s name  should be between 4 and 30 characters.';
   }
 
   if (!isLength(state.title, 2, 30)) {

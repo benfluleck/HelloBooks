@@ -31,9 +31,9 @@ class PaginationWrapper extends React.Component {
    */
   pageLimit = (pagenumber, numberOfRecords) => {
     let pageOffset;
-    pageOffset = (pagenumber === 1)
-      ? 0
-      : pagenumber - 1;
+    pageOffset = (pagenumber === 1) ?
+      0 :
+      pagenumber - 1;
     return pageOffset * numberOfRecords;
   }
   /**
@@ -61,7 +61,6 @@ PaginationWrapper.defaultProps = {
   items: 0,
   activePage: 1,
   maxButtons: 5,
-  // config: null
 };
 
 PaginationWrapper.propTypes = {
@@ -70,5 +69,5 @@ PaginationWrapper.propTypes = {
   maxButtons: PropTypes.number,
   fetch: PropTypes.func.isRequired,
   numberOfRecords: PropTypes.number.isRequired,
-  // config: PropTypes.func
+  config: PropTypes.object
 };

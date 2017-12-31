@@ -60,6 +60,7 @@ class EditBookModal extends React.Component {
    * @memberOf DisplayAllBooks
   * */
   componentDidMount() {
+    this.setState({ initModal: true });
     $('.modal').modal();
   }
   /**
@@ -220,14 +221,12 @@ EditBookModal.defaultProps = {
 
 
 EditBookModal.propTypes = {
-  // book: PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.number,
-  //   PropTypes.object
-  // ]),
+  book: PropTypes.object,
   header: PropTypes.string,
   updateBookDetails: PropTypes.func.isRequired
 };
+
+export { EditBookModal };
 
 const mapStateToProps = state => ({
   book: (state.bookReducer.book) ? state.bookReducer.book.book : [],

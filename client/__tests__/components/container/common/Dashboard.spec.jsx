@@ -6,11 +6,7 @@ import GetDashboardWrapper, { Dashboard } from
   '../../../../src/app/components/container/common/Dashboard.jsx';
 
 const FakeDashboard = () => (<div/>);
-/**
- *
- *
- * @returns { shallow } shallow
- */
+
 const user = {
   username: '', email: '', firstname: '', lastname: '',
 };

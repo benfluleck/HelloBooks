@@ -104,7 +104,7 @@ describe('<Authentication', () => {
       }
     };
     wrapper.setState({ user });
-    wrapper.setState({ errors: {} });
+                                                                                                 
     wrapper.instance().onSignUpSubmit(event);
     expect(onSignUpSubmitSpy).toHaveBeenCalledTimes(1);
   });

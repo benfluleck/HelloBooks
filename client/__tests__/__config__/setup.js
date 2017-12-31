@@ -16,6 +16,7 @@ $.prototype.modal = () => { };
 
 global.CLOUDINARY_UPLOAD_URL = 'imageUrl';
 global.CLOUDINARY_UPLOAD_PRESET = 'imagePreset';
+global.CLOUDINARY_IMG_URL_STUB = 'cloudinary-stub';
 global.CLIENT_ID = '11223344556677';
 global.Materialize = {};
 global.Materialize.toast = (param, param2, param3, fn) => {
@@ -23,6 +24,7 @@ global.Materialize.toast = (param, param2, param3, fn) => {
     fn();
   }
 };
+
 
 global.Materialize = {
   toast: () => {}

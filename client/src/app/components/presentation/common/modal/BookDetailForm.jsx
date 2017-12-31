@@ -31,7 +31,7 @@ class BookDetailForm extends React.PureComponent {
     } = this.props.book;
 
     const { errors } = this.props;
-    const onChange = this.props.onChange;
+    const { onChange } = this.props;
     const onClick = this.props.uploadWidget;
     return (
       <Row>
@@ -136,10 +136,5 @@ BookDetailForm.propTypes = {
 
 };
 
-BookDetailForm.defaultProps = {
-  book: [],
-  errors: {},
-  uploadWidget: null
-};
 
 export default BookDetailForm;

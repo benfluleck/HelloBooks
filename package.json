@@ -18,7 +18,9 @@
 		"start:dev": "babel-node server/dist/bin/www.js",
 		"start:webdev": "webpack -d && webpack-dev-server && --content-base client/src/ --inline --hot",
 		"start-prod": "babel server/src --out-dir server/dist --presets es2015 && npm run heroku-postbuild",
-		"heroku-postbuild": "rimraf client/dist && mkdir client/dist && npm run build && export NODE_ENV=production && npm run undo:migrate && npm run start:migrate && npm run seed:all && webpack"
+    "heroku-postbuild": "rimraf client/dist && mkdir client/dist && npm run build && export NODE_ENV=production && npm run undo:migrate && npm run start:migrate && npm run seed:all && webpack",
+    "e2e-setup": "selenium-standalone install",
+    "e2e-server": "selenium-standalone start"
 	},
 	"nyc": {
 		"exclude": [
@@ -177,6 +179,7 @@
 		"react-addons-transition-group": "^15.6.0",
 		"react-burger-menu": "^2.1.6",
 		"react-test-renderer": "^16.2.0",
-		"redux-promise-middleware": "^4.4.1"
+		"redux-promise-middleware": "^4.4.1",
+		"selenium-standalone": "^6.12.0"
 	}
 }
