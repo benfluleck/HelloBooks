@@ -4,7 +4,7 @@ import expect from 'expect';
 
 import { mockStore } from '../../../__mocks__/mockConfig';
 import { SignUpPage } from
-  '../../../../src/app/components/presentation/authentication/SignUpPage.jsx';
+  '../../../../src/app/components/presentation/authentication/SignUpPage';
 
 
 /**

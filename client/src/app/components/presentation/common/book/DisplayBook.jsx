@@ -130,7 +130,6 @@ class Book extends React.Component {
                     <i className="material-icons">mode_edit</i>
                     Edit
                   </a>
-
                   <a
                     onClick={this.handleDelete}
                     className="#f57c00 btn-floating delete-book-btn waves-light orange darken-2 book-icons">
@@ -175,7 +174,7 @@ Book.propTypes = {
   deleteBookAction: PropTypes.func.isRequired,
   offset: PropTypes.number,
   limit: PropTypes.number,
-  book: PropTypes.object
+  // book: PropTypes.object
 };
 
 Book.defaultProps = {

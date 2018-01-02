@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import expect from 'expect';
 
 import { CategoriesDropdown } from
-  '../../../../src/app/components/container/categories/CategoriesDropdownList.jsx';
+  '../../../../src/app/components/container/categories/CategoriesDropdownList';
 
 
 const setup = () => {

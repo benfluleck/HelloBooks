@@ -3,8 +3,8 @@ import { NavLink } from 'react-router-dom';
 import { Col, Row, Button } from 'react-materialize';
 import { GoogleLogin } from 'react-google-login';
 import PropTypes from 'prop-types';
-import AuthenticationWrapper from './AuthenticationWrapper.jsx';
-import TextInput from '../../presentation/common/modal/form/TextInput.jsx';
+import AuthenticationWrapper from './AuthenticationWrapper';
+import TextInput from '../../presentation/common/modal/form/TextInput';
 
 const SignInPage = props => (
   <div>
@@ -43,7 +43,7 @@ const SignInPage = props => (
               </Col>
               <Col className="center" s={12}>
                 <div className="login-btn">
-                  <Button waves="light">Login</Button>
+                  <Button className="loginbtn" waves="light">Login</Button>
                 </div>
               </Col>
               <Col className="center" s={12}>
@@ -52,6 +52,7 @@ const SignInPage = props => (
                   <span className="fa fa-google" />
                   <GoogleLogin
                     className="google-btn"
+                    /*eslint no-undef:*/
                     clientId={GOOGLE_CLIENT_ID}
                     onSuccess={props.handleGoogleLogin}
                     onFailure={props.handleGoogleLogin}>
@@ -71,7 +72,8 @@ SignInPage.propTypes = {
   onSignInSubmit: PropTypes.func,
   onChange: PropTypes.func,
   handleGoogleLogin: PropTypes.func,
-  user: PropTypes.object
+  user: PropTypes.object,
+  errors: PropTypes.object
 };
 
 const AuthSignInPage = AuthenticationWrapper(SignInPage);

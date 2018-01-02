@@ -2,12 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import { Row, Col } from 'react-materialize';
-import PaginationWrapper from '../common/Pagination.jsx';
-import Loader from './Loader.jsx';
-import Book from '../../presentation/common/book/DisplayBook.jsx';
+import PaginationWrapper from '../common/Pagination';
+import Loader from './Loader';
+import Book from '../../presentation/common/book/DisplayBook';
 import { fetchOverdueBookstoDashboard } from '../../../actions/fetchBooks';
 import MessageforNoOverdueBooks from
-  '../../presentation/messages/dashboardMessages/MessageforNoOverdueBooks.jsx';
+  '../../presentation/messages/dashboardMessages/MessageforNoOverdueBooks';
 
 /**
  * @description Component for Display Books on the Landing page for all users
@@ -33,7 +33,7 @@ class DisplayOverdueBooks extends React.Component {
         this.props.fetchOverdueBookstoDashboard(
           this.props.offset,
           this.props.limit
-          )}
+        )}
     />);
   }
   /**
@@ -46,7 +46,8 @@ class DisplayOverdueBooks extends React.Component {
    * @returns {object} component
    */
   render() {
-    if (!this.props.overdueBooks || this.props.overdueBooks.books.length === 0) {
+    if (!this.props.overdueBooks ||
+      this.props.overdueBooks.books.length === 0) {
       return <MessageforNoOverdueBooks />;
     }
     const getAllBooks = this.props.overdueBooks.books.map(book => (

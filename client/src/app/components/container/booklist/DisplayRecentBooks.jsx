@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import { Row } from 'react-materialize';
-import Loader from './Loader.jsx';
-import Book from '../../presentation/common/book/DisplayBook.jsx';
+import Loader from './Loader';
+import Book from '../../presentation/common/book/DisplayBook';
 import { fetchAllRecentBooks } from '../../../actions/fetchBooks';
 
 

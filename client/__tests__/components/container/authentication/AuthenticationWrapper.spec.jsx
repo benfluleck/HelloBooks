@@ -2,8 +2,9 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { mockStore } from '../../../__mocks__/mockConfig';
+/* eslint-disable */
 import AuthenticationWrapper, { AuthComponent } from
-  '../../../../src/app/components/presentation/authentication/AuthenticationWrapper.jsx';
+  '../../../../src/app/components/presentation/authentication/AuthenticationWrapper';
 
 
 const FakeCompomnent = () => (<div />);
@@ -37,7 +38,7 @@ const props = {
 
   signup: jest.fn(() => Promise.resolve()),
   login: jest.fn(() => Promise.resolve()),
-  history: jest.fn(() => Promise.resolve()),
+  history: {}
 };
 
 
@@ -104,7 +105,6 @@ describe('<Authentication', () => {
       }
     };
     wrapper.setState({ user });
-                                                                                                 
     wrapper.instance().onSignUpSubmit(event);
     expect(onSignUpSubmitSpy).toHaveBeenCalledTimes(1);
   });

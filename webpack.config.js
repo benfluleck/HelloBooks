@@ -9,7 +9,7 @@ let config = {};
 if (isProd) {
   const GLOBALS = {
     'process.env.NODE_ENV': JSON.stringify('production'),
-    GOOGLE_CLIENT_ID:
+    "GOOGLE_CLIENT_ID":
     JSON.stringify('733763885774-2tktr5a165kk4q9b2lr0cnghl9hgtdo8.' +
     'apps.googleusercontent.com')
   };
@@ -88,6 +88,9 @@ if (isProd) {
       path: `${DIST_DIR}/app`,
       filename: 'bundle.js',
       publicPath: ''
+    },
+    resolve: {
+      extensions: ['.js', '.jsx']
     },
     devtool: 'sourcemap',
 

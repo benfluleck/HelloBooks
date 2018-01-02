@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Row } from 'react-materialize';
 import NoNotificationsMessage from
-  '../../presentation/messages/dashboardMessages/NoNotifications.jsx';
+  '../../presentation/messages/dashboardMessages/NoNotifications';
 
 /**
  *

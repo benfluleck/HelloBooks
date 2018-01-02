@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Row, Button } from 'react-materialize';
 import { connect } from 'react-redux';
 import ChangeUserLevelModal from
-  '../../presentation/common/modal/ChangeUserLevelModal.jsx';
+  '../../presentation/common/modal/ChangeUserLevelModal';
 import { getSelectedUser } from '../../../actions/admin/getSelectedUser';
 
 
@@ -28,6 +28,7 @@ class UserListTable extends React.Component {
    *
   * */
   componentWillReceiveProps() {
+    this.setState({ initModal: true });
     $('.modal').modal();
   }
   /**
@@ -71,8 +72,8 @@ class UserListTable extends React.Component {
               waves="light"
               href="#change-user-level-modal"
               onClick={() => {
-              this.onClick(user.id);
- }}
+                this.onClick(user.id);
+              }}
             >Edit
             </Button>
           </td>

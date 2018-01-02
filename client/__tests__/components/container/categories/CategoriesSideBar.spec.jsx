@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { CategoriesSideBar } from
-  '../../../../src/app/components/container/categories/CategoriesSideBarList.jsx';
+  '../../../../src/app/components/container/categories/CategoriesSideBarList';
 
 
 const setup = () => {

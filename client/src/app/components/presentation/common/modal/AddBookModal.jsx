@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bookDetailValidator } from '../../../../validators/validator';
 import { addBook } from '../../../../actions/admin/books';
-import BookDetailForm from './BookDetailForm.jsx';
+import BookDetailForm from './BookDetailForm';
 
 
 /**
@@ -25,6 +25,10 @@ class AddBookModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      title: '',
+      author: '',
+      description: '',
+      quantity: '',
       book: {
         title: '',
         author: '',
@@ -158,7 +162,8 @@ class AddBookModal extends React.Component {
         fixedFooter
         header={header}
         modalOptions={{ dismissible: true, inDuration: 30 }}
-        actions={<Button onClick={this.handleSubmit}>Submit</Button>}
+        actions={<Button className="addbook-submit-btn"
+          onClick={this.handleSubmit}>Submit</Button>}
       >
         <BookDetailForm
           book={this.state}

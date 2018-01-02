@@ -18,9 +18,10 @@
 		"start:dev": "babel-node server/dist/bin/www.js",
 		"start:webdev": "webpack -d && webpack-dev-server && --content-base client/src/ --inline --hot",
 		"start-prod": "babel server/src --out-dir server/dist --presets es2015 && npm run heroku-postbuild",
-    "heroku-postbuild": "rimraf client/dist && mkdir client/dist && npm run build && export NODE_ENV=production && npm run undo:migrate && npm run start:migrate && npm run seed:all && webpack",
-    "e2e-setup": "selenium-standalone install",
-    "e2e-server": "selenium-standalone start"
+		"heroku-postbuild": "rimraf client/dist && mkdir client/dist && npm run build && export NODE_ENV=production && npm run undo:migrate && npm run start:migrate && npm run seed:all && webpack",
+		"e2e-setup": "selenium-standalone install",
+		"e2e-server": "selenium-standalone start",
+		"e2e-test": "export NODE_ENV=test && npm run undo:migrate && npm run start:migrate && npm run seed:all && nightwatch"
 	},
 	"nyc": {
 		"exclude": [
@@ -30,6 +31,7 @@
 		]
 	},
 	"jest": {
+		"verbose": true,
 		"rootDir": "./client",
 		"coveragePathIgnorePatterns": [
 			"<rootDir>/__tests__/shim.js",
@@ -50,7 +52,7 @@
 		],
 		"moduleNameMapper": {
 			"\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)$": "<rootDir>/__tests__/__mocks__/fileMock.js",
-			"\\.(css|scss)$": "<rootDir>/__tests__/__mocks__/styleMock.js"
+			"\\.(s?css|less)$": "identity-obj-proxy"
 		}
 	},
 	"engines": {
@@ -110,6 +112,7 @@
 		"jsonwebtoken": "^7.4.1",
 		"jwt-decode": "^2.2.0",
 		"lodash": "^4.17.4",
+		"loglevel": "^1.6.0",
 		"maildev": "^1.0.0-rc3",
 		"materialize-css": "^0.100.2",
 		"mocha": "^3.5.0",
@@ -169,6 +172,7 @@
 		"enzyme-to-json": "^3.3.0",
 		"eslint-plugin-import": "^2.8.0",
 		"git-flow": "^0.2.0",
+		"identity-obj-proxy": "^3.0.0",
 		"mocha-lcov-reporter": "^1.3.0",
 		"nyc": "^11.1.0",
 		"path": "^0.12.7",

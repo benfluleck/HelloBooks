@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Collapsible, CollapsibleItem } from 'react-materialize';
-import GetCategories from './GetCategoriesWrapper.jsx';
+import GetCategories from './GetCategoriesWrapper';
 
 /**
  *
@@ -41,8 +41,8 @@ export const CategoriesSideBar = (props) => {
 
 CategoriesSideBar.propTypes = {
   categories: PropTypes.arrayOf(PropTypes.shape({
-    map: PropTypes.object,
-  })).isRequired
+    category: PropTypes.object
+  }))
 };
 
 const CategoriesSideBarList = GetCategories(CategoriesSideBar);

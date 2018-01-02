@@ -1,3 +1,4 @@
+import * as log from 'loglevel';
 import http from 'http';
 
 const options = {
@@ -5,16 +6,16 @@ const options = {
   port: 80,
   path: '/WAKEUP_DYNO'
 };
-console.log('======WAKEUP DYNO START');
+log.debug('======WAKEUP DYNO START');
 http.get(options, (res) => {
   res.on('data', (chunk) => {
     try {
       // optional logging... disable after it's working
-      console.log(`======WAKUP DYNO: HEROKU RESPONSE: ${chunk}`);
+      log.debug(`======WAKUP DYNO: HEROKU RESPONSE: ${chunk}`);
     } catch (err) {
-      console.log(err.message);
+      log.debug(err.message);
     }
   });
 }).on('error', (err) => {
-  console.log(`Error: ${err.message}`);
+  log.debug(`Error: ${err.message}`);
 });

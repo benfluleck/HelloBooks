@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import BookDetalForm from
-  '../../../../../src/app/components/presentation/common/modal/BookDetailForm.jsx';
+  '../../../../../src/app/components/presentation/common/modal/BookDetailForm';
 
 
 const book = {

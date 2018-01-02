@@ -2,12 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import { Row, Col } from 'react-materialize';
-import PaginationWrapper from '../common/Pagination.jsx';
-import Book from '../../presentation/common/book/DisplayBook.jsx';
-import Loader from './Loader.jsx';
+import PaginationWrapper from '../common/Pagination';
+import Book from '../../presentation/common/book/DisplayBook';
+import Loader from './Loader';
 import { fetchAllBorrowedBooks } from '../../../actions/fetchBooks';
 import MessageforNoBooks from
-  '../../presentation/messages/dashboardMessages/MessageforNoBooks.jsx';
+  '../../presentation/messages/dashboardMessages/MessageforNoBooks';
 
 /**
  * @description Component for Display Books on the Landing page for all users

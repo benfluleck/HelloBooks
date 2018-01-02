@@ -25,35 +25,35 @@ export default function categoryReducer(
   action = {}
 ) {
   switch (action.type) {
-    case FETCH_CATEGORIES_SUCCESS:
-      return { ...state, categoryList: action.categories.categories };
-    case FETCH_CATEGORIES_FAILURE:
-      return { ...state, error: action.error };
+  case FETCH_CATEGORIES_SUCCESS:
+    return { ...state, categoryList: action.categories.categories };
+  case FETCH_CATEGORIES_FAILURE:
+    return { ...state, error: action.error };
 
-    case ADD_CATEGORY_SUCCESS:
-      return {
-        ...state,
-        categoryList: [...state.categoryList,
-          action.category.category
-        ]
-      };
-    case EDIT_CATEGORY_SUCCESS:
-      return {
-        ...state,
-        categoryList: state.categoryList.map(category =>
-          ((category.id !== action.category.updatedCategory.id) ?
-            category : action.category.updatedCategory))
-      };
+  case ADD_CATEGORY_SUCCESS:
+    return {
+      ...state,
+      categoryList: [...state.categoryList,
+        action.category.category
+      ]
+    };
+  case EDIT_CATEGORY_SUCCESS:
+    return {
+      ...state,
+      categoryList: state.categoryList.map(category =>
+        ((category.id !== action.category.updatedCategory.id) ?
+          category : action.category.updatedCategory))
+    };
 
-    case DELETE_CATEGORY_SUCCESS:
-      return {
-        ...state,
-        categoryList: state.categoryList
-          .filter(category =>
-            category.id !== action.deletedCategory.category.id)
-      };
+  case DELETE_CATEGORY_SUCCESS:
+    return {
+      ...state,
+      categoryList: state.categoryList
+        .filter(category =>
+          category.id !== action.deletedCategory.category.id)
+    };
 
-    default:
-      return state;
+  default:
+    return state;
   }
 }

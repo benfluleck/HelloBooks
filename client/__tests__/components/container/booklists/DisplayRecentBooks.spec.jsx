@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 
 import { mockStore } from '../../../__mocks__/mockConfig';
 import ConnectedDisplayRecentBooks, { DisplayRecentBooks } from
-  '../../../../src/app/components/container/booklist/DisplayRecentBooks.jsx';
+  '../../../../src/app/components/container/booklist/DisplayRecentBooks';
 
 
 const recentBooks = [{

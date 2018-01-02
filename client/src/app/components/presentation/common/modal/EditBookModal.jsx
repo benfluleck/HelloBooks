@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bookDetailValidator } from '../../../../validators/validator';
 import { updateBookDetails } from '../../../../actions/admin/books';
-import BookDetailForm from './BookDetailForm.jsx';
+import BookDetailForm from './BookDetailForm';
 
 /**
  *
@@ -34,12 +34,6 @@ class EditBookModal extends React.Component {
         bookId: ''
       },
       errors: {
-        title: '',
-        author: '',
-        description: '',
-        quantity: '',
-        bookImage: '',
-        categoryId: ''
       }
     };
 
@@ -200,7 +194,8 @@ class EditBookModal extends React.Component {
         id="edit-admin-book-modal"
         fixedFooter
         header={header}
-        actions={<Button onClick={this.handleSubmit}>Submit</Button>}
+        actions={<Button className="editbook-submit-btn"
+          onClick={this.handleSubmit}>Submit</Button>}
         modalOptions={{ dismissible: true, inDuration: 30 }}
       >
         <BookDetailForm

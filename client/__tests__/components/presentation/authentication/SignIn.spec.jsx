@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 
 import { mockStore } from '../../../__mocks__/mockConfig';
 import { SignInPage } from
-  '../../../../src/app/components/presentation/authentication/SignInPage.jsx';
+  '../../../../src/app/components/presentation/authentication/SignInPage';
 
 
 /**

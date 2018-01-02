@@ -20,6 +20,7 @@ const Navigation = (props) => {
     .map(link => (
       <li
         key={link}
+        id={link.replace(' ', '')}
         className={props.activeLink === link ?
           'active' :
           ''}

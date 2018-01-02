@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { login, signup } from '../../../actions/authenticate';
 import { validateSignUpInput } from '../../../validators/validator';
-import SiteFooter from '../../../components/presentation/common/Footer.jsx';
+import SiteFooter from '../../../components/presentation/common/Footer';
 
 
 /**
@@ -87,6 +87,7 @@ export class AuthComponent extends Component {
               .history
               .push('/login');
           } else {
+            /*eslint no-undef:*/
             Materialize.toast('Please sign in again', 3000);
           }
         });
@@ -215,7 +216,7 @@ AuthComponent.propTypes = {
   signup: PropTypes.func,
   login: PropTypes.func,
   wrappedComponent: PropTypes.func.isRequired,
-  history: PropTypes.func
+  history: PropTypes.object
 };
 
 const AuthenticationWrapper = (WrappedComponent) => {

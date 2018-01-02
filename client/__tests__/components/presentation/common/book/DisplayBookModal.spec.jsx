@@ -3,9 +3,9 @@ import { shallow } from 'enzyme';
 
 import { mockStore } from '../../../../__mocks__/mockConfig';
 import ConnectedDisplayBookModal, { DisplayBookModal } from
-  '../../../../../src/app/components/presentation/common/book/DisplayBookModal.jsx';
+  '../../../../../src/app/components/presentation/common/book/DisplayBookModal';
 import BaseBookModal from
-  '../../../../../src/app/components/presentation/common/book/BaseBookModal.jsx';
+  '../../../../../src/app/components/presentation/common/book/BaseBookModal';
 
 const book = {
   id: 9,

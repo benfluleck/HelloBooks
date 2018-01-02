@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 
 import { mockStore } from '../../../__mocks__/mockConfig';
 import GetDashboardWrapper, { Dashboard } from
-  '../../../../src/app/components/container/common/Dashboard.jsx';
+  '../../../../src/app/components/container/common/Dashboard';
 
 const FakeDashboard = () => (<div/>);
 

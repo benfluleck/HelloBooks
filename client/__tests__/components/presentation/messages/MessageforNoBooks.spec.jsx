@@ -1,7 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+/* eslint-disable */
 import MessageforNoBooks from
-  '../../../../src/app/components/presentation/messages/dashboardMessages/MessageforNoBooks.jsx';
+  '../../../../src/app/components/presentation/messages/dashboardMessages/MessageforNoBooks';
 
 
 describe('MessageforNoBooks/>', () => {

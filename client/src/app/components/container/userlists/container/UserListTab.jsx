@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { Preloader } from 'react-materialize';
 import PropTypes from 'prop-types';
 import { getUserListAction } from '../../../../actions/admin/getUserList';
-import PaginationWrapper from '../../common/Pagination.jsx';
-import UserListTable from '../UserListTable.jsx';
+import PaginationWrapper from '../../common/Pagination';
+import UserListTable from '../UserListTable';
 
 /**
  * handles the state of the User List table

@@ -3,8 +3,8 @@ import { Row, Col } from 'react-materialize';
 import PropTypes from 'prop-types';
 import
 CategoriesOptionList from
-  '../../../container/categories/CategoriesOptionsList.jsx';
-import TextInput from './form/TextInput.jsx';
+  '../../../container/categories/CategoriesOptionsList';
+import TextInput from './form/TextInput';
 
 /**
  *
@@ -35,7 +35,6 @@ class BookDetailForm extends React.PureComponent {
     const onClick = this.props.uploadWidget;
     return (
       <Row>
-
         <div className="bookform">
           <Row>
             <Col l={6}>
@@ -44,6 +43,7 @@ class BookDetailForm extends React.PureComponent {
                 value={title}
                 label="Title"
                 type="text"
+                id="benny"
                 onChange={onChange}
                 errors={errors.title}
                 prefix="book"
@@ -107,7 +107,6 @@ class BookDetailForm extends React.PureComponent {
                 className="btn btn-primary btn-sm upload-button"
               >
                 {imageName === '' && <span>Add BookCover</span>}
-
                 {imageName !== '' && <span>Change Book Cover</span>}
               </button>
             </div>
@@ -121,16 +120,8 @@ class BookDetailForm extends React.PureComponent {
 }
 
 BookDetailForm.propTypes = {
-  book: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-    PropTypes.object
-  ]),
-  errors: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-    PropTypes.object
-  ]),
+  book: PropTypes.object,
+  errors: PropTypes.object,
   onChange: PropTypes.func.isRequired,
   uploadWidget: PropTypes.func
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Dropdown, NavItem, Button } from 'react-materialize';
-import GetCategories from './GetCategoriesWrapper.jsx';
+import GetCategories from './GetCategoriesWrapper';
 
 
 const CategoriesDropdown = (props) => {
@@ -38,7 +38,7 @@ const CategoriesDropdown = (props) => {
 
 CategoriesDropdown.propTypes = {
   categories: PropTypes.arrayOf(PropTypes.shape({
-    map: PropTypes.object,
+    category: PropTypes.object,
   })).isRequired
 };
 

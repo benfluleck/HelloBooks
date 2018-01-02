@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import MessageforNoBooksHistory from
-  '../../../../src/app/components/presentation/messages/dashboardMessages/MessageforNoBooksHistory.jsx';
+  '../../../../src/app/components/presentation/messages/dashboardMessages/MessageforNoBooksHistory';
 
 
 describe('MessageforNoBooks/>', () => {

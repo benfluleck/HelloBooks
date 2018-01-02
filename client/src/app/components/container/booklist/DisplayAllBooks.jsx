@@ -2,17 +2,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import { Row, Col, Button, Preloader } from 'react-materialize';
-import Book from '../../presentation/common/book/DisplayBook.jsx';
-import Loader from './Loader.jsx';
+import Book from '../../presentation/common/book/DisplayBook';
+import Loader from './Loader';
 import { fetchAllBooks } from '../../../actions/fetchBooks';
 import { fetchAllCategories } from '../../../actions/fetchCategories';
-import PaginationWrapper from '../common/Pagination.jsx';
-import SearchBooks from '../../presentation/common/book/SearchBooks.jsx';
-import CategoriesDropdownList from '../categories/CategoriesDropdownList.jsx';
+import PaginationWrapper from '../common/Pagination';
+import SearchBooks from '../../presentation/common/book/SearchBooks';
+import CategoriesDropdownList from '../categories/CategoriesDropdownList';
 import MessageforNoCatBooks from
-  '../../presentation/messages/dashboardMessages/MessageforNoCatBooks.jsx';
-import EditBookModal from '../../presentation/common/modal/EditBookModal.jsx';
-import AddBookModal from '../../presentation/common/modal/AddBookModal.jsx';
+  '../../presentation/messages/dashboardMessages/MessageforNoCatBooks';
+import EditBookModal from '../../presentation/common/modal/EditBookModal';
+import AddBookModal from '../../presentation/common/modal/AddBookModal';
 
 /**
  * @description Component for Display Books on the Landing page for all users
@@ -148,7 +148,7 @@ DisplayAllBooks.propTypes = {
       author: PropTypes.string,
       quantity: PropTypes.number,
       description: PropTypes.string,
-    }))
+    })),
   }),
   fetchAllBooks: PropTypes.func.isRequired,
   fetchAllCategories: PropTypes.func.isRequired

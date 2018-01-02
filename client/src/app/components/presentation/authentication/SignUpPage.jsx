@@ -2,8 +2,8 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Col, Row, Button } from 'react-materialize';
 import PropTypes from 'prop-types';
-import AuthenticationWrapper from './AuthenticationWrapper.jsx';
-import TextInput from '../../presentation/common/modal/form/TextInput.jsx';
+import AuthenticationWrapper from './AuthenticationWrapper';
+import TextInput from '../../presentation/common/modal/form/TextInput';
 
 
 const SignUpPage = props => (
@@ -91,7 +91,7 @@ const SignUpPage = props => (
                   </NavLink>
                 </Col>
                 <Col s={12} className="center">
-                  <Button waves="light">Sign Up</Button>
+                  <Button className="signup-btn" waves="light">Sign Up</Button>
                 </Col>
               </div>
             </form>

@@ -80,11 +80,6 @@ GetCategories.propTypes = {
   wrappedComponent: PropTypes.func,
 };
 
-GetCategories.defaultProps = {
-  fetchBooksForCategories: null,
-  onChange: null,
-  categoryList: []
-};
 
 const GetCategoriesWrapper = (WrappedComponent) => {
   const mapStateToProps = ({

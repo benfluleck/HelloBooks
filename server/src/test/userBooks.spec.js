@@ -1,6 +1,4 @@
-/*
-eslint-disable no-console
-*/
+import * as log from 'loglevel';
 
 import faker from 'faker';
 import chai from 'chai';
@@ -12,9 +10,8 @@ import app from '../app';
 import db from '../models';
 
 
-const User = db.User;
-const Books = db.Books;
-const expect = chai.expect;
+const { User, Books } = db;
+const { expect } = chai;
 
 dotenv.config();
 
@@ -26,7 +23,7 @@ let bookId;
 let zerobookId;
 let testbookId;
 let token;
-const testdate = new Date('2017-12-28');
+const testdate = new Date('2018-01-04');
 const nulluserId = '';
 
 
@@ -90,7 +87,7 @@ describe('HelloBooks', () => {
         done();
       })
       .catch(() => {
-        console.log('Error in the seeding of the db');
+        log.debug('Error in the seeding of the db');
       });
   });
 

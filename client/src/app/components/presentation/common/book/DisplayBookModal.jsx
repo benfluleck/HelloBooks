@@ -4,7 +4,8 @@ import moment from 'moment';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Button } from 'react-materialize';
-import BaseBookModal from './BaseBookModal.jsx';
+import BaseBookModal from './BaseBookModal';
+import { fetchAllBorrowedBooks } from '../../../../actions/fetchBooks';
 import borrowBookAction from '../../../../actions/borrowBooks';
 import { returnBookAction } from '../../../../actions/returnBooks';
 
@@ -116,6 +117,7 @@ class DisplayBookModal extends React.Component {
         if (response.error) {
           return;
         }
+        this.props.fetchAllBorrowedBooks(0, 8);
         $('#modal').modal('close');
       });
   }
@@ -194,9 +196,16 @@ class DisplayBookModal extends React.Component {
 
 DisplayBookModal.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
-  borrowBookAction: PropTypes.func.isRequired,
-  returnBookAction: PropTypes.func.isRequired,
-  book: PropTypes.object,
+  borrowBookAction: PropTypes.func,
+  returnBookAction: PropTypes.func,
+  fetchAllBorrowedBooks: PropTypes.func,
+  // book: PropTypes.arrayOf(PropTypes.shape({
+  //   title: PropTypes.string,
+  //   author: PropTypes.string,
+  //   quantity: PropTypes.number,
+  //   description: PropTypes.string,
+  // })),
+  // book: PropTypes.object,
   borrowedBooksList: PropTypes.object
 };
 
@@ -213,6 +222,7 @@ export default connect(
   mapStateToProps,
   {
     returnBookAction,
-    borrowBookAction
+    borrowBookAction,
+    fetchAllBorrowedBooks
   }
 )(DisplayBookModal);

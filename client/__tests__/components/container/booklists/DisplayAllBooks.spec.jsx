@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 
 import { mockStore } from '../../../__mocks__/mockConfig';
 import ConnectedDisplayAllBooks, { DisplayAllBooks } from
-  '../../../../src/app/components/container/booklist/DisplayAllBooks.jsx';
+  '../../../../src/app/components/container/booklist/DisplayAllBooks';
 
 const book = {
   id: 9,

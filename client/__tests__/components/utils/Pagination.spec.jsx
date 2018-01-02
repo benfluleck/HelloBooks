@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import Pagination from
-  '../../../src/app/components/container/common/Pagination.jsx';
+  '../../../src/app/components/container/common/Pagination';
 
 jest.mock('react-router-dom');
 

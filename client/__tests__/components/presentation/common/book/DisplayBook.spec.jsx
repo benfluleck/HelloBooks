@@ -3,7 +3,7 @@ import { shallow, mount } from 'enzyme';
 
 import { mockStore } from '../../../../__mocks__/mockConfig';
 import ConnectedBook, { Book } from
-  '../../../../../src/app/components/presentation/common/book/DisplayBook.jsx';
+  '../../../../../src/app/components/presentation/common/book/DisplayBook';
 
 const book = {
   id: 9,

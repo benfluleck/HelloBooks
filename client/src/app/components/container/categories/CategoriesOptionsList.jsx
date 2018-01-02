@@ -56,15 +56,11 @@ class CategoriesOptions extends React.PureComponent {
   }
 }
 
-CategoriesOptions.defaultProps = {
-  categoryId: ''
-};
 
 CategoriesOptions.propTypes = {
   categories: PropTypes.arrayOf(PropTypes.shape({
-    map: PropTypes.object,
+    category: PropTypes.object
   })),
-  categoryId: PropTypes.string,
   onChange: PropTypes.func
 };
 

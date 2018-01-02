@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Navigation from './NavigationBar.jsx';
+import Navigation from './NavigationBar';
 
 /**
  * @description Component for header and navigation
@@ -10,7 +10,7 @@ import Navigation from './NavigationBar.jsx';
  * @param {string} activeLink
  * @extends {Component}
  */
-const Header = ({isAuthenticated, tokenExists, activeLink}) => {
+const Header = ({ isAuthenticated, tokenExists, activeLink }) => {
   /**
    * render Navigation Bar
    * @method render
@@ -19,12 +19,11 @@ const Header = ({isAuthenticated, tokenExists, activeLink}) => {
    */
 
   let navLinks = ['apiDocs'];
-  navLinks = isAuthenticated && tokenExists
-    ? [
+  navLinks = isAuthenticated && tokenExists ?
+    [
       ...navLinks,
-      'dashboard','logout'
-    ]
-    : [
+      'dashboard', 'logout'] :
+    [
       'login', 'sign up', ...navLinks
     ];
   return (

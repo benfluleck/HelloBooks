@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { AddBookModal } from
-  '../../../../src/app/components/presentation/common/modal/AddBookModal.jsx';
+  '../../../../src/app/components/presentation/common/modal/AddBookModal';
 
 
 const props = {

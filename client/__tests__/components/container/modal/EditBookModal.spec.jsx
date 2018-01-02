@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import { mockStore } from '../../../__mocks__/mockConfig';
 
 import ConnectedEditBookModal, { EditBookModal } from
-  '../../../../src/app/components/presentation/common/modal/EditBookModal.jsx';
+  '../../../../src/app/components/presentation/common/modal/EditBookModal';
 
 const nextBook = {
   book: {

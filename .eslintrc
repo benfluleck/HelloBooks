@@ -9,10 +9,18 @@
 		"es6": true,
 		"mocha": true,
 		"jquery": true,
-		"jest":true
+		"jest": true,
+		"browser": true
 	},
 	"settings": {
-		"import/resolver": "node"
+		"import/resolver": {
+			"node": {
+				"extensions": [
+					".js",
+					".jsx"
+				]
+			}
+		}
 	},
 	"rules": {
 		"one-var": 0,

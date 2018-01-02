@@ -1,6 +1,4 @@
-/*
-eslint-disable no-console
-*/
+import * as log from 'loglevel';
 
 import faker from 'faker';
 import chai from 'chai';
@@ -11,9 +9,9 @@ import dotenv from 'dotenv';
 import app from '../app';
 import db from '../models';
 
-const User = db.User;
-const Books = db.Books;
-const expect = chai.expect;
+const { User } = db;
+const { Books } = db;
+const { expect } = chai;
 
 dotenv.config();
 chai.use(chaiHttp);
@@ -63,7 +61,7 @@ describe('HelloBooks', () => {
         done();
       })
       .catch((error) => {
-        console.log('Error in seeding the db', error);
+        log.debug('Error in seeding the db', error);
         done();
       });
   });

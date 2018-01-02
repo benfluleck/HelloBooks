@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import { SearchBooks } from
-  '../../../../src/app/components/presentation/common/book/SearchBooks.jsx';
+  '../../../../src/app/components/presentation/common/book/SearchBooks';
 
 
 const props = {

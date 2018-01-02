@@ -21,12 +21,11 @@ const TextInput = ({
           name={name}
           id="description"
           className={errors ?
-          'materialize-textarea invalid' : 'materialize-textarea validate'}
+            'materialize-textarea invalid' : 'materialize-textarea validate'}
           onChange={onChange}
           value={value}
           required={required}
-        />
-        :
+        /> :
         <input
           type={type}
           name={name}

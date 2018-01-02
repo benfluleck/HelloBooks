@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import expect from 'expect';
 import TextInput from
-  '../../../../../src/app/components/presentation/common/modal/form/TextInput.jsx';
+  '../../../../../src/app/components/presentation/common/modal/form/TextInput';
 
 jest.mock('react-router-dom');
 

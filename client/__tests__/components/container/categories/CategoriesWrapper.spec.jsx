@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 
 import { mockStore } from '../../../__mocks__/mockConfig';
 import GetCategoriesWrapper, { GetCategories } from
-  '../../../../src/app/components/container/categories/GetCategoriesWrapper.jsx';
+  '../../../../src/app/components/container/categories/GetCategoriesWrapper';
 
 const FakeCategories = () => (<div/>);
 const categories = [{ id: 1, categoryName: "Action" },

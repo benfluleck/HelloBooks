@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import { Row } from 'react-materialize';
 import MessageforNoBooksHistory
-  from '../messages/dashboardMessages/MessageforNoBooksHistory.jsx';
+  from '../messages/dashboardMessages/MessageforNoBooksHistory';
 
 /**
  * Table of Loan history

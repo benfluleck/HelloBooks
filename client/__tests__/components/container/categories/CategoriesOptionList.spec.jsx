@@ -4,7 +4,7 @@ import expect from 'expect';
 
 import { mockStore } from '../../../__mocks__/mockConfig';
 import ConnectedCategoriesOptions, { CategoriesOptions } from
-  '../../../../src/app/components/container/categories/CategoriesOptionsList.jsx';
+  '../../../../src/app/components/container/categories/CategoriesOptionsList';
 
 
 const setup = () => {

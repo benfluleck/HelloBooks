@@ -1,3 +1,4 @@
+import * as log from 'loglevel';
 /**
  * saves application state to disk
  *
@@ -10,7 +11,7 @@ export const saveState = (state) => {
     const serializedState = JSON.stringify(state);
     localStorage.setItem('state', serializedState);
   } catch (e) {
-    console.log(e);
+    log.debug(e);
   }
 };
 
@@ -27,6 +28,6 @@ export const loadState = () => {
     }
     return JSON.parse(serializedState);
   } catch (error) {
-    console.log(error);
+    log.debug(error);
   }
 };

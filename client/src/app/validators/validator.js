@@ -1,7 +1,8 @@
 import { isAlpha, isLength } from 'validator';
 import { isEmpty } from 'lodash';
 
-const emailRegex = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"|"_+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
+const emailRegex =
+/^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"|"_+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
 const validateEmail = emailAddress => emailRegex.test(emailAddress);
 
 const bookDetailValidator = (state) => {
@@ -33,7 +34,8 @@ const validatePasswordInput = (state) => {
   const errors = {};
 
   if (!isLength(state.password, 5, 20)) {
-    errors.password = 'Password ahould be a minimum of 5 characters and max. of 20.';
+    errors.password =
+    'Password ahould be a minimum of 5 characters and max. of 20.';
   }
 
   if (state.passwordConfirmation !== state.password) {
