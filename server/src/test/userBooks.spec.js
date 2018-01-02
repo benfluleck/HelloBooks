@@ -141,7 +141,7 @@ describe('HelloBooks', () => {
         .end((err, res) => {
           const response = res.body;
           expect(response.message).to
-            .equal('Amarachi continues to go to school succesfully loaned');
+            .equal('Amarachi continues to go to school successfully loaned');
           expect(res.status)
             .to
             .equal(200);
