@@ -75,18 +75,27 @@ class Book extends React.Component {
       cancelButtonClass: 'btn btn-danger',
       buttonsStyling: false,
       reverseButtons: true
-    }).then((result) => {
-      if (result) {
-        this
-          .props
-          .deleteBookAction(this.props.book.id);
-        this
-          .props
-          .fetchAllBooks(this.props.offset, this.props.limit);
-        swal('Deleted!', 'Your file has been deleted.', 'success');
-      } else {
-        swal('Cancelled', 'Your book is safe', 'error');
-      }
+    }).then(() => {
+      this
+        .props
+        .deleteBookAction(this.props.book.id)
+        .then((response) => {
+          if
+          (response.message === `${this.props.book.title} has been deleted`) {
+            swal('Deleted!', 'Your book has been deleted.', 'success');
+            this
+              .props
+              .fetchAllBooks(this.props.offset, this.props.limit);
+          } else {
+            swal('Cancelled', 'Your book is safe', 'error');
+          }
+        })
+        .catch(() => {
+          swal(
+            'Operation Cancelled',
+            'This book is safe from deletion', 'error'
+          );
+        });
     }).catch(() => {});
   }
   /**
@@ -150,8 +159,8 @@ class Book extends React.Component {
               <div
                 className="card-image"
                 data-tip={`<h4>Title: ${this.props.book.title}</h4><hr/> 
-                <p>Author: ${this.props.book.author}</p> 
-                <p>Description:${this.props.book.description}</p>`}
+                <p>Author: ${this.props.book.author}</p>
+                 <p>Description:${this.props.book.description}</p>`}
                 data-html
                 data-class="booktip">
                 <img src={this.props.book.bookImage}
@@ -191,11 +200,4 @@ const mapStateToProps = state => ({
 
 });
 
-export default connect(
-  mapStateToProps,
-  {
-    deleteBookAction,
-    fetchAllBooks,
-    fetchSelectedBook
-  }
-)(Book);
+export default connect(mapStateToProps, { deleteBookAction, fetchAllBooks, fetchSelectedBook })(Book);

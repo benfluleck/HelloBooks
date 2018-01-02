@@ -1,6 +1,6 @@
 require('./user.spec');
 require('./books.spec');
-require('./userbooks.spec');
+require('./userBooks.spec');
 require('./model.spec');
 require('./categories.spec');
 require('./authenticate.spec');

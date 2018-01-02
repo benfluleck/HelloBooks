@@ -23,7 +23,7 @@ export default {
    */
   loanBook(req, res) {
     const userId = req.user.id.id || req.user.id;
-    const bookId = req.body.bookId;
+    const { bookId } = req.body;
     if (!req.body.returnDate) {
       return res
         .status(404)
@@ -61,8 +61,8 @@ export default {
             .status(409)
             .send({
               message: 'To loan this book for more days,' +
-           ' You need to upgrade your user level,'
-           + 'Please contact the administrator'
+           ' You need to upgrade your user level,' +
+           'Please contact the administrator'
             });
         }
         if (user.borrowCount > user.level.maxBooks) {
@@ -141,7 +141,7 @@ export default {
                       res
                         .status(200)
                         .send({
-                          message: `${borrowedBook.book} succesfully loaned`
+                          message: `${borrowedBook.book} successfully loaned`
                         });
                     });
                 });

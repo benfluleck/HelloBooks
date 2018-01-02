@@ -93,13 +93,13 @@ class CategoriesCollectionList extends React.Component {
         this.props.deleteCategoryAction(id);
         swal(
           'Deleted!',
-          'Your file has been deleted.',
+          'Your Category has been deleted.',
           'success'
         );
       } else {
         swal(
           'Cancelled',
-          'This category has books in it',
+          'This Category has books in it',
           'error'
         );
       }

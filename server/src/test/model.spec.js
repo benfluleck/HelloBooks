@@ -5,8 +5,8 @@ import chaiHttp from 'chai-http';
 
 import db from '../models';
 
-const User = db.User;
-const expect = chai.expect;
+const { User } = db;
+const { expect } = chai;
 
 chai.use(chaiHttp);
 

@@ -1,13 +1,10 @@
 module.exports = {
-  "beforeEach": (client) => {
-    client
-      .resizeWindow(1280, 800);
-  },
   'user can view landing page': (client) => {
     client
       .url('http://localhost:8080')
       .waitForElementVisible('body', 1000)
       .assert.title('Hello Books')
+      .pause(3000)
       .assert.visible('li#login')
       .assert.visible('li#signup')
       .assert.containsText('li#login', 'LOGIN')

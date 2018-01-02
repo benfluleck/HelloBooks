@@ -26,14 +26,17 @@
       "desiredCapabilities": {
         "browserName": "chrome",
         "javascriptEnabled": true,
-        "acceptSslCerts": true
+        "acceptSslCerts": true,
+        "chromeOptions" : {
+          "args" : ["start-fullscreen"]
+        }
       },
       "screenshots": {
         "enabled": true,
         "path": "./results/screenshots"
       },
       "globals": {
-        "waitForConditionTimeout": 5000
+        "waitForConditionTimeout": 3000
       }
     }
   }

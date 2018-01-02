@@ -4,7 +4,8 @@ import { PropTypes } from 'prop-types';
 import { Row, Col, Button, Preloader } from 'react-materialize';
 import Book from '../../presentation/common/book/DisplayBook';
 import Loader from './Loader';
-import { fetchAllBooks } from '../../../actions/fetchBooks';
+import { fetchAllBooks,
+  fetchAllBorrowedBooks } from '../../../actions/fetchBooks';
 import { fetchAllCategories } from '../../../actions/fetchCategories';
 import PaginationWrapper from '../common/Pagination';
 import SearchBooks from '../../presentation/common/book/SearchBooks';
@@ -76,6 +77,10 @@ class DisplayAllBooks extends React.Component {
     if (!this.props.allBooksList.books) {
       return <Preloader size="big"/>;
     }
+    this.props.fetchAllBorrowedBooks(
+      this.props.offset,
+      this.props.limit
+    );
     const getAllBooks = this
       .props
       .allBooksList
@@ -171,5 +176,6 @@ export { DisplayAllBooks };
 
 export default connect(mapStateToProps, {
   fetchAllCategories,
-  fetchAllBooks
+  fetchAllBooks,
+  fetchAllBorrowedBooks
 })(DisplayAllBooks);

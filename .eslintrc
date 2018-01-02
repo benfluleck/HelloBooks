@@ -38,6 +38,7 @@
 			"error",
 			"multi-line"
 		],
+		"prefer-destructuring": [ "error", { "object": false, "array": false } ],
 		"max-len": [
 			1,
 			80,

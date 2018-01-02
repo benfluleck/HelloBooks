@@ -1,8 +1,4 @@
 module.exports = {
-  "beforeEach": (client) => {
-    client
-      .resizeWindow(1280, 800);
-  },
   'user navigates to login page, user login to the main dashboard':
   (client) => {
     client
@@ -12,6 +8,7 @@ module.exports = {
       .setValue('input[name="username"]', 'testuser')
       .setValue('input[name="password"]', 'testuser')
       .click('.loginbtn')
+      .pause(2000)
       .waitForElementVisible('.main-wrapper')
       .assert.containsText('.notif', 'You are now logged in as testuser')
       .assert.urlEquals('http://localhost:8080/dashboard')
@@ -22,6 +19,7 @@ module.exports = {
       .url('http://localhost:8080/login')
       .waitForElementVisible('body')
       .waitForElementVisible('.login-wrapper')
+      .pause(3000)
       .click('.loginbtn')
       .assert.containsText('.notif', 'Username is invalid')
       .end();
@@ -29,6 +27,7 @@ module.exports = {
   'user cannot log in with wrong password': (client) => {
     client
       .url('http://localhost:8080/login')
+      .pause(3000)
       .waitForElementVisible('body')
       .waitForElementVisible('.login-wrapper')
       .setValue('input[name="username"]', 'testuser')
@@ -42,6 +41,7 @@ module.exports = {
   'user cannot log in with unknown username': (client) => {
     client
       .url('http://localhost:8080/login')
+      .pause(3000)
       .waitForElementVisible('.login-wrapper')
       .setValue('input[name="username"]', 'wrongusername')
       .setValue('input[name="password"]', 'wrongpassword')

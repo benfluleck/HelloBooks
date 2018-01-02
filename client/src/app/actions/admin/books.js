@@ -75,7 +75,9 @@ export const deleteBookAction = bookId => dispatch => api
   .then((response) => {
     dispatch(deleteBookSuccess(response));
     dispatch(showSuccessNotification(response));
+    return (response);
   })
   .catch((error) => {
     dispatch(showErrorNotification({ error }));
+    return ({ error });
   });

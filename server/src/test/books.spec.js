@@ -10,15 +10,12 @@ import dotenv from 'dotenv';
 import app from '../app';
 import db from '../models';
 
-
 dotenv.config();
-
 
 const { Books } = db;
 const { expect } = chai;
 
 chai.use(chaiHttp);
-
 
 let bookId;
 let token = '';
@@ -40,13 +37,13 @@ describe('HelloBooks', () => {
         bookId = book.id;
         done();
       })
-      .catch(() => {
-      });
+      .catch(() => {});
   });
 
   describe('Authentication', () => {
     it('should return 201 when a regular administrator is created', (done) => {
-      chai.request(app)
+      chai
+        .request(app)
         .post('/api/v1/auth/users/signup')
         .set('Accept', 'application/x-www-form-urlencoded')
         .send({
@@ -55,24 +52,30 @@ describe('HelloBooks', () => {
           passwordConfirmation: 'boooboo',
           firstname: 'Benny',
           isAdmin: true,
-          email: faker.internet.email(),
-          lastname: faker.name.lastName()
+          email: faker
+            .internet
+            .email(),
+          lastname: faker
+            .name
+            .lastName()
         })
         .end((err, res) => {
-          expect(res.status).to.equal(201);
+          expect(res.status)
+            .to
+            .equal(201);
           done();
         });
     });
     it('should return 200 when a administrator signs in', (done) => {
-      chai.request(app)
+      chai
+        .request(app)
         .post('/api/v1/auth/users/signin')
         .set('Accept', 'application/x-www-form-urlencoded')
-        .send({
-          username: 'ogidan',
-          password: 'boooboo'
-        })
+        .send({ username: 'ogidan', password: 'boooboo' })
         .end((err, res) => {
-          expect(res.status).to.equal(200);
+          expect(res.status)
+            .to
+            .equal(200);
           token = res.body.token;
           done();
         });
@@ -97,13 +100,17 @@ describe('HelloBooks', () => {
         .request(app)
         .get('/api/v1/books')
         .set({ 'x-access-token': token })
-        .query({
-          limit: 2
-        })
+        .query({ limit: 2 })
         .end((err, res) => {
-          expect(res.status).to.be.equal(200);
+          expect(res.status)
+            .to
+            .be
+            .equal(200);
           expect('Content-Type', /json/);
-          expect(res.body.books.length).to.be.equal(2);
+          expect(res.body.books.length)
+            .to
+            .be
+            .equal(2);
           done();
         });
     });
@@ -112,13 +119,17 @@ describe('HelloBooks', () => {
         .request(app)
         .get('/api/v1/books')
         .set({ 'x-access-token': token })
-        .query({
-          limit: 1
-        })
+        .query({ limit: 1 })
         .end((err, res) => {
-          expect(res.status).to.be.equal(200);
+          expect(res.status)
+            .to
+            .be
+            .equal(200);
           expect('Content-Type', /json/);
-          expect(res.body.books.length).to.be.equal(1);
+          expect(res.body.books.length)
+            .to
+            .be
+            .equal(1);
           done();
         });
     });
@@ -127,14 +138,17 @@ describe('HelloBooks', () => {
         .request(app)
         .get('/api/v1/books')
         .set({ 'x-access-token': token })
-        .query({
-          limit: 1,
-          offset: 1,
-        })
+        .query({ limit: 1, offset: 1 })
         .end((err, res) => {
-          expect(res.status).to.be.equal(200);
+          expect(res.status)
+            .to
+            .be
+            .equal(200);
           expect('Content-Type', /json/);
-          expect(res.body.books.length).to.be.equal(1);
+          expect(res.body.books.length)
+            .to
+            .be
+            .equal(1);
           done();
         });
     });
@@ -143,14 +157,17 @@ describe('HelloBooks', () => {
         .request(app)
         .get('/api/v1/books')
         .set({ 'x-access-token': token })
-        .query({
-          limit,
-          offset: 1
-        })
+        .query({ limit, offset: 1 })
         .end((err, res) => {
-          expect(res.status).to.be.equal(200);
+          expect(res.status)
+            .to
+            .be
+            .equal(200);
           expect('Content-Type', /json/);
-          expect(res.body.books.length).to.be.equal(3);
+          expect(res.body.books.length)
+            .to
+            .be
+            .equal(3);
           done();
         });
     });
@@ -205,11 +222,7 @@ describe('HelloBooks', () => {
         .set('Accept', 'application/x-www-form-urlencoded')
         .set('x-access-token', token)
         .send({
-          title: 'The Chronicles of Andela',
-          author: 'C.S. Lewis',
-          quantity: '23',
-          description: 'This is a test',
-          bookImage: 'Image'
+          title: 'The Chronicles of Andela', author: 'C.S. Lewis', quantity: '23', description: 'This is a test', bookImage: 'Image'
         })
         .end((err, res) => {
           expect(res.status)
@@ -266,27 +279,30 @@ describe('HelloBooks', () => {
           done();
         });
     });
-    it('should return a 400 response for a book with an incomplete description', (done) => {
-      chai
-        .request(app)
-        .post('/api/v1/admin/books')
-        .set('Accept', 'application/x-www-form-urlencoded')
-        .set('x-access-token', token)
-        .send({
-          title: 'Benedict goes to school',
-          author: 'Benny O',
-          categoryId: '3',
-          quantity: '20',
-          description: 'This ',
-          bookimage: 'Test Image'
-        })
-        .end((err, res) => {
-          expect(res.status)
-            .to
-            .equal(400);
-          done();
-        });
-    });
+    it(
+      'should return a 400 response for a book with an incomplete description',
+      (done) => {
+        chai
+          .request(app)
+          .post('/api/v1/admin/books')
+          .set('Accept', 'application/x-www-form-urlencoded')
+          .set('x-access-token', token)
+          .send({
+            title: 'Benedict goes to school',
+            author: 'Benny O',
+            categoryId: '3',
+            quantity: '20',
+            description: 'This ',
+            bookimage: 'Test Image'
+          })
+          .end((err, res) => {
+            expect(res.status)
+              .to
+              .equal(400);
+            done();
+          });
+      }
+    );
     it('should allow only authenticated users allowed to create books', (done) => {
       chai
         .request(app)
@@ -300,7 +316,10 @@ describe('HelloBooks', () => {
         });
     });
     it('should return 200 when searching all books', (done) => {
-      chai.request(app).get('/api/v1/books/search?searchTerm=Sta').set('x-access-token', token)
+      chai
+        .request(app)
+        .get('/api/v1/books/search?searchTerm=Sta')
+        .set('x-access-token', token)
         .end((err, res) => {
           expect(res.status)
             .to
@@ -309,7 +328,10 @@ describe('HelloBooks', () => {
         });
     });
     it('should return 200 when searching all books in a category', (done) => {
-      chai.request(app).get('/api/v1/books/search?searchTerm=Sta&categoryId=1').set('x-access-token', token)
+      chai
+        .request(app)
+        .get('/api/v1/books/search?searchTerm=Sta&categoryId=1')
+        .set('x-access-token', token)
         .end((err, res) => {
           expect(res.status)
             .to
@@ -318,7 +340,10 @@ describe('HelloBooks', () => {
         });
     });
     it('should return 400 when search parameter is null', (done) => {
-      chai.request(app).get('/api/v1/books/search?searchTerm=').set('x-access-token', token)
+      chai
+        .request(app)
+        .get('/api/v1/books/search?searchTerm=')
+        .set('x-access-token', token)
         .end((err, res) => {
           expect(res.status)
             .to
@@ -327,7 +352,10 @@ describe('HelloBooks', () => {
         });
     });
     it('should return 404 when no books match search criteria', (done) => {
-      chai.request(app).get('/api/v1/books/search?searchTerm=999999').set('x-access-token', token)
+      chai
+        .request(app)
+        .get('/api/v1/books/search?searchTerm=999999')
+        .set('x-access-token', token)
         .end((err, res) => {
           expect(res.status)
             .to
@@ -336,7 +364,10 @@ describe('HelloBooks', () => {
         });
     });
     it('should return 200 when getting a single book', (done) => {
-      chai.request(app).get('/api/v1/auth/books/1').set('x-access-token', token)
+      chai
+        .request(app)
+        .get('/api/v1/auth/books/1')
+        .set('x-access-token', token)
         .end((err, res) => {
           expect(res.status)
             .to
@@ -345,7 +376,10 @@ describe('HelloBooks', () => {
         });
     });
     it('should return 400 if the bookId is not valid', (done) => {
-      chai.request(app).get('/api/v1/auth/books/sfgh').set('x-access-token', token)
+      chai
+        .request(app)
+        .get('/api/v1/auth/books/sfgh')
+        .set('x-access-token', token)
         .end((err, res) => {
           expect(res.status)
             .to
@@ -353,18 +387,18 @@ describe('HelloBooks', () => {
           done();
         });
     });
-    it(
-      'should return 404 when getting a single book if it does not exist',
-      (done) => {
-        chai.request(app).get('/api/v1/auth/books/100').set('x-access-token', token)
-          .end((err, res) => {
-            expect(res.status)
-              .to
-              .equal(404);
-            done();
-          });
-      }
-    );
+    it('should return 404 when getting a single book if it does not exist', (done) => {
+      chai
+        .request(app)
+        .get('/api/v1/auth/books/100')
+        .set('x-access-token', token)
+        .end((err, res) => {
+          expect(res.status)
+            .to
+            .equal(404);
+          done();
+        });
+    });
     it('should throw an error if the selected book undefined', (done) => {
       chai
         .request(app)
@@ -462,4 +496,3 @@ describe('HelloBooks', () => {
     });
   });
 });
-

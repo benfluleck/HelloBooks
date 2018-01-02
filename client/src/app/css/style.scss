@@ -64,9 +64,6 @@ p {
 	padding-top: 20px;
 }
 
-.landing-page-image .card {
-	max-width: 85% !important;
-}
 
 form p {
 	color: $secondary-color;
@@ -676,6 +673,7 @@ i.medium {
 	.card {
 		max-width: 55%
 	}
+
 	
 }
 
@@ -698,16 +696,6 @@ i.medium {
 }
 
 
-
-@media screen and (min-width: 900px) {
-	.book-icons,
-	.book-icons-1 {
-		//margin-left: 50px;
-	}
-	.book-icons-1 {
-		// right: -40px;
-	}
-}
 @media screen and (min-width: 992px) and (max-width: 1199px) {
 	.card img,
 	.card-image img {

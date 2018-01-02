@@ -1,14 +1,11 @@
 module.exports = {
-  "beforeEach": (client) => {
-    client
-      .resizeWindow(1280, 800);
-  },
   'users can visit their dashboard after they log in': (client) => {
     client
       .url('localhost:8080/login')
       .waitForElementVisible('.login-wrapper')
       .setValue('input[name="username"]', 'testuser')
       .setValue('input[name="password"]', 'testuser')
+      .pause(3000)
       .click('.loginbtn')
       .waitForElementVisible('.main-wrapper')
       .end();
@@ -16,6 +13,7 @@ module.exports = {
   'users cannot visit their dashboard unless logged in': (client) => {
     client
       .url('localhost:8080/dashboard')
+      .pause(3000)
       .assert.urlEquals('http://localhost:8080/login')
       .end();
   },
@@ -25,31 +23,32 @@ module.exports = {
       .waitForElementVisible('.login-wrapper')
       .setValue('input[name="username"]', 'testuser')
       .setValue('input[name="password"]', 'testuser')
-      .click('.loginbtn')
       .pause(3000)
+      .click('.loginbtn')
       .waitForElementVisible('.main-wrapper')
       .click('.card-image')
       .waitForElementVisible('.book-modal')
       .click('.loan-button')
       .pause(3000)
-      .assert.containsText('.notif', 'Harry Potter succesfully loaned')
-      .end();
+      .assert.containsText(
+        '.notif',
+        'BennyCode successfully loaned'
+      )
+      .refresh();
   },
-  'users can  return a borrowed book from their dashboard': (client) => {
+  'users can return a borrowed book from their dashboard': (client) => {
     client
-      .url('localhost:8080/login')
-      .waitForElementVisible('.login-wrapper')
-      .setValue('input[name="username"]', 'testuser')
-      .setValue('input[name="password"]', 'testuser')
-      .click('.loginbtn')
-      .pause(3000)
+      .url('localhost:8080/dashboard')
       .click('#react-tabs-2')
-      .waitForElementVisible('.borrowed-books')
+      .pause(3000)
       .click('.card-image')
       .waitForElementVisible('.book-modal')
       .click('.return-button')
       .pause(3000)
-      .assert.containsText('.notif', 'You have just returned Harry Potter')
+      .assert.containsText(
+        '.notif',
+        'You have just returned BennyCode'
+      )
       .end();
   },
 };

@@ -40,9 +40,9 @@ const fieldMap = (bookId, categoryId) => ({
  * @returns {void|response} res
  */
 export default (req, res, next) => {
-  const path = req.path;
-  const bookId = req.params.bookId;
-  const categoryId = req.params.categoryId;
+  const { path } = req;
+  const { bookId } = req.params;
+  const { categoryId } = req.params;
   const nullField = fieldMap(bookId, categoryId)[path]
     .find((field) => {
       if (req.body[field]) {

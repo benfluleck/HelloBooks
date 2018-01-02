@@ -338,14 +338,14 @@ export default {
             return res
               .status(409)
               .send({
-                message: 'You can\'t delete this' +
+                message: 'You can\'t delete this ' +
                 'book while there is a copy still out on loan'
               });
           }
           book
             .destroy()
             .then(() => res.status(200).send({
-              message: `${book.title}  has been deleted`,
+              message: `${book.title} has been deleted`,
               deletedBookId: bookId
             }));
         });
