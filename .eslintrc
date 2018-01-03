@@ -44,6 +44,10 @@
 			80,
 			2
 		],
+		"max-nested-callbacks": [2, 7],
+    "max-depth": [2, {
+      "max": 2
+    }],
 		"import/no-unresolved": [
 			2,
 			{

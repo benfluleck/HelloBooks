@@ -52,9 +52,9 @@ const userController = {
                 }).then((user) => {
                   if (user) {
                     res.status(201).send({
-                      message: `${user.username} has
-                       been added to the library, ` +
-                       'Please Login, you will be only required to do this once'
+                      message: `${user.username} has been added to 
+                      the library, 'Please Login, you will be only ` +
+                      'required to do this once'
                     });
                   }
                 });
@@ -179,8 +179,8 @@ const userController = {
           return res.status(409)
             .send({
               message:
-              'Your current password does not match our records,'
-              + 'Please Re-enter'
+              'Your current password does not match our records, ' +
+              'Please Re-enter'
             });
         }
         const compareNewPasswords =

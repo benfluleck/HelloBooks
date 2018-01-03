@@ -19,21 +19,22 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use('/api-docs', express.static(path.join(__dirname, '../../apiDocs/')));
+app.use('/apiDocs', express.static(path.join(__dirname, '../../apiDocs/')));
 app.use(express.static(path.join(__dirname, '../../client/dist/app')));
 
 app.use((req, res, next) => {
   res.header(
     'Access-Control-Allow-Headers',
     'Authorization, X-PINGOTHER, Origin, X-Requested-With,' +
-     'Content-Type, Accept, x-ac' +
-      'cess-token'
+     'Content-Type, Accept, x-access-token'
   );
   next();
 });
 
 app.use('/api/v1', authenticateRoutes, routes);
 
-app.get('*', (req, res) => res.sendFile(path.join(__dirname, '../../client/dist/app/index.html')));
+app
+  .get('*', (req, res) =>
+    res.sendFile(path.join(__dirname, '../../client/dist/app/index.html')));
 
 export default(app);

@@ -1,34 +1,31 @@
-import * as log from 'loglevel';
-
-import faker from 'faker';
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
 
 import app from '../app';
 import db from '../models';
+import usrToken from './helpers/testHooks';
 
-
-const { User, Books } = db;
+const { Books } = db;
 const { expect } = chai;
 
-dotenv.config();
-
 chai.use(chaiHttp);
-
 
 let userId;
 let bookId;
 let zerobookId;
 let testbookId;
-let token;
+let userToken = '';
+let adminToken = '';
 const testdate = new Date('2018-01-04');
 const nulluserId = '';
 
-
-describe('HelloBooks', () => {
+describe('UserBooks', () => {
   before((done) => {
+    usrToken().then((response) => {
+      userToken = response.userToken;
+      adminToken = response.adminToken;
+      done();
+    });
     Books
       .create({
         title: 'Eze goes to school',
@@ -66,32 +63,9 @@ describe('HelloBooks', () => {
       .then((book) => {
         testbookId = book.id;
       });
-    User.create({
-      firstname: faker
-        .name
-        .firstName(),
-      lastname: faker
-        .name
-        .lastName(),
-      username: 'Fidelis',
-      password: 'bennyogidan',
-      passwordConfirmation: 'bennyogidan',
-      userLevel: '3',
-      email: faker.internet.email()
-    })
-      .then((user) => {
-        userId = user.id;
-        token = jwt.sign({
-          id: user.id
-        }, process.env.JWT_SECRET);
-        done();
-      })
-      .catch(() => {
-        log.debug('Error in the seeding of the db');
-      });
   });
 
-  describe('Loan', () => {
+  describe('<Loan Books', () => {
     it('should allow an authenticated user to loan a book', (done) => {
       const userbook = {
         bookId: bookId.toString(),
@@ -100,7 +74,7 @@ describe('HelloBooks', () => {
       chai
         .request(app)
         .post('/api/v1/users/loanbook')
-        .set('x-access-token', token)
+        .set('x-access-token', userToken)
         .send(userbook)
         .end((err, res) => {
           expect(res.status)
@@ -111,16 +85,17 @@ describe('HelloBooks', () => {
     });
     it('should not allow loans without a specified return date', (done) => {
       const userbook = {
-        bookId: bookId.toString(),
+        bookId: bookId.toString()
       };
       chai
         .request(app)
         .post('/api/v1/users/loanbook')
-        .set('x-access-token', token)
+        .set('x-access-token', userToken)
         .send(userbook)
         .end((err, res) => {
           const response = res.body;
-          expect(response.message).to
+          expect(response.message)
+            .to
             .equal('Please specify a valid return date');
           expect(res.status)
             .to
@@ -136,16 +111,20 @@ describe('HelloBooks', () => {
       chai
         .request(app)
         .post('/api/v1/users/loanbook')
-        .set('x-access-token', token)
+        .set('x-access-token', userToken)
         .send(userbook)
         .end((err, res) => {
           const response = res.body;
-          expect(response.message).to
+          expect(response.message)
+            .to
             .equal('Amarachi continues to go to school successfully loaned');
           expect(res.status)
             .to
             .equal(200);
-          expect(res.body).to.be.an('object');
+          expect(res.body)
+            .to
+            .be
+            .an('object');
           done();
         });
     });
@@ -158,117 +137,148 @@ describe('HelloBooks', () => {
       chai
         .request(app)
         .post('/api/v1/users/loanbook')
-        .set('x-access-token', token)
+        .set('x-access-token', userToken)
         .send(userbook)
         .end((err, res) => {
           const response = res.body;
-          expect(response.message).to
+          expect(response.message)
+            .to
             .equal('You have already borrowed this book');
           expect(res.status)
             .to
             .equal(409);
-          expect(res.body).to.be.an('object');
-          done();
-        });
-    });
-    it('should not be able to borrow book if the user id is invalid', (done) => {
-      const userbook = {
-        bookId: bookId.toString(),
-        returnDate: testdate
-      };
-      chai
-        .request(app)
-        .post(`/api/v1/users/${nulluserId}/books`)
-        .set('x-access-token', token)
-        .send(userbook)
-        .end((err, res) => {
-          expect(res.status)
+          expect(res.body)
             .to
-            .equal(404);
+            .be
+            .an('object');
           done();
         });
     });
-    it('should not be able to borrow book with previous functioning route', (done) => {
-      const userbook = {
-        bookId: bookId.toString(),
-        returnDate: testdate
-      };
-      chai
-        .request(app)
-        .post('/api/v1/users/2/books')
-        .set('x-access-token', token)
-        .send(userbook)
-        .end((err, res) => {
-          const response = res.body;
-          expect(response.message).to
-            .equal(undefined);
-          expect(res.status)
-            .to
-            .equal(404);
-          expect(res.body).to.be.an('object');
-          done();
-        });
-    });
-    it('should not be able to borrow a book if bookId cannot be found', (done) => {
-      const userbook = {
-        bookId: 500,
-        returnDate: testdate
-      };
-      chai
-        .request(app)
-        .post('/api/v1/users/loanbook')
-        .set('x-access-token', token)
-        .send(userbook)
-        .end((err, res) => {
-          const response = res.body;
-          expect(response.message).to
-            .equal('Sorry we can\'t find this book or all copies of this book are on loan');
-          expect(res.status)
-            .to
-            .equal(404);
-          done();
-        });
-    });
-    it('should not be able to borrow a book if a valid return date is not inputted', (done) => {
-      const userbook = {
-        userId,
-        bookId: bookId.toString(),
-        returnDate: 'Invalid date'
-      };
-      chai
-        .request(app)
-        .post('/api/v1/users/loanbook')
-        .set('x-access-token', token)
-        .send(userbook)
-        .end((err, res) => {
-          const response = res.body;
-          expect(response.message).to
-            .equal('Please provide a valid return date');
-          expect(res.status)
-            .to
-            .equal(422);
-          expect(res.body).to.be.an('object');
-          done();
-        });
-    });
-    it('should not be able to borrow a book if a valid return date is not inputted', (done) => {
-      const userbook = {
-        userId,
-        bookId: bookId.toString(),
-        returnDate: 2108
-      };
-      chai
-        .request(app)
-        .post('/api/v1/users/loanbook')
-        .set('x-access-token', token)
-        .send(userbook)
-        .end((err, res) => {
-          expect(res.status)
-            .to
-            .equal(500);
-          done();
-        });
-    });
+    it(
+      'should not be able to borrow book if the user id is invalid'
+      , (done) => {
+        const userbook = {
+          bookId: bookId.toString(),
+          returnDate: testdate
+        };
+        chai
+          .request(app)
+          .post(`/api/v1/users/${nulluserId}/books`)
+          .set('x-access-token', userToken)
+          .send(userbook)
+          .end((err, res) => {
+            expect(res.status)
+              .to
+              .equal(404);
+            done();
+          });
+      }
+    );
+    it(
+      'should not be able to borrow book with previous functioning route'
+      , (done) => {
+        const userbook = {
+          bookId: bookId.toString(),
+          returnDate: testdate
+        };
+        chai
+          .request(app)
+          .post('/api/v1/users/2/books')
+          .set('x-access-token', userToken)
+          .send(userbook)
+          .end((err, res) => {
+            const response = res.body;
+            expect(response.message)
+              .to
+              .equal(undefined);
+            expect(res.status)
+              .to
+              .equal(404);
+            expect(res.body)
+              .to
+              .be
+              .an('object');
+            done();
+          });
+      }
+    );
+    it(
+      'should not be able to borrow a book if bookId cannot be found'
+      , (done) => {
+        const userbook = {
+          bookId: 500,
+          returnDate: testdate
+        };
+        chai
+          .request(app)
+          .post('/api/v1/users/loanbook')
+          .set('x-access-token', userToken)
+          .send(userbook)
+          .end((err, res) => {
+            const response = res.body;
+            expect(response.message)
+              .to
+              .equal('Sorry we can\'t find this book or ' +
+                 'all copies of this book are on loan');
+            expect(res.status)
+              .to
+              .equal(404);
+            done();
+          });
+      }
+    );
+    it(
+      'should not be able to borrow a book if a valid ' +
+       'return date is not inputted',
+      (done) => {
+        const userbook = {
+          userId,
+          bookId: bookId.toString(),
+          returnDate: 'Invalid date'
+        };
+        chai
+          .request(app)
+          .post('/api/v1/users/loanbook')
+          .set('x-access-token', userToken)
+          .send(userbook)
+          .end((err, res) => {
+            const response = res.body;
+            expect(response.message)
+              .to
+              .equal('Please provide a valid return date');
+            expect(res.status)
+              .to
+              .equal(422);
+            expect(res.body)
+              .to
+              .be
+              .an('object');
+            done();
+          });
+      }
+    );
+    it(
+      'should not be able to borrow a book ' +
+      'if a valid return date is not inputted',
+      (done) => {
+        const userbook = {
+          userId,
+          bookId: bookId.toString(),
+          returnDate: 2108
+        };
+        chai
+          .request(app)
+          .post('/api/v1/users/loanbook')
+          .set('x-access-token', userToken)
+          .send(userbook)
+          .end((err, res) => {
+            expect(res.status)
+              .to
+              .equal(500);
+            done();
+          });
+      }
+    );
     it('should not be able to borrow a book if book quantity = 0', (done) => {
       const userbook = {
         userId,
@@ -278,29 +288,34 @@ describe('HelloBooks', () => {
       chai
         .request(app)
         .post('/api/v1/users/loanbook')
-        .set('x-access-token', token)
+        .set('x-access-token', adminToken)
         .send(userbook)
         .end((err, res) => {
           const response = res.body;
-          expect(response.message).to
-            .equal('Sorry we can\'t find this book or all copies of this book are on loan');
+          expect(response.message)
+            .to
+            .equal('Sorry we can\'t ' +
+            'find this book or all copies of this book are on loan');
           expect(res.status)
             .to
             .equal(404);
-          expect(res.body).to.be.an('object');
+          expect(res.body)
+            .to
+            .be
+            .an('object');
           done();
         });
     });
   });
 
-  describe('/GET should return a borrow history ', () => {
+  describe('<Get Borrow History', () => {
     it('should return a list of books loaned by the user', (done) => {
       chai
         .request(app)
         .get('/api/v1/users/borrowedbooks')
         .set('Accept', 'application/x-www-form-urlencoded')
         .query({ returned: false })
-        .set('x-access-token', token)
+        .set('x-access-token', userToken)
         .end((err, res) => {
           expect(res.status)
             .to
@@ -308,13 +323,12 @@ describe('HelloBooks', () => {
           done();
         });
     });
-    // /users/getloanhistory
     it('should not return a borrow list if return query is not set', (done) => {
       chai
         .request(app)
         .get('/api/v1/users/borrowedbooks')
         .set('Accept', 'application/x-www-form-urlencoded')
-        .set('x-access-token', token)
+        .set('x-access-token', userToken)
         .end((err, res) => {
           expect(res.status)
             .to
@@ -327,7 +341,7 @@ describe('HelloBooks', () => {
         .request(app)
         .get('/api/v1/users/getloanhistory')
         .set('Accept', 'application/x-www-form-urlencoded')
-        .set('x-access-token', token)
+        .set('x-access-token', userToken)
         .end((err, res) => {
           expect(res.status)
             .to
@@ -340,7 +354,7 @@ describe('HelloBooks', () => {
         .request(app)
         .get('/api/v1/users/getoverduebooks')
         .set('Accept', 'application/x-www-form-urlencoded')
-        .set('x-access-token', token)
+        .set('x-access-token', userToken)
         .end((err, res) => {
           expect(res.status)
             .to
@@ -350,12 +364,12 @@ describe('HelloBooks', () => {
     });
   });
 
-  describe('/PUT Return book', () => {
+  describe('<Return book', () => {
     it('should be able to return a book with a book id', (done) => {
       chai
         .request(app)
         .put('/api/v1/users/returnbook')
-        .set('x-access-token', token)
+        .set('x-access-token', userToken)
         .send({ bookId })
         .end((err, res) => {
           expect(res.status)
@@ -368,25 +382,30 @@ describe('HelloBooks', () => {
       chai
         .request(app)
         .put('/api/v1/users/returnbook')
-        .set('x-access-token', token)
+        .set('x-access-token', userToken)
         .send({ bookId: 7 })
         .end((err, res) => {
           const response = res.body;
-          expect(response.message).to.equal('You did not borrow this book');
+          expect(response.message)
+            .to
+            .equal('You did not borrow this book');
           expect(res.status)
             .to
             .equal(409);
           done();
         });
     });
-    it('should not be able to return a book with an invalid id they have not borrowed', (done) => {
+    it('should not be able to return a book with an ' +
+      'invalid id they have not borrowed', (done) => {
       chai
         .request(app)
         .put('/api/v1/users/returnbook')
-        .set('x-access-token', token)
+        .set('x-access-token', userToken)
         .send({ bookId: 'one' })
         .end((err, res) => {
-          expect(res.error.text).to.equal('invalid input syntax for integer: "one"');
+          expect(res.error.text)
+            .to
+            .equal('invalid input syntax for integer: "one"');
           expect(res.status)
             .to
             .equal(500);
@@ -397,11 +416,13 @@ describe('HelloBooks', () => {
       chai
         .request(app)
         .put('/api/v1/users/returnbook')
-        .set('x-access-token', token)
+        .set('x-access-token', userToken)
         .send({ bookId })
         .end((err, res) => {
           const response = res.body;
-          expect(response.message).to.equal('You did not borrow this book');
+          expect(response.message)
+            .to
+            .equal('You did not borrow this book');
           expect(res.status)
             .to
             .equal(409);
@@ -411,7 +432,3 @@ describe('HelloBooks', () => {
   });
 });
 
-/*
-
-Authenticated users
-*/

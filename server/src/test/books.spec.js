@@ -1,16 +1,9 @@
-/*
-eslint-disable no-console
-*/
-
-import faker from 'faker';
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import dotenv from 'dotenv';
 
 import app from '../app';
 import db from '../models';
-
-dotenv.config();
+import usrToken from './helpers/testHooks';
 
 const { Books } = db;
 const { expect } = chai;
@@ -18,12 +11,18 @@ const { expect } = chai;
 chai.use(chaiHttp);
 
 let bookId;
-let token = '';
+let userToken = '';
+let adminToken = '';
 const testdate = new Date('2018-01-04');
 let limit;
 
-describe('HelloBooks', () => {
+describe('Books', () => {
   before((done) => {
+    usrToken().then((response) => {
+      userToken = response.userToken;
+      adminToken = response.adminToken;
+      done();
+    });
     Books
       .create({
         title: 'Shola comes home',
@@ -35,63 +34,24 @@ describe('HelloBooks', () => {
       })
       .then((book) => {
         bookId = book.id;
-        done();
       })
       .catch(() => {});
   });
-
-  describe('Authentication', () => {
-    it('should return 201 when a regular administrator is created', (done) => {
-      chai
-        .request(app)
-        .post('/api/v1/auth/users/signup')
-        .set('Accept', 'application/x-www-form-urlencoded')
-        .send({
-          username: 'ogidan',
-          password: 'boooboo',
-          passwordConfirmation: 'boooboo',
-          firstname: 'Benny',
-          isAdmin: true,
-          email: faker
-            .internet
-            .email(),
-          lastname: faker
-            .name
-            .lastName()
-        })
-        .end((err, res) => {
-          expect(res.status)
-            .to
-            .equal(201);
-          done();
-        });
-    });
-    it('should return 200 when a administrator signs in', (done) => {
-      chai
-        .request(app)
-        .post('/api/v1/auth/users/signin')
-        .set('Accept', 'application/x-www-form-urlencoded')
-        .send({ username: 'ogidan', password: 'boooboo' })
-        .end((err, res) => {
-          expect(res.status)
-            .to
-            .equal(200);
-          token = res.body.token;
-          done();
-        });
-    });
-  });
-  describe('Books', () => {
+  describe('<Get Booklist', () => {
     it('should display all books from the data', (done) => {
       chai
         .request(app)
         .get('/api/v1/books')
         .set('Accept', 'application/x-www-form-urlencoded')
-        .set('x-access-token', token)
+        .set('x-access-token', userToken)
         .end((err, res) => {
           expect(res.status)
             .to
             .equal(200);
+          expect(res.body)
+            .to
+            .be
+            .a('object');
           done();
         });
     });
@@ -99,7 +59,7 @@ describe('HelloBooks', () => {
       chai
         .request(app)
         .get('/api/v1/books')
-        .set({ 'x-access-token': token })
+        .set({ 'x-access-token': userToken })
         .query({ limit: 2 })
         .end((err, res) => {
           expect(res.status)
@@ -111,6 +71,10 @@ describe('HelloBooks', () => {
             .to
             .be
             .equal(2);
+          expect(res.body)
+            .to
+            .be
+            .a('object');
           done();
         });
     });
@@ -118,7 +82,7 @@ describe('HelloBooks', () => {
       chai
         .request(app)
         .get('/api/v1/books')
-        .set({ 'x-access-token': token })
+        .set({ 'x-access-token': userToken })
         .query({ limit: 1 })
         .end((err, res) => {
           expect(res.status)
@@ -137,7 +101,7 @@ describe('HelloBooks', () => {
       chai
         .request(app)
         .get('/api/v1/books')
-        .set({ 'x-access-token': token })
+        .set({ 'x-access-token': userToken })
         .query({ limit: 1, offset: 1 })
         .end((err, res) => {
           expect(res.status)
@@ -156,7 +120,7 @@ describe('HelloBooks', () => {
       chai
         .request(app)
         .get('/api/v1/books')
-        .set({ 'x-access-token': token })
+        .set({ 'x-access-token': userToken })
         .query({ limit, offset: 1 })
         .end((err, res) => {
           expect(res.status)
@@ -172,13 +136,13 @@ describe('HelloBooks', () => {
         });
     });
   });
-  describe('Edit books', () => {
+  describe('<Edit books', () => {
     it('should edit a selected book from the database', (done) => {
       chai
         .request(app)
         .put(`/api/v1/admin/books/${bookId}`)
         .set('Accept', 'application/x-www-form-urlencoded')
-        .set('x-access-token', token)
+        .set('x-access-token', adminToken)
         .send({
           title: 'The Chronicles of Andela',
           author: 'C.S. Lewis',
@@ -191,6 +155,10 @@ describe('HelloBooks', () => {
           expect(res.status)
             .to
             .equal(200);
+          expect('Content-Type', /json/);
+          expect(res.body.message)
+            .to
+            .equal('The Chronicles of Andela has been updated');
           done();
         });
     });
@@ -199,7 +167,7 @@ describe('HelloBooks', () => {
         .request(app)
         .put(`/api/v1/admin/books/${bookId}`)
         .set('Accept', 'application/x-www-form-urlencoded')
-        .set('x-access-token', token)
+        .set('x-access-token', adminToken)
         .send({
           title: 'The Chronicles of Andela',
           author: '',
@@ -212,31 +180,44 @@ describe('HelloBooks', () => {
           expect(res.status)
             .to
             .equal(400);
-          done();
-        });
-    });
-    it('should throw an error if category Id is not defined', (done) => {
-      chai
-        .request(app)
-        .put('/api/v1/admin/books')
-        .set('Accept', 'application/x-www-form-urlencoded')
-        .set('x-access-token', token)
-        .send({
-          title: 'The Chronicles of Andela', author: 'C.S. Lewis', quantity: '23', description: 'This is a test', bookImage: 'Image'
-        })
-        .end((err, res) => {
-          expect(res.status)
+          expect(res.body.message)
             .to
-            .equal(404);
+            .equal('This author\'s name is invalid');
           done();
         });
     });
+    it(
+      'should throw a 404 errror if book to be edited is not defined',
+      (done) => {
+        chai
+          .request(app)
+          .put('/api/v1/admin/books/')
+          .set('Accept', 'application/x-www-form-urlencoded')
+          .set('x-access-token', adminToken)
+          .send({
+            title: 'The Chronicles of Andela',
+            author: 'C.S. Lewis',
+            quantity: '23',
+            categoryId: '2',
+            description: 'This is a test',
+            bookImage: 'Image'
+          })
+          .end((err, res) => {
+            expect(res.status)
+              .to
+              .equal(404);
+            done();
+          });
+      }
+    );
+  });
+  describe('<Create books', () => {
     it('should allow administrators to create books', (done) => {
       chai
         .request(app)
         .post('/api/v1/admin/books')
         .set('Accept', 'application/x-www-form-urlencoded')
-        .set('x-access-token', token)
+        .set('x-access-token', adminToken)
         .send({
           title: 'Learn Java',
           author: 'Sleeping Master',
@@ -251,7 +232,8 @@ describe('HelloBooks', () => {
             .equal(201);
           expect(res.body.message)
             .to
-            .equal('Learn Java has been added to the library, Category: Drama');
+            .equal('Learn Java has been added to the library,' +
+              ' Category: Drama');
           done();
         });
     });
@@ -260,7 +242,7 @@ describe('HelloBooks', () => {
         .request(app)
         .post('/api/v1/admin/books')
         .set('Accept', 'application/x-www-form-urlencoded')
-        .set('x-access-token', token)
+        .set('x-access-token', adminToken)
         .send({
           title: 'Learn Java',
           author: 'Sleeping Master',
@@ -275,35 +257,35 @@ describe('HelloBooks', () => {
             .equal(409);
           expect(res.body.message)
             .to
-            .equal('A book with the same title and author already exists in the library');
+            .equal('A book with the same title and ' +
+              'author already exists in the library');
           done();
         });
     });
-    it(
-      'should return a 400 response for a book with an incomplete description',
-      (done) => {
-        chai
-          .request(app)
-          .post('/api/v1/admin/books')
-          .set('Accept', 'application/x-www-form-urlencoded')
-          .set('x-access-token', token)
-          .send({
-            title: 'Benedict goes to school',
-            author: 'Benny O',
-            categoryId: '3',
-            quantity: '20',
-            description: 'This ',
-            bookimage: 'Test Image'
-          })
-          .end((err, res) => {
-            expect(res.status)
-              .to
-              .equal(400);
-            done();
-          });
-      }
-    );
-    it('should allow only authenticated users allowed to create books', (done) => {
+    it('should return a 400 response for ' +
+      'a book with an incomplete description', (done) => {
+      chai
+        .request(app)
+        .post('/api/v1/admin/books')
+        .set('Accept', 'application/x-www-form-urlencoded')
+        .set('x-access-token', adminToken)
+        .send({
+          title: 'Benedict goes to school',
+          author: 'Benny O',
+          categoryId: '3',
+          quantity: '20',
+          description: 'This ',
+          bookimage: 'Test Image'
+        })
+        .end((err, res) => {
+          expect(res.status)
+            .to
+            .equal(400);
+          done();
+        });
+    });
+    it('should allow only authenticated ' +
+      'users allowed to create books', (done) => {
       chai
         .request(app)
         .post('/api/v1/admin/books/')
@@ -312,18 +294,26 @@ describe('HelloBooks', () => {
           expect(res.status)
             .to
             .equal(401);
+          expect(res.body.token)
+            .to.equal(null);
+          expect(res.body.message)
+            .to.equal("Unauthorised access");
           done();
         });
     });
+  });
+  describe('<Search books', () => {
     it('should return 200 when searching all books', (done) => {
       chai
         .request(app)
         .get('/api/v1/books/search?searchTerm=Sta')
-        .set('x-access-token', token)
+        .set('x-access-token', userToken)
         .end((err, res) => {
           expect(res.status)
             .to
             .equal(200);
+          expect(res.body.success)
+            .to.equal(true);
           done();
         });
     });
@@ -331,11 +321,13 @@ describe('HelloBooks', () => {
       chai
         .request(app)
         .get('/api/v1/books/search?searchTerm=Sta&categoryId=1')
-        .set('x-access-token', token)
+        .set('x-access-token', userToken)
         .end((err, res) => {
           expect(res.status)
             .to
             .equal(200);
+          expect(res.body.success)
+            .to.equal(true);
           done();
         });
     });
@@ -343,11 +335,14 @@ describe('HelloBooks', () => {
       chai
         .request(app)
         .get('/api/v1/books/search?searchTerm=')
-        .set('x-access-token', token)
+        .set('x-access-token', userToken)
         .end((err, res) => {
           expect(res.status)
             .to
             .equal(400);
+          expect(res.body.message)
+            .to
+            .equal('Please enter your search criteria');
           done();
         });
     });
@@ -355,73 +350,64 @@ describe('HelloBooks', () => {
       chai
         .request(app)
         .get('/api/v1/books/search?searchTerm=999999')
-        .set('x-access-token', token)
+        .set('x-access-token', userToken)
         .end((err, res) => {
           expect(res.status)
             .to
             .equal(404);
-          done();
-        });
-    });
-    it('should return 200 when getting a single book', (done) => {
-      chai
-        .request(app)
-        .get('/api/v1/auth/books/1')
-        .set('x-access-token', token)
-        .end((err, res) => {
-          expect(res.status)
+          expect(res.body.message)
             .to
-            .equal(200);
-          done();
-        });
-    });
-    it('should return 400 if the bookId is not valid', (done) => {
-      chai
-        .request(app)
-        .get('/api/v1/auth/books/sfgh')
-        .set('x-access-token', token)
-        .end((err, res) => {
-          expect(res.status)
-            .to
-            .equal(400);
-          done();
-        });
-    });
-    it('should return 404 when getting a single book if it does not exist', (done) => {
-      chai
-        .request(app)
-        .get('/api/v1/auth/books/100')
-        .set('x-access-token', token)
-        .end((err, res) => {
-          expect(res.status)
-            .to
-            .equal(404);
-          done();
-        });
-    });
-    it('should throw an error if the selected book undefined', (done) => {
-      chai
-        .request(app)
-        .put('/api/v1/admin/books/')
-        .set('Accept', 'application/x-www-form-urlencoded')
-        .set('x-access-token', token)
-        .send({
-          title: 'The Chronicles of Andela',
-          author: 'C.S. Lewis',
-          category: 4,
-          quantity: '23',
-          description: 'This is a test',
-          bookimage: 'Image'
-        })
-        .end((err, res) => {
-          expect(res.status)
-            .to
-            .equal(404);
+            .equal('Sorry no books match your search criteria');
           done();
         });
     });
   });
-  describe('/LOAN', () => {
+  it('should return 200 when getting a single book', (done) => {
+    chai
+      .request(app)
+      .get('/api/v1/auth/books/1')
+      .set('x-access-token', userToken)
+      .end((err, res) => {
+        expect(res.status)
+          .to
+          .equal(200);
+        done();
+      });
+  });
+  describe('<Select Book', () => {
+    it('should return 400 if the bookId is not valid', (done) => {
+      chai
+        .request(app)
+        .get('/api/v1/auth/books/sfgh')
+        .set('x-access-token', userToken)
+        .end((err, res) => {
+          expect(res.status)
+            .to
+            .equal(400);
+          expect(res.body.message)
+            .to
+            .equal('Please enter a valid bookId');
+          done();
+        });
+    });
+    it('should return 404 when getting a' +
+     'single book if it does not exist', (done) => {
+      chai
+        .request(app)
+        .get('/api/v1/auth/books/100')
+        .set('x-access-token', userToken)
+        .end((err, res) => {
+          expect(res.status)
+            .to
+            .equal(404);
+          expect(res.body.message)
+            .to
+            .equal('This book does not exist in the library');
+          done();
+        });
+    });
+  });
+  describe('/Loan a book', () => {
     it('should allow an authenticated user to loan a book', (done) => {
       const userbook = {
         bookId: bookId.toString(),
@@ -430,36 +416,42 @@ describe('HelloBooks', () => {
       chai
         .request(app)
         .post('/api/v1/users/loanbook')
-        .set('x-access-token', token)
+        .set('x-access-token', userToken)
         .send(userbook)
         .end((err, res) => {
           expect(res.status)
             .to
             .equal(200);
+          expect(res.body.message)
+            .to
+            .equal('The Chronicles of Andela successfully loaned');
           done();
         });
     });
   });
 
   describe('Delete books', () => {
-    it('should allow only administrators are allowed to delete books', (done) => {
-      chai
-        .request(app)
-        .delete('/api/v1/admin/books/2')
-        .set('x-access-token', token)
-        .set('Accept', 'application/x-www-form-urlencoded')
-        .end((err, res) => {
-          expect(res.status)
-            .to
-            .equal(200);
-          done();
-        });
-    });
+    it(
+      'should allow only administrators to delete books',
+      (done) => {
+        chai
+          .request(app)
+          .delete('/api/v1/admin/books/2')
+          .set('x-access-token', userToken)
+          .set('Accept', 'application/x-www-form-urlencoded')
+          .end((err, res) => {
+            expect(res.status)
+              .to
+              .equal(403);
+            done();
+          });
+      }
+    );
     it('should allow only all books in the database to be deleted', (done) => {
       chai
         .request(app)
         .delete('/api/v1/admin/books/344')
-        .set('x-access-token', token)
+        .set('x-access-token', adminToken)
         .set('Accept', 'application/x-www-form-urlencoded')
         .end((err, res) => {
           expect(res.status)
@@ -472,12 +464,16 @@ describe('HelloBooks', () => {
       chai
         .request(app)
         .delete(`/api/v1/admin/books/${bookId}`)
-        .set('x-access-token', token)
+        .set('x-access-token', adminToken)
         .set('Accept', 'application/x-www-form-urlencoded')
         .end((err, res) => {
           expect(res.status)
             .to
             .equal(409);
+          expect(res.body.message)
+            .to
+            .equal('You can\'t delete this book ' +
+            'while there is a copy still out on loan');
           done();
         });
     });
@@ -485,12 +481,15 @@ describe('HelloBooks', () => {
       chai
         .request(app)
         .delete('/api/v1/admin/books/thisbook')
-        .set('x-access-token', token)
+        .set('x-access-token', adminToken)
         .set('Accept', 'application/x-www-form-urlencoded')
         .end((err, res) => {
           expect(res.status)
             .to
             .equal(400);
+          expect(res.body.message)
+            .to
+            .equal('Please enter a valid bookId');
           done();
         });
     });

@@ -1,5 +1,7 @@
 import faker from 'faker';
 
+require('dotenv').config();
+
 
 const bcrypt = require('bcrypt');
 
@@ -18,7 +20,7 @@ module.exports = {
       },
       {
         username: 'bennyogidan',
-        password: bcrypt.hashSync('bennyogidan', bcrypt.genSaltSync(10)),
+        password: bcrypt.hashSync(process.env.ADMIN_PASSWORD, bcrypt.genSaltSync(10)),
         email: 'benfluleck@gmail.com',
         firstname: 'Administrator',
         isAdmin: true,
