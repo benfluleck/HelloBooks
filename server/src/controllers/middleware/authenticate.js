@@ -12,7 +12,10 @@ appended in routes that need to be authenticated
 *
 * @param {function} next - next function to be called on the success
 *
-* @return {object}  message
+* @return {object}
+*
+* @return {string} message - Validation error
+*
 */
 const authenticate = (req, res, next) => {
   if (req.url.startsWith('/auth')) return next();
@@ -20,32 +23,47 @@ const authenticate = (req, res, next) => {
   if (token) {
     jwt.verify(token, process.env.JWT_SECRET, (error, decoded) => {
       if (error) {
-        return res.status(401).json({ token: null, message: 'Unauthorised access' });
+        return res.status(401).json({
+          token: null,
+          state: {},
+          message: 'Unauthorised access'
+        });
       }
       req.user = decoded;
       next();
     });
   } else if (token === '') {
-    res.status(403).send({ token: null, message: 'Forbidden' });
+    res.status(403).send({
+      token: null,
+      state: null,
+      message: 'Forbidden'
+    });
   } else {
-    res.status(401).send({ token: null, message: 'Unauthorised access' });
+    res.status(401).send({
+      token: null,
+      state: {},
+      message: 'Unauthorised access'
+    });
   }
 };
 
 /**
  * @description Decode Token for the server side processes
+ *
  * @param {object} req
+ *
  * @param {object} res
+ *
  * @param {object} next
+ *
  * @returns {object} res
  */
 const decodeToken = (req, res, next) => {
   const token = req.headers['x-access-token'] || req.headers.authorization;
   if (token) {
     const decodedToken = jwtDecode(token);
-    next(null, {
-      userId: decodedToken.id.id
-    });
+    req.userId = decodedToken.id.id;
+    next();
   } else {
     res.status(401).send({ message: 'Unauthorised access' });
   }
@@ -71,11 +89,17 @@ const getJWT = (id, isAdmin) =>
       },
       (error, token) => {
         if (error) {
-          reject(new Error({ status: 'Error', message: 'Error generating token' }));
+          reject(new Error({
+            status: 'Error',
+            message: 'Error generating token'
+          }));
         } else if (token) {
           resolve({ status: 'Success', token });
         } else {
-          reject(new Error({ status: 'Error', message: 'Error generating token' }));
+          reject(new Error({
+            status: 'Error',
+            message: 'Error generating token'
+          }));
         }
       }
     );

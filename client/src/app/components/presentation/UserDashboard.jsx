@@ -1,25 +1,25 @@
 import React from 'react';
 import { Row } from 'react-materialize';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import SideNav from '../presentation/common/SideNav/index.jsx';
+import SideNav from '../presentation/common/SideNav/index';
 import DisplayAllBorrowedBooks from
-  '../container/booklist/DisplayBorrowedBooks.jsx';
-import DisplayAllBooks from '../container/booklist/DisplayAllBooks.jsx';
-import LoanHistoryTable from '../container/loanhistory/LoanHistory.jsx';
-import DisplayOverdueBooks from '../container/booklist/DisplayOverdueBooks.jsx';
-import getDashboardWrapper from '../container/Dashboard.jsx';
-import DisplayBookModal from '../../components/presentation/common/book/DisplayBookModal.jsx';
+  '../container/booklist/DisplayBorrowedBooks';
+import DisplayAllBooks from '../container/booklist/DisplayAllBooks';
+import LoanHistoryTable from '../container/loanhistory/LoanHistory';
+import DisplayOverdueBooks from '../container/booklist/DisplayOverdueBooks';
+import GetDashboardWrapper from '../container/common/Dashboard';
 
 
 /**
  * @description Show User Dashboard
+ *
  * @class DashboardView
+ *
  * @param {object} props
  *
  */
 class UserDashboard extends React.PureComponent {
   /**
-   *
    *
    *
    * @returns {Component} Userboard
@@ -61,14 +61,12 @@ class UserDashboard extends React.PureComponent {
             <hr />
           </div>
         </div>
-        {/* <DisplayBookModal /> */}
       </div>
     );
   }
 }
 
-
-const ClientDashboard = getDashboardWrapper(UserDashboard);
+const ClientDashboard = GetDashboardWrapper(UserDashboard);
 
 
 export default ClientDashboard;

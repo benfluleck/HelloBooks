@@ -2,9 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Preloader } from 'react-materialize';
 import PropTypes from 'prop-types';
-import { getAdminNotificationAction } from '../../../actions/admin/getAdminNotifications';
-import PaginationWrapper from '../common/Pagination.jsx';
-import NotificationTable from './NotificationTable.jsx';
+import { getAdminNotificationAction } from
+  '../../../actions/admin/getAdminNotifications';
+import PaginationWrapper from '../common/Pagination';
+import NotificationTable from './NotificationTable';
 
 /**
  * @description handles the state of the NotificationTab

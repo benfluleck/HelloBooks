@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Row, Button } from 'react-materialize';
 import { connect } from 'react-redux';
 import ChangeUserLevelModal from
-  '../../presentation/common/modal/ChangeUserLevelModal.jsx';
+  '../../presentation/common/modal/ChangeUserLevelModal';
 import { getSelectedUser } from '../../../actions/admin/getSelectedUser';
 
 
@@ -16,6 +16,24 @@ import { getSelectedUser } from '../../../actions/admin/getSelectedUser';
  */
 class UserListTable extends React.Component {
   /**
+   *
+   * @method componentReceiveProps
+   *
+   * @memberof DisplayAllBooks
+   *
+   *
+   * @returns {void}
+   *
+   *
+   *
+  * */
+  componentWillReceiveProps() {
+    this.setState({ initModal: true });
+    $('.modal').modal();
+  }
+  /**
+    * @description get a selected User details
+    *
     * @param {object} id
     *
     * @memberof UserListTable
@@ -26,7 +44,6 @@ class UserListTable extends React.Component {
    * */
   onClick(id) {
     this.props.getSelectedUser(id);
-    $('#change-user-level-modal').modal('open');
   }
   /**
    *
@@ -52,11 +69,12 @@ class UserListTable extends React.Component {
             <Button
               floating
               icon="mode_edit"
-              className="#f57c00 orange darken-2"
+              className="#f57c00 orange darken-2 modal-trigger"
               waves="light"
+              href="#change-user-level-modal"
               onClick={() => {
-              this.onClick(user.id);
- }}
+                this.onClick(user.id);
+              }}
             >Edit
             </Button>
           </td>

@@ -1,21 +1,23 @@
 import { isAlpha, isLength } from 'validator';
 import { isEmpty } from 'lodash';
 
-const emailRegex = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"|"_+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
+const emailRegex =
+/^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"|"_+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
 const validateEmail = emailAddress => emailRegex.test(emailAddress);
 
 const bookDetailValidator = (state) => {
   const errors = {};
 
   if (!isLength(state.author, 4, 30)) {
-    errors.author = 'The author\'s name  should be between 4 and 30 characters.';
+    errors.author =
+    'The author\'s name  should be between 4 and 30 characters.';
   }
 
   if (!isLength(state.title, 2, 30)) {
     errors.title = 'The book title should be between 2 and 30.';
   }
 
-  if (!isLength(state.description, 10, 200)) {
+  if (!isLength(state.description, 10)) {
     errors.description = 'The book description should be between 10 and 300.';
   }
 
@@ -32,24 +34,23 @@ const validatePasswordInput = (state) => {
   const errors = {};
 
   if (!isLength(state.password, 5, 20)) {
-    errors.password = 'Password ahould be a minimum of 5 characters and max. of 20.';
+    errors.password =
+    'Password ahould be a minimum of 5 characters and max. of 20.';
   }
 
   if (state.passwordConfirmation !== state.password) {
     errors.passwordConfirmation = 'Passwords do not match';
   }
 
-  if (!isEmpty) {
+  if (isEmpty(state.oldpassword)) {
     errors.oldpassword = 'Please fill this field';
   }
-  
   return { errors, isValid: isEmpty(errors) };
 };
 
 
-const validateSignupInput = (state) => {
+const validateSignUpInput = (state) => {
   const errors = {};
-
   if (!validateEmail(state.email)) {
     errors.email = 'Email is Invalid';
   }
@@ -70,15 +71,18 @@ const validateSignupInput = (state) => {
   }
 
   if (!isLength(state.password, 5, 20)) {
-    errors.password = 'Password ahould be a minimum of 5 characters and max. of 20.';
+    errors.password =
+    'Password ahould be a minimum of 5 characters and max. of 20.';
   }
 
   if (!isLength(state.firstname, 4, 30)) {
-    errors.firstname = 'Firstname ahould be a minimum of 4 characters and max. of 30.';
+    errors.firstname =
+    'Firstname ahould be a minimum of 4 characters and max. of 30.';
   }
 
   if (!isLength(state.lastname, 4, 30)) {
-    errors.lastname = 'Lastname ahould be a minimum of 4 characters and max. of 30.';
+    errors.lastname =
+    'Lastname ahould be a minimum of 4 characters and max. of 30.';
   }
 
   if (state.passwordConfirmation !== state.password) {
@@ -86,16 +90,6 @@ const validateSignupInput = (state) => {
   }
 
   return { errors, isValid: isEmpty(errors) };
-};
-
-const validateForgotPasswordEmail = (state) => {
-  const errors = {};
-
-  if (trim(state.email).length === 0) {
-    errors.email = 'Email is empty';
-  }
-
-  return { isValid: isEmpty(errors) };
 };
 
 const validateCategoryInput = (state) => {
@@ -109,8 +103,7 @@ const validateCategoryInput = (state) => {
 };
 
 
-export { validateSignupInput,
-  validateForgotPasswordEmail,
+export { validateSignUpInput,
   bookDetailValidator,
   validateCategoryInput,
   validatePasswordInput };

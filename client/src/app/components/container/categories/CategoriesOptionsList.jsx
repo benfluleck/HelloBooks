@@ -1,47 +1,77 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Input } from 'react-materialize';
-import getCategories from './getCategoriesWrapper.jsx';
+import { connect } from 'react-redux';
 
 
-const CategoriesOptions = (props) => {
-  const categoryNames = props.categories
-    .map(category => (
-      <option
-        key={category.id}
-        value={category.id}
-        className="black-text"
-      >
-        {category.categoryName}
-      </option>
-    ));
-  return (
-    <Input
-      s={6}
-      type="select"
-      name="categoryId"
-      onChange={props.onChange}
-      id="category"
-      className="black-text"
-    >
-      <option
-        value=""
-        label="Choose Category"
-      >
-      Choose a Category
-      </option>
-      {[...categoryNames]}
-    </Input>
-  );
-};
+/**
+ *
+ * @description Displays Category option list
+ *
+ * @class CategoriesOptions
+ *
+ * @extends {React.Component}
+ */
+class CategoriesOptions extends React.PureComponent {
+  /**
+   *
+   *
+   * @returns {component} CategoryName
+   *
+   * @memberof CategoriesOptions
+   *
+   *
+   * @memberOf CategoriesOptions
+   */
+  render() {
+    const categoryNames = this.props.categories
+      .map(category => (
+        <option
+          key={category.id}
+          value={category.id}
+          className="black-text"
+
+        >
+          {category.categoryName}
+        </option>
+      ));
+    return (
+
+      <div className="col s6 push-s4">
+        <label>Category Name</label>
+        <br/>
+        <select className="browser-default"
+          onChange={this.props.onChange}
+          value={this.props.categoryId}>
+          <option
+            value=""
+            label="Choose Category"
+            defaultValue
+          >
+          Choose a Category
+          </option>
+          {[...categoryNames]}
+        </select>
+
+      </div>
+    );
+  }
+}
+
 
 CategoriesOptions.propTypes = {
   categories: PropTypes.arrayOf(PropTypes.shape({
-    map: PropTypes.object,
-  })).isRequired,
-  onChange: PropTypes.func.isRequired
+    category: PropTypes.object
+  })),
+  onChange: PropTypes.func,
+  categoryId: PropTypes.number
 };
 
-const CategoriesOptionsList = getCategories(CategoriesOptions);
+export { CategoriesOptions };
 
-export default CategoriesOptionsList;
+const mapStateToProps = ({ categoryReducer }) => (
+  {
+    categories: categoryReducer.categoryList
+  });
+
+
+export default connect(mapStateToProps, null)(CategoriesOptions);

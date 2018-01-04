@@ -4,9 +4,13 @@ import PropTypes from 'prop-types';
 /**
  * display a user's image and username
  * @function UserView
+ *
  * @param {object} props
+ *
  * @param {string} imageLink
+ *
  * @param {string} username
+ *
  * @return {object} UserView component
  */
 const UserView = ({
@@ -37,11 +41,5 @@ UserView.propTypes = {
   email: PropTypes.string
 };
 
-UserView.defaultProps = {
-  imageLink: null,
-  username: null,
-  firstname: null,
-  email: null
-};
 
 export default UserView;

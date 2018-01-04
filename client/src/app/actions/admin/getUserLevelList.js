@@ -1,4 +1,3 @@
-import { showErrorNotification } from '../notifications';
 import {
   GET_USER_LEVEL_LIST_FAILURE,
   GET_USER_LEVEL_LIST_SUCCESS
@@ -30,6 +29,5 @@ export const getUserLevelListAction = () => dispatch => api
     return response;
   })
   .catch((error) => {
-    dispatch(showErrorNotification({ error }));
     dispatch(getUserLevelListFailure({ error }));
   });

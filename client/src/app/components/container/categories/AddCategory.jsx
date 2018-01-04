@@ -6,9 +6,9 @@ import { addNewCategory } from '../../../actions/admin/addCategory';
 import { validateCategoryInput } from '../../../validators/validator';
 
 /**
- * handles the state of the Loan history table
+ * @description AddCategory to the library
  *
- * @class LoanHistory
+ * @class AddCategory
  *
  * @extends {React.Component}
  */
@@ -76,8 +76,7 @@ class AddCategory extends React.Component {
    *
    * @memberOf AddCategory
    */
-  handleClick(event) {
-    event.preventDefault();
+  handleClick() {
     if (this.isValid()) {
       this.setState({ errors: {} });
       this
@@ -112,7 +111,10 @@ class AddCategory extends React.Component {
           <Icon>book</Icon>
         </Input>
         <Col s={6} l={3}>
-          <Button className="add-category-btn" onClick={() => this.handleClick(event)}>
+          <Button
+            className="add-category-btn"
+            onClick={() => this.handleClick()}
+          >
             Add Category
           </Button>
         </Col>

@@ -3,11 +3,14 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import { Row } from 'react-materialize';
 import MessageforNoBooksHistory
-  from '../messages/dashboardMessages/MessageforNoBooksHistory.jsx';
+  from '../messages/dashboardMessages/MessageforNoBooksHistory';
+
 
 /**
- * Table of Loan history
+ * @description Table of Loan history
+ *
  * @param {Object} props props object containing books
+ *
  * @returns {JSX} JSX representation of Books table
  */
 const BorrowHistoryTable = (props) => {
@@ -23,9 +26,18 @@ const BorrowHistoryTable = (props) => {
           moment(book.userReturnDate).format('LL') || 'N/A' : '-'}
         </td>
         <td>{book.returnStatus ? 'Returned' : 'Still Out on Loan'}</td>
-        <td> {(moment(book.returnDate) < moment()
-         && book.returnStatus === false) ?
-           <div className="overdue">Overdue</div> : '-'}
+        <td> {(new Date(book.returnDate) <
+           (Date.now() - (24 * 60 * 60 * 1000)) &&
+         book.returnStatus === false) ?
+          <div className="overdue">Overdue</div> : '-'}
+        </td>
+        <td>
+
+          <div className="overdue">{!book.returnStatus ?
+            `${moment().diff(
+              moment(book.returnDate),
+              'days'
+            )} days` : '-'}</div>
         </td>
       </tr>
     )) : null;
@@ -39,8 +51,9 @@ const BorrowHistoryTable = (props) => {
               <th>Date Borrowed</th>
               <th>Date To Be Returned</th>
               <th>User Return Date</th>
-              <th>Status</th>
+              <th>Book Status</th>
               <th>Overdue</th>
+              <th>Due</th>
             </tr>
           </thead>
           <tbody>

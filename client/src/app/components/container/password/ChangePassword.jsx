@@ -44,10 +44,11 @@ class ChangePassword extends Component {
    * @memberOf DisplayRecentBooks
   * */
   componentWillMount() {
+    this.setState({ initModal: true });
     $('body').css('background-color', 'rgb(204, 204, 204)');
   }
   /**
-   * Handle onChange events for Change Password
+   * @description Handle onChange events for Change Password
    *
    * @method onChange
    *
@@ -67,6 +68,7 @@ class ChangePassword extends Component {
 
   /**
  *
+ * @description Changes the password of the user
  *
  * @memberof ChangePassword
  *
@@ -91,7 +93,9 @@ class ChangePassword extends Component {
 
    * @method isValid
    * @memberof ChangePassword
-   * @returns {function} a validation function and returns errors in string format
+   *
+   * @returns {function} a validation function and returns
+   * errors in string format
    */
   isValid() {
     const { errors, isValid } = validatePasswordInput(this.state);
@@ -103,9 +107,10 @@ class ChangePassword extends Component {
   }
 
   /**
-   *
+   * @description Change Password components helps the user to change this password
    *
    * @returns {component} Component
+   *
    * @memberof ChangePassword
    *
    * @memberof ChangePassword
@@ -159,7 +164,9 @@ class ChangePassword extends Component {
                 </Input>
                 <Col className="center" s={12}>
                   <div className="login-btn">
-                    <Button onClick={this.onClick} waves="light">Change Password</Button>
+                    <Button
+                      onClick={this.onClick}
+                      waves="light">Change Password</Button>
                   </div>
                 </Col>
               </Row>
@@ -170,5 +177,10 @@ class ChangePassword extends Component {
     );
   }
 }
+
+ChangePassword.propTypes = {
+  changePasswordAction: PropTypes.func
+};
+
 
 export default connect(null, { changePasswordAction })(ChangePassword);

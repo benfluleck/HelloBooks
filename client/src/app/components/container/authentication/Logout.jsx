@@ -31,6 +31,7 @@ class Logout extends Component {
    * @return {JSX} JSX representation of DOM
    */
   render() {
+    this.setState({ isAuthneticated: false });
     return (
       <Row className="center landing">
         <h1 className="">

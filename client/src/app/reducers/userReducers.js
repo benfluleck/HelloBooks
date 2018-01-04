@@ -1,19 +1,14 @@
 import {
   USER_LOGGED_IN,
   USER_LOGGED_OUT,
-  SIGNUP_USER_FAILURE,
   SIGNUP_USER_SUCCESS,
-  USER_LOG_IN_FAILURE,
   GET_USER_LIST_SUCCESS,
   GET_USER_LIST_FAILURE,
   GET_USER_LEVEL_LIST_SUCCESS,
   GET_USER_LEVEL_LIST_FAILURE,
-  CHANGE_USER_LEVEL_FAILURE,
   CHANGE_USER_LEVEL_SUCCESS,
   GET_USER_SUCCESS,
   GET_USER_FAILURE,
-  PASSWORD_CHANGED_SUCCESS,
-  PASSWORD_CHANGED_FAILURE
 } from '../actions/actionType';
 
 const INITIAL_STATE = {
@@ -22,95 +17,83 @@ const INITIAL_STATE = {
 };
 
 /**
- * @export
- * @description this Reducer implements the authenbtication action for the user
+ *
+ * @description this Reducer implements the authentication action for the user
+ *
  * @param {object} [state=INITIAL_STATE]
- * @param {object} [action={}]: action initiated
+ *
+ * @param {object} action initiated
+ *
  * @returns {object} action:return the action object
  */
 export default function userReducer(state = INITIAL_STATE, action = {}) {
   switch (action.type) {
-    case USER_LOGGED_IN:
-      return {
-        ...state,
-        isAuthenticated: true,
-        user: action.data
-      };
+  case USER_LOGGED_IN:
+    return {
+      ...state,
+      isAuthenticated: true,
+      user: action.data
+    };
 
-    case SIGNUP_USER_SUCCESS:
-      return {
-        ...state,
-        user: action.data
-      };
-    case SIGNUP_USER_FAILURE:
-      return {
-        ...state,
-        isAuthenticated: false,
-        user: null,
-      };
-    case USER_LOG_IN_FAILURE:
-      return {
-        ...state,
-        user: null,
-      };
-    case USER_LOGGED_OUT:
-      return {
-        isAuthenticated: false,
-        user: {}
-      };
-    case GET_USER_LIST_SUCCESS:
-      return {
-        ...state,
-        userList: action.userList
-      };
-    case GET_USER_LIST_FAILURE:
-      return {
-        ...state,
-        error: action.error
-      };
-    case GET_USER_LEVEL_LIST_SUCCESS:
-      return {
-        ...state,
-        userLevels: action.userLevelList
-      };
-    case GET_USER_LEVEL_LIST_FAILURE:
-      return {
-        ...state,
-        error: action.error
-      };
-    case CHANGE_USER_LEVEL_SUCCESS:
-    {
-      return {
-        ...state,
-        selectedUserLevel: action.userLevel,
-      };
-    }
-    case CHANGE_USER_LEVEL_FAILURE:
-      return {
-        ...state,
-        error: action.error
-      };
-    case GET_USER_SUCCESS:
-      return {
-        ...state,
-        selectedUser: action.user
-      };
-    case GET_USER_FAILURE:
-      return {
-        ...state,
-        error: action.error
-      };
-    case PASSWORD_CHANGED_SUCCESS:
-      return {
-        ...state,
-        data: action.data
-      };
-    case PASSWORD_CHANGED_FAILURE:
-      return {
-        ...state,
-        error: action.error
-      };
-    default:
-      return state;
+  case SIGNUP_USER_SUCCESS:
+    return {
+      ...state,
+      isAuthenticated: false,
+      user: action.data
+    };
+
+
+  case USER_LOGGED_OUT:
+    return {
+      isAuthenticated: false,
+      user: {}
+    };
+
+  case GET_USER_LIST_SUCCESS:
+    return {
+      ...state,
+      userList: action.userList
+    };
+
+  case GET_USER_LIST_FAILURE:
+    return {
+      ...state,
+      error: action.error
+    };
+
+  case GET_USER_LEVEL_LIST_SUCCESS:
+    return {
+      ...state,
+      userLevels: action.userLevelList
+    };
+
+  case GET_USER_LEVEL_LIST_FAILURE:
+    return {
+      ...state,
+      error: action.error
+    };
+
+  case CHANGE_USER_LEVEL_SUCCESS:
+  {
+    return {
+      ...state,
+      selectedUserLevel: action.userLevel,
+    };
+  }
+
+  case GET_USER_SUCCESS:
+    return {
+      ...state,
+      selectedUser: action.user
+    };
+
+  case GET_USER_FAILURE:
+    return {
+      ...state,
+      error: action.error
+    };
+
+  default:
+    return state;
   }
 }

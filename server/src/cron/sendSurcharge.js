@@ -1,6 +1,7 @@
 import model from '../models';
 import { transporter, mailOptions } from '../mailer/mailer';
 
+
 const { UserBooks, User, Books } = model;
 
 const sendSurcharge = () => (UserBooks.findAll({
@@ -47,9 +48,8 @@ const sendSurcharge = () => (UserBooks.findAll({
     <p>Kind regards,</p>`;
     transporter.sendMail(mailOptions(to, bcc, subject, html), (error, info) => {
       if (error) {
-        console.log(error);
+        process.exit(0);
       } else {
-        console.log(`Email sent: ${info.response}`);
         process.exit(0);
       }
     });

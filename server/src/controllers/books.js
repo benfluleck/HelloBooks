@@ -1,15 +1,22 @@
 import models from '../models';
-import paginationFunc from '../controllers/middleware/pagination';
+import pagination from '../controllers/helpers/pagination';
 
 const { Categories, Books, UserBooks } = models;
 
 export default {
   /**
    * Route: POST: /books
+   *
    * @description add a book
-   * @param {req} req
-   * @param {res} res
+   *
+   * @param {object} req - request object
+   *
+   * @param {object} res - respond object
+   *
    * @returns {object} book
+   *
+   * @returns {string} message - returns message
+   *
    * @memmberOf BookController
   */
   addBook(req, res) {
@@ -66,7 +73,8 @@ export default {
                     .status(201)
                     .send({
                       message: `${newBook.title} ` +
-                    `has been added to the library, Category: ${newBook.category}`,
+                    `has been added to the library,` +
+                    `Category: ${newBook.category}`,
                       createdBook
                     });
                 });
@@ -78,10 +86,17 @@ export default {
 
   /**
    * Route: PUT: /books/:bookId
+   *
    * @description update a book
-   * @param {req} req
-   * @param {res} res
-   * @returns {object} book
+   *
+   * @param {object} req - request object
+   *
+   * @param {object} res - respond object
+   *
+   * @returns {object} book - book object
+   *
+   * @returns {string} message
+   *
    * @memmberOf BookController
    */
   updateBook(req, res) {
@@ -113,25 +128,28 @@ export default {
             bookExists.id !== parseInt(req.params.bookId, 10)) {
             return res
               .status(409)
-              .send({ message: 'A book with the same title and author already exists in the library' });
+              .send({
+                message: 'A book with the same title and' +
+                'author already exists in the library'
+              });
           }
           return book
             .updateAttributes(req.body, {
               fields: Object.keys(req.body)
             })
-            .then((createdBook) => {
-              createdBook
+            .then((updatedBook) => {
+              updatedBook
                 .getCategory()
                 .then((category) => {
                   const newBook = {
-                    title: createdBook.title,
+                    title: updatedBook.title,
                     category: category.categoryName
                   };
                   res
                     .status(200)
                     .send({
                       message: `${newBook.title} has been updated`,
-                      createdBook
+                      updatedBook
                     });
                 });
             });
@@ -140,10 +158,17 @@ export default {
   },
   /**
    * Route: GET: /books
+   *
    * @description returns a list of all books
-   * @param {req} req
-   * @param {res} res
+   *
+   * @param {object} req - request object
+   *
+   * @param {object} res - respond object
+   *
    * @returns {object} books
+   *
+   * @returns {object} pagination
+   *
    * @memmberOf BookController
    */
   getAllBooks(req, res) {
@@ -168,7 +193,7 @@ export default {
             .status(200)
             .send({
               books: books.rows,
-              pagination: paginationFunc(offset, limit, books)
+              pagination: pagination(offset, limit, books)
             });
         }
       })
@@ -176,10 +201,15 @@ export default {
   },
   /**
    * Route: GET: /books/search
+   *
    * @description returns a list of all books that match the search criteria
-   * @param {req} req
-   * @param {res} res
-   * @returns {object} books
+   *
+   * @param {object} req - request object
+   *
+   * @param {object} res - respond object
+   *
+   * @returns {object} books - booksFound
+   *
    * @memmberOf BookController
    */
   searchBooks(req, res) {
@@ -226,7 +256,7 @@ export default {
       }).then((books) => {
         const booksFound = {
           books: books.rows,
-          pagination: paginationFunc(offset, limit, books)
+          pagination: pagination(offset, limit, books)
         };
         if (books.rows.length === 0) {
           return res
@@ -240,10 +270,13 @@ export default {
     }
   },
 
-  /** displays the book matching the booKId parameters
-    * @param {req} req
-   * @param {res} res
-   * @returns {object} book
+  /** displays the book matching the bookId parameters
+   *
+   * @param {object} req - request object
+   *
+   * @param {object} res - respond object
+   *
+   * @returns {object} selectedBook
      */
   viewBookDetails(req, res) {
     const bookId = parseInt(req.params.bookId, 10);
@@ -280,8 +313,11 @@ export default {
   },
 
   /** deletes the book matching the booKId parameters
-    * @param {req} req
-   * @param {res} res
+   *
+   * @param {object} req - request object
+   *
+   * @param {object} res - respond object
+   *
    * @returns {string} message
      */
   deleteBook(req, res) {
@@ -313,15 +349,15 @@ export default {
           if (borrowedBooks) {
             return res
               .status(409)
-              .send({ 
-                message: 'You can\'t delete this' +
+              .send({
+                message: 'You can\'t delete this ' +
                 'book while there is a copy still out on loan'
               });
           }
           book
             .destroy()
             .then(() => res.status(200).send({
-              message: `${book.title}  has been deleted`,
+              message: `${book.title} has been deleted`,
               deletedBookId: bookId
             }));
         });

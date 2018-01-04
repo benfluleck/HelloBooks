@@ -28,6 +28,5 @@ export const getSelectedUser = userId => dispatch => api
     return response;
   })
   .catch((error) => {
-    dispatch(showErrorNotification({ error }));
     dispatch(getUserFailure({ error }));
   });

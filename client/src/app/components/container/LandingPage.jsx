@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import LandingPage from '../presentation/LandingPage.jsx';
+import LandingPage from '../presentation/LandingPage';
 
 LandingPage.PropTypes = {
   isAuthenticated: PropTypes.bool.isRequired

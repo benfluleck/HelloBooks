@@ -1,0 +1,2339 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Reference</title>
+
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .cd {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all.js"></script>
+  </head>
+
+  <body class="index" data-languages="[&quot;javascript&quot;]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" alt="Navbar" />
+      </span>
+    </a>
+    <div class="toc-wrapper">
+      <img src="images/logo.png" class="logo" alt="Logo" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="javascript">javascript</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="toc" class="toc-list-h1">
+          <li>
+            <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
+          </li>
+          <li>
+            <a href="#features" class="toc-h1 toc-link" data-title="Features">Features</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#endpoints" class="toc-h2 toc-link" data-title="Features">Endpoints</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#authentication-endpoints" class="toc-h1 toc-link" data-title="Authentication Endpoints">Authentication Endpoints</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#sign-up" class="toc-h2 toc-link" data-title="Authentication Endpoints">Sign Up</a>
+                  </li>
+                  <li>
+                    <a href="#login-user" class="toc-h2 toc-link" data-title="Authentication Endpoints">Login User</a>
+                  </li>
+                  <li>
+                    <a href="#get-all-recent-books" class="toc-h2 toc-link" data-title="Authentication Endpoints">Get All Recent Books</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#get-userlevel-list" class="toc-h1 toc-link" data-title="Get Userlevel List">Get Userlevel List</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#http-request-3" class="toc-h2 toc-link" data-title="Get Userlevel List">HTTP Request</a>
+                  </li>
+                  <li>
+                    <a href="#request-required-fields-4" class="toc-h2 toc-link" data-title="Get Userlevel List">Request Required Fields</a>
+                  </li>
+                  <li>
+                    <a href="#view-book-details" class="toc-h2 toc-link" data-title="Get Userlevel List">View Book details</a>
+                  </li>
+                  <li>
+                    <a href="#change-password" class="toc-h2 toc-link" data-title="Get Userlevel List">Change Password</a>
+                  </li>
+                  <li>
+                    <a href="#get-all-books" class="toc-h2 toc-link" data-title="Get Userlevel List">Get All Books</a>
+                  </li>
+                  <li>
+                    <a href="#get-all-borrowed-books" class="toc-h2 toc-link" data-title="Get Userlevel List">Get All Borrowed Books</a>
+                  </li>
+                  <li>
+                    <a href="#get-loan-book-history" class="toc-h2 toc-link" data-title="Get Userlevel List">Get loan book history</a>
+                  </li>
+                  <li>
+                    <a href="#get-all-overdue-books" class="toc-h2 toc-link" data-title="Get Userlevel List">Get All overdue books</a>
+                  </li>
+                  <li>
+                    <a href="#loan-a-book" class="toc-h2 toc-link" data-title="Get Userlevel List">Loan a Book</a>
+                  </li>
+                  <li>
+                    <a href="#return-book-from-loan" class="toc-h2 toc-link" data-title="Get Userlevel List">Return book from loan</a>
+                  </li>
+                  <li>
+                    <a href="#search-all-books" class="toc-h2 toc-link" data-title="Get Userlevel List">Search all books</a>
+                  </li>
+                  <li>
+                    <a href="#get-all-categories" class="toc-h2 toc-link" data-title="Get Userlevel List">Get all categories</a>
+                  </li>
+                  <li>
+                    <a href="#display-books-by-their-categories" class="toc-h2 toc-link" data-title="Get Userlevel List">Display books by their categories</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#admin-endpoints" class="toc-h1 toc-link" data-title="Admin Endpoints">Admin Endpoints</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#add-book" class="toc-h2 toc-link" data-title="Admin Endpoints">Add Book</a>
+                  </li>
+                  <li>
+                    <a href="#edit-a-book" class="toc-h2 toc-link" data-title="Admin Endpoints">Edit a book</a>
+                  </li>
+                  <li>
+                    <a href="#add-category" class="toc-h2 toc-link" data-title="Admin Endpoints">Add Category</a>
+                  </li>
+                  <li>
+                    <a href="#edit-category" class="toc-h2 toc-link" data-title="Admin Endpoints">Edit Category</a>
+                  </li>
+                  <li>
+                    <a href="#delete-category" class="toc-h2 toc-link" data-title="Admin Endpoints">Delete Category</a>
+                  </li>
+                  <li>
+                    <a href="#delete-book" class="toc-h2 toc-link" data-title="Admin Endpoints">Delete Book</a>
+                  </li>
+                  <li>
+                    <a href="#get-all-books-2" class="toc-h2 toc-link" data-title="Admin Endpoints">Get all books</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
+          </li>
+      </div>
+        <ul class="toc-footer">
+            <li><a href='#'>Sign Up for a Developer Key</a></li>
+            <li><a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id='introduction'>Introduction</h1>
+<p>Welcome to the Hello Books API! You can use our API to access the Hello Books API endpoints which can get information on various books. HelloBooks is an application that helps manage a library and its processes like stocking, tracking and borrowing books to individuals.</p>
+
+<p>The API can be consumed using any programming language as it returns JSON for all API calls. You can view the coding examples in the dark area to the right</p>
+<h1 id='features'>Features</h1>
+<p>This API has the following features:</p>
+
+<p><strong>Unauthenticated Users</strong></p>
+
+<ul>
+<li>Creating an account</li>
+<li>Signing in as an existing user</li>
+<li>View Recent Books</li>
+<li>Get User Levels list</li>
+<li>View Book details</li>
+</ul>
+
+<p><strong>Authenticated Users</strong></p>
+
+<ul>
+<li>Change password</li>
+<li>View all books</li>
+<li>Search for a book from all books</li>
+<li>Borrow and return borrowed books</li>
+<li>View borrowing history</li>
+<li>Receive email notification when a surcharge is place for late return of borrowed book</li>
+</ul>
+
+<p><strong>Admin</strong></p>
+
+<ul>
+<li>Add, edit and delete books</li>
+<li>Add, edit and delete categories</li>
+<li>Group books by their respective categories</li>
+<li>Edit user levels</li>
+<li>View borrowing and return notifications</li>
+<li>Retrieve a user</li>
+</ul>
+<h3 id='endpoints'>Endpoints</h3>
+<p><strong>Users</strong></p>
+
+<table><thead>
+<tr>
+<th>Feature</th>
+<th>Type</th>
+<th>Endpoint</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>User sign up</td>
+<td>POST</td>
+<td>api/v1/auth/users/signup</td>
+</tr>
+<tr>
+<td>User sign in</td>
+<td>POST</td>
+<td>api/v1/auth/users/signin</td>
+</tr>
+<tr>
+<td>Get recent books</td>
+<td>GET</td>
+<td>api/v1/auth/books/recentbooks</td>
+</tr>
+<tr>
+<td>Get user level list</td>
+<td>GET</td>
+<td>api/v1//auth/getuserlevellist</td>
+</tr>
+<tr>
+<td>View book details</td>
+<td>GET</td>
+<td>api/v1/auth/books/:bookId</td>
+</tr>
+<tr>
+<td>Change password</td>
+<td>POST</td>
+<td>api/v1/users/changepassword</td>
+</tr>
+<tr>
+<td>Get all books</td>
+<td>GET</td>
+<td>api/v1/books</td>
+</tr>
+<tr>
+<td>Get borrowed books</td>
+<td>GET</td>
+<td>api/v1/users/borrowedbooks</td>
+</tr>
+<tr>
+<td>Get borrow history</td>
+<td>GET</td>
+<td>api/v1/users/getloanhistory</td>
+</tr>
+<tr>
+<td>Get overdue books</td>
+<td>GET</td>
+<td>api/v1//users/getoverduebooks</td>
+</tr>
+<tr>
+<td>Loan Book</td>
+<td>POST</td>
+<td>api/v1/users/loanbook</td>
+</tr>
+<tr>
+<td>Return Book</td>
+<td>PUT</td>
+<td>api/v1/users/returnbook</td>
+</tr>
+<tr>
+<td>Search for Book</td>
+<td>GET</td>
+<td>api/v1/books/search</td>
+</tr>
+<tr>
+<td>Get All Categories</td>
+<td>GET</td>
+<td>api/v1/listcategories</td>
+</tr>
+<tr>
+<td>Get All Books by Categories</td>
+<td>GET</td>
+<td>api/v1/books/category/{categoryId}</td>
+</tr>
+</tbody></table>
+
+<p><br/></p>
+
+<p><strong>Admin</strong></p>
+
+<table><thead>
+<tr>
+<th>Feature</th>
+<th>Type</th>
+<th>Endpoint</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Add Book</td>
+<td>POST</td>
+<td>api/v1/books</td>
+</tr>
+<tr>
+<td>Edit Book</td>
+<td>PUT</td>
+<td>api/v1/books/{bookId}</td>
+</tr>
+<tr>
+<td>Add Category</td>
+<td>POST</td>
+<td>api/v1/admin/category</td>
+</tr>
+<tr>
+<td>Edit Category</td>
+<td>PUT</td>
+<td>api/v1/category/{categoryId}</td>
+</tr>
+<tr>
+<td>Delete Category</td>
+<td>DELETE</td>
+<td>api/v1/admin/category/{categoryId}</td>
+</tr>
+<tr>
+<td>Delete Book</td>
+<td>DELETE</td>
+<td>api/v1/admin/books/{bookId}</td>
+</tr>
+<tr>
+<td>Get user list</td>
+<td>GET</td>
+<td>api/v1/admin/getuserlist</td>
+</tr>
+<tr>
+<td>Get all notifications</td>
+<td>GET</td>
+<td>api/v1/admin/notifications</td>
+</tr>
+<tr>
+<td>Retrieve a user details</td>
+<td>GET</td>
+<td>api/v1/admin/users/{userId}</td>
+</tr>
+<tr>
+<td>Change a user&#39;s level</td>
+<td>PUT</td>
+<td>api/v1/admin/changeuserlevel</td>
+</tr>
+</tbody></table>
+<h1 id='authentication-endpoints'>Authentication Endpoints</h1><h2 id='sign-up'>Sign Up</h2>
+<p>This endpoint handles user registration</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>POST api/v1/users/signup</code></p>
+
+<p>onSuccess - Status code (201)</p>
+
+<p>onError - Status code (400, 422, 409, 500)</p>
+
+<blockquote>
+<p>Request Body:</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="s2">"username"</span><span class="p">:</span><span class="s2">"andela"</span>
+  <span class="s2">"password"</span><span class="p">:</span><span class="s2">"ebelehigh"</span>
+  <span class="s2">"firstname"</span><span class="p">:</span><span class="s2">"Benny"</span>
+  <span class="s2">"passwordConfirmation"</span><span class="p">:</span><span class="s2">"ebelehigh"</span>
+  <span class="s2">"lastname"</span><span class="p">:</span><span class="s2">"Ogidan"</span>
+  <span class="s2">"email"</span><span class="p">:</span><span class="s2">"benfluleck@hotmail.com"</span>
+<span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Success Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+   </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"andela  has been added to the library, Please Login, you will be only required to Sign up once"</span><span class="w">
+
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Error Responses</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="err">Invalid</span><span class="w"> </span><span class="err">or</span><span class="w"> </span><span class="err">omitted</span><span class="w"> </span><span class="err">parameters</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This email address you have provided is invalid"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Password is too short"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Username is invalid"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="err">Duplicate</span><span class="w"> </span><span class="err">username</span><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This username is already in use"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="err">Duplicate</span><span class="w"> </span><span class="err">error</span><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This email is already in use"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre><h3 id='request-required-fields'>Request Required Fields</h3>
+<ul>
+<li>Authorization: NA</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>username</td>
+<td>null</td>
+<td>This field is required</td>
+</tr>
+<tr>
+<td>password</td>
+<td>null</td>
+<td>This field is required</td>
+</tr>
+<tr>
+<td>email</td>
+<td>null</td>
+<td>This field is required</td>
+</tr>
+<tr>
+<td>firstName</td>
+<td>null</td>
+<td>This field is required</td>
+</tr>
+<tr>
+<td>surname</td>
+<td>null</td>
+<td>This field is required</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+On successful signup, a 201 status code is returned.
+</aside>
+
+<aside class="notice">
+Unauthenticated users can access this route.
+</aside>
+<h2 id='login-user'>Login User</h2>
+<blockquote>
+<p>Request Body:</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="s2">"username"</span><span class="p">:</span><span class="s2">"andela"</span>
+  <span class="s2">"password"</span><span class="p">:</span><span class="s2">"ebelehigh"</span>
+<span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Success Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+     </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">" You are now logged in as andela"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6eyJpZCI6MTEsImlzQWRtaW4iOmZhbHNlfSwiaWF0IjoxNTE1MDU5MTE4LCJleHAiOjE1MTUwNzM1MTh9.DUVMZebP17LiphVvPjKfCksuHCR5zpp1Ysm0cMgrTTw"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bennytest"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xyz@xyz.com"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"profilePic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://res.cloudinary.com/digpnxufx/image/upload/v1510582526/boy_avatar_s1rb9m.svg"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"firstname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Samuel"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"isAdmin"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Error Responses</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wrong Credentials"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='request-required-fields-2'>Request Required Fields</h3>
+<ul>
+<li>Authorization: NA</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>username</td>
+<td>null</td>
+<td>This field is required</td>
+</tr>
+<tr>
+<td>password</td>
+<td>null</td>
+<td>This field is required</td>
+</tr>
+</tbody></table>
+<h3 id='request'>Request</h3>
+<ul>
+<li>Endpoint: POST: <code>/api/v1/users/auth/signin</code></li>
+</ul>
+<h3 id='response'>Response</h3>
+<ul>
+<li>Status: <code>200: OK</code></li>
+<li>Body <code>(application/json)</code></li>
+</ul>
+
+<aside class="notice">
+ Unauthenticated users can access this route.
+</aside>
+<h2 id='get-all-recent-books'>Get All Recent Books</h2>
+<p>This endpoint retrieves all recent books from the library</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>GET api/v1/recentbooks</code></p>
+
+<p>onSuccess - Status code (200)</p>
+
+<p>onError - Status code (404, 500)</p>
+
+<blockquote>
+<p>Sample Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"books"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Harry Potter"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"J K Rowling"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"ISBN"</span><span class="p">:</span><span class="w"> </span><span class="mi">3013202</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is a good book"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"categoryId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">74</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"bookImage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://res.cloudinary.com/digpnxufx/image/upload/v1514703532/jt4mxtphdoj3eqrh7dcq.jpg"</span><span class="p">,</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Capital"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Thomas Piketty"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"ISBN"</span><span class="p">:</span><span class="w"> </span><span class="mi">12163242</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mmmmmm lkjdslgjkljksdlfkjlkjfslkjdlfkjskljfskldjkjldfsklx x"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"categoryId"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"bookImage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://res.cloudinary.com/digpnxufx/image/upload/c_scale,h_499,w_325/v1507396539/Capital_in_the_First_Century_bc4bfw.webp"</span><span class="p">,</span><span class="w">
+
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The House on the Borderland"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"William Hope Hodgson"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"ISBN"</span><span class="p">:</span><span class="w"> </span><span class="mi">124363242</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Consequuntur incidunt quia suscipit soluta voluptas tempore placeat aut neque eos sed optio qui harum exercitationem nemo iid ullam repellendus et"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"categoryId"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">19</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"bookImage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://res.cloudinary.com/digpnxufx/image/upload/c_scale,h_499,w_325/v1507396518/51iMfGw6LcL._AC_UL320_SR202_320__ret7dc.jpg"</span><span class="p">,</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dare"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Barry McDonagh"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"ISBN"</span><span class="p">:</span><span class="w"> </span><span class="mi">121633242</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Corporis quod laudantium voluptatem aut rerum modi. Provident consequatur temporibus rerum non sed vitae. Qui dolorem qui. A veniam est molestiae aperiam dignissimos.</span><span class="se">\n</span><span class="s2"> </span><span class="se">\r</span><span class="s2">Et architecto est at. Quia ex vel autem in est. Ad sed veritatis ex. Exercitationem ipsa iusto sunt saepe. Aperiam non laboriosam iure aliquid esse error. Omnis corrupti ad eos voluptas est.</span><span class="se">\n</span><span class="s2"> </span><span class="se">\r</span><span class="s2">Repellendus ipsam facere aspernatur a explicabo magni. Nemo aut id magnam voluptates perspiciatis nobis. Inventore est qui explicabo quo voluptatem sunt corrupti maiores minus. Earum dolores dolorum sequi eveniet ut laborum a distinctio dolores."</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"categoryId"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">21</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"bookImage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://res.cloudinary.com/digpnxufx/image/upload/c_scale,h_499,w_325/v1506272698/book_1_gudyxi.jpg"</span><span class="p">,</span><span class="w">
+
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"End of Watch 1"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Stephen K"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"ISBN"</span><span class="p">:</span><span class="w"> </span><span class="mi">123343242</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Voluptate qui praesentium sint assumenda dolorem voluptas labore totam dolore tempore ut eum adipisci nulla similique sit illo perferendis id omnis a k"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"categoryId"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">24</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"bookImage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://res.cloudinary.com/digpnxufx/image/upload/v1506272697/book6_v1ufwj.jpg"</span><span class="p">,</span><span class="w">
+
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A Room Full of Bones"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Elly Griffiths"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"ISBN"</span><span class="p">:</span><span class="w"> </span><span class="mi">123343242</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A autem voluptas nihil qui deleniti nobis eius voluptas quos mmolestiae hic aut consequatur saepe suscipit ut veritatis ab error"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"categoryId"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">19</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"bookImage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://res.cloudinary.com/digpnxufx/image/upload/v1506272697/book4_dwjtvv.jpg"</span><span class="p">,</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Redbreast Jo Nesbo"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Harry Hole"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"ISBN"</span><span class="p">:</span><span class="w"> </span><span class="mi">12333233</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Culpa porro dolores ullam placeat odio vero magnam eum consequatur odit non dicta quisquam molestiae animi ut sit ut aperiam quo quo quasi aperiam l"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"categoryId"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">22</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"bookImage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://res.cloudinary.com/digpnxufx/image/upload/v1506272697/book5_cpffhx.jpg"</span><span class="p">,</span><span class="w">
+
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"I am Watching You"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Teresa Drirrscoll"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"ISBN"</span><span class="p">:</span><span class="w"> </span><span class="mi">133633242</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Voluptate qui praesentium sint assumenda dolorem voluptas labore tota m dolore tempore ut eum adipisci nulla similique sit illo perferendis id omnis a cc"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"categoryId"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">24</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"bookImage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://res.cloudinary.com/digpnxufx/image/upload/c_scale,h_499,w_325/v1506272698/book2_rxfkg9.jpg"</span><span class="p">,</span><span class="w">
+
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"pagination"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"pageCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"pageSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"totalCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre><h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>limit</td>
+<td>8</td>
+<td>If set, result retrieved will be limited to the limit.</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>0</td>
+<td>If set, result will be limited to the offset limit</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Error Responses</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="err">No</span><span class="w"> </span><span class="err">Books</span><span class="w"> </span><span class="err">Found</span><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Empty"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"There are no books present in the database"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="err">Server</span><span class="w"> </span><span class="err">Error</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Request could not be completed, please try again later"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='request-required-fields-3'>Request Required Fields</h3>
+<ul>
+<li>Authorization: NA</li>
+</ul>
+<h1 id='get-userlevel-list'>Get Userlevel List</h1>
+<p>This endpoint retrieves the user level list from the library</p>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p><code>GET api/v1/getuserlevellist</code></p>
+
+<p>onSuccess - Status code (200)</p>
+
+<p>onError - Status code (404, 500)</p>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"userLevels"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"maxBooks"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"maxDays"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"level"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"levelName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bronze"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"maxBooks"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"maxDays"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"level"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"levelName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Silver"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"maxBooks"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"maxDays"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"level"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"levelName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gold"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"maxBooks"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"maxDays"</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"level"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"levelName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Platinium"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<blockquote>
+<p>Error Responses</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="err">No</span><span class="w"> </span><span class="err">Userlevels</span><span class="w"> </span><span class="err">Found</span><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"message: 'Sorry there are no user levels available'"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="err">Server</span><span class="w"> </span><span class="err">Error</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Request could not be completed, please try again later"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='request-required-fields-4'>Request Required Fields</h3>
+<ul>
+<li>Authorization: x-tokenx</li>
+</ul>
+<h2 id='view-book-details'>View Book details</h2>
+<p>This endpoint retrieves a specific book and returns their details</p>
+<h3 id='http-request-4'>HTTP Request</h3>
+<p><code>GET api/v1/auth/books/&lt;bookId&gt;</code></p>
+
+<p>onSuccess - Status code (200)</p>
+
+<p>onError - Status code (400, 404, 500)</p>
+
+<blockquote>
+<p>Sample Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+     </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"book"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cthulhu"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wes Dreamins"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"ISBN"</span><span class="p">:</span><span class="w"> </span><span class="mi">1222222</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Id tenetur qui natus voluptatem. Aut ex vero omnis. Mollitia cupiditate voluptate nihil illo amet ullam ratione aut et. Quam velit quibusdam eum assumenda delectus nam aperiam dolores reiciendis. Amet quo eaque illum. Velit quia similique.</span><span class="se">\n</span><span class="s2"> </span><span class="se">\r</span><span class="s2">Quas accusamus soluta non neque repudiandae aut architecto enim incidunt. Expedita cumque est harum dolores beatae. Omnis rerum et ut sed iure tempore vitae neque. Expedita est id mollitia. Quas accusantium fugiat sapiente.</span><span class="se">\n</span><span class="s2"> </span><span class="se">\r</span><span class="s2">Impedit voluptas minima. Sapiente hic repudiandae excepturi aperiam fugiat. Rerum quia est quis. Quo fuga dolores praesentium blanditiis. Omnis est animi debitis voluptatem autem illo debitis porro natus."</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"categoryId"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">21</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"bookImage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://res.cloudinary.com/digpnxufx/image/upload/c_scale,h_499,w_325/v1507396542/CLD-front-cover-preview-v4-3-1_e9bolq.jpg"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"categoryName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Horror"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Error Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="err">No</span><span class="w"> </span><span class="err">Book</span><span class="w"> </span><span class="err">of</span><span class="w"> </span><span class="err">this</span><span class="w"> </span><span class="err">id</span><span class="w"> </span><span class="err">Found</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This book does not exist in the library"</span><span class="w"> 
+</span><span class="p">}</span><span class="w">
+
+</span><span class="err">Book</span><span class="w"> </span><span class="err">id</span><span class="w"> </span><span class="err">Invalid</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Please enter a valid bookId"</span><span class="w"> 
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre><h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>bookId</td>
+<td>ID of the book to retrieve</td>
+</tr>
+</tbody></table>
+<h3 id='request-required-fields-5'>Request Required Fields</h3>
+<ul>
+<li>Authorization: x-token</li>
+</ul>
+<h2 id='change-password'>Change Password</h2>
+<p>This endpoint handles change password request by authenticated users,</p>
+
+<ul>
+<li>Users who created account using google login cannot change password.</li>
+</ul>
+<h3 id='http-request-5'>HTTP Request</h3>
+<p><code>POST api/v1/users/changepassword</code></p>
+
+<p>onSuccess - Status code (200)</p>
+
+<p>onError - Status code (400, 409, 404, 500)</p>
+
+<blockquote>
+<p>Request Body:</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="s2">"oldPassword"</span><span class="p">:</span> <span class="s2">"testuser"</span><span class="p">,</span>
+    <span class="s2">"password"</span><span class="p">:</span> <span class="s2">"testuser"</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Success Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"`User` your password has been updated"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Error Responses</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="err">Password</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">same</span><span class="w"> </span><span class="err">as</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">previous</span><span class="w">
+</span><span class="p">{</span><span class="w">
+
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You cannot use a previous password"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="err">Old</span><span class="w"> </span><span class="err">Password</span><span class="w"> </span><span class="err">not</span><span class="w"> </span><span class="err">matching</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">database</span><span class="w"> </span><span class="err">records</span><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Your current password does not match our records, ' +
+              'Please Re-enter'"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="err">Server</span><span class="w"> </span><span class="err">Error</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Request could not be completed, please try again later"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='request-required-fields-6'>Request Required Fields</h3>
+<ul>
+<li>Authorization: x-token</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>oldPassword</td>
+<td>null</td>
+<td>User current password</td>
+</tr>
+<tr>
+<td>newpassword</td>
+<td>null</td>
+<td>New password</td>
+</tr>
+</tbody></table>
+<h2 id='get-all-books'>Get All Books</h2>
+<p>This endpoint retrieves all books from the library</p>
+<h3 id='http-request-6'>HTTP Request</h3>
+<p><code>GET api/v1/books</code></p>
+
+<ul>
+<li>Authorization: x-token</li>
+</ul>
+
+<p>onSuccess - Status code (200)</p>
+
+<p>onError - Status code (404, 500)</p>
+
+<blockquote>
+<p>Sample Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+   </span><span class="s2">"books"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The Litigators"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Grisham"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"ISBN"</span><span class="p">:</span><span class="w"> </span><span class="mi">97184017</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fiction"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is a test book"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"bookimage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://res.cloudinary.com/digpnxufx/image/upload/v1506272697/book3_cmhfot.jpg</span><span class="se">\n\n</span><span class="s2">"</span><span class="p">,</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Syria"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Mchugo"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"ISBN"</span><span class="p">:</span><span class="w"> </span><span class="mi">87665065</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"History"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is a test book"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"bookimage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://res.cloudinary.com/digpnxufx/image/upload/v1506272698/book7_vyvejr.jpg</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span><span class="w">
+
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"I am Watching You"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Teresa Driscoll"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"ISBN"</span><span class="p">:</span><span class="w"> </span><span class="mi">55138747</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fiction"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is a test book"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">35</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"bookimage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://res.cloudinary.com/digpnxufx/image/upload/c_scale,h_499,w_325/v1506272698/book2_rxfkg9.jpg</span><span class="se">\n\n</span><span class="s2">"</span><span class="p">,</span><span class="w">
+
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"pagination"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"pageCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"pageSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"totalCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre><h3 id='query-parameters-2'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>limit</td>
+<td>8</td>
+<td>If set, result retrieved will be limited to the limit.</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>0</td>
+<td>If set, result will be limited to the offset limit</td>
+</tr>
+</tbody></table>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="err">No</span><span class="w"> </span><span class="err">Books</span><span class="w"> </span><span class="err">Found</span><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Empty"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"There are no books present in the database"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="err">Server</span><span class="w"> </span><span class="err">Error</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Request could not be completed, please try again later"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h2 id='get-all-borrowed-books'>Get All Borrowed Books</h2>
+<p>This endpoint retrieves all books borrowed by the user from the library</p>
+<h3 id='http-request-7'>HTTP Request</h3>
+<p><code>GET api/v1/borrowedbooks</code></p>
+
+<ul>
+<li>Authorization: x-token</li>
+</ul>
+
+<p>onSuccess - Status code (200)</p>
+
+<p>onError - Status code (404, 500)</p>
+
+<blockquote>
+<p>Sample Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+   </span><span class="s2">"books"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The Litigators"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Grisham"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"ISBN"</span><span class="p">:</span><span class="w"> </span><span class="mi">97184017</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fiction"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is a test book"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"bookimage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://res.cloudinary.com/digpnxufx/image/upload/v1506272697/book3_cmhfot.jpg</span><span class="se">\n\n</span><span class="s2">"</span><span class="p">,</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Syria"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Mchugo"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"ISBN"</span><span class="p">:</span><span class="w"> </span><span class="mi">87665065</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"History"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is a test book"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"bookimage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://res.cloudinary.com/digpnxufx/image/upload/v1506272698/book7_vyvejr.jpg</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span><span class="w">
+
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"I am Watching You"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Teresa Driscoll"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"ISBN"</span><span class="p">:</span><span class="w"> </span><span class="mi">55138747</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fiction"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is a test book"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">35</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"bookimage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://res.cloudinary.com/digpnxufx/image/upload/c_scale,h_499,w_325/v1506272698/book2_rxfkg9.jpg</span><span class="se">\n\n</span><span class="s2">"</span><span class="p">,</span><span class="w">
+
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"pagination"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"pageCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"pageSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"totalCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre><h3 id='query-parameters-3'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>limit</td>
+<td>8</td>
+<td>If set, result retrieved will be limited to the limit.</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>0</td>
+<td>If set, result will be limited to the offset limit</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Error Responses</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="err">No</span><span class="w"> </span><span class="err">Books</span><span class="w"> </span><span class="err">Found</span><span class="w">
+</span><span class="p">{</span><span class="w">
+
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You have not borrowed any books"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="err">Server</span><span class="w"> </span><span class="err">Error</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Request could not be completed, please try again later"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h2 id='get-loan-book-history'>Get loan book history</h2>
+<p>This endpoint retrieves the loan history of the user</p>
+<h3 id='http-request-8'>HTTP Request</h3>
+<p><code>GET api/v1/users/getloanhistory?returned=false</code></p>
+
+<ul>
+<li>Authorization: x-token</li>
+</ul>
+
+<p>onSuccess - Status code (200)</p>
+
+<p>onError - Status code (404, 500)</p>
+
+<blockquote>
+<p>Sample Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+     </span><span class="s2">"books"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"bookid"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"userid"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"returndate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-11T00:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"userReturndate"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"returnstatus"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-10-18T18:34:38.131Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-10-18T18:34:38.131Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"book"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is a Repeat"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Benny Ogidan"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"ISBN"</span><span class="p">:</span><span class="w"> </span><span class="mi">3604295</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fiction"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is a test book"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">33</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"bookimage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://res.cloudinary.com/digpnxufx/image/upload/v1506272697/book3_cmhfot.jpg</span><span class="se">\n\n</span><span class="s2">"</span><span class="p">,</span><span class="w">
+
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"pagination"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"pageCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"pageSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"totalCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<aside class="notice">
+ Only Authenticated can access this route.
+</aside>
+<h3 id='query-parameters-4'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>limit</td>
+<td>8</td>
+<td>If set, result retrieved will be limited to the limit.</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>0</td>
+<td>If set, result will be limited to the offset limit</td>
+</tr>
+<tr>
+<td>returned</td>
+<td>&quot;&quot;</td>
+<td>Search query item</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Error Responses</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="err">No</span><span class="w"> </span><span class="err">Books</span><span class="w"> </span><span class="err">Found</span><span class="w">
+</span><span class="p">{</span><span class="w">
+
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You have not loaned any books'"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="err">Server</span><span class="w"> </span><span class="err">Error</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Request could not be completed, please try again later"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h2 id='get-all-overdue-books'>Get All overdue books</h2>
+<p>This endpoint retrieves all books that are overdue by the user and have not been returned</p>
+<h3 id='http-request-9'>HTTP Request</h3>
+<p><code>GET api/v1/overduebooks</code></p>
+
+<ul>
+<li>Authorization: x-token</li>
+</ul>
+
+<p>onSuccess - Status code (200)</p>
+
+<p>onError - Status code (404, 500)</p>
+
+<blockquote>
+<p>Sample Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+   </span><span class="s2">"books"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The Litigators"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Grisham"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"ISBN"</span><span class="p">:</span><span class="w"> </span><span class="mi">97184017</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fiction"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is a test book"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"bookimage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://res.cloudinary.com/digpnxufx/image/upload/v1506272697/book3_cmhfot.jpg</span><span class="se">\n\n</span><span class="s2">"</span><span class="p">,</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Syria"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Mchugo"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"ISBN"</span><span class="p">:</span><span class="w"> </span><span class="mi">87665065</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"History"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is a test book"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"bookimage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://res.cloudinary.com/digpnxufx/image/upload/v1506272698/book7_vyvejr.jpg</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span><span class="w">
+
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"I am Watching You"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Teresa Driscoll"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"ISBN"</span><span class="p">:</span><span class="w"> </span><span class="mi">55138747</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fiction"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is a test book"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">35</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"bookimage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://res.cloudinary.com/digpnxufx/image/upload/c_scale,h_499,w_325/v1506272698/book2_rxfkg9.jpg</span><span class="se">\n\n</span><span class="s2">"</span><span class="p">,</span><span class="w">
+
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"pagination"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"pageCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"pageSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"totalCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre><h3 id='query-parameters-5'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>limit</td>
+<td>8</td>
+<td>If set, result retrieved will be limited to the limit.</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>0</td>
+<td>If set, result will be limited to the offset limit</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Error Responses</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="err">No</span><span class="w"> </span><span class="err">Books</span><span class="w"> </span><span class="err">Found</span><span class="w">
+</span><span class="p">{</span><span class="w">
+
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You have no overdue books"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="err">Server</span><span class="w"> </span><span class="err">Error</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Request could not be completed, please try again later"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h2 id='loan-a-book'>Loan a Book</h2>
+<p>This endpoint </p>
+<h3 id='http-request-10'>HTTP Request</h3>
+<p><code>GET api/v1/loanbook</code></p>
+
+<ul>
+<li>Authorization: x-token</li>
+</ul>
+
+<p>onSuccess - Status code (200)</p>
+
+<p>onError - Status code (400, 404, 409)</p>
+
+<blockquote>
+<p>Sample Response</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+   <span class="s2">"bookId"</span><span class="p">:</span><span class="mi">2</span>
+   <span class="s2">"returndate"</span><span class="p">:</span><span class="s2">"2018-01-11"</span>
+<span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Response: </p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is a Repeat succesfully loaned"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Error Responses</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="err">Invalid</span><span class="w"> </span><span class="err">book</span><span class="w"> </span><span class="err">Id</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+  </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Book id is invalid"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="err">Invalid</span><span class="w"> </span><span class="err">Return</span><span class="w"> </span><span class="err">Date</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Please provide a valid return date"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+
+</span><span class="err">User</span><span class="w"> </span><span class="err">level</span><span class="w"> </span><span class="err">not</span><span class="w"> </span><span class="err">high</span><span class="w"> </span><span class="err">enough</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="s2">"To loan this book for more days,' +
+           ' You need to upgrade your user level,' +
+           'Please contact the administrator"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+
+
+
+</span><span class="err">Book</span><span class="w"> </span><span class="err">not</span><span class="w"> </span><span class="err">available</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sorry we can't find this book or ' +
+            'all copies of this book are on loan"</span><span class="w"> 
+</span><span class="p">}</span><span class="w">
+
+</span><span class="err">User</span><span class="w"> </span><span class="err">has</span><span class="w"> </span><span class="err">already</span><span class="w"> </span><span class="err">borrowed</span><span class="w"> </span><span class="err">book</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+  </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You have already borrowed this book"</span><span class="w"> 
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='request-required-fields-7'>Request Required Fields</h3>
+<ul>
+<li>Authorization: x-token</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>bookId</td>
+<td>null</td>
+<td>ID of book to borrow</td>
+</tr>
+</tbody></table>
+<h2 id='return-book-from-loan'>Return book from loan</h2>
+<p>This endpoint handles returning a book</p>
+<h3 id='http-request-11'>HTTP Request</h3>
+<p><code>PUT api/v1/users/returnbook</code></p>
+
+<p>onSuccess - Status code (200)</p>
+
+<p>onError - Status code (400, 404, 409)</p>
+
+<blockquote>
+<p>Request Body:</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+   <span class="s2">"bookId"</span><span class="p">:</span><span class="mi">2</span>
+<span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Response: </p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You have just returned This is a Repeat"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You have just returned This is a Repeat' 
+                         late, A fine will be sent to your registerd email"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Error Responses</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="err">Invalid</span><span class="w"> </span><span class="err">book</span><span class="w"> </span><span class="err">Id</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The book is not in our library"</span><span class="w"> 
+</span><span class="p">}</span><span class="w">
+
+</span><span class="err">Book</span><span class="w"> </span><span class="err">is</span><span class="w"> </span><span class="err">not</span><span class="w"> </span><span class="err">in</span><span class="w"> </span><span class="err">user</span><span class="w"> </span><span class="err">borrowed</span><span class="w"> </span><span class="err">list</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You did not borrow this book"</span><span class="w"> 
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='request-required-fields-8'>Request Required Fields</h3>
+<ul>
+<li>Authorization: x-token</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>bookId</td>
+<td>null</td>
+<td>ID of book to return</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+ Only Authenticated can access this route.
+</aside>
+<h2 id='search-all-books'>Search all books</h2>
+<p>This endpoint handles searching all books</p>
+<h3 id='http-request-12'>HTTP Request</h3>
+<p><code>PUT api/v1/books/search</code></p>
+
+<p>onSuccess - Status code (200)</p>
+
+<p>onError - Status code (400, 404, 500)</p>
+
+<blockquote>
+<p>Response: </p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+   </span><span class="s2">"books"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The Litigators"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Grisham"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"ISBN"</span><span class="p">:</span><span class="w"> </span><span class="mi">97184017</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fiction"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is a test book"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"bookimage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://res.cloudinary.com/digpnxufx/image/upload/v1506272697/book3_cmhfot.jpg</span><span class="se">\n\n</span><span class="s2">"</span><span class="p">,</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Syria"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Mchugo"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"ISBN"</span><span class="p">:</span><span class="w"> </span><span class="mi">87665065</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"History"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is a test book"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"bookimage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://res.cloudinary.com/digpnxufx/image/upload/v1506272698/book7_vyvejr.jpg</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span><span class="w">
+
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"I am Watching You"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Teresa Driscoll"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"ISBN"</span><span class="p">:</span><span class="w"> </span><span class="mi">55138747</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fiction"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is a test book"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">35</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"bookimage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://res.cloudinary.com/digpnxufx/image/upload/c_scale,h_499,w_325/v1506272698/book2_rxfkg9.jpg</span><span class="se">\n\n</span><span class="s2">"</span><span class="p">,</span><span class="w">
+
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"pagination"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"pageCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"pageSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"totalCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Error Responses</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="err">No</span><span class="w"> </span><span class="err">Books</span><span class="w"> </span><span class="err">matching</span><span class="w"> </span><span class="err">search</span><span class="w"> </span><span class="err">squery</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sorry no books match your search criteria"</span><span class="w"> 
+</span><span class="p">}</span><span class="w">
+
+</span><span class="err">Search</span><span class="w"> </span><span class="err">query</span><span class="w"> </span><span class="err">is</span><span class="w"> </span><span class="kc">null</span><span class="w"> 
+
+</span><span class="p">{</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Please enter your search criteria"</span><span class="w"> 
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>searchITem</td>
+<td>null</td>
+<td>Item to search</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+ Only Authenticated can access this route.
+</aside>
+<h2 id='get-all-categories'>Get all categories</h2>
+<p>This endpoint returns all categories</p>
+<h3 id='http-request-13'>HTTP Request</h3>
+<p><code>PUT api/v1/books/listcategories</code></p>
+
+<p>onSuccess - Status code (200)</p>
+
+<p>onError - Status code ( 404, 500)</p>
+
+<blockquote>
+<p>Response: </p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"categories"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"categoryName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Action"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"categoryName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Comedy"</span><span class="p">,</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"categoryName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Drama"</span><span class="p">,</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"categoryName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fiction"</span><span class="p">,</span><span class="w">
+
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"categoryName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Horror"</span><span class="p">,</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"categoryName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pizza"</span><span class="p">,</span><span class="w">
+
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"categoryName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Science"</span><span class="p">,</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<blockquote>
+<p>Error Responses</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="err">No</span><span class="w"> </span><span class="err">Categories</span><span class="w"> </span><span class="err">in</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">library</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sorry there are no categories available"</span><span class="w"> 
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre><h3 id='request-required-fields-9'>Request Required Fields</h3>
+<ul>
+<li>Authorization: x-token</li>
+</ul>
+
+<aside class="notice">
+ Only Authenticated can access this route.
+</aside>
+<h2 id='display-books-by-their-categories'>Display books by their categories</h2>
+<p>This endpoint handles sfetching all books by their respective categories</p>
+<h3 id='http-request-14'>HTTP Request</h3>
+<p><code>PUT api/v1/books/category/&lt;categoryId&gt;</code></p>
+
+<p>onSuccess - Status code (200)</p>
+
+<p>onError - Status code (400, 404, 500)</p>
+
+<blockquote>
+<p>Response: </p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Success"</span><span class="p">,</span><span class="w">
+   </span><span class="s2">"books"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The Litigators"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Grisham"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"ISBN"</span><span class="p">:</span><span class="w"> </span><span class="mi">97184017</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fiction"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is a test book"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"bookimage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://res.cloudinary.com/digpnxufx/image/upload/v1506272697/book3_cmhfot.jpg</span><span class="se">\n\n</span><span class="s2">"</span><span class="p">,</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Syria"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Mchugo"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"ISBN"</span><span class="p">:</span><span class="w"> </span><span class="mi">87665065</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"History"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is a test book"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"bookimage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://res.cloudinary.com/digpnxufx/image/upload/v1506272698/book7_vyvejr.jpg</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span><span class="w">
+
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"I am Watching You"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Teresa Driscoll"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"ISBN"</span><span class="p">:</span><span class="w"> </span><span class="mi">55138747</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fiction"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is a test book"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">35</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"bookimage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://res.cloudinary.com/digpnxufx/image/upload/c_scale,h_499,w_325/v1506272698/book2_rxfkg9.jpg</span><span class="se">\n\n</span><span class="s2">"</span><span class="p">,</span><span class="w">
+
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"pagination"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"pageCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"pageSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"totalCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Error Responses</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="err">No</span><span class="w"> </span><span class="err">Books</span><span class="w"> </span><span class="err">in</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">Category</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sorry there are no books in this category"</span><span class="w"> 
+</span><span class="p">}</span><span class="w">
+
+</span><span class="err">Category</span><span class="w"> </span><span class="err">does</span><span class="w"> </span><span class="err">not</span><span class="w"> </span><span class="err">exist</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Category does not exist in this Library"</span><span class="w"> 
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='request-required-fields-10'>Request Required Fields</h3>
+<ul>
+<li>Authorization: x-token</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>categoryId</td>
+<td>&#39;&#39;</td>
+<td>Category to query</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+ Only Authenticated can access this route.
+</aside>
+<h1 id='admin-endpoints'>Admin Endpoints</h1><h2 id='add-book'>Add Book</h2>
+<p>This endpoint handles adding a book</p>
+<h3 id='http-request-15'>HTTP Request</h3>
+<p><code>POST api/v1/book</code></p>
+
+<p>onSuccess - Status code (201)</p>
+
+<p>onError - Status code (400, 403, 500)</p>
+
+<blockquote>
+<p>Request Body:</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="nl">title</span><span class="p">:</span><span class="s2">"The Litigators"</span>
+  <span class="nl">author</span><span class="p">:</span><span class="s2">"John Grisham"</span>
+  <span class="nl">category</span><span class="p">:</span><span class="s2">"Fiction"</span>
+  <span class="nl">quantity</span><span class="p">:</span><span class="mi">20</span>
+  <span class="nl">description</span><span class="p">:</span><span class="s2">"This is a test book"</span>
+  <span class="nl">bookImage</span><span class="p">:</span><span class="s2">"http://res.cloudinary.com/digpnxufx/image/upload/v1506272697/book3_cmhfot.jpg"</span>
+  <span class="nl">categoryId</span><span class="p">:</span> <span class="mi">2</span>
+<span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Success Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The Litigators has been added to the library, Category: Action"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"book"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"title"</span><span class="p">:</span><span class="s2">"The Litigators"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"author"</span><span class="p">:</span><span class="s2">"John Grisham"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"category"</span><span class="p">:</span><span class="s2">"Fiction"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="s2">"This is a test book"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"bookImage"</span><span class="p">:</span><span class="s2">"http://res.cloudinary.com/digpnxufx/image/upload/v1506272697/book3_cmhfot.jpg"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<blockquote>
+<p>Error Responses:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="err">Invalid</span><span class="w"> </span><span class="err">inputs</span><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This author's name is invalid"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Category Id is Invalid"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This book title is too short"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="err">Duplicate</span><span class="w"> </span><span class="err">book</span><span class="w"> </span><span class="err">added</span><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A book with the same title ' +
+                 'and author already exists in the library'"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<aside class="notice">
+ Only Admin users can access this route.
+</aside>
+<h3 id='request-body-fields'>Request Body Fields</h3>
+<ul>
+<li>Authorization: x-token</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>title</td>
+<td>null</td>
+<td>This title of the book</td>
+</tr>
+<tr>
+<td>author</td>
+<td>null</td>
+<td>The book author</td>
+</tr>
+<tr>
+<td>categoryId</td>
+<td>null</td>
+<td>The book category</td>
+</tr>
+<tr>
+<td>description</td>
+<td>null</td>
+<td>Brief description of book</td>
+</tr>
+<tr>
+<td>bookImage</td>
+<td>defaultCover</td>
+<td>The cover image of the book</td>
+</tr>
+<tr>
+<td>quantity</td>
+<td>null</td>
+<td>The stock quantity of the book</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+All fields are required
+</aside>
+<h2 id='edit-a-book'>Edit a book</h2>
+<p>This endpoint handles updating a book</p>
+<h3 id='http-request-16'>HTTP Request</h3>
+<p><code>PUT api/v1/book/&lt;bookId&gt;</code></p>
+
+<p>onSuccess - Status code (200)</p>
+
+<p>onError - Status code (400, 403, 404, 500)</p>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="s2">"title"</span><span class="p">:</span><span class="s2">"This is a Repeat"</span>
+    <span class="s2">"author"</span><span class="p">:</span><span class="s2">"Benny Ogidan"</span>
+    <span class="s2">"category"</span><span class="p">:</span><span class="s2">"Fiction"</span>
+    <span class="s2">"quantity"</span><span class="p">:</span><span class="mi">34</span>
+    <span class="s2">"description"</span><span class="p">:</span><span class="s2">"This is a test book"</span>
+    <span class="s2">"bookimage"</span><span class="p">:</span><span class="s2">"http://res.cloudinary.com/digpnxufx/image/upload/v1506272697/book3_cmhfot.jpg"</span>
+<span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Success Response:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is a Repeat has been updated"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Repeat"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Author"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Benny"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">34</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fiction"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is a test book"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://res.cloudinary.com/digpnxufx/image/upload/v1506272697/book3_cmhfot.jpg"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><pre class="highlight json tab-json"><code><span class="err">Invalid</span><span class="w"> </span><span class="err">book</span><span class="w"> </span><span class="err">Id</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+  </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Book id is invalid"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="err">Book</span><span class="w"> </span><span class="err">does</span><span class="w"> </span><span class="err">not</span><span class="w"> </span><span class="err">exist</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Book not found"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<aside class="notice">
+ Only Admin users can access this route.
+</aside>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>bookId</td>
+<td>ID of the book to update</td>
+</tr>
+</tbody></table>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>title</td>
+<td>null</td>
+<td>This title of the book</td>
+</tr>
+<tr>
+<td>author</td>
+<td>null</td>
+<td>The book author</td>
+</tr>
+<tr>
+<td>categoryId</td>
+<td>null</td>
+<td>The book category</td>
+</tr>
+<tr>
+<td>description</td>
+<td>null</td>
+<td>Brief description of book</td>
+</tr>
+<tr>
+<td>bookImage</td>
+<td>defaultCover</td>
+<td>The cover image of the book</td>
+</tr>
+<tr>
+<td>quantity</td>
+<td>null</td>
+<td>The stock quantity of the book</td>
+</tr>
+</tbody></table>
+<h2 id='add-category'>Add Category</h2>
+<p>This endpoint handles adding a category</p>
+<h3 id='http-request-17'>HTTP Request</h3>
+<p><code>POST api/v1/admin/category</code></p>
+
+<p>onSuccess - Status code (201)</p>
+
+<p>onError - Status code (400, 403, 500)</p>
+
+<blockquote>
+<p>Request Body:</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="s2">"categoryName"</span><span class="p">:</span> <span class="s1">'Fiction'</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Success Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Category added Fiction"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"categoryName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fiction"</span><span class="p">,</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Error Responses</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="err">Name</span><span class="w"> </span><span class="err">less</span><span class="w"> </span><span class="err">than</span><span class="w"> </span><span class="err">two</span><span class="w"> </span><span class="err">(</span><span class="mi">2</span><span class="err">)</span><span class="w"> </span><span class="err">chars</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Category name is Invalid"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="err">Duplicate</span><span class="w"> </span><span class="err">category</span><span class="w"> </span><span class="err">name</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Category already exists"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='request-body-fields-2'>Request Body Fields</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>categoryName</td>
+<td>null</td>
+<td>The name of the category to be added</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+ Only Admin users can access this route.
+</aside>
+<h2 id='edit-category'>Edit Category</h2>
+<p>This endpoint handles updating a category</p>
+<h3 id='http-request-18'>HTTP Request</h3>
+<p><code>PUT api/v1/admin/category/&lt;categoryId&gt;</code></p>
+
+<p>onSuccess - Status code (200)</p>
+
+<p>onError - Status code (400, 403, 404, 500)</p>
+
+<blockquote>
+<p>Request Body:</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+    <span class="s2">"categoryName"</span><span class="p">:</span> <span class="s1">'Updated Category'</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre>
+<blockquote>
+<p>Sample Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Category modified"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"categoryName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Action"</span><span class="p">,</span><span class="w">
+
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Error Responses</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="err">Name</span><span class="w"> </span><span class="err">less</span><span class="w"> </span><span class="err">than</span><span class="w"> </span><span class="err">two</span><span class="w"> </span><span class="err">(</span><span class="mi">2</span><span class="err">)</span><span class="w"> </span><span class="err">chars</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Category name is Invalid"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+
+</span><span class="err">Category</span><span class="w"> </span><span class="err">does</span><span class="w"> </span><span class="err">not</span><span class="w"> </span><span class="err">exist</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Category does not exist in this Library"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="err">Duplicate</span><span class="w"> </span><span class="err">category</span><span class="w"> </span><span class="err">name</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Category already exists"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='url-parameter'>URL Parameter</h3>
+<ul>
+<li>Authorization: x-token</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>categoryId</td>
+<td>ID of the category to update</td>
+</tr>
+</tbody></table>
+<h3 id='request-body-fields-3'>Request Body Fields</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>categoryName</td>
+<td>null</td>
+<td>The name of the category to be added</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+ Only Admin users can access this route.
+</aside>
+<h2 id='delete-category'>Delete Category</h2>
+<p>This endpoint handles deleting a category</p>
+<h3 id='http-request-19'>HTTP Request</h3>
+<p><code>DELETE api/v1/admin/category/&lt;categoryId&gt;</code></p>
+
+<p>onSuccess - Status code (200)</p>
+
+<p>onError - Status code (403, 404, 409, 500)</p>
+
+<blockquote>
+<p>Success Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This category has been deleted"</span><span class="p">,</span><span class="w">
+     </span><span class="s2">"category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"categoryName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Action"</span><span class="p">,</span><span class="w">
+
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Error Responses</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="err">Invalid</span><span class="w"> </span><span class="err">category</span><span class="w"> </span><span class="err">Id</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Category is not Valid"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="err">Category</span><span class="w"> </span><span class="err">does</span><span class="w"> </span><span class="err">not</span><span class="w"> </span><span class="err">exist</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+    </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Category Not found"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="err">Category</span><span class="w"> </span><span class="err">with</span><span class="w"> </span><span class="err">books</span><span class="w"> </span><span class="err">attached</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+  </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You cannot delete this ' +
+            'category as there are still books in it"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='url-parameter-2'>URL Parameter</h3>
+<ul>
+<li>Authorization: x-token</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>categoryId</td>
+<td>ID of the category to delete</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+ Only Admin users can access this route.
+</aside>
+<h2 id='delete-book'>Delete Book</h2>
+<p>This endpoint handles deleting a book</p>
+<h3 id='http-request-20'>HTTP Request</h3>
+<p><code>DELETE api/v1/admin/&lt;bookId&gt;</code></p>
+
+<p>onSuccess - Status code (200)</p>
+
+<p>onError - Status code (403, 404, 409, 500)</p>
+
+<blockquote>
+<p>Sample Response</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{book.title} has been deleted"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"deletedBookId"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="w">
+
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='url-parameter-3'>URL Parameter</h3>
+<ul>
+<li>Authorization: x-token</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>bookId</td>
+<td>ID of the book to delete</td>
+</tr>
+</tbody></table>
+<h2 id='get-all-books-2'>Get all books</h2>
+<blockquote>
+<p>Response:</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code></code></pre>
+<aside class="notice">
+ Only Admin users can access this route.
+</aside>
+<h3 id='request-2'>Request</h3>
+<ul>
+<li>Endpoint: GET: <code>/api/v1/books</code></li>
+<li>Requires: Authorization</li>
+</ul>
+<h3 id='response-2'>Response</h3>
+<ul>
+<li>Status: <code>200: OK</code></li>
+<li>Body <code>(application/json)</code></li>
+</ul>
+<h3 id='query-parameters-6'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>limit</td>
+<td>3</td>
+<td>Search query</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>0</td>
+<td>Search query</td>
+</tr>
+</tbody></table>
+<h1 id='errors'>Errors</h1>
+<aside class="notice">This error section is stored in a separate file in `includes/_errors.md`.</aside>
+
+<p>The Hello Books API uses the following error codes:</p>
+
+<table><thead>
+<tr>
+<th>Error Code</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>Bad Request -- You made a bad request.</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized -- You are not unauthorized to view this route.</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden -- You are not allowed to view this route.</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found -- This resource can&#39;t be found.</td>
+</tr>
+<tr>
+<td>409</td>
+<td>Conflict -- This resource already exists</td>
+</tr>
+<tr>
+<td>422</td>
+<td>Unprocessable Entity - This resource is invalid</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal Server Error -- We had a problem with our server. Try again later.</td>
+</tr>
+<tr>
+<td>503</td>
+<td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
+</tr>
+</tbody></table>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="javascript">javascript</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>

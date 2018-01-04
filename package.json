@@ -9,7 +9,7 @@
 		"build:watch": "babel server/src --watch --out-dir server/dist --presets es2015",
 		"pretest": "rimraf server/dist && mkdir server/dist && npm run build && sequelize db:migrate:undo:all --env=test && sequelize db:migrate --env=test && sequelize db:seed:all --env=test ",
 		"test": "export NODE_ENV=test && mocha server/dist/test/index.spec.js --timeout 10000 && export NODE_ENV=development",
-		"client:test": "jest client/ --coverage",
+		"client:test": "jest --coverage",
 		"coverage": "export NODE_ENV=test && npm run pretest &&  nyc --reporter=lcov --reporter=text --reporter=lcovonly mocha --compilers js:babel-register server/src/test/*",
 		"start:migrate": "sequelize db:migrate ",
 		"undo:migrate": "sequelize db:migrate:undo:all",
@@ -18,7 +18,12 @@
 		"start:dev": "babel-node server/dist/bin/www.js",
 		"start:webdev": "webpack -d && webpack-dev-server && --content-base client/src/ --inline --hot",
 		"start-prod": "babel server/src --out-dir server/dist --presets es2015 && npm run heroku-postbuild",
-		"heroku-postbuild": "rimraf client/dist && mkdir client/dist && npm run build && export NODE_ENV=production && npm run undo:migrate && npm run start:migrate && npm run seed:all && webpack"
+		"heroku-postbuild": "rimraf client/dist && mkdir client/dist && npm run build && export NODE_ENV=production && npm run undo:migrate && npm run start:migrate && npm run seed:all && webpack",
+		"e2e-setup": "selenium-standalone install",
+		"e2e-server": "selenium-standalone start",
+		"start:server:e2e": "NODE_ENV=test babel-watch server/dist/bin/www --exec babel-node",
+		"pretest:e2e": "export NODE_ENV=test && npm run undo:migrate && npm run start:migrate && npm run seed:all",
+		"test:e2e": "nightwatch"
 	},
 	"nyc": {
 		"exclude": [
@@ -26,6 +31,31 @@
 			"server/src/cron/",
 			"server/src/mailer/"
 		]
+	},
+	"jest": {
+		"verbose": true,
+		"rootDir": "./client",
+		"coveragePathIgnorePatterns": [
+			"<rootDir>/__tests__/shim.js",
+			"<rootDir>/__tests__/__config__"
+		],
+		"testMatch": [
+			"**/?(*.)(spec).js?(x)"
+		],
+		"setupFiles": [
+			"<rootDir>/__tests__/shim.js",
+			"jest-localstorage-mock",
+			"<rootDir>/__tests__/__config__/setup.js"
+		],
+		"moduleFileExtensions": [
+			"js",
+			"jsx",
+			"json"
+		],
+		"moduleNameMapper": {
+			"\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)$": "<rootDir>/__tests__/__mocks__/fileMock.js",
+			"\\.(s?css|less)$": "identity-obj-proxy"
+		}
 	},
 	"engines": {
 		"npm": "5.3.0",
@@ -36,6 +66,7 @@
 	"license": "ISC",
 	"dependencies": {
 		"axios": "^0.16.2",
+		"axios-mock-adapter": "^1.10.0",
 		"babel-cli": "^6.24.1",
 		"babel-core": "^6.26.0",
 		"babel-eslint": "^7.2.3",
@@ -59,29 +90,31 @@
 		"css-loader": "^0.28.7",
 		"debug": "^3.0.0",
 		"dotenv": "^4.0.0",
-		"enzyme": "^3.1.0",
+		"enzyme-adapter-react-15": "^1.0.5",
 		"eslint": "^4.3.0",
 		"eslint-config-airbnb": "^16.1.0",
-		"eslint-plugin-jsx-a11y": "^6.0.2",
+		"eslint-config-react": "^1.1.7",
 		"eslint-plugin-react": "^7.4.0",
+		"expect": "^22.0.3",
 		"express": "^4.15.3",
 		"express-boom": "^2.0.0",
 		"extract-text-webpack-plugin": "^3.0.0",
 		"faker": "^4.1.0",
 		"fakerator": "^0.3.0",
 		"file-loader": "^0.11.2",
-		"firebase": "^4.6.2",
 		"firebase-cron": "^0.1.2",
 		"firebase-queue": "^1.6.1",
 		"foreman": "^2.0.0",
 		"html-loader": "^0.5.1",
 		"html-webpack-plugin": "^2.30.1",
 		"jest": "^21.2.1",
+		"jest-localstorage-mock": "^2.1.0",
 		"jquery": "^3.2.1",
 		"json": "^9.0.6",
 		"jsonwebtoken": "^7.4.1",
 		"jwt-decode": "^2.2.0",
 		"lodash": "^4.17.4",
+		"loglevel": "^1.6.0",
 		"maildev": "^1.0.0-rc3",
 		"materialize-css": "^0.100.2",
 		"mocha": "^3.5.0",
@@ -94,16 +127,12 @@
 		"nodemailer-mailgun-transport": "^1.3.5",
 		"nodemon": "^1.11.0",
 		"pg": "^7.0.2",
-		"pg-hstore": "^2.3.2",
 		"prop-types": "^15.5.10",
 		"react": "^16.2.0",
-		"react-autosuggest": "^9.3.2",
-		"react-cookie": "^2.0.8",
 		"react-datepicker": "^0.61.0",
 		"react-dom": "^16.2.0",
 		"react-google-login": "^3.0.2",
 		"react-materialize": "^1.0.11",
-		"react-md": "^1.0.19",
 		"react-preload": "^0.5.1",
 		"react-redux": "^5.0.6",
 		"react-router": "^4.2.0",
@@ -113,16 +142,15 @@
 		"react-tooltip": "^3.4.0",
 		"redux": "^3.7.2",
 		"redux-devtools-extension": "^2.13.2",
-		"redux-form": "^6.0.0-rc.3",
 		"redux-immutable-state-invariant": "^2.1.0",
 		"redux-logger": "^3.0.6",
+		"redux-mock-store": "^1.3.0",
 		"redux-notifications": "^4.0.1",
 		"redux-persist": "^4.10.1",
 		"redux-thunk": "^2.2.0",
 		"rimraf": "^2.6.2",
 		"sass-loader": "^6.0.6",
 		"scss-loader": "0.0.1",
-		"semantic-ui-react": "^0.73.0",
 		"sentence-case": "^2.1.1",
 		"sequelize": "^4.7.5",
 		"sequelize-cli": "^2.8.0",
@@ -138,24 +166,26 @@
 		"webpack-dev-server": "^2.7.1"
 	},
 	"devDependencies": {
-		"babel-cli": "^6.26.0",
 		"babel-jest": "^21.2.0",
 		"clean-webpack-plugin": "^0.1.16",
 		"coveralls": "^2.13.1",
-		"cross-env": "^5.0.5",
+		"enzyme": "^3.2.0",
+		"enzyme-adapter-react-16": "^1.1.1",
+		"enzyme-to-json": "^3.3.0",
 		"eslint-plugin-import": "^2.8.0",
 		"git-flow": "^0.2.0",
+		"identity-obj-proxy": "^3.0.0",
 		"mocha-lcov-reporter": "^1.3.0",
 		"nyc": "^11.1.0",
 		"path": "^0.12.7",
-		"prop-types": "^15.5.10",
 		"purify-css": "^1.2.5",
 		"purifycss": "^1.2.6",
 		"purifycss-webpack": "^0.7.0",
 		"react-addons-css-transition-group": "^15.6.0",
 		"react-addons-transition-group": "^15.6.0",
 		"react-burger-menu": "^2.1.6",
-		"reactstrap": "^4.8.0",
-		"redux-promise-middleware": "^4.4.1"
+		"react-test-renderer": "^16.2.0",
+		"redux-promise-middleware": "^4.4.1",
+		"selenium-standalone": "^6.12.0"
 	}
 }

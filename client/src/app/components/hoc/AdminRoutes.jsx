@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { PropTypes } from 'prop-types';
 import { Redirect, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -7,16 +7,19 @@ const AdminRoutes = ({
   isAuthenticated,
   tokenExists,
   isAdmin,
-  component : Component,
+  component,
   ...rest
-}) => (
-  <Route
-    {...rest}
-    render={props => (isAuthenticated && isAdmin && tokenExists
-    ? <Component{...props} />
-    : <Redirect to="/login" />)}
-  />
-);
+}) => {
+  const PassedComponent = component;
+  return (
+    <Route
+      {...rest}
+      render={props => (isAuthenticated && isAdmin && tokenExists ?
+        <PassedComponent{...props} /> :
+        <Redirect to="/login" />)}
+    />
+  );
+};
 
 AdminRoutes.defaultProps = {
   isAdmin: false
@@ -31,9 +34,9 @@ AdminRoutes.propTypes = {
 
 const mapStateToProps = state => ({
   isAuthenticated: !!state.userReducer.isAuthenticated,
-  isAdmin: (state.userReducer.user)
-    ? state.userReducer.user.isAdmin
-    : '',
+  isAdmin: (state.userReducer.user) ?
+    state.userReducer.user.isAdmin :
+    '',
   tokenExists: !!localStorage.getItem('token')
 });
 

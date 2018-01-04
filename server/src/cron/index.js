@@ -3,6 +3,7 @@ import sendSurcharge from './sendSurcharge';
 
 export const setCron = props => new CronJob(props);
 
+
 export const sendSurchargeJob = () =>
   setCron({
     cronTime: '05 17 * * 1-7',

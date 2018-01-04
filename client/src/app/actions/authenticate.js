@@ -4,10 +4,8 @@ import
 } from './notifications';
 
 import { USER_LOGGED_IN,
-  USER_LOG_IN_FAILURE,
   USER_LOGGED_OUT,
   SIGNUP_USER_SUCCESS,
-  SIGNUP_USER_FAILURE
 } from './actionType';
 
 import api from './api';
@@ -28,11 +26,6 @@ export const userLoggedIn = data =>
     data
   });
 
-export const userLogInFailure = error =>
-  ({
-    type: USER_LOG_IN_FAILURE,
-    error
-  });
 
 /**
  * create action: userLoggedIn: user
@@ -49,20 +42,6 @@ export const userLoggedOut = user =>
     user
   });
 
-/**
- * create action: sign : user
- *
- * @function userAuthFailure
- *
- * @param {object} user
- *
- * @returns {object} action: type and response
- */
-export const signUpUserFailure = user =>
-  ({
-    type: SIGNUP_USER_FAILURE,
-    user
-  });
 
 /**
  * create action: signUpUserSuccess : user
@@ -98,7 +77,6 @@ export const signup = data => dispatch => api
   })
   .catch((error) => {
     dispatch(showErrorNotification({ error }));
-    dispatch(signUpUserFailure(error));
   });
 
 /**
@@ -123,7 +101,6 @@ export const login = credentials => dispatch => api
   })
   .catch((error) => {
     dispatch(showErrorNotification({ error }));
-    dispatch(userLogInFailure(error));
   });
 
 /**

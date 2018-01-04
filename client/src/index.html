@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Coiny|Purple+Purse" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Coiny|Purple+Purse|Merriweather" rel="stylesheet">
 
   <link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.7.0/sweetalert2.min.css" rel="stylesheet" type="text/css" media="screen" />
   <script src="https://use.fontawesome.com/e096d8d3e1.js"></script>
@@ -15,33 +15,52 @@
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.min.css">
 
   <title>Hello Books</title>
+  <style media="screen">
+    #still-loading {
+      padding-top: 30vh;
+      text-align: center;
+      font-size: 70px;
+      font-weight: bold;
+      -webkit-animation: beat 1s ease-in-out infinite;
+      -moz-animation: beat 1s ease-in-out infinite;
+      animation: beat 1s ease-in-out infinite;
+      animation-direction: alternate;
+    }
+    @-webkit-keyframes beat {
+      0% {color: #ffffff;}
+      100% {color: #011b33;}
+    }
+    @keyframes beat {
+      0% {color: #ffffff;}
+      100% {color: #011b33;}
+    }
+  </style>
 </head>
 
 <body>
   <div id="app"></div>
-  <script src="https://widget.cloudinary.com/global/all.js" type="text/javascript"></script>
-  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){
   
-    $('#admin-book-modal').on('hidden', function() {
+ 
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script> -->
+  <script src="https://widget.cloudinary.com/global/all.js" type="text/javascript"></script>
+  <script type="text/javascript">
+  $(document).ready(function(){
+  
+    $('#edit-admin-book-modal').on('hidden', function() {
       $(':input', this).val('');
     });
    
       $('.button-collapse').sideNav({
-
+  
         closeOnClick: true
       });
-
-      $('.modal').modal();
-
-
+  
+     
+  
+  
     });
-</script>
+   </script>
 </body>
-
-
-
 </html>

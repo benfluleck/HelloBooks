@@ -4,10 +4,14 @@ import { Navbar } from 'react-materialize';
 import { PropTypes } from 'prop-types';
 
 /**
- * @description Component for Navigation
+ * @description Component for Navigation Bar
+ *
  * @class NavigationBar
+ *
  * @param {object} props
+ *
  * @extends {Component}
+ *
  * @return {object} Navigation fixed navigation bar
  */
 const Navigation = (props) => {
@@ -16,9 +20,10 @@ const Navigation = (props) => {
     .map(link => (
       <li
         key={link}
-        className={props.activeLink === link
-        ? 'active'
-        : ''}
+        id={link.replace(' ', '')}
+        className={props.activeLink === link ?
+          'active' :
+          ''}
       >
         <NavLink to={`/${link.replace(' ', '')}`} activeClassName="active">
           {link.toUpperCase()}
@@ -27,6 +32,7 @@ const Navigation = (props) => {
     ));
   return (
     <Navbar right fixed>
+      <li><a href="/apidocs">API DOCS</a></li>
       {links}
     </Navbar>
   );
@@ -36,9 +42,5 @@ Navigation.propTypes = {
   navLinks: PropTypes.arrayOf(PropTypes.string)
 };
 
-Navigation.defaultProps = {
-  activeLink: null,
-  navLinks: null
-};
 
 export default Navigation;

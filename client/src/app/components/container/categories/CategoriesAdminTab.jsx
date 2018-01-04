@@ -1,7 +1,7 @@
 import React from 'react';
 import { Col, Row } from 'react-materialize';
-import CategoryCollectionList from './CategoriesCollectionList.jsx';
-import AddCategory from './AddCategory.jsx';
+import CategoryCollectionList from './CategoriesCollectionList';
+import AddCategory from './AddCategory';
 
 
 /**

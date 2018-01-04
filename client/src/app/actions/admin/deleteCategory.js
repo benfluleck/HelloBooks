@@ -4,18 +4,12 @@ import {
 } from '../notifications';
 import {
   DELETE_CATEGORY_SUCCESS,
-  DELETE_CATEGORY_FAILURE
 } from '../actionType';
 import api from '../api';
 
 export const deleteCategorySuccess = deletedCategory => (
   { type: DELETE_CATEGORY_SUCCESS, deletedCategory }
 );
-export const deleteCategoryFailure = error =>
-  ({
-    type: DELETE_CATEGORY_FAILURE,
-    error
-  });
 
 
 /**
@@ -36,7 +30,6 @@ export const deleteCategoryAction = categoryId => dispatch => api
     return (response);
   })
   .catch((error) => {
-    dispatch(deleteCategoryFailure({ error }));
     dispatch(showErrorNotification({ error }));
     return ({ error });
   });

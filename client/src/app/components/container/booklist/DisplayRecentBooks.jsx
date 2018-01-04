@@ -2,15 +2,19 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import { Row } from 'react-materialize';
-import Loader from './Loader.jsx';
-import Book from '../../presentation/common/book/DisplayBook.jsx';
-import { fetchAllRecentBooks } from '../../../actions/fetchBooks';
+import Loader from './Loader';
+import Book from '../../presentation/common/book/DisplayBook';
+import { fetchAllRecentBooks,
+  fetchAllBorrowedBooks } from '../../../actions/fetchBooks';
 
 
 /**
- * @description Component for Display Books on the Landing page for all users
+ * @description Component for Display RecentBooks on the Landing page for all users
+ *
  * @class DisplayLandingBooks
+ *
  * @extends {React.Component} DisplayLandingBooks
+ *
  * @return {Component} DisplayLandingBooks
  */
 class DisplayRecentBooks extends React.Component {
@@ -29,24 +33,12 @@ class DisplayRecentBooks extends React.Component {
     return (<Loader
       records={this.props.books}
       callback={this.props.fetchAllRecentBooks(
-       this.props.offset,
-       this.props.limit
-)}
+        this.props.offset,
+        this.props.limit
+      )}
     />);
   }
 
-  /**
-   * @method componentDidMount
-   *
-   * @memberof DisplayRecentBooks
-   *
-   * @returns {object} void
-   *
-   * @memberOf DisplayRecentBooks
-  * */
-  componentWillUnmount() {
-    $('body').css('background-color', 'rgb(204, 204, 204)');
-  }
   /**
    * render Display Recent component
    *
@@ -57,6 +49,10 @@ class DisplayRecentBooks extends React.Component {
    * @returns {object} component
    */
   render() {
+    this.props.fetchAllBorrowedBooks(
+      this.props.offset,
+      this.props.limit
+    );
     const getAllBooks = (this
       .props
       .recentBooks) ? this
@@ -83,25 +79,17 @@ class DisplayRecentBooks extends React.Component {
 DisplayRecentBooks.propTypes = {
   offset: PropTypes.number,
   limit: PropTypes.number,
-  books: PropTypes.shape({
-    id: PropTypes.number,
-    map: PropTypes.object,
-    pagination: PropTypes.object,
-    books: PropTypes.arrayOf(PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      author: PropTypes.string.isRequired,
-      // quantity: PropTypes.number.isRequired,
-      description: PropTypes.string,
-    }))
-  }),
+  books: PropTypes.object,
   fetchAllRecentBooks: PropTypes.func.isRequired,
+  fetchAllBorrowedBooks: PropTypes.func,
   recentBooks: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.integer
+    id: PropTypes.number
   }))
 };
+
+export { DisplayRecentBooks };
+
 DisplayRecentBooks.defaultProps = {
-  books: {},
-  recentBooks: [],
   limit: 8,
   offset: 0
 };
@@ -113,6 +101,7 @@ const mapStateToProps = ({ bookReducer }) => ({
 export default connect(
   mapStateToProps,
   {
-    fetchAllRecentBooks
+    fetchAllRecentBooks,
+    fetchAllBorrowedBooks
   }
 )(DisplayRecentBooks);

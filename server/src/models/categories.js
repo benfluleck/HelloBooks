@@ -1,4 +1,5 @@
 'use strict';
+
 export default(sequelize, DataTypes) => {
   const Categories = sequelize.define('Categories', {
     categoryName: {
@@ -9,7 +10,6 @@ export default(sequelize, DataTypes) => {
       }
     }
   }, { paranoid: true });
-  
   Categories.associate = (models) => {
     Categories.hasMany(models.Books, {
       foreignKey: 'categoryId',

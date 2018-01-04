@@ -3,7 +3,6 @@ import {
   showSuccessNotification
 } from '../notifications';
 import {
-  ADD_CATEGORY_FAILURE,
   ADD_CATEGORY_SUCCESS
 } from '../actionType';
 import api from '../api';
@@ -11,10 +10,6 @@ import api from '../api';
 export const addCategorySuccess = category =>
   ({
     type: ADD_CATEGORY_SUCCESS, category
-  });
-export const addCategoryFailure = error =>
-  ({
-    type: ADD_CATEGORY_FAILURE, error
   });
 
 
@@ -36,7 +31,6 @@ export const addNewCategory = category => dispatch => api
     return (response);
   })
   .catch((error) => {
-    dispatch(addCategoryFailure({ error }));
     dispatch(showErrorNotification({ error }));
     return ({ error });
   });

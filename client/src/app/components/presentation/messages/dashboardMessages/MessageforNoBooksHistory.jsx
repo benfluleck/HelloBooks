@@ -3,6 +3,7 @@ import { Row } from 'react-materialize';
 
 /**
  * @description Component for Message for No Loan History
+ *
  * @class MessageforNoBooksHistory
  */
 const MessageforNoBooksHistory = () => (

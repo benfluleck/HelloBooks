@@ -9,7 +9,8 @@ const INITIAL_STATE = {
 
 /**
  *
- * @export
+ * @description this Reducer implements the imageReducer
+ * 
  * @param {any} [state=INITIAL_STATE]
  *
  * @param {any} [action={}]
@@ -20,19 +21,21 @@ const INITIAL_STATE = {
  */
 export default function imageReducer(state = INITIAL_STATE, action = {}) {
   switch (action.type) {
-    case UPLOAD_TO_CLOUD_IMAGE_SUCCESS:
-      return {
-        ...state,
-        body: action.response,
-        url: action.response.secureUrl,
-        upload: 'Success'
-      };
-    case UPLOAD_TO_CLOUD_IMAGE_FAILURE:
-      return {
-        ...state,
-        error: action.response
-      };
-    default:
-      return state;
+  case UPLOAD_TO_CLOUD_IMAGE_SUCCESS:
+    return {
+      ...state,
+      body: action.response,
+      url: action.response.secureUrl,
+      upload: 'Success'
+    };
+
+  case UPLOAD_TO_CLOUD_IMAGE_FAILURE:
+    return {
+      ...state,
+      error: action.response
+    };
+
+  default:
+    return state;
   }
 }

@@ -2,15 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Collapsible, CollapsibleItem } from 'react-materialize';
-import getCategories from './getCategoriesWrapper.jsx';
+import GetCategories from './GetCategoriesWrapper';
 
 /**
- *
+ *@description displays Collapsible Sidebar Items
  *
  * @param {object} props
+ *
  * @returns {component} Collapsible
  */
-const CategoriesSideBar = (props) => {
+export const CategoriesSideBar = (props) => {
   const categoryNames = props.categories
     .map(category => (
       <Link
@@ -41,10 +42,10 @@ const CategoriesSideBar = (props) => {
 
 CategoriesSideBar.propTypes = {
   categories: PropTypes.arrayOf(PropTypes.shape({
-    map: PropTypes.object,
-  })).isRequired
+    category: PropTypes.object
+  }))
 };
 
-const CategoriesSideBarList = getCategories(CategoriesSideBar);
+const CategoriesSideBarList = GetCategories(CategoriesSideBar);
 
 export default CategoriesSideBarList;

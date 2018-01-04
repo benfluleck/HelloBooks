@@ -1,19 +1,23 @@
 import bcrypt from 'bcrypt';
 import models from '../models';
 import generateToken from '../controllers/middleware/authenticate';
-import paginationFunc from '../controllers/middleware/pagination';
+import pagination from '../controllers/helpers/pagination';
 
 const { User, Userlevel } = models;
 
 const userController = {
   /**
   * Route: POST: /auth/users/signin
+  *
   * @description Create a new user
+  *
   * @param {Object} req request object
+  *
   * @param {Object} res response object
-  * @returns {void|Response} response
+  *
+  * @returns {void|object} response object
   */
-  create(req, res) {
+  createUser(req, res) {
     if (req.body.password !== req.body.passwordConfirmation) {
       return res.status(422).send({
         message: 'Password and Password confirmation do not match'
@@ -48,8 +52,9 @@ const userController = {
                 }).then((user) => {
                   if (user) {
                     res.status(201).send({
-                      message: `${user.username} has been added to the library,` +
-                       'Please Login, you will be only required to do this once'
+                      message: `${user.username} has been added to the ` +
+                      'library, Please Login, you will be only ' +
+                      'required to Sign up once'
                     });
                   }
                 });
@@ -66,9 +71,13 @@ const userController = {
   /**
    *
    * Route: POST: /auth/users/sigin
+   *
    * @description User sign in
+   *
    * @param {Object} req request object
+   *
    * @param {Object} res response object
+   *
    * @returns {void|Response} status, send
    *
    */
@@ -151,10 +160,10 @@ const userController = {
     *
     * @param {object} res HTTP response object
     *
-    * @returns {object} Message object
+    * @returns {string} Message
     */
   changePassword(req, res) {
-    const userId = req.user.id.id || req.user.id;
+    const userId = req.userId;
     User
       .findOne({
         where: {
@@ -170,8 +179,8 @@ const userController = {
           return res.status(409)
             .send({
               message:
-              'Your current password does not match our records,'
-              + 'Please Re-enter'
+              'Your current password does not match our records, ' +
+              'Please Re-enter'
             });
         }
         const compareNewPasswords =
@@ -191,7 +200,7 @@ const userController = {
       })
       .catch(error => res.status(500).send(error.message));
   },
-  /** Changes a users level
+  /** @description Changes a users level
    *
     * @param {object} req HTTP request object
     *
@@ -246,13 +255,15 @@ const userController = {
   /**
    * Gets a list of users in tha library
    *
-   * @method get
+   * @method getUserList
    *
-   * @param {object} req
+   * @param {object} req HTTP request object
    *
-   * @param {object} res
+   * @param {object} res HTTP response object
    *
    * @return {object} response
+   *
+   * @return {string} response
    */
   getUserList(req, res) {
     const offset = req.query.offset || 0;
@@ -286,7 +297,7 @@ const userController = {
             .status(200)
             .send({
               users: users.rows,
-              pagination: paginationFunc(offset, limit, users)
+              pagination: pagination(offset, limit, users)
             });
         }
       })
@@ -297,9 +308,9 @@ const userController = {
    *
    * @description UserLevelList fetches the list of the user levels
    *
-   * @param {object} req
+   * @param {object} req - request object
    *
-   * @param {object} res
+   * @param {object} res - response object
    *
    * @returns {object} response
    */

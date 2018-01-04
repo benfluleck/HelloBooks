@@ -31,7 +31,6 @@ export const getAdminNotificationAction = (offset, limit) => dispatch => api
   .getAdminNotifications(offset, limit)
   .then((response) => {
     dispatch(getNotificationSuccess(response));
-    return response;
   })
   .catch((error) => {
     dispatch(getNotificationFailure({ error }));

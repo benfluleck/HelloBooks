@@ -8,7 +8,7 @@ import { editCategoryAction } from '../../../actions/admin/editCategory';
 import { deleteCategoryAction } from '../../../actions/admin/deleteCategory';
 
 /**
- *
+ * @description renders the Categories Collection list
  *
  * @class CategoriesCollection
  *
@@ -36,7 +36,7 @@ class CategoriesCollectionList extends React.Component {
   /**
   *
   *
-  * @param {object} id
+  * @param {object} id - categoryId
   *
   * @memberof CategoriesCollectionList
   *
@@ -70,7 +70,7 @@ class CategoriesCollectionList extends React.Component {
   }
 
   /**
-   * @param {integer} id
+   * @param {integer} id - Category id
    *
    * @returns {function} deleteCategory
    *
@@ -82,30 +82,35 @@ class CategoriesCollectionList extends React.Component {
       text: "You won't be able to revert this!",
       type: 'warning',
       showCancelButton: true,
-      // confirmButtonColor: '#3085d6',
-      // cancelButtonColor: '#d33',
       confirmButtonText: 'Yes, delete it!',
       cancelButtonText: 'No, cancel!',
-      confirmButtonClass: 'btn btn-success',
-      cancelButtonClass: 'btn btn-danger',
-      buttonsStyling: false,
+      buttonsStyling: true,
       reverseButtons: true
-    }).then((result) => {
-      if (result) {
-        this.props.deleteCategoryAction(id);
-        swal(
-          'Deleted!',
-          'Your file has been deleted.',
-          'success'
-        );
-      } else {
-        swal(
-          'Cancelled',
-          'Your book is safe',
-          'error'
-        );
-      }
-    });
+    }).then(() => {
+      this.props.deleteCategoryAction(id)
+        .then((response) => {
+          if (response.message === "This category has been deleted") {
+            swal(
+              'Deleted!',
+              'Your Category has been deleted.',
+              'success'
+            );
+          } else {
+            swal(
+              'Cancelled',
+              'This Category has books in it',
+              'error'
+            );
+          }
+        })
+        .catch(() => {
+          swal(
+            'Operation Cancelled',
+            'Category is safe from deletion',
+            'error'
+          );
+        });
+    }).catch(() => {});
   }
   /**
    *
@@ -132,18 +137,17 @@ class CategoriesCollectionList extends React.Component {
             <span className="right">
               <Link
                 to="#"
-                className="waves-effect "
-                onClick={() => this.deleteCategory(category.id)}
-              >
-                <Icon small className="icons">delete</Icon>
-              </Link>
-
-              <Link
-                to="#"
                 className="waves-effect"
                 onClick={() => this.editCategory(category.id)}
               >
                 <Icon small className="icons">edit</Icon>
+              </Link>
+              <Link
+                to="#"
+                className="waves-effect "
+                onClick={() => this.deleteCategory(category.id)}
+              >
+                <Icon small className="icons">delete</Icon>
               </Link>
             </span>
           </div>

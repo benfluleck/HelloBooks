@@ -1,19 +1,19 @@
 import React from 'react';
-import Header from '../components/container/header/Header.jsx';
+import Header from '../components/container/header/Header';
 
-import UploadModal from '../components/presentation/common/modal/UploadModal.jsx';
-import DisplayBookModal from './presentation/common/book/DisplayBookModal.jsx';
+import UploadModal from
+  '../components/presentation/common/modal/UploadModal';
+import DisplayBookModal from './presentation/common/book/DisplayBookModal';
 
 
-/* eslint-disable */
 const Root = props => (
   <div className="root-wrapper">
 
     <Header />
     {props.children}
-  <UploadModal />
- <DisplayBookModal />
- 
+    <UploadModal />
+    <DisplayBookModal />
+
   </div>
 );
 

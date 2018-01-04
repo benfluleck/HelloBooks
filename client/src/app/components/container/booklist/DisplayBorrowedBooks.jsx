@@ -2,15 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import { Row, Col } from 'react-materialize';
-import PaginationWrapper from '../common/Pagination.jsx';
-import Book from '../../presentation/common/book/DisplayBook.jsx';
-import Loader from './Loader.jsx';
+import PaginationWrapper from '../common/Pagination';
+import Book from '../../presentation/common/book/DisplayBook';
+import Loader from './Loader';
 import { fetchAllBorrowedBooks } from '../../../actions/fetchBooks';
 import MessageforNoBooks from
-  '../../presentation/messages/dashboardMessages/MessageforNoBooks.jsx';
+  '../../presentation/messages/dashboardMessages/MessageforNoBooks';
 
 /**
- * @description Component for Display Books on the Landing page for all users
+ * @description Component for Display BorrowedBooks on the Landing page for all users
  *
  * @class DisplayLandingBooks
  *
@@ -30,7 +30,10 @@ class DisplayAllBorrowedBooks extends React.Component {
   componentDidMount() {
     return (<Loader
       records={this.props.borrowedBooks}
-      callback={this.props.fetchAllBorrowedBooks(this.props.offset, this.props.limit)}
+      callback={this.props.fetchAllBorrowedBooks(
+        this.props.offset,
+        this.props.limit
+      )}
     />);
   }
   /**
@@ -43,7 +46,8 @@ class DisplayAllBorrowedBooks extends React.Component {
    * @returns {object} component
    */
   render() {
-    if (!this.props.borrowedBooks || this.props.borrowedBooks.books.length === 0) {
+    if (!this.props.borrowedBooks ||
+      this.props.borrowedBooks.books.length === 0) {
       return <MessageforNoBooks />;
     }
     const getAllBooks = this.props.borrowedBooks.books.map(book => (
@@ -79,26 +83,24 @@ class DisplayAllBorrowedBooks extends React.Component {
 DisplayAllBorrowedBooks.propTypes = {
   offset: PropTypes.number,
   limit: PropTypes.number,
-  borrowedBooks: PropTypes.shape({
-    map: PropTypes.object,
-    pagination: PropTypes.object,
-    books: PropTypes.arrayOf(PropTypes.shape({
-      title: PropTypes.string
-    }))
-  }),
+  borrowedBooks: PropTypes.object,
   fetchAllBorrowedBooks: PropTypes.func.isRequired
 };
 
 DisplayAllBorrowedBooks.defaultProps = {
-  borrowedBooks: null,
   limit: 8,
   offset: 0
 
 };
 
+export { DisplayAllBorrowedBooks };
+
 const mapStateToProps = ({ bookReducer }) => ({
   borrowedBooks: bookReducer.borrowedBooksList
 });
 
-export default connect(mapStateToProps, { fetchAllBorrowedBooks })(DisplayAllBorrowedBooks);
+export default connect(
+  mapStateToProps,
+  { fetchAllBorrowedBooks }
+)(DisplayAllBorrowedBooks);
 

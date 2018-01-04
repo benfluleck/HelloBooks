@@ -13,6 +13,7 @@ class PaginationWrapper extends React.Component {
   * @param {number} number
   *
   * @memberOf PaginationWrapper
+  *
   * @returns {function} Function fetch
   */
   onSelect = (number) => {
@@ -24,22 +25,28 @@ class PaginationWrapper extends React.Component {
   /**
    *
    * @param {number} pagenumber
+   *
    * @param {number} numberOfRecords
+   *
    * @returns {number} pageOffset * numberOfRecords
    *
    * @memberOf PaginationWrapper
    */
   pageLimit = (pagenumber, numberOfRecords) => {
     let pageOffset;
-    pageOffset = (pagenumber === 1)
-      ? 0
-      : pagenumber - 1;
+    pageOffset = (pagenumber === 1) ?
+      0 :
+      pagenumber - 1;
     return pageOffset * numberOfRecords;
   }
   /**
-   * render Pagination Wrapper
+   * renders Pagination Wrapper displays Pagination
+   * for each component that requires it
+   *
    * @method render
+   *
    * @member Pagination
+   *
    * @returns {object} component
    */
   render() {
@@ -61,7 +68,6 @@ PaginationWrapper.defaultProps = {
   items: 0,
   activePage: 1,
   maxButtons: 5,
-  // config: null
 };
 
 PaginationWrapper.propTypes = {
@@ -70,5 +76,5 @@ PaginationWrapper.propTypes = {
   maxButtons: PropTypes.number,
   fetch: PropTypes.func.isRequired,
   numberOfRecords: PropTypes.number.isRequired,
-  // config: PropTypes.func
+  config: PropTypes.object
 };

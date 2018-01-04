@@ -1,5 +1,5 @@
 import models from '../models';
-import paginationFunc from '../controllers/middleware/pagination';
+import getPagination from '../controllers/helpers/pagination';
 
 const { Categories, Books } = models;
 
@@ -89,15 +89,15 @@ export default {
     *
     * @param {object} res HTTP response object
     *
-    * @returns {object} All Categories
+    * @returns {object} All Categories - returns all categories
     */
   listCategories(req, res) {
     return Categories
       .all({ order: [['categoryName', 'ASC']] })
       .then((categories) => {
         if (Object.keys(categories).length < 1) {
-          return res.status(200)
-            .send({ message: 'sorry there are no categories available' });
+          return res.status(404)
+            .send({ message: 'Sorry there are no categories available' });
         }
         const allCategories = { categories };
         res.status(200).send(allCategories);
@@ -136,17 +136,17 @@ export default {
           })
           .then((books) => {
             if (books.rows.length < 1) {
-              return res.status(200)
+              return res.status(404)
                 .send({
                   message: 'Sorry there are no books in this category',
                   books: books.rows,
-                  pagination: paginationFunc(offset, limit, books)
+                  pagination: getPagination(offset, limit, books)
                 });
             }
             const categoryBooks = {
               message: 'Success!',
               books: books.rows,
-              pagination: paginationFunc(offset, limit, books)
+              pagination: getPagination(offset, limit, books)
             };
             res.status(200).send(categoryBooks);
           });
@@ -158,13 +158,13 @@ export default {
    *
    * @description Deletes a selected book
    *
-   * @param {object} req
+   * @param {object} req - request object
    *
-   * @param {object} res
+   * @param {object} res - respond object
    *
-   * @returns {object} books
+   * @returns {string} message from the route
    *
-   * @memmberOf BookController
+   * @memmberOf CategoryController
    */
   deleteCategory(req, res) {
     const categoryId = parseInt(req.params.categoryId, 10);
@@ -187,15 +187,15 @@ export default {
         }
         if (category.books.length > 0) {
           return res.status(409).send({
-            message: 'You cannot delete this' +
-            'Category as there are still books in it',
+            message: 'You cannot delete this ' +
+            'category as there are still books in it',
           });
         }
         category
           .destroy()
           .then(() => res.status(200)
             .send({
-              message: `Category ${category.categoryName}, has been deleted`,
+              message: 'This category has been deleted',
               category
             }))
           .catch(error => res.status(500).send(error));

@@ -53,24 +53,22 @@ export const fetchAllCategories = () => dispatch => api
  *
  * @param {number} categoryId
  *
- * @param {number} offset
+ * @param {number} offset - page offset
  *
- * @param {number} limit
+ * @param {number} limit - page limit
  *
  * @returns {object} asynchronous action
  */
 export
-const fetchBooksForCategories = (categoryId, offset, limit) => (dispatch) => {
+const fetchBooksForCategories = (categoryId, offset, limit) => dispatch =>
   api
     .book
     .fetchAllBooksByCategories(categoryId, offset, limit)
     .then((response) => {
       dispatch(fetchBooksCategoriesSuccess(response));
-      return response;
     })
     .catch((error) => {
       dispatch(showErrorNotification({ error }));
       dispatch(fetchBooksCategoriesFailure({ error }));
-      return error;
     });
-};
+

@@ -1,14 +1,15 @@
 import React from 'react';
 import { Row } from 'react-materialize';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import SideNav from '../common/SideNav/index.jsx';
-import DisplayAllBooks from '../../container/booklist/DisplayAllBooks.jsx';
-import getDashboardWrapper from '../../container/Dashboard.jsx';
+import SideNav from '../common/SideNav/index';
+import DisplayAllBooks from '../../container/booklist/DisplayAllBooks';
+import GetDashboardWrapper from '../../container/common/Dashboard';
 import
-CategoryAdminTab from '../../container/categories/CategoriesAdminTab.jsx';
-import UserListTab from '../../container/userlists/container/UserListTab.jsx';
-import NotificationTab from '../../container/notification/NotificationTab.jsx';
+CategoryAdminTab from '../../container/categories/CategoriesAdminTab';
+import UserListTab from '../../container/userlists/container/UserListTab';
+import NotificationTab from '../../container/notification/NotificationTab';
 /**
+ * @description Shows the Admin Dashboard of the admin user
  *
  * @class AdminDashboard
  *
@@ -24,7 +25,7 @@ class AdminDashboard extends React.PureComponent {
   render() {
     return (
       <div>
-        <div className="main-wrapper">
+        <div id="adminboard" className="main-wrapper">
           <SideNav
             {...this.props}
           />
@@ -62,7 +63,7 @@ class AdminDashboard extends React.PureComponent {
 }
 
 
-const AdministratorDashboard = getDashboardWrapper(AdminDashboard);
+const AdministratorDashboard = GetDashboardWrapper(AdminDashboard);
 
 
 export default AdministratorDashboard;

@@ -16,3 +16,5 @@ client/dist
 server/dist
 .vscode
 .DS_Store
+reports
+logs

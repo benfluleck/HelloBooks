@@ -1,14 +1,15 @@
 import React from 'react';
 import { Row } from 'react-materialize';
 import PropTypes from 'prop-types';
-import WelcomeMessage from './messages/WelcomeMessage.jsx';
-import Bottom from '../presentation/common/Footer.jsx';
-import DisplayBookModal from '../presentation/common/book/DisplayBookModal.jsx';
-import DisplayRecentBooks from '../container/booklist/DisplayRecentBooks.jsx';
+import WelcomeMessage from './messages/WelcomeMessage';
+import Bottom from '../presentation/common/Footer';
+import DisplayRecentBooks from '../container/booklist/DisplayRecentBooks';
 
 /**
  * @description Component for Landong Page presentaion component
+ *
  * @class LandingPage
+ *
  * @param {bool} isAuthenticated
  */
 const LandingPage = ({ isAuthenticated }) => (
@@ -34,7 +35,6 @@ const LandingPage = ({ isAuthenticated }) => (
         </div>
       </div>
     </Row>
-    {/* <DisplayBookModal /> */}
     <Bottom />
   </div>
 );

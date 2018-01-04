@@ -1,8 +1,9 @@
 import express from 'express';
 import controller from '../controllers';
 import fieldValidationMiddleware from
-  '../controllers/middleware/fieldValidations';
-import nullvalidationMiddleware from '../controllers/middleware/nullValidation';
+  '../controllers/middleware/validators/fieldValidations';
+import nullvalidationMiddleware from
+  '../controllers/middleware/validators/nullValidation';
 import decodeToken from '../controllers/middleware/authenticate';
 import checkAdmin from '../controllers/middleware/checkAdmin';
 import checkGoogleAuth from '../controllers/middleware/checkGoogleAuth';
@@ -27,7 +28,7 @@ Router.post(
   '/auth/users/signup',
   fieldValidationMiddleware,
   nullvalidationMiddleware,
-  UserController.create
+  UserController.createUser
 );
 
 Router.post(
@@ -36,7 +37,7 @@ Router.post(
   nullvalidationMiddleware,
   UserController.signIn
 );
-Router.get('/admin/users/:userId', UserController.getUser);
+Router.get('/admin/users/:userId', checkAdmin, UserController.getUser);
 
 Router.post(
   '/admin/books',

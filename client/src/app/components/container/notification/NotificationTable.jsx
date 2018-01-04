@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Row } from 'react-materialize';
 import NoNotificationsMessage from
-  '../../presentation/messages/dashboardMessages/NoNotifications.jsx';
+  '../../presentation/messages/dashboardMessages/NoNotifications';
 
 /**
+ * @description Displays notifications from Users
  *
  * @class NotificationTable
  *
@@ -15,11 +16,11 @@ const NotificationTable = ({ notificationList }) => {
     notificationList.map(notification =>
       (
         <tr key={notification.id}>
-          <td>{notification.user ? notification.user.username
-              : 'User not found'}
+          <td>{notification.user ? notification.user.username :
+            'User not found'}
           </td>
-          <td>{notification.book ? notification.book.title
-              : 'Book not found'}
+          <td>{notification.book ? notification.book.title :
+            'Book not found'}
           </td>
           <td>{notification.action || 'N/A'}
           </td>

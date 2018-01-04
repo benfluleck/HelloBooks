@@ -1,10 +1,10 @@
-import toTitleCase from 'to-title-case';
 import sentenceCase from 'sentence-case';
 import uniqueRandom from 'unique-random';
 import dotenv from 'dotenv';
 
 dotenv.config();
-const randomId = uniqueRandom(process.env.ISBNRANDOM_MIN_ID, process.env.ISBNRANDOM_MAX_ID);
+const randomId =
+uniqueRandom(process.env.ISBNRANDOM_MIN_ID, process.env.ISBNRANDOM_MAX_ID);
 
 export default(sequelize, DataTypes) => {
   const Books = sequelize.define('Books', {

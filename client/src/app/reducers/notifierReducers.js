@@ -9,6 +9,7 @@ const INITIAL_STATE = {
 /**
  *
  * @export
+ *
  * @param {any} [state=INITIAL_STATE]
  *
  * @param {any} [action={}]
@@ -19,17 +20,19 @@ const INITIAL_STATE = {
  */
 export default function notifierReducer(state = INITIAL_STATE, action = {}) {
   switch (action.type) {
-    case GET_NOTIFICATIONS_SUCCESS:
-      return {
-        ...state,
-        notifications: action.data
-      };
-    case GET_NOTIFICATIONS_FAILURE:
-      return {
-        ...state,
-        error: action.error
-      };
-    default:
-      return state;
+  case GET_NOTIFICATIONS_SUCCESS:
+    return {
+      ...state,
+      notifications: action.data
+    };
+
+  case GET_NOTIFICATIONS_FAILURE:
+    return {
+      ...state,
+      error: action.error
+    };
+
+  default:
+    return state;
   }
 }

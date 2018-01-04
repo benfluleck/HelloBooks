@@ -31,6 +31,5 @@ export const loanHistoryAction = (offset, limit) => dispatch => api
     return response;
   })
   .catch((error) => {
-    dispatch(showErrorNotification({ error }));
     dispatch(loanHistoryFailure({ error }));
   });

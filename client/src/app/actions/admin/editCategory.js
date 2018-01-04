@@ -1,21 +1,25 @@
 import {
   showErrorNotification,
+  showSuccessNotification
 } from '../notifications';
 import {
-  EDIT_CATEGORY_FAILURE,
   EDIT_CATEGORY_SUCCESS
 } from '../actionType';
 import api from '../api';
 
+
+/**
+ * @description This implements action type
+ * when edit category is successful
+ *
+ * @param {object} category
+ *
+ * @returns {void}
+ */
 export const editCategorySuccess = category =>
   ({
     type: EDIT_CATEGORY_SUCCESS,
     category
-  });
-export const editCategoryFailure = error =>
-  ({
-    type: EDIT_CATEGORY_FAILURE,
-    error
   });
 
 
@@ -36,10 +40,10 @@ export const editCategoryAction = (categoryName, categoryId) => dispatch =>
     .editCategory(categoryName, categoryId)
     .then((response) => {
       dispatch(editCategorySuccess(response));
+      dispatch(showSuccessNotification(response));
       return (response);
     })
     .catch((error) => {
-      dispatch(editCategoryFailure({ error }));
       dispatch(showErrorNotification({ error }));
     });
 

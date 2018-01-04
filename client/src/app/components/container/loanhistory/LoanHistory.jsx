@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { Preloader } from 'react-materialize';
 import PropTypes from 'prop-types';
 import { loanHistoryAction } from '../../../actions/loanHistory';
-import PaginationWrapper from '../common/Pagination.jsx';
+import PaginationWrapper from '../common/Pagination';
 import LoanHistoryTable
-  from '../../presentation/loanhistory/LoanHistoryTable.jsx';
+  from '../../presentation/loanhistory/LoanHistoryTable';
 
 /**
  * handles the state of the Loan history table

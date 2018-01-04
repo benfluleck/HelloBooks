@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Dropdown, NavItem, Button } from 'react-materialize';
-import getCategories from './getCategoriesWrapper.jsx';
+import GetCategories from './GetCategoriesWrapper';
 
 
 const CategoriesDropdown = (props) => {
   /**
- *
+ * @description CategoriesDropdown list display items for the drop down
  *
  * @returns {Component} Dropdown
  *
@@ -38,10 +38,13 @@ const CategoriesDropdown = (props) => {
 
 CategoriesDropdown.propTypes = {
   categories: PropTypes.arrayOf(PropTypes.shape({
-    map: PropTypes.object,
+    category: PropTypes.object,
   })).isRequired
 };
 
-const CategoriesDropdownList = getCategories(CategoriesDropdown);
+
+const CategoriesDropdownList = GetCategories(CategoriesDropdown);
+
+export { CategoriesDropdown };
 
 export default CategoriesDropdownList;
