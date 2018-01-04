@@ -32,7 +32,7 @@ const props = {
   key: book.id,
   fetchAllBooks: jest.fn(() => Promise.resolve()),
   fetchAllCategories: jest.fn(() => Promise.resolve()),
-
+  fetchAllBorrowedBooks: jest.fn(() => Promise.resolve()),
   allBooksList
 
 };

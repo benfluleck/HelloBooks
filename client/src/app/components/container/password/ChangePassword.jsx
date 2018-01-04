@@ -44,6 +44,7 @@ class ChangePassword extends Component {
    * @memberOf DisplayRecentBooks
   * */
   componentWillMount() {
+    this.setState({ initModal: true });
     $('body').css('background-color', 'rgb(204, 204, 204)');
   }
   /**
@@ -159,7 +160,9 @@ class ChangePassword extends Component {
                 </Input>
                 <Col className="center" s={12}>
                   <div className="login-btn">
-                    <Button onClick={this.onClick} waves="light">Change Password</Button>
+                    <Button
+                      onClick={this.onClick}
+                      waves="light">Change Password</Button>
                   </div>
                 </Col>
               </Row>

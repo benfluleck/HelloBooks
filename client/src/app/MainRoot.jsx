@@ -25,9 +25,9 @@ const MainRoot = () => (
     <Root>
       <Switch>
         <Route exact path="/" component={LandingPage} />
-        <Route exact path="/login" component={AuthSignIn} />
+        <GuestRoutes exact path="/login" component={AuthSignIn} />
         <Route exact path="/logout" component={Logout} />
-        <Route exact path="/signup" component={AuthSignUp} />
+        <GuestRoutes exact path="/signup" component={AuthSignUp} />
         <UserRoutes exact path="/dashboard" component={UserDashboard} />
         <AdminRoutes exact path="/admin" component={AdminDashboard} />
         <UserRoutes exact path="/changepassword" component={ChangePassword} />

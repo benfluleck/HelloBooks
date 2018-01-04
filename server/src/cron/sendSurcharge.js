@@ -1,4 +1,3 @@
-import * as log from 'loglevel';
 import model from '../models';
 import { transporter, mailOptions } from '../mailer/mailer';
 
@@ -49,9 +48,8 @@ const sendSurcharge = () => (UserBooks.findAll({
     <p>Kind regards,</p>`;
     transporter.sendMail(mailOptions(to, bcc, subject, html), (error, info) => {
       if (error) {
-        log.debug(error);
+        process.exit(0);
       } else {
-        log.debug(`Email sent: ${info.response}`);
         process.exit(0);
       }
     });

@@ -22,7 +22,7 @@ const INITIAL_STATE = {
  *
  * @param {object} [state=INITIAL_STATE]
  *
- * @param {object} [action={}]: action initiated
+ * @param {object} action initiated
  *
  * @returns {object} action:return the action object
  */

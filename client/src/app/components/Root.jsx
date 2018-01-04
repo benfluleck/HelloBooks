@@ -6,15 +6,14 @@ import UploadModal from
 import DisplayBookModal from './presentation/common/book/DisplayBookModal';
 
 
-/* eslint-disable */
 const Root = props => (
   <div className="root-wrapper">
 
     <Header />
     {props.children}
-  <UploadModal />
- <DisplayBookModal />
- 
+    <UploadModal />
+    <DisplayBookModal />
+
   </div>
 );
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Input } from 'react-materialize';
 
 
 /**
@@ -36,22 +35,24 @@ class CategoriesOptions extends React.PureComponent {
         </option>
       ));
     return (
-      <Input
-        s={6}
-        type="select"
-        name="categoryId"
-        value={this.props.categoryId}
-        onChange={this.props.onChange}
-        className="black-text"
-      >
-        <option
-          value=""
-          label="Choose Category"
-        >
-      Choose a Category
-        </option>
-        {[...categoryNames]}
-      </Input>
+
+      <div className="col s6 push-s4">
+        <label>Category Name</label>
+        <br/>
+        <select className="browser-default"
+          onChange={this.props.onChange}
+          value={this.props.categoryId}>
+          <option
+            value=""
+            label="Choose Category"
+            defaultValue
+          >
+          Choose a Category
+          </option>
+          {[...categoryNames]}
+        </select>
+
+      </div>
     );
   }
 }
@@ -61,7 +62,8 @@ CategoriesOptions.propTypes = {
   categories: PropTypes.arrayOf(PropTypes.shape({
     category: PropTypes.object
   })),
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  categoryId: PropTypes.number
 };
 
 export { CategoriesOptions };

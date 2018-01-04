@@ -18,13 +18,10 @@ const Header = ({ isAuthenticated, tokenExists, activeLink }) => {
    * @returns {object} component
    */
 
-  let navLinks = ['apiDocs'];
-  navLinks = isAuthenticated && tokenExists ?
+  const navLinks = isAuthenticated && tokenExists ?
+    ['dashboard', 'logout'] :
     [
-      ...navLinks,
-      'dashboard', 'logout'] :
-    [
-      'login', 'sign up', ...navLinks
+      'login', 'sign up'
     ];
   return (
     <header className="header">

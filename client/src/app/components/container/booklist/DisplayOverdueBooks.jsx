@@ -83,7 +83,6 @@ DisplayOverdueBooks.propTypes = {
   offset: PropTypes.number,
   limit: PropTypes.number,
   overdueBooks: PropTypes.shape({
-    id: PropTypes.number,
     map: PropTypes.object,
     pagination: PropTypes.object,
     books: PropTypes.arrayOf(PropTypes.shape({

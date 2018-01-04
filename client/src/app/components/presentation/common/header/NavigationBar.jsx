@@ -32,6 +32,7 @@ const Navigation = (props) => {
     ));
   return (
     <Navbar right fixed>
+      <li><a href="/apidocs">API DOCS</a></li>
       {links}
     </Navbar>
   );

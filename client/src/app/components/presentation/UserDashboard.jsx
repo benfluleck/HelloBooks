@@ -12,7 +12,9 @@ import GetDashboardWrapper from '../container/common/Dashboard';
 
 /**
  * @description Show User Dashboard
+ *
  * @class DashboardView
+ *
  * @param {object} props
  *
  */
@@ -64,7 +66,6 @@ class UserDashboard extends React.PureComponent {
     );
   }
 }
-
 
 const ClientDashboard = GetDashboardWrapper(UserDashboard);
 

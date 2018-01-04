@@ -84,33 +84,33 @@ class CategoriesCollectionList extends React.Component {
       showCancelButton: true,
       confirmButtonText: 'Yes, delete it!',
       cancelButtonText: 'No, cancel!',
-      confirmButtonClass: 'btn btn-success',
-      cancelButtonClass: 'btn btn-danger',
-      buttonsStyling: false,
+      buttonsStyling: true,
       reverseButtons: true
-    }).then((response) => {
-      if (response.message === 'This category has been deleted') {
-        this.props.deleteCategoryAction(id);
-        swal(
-          'Deleted!',
-          'Your Category has been deleted.',
-          'success'
-        );
-      } else {
-        swal(
-          'Cancelled',
-          'This Category has books in it',
-          'error'
-        );
-      }
-    })
-      .catch(() => {
-        swal(
-          'Operation Cancelled',
-          'Category is safe from deletion',
-          'error'
-        );
-      });
+    }).then(() => {
+      this.props.deleteCategoryAction(id)
+        .then((response) => {
+          if (response.message === "This category has been deleted") {
+            swal(
+              'Deleted!',
+              'Your Category has been deleted.',
+              'success'
+            );
+          } else {
+            swal(
+              'Cancelled',
+              'This Category has books in it',
+              'error'
+            );
+          }
+        })
+        .catch(() => {
+          swal(
+            'Operation Cancelled',
+            'Category is safe from deletion',
+            'error'
+          );
+        });
+    }).catch(() => {});
   }
   /**
    *

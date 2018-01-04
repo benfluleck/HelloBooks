@@ -1,5 +1,5 @@
 import models from '../models';
-import paginationFunc from '../controllers/middleware/pagination';
+import getPagination from '../controllers/helpers/pagination';
 
 
 const { Notifications, Books, User } = models;
@@ -37,7 +37,7 @@ export default {
       .then((notifications) => {
         const allNotifications = {
           notifications: notifications.rows,
-          pagination: paginationFunc(offset, limit, notifications)
+          pagination: getPagination(offset, limit, notifications)
         };
         res.status(200).send(allNotifications);
       })

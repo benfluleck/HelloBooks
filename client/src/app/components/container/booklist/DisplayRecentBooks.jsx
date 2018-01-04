@@ -82,7 +82,7 @@ DisplayRecentBooks.propTypes = {
   books: PropTypes.object,
   fetchAllRecentBooks: PropTypes.func.isRequired,
   recentBooks: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.integer
+    id: PropTypes.number
   }))
 };
 

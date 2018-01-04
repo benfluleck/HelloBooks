@@ -1,4 +1,4 @@
-const paginationFunc = (offset, limit, books) => {
+const getPagination = (offset, limit, books) => {
   const pagination = {
     page: Math.floor(offset / limit) + 1,
     pageCount: Math.ceil(books.count / limit),
@@ -8,4 +8,4 @@ const paginationFunc = (offset, limit, books) => {
   return pagination;
 };
 
-export default paginationFunc;
+export default getPagination;

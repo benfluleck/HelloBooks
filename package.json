@@ -20,10 +20,10 @@
 		"start-prod": "babel server/src --out-dir server/dist --presets es2015 && npm run heroku-postbuild",
 		"heroku-postbuild": "rimraf client/dist && mkdir client/dist && npm run build && export NODE_ENV=production && npm run undo:migrate && npm run start:migrate && npm run seed:all && webpack",
 		"e2e-setup": "selenium-standalone install",
-    "e2e-server": "selenium-standalone start",
-    "start:server:e2e": "NODE_ENV=test babel-watch server/dist/bin/www --exec babel-node",
-    "pretest:e2e": "export NODE_ENV=test && npm run undo:migrate && npm run start:migrate && npm run seed:all",
-    "test:e2e": "nightwatch"
+		"e2e-server": "selenium-standalone start",
+		"start:server:e2e": "NODE_ENV=test babel-watch server/dist/bin/www --exec babel-node",
+		"pretest:e2e": "export NODE_ENV=test && npm run undo:migrate && npm run start:migrate && npm run seed:all",
+		"test:e2e": "nightwatch"
 	},
 	"nyc": {
 		"exclude": [

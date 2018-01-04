@@ -66,7 +66,7 @@ class BookDetailForm extends React.PureComponent {
               <TextInput
                 name="quantity"
                 type="text"
-                value={quantity}
+                value={quantity ? quantity.toString() : quantity}
                 onChange={onChange}
                 errors={errors.quantity}
                 label="Quantity"

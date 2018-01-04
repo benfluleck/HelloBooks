@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { PropTypes } from 'prop-types';
 import { Redirect, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -6,25 +6,25 @@ import { connect } from 'react-redux';
 const UserRoutes = ({
   isAuthenticated,
   tokenExists,
-  component: Component,
+  component,
   ...rest
-}) => (
-  <Route
-    {...rest}
-    render={props => (isAuthenticated && tokenExists
-    ? <Component{...props} />
-    : <Redirect to="/login" />
-
-    )
-    }
-  />
-);
-
+}) => {
+  const PassedComponent = component;
+  return (
+    <Route
+      {...rest}
+      render={props => (isAuthenticated && tokenExists ?
+        <PassedComponent{...props} /> :
+        <Redirect to="/login" />
+      )
+      }
+    />
+  );
+};
 UserRoutes.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   component: PropTypes.func.isRequired,
-  tokenExists: PropTypes.bool.isRequired,
-  // isAdmin: PropTypes.bool.isRequired
+  tokenExists: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = state => ({

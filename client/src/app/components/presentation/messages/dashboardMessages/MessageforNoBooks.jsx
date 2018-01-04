@@ -4,6 +4,7 @@ import { Row } from 'react-materialize';
 
 /**
  * @description Component for Message for No Books
+ *
  * @class MessageforNoBooks
  */
 const MessageforNoBooks = () => (

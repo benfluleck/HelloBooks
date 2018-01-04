@@ -20,7 +20,7 @@ export default (req, res, next) => {
       familyName: lastname,
       imageUrl: userImage
     } = req.body;
-    const username = email.slice(0, email.indexOf('@')) + googleId.slice(3);
+    const username = email.slice(0, email.indexOf('@')) + googleId.slice(5);
     const password = googleId;
     const passwordConfirmation = googleId;
     req.body = {

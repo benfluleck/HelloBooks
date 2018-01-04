@@ -59,9 +59,8 @@ const decodeToken = (req, res, next) => {
   const token = req.headers['x-access-token'] || req.headers.authorization;
   if (token) {
     const decodedToken = jwtDecode(token);
-    next(null, {
-      userId: decodedToken.id.id
-    });
+    req.userId = decodedToken.id.id;
+    next();
   } else {
     res.status(401).send({ message: 'Unauthorised access' });
   }

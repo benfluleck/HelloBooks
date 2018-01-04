@@ -115,7 +115,7 @@ describe('Authentication', () => {
         passwordConfirmation: 'boooboo',
         firstname: 'Benny',
         isAdmin: true,
-        email: faker.internet.email(),
+        email: 'bo555@kent.ac.uk',
         lastname: faker.name.lastName()
       })
       .end((err, res) => {
@@ -154,7 +154,7 @@ describe('Authentication', () => {
   );
 
   it(
-    'should not log a user in with a wrong googleID with user details',
+    'should not log a user in with a wrong googleID but with user details',
     (done) => {
       const newUser = {
         googleId: '345678976543',
@@ -171,7 +171,7 @@ describe('Authentication', () => {
         .post('/api/v1/auth/users/signin')
         .send(newUser)
         .end((err, res) => {
-          expect(res.status).to.equal(400);
+          expect(res.status).to.equal(500);
           done();
         });
     }

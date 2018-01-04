@@ -55,7 +55,8 @@ describe('Books', () => {
           done();
         });
     });
-    it('should return books when given a default limit and an offset', (done) => {
+    it('should return books when given ' +
+    'a default limit and an offset', (done) => {
       chai
         .request(app)
         .get('/api/v1/books')
@@ -78,7 +79,8 @@ describe('Books', () => {
           done();
         });
     });
-    it('should return books with a given limit and a default offset', (done) => {
+    it('should return books with a given ' +
+    'limit and a default offset', (done) => {
       chai
         .request(app)
         .get('/api/v1/books')
@@ -116,7 +118,8 @@ describe('Books', () => {
           done();
         });
     });
-    it('should return books with a default limit and a given offset', (done) => {
+    it('should return books with a ' +
+    'default limit and a given offset', (done) => {
       chai
         .request(app)
         .get('/api/v1/books')
@@ -162,7 +165,8 @@ describe('Books', () => {
           done();
         });
     });
-    it('should not edit a selected book if a field value is set to empty', (done) => {
+    it('should not edit a selected ' +
+    'book if a field value is set to empty', (done) => {
       chai
         .request(app)
         .put(`/api/v1/admin/books/${bookId}`)
@@ -233,7 +237,7 @@ describe('Books', () => {
           expect(res.body.message)
             .to
             .equal('Learn Java has been added to the library,' +
-              ' Category: Drama');
+              'Category: Drama');
           done();
         });
     });

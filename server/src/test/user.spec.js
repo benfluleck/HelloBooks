@@ -1,4 +1,3 @@
-import * as log from 'loglevel';
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import usrToken from './helpers/testHooks';
@@ -34,9 +33,6 @@ describe('Users', () => {
       })
       .then((book) => {
         bookId = book.id;
-      })
-      .catch((error) => {
-        log.debug('Error in seeding the db', error);
       });
   });
   it('should allow only authenticated users to view books', (done) => {
@@ -71,7 +67,6 @@ describe('Users', () => {
         done();
       });
   });
-
   describe('<Change User level Route', () => {
     it('should return 409 when the level is ' +
     'changed to the existing level', (done) => {

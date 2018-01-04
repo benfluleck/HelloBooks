@@ -211,7 +211,6 @@ class EditBookModal extends React.Component {
 
 EditBookModal.defaultProps = {
   header: 'Edit Book',
-  // book: null
 };
 
 

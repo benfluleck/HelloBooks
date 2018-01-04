@@ -71,9 +71,7 @@ class Book extends React.Component {
       showCancelButton: true,
       confirmButtonText: 'Yes, delete it!',
       cancelButtonText: 'No, cancel!',
-      confirmButtonClass: 'btn btn-success',
-      cancelButtonClass: 'btn btn-danger',
-      buttonsStyling: false,
+      buttonsStyling: true,
       reverseButtons: true
     }).then(() => {
       this
@@ -183,7 +181,7 @@ Book.propTypes = {
   deleteBookAction: PropTypes.func.isRequired,
   offset: PropTypes.number,
   limit: PropTypes.number,
-  // book: PropTypes.object
+  book: PropTypes.object
 };
 
 Book.defaultProps = {
@@ -200,4 +198,5 @@ const mapStateToProps = state => ({
 
 });
 
-export default connect(mapStateToProps, { deleteBookAction, fetchAllBooks, fetchSelectedBook })(Book);
+export default connect(mapStateToProps, {
+  deleteBookAction, fetchAllBooks, fetchSelectedBook })(Book);

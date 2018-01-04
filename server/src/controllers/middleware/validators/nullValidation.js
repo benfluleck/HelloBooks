@@ -1,4 +1,4 @@
-import { nullValidationFnMap, nullValidFieldMessage } from './validators';
+import { nullValidationFnMap, nullValidFieldMessage } from '././validators';
 
 const fieldMap = (bookId, categoryId) => ({
   '/auth/users/signin': ['username',

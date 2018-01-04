@@ -5,7 +5,6 @@ import path from 'path';
 import dotenv from 'dotenv';
 import routes from './routes';
 import authenticate from './controllers/middleware/authenticate';
-import { sendSurchargeJob } from './cron/index';
 
 dotenv.config();
 const app = express();
@@ -19,7 +18,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use('/apiDocs', express.static(path.join(__dirname, '../../apiDocs/')));
+app.use('/apidocs', express.static(path.join(__dirname, '../../apidocs')));
 app.use(express.static(path.join(__dirname, '../../client/dist/app')));
 
 app.use((req, res, next) => {
@@ -32,6 +31,10 @@ app.use((req, res, next) => {
 });
 
 app.use('/api/v1', authenticateRoutes, routes);
+
+app.get('/apidocs', (req, res) => {
+  res.sendFile(path.join(__dirname, '../../apidocs/index.html'));
+});
 
 app
   .get('*', (req, res) =>

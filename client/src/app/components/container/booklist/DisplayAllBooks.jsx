@@ -156,7 +156,8 @@ DisplayAllBooks.propTypes = {
     })),
   }),
   fetchAllBooks: PropTypes.func.isRequired,
-  fetchAllCategories: PropTypes.func.isRequired
+  fetchAllCategories: PropTypes.func.isRequired,
+  fetchAllBorrowedBooks: PropTypes.func
 };
 
 DisplayAllBooks.defaultProps = {

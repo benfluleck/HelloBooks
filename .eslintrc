@@ -24,6 +24,7 @@
 	},
 	"rules": {
 		"one-var": 0,
+		"no-restricted-globals": 0,
 		"indent": [
 			"error",
 			2

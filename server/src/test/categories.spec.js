@@ -38,7 +38,7 @@ describe('Categories', () => {
         done();
       });
   });
-  it('should return 200 when displaying all book categories', (done) => {
+  it('should return 200 when displaying all book categories by id', (done) => {
     chai
       .request(app)
       .get('/api/v1/books/category/1')
@@ -55,7 +55,7 @@ describe('Categories', () => {
         expect(res.body.books)
           .to
           .have
-          .length(6);
+          .length(7);
         done();
       });
   });

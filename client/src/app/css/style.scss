@@ -577,35 +577,46 @@ i.medium {
 	background-color: $base-light-orange;
 }
 
-.swal-icon,
-.swal-icon--warning,
-.swal-text,
-.swal-title {
+.swal2-icon,
+.swal2-icon--warning,
+.swal2-text,
+.swal2-title {
 	color: white !important;
 	border-color: white !important;
 	background-color: $base-orange;
 }
 
-.swal-icon--warning__body,
-.swal-icon--warning__dot {
+.swal2-icon--warning__body,
+.swal2-icon--warning__dot {
 	background-color: white !important;
 }
-.swal-button--danger,
-.swal-button--confirm,
-.swal-button {
-	background-color: white !important;
+.swal2-button--danger,
+.swal2-confirm,
+.swal2-button {
+	background-color: $base-light-orange !important;
 	color: $base-orange !important;
 }
-.swal-icon--success__ring {
-	border-color: $base-light-orange !important;
+
+.swal2-title{
+	font-family: $font-stack2;
 }
-.swal-icon--success__line,
-.swal-icon--success__line--long .swal-icon--success__line--tip {
+
+.swal2-cancel{
+	color: white !important;
+	background-color: #d2623e !important;
+	margin-left: 10px !important;
+}
+.swal2-icon--success__ring {
+	border-color: $base-light-orange !important;
+
+}
+.swal2-icon--success__line,
+.swal2-icon--success__line--long .swal-icon--success__line--tip {
 	background-color: #a5dc86 !important;
 }
-.swal-icon--success:before,
-.swal-icon--success:after,
-.swal-icon--success__hide-corners {
+.swal2-icon--success:before,
+.swal2-icon--success:after,
+.swal2-icon--success__hide-corners {
 	background-color: $base-orange !important;
 }
 

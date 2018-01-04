@@ -1,4 +1,4 @@
-import { fieldValidationFnMap, inValidFieldMessage } from './validators';
+import { fieldValidationFnMap, inValidFieldMessage } from '././validators';
 
 
 const fieldMap = {

@@ -1,6 +1,6 @@
 import { toDate } from 'validator';
 import models from '../models';
-import paginationFunc from '../controllers/middleware/pagination';
+import getPagination from '../controllers/helpers/pagination';
 
 const {
   User, Books, Userlevel, UserBooks, Notifications
@@ -204,7 +204,7 @@ export default {
         .status(200)
         .send({
           books: book.rows,
-          pagination: paginationFunc(offset, limit, book)
+          pagination: getPagination(offset, limit, book)
         });
     }).catch(error => res.status(400).send(error.message));
   },
@@ -293,7 +293,7 @@ export default {
                       .send({
                         message:
                         `You have just returned ${returnDetail.book} 
-                         late, A fine will be sent to you`,
+                         late, A fine will be sent to your registered email`,
                         returnedBook: returnDetail
                       });
                   } else {
@@ -356,7 +356,7 @@ export default {
           .status(200)
           .send({
             books: book.rows,
-            pagination: paginationFunc(offset, limit, book)
+            pagination: getPagination(offset, limit, book)
           });
       }).catch(error => res.status(500).send(error.message));
   },
@@ -405,7 +405,7 @@ export default {
         .status(200)
         .send({
           books: book.rows,
-          pagination: paginationFunc(offset, limit, book)
+          pagination: getPagination(offset, limit, book)
         });
     }).catch(error => res.status(400).send(error.message));
   }

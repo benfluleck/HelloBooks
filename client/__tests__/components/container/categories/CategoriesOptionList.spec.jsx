@@ -20,7 +20,6 @@ const setup = () => {
 describe('CategoriesOption Component', () => {
   it('should render without throwing an error', () => {
     const wrapper = setup();
-    expect(wrapper.find('Input').length).toBe(1);
     expect(wrapper.find('option').length).toBe(3);
   });
 });

@@ -1,5 +1,5 @@
 import models from '../models';
-import paginationFunc from '../controllers/middleware/pagination';
+import getPagination from '../controllers/helpers/pagination';
 
 const { Categories, Books, UserBooks } = models;
 
@@ -71,7 +71,8 @@ export default {
                     .status(201)
                     .send({
                       message: `${newBook.title} ` +
-                    `has been added to the library, Category: ${newBook.category}`,
+                    `has been added to the library,` +
+                    `Category: ${newBook.category}`,
                       createdBook
                     });
                 });
@@ -153,10 +154,15 @@ export default {
   },
   /**
    * Route: GET: /books
+   *
    * @description returns a list of all books
+   *
    * @param {req} req
+   *
    * @param {res} res
+   *
    * @returns {object} books
+   *
    * @memmberOf BookController
    */
   getAllBooks(req, res) {
@@ -181,7 +187,7 @@ export default {
             .status(200)
             .send({
               books: books.rows,
-              pagination: paginationFunc(offset, limit, books)
+              pagination: getPagination(offset, limit, books)
             });
         }
       })
@@ -244,7 +250,7 @@ export default {
       }).then((books) => {
         const booksFound = {
           books: books.rows,
-          pagination: paginationFunc(offset, limit, books)
+          pagination: getPagination(offset, limit, books)
         };
         if (books.rows.length === 0) {
           return res

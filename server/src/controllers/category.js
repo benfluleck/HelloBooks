@@ -1,5 +1,5 @@
 import models from '../models';
-import paginationFunc from '../controllers/middleware/pagination';
+import getPagination from '../controllers/helpers/pagination';
 
 const { Categories, Books } = models;
 
@@ -96,7 +96,7 @@ export default {
       .all({ order: [['categoryName', 'ASC']] })
       .then((categories) => {
         if (Object.keys(categories).length < 1) {
-          return res.status(200)
+          return res.status(404)
             .send({ message: 'Sorry there are no categories available' });
         }
         const allCategories = { categories };
@@ -136,17 +136,17 @@ export default {
           })
           .then((books) => {
             if (books.rows.length < 1) {
-              return res.status(200)
+              return res.status(404)
                 .send({
                   message: 'Sorry there are no books in this category',
                   books: books.rows,
-                  pagination: paginationFunc(offset, limit, books)
+                  pagination: getPagination(offset, limit, books)
                 });
             }
             const categoryBooks = {
               message: 'Success!',
               books: books.rows,
-              pagination: paginationFunc(offset, limit, books)
+              pagination: getPagination(offset, limit, books)
             };
             res.status(200).send(categoryBooks);
           });

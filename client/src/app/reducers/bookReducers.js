@@ -21,8 +21,8 @@ import {
  * *
  *
  * @export
- * @param {object} [state={
- * }]
+ *
+ * @param {object} [state={}]
  *
  * @param {object} action
  *

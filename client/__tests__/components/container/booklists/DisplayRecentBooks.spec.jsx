@@ -27,6 +27,7 @@ const props = {
   offset: 0,
   limit: 3,
   fetchAllRecentBooks: jest.fn(() => Promise.resolve()),
+  fetchAllBorrowedBooks: jest.fn(() => Promise.resolve()),
   recentBooks
 
 };

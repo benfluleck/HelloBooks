@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import models from '../models';
 import generateToken from '../controllers/middleware/authenticate';
-import paginationFunc from '../controllers/middleware/pagination';
+import getPagination from '../controllers/helpers/pagination';
 
 const { User, Userlevel } = models;
 
@@ -17,7 +17,7 @@ const userController = {
   *
   * @returns {void|object} response
   */
-  create(req, res) {
+  createUser(req, res) {
     if (req.body.password !== req.body.passwordConfirmation) {
       return res.status(422).send({
         message: 'Password and Password confirmation do not match'
@@ -52,9 +52,9 @@ const userController = {
                 }).then((user) => {
                   if (user) {
                     res.status(201).send({
-                      message: `${user.username} has been added to 
-                      the library, 'Please Login, you will be only ` +
-                      'required to do this once'
+                      message: `${user.username} has been added to the ` +
+                      'library, Please Login, you will be only ' +
+                      'required to Sign up once'
                     });
                   }
                 });
@@ -163,7 +163,7 @@ const userController = {
     * @returns {object} Message object
     */
   changePassword(req, res) {
-    const userId = req.user.id.id || req.user.id;
+    const userId = req.userId;
     User
       .findOne({
         where: {
@@ -295,7 +295,7 @@ const userController = {
             .status(200)
             .send({
               users: users.rows,
-              pagination: paginationFunc(offset, limit, users)
+              pagination: getPagination(offset, limit, users)
             });
         }
       })
