@@ -21,8 +21,8 @@ describe('Search All Books action', () => {
         expect(actions[0].type).toBe(SEARCH_BOOKS_SUCCESS);
       });
   });
-  test('should return an error when there are no results'
-  + 'matching the current criteria', () => {
+  test(`should return an error when there are no results` +
+  `matching the current criteria`, () => {
     const errorMessage = 'No books matching the cirrent search criteria';
     const store = mockStore({ allBooksList: { } });
 

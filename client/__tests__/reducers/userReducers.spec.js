@@ -8,12 +8,8 @@ import { getUserLevelListSuccess,
   getUserLevelListFailure } from
   '../../src/app/actions/admin/getUserLevelList';
 import {
-  changeUserLevelSuccess,
-  changeUserLevelFailure
+  changeUserLevelSuccess
 } from '../../src/app/actions/admin/changeUserLevel';
-import {
-  changePasswordSuccess
-} from '../../src/app/actions/changePassword';
 import {
   getUserSuccess,
   getUserFailure

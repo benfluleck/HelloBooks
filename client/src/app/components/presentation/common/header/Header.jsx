@@ -4,10 +4,15 @@ import Navigation from './NavigationBar';
 
 /**
  * @description Component for header and navigation
+ *
  * @class Header
+ *
  * @param {bool} isAuthenticated
+ *
  * @param {bool} tokenExists
+ *
  * @param {string} activeLink
+ *
  * @extends {Component}
  */
 const Header = ({ isAuthenticated, tokenExists, activeLink }) => {

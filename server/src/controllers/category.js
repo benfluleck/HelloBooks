@@ -89,7 +89,7 @@ export default {
     *
     * @param {object} res HTTP response object
     *
-    * @returns {object} All Categories
+    * @returns {object} All Categories - returns all categories
     */
   listCategories(req, res) {
     return Categories
@@ -158,13 +158,13 @@ export default {
    *
    * @description Deletes a selected book
    *
-   * @param {object} req
+   * @param {object} req - request object
    *
-   * @param {object} res
+   * @param {object} res - respond object
    *
-   * @returns {object} books
+   * @returns {string} message from the route
    *
-   * @memmberOf BookController
+   * @memmberOf CategoryController
    */
   deleteCategory(req, res) {
     const categoryId = parseInt(req.params.categoryId, 10);

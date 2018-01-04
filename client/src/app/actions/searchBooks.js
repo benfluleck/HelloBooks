@@ -14,7 +14,7 @@ export const searchBookSuccess = books =>
   });
 
 /**
- * async helper function: search Books
+ * async helper function: search Books action
  *
  * @function SearchBooks
  *

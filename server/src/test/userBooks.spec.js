@@ -3,7 +3,7 @@ import chaiHttp from 'chai-http';
 
 import app from '../app';
 import db from '../models';
-import usrToken from './helpers/testHooks';
+import usrToken from './helpers/usrToken';
 
 const { Books } = db;
 const { expect } = chai;
@@ -42,7 +42,7 @@ describe('UserBooks', () => {
       .create({
         title: 'Eze continues to go to school',
         author: 'Benny Ogidan',
-        categoryId: '1',
+        categoryId: '3',
         quantity: '0',
         description: 'Test',
         bookImage: 'Test Image'

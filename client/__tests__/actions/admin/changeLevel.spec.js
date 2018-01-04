@@ -7,7 +7,8 @@ import {
 import mockItems from '../../__mocks__/mockItems';
 
 describe('Change level action creator', () => {
-  test('should successfully change the user level for an authenticasted user', () => {
+  test(`should successfully change the user ` +
+  `level for an authenticasted user`, () => {
     const store = mockStore({});
     const sucessMessage =
     'Level changed Successfully,' +

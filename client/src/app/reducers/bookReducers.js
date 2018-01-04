@@ -20,7 +20,7 @@ import {
 /**
  * *
  *
- * @export
+ * @description this Reducer implements the action for the book reducer
  *
  * @param {object} [state={}]
  *

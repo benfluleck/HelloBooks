@@ -10,12 +10,11 @@ import TextInput from './form/TextInput';
  *
  *
  * @class BookDetailsForm
- * @extends {React.Component}
-
  *
- *
- * @class BookDetailsForm
  * @extends {React.Component}
+ *
+ * @description Shows the book details form
+ *
 * */
 class BookDetailForm extends React.PureComponent {
   /**

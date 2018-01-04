@@ -7,8 +7,9 @@ import { SignInPage } from
 
 
 /**
+ * @description renders mock for the SignInPage
  *
- * @returns { shallow } shallow
+ * @returns {component} shallow SignInPage
  */
 function setup() {
   const props = {

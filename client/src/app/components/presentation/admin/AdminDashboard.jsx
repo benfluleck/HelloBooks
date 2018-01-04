@@ -9,6 +9,7 @@ CategoryAdminTab from '../../container/categories/CategoriesAdminTab';
 import UserListTab from '../../container/userlists/container/UserListTab';
 import NotificationTab from '../../container/notification/NotificationTab';
 /**
+ * @description Shows the Admin Dashboard of the admin user
  *
  * @class AdminDashboard
  *

@@ -1,5 +1,5 @@
 import models from '../models';
-import getPagination from '../controllers/helpers/pagination';
+import pagination from '../controllers/helpers/pagination';
 
 const { Categories, Books, UserBooks } = models;
 
@@ -9,11 +9,13 @@ export default {
    *
    * @description add a book
    *
-   * @param {req} req
+   * @param {object} req - request object
    *
-   * @param {res} res
+   * @param {object} res - respond object
    *
    * @returns {object} book
+   *
+   * @returns {string} message - returns message
    *
    * @memmberOf BookController
   */
@@ -87,11 +89,13 @@ export default {
    *
    * @description update a book
    *
-   * @param {req} req
+   * @param {object} req - request object
    *
-   * @param {res} res
+   * @param {object} res - respond object
    *
-   * @returns {object} book
+   * @returns {object} book - book object
+   *
+   * @returns {string} message
    *
    * @memmberOf BookController
    */
@@ -157,11 +161,13 @@ export default {
    *
    * @description returns a list of all books
    *
-   * @param {req} req
+   * @param {object} req - request object
    *
-   * @param {res} res
+   * @param {object} res - respond object
    *
    * @returns {object} books
+   *
+   * @returns {object} pagination
    *
    * @memmberOf BookController
    */
@@ -187,7 +193,7 @@ export default {
             .status(200)
             .send({
               books: books.rows,
-              pagination: getPagination(offset, limit, books)
+              pagination: pagination(offset, limit, books)
             });
         }
       })
@@ -198,11 +204,11 @@ export default {
    *
    * @description returns a list of all books that match the search criteria
    *
-   * @param {req} req
+   * @param {object} req - request object
    *
-   * @param {res} res
+   * @param {object} res - respond object
    *
-   * @returns {object} books
+   * @returns {object} books - booksFound
    *
    * @memmberOf BookController
    */
@@ -250,7 +256,7 @@ export default {
       }).then((books) => {
         const booksFound = {
           books: books.rows,
-          pagination: getPagination(offset, limit, books)
+          pagination: pagination(offset, limit, books)
         };
         if (books.rows.length === 0) {
           return res
@@ -266,11 +272,11 @@ export default {
 
   /** displays the book matching the bookId parameters
    *
-   * @param {req} req
+   * @param {object} req - request object
    *
-   * @param {res} res
+   * @param {object} res - respond object
    *
-   * @returns {object} book
+   * @returns {object} selectedBook
      */
   viewBookDetails(req, res) {
     const bookId = parseInt(req.params.bookId, 10);
@@ -308,9 +314,9 @@ export default {
 
   /** deletes the book matching the booKId parameters
    *
-   * @param {req} req
+   * @param {object} req - request object
    *
-   * @param {res} res
+   * @param {object} res - respond object
    *
    * @returns {string} message
      */

@@ -6,9 +6,9 @@ import { addNewCategory } from '../../../actions/admin/addCategory';
 import { validateCategoryInput } from '../../../validators/validator';
 
 /**
- * handles the state of the Loan history table
+ * @description AddCategory to the library
  *
- * @class LoanHistory
+ * @class AddCategory
  *
  * @extends {React.Component}
  */

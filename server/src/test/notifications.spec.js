@@ -1,7 +1,7 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 
-import usrToken from './helpers/testHooks';
+import usrToken from './helpers/usrToken';
 import app from '../app';
 
 const expect = chai.expect;

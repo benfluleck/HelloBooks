@@ -7,7 +7,9 @@ import DisplayRecentBooks from '../container/booklist/DisplayRecentBooks';
 
 /**
  * @description Component for Landong Page presentaion component
+ *
  * @class LandingPage
+ *
  * @param {bool} isAuthenticated
  */
 const LandingPage = ({ isAuthenticated }) => (

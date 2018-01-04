@@ -22,9 +22,9 @@ export const getUserListFailure = error =>
  *
  * @function getUserLists
  *
- * @param {integer} offset
+ * @param {integer} offset - offset number
  *
- * @param {integer} limit
+ * @param {integer} limit - limit number
  *
  * @returns {function} asynchronous action
  */

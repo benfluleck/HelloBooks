@@ -15,8 +15,8 @@ const offset = 0;
 const limit = 8;
 describe('Fetch all books by categories action', () => {
   test(
-    'should successfully fetch all the books in the library and group them by their c' +
-      'ategories',
+    `should successfully fetch all the books in the library and ' +
+      'group them by their categories`,
     () => {
       const store = mockStore({});
       const books = mockItems.allBooksList;

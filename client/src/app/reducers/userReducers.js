@@ -18,7 +18,7 @@ const INITIAL_STATE = {
 
 /**
  *
- * @description this Reducer implements the authenbtication action for the user
+ * @description this Reducer implements the authentication action for the user
  *
  * @param {object} [state=INITIAL_STATE]
  *

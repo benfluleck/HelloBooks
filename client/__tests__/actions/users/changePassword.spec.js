@@ -24,10 +24,10 @@ describe('Change level action creator', () => {
         expect(actions[0].type).toEqual('NOTIF_SEND');
       });
   });
-  test('should return an error when you specify the old '
-  + 'password as the new password', () => {
-    const errorMessage
-    = "Sorry we can't find this book or all copies of this book are on loan";
+  test(`should return an error when you specify the old` +
+  `password as the new password`, () => {
+    const errorMessage =
+    "Sorry we can't find this book or all copies of this book are on loan";
     const store = mockStore({ });
 
     mock.onPut().replyOnce(

@@ -1,6 +1,6 @@
 import { toDate } from 'validator';
 import models from '../models';
-import getPagination from '../controllers/helpers/pagination';
+import pagination from '../controllers/helpers/pagination';
 
 const {
   User, Books, Userlevel, UserBooks, Notifications
@@ -13,11 +13,11 @@ export default {
    *
    * @description Loan a book
    *
-   * @param {any} req
+   * @param {object} req - request object
    *
-   * @param {any} res
+   * @param {object} res - respond object
    *
-   * @returns {any} book
+   * @returns {object} message
    *
    * @memmberOf UserBooks Controller
    */
@@ -160,11 +160,11 @@ export default {
    *
    * @description Get list of borrowed books
    *
-   * @param {any} req
+   * @param {object} req - request object
    *
-   * @param {any} res
+   * @param {object} res - respond object
    *
-   * @returns {any} book list
+   * @returns {object} book list
    *
    * @memmberOf UserBooks Controller
    */
@@ -204,7 +204,7 @@ export default {
         .status(200)
         .send({
           books: book.rows,
-          pagination: getPagination(offset, limit, book)
+          pagination: pagination(offset, limit, book)
         });
     }).catch(error => res.status(400).send(error.message));
   },
@@ -214,11 +214,11 @@ export default {
    *
    * @description Return a book
    *
-   * @param {any} req
+   * @param {object} req - request object
    *
-   * @param {any} res
+   * @param {object} res - response object
    *
-   * @returns {any} book
+   * @returns {object} book - returned book
    *
    * @memmberOf UserBooks Controller
    */
@@ -314,15 +314,18 @@ export default {
   /**
    * Route: GET: /users/overduebooks
    *
-   * @description Get user overdue books
+    * Method to get all overdue books from the library
+
+   * @param {Object} req - request object
    *
-   * @param {any} req
+   * @param {Object} res - response object
    *
-   * @param {any} res
+   * @return {string} message - returns message from overdue books
    *
-   * @returns {any} book
+   * @return {Object} books
    *
-   * @memmberOf UserBooks Controller
+   * @return {object} pagination - returns pagination
+   *
    */
   getOverdueBooks(req, res) {
     const offset = req.query.offset || 0;
@@ -356,7 +359,7 @@ export default {
           .status(200)
           .send({
             books: book.rows,
-            pagination: getPagination(offset, limit, book)
+            pagination: pagination(offset, limit, book)
           });
       }).catch(error => res.status(500).send(error.message));
   },
@@ -365,15 +368,18 @@ export default {
   /**
    * Route: GET: /users/userhistory
    *
-   * @description Get user loan history
+   * Method to get all the loan history
    *
-   * @param {any} req
+   * @param {Object} req - request object
    *
-   * @param {any} res
+   * @param {Object} res - response object
    *
-   * @returns {any} book
+   * @return {string} message - returns message
    *
-   * @memmberOf UserBooks Controller
+   * @return {Object} books
+   * 
+   * @return {object} pagination - returns pagination
+   *
    */
   getLoanHistory(req, res) {
     const offset = req.query.offset || 0;
@@ -405,7 +411,7 @@ export default {
         .status(200)
         .send({
           books: book.rows,
-          pagination: getPagination(offset, limit, book)
+          pagination: pagination(offset, limit, book)
         });
     }).catch(error => res.status(400).send(error.message));
   }

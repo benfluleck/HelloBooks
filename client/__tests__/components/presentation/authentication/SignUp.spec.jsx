@@ -9,8 +9,9 @@ import { SignUpPage } from
 
 /**
  *
+ * @description renders mock for the SignUpPage
  *
- * @returns { shallow } shallow
+ * @returns { shallow } shallowSignUpPage
  */
 function setup() {
   const props = {

@@ -14,6 +14,7 @@ import { returnBookAction } from '../../../../actions/returnBooks';
  *
  *
  * @class DisplayBookModal
+ *
  * @extends {React.Component}
 
  *
@@ -41,7 +42,7 @@ class DisplayBookModal extends React.Component {
 
   /**
    *
-   * @param {param} date
+   * @param {date} date - return date specified by user
    *
    * @returns {state} state
    *
@@ -68,7 +69,7 @@ class DisplayBookModal extends React.Component {
    *
    *
    *
-   * @param {param} loanStatus
+   * @param {bool} loanStatus of the book
    *
    * @returns {Component} Component
    *

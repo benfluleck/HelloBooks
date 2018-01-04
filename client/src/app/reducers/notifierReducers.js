@@ -9,6 +9,7 @@ const INITIAL_STATE = {
 /**
  *
  * @export
+ *
  * @param {any} [state=INITIAL_STATE]
  *
  * @param {any} [action={}]

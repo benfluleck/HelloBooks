@@ -5,8 +5,10 @@ import { imageUploadToCloud } from '../../../../actions/uploadImage';
 import ShowProgressBar from '../Preloader/ShowProgressBar';
 
 /**
- * display modal with a file input field and a submit button
- * @class UploadPictureModal
+ * @description display modal with a file input field and a submit button
+ *
+ * @class UploadeModal
+ *
  * @extends CommonModal
  */
 class UploadModal extends React.Component {

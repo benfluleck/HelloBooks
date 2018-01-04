@@ -36,6 +36,8 @@ Dashboard.propTypes = {
   wrappedDashboard: PropTypes.func
 };
 /**
+ * @description Handles the state of the Dashboard
+ *
  * @returns {component} Dashboard
  *
  * @param {component} WrappedDashboard

@@ -9,7 +9,7 @@ import { fetchAllRecentBooks,
 
 
 /**
- * @description Component for Display Books on the Landing page for all users
+ * @description Component for Display RecentBooks on the Landing page for all users
  *
  * @class DisplayLandingBooks
  *
@@ -81,6 +81,7 @@ DisplayRecentBooks.propTypes = {
   limit: PropTypes.number,
   books: PropTypes.object,
   fetchAllRecentBooks: PropTypes.func.isRequired,
+  fetchAllBorrowedBooks: PropTypes.func,
   recentBooks: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number
   }))

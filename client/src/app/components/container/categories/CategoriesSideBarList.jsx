@@ -5,9 +5,10 @@ import { Collapsible, CollapsibleItem } from 'react-materialize';
 import GetCategories from './GetCategoriesWrapper';
 
 /**
- *
+ *@description displays Collapsible Sidebar Items
  *
  * @param {object} props
+ *
  * @returns {component} Collapsible
  */
 export const CategoriesSideBar = (props) => {

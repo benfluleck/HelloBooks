@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 /**
  * @description Component for Welcome Mesage
+ *
  * @class WelcomeMessage
  */
 const WelcomeMessage = () => (

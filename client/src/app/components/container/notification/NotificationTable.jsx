@@ -5,6 +5,7 @@ import NoNotificationsMessage from
   '../../presentation/messages/dashboardMessages/NoNotifications';
 
 /**
+ * @description Displays notifications from Users
  *
  * @class NotificationTable
  *

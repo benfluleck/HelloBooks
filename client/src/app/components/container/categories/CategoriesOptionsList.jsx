@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 /**
  *
- *
+ * @description Displays Category option list
  *
  * @class CategoriesOptions
  *

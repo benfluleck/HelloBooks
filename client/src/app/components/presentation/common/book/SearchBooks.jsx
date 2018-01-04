@@ -14,7 +14,8 @@ import { fetchAllBooks } from '../../../../actions/fetchBooks';
 class SearchBooks extends React.Component {
   /**
    * Creates an instance of SearchBooks.
-   * @param {any} props
+   *
+   * @param {object} props
    *
    * @memberOf SearchBooks
    */

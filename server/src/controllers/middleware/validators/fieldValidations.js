@@ -8,9 +8,9 @@ const fieldMap = {
 /**
  * @description middleware for field format validations
  *
- * @param {object} req
+ * @param {object} req - request object
  *
- * @param {object} res
+ * @param {object} res - respond object
  *
  * @param {function} next
  *

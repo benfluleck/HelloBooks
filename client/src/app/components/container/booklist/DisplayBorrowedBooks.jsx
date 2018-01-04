@@ -10,7 +10,7 @@ import MessageforNoBooks from
   '../../presentation/messages/dashboardMessages/MessageforNoBooks';
 
 /**
- * @description Component for Display Books on the Landing page for all users
+ * @description Component for Display BorrowedBooks on the Landing page for all users
  *
  * @class DisplayLandingBooks
  *

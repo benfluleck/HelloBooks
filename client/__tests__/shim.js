@@ -26,8 +26,6 @@ document.getElementById = jest.fn(() => ({
   click: jest.fn()
 }));
 
-// window.localStorage = localStorage;
-
 window.localStorage = jest.fn({
   getItem: jest.fn(),
   setItem: jest.fn(),

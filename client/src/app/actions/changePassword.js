@@ -11,9 +11,9 @@ import api from './api';
  *
  * @function changePassword
  *
- * @param {string} password
+ * @param {string} password - new password specified by user
  *
- * @param {string} oldPassword
+ * @param {string} oldPassword - oldPassword of the user
  *
  * @returns {function} asynchronous action
  */

@@ -7,7 +7,7 @@ import MessageforNoBooksHistory
 
 
 /**
- * Table of Loan history
+ * @description Table of Loan history
  *
  * @param {Object} props props object containing books
  *

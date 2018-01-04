@@ -19,10 +19,10 @@ describe('Borrow books action', () => {
         expect(actions[0].type).toEqual('NOTIF_SEND');
       });
   });
-  test('should return an error when you try to borrow'
-  + 'a book with no id', () => {
-    const errorMessage
-    = "Sorry we can't find this book or all copies of this book are on loan";
+  test(`should return an error when you try to borrow ` +
+  `a book with no id`, () => {
+    const errorMessage =
+    "Sorry we can't find this book or all copies of this book are on loan";
     const store = mockStore({ borrowBooksList: { } });
 
     mock.onPost().replyOnce(

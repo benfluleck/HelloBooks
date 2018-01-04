@@ -7,7 +7,7 @@ import api from './api';
 /**
  * @description action to borrow book
  *
- * @param {object} book
+ * @param {object} book - book to borrow
  *
  * @returns {object} response
  */

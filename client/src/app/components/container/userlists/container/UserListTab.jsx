@@ -7,7 +7,7 @@ import PaginationWrapper from '../../common/Pagination';
 import UserListTable from '../UserListTable';
 
 /**
- * handles the state of the User List table
+ * @description handles the state of the User List table
  *
  * @class Userlists
  *
@@ -30,7 +30,7 @@ class UserListTab extends React.Component {
   }
 
   /**
-   * render User Lists component
+   * @description render User Lists component
    *
    * @method render
    *

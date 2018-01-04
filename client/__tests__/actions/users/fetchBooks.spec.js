@@ -50,8 +50,8 @@ describe('Fetch all books action', () => {
 });
 
 describe('Fetch all recent books action', () => {
-  test('should successfully fetch all '
-  + 'the recently added books in the library', () => {
+  test(`should successfully fetch all ` +
+  `the recently added books in the library`, () => {
     const store = mockStore({ recentBooksList: { } });
     mock.onGet().replyOnce(
       200,
@@ -82,8 +82,8 @@ describe('Fetch all recent books action', () => {
 });
 
 describe('Fetch all borrowed books action', () => {
-  test('should successfully fetch all '
-  + 'the books borrowed books by the user in the library', () => {
+  test(`should successfully fetch all ` +
+  `the books borrowed books by the user in the library`, () => {
     const store = mockStore({ recentBooksList: { } });
     mock.onGet().replyOnce(
       200,
@@ -114,8 +114,8 @@ describe('Fetch all borrowed books action', () => {
 });
 
 describe('Fetch all overdue books action', () => {
-  test('should successfully fetch all '
-  + 'the user\'s overdue books in the library', () => {
+  test(`should successfully fetch all ` +
+  `the user's overdue books in the library`, () => {
     const store = mockStore({ overdueBooksList: { } });
     mock.onGet().replyOnce(
       200,

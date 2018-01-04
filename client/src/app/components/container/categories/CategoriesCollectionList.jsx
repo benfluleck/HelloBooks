@@ -8,7 +8,7 @@ import { editCategoryAction } from '../../../actions/admin/editCategory';
 import { deleteCategoryAction } from '../../../actions/admin/deleteCategory';
 
 /**
- *
+ * @description renders the Categories Collection list
  *
  * @class CategoriesCollection
  *
@@ -36,7 +36,7 @@ class CategoriesCollectionList extends React.Component {
   /**
   *
   *
-  * @param {object} id
+  * @param {object} id - categoryId
   *
   * @memberof CategoriesCollectionList
   *
@@ -70,7 +70,7 @@ class CategoriesCollectionList extends React.Component {
   }
 
   /**
-   * @param {integer} id
+   * @param {integer} id - Category id
    *
    * @returns {function} deleteCategory
    *

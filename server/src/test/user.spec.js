@@ -1,6 +1,6 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import usrToken from './helpers/testHooks';
+import usrToken from './helpers/usrToken';
 
 import app from '../app';
 import db from '../models';
@@ -68,8 +68,8 @@ describe('Users', () => {
       });
   });
   describe('<Change User level Route', () => {
-    it('should return 409 when the level is ' +
-    'changed to the existing level', (done) => {
+    it(`should return 409 when the level is ` +
+    `changed to the existing level`, (done) => {
       chai
         .request(app)
         .put('/api/v1/admin/changeuserlevel')
@@ -224,8 +224,8 @@ describe('Users', () => {
   });
   describe('<ChangePassword route', () => {
     it(
-      'should produce a 409 error message if the there is an' +
-      ' error with previous password is supplied',
+      `should produce a 409 error message if the there is an` +
+      ` error with previous password is supplied`,
       (done) => {
         chai
           .request(app)
@@ -246,8 +246,8 @@ describe('Users', () => {
       }
     );
     it(
-      'should be able to change a user\'s password ' +
-     'provided a new password is specified',
+      `should be able to change a user's password ` +
+     `provided a new password is specified`,
       (done) => {
         chai
           .request(app)
@@ -267,8 +267,8 @@ describe('Users', () => {
       }
     );
     it(
-      'should return a 409 error if new password is set ' +
-     'to the old password value',
+      `should return a 409 error if new password is set ` +
+     `to the old password value`,
       (done) => {
         chai
           .request(app)

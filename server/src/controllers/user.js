@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import models from '../models';
 import generateToken from '../controllers/middleware/authenticate';
-import getPagination from '../controllers/helpers/pagination';
+import pagination from '../controllers/helpers/pagination';
 
 const { User, Userlevel } = models;
 
@@ -15,7 +15,7 @@ const userController = {
   *
   * @param {Object} res response object
   *
-  * @returns {void|object} response
+  * @returns {void|object} response object
   */
   createUser(req, res) {
     if (req.body.password !== req.body.passwordConfirmation) {
@@ -160,7 +160,7 @@ const userController = {
     *
     * @param {object} res HTTP response object
     *
-    * @returns {object} Message object
+    * @returns {string} Message
     */
   changePassword(req, res) {
     const userId = req.userId;
@@ -200,7 +200,7 @@ const userController = {
       })
       .catch(error => res.status(500).send(error.message));
   },
-  /** Changes a users level
+  /** @description Changes a users level
    *
     * @param {object} req HTTP request object
     *
@@ -255,13 +255,15 @@ const userController = {
   /**
    * Gets a list of users in tha library
    *
-   * @method get
+   * @method getUserList
    *
-   * @param {object} req
+   * @param {object} req HTTP request object
    *
-   * @param {object} res
+   * @param {object} res HTTP response object
    *
    * @return {object} response
+   *
+   * @return {string} response
    */
   getUserList(req, res) {
     const offset = req.query.offset || 0;
@@ -295,7 +297,7 @@ const userController = {
             .status(200)
             .send({
               users: users.rows,
-              pagination: getPagination(offset, limit, users)
+              pagination: pagination(offset, limit, users)
             });
         }
       })
@@ -306,9 +308,9 @@ const userController = {
    *
    * @description UserLevelList fetches the list of the user levels
    *
-   * @param {object} req
+   * @param {object} req - request object
    *
-   * @param {object} res
+   * @param {object} res - response object
    *
    * @returns {object} response
    */

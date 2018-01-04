@@ -1,7 +1,6 @@
 import { mock, mockStore } from '../../__mocks__/mockConfig';
 
-import { UPLOAD_TO_CLOUD_IMAGE_FAILURE,
-  UPLOAD_TO_CLOUD_IMAGE_SUCCESS,
+import {
   imageUploadToCloud,
 } from '../../../src/app/actions/index';
 
@@ -36,7 +35,6 @@ describe('Upload Image action', () => {
     ))
       .then(() => store.getActions())
       .then((error) => {
-       
       });
   });
 });

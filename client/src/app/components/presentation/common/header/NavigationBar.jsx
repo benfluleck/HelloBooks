@@ -4,7 +4,7 @@ import { Navbar } from 'react-materialize';
 import { PropTypes } from 'prop-types';
 
 /**
- * @description Component for Navigation
+ * @description Component for Navigation Bar
  *
  * @class NavigationBar
  *

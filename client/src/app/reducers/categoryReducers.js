@@ -10,8 +10,8 @@ const InitialBooksState = {
 };
 
 /**
+ * @description this Reducer implements the action for the category reducer
  *
- * @export
  * @param {any} [state=INITIAL_STATE]
  *
  * @param {any} [action={}]

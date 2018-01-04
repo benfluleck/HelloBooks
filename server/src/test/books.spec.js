@@ -3,7 +3,7 @@ import chaiHttp from 'chai-http';
 
 import app from '../app';
 import db from '../models';
-import usrToken from './helpers/testHooks';
+import usrToken from './helpers/usrToken';
 
 const { Books } = db;
 const { expect } = chai;
@@ -27,7 +27,7 @@ describe('Books', () => {
       .create({
         title: 'Shola comes home',
         author: 'Benny',
-        categoryId: '1',
+        categoryId: '3',
         quantity: 20,
         description: 'Test',
         bookImage: 'Test Image'
@@ -55,8 +55,8 @@ describe('Books', () => {
           done();
         });
     });
-    it('should return books when given ' +
-    'a default limit and an offset', (done) => {
+    it(`should return books when given ` +
+    `a default limit and an offset`, (done) => {
       chai
         .request(app)
         .get('/api/v1/books')
@@ -79,8 +79,8 @@ describe('Books', () => {
           done();
         });
     });
-    it('should return books with a given ' +
-    'limit and a default offset', (done) => {
+    it(`should return books with a given ` +
+    `limit and a default offset`, (done) => {
       chai
         .request(app)
         .get('/api/v1/books')
@@ -118,8 +118,8 @@ describe('Books', () => {
           done();
         });
     });
-    it('should return books with a ' +
-    'default limit and a given offset', (done) => {
+    it(`should return books with a ` +
+    `default limit and a given offset`, (done) => {
       chai
         .request(app)
         .get('/api/v1/books')
@@ -165,8 +165,8 @@ describe('Books', () => {
           done();
         });
     });
-    it('should not edit a selected ' +
-    'book if a field value is set to empty', (done) => {
+    it(`should not edit a selected ` +
+    `book if a field value is set to empty`, (done) => {
       chai
         .request(app)
         .put(`/api/v1/admin/books/${bookId}`)
@@ -236,8 +236,8 @@ describe('Books', () => {
             .equal(201);
           expect(res.body.message)
             .to
-            .equal('Learn Java has been added to the library,' +
-              'Category: Drama');
+            .equal(`Learn Java has been added to the library,` +
+              `Category: Drama`);
           done();
         });
     });
@@ -261,13 +261,13 @@ describe('Books', () => {
             .equal(409);
           expect(res.body.message)
             .to
-            .equal('A book with the same title and ' +
-              'author already exists in the library');
+            .equal(`A book with the same title and ` +
+              `author already exists in the library`);
           done();
         });
     });
-    it('should return a 400 response for ' +
-      'a book with an incomplete description', (done) => {
+    it(`should return a 400 response for ` +
+      `a book with an incomplete description`, (done) => {
       chai
         .request(app)
         .post('/api/v1/admin/books')

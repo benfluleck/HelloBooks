@@ -57,8 +57,6 @@ class Book extends React.Component {
    *
    * @method handleDelete
    *
-   *
-   *
    * @returns {void}
    *
    * @memberOf Book
@@ -99,7 +97,7 @@ class Book extends React.Component {
   /**
    *
    *
-   * @description Edit button click
+   * @description Edit button click to edit a book
    *
    * @method handleEdit
    *

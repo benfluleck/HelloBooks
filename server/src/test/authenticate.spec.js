@@ -9,7 +9,7 @@ const { expect } = chai;
 chai.use(chaiHttp);
 
 let userToken = '';
-const errorToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9';
+const invalidToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9';
 
 describe('Authentication', () => {
   it('should return a 401 status code if token is not a token', (done) => {
@@ -73,7 +73,8 @@ describe('Authentication', () => {
         done();
       });
   });
-  it('should return a 401 stus code if token is not an admin token', (done) => {
+  it('should return a 401 status ' +
+  'code if token is not an admin token', (done) => {
     chai
       .request(app)
       .post('/api/v1/admin/category')
@@ -92,7 +93,7 @@ describe('Authentication', () => {
     chai
       .request(app)
       .post('/api/v1/admin/category')
-      .set('x-access-token', errorToken)
+      .set('x-access-token', invalidToken)
       .send({ categoryName: 'EDUCATIONAL' })
       .end((err, res) => {
         expect(res.status)
@@ -177,8 +178,8 @@ describe('Authentication', () => {
     }
   );
   it(
-    'should sign up users who fill the correct ' +
-    'parameters for the signup form',
+    `should sign up users who fill the correct ` +
+    `parameters for the signup form`,
     (done) => {
       const email = 'bo345@kent.ac.uk';
       chai
@@ -186,12 +187,8 @@ describe('Authentication', () => {
         .post('/api/v1/auth/users/signup')
         .set('Accept', 'application/x-www-form-urlencoded')
         .send({
-          firstname: faker
-            .name
-            .firstName(),
-          lastname: faker
-            .name
-            .lastName(),
+          firstname: 'Mark',
+          lastname: 'Davies',
           username: 'samplename',
           password: 'password',
           passwordConfirmation: 'password',
@@ -438,8 +435,8 @@ describe('Authentication', () => {
       });
   });
   it(
-    'should return a successful login message ' +
-    'if user name and password are valid',
+    `should return a successful login message ` +
+    `if user name and password are valid`,
     (done) => {
       chai
         .request(app)

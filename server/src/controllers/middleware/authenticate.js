@@ -12,7 +12,10 @@ appended in routes that need to be authenticated
 *
 * @param {function} next - next function to be called on the success
 *
-* @return {object}  message
+* @return {object}
+*
+* @return {string} message - Validation error
+*
 */
 const authenticate = (req, res, next) => {
   if (req.url.startsWith('/auth')) return next();

@@ -1,5 +1,5 @@
 import models from '../models';
-import getPagination from '../controllers/helpers/pagination';
+import pagination from '../controllers/helpers/pagination';
 
 
 const { Notifications, Books, User } = models;
@@ -11,7 +11,7 @@ export default {
      *
      * @param {object} res HTTP response object
      *
-     * @returns {object} admin notififications
+     * @returns {object} allnotififications - returns all notifications
      */
   displayNotification(req, res) {
     const offset = req.query.offset || 0;
@@ -37,7 +37,7 @@ export default {
       .then((notifications) => {
         const allNotifications = {
           notifications: notifications.rows,
-          pagination: getPagination(offset, limit, notifications)
+          pagination: pagination(offset, limit, notifications)
         };
         res.status(200).send(allNotifications);
       })

@@ -59,8 +59,6 @@ class ChangeUserLevelModal extends React.Component {
 
   /**
    *
-   *
-   *
    * @param {object} event
    *
    * @returns {object} state
@@ -102,8 +100,6 @@ class ChangeUserLevelModal extends React.Component {
   }
 
   /**
-   *
-   *
    *
    * @memberof ChangeUserLevelModal
    *

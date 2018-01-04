@@ -22,7 +22,6 @@ class UserDashboard extends React.PureComponent {
   /**
    *
    *
-   *
    * @returns {Component} Userboard
    *
    * @memberOf UserDashboard

@@ -11,6 +11,7 @@ import BookDetailForm from './BookDetailForm';
  *
  *
  * @class BookModal
+ *
  * @extends {React.Component}
  */
 class AddBookModal extends React.Component {
@@ -147,10 +148,11 @@ class AddBookModal extends React.Component {
 
   /**
    *
+   * @description Adds Books to the library
    *
    * @returns {Component} Component
    *
-   * @memberOf BookModal
+   * @memberOf AddBookModal
    */
   render() {
     const {

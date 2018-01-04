@@ -6,7 +6,7 @@ import GetCategories from './GetCategoriesWrapper';
 
 const CategoriesDropdown = (props) => {
   /**
- *
+ * @description CategoriesDropdown list display items for the drop down
  *
  * @returns {Component} Dropdown
  *

@@ -22,8 +22,8 @@ describe('Return book action', () => {
         expect(actions[1].type).toBe(RETURN_BOOKS_SUCCESS);
       });
   });
-  test('should return an error when you try to return'
-  + 'a book with no id', () => {
+  test(`should return an error when you try to return` +
+  `a book with no id`, () => {
     const errorMessage = 'You did not borrow this book';
     const store = mockStore({ borrowBooksList: { } });
 

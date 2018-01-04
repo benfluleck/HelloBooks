@@ -12,7 +12,7 @@ if (localStorage.getItem('token')) {
 }
 /**
  *
- * @class App
+ * App class, renders the default page
  *
  * @extends {React.Component}
  *

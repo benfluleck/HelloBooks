@@ -14,8 +14,8 @@ import mockItems from '../../__mocks__/mockItems';
 describe('signup action creator', () => {
   test('successfully signup by authenticated users', () => {
     const store = mockStore({ user: { } });
-    const successMessage = 'bennytest has been added to the library,' +
-    'Please Login, you will be only required to do this once';
+    const successMessage = `bennytest has been added to the library, ` +
+    `Please Login, you will be only required to do this once`;
     mock.onPost().replyOnce(
       201,
       { message: successMessage }

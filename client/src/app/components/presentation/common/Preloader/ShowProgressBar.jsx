@@ -3,6 +3,7 @@ import { Col, Row, ProgressBar } from 'react-materialize';
 
 /**
  * @description Component for Progress Bar,
+ *
  * @class ShowProgressBar
  */
 const ShowProgressBar = () => (

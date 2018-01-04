@@ -1,6 +1,6 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import usrToken from './helpers/testHooks';
+import usrToken from './helpers/usrToken';
 
 import app from '../app';
 
@@ -55,7 +55,7 @@ describe('Categories', () => {
         expect(res.body.books)
           .to
           .have
-          .length(7);
+          .length(6);
         done();
       });
   });

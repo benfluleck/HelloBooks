@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 
 /**
  *
+ * @description base book modal used to display book data
+ *
  * @class BookModal
  *
  * @extends {React.Component}
@@ -62,13 +64,6 @@ class BaseBookModal extends React.PureComponent {
 
 BaseBookModal.propTypes = {
   children: PropTypes.element,
-  // books: PropTypes.arrayOf(PropTypes.shape({
-  //   title: PropTypes.string,
-  //   author: PropTypes.string,
-  //   quantity: PropTypes.number,
-  //   description: PropTypes.string,
-  // })),
-  // books: PropTypes.object,
   header: PropTypes.string,
   actions: PropTypes.element
 };

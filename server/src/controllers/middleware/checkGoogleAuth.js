@@ -9,7 +9,7 @@
   *
   * @param {object} next
 
-  * @returns {next} response
+  * @returns {next} undefined
   */
 export default (req, res, next) => {
   if (req.body.googleId) {

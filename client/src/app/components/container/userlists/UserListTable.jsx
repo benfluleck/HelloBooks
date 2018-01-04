@@ -32,6 +32,8 @@ class UserListTable extends React.Component {
     $('.modal').modal();
   }
   /**
+    * @description get a selected User details
+    *
     * @param {object} id
     *
     * @memberof UserListTable
@@ -42,7 +44,6 @@ class UserListTable extends React.Component {
    * */
   onClick(id) {
     this.props.getSelectedUser(id);
-    // $('#change-user-level-modal').modal('open');
   }
   /**
    *

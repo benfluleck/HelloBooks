@@ -9,7 +9,8 @@ const INITIAL_STATE = {
 
 /**
  *
- * @export
+ * @description this Reducer implements the imageReducer
+ * 
  * @param {any} [state=INITIAL_STATE]
  *
  * @param {any} [action={}]

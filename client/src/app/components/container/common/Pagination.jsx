@@ -13,6 +13,7 @@ class PaginationWrapper extends React.Component {
   * @param {number} number
   *
   * @memberOf PaginationWrapper
+  *
   * @returns {function} Function fetch
   */
   onSelect = (number) => {
@@ -24,7 +25,9 @@ class PaginationWrapper extends React.Component {
   /**
    *
    * @param {number} pagenumber
+   *
    * @param {number} numberOfRecords
+   *
    * @returns {number} pageOffset * numberOfRecords
    *
    * @memberOf PaginationWrapper
@@ -37,9 +40,13 @@ class PaginationWrapper extends React.Component {
     return pageOffset * numberOfRecords;
   }
   /**
-   * render Pagination Wrapper
+   * renders Pagination Wrapper displays Pagination
+   * for each component that requires it
+   *
    * @method render
+   *
    * @member Pagination
+   *
    * @returns {object} component
    */
   render() {
