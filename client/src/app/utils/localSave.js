@@ -3,7 +3,7 @@
  *
  * @param  {Object} state application state
  *
- * @return {undefined} writes to disk
+ * @return {object} writes to disk
  */
 export const saveState = (state) => {
   const serializedState = JSON.stringify(state);
