@@ -17,7 +17,11 @@ const GuestRoutes = ({
       render={
         props => (!isAuthenticated || !tokenExists ?
           <PassedComponent{...props} /> :
-          <Redirect to="/dashboard" />)
+          <Redirect to={{
+            pathname: '/dashboard',
+            state: { from: props.location }
+          }} />
+        )
       }
     />
   );
@@ -27,6 +31,7 @@ GuestRoutes.propTypes = {
   component: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool,
   tokenExists: PropTypes.bool,
+  location: PropTypes.object
 };
 
 const mapStateToProps = state =>

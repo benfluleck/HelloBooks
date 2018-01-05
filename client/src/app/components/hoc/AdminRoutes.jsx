@@ -16,7 +16,11 @@ const AdminRoutes = ({
       {...rest}
       render={props => (isAuthenticated && isAdmin && tokenExists ?
         <PassedComponent{...props} /> :
-        <Redirect to="/login" />)}
+        <Redirect to={{
+          pathname: '/login',
+          state: { from: props.location }
+        }} />
+      )}
     />
   );
 };
@@ -29,7 +33,8 @@ AdminRoutes.propTypes = {
   component: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
   tokenExists: PropTypes.bool.isRequired,
-  isAdmin: PropTypes.bool
+  isAdmin: PropTypes.bool,
+  location: PropTypes.object
 };
 
 const mapStateToProps = state => ({

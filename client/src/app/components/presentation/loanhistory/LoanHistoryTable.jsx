@@ -34,8 +34,8 @@ const BorrowHistoryTable = (props) => {
         <td>
 
           <div className="overdue">{!book.returnStatus ?
-            `${moment().diff(
-              moment(book.returnDate),
+            `${moment(book.returnDate).diff(
+              moment(),
               'days'
             )} days` : '-'}</div>
         </td>

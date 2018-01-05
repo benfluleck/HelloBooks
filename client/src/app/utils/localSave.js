@@ -1,4 +1,3 @@
-
 /**
  * saves application state to disk
  *
@@ -8,18 +7,28 @@
  */
 export const saveState = (state) => {
   const serializedState = JSON.stringify(state);
-  localStorage.setItem('state', serializedState);
+  localStorage.setItem('http://hellobooks', serializedState);
 };
 
+const initializeState = {
+  notifierReducer: {},
+  categoryReducer: {},
+  userReducer: {},
+};
 /**
  * loads state from disk
  *
  * @return {Object} State Object
  */
 export const loadState = () => {
-  const serializedState = localStorage.getItem('state');
-  if (serializedState === null) {
-    return undefined;
+  try {
+    const serializedState = localStorage.getItem('http://hellobooks');
+    if (serializedState === null) {
+      return initializeState;
+    }
+
+    return JSON.parse(serializedState);
+  } catch (err) {
+    return initializeState;
   }
-  return JSON.parse(serializedState);
 };

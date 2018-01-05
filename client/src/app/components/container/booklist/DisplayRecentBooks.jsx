@@ -5,7 +5,7 @@ import { Row } from 'react-materialize';
 import Loader from './Loader';
 import Book from '../../presentation/common/book/DisplayBook';
 import { fetchAllRecentBooks,
-  fetchAllBorrowedBooks } from '../../../actions/fetchBooks';
+} from '../../../actions/fetchBooks';
 
 
 /**
@@ -49,10 +49,6 @@ class DisplayRecentBooks extends React.Component {
    * @returns {object} component
    */
   render() {
-    this.props.fetchAllBorrowedBooks(
-      this.props.offset,
-      this.props.limit
-    );
     const getAllBooks = (this
       .props
       .recentBooks) ? this
@@ -81,7 +77,6 @@ DisplayRecentBooks.propTypes = {
   limit: PropTypes.number,
   books: PropTypes.object,
   fetchAllRecentBooks: PropTypes.func.isRequired,
-  fetchAllBorrowedBooks: PropTypes.func,
   recentBooks: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number
   }))
@@ -101,7 +96,6 @@ const mapStateToProps = ({ bookReducer }) => ({
 export default connect(
   mapStateToProps,
   {
-    fetchAllRecentBooks,
-    fetchAllBorrowedBooks
+    fetchAllRecentBooks
   }
 )(DisplayRecentBooks);
