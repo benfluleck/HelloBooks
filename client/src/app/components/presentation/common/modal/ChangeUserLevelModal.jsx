@@ -199,10 +199,10 @@ ChangeUserLevelModal.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  userLevels: (state.userReducer.userLevels)
-    ? state.userReducer.userLevels.userLevels : [],
-  selectedUser: (state.userReducer.selectedUser)
-    ? state.userReducer.selectedUser.user : []
+  userLevels: (state.userReducer.userLevels) ?
+    state.userReducer.userLevels.userLevels : [],
+  selectedUser: (state.userReducer.selectedUser) ?
+    state.userReducer.selectedUser.user : []
 });
 
 export default connect(

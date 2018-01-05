@@ -107,7 +107,8 @@ class ChangePassword extends Component {
   }
 
   /**
-   * @description Change Password components helps the user to change this password
+   * @description Change Password components helps the
+   * user to change this password
    *
    * @returns {component} Component
    *
