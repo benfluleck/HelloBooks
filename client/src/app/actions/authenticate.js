@@ -112,7 +112,7 @@ export const login = credentials => dispatch => api
  */
 export const logout = () => (dispatch) => {
   localStorage.removeItem('token');
-  localStorage.removeItem('state');
+  localStorage.removeItem('http://hellobooks');
   localStorage.clear();
   setAuthorizationToken(false);
   dispatch(userLoggedOut());

@@ -7,7 +7,7 @@
  */
 export const saveState = (state) => {
   const serializedState = JSON.stringify(state);
-  localStorage.setItem('state', serializedState);
+  localStorage.setItem('http://hellobooks', serializedState);
 };
 
 const initializeState = {
@@ -22,7 +22,7 @@ const initializeState = {
  */
 export const loadState = () => {
   try {
-    const serializedState = localStorage.getItem('state');
+    const serializedState = localStorage.getItem('http://hellobooks');
     if (serializedState === null) {
       return initializeState;
     }

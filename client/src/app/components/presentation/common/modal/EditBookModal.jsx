@@ -215,7 +215,7 @@ EditBookModal.defaultProps = {
 
 
 EditBookModal.propTypes = {
-  book: PropTypes.array,
+  book: PropTypes.object,
   header: PropTypes.string,
   updateBookDetails: PropTypes.func.isRequired
 };

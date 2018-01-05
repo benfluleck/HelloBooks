@@ -15,7 +15,10 @@ const UserRoutes = ({
       {...rest}
       render={props => (isAuthenticated && tokenExists ?
         <PassedComponent{...props} /> :
-        <Redirect to="/login" />
+        <Redirect to={{
+          pathname: '/login',
+          state: { from: props.location }
+        }} />
       )
       }
     />
@@ -24,15 +27,13 @@ const UserRoutes = ({
 UserRoutes.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
   component: PropTypes.func.isRequired,
-  tokenExists: PropTypes.bool.isRequired
+  tokenExists: PropTypes.bool.isRequired,
+  location: PropTypes.object
 };
 
 const mapStateToProps = state => ({
   isAuthenticated: !!state.userReducer.isAuthenticated,
   tokenExists: !!localStorage.getItem('token'),
-  // isAdmin: (state.userReducer.user)
-  //   ? state.userReducer.user.isAdmin
-  //   : '',
 });
 
 export default connect(mapStateToProps)(UserRoutes);
