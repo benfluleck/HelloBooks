@@ -6,6 +6,12 @@
 
 HelloBooks is an application that helps manage a library and its processes like stocking, tracking and lending of books.This application enables users to be able to find and borrow books. Users  are managed by an admin who manages users as well as add, edit, delete books.
 
+<br />
+<br />
+
+<img width="1440" alt="Hellobooks-screenshot" src="/screenshots/hellobooks-screenshot.png">
+<br />
+
 # Table of Contents
 - [Getting Started](#getting-started)
 - [Technology Stack](#technology-stack)
@@ -162,4 +168,4 @@ This project is authored by **Benny Ogidan** (benny.ogidan@andela.com) and is li
 See the Hello Books wiki
 
 ## Current state
-Client side testing phase
+

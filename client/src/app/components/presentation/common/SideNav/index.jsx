@@ -44,7 +44,8 @@ const SideNav = ({
 
 
 SideNav.propTypes = {
-  user: PropTypes.object
+  user: PropTypes.object,
+  props: PropTypes.object
 };
 
 export default SideNav;

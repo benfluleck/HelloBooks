@@ -230,60 +230,52 @@
               </ul>
           </li>
           <li>
-            <a href="#authentication-endpoints" class="toc-h1 toc-link" data-title="Authentication Endpoints">Authentication Endpoints</a>
+            <a href="#user-endpoints" class="toc-h1 toc-link" data-title="User Endpoints">User Endpoints</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#sign-up" class="toc-h2 toc-link" data-title="Authentication Endpoints">Sign Up</a>
+                    <a href="#sign-up" class="toc-h2 toc-link" data-title="User Endpoints">Sign Up</a>
                   </li>
                   <li>
-                    <a href="#login-user" class="toc-h2 toc-link" data-title="Authentication Endpoints">Login User</a>
+                    <a href="#login-user" class="toc-h2 toc-link" data-title="User Endpoints">Login User</a>
                   </li>
                   <li>
-                    <a href="#get-all-recent-books" class="toc-h2 toc-link" data-title="Authentication Endpoints">Get All Recent Books</a>
-                  </li>
-              </ul>
-          </li>
-          <li>
-            <a href="#get-userlevel-list" class="toc-h1 toc-link" data-title="Get Userlevel List">Get Userlevel List</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#http-request-3" class="toc-h2 toc-link" data-title="Get Userlevel List">HTTP Request</a>
+                    <a href="#get-all-recent-books" class="toc-h2 toc-link" data-title="User Endpoints">Get All Recent Books</a>
                   </li>
                   <li>
-                    <a href="#request-required-fields-4" class="toc-h2 toc-link" data-title="Get Userlevel List">Request Required Fields</a>
+                    <a href="#get-userlevel-list" class="toc-h2 toc-link" data-title="User Endpoints">Get Userlevel List</a>
                   </li>
                   <li>
-                    <a href="#view-book-details" class="toc-h2 toc-link" data-title="Get Userlevel List">View Book details</a>
+                    <a href="#view-book-details" class="toc-h2 toc-link" data-title="User Endpoints">View Book details</a>
                   </li>
                   <li>
-                    <a href="#change-password" class="toc-h2 toc-link" data-title="Get Userlevel List">Change Password</a>
+                    <a href="#change-password" class="toc-h2 toc-link" data-title="User Endpoints">Change Password</a>
                   </li>
                   <li>
-                    <a href="#get-all-books" class="toc-h2 toc-link" data-title="Get Userlevel List">Get All Books</a>
+                    <a href="#get-all-books" class="toc-h2 toc-link" data-title="User Endpoints">Get All Books</a>
                   </li>
                   <li>
-                    <a href="#get-all-borrowed-books" class="toc-h2 toc-link" data-title="Get Userlevel List">Get All Borrowed Books</a>
+                    <a href="#get-all-borrowed-books" class="toc-h2 toc-link" data-title="User Endpoints">Get All Borrowed Books</a>
                   </li>
                   <li>
-                    <a href="#get-loan-book-history" class="toc-h2 toc-link" data-title="Get Userlevel List">Get loan book history</a>
+                    <a href="#get-loan-book-history" class="toc-h2 toc-link" data-title="User Endpoints">Get loan book history</a>
                   </li>
                   <li>
-                    <a href="#get-all-overdue-books" class="toc-h2 toc-link" data-title="Get Userlevel List">Get All overdue books</a>
+                    <a href="#get-all-overdue-books" class="toc-h2 toc-link" data-title="User Endpoints">Get All overdue books</a>
                   </li>
                   <li>
-                    <a href="#loan-a-book" class="toc-h2 toc-link" data-title="Get Userlevel List">Loan a Book</a>
+                    <a href="#loan-a-book" class="toc-h2 toc-link" data-title="User Endpoints">Loan a Book</a>
                   </li>
                   <li>
-                    <a href="#return-book-from-loan" class="toc-h2 toc-link" data-title="Get Userlevel List">Return book from loan</a>
+                    <a href="#return-book-from-loan" class="toc-h2 toc-link" data-title="User Endpoints">Return book from loan</a>
                   </li>
                   <li>
-                    <a href="#search-all-books" class="toc-h2 toc-link" data-title="Get Userlevel List">Search all books</a>
+                    <a href="#search-all-books" class="toc-h2 toc-link" data-title="User Endpoints">Search all books</a>
                   </li>
                   <li>
-                    <a href="#get-all-categories" class="toc-h2 toc-link" data-title="Get Userlevel List">Get all categories</a>
+                    <a href="#get-all-categories" class="toc-h2 toc-link" data-title="User Endpoints">Get all categories</a>
                   </li>
                   <li>
-                    <a href="#display-books-by-their-categories" class="toc-h2 toc-link" data-title="Get Userlevel List">Display books by their categories</a>
+                    <a href="#display-books-by-their-categories" class="toc-h2 toc-link" data-title="User Endpoints">Display books by their categories</a>
                   </li>
               </ul>
           </li>
@@ -512,7 +504,7 @@
 <td>api/v1/admin/changeuserlevel</td>
 </tr>
 </tbody></table>
-<h1 id='authentication-endpoints'>Authentication Endpoints</h1><h2 id='sign-up'>Sign Up</h2>
+<h1 id='user-endpoints'>User Endpoints</h1><h2 id='sign-up'>Sign Up</h2>
 <p>This endpoint handles user registration</p>
 <h3 id='http-request'>HTTP Request</h3>
 <p><code>POST api/v1/users/signup</code></p>
@@ -570,11 +562,7 @@
     </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This email is already in use"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
-</span></code></pre><h3 id='request-required-fields'>Request Required Fields</h3>
-<ul>
-<li>Authorization: NA</li>
-</ul>
-
+</span></code></pre>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -646,7 +634,7 @@ Unauthenticated users can access this route.
     </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wrong Credentials"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='request-required-fields-2'>Request Required Fields</h3>
+</span></code></pre><h3 id='request-required-fields'>Request Required Fields</h3>
 <ul>
 <li>Authorization: NA</li>
 </ul>
@@ -827,11 +815,11 @@ Unauthenticated users can access this route.
     </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Request could not be completed, please try again later"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='request-required-fields-3'>Request Required Fields</h3>
-<ul>
-<li>Authorization: NA</li>
-</ul>
-<h1 id='get-userlevel-list'>Get Userlevel List</h1>
+</span></code></pre>
+<aside class="notice">
+Unauthenticated users can access this route.
+</aside>
+<h2 id='get-userlevel-list'>Get Userlevel List</h2>
 <p>This endpoint retrieves the user level list from the library</p>
 <h3 id='http-request-3'>HTTP Request</h3>
 <p><code>GET api/v1/getuserlevellist</code></p>
@@ -884,10 +872,10 @@ Unauthenticated users can access this route.
     </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Request could not be completed, please try again later"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='request-required-fields-4'>Request Required Fields</h3>
-<ul>
-<li>Authorization: x-tokenx</li>
-</ul>
+</span></code></pre>
+<aside class="notice">
+Unauthenticated users can access this route.
+</aside>
 <h2 id='view-book-details'>View Book details</h2>
 <p>This endpoint retrieves a specific book and returns their details</p>
 <h3 id='http-request-4'>HTTP Request</h3>
@@ -943,10 +931,10 @@ Unauthenticated users can access this route.
 <td>ID of the book to retrieve</td>
 </tr>
 </tbody></table>
-<h3 id='request-required-fields-5'>Request Required Fields</h3>
-<ul>
-<li>Authorization: x-token</li>
-</ul>
+
+<aside class="notice">
+Unauthenticated users can access this route.
+</aside>
 <h2 id='change-password'>Change Password</h2>
 <p>This endpoint handles change password request by authenticated users,</p>
 
@@ -997,7 +985,7 @@ Unauthenticated users can access this route.
     </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
     </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Request could not be completed, please try again later"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='request-required-fields-6'>Request Required Fields</h3>
+</span></code></pre><h3 id='request-required-fields-2'>Request Required Fields</h3>
 <ul>
 <li>Authorization: x-token</li>
 </ul>
@@ -1463,7 +1451,7 @@ Unauthenticated users can access this route.
   </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
   </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You have already borrowed this book"</span><span class="w"> 
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='request-required-fields-7'>Request Required Fields</h3>
+</span></code></pre><h3 id='request-required-fields-3'>Request Required Fields</h3>
 <ul>
 <li>Authorization: x-token</li>
 </ul>
@@ -1526,7 +1514,7 @@ Unauthenticated users can access this route.
 </span><span class="p">{</span><span class="w">
   </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You did not borrow this book"</span><span class="w"> 
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='request-required-fields-8'>Request Required Fields</h3>
+</span></code></pre><h3 id='request-required-fields-4'>Request Required Fields</h3>
 <ul>
 <li>Authorization: x-token</li>
 </ul>
@@ -1695,7 +1683,7 @@ Unauthenticated users can access this route.
   </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sorry there are no categories available"</span><span class="w"> 
 </span><span class="p">}</span><span class="w">
 
-</span></code></pre><h3 id='request-required-fields-9'>Request Required Fields</h3>
+</span></code></pre><h3 id='request-required-fields-5'>Request Required Fields</h3>
 <ul>
 <li>Authorization: x-token</li>
 </ul>
@@ -1774,7 +1762,7 @@ Unauthenticated users can access this route.
 </span><span class="p">{</span><span class="w">
   </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Category does not exist in this Library"</span><span class="w"> 
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='request-required-fields-10'>Request Required Fields</h3>
+</span></code></pre><h3 id='request-required-fields-6'>Request Required Fields</h3>
 <ul>
 <li>Authorization: x-token</li>
 </ul>

@@ -5,13 +5,9 @@ import PropTypes from 'prop-types';
  * display a user's image and username
  * @function UserView
  *
- * @param {object} props
+ * @param {object} props username,firstname, email
  *
- * @param {string} imageLink
- *
- * @param {string} username
- *
- * @return {object} UserView component
+ * @return {component} UserView component - displays userview in Sidenav
  */
 const UserView = ({
   imageLink, username, firstname, email
@@ -21,7 +17,7 @@ const UserView = ({
       <a className="modal-trigger" role="button" href="#user1" tabIndex="-1">
         <img className="circle" src={imageLink} alt={username} />
       </a>
-      <a href="www.andela.com">
+      <a href="#!userrname">
         <span className="black-text name">{username}</span>
       </a>
       <a href="#!name">

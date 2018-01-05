@@ -16,7 +16,7 @@ let zerobookId;
 let testbookId;
 let userToken = '';
 let adminToken = '';
-const testdate = new Date('2018-01-04');
+const testdate = new Date(Date.now());
 const nulluserId = '';
 
 describe('UserBooks', () => {
