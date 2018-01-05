@@ -5,7 +5,10 @@
 # HelloBooks
 
 HelloBooks is an application that helps manage a library and its processes like stocking, tracking and lending of books.This application enables users to be able to find and borrow books. Users  are managed by an admin who manages users as well as add, edit, delete books.
-<img width="1440" alt="Hellobooks-screenshot" src="/screenshots/hellobooks-screenshot.png">
+
+
+<img width="1440" height="803" alt="Hellobooks-screenshot" src="/screenshots/hellobooks-screenshot.png">
+
 
 # Table of Contents
 - [Getting Started](#getting-started)
