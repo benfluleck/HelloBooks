@@ -1,4 +1,3 @@
-
 /**
  * saves application state to disk
  *
@@ -11,15 +10,21 @@ export const saveState = (state) => {
   localStorage.setItem('state', serializedState);
 };
 
+const initializeState = {};
 /**
  * loads state from disk
  *
  * @return {Object} State Object
  */
 export const loadState = () => {
-  const serializedState = localStorage.getItem('state');
-  if (serializedState === null) {
-    return undefined;
+  try {
+    const serializedState = localStorage.getItem('state');
+    if (serializedState === null) {
+      return initializeState;
+    }
+
+    return JSON.parse(serializedState);
+  } catch (err) {
+    return initializeState;
   }
-  return JSON.parse(serializedState);
 };
