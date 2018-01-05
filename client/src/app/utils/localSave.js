@@ -10,7 +10,11 @@ export const saveState = (state) => {
   localStorage.setItem('state', serializedState);
 };
 
-const initializeState = {};
+const initializeState = {
+  notifierReducer: {},
+  categoryReducer: {},
+  userReducer: {},
+};
 /**
  * loads state from disk
  *
