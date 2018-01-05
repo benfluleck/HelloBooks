@@ -52,8 +52,11 @@ describe('<Unit Test>', () => {
           })
             .then(() => {
             })
-            .catch((error) => 
-            { expect(error.message).to.equal('Passwords do not match'); });
+            .catch((error) => {
+              expect(error.message)
+                .to
+                .equal('Passwords do not match');
+            });
           done();
         }
       );

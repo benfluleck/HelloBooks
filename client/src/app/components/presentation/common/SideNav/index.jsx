@@ -44,6 +44,7 @@ const SideNav = ({
 
 
 SideNav.propTypes = {
+  user: PropTypes.object,
   props: PropTypes.object
 };
 
