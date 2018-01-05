@@ -10,7 +10,7 @@ HelloBooks is an application that helps manage a library and its processes like 
 <br />
 
 <img width="1440" alt="Hellobooks-screenshot" src="/screenshots/hellobooks-screenshot.png">
-
+<br />
 
 # Table of Contents
 - [Getting Started](#getting-started)
