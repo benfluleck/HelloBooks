@@ -1,9 +1,11 @@
 [![Build Status](https://travis-ci.org/benfluleck/HelloBooks.png)](https://travis-ci.org/benfluleck/HelloBooks.svg?branch=staging)
 [![Coverage Status](https://coveralls.io/repos/github/benfluleck/HelloBooks/badge.svg?branch=staging)](https://coveralls.io/github/benfluleck/HelloBooks?branch=staging)
+[![Maintainability](https://api.codeclimate.com/v1/badges/65310d93aa5d31790cc1/maintainability)](https://codeclimate.com/github/benfluleck/HelloBooks/maintainability)
 
 # HelloBooks
 
 HelloBooks is an application that helps manage a library and its processes like stocking, tracking and lending of books.This application enables users to be able to find and borrow books. Users  are managed by an admin who manages users as well as add, edit, delete books.
+<img width="1440" alt="Hellobooks-screenshot" src="/screenshots/hellobooks-screenshot.png">
 
 # Table of Contents
 - [Getting Started](#getting-started)
@@ -163,4 +165,4 @@ This project is authored by **Benny Ogidan** (benny.ogidan@andela.com) and is li
 See the Hello Books wiki
 
 ## Current state
-Client side testing phase
+
