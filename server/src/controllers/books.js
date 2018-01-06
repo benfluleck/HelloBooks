@@ -60,21 +60,25 @@ export default {
               categoryId: req.body.categoryId,
               description: req.body.description,
               bookImage: req.body.bookImage || process.env.DEFAULT_BOOK_COVER
+
             })
-            .then((createdBook) => {
-              createdBook
+            .then((newBook) => {
+              newBook
                 .getCategory()
                 .then((category) => {
-                  const newBook = {
-                    title: createdBook.title,
-                    category: category.categoryName
+                  const createdBook = {
+                    title: newBook.title,
+                    category: category.categoryName,
+                    author: newBook.author,
+                    description: newBook.description,
+                    bookImage: newBook.bookImage
                   };
                   res
                     .status(201)
                     .send({
-                      message: `${newBook.title} ` +
+                      message: `${createdBook.title} ` +
                     `has been added to the library,` +
-                    `Category: ${newBook.category}`,
+                    `Category: ${createdBook.category}`,
                       createdBook
                     });
                 });
@@ -137,18 +141,21 @@ export default {
             .updateAttributes(req.body, {
               fields: Object.keys(req.body)
             })
-            .then((updatedBook) => {
-              updatedBook
+            .then((editedBook) => {
+              editedBook
                 .getCategory()
                 .then((category) => {
-                  const newBook = {
-                    title: updatedBook.title,
-                    category: category.categoryName
+                  const updatedBook = {
+                    title: editedBook.title,
+                    category: category.categoryName,
+                    author: editedBook.author,
+                    description: editedBook.description,
+                    bookImage: editedBook.bookImage
                   };
                   res
                     .status(200)
                     .send({
-                      message: `${newBook.title} has been updated`,
+                      message: `${updatedBook.title} has been updated`,
                       updatedBook
                     });
                 });
@@ -178,6 +185,14 @@ export default {
       .findAndCountAll({
         limit,
         offset,
+        attributes: [
+          'id',
+          'title',
+          'author',
+          'categoryId',
+          'description',
+          'bookImage'
+        ],
         order: [
           ['createdAt', 'DESC']
         ]

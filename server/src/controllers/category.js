@@ -27,7 +27,11 @@ export default {
       Categories.create({
         categoryName
       })
-        .then((category) => {
+        .then((newCategory) => {
+          const category = {
+            categoryName: newCategory.categoryName,
+            id: newCategory.id
+          };
           res.status(201)
             .send({
               message: `Category added!, ${category.categoryName}`,
@@ -93,7 +97,10 @@ export default {
     */
   listCategories(req, res) {
     return Categories
-      .all({ order: [['categoryName', 'ASC']] })
+      .all({
+        attributes: ['id', 'categoryName'],
+        order: [['categoryName', 'ASC']]
+      })
       .then((categories) => {
         if (Object.keys(categories).length < 1) {
           return res.status(404)

@@ -377,7 +377,7 @@ export default {
    * @return {string} message - returns message
    *
    * @return {Object} books
-   * 
+   *
    * @return {object} pagination - returns pagination
    *
    */
@@ -395,6 +395,14 @@ export default {
           as: 'book',
           required: true
         }
+      ],
+      attributes: [
+        'bookId',
+        'userId',
+        'returnDate',
+        'userReturnDate',
+        'returnStatus',
+        'overdueAmount'
       ],
       limit,
       offset,

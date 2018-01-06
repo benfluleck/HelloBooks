@@ -50,7 +50,11 @@ const userController = {
                   googleId: req.body.googleId || null,
                   isAdmin: req.body.isAdmin
                 }).then((user) => {
-                  if (user) {
+                  if (user.googleId) 
+                  {
+                    return userController.signIn(req, res);
+                  }
+                  else {
                     res.status(201).send({
                       message: `${user.username} has been added to the ` +
                       'library, Please Login, you will be only ' +
@@ -91,7 +95,7 @@ const userController = {
       .then((user) => {
         if (!user) {
           if (googleId) {
-            return userController.create(req, res);
+            return userController.createUser(req, res);
           }
           return res.status(404).send({
             success: false,

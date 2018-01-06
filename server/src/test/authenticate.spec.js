@@ -73,22 +73,22 @@ describe('Authentication', () => {
         done();
       });
   });
-  it('should return a 401 status ' +
-  'code if token is not an admin token', (done) => {
-    chai
-      .request(app)
-      .post('/api/v1/admin/category')
-      .set('x-access-token', userToken)
-      .send({ categoryName: 'EDUCATIONAL' })
-      .end((err, res) => {
-        expect(res.status)
-          .to
-          .equal(403);
-        expect(res.body.token)
-          .to.equal(undefined);
-        done();
-      });
-  });
+  it(`should return a 403 status ' +
+  'code if token is not an admin token`, (done) => {
+      chai
+        .request(app)
+        .post('/api/v1/admin/category')
+        .set('x-access-token', userToken)
+        .send({ categoryName: 'EDUCATIONAL' })
+        .end((err, res) => {
+          expect(res.status)
+            .to
+            .equal(403);
+          expect(res.body.token)
+            .to.equal(null);
+          done();
+        });
+    });
   it('should return 401 if there is an error with token', (done) => {
     chai
       .request(app)
@@ -172,7 +172,7 @@ describe('Authentication', () => {
         .post('/api/v1/auth/users/signin')
         .send(newUser)
         .end((err, res) => {
-          expect(res.status).to.equal(500);
+          expect(res.status).to.equal(400);
           done();
         });
     }

@@ -1,7 +1,7 @@
 import jwtDecode from 'jwt-decode';
 
 /**
-  * R
+  *
   *
   * @description Middleware that to check token for administrator parameters
   *
@@ -17,10 +17,9 @@ export default (req, res, next) => {
   const token = req.headers['x-access-token'] || req.headers.authorization;
   const decodedToken = jwtDecode(token);
   if (decodedToken.id.isAdmin) {
-    next(null, {
-      isAdmin: decodedToken.id.isAdmin
-    });
+    req.isAdmin = decodedToken.id.isAdmin;
+    next();
   } else {
-    res.status(403).send({ message: 'You are forbidden, Sorry' });
+    res.status(403).send({ token: null, message: 'Unauthorised Access' });
   }
 };
