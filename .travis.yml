@@ -30,7 +30,6 @@ before_script:
   - psql -c 'create database travis;' -U postgres
 script:
   - npm test
-  - bundle exec rspec
 
 after_success:
   - npm run coverage
