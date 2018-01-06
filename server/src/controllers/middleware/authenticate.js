@@ -25,7 +25,6 @@ const authenticate = (req, res, next) => {
       if (error) {
         return res.status(401).json({
           token: null,
-          state: {},
           message: 'Unauthorised access'
         });
       }
@@ -41,7 +40,6 @@ const authenticate = (req, res, next) => {
   } else {
     res.status(401).send({
       token: null,
-      state: {},
       message: 'Unauthorised access'
     });
   }
@@ -50,13 +48,13 @@ const authenticate = (req, res, next) => {
 /**
  * @description Decode Token for the server side processes
  *
- * @param {object} req
+ * @param {object} req - HTTP request object
  *
- * @param {object} res
+ * @param {object} res - HTTP response object
  *
- * @param {object} next
+ * @param {undefined} next
  *
- * @returns {object} res
+ * @returns {object} res - decodedToken
  */
 const decodeToken = (req, res, next) => {
   const token = req.headers['x-access-token'] || req.headers.authorization;
@@ -65,15 +63,18 @@ const decodeToken = (req, res, next) => {
     req.userId = decodedToken.id.id;
     next();
   } else {
-    res.status(401).send({ message: 'Unauthorised access' });
+    res.status(401).send({ token: null, message: 'Unauthorised access' });
   }
 };
 
 
 /**
  * @description Generates a json web token with the supplied parameters
+ *
  * @param {number} id
+ *
  * @param {boolean} isAdmin
+ *
  * @return {promise} signed token
  */
 const getJWT = (id, isAdmin) =>

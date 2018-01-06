@@ -21,6 +21,8 @@ class Logout extends Component {
    */
   componentDidMount() {
     this.props.logout();
+    /* eslint-disable */
+      Materialize.toast("User Logging Out", 2500);
     this.props.history.push('/');
   }
   /**
@@ -31,10 +33,9 @@ class Logout extends Component {
    * @return {JSX} JSX representation of DOM
    */
   render() {
-    this.setState({ isAuthneticated: false });
     return (
       <Row className="center landing">
-        <h1 className="">
+        <h1>
           Logging out...
         </h1>
       </Row>

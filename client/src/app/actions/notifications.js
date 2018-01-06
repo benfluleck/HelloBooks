@@ -20,7 +20,7 @@ export const showErrorNotification = ({ message, error }) => (dispatch) => {
       kind: 'info',
       dismissAfter: 3500
     }));
-    localStorage.removeItem('http://hellobooks');
+    localStorage.removeItem('http://hellobooks:state');
     localStorage.removeItem('token');
     setAuthorizationToken(false);
   } else {

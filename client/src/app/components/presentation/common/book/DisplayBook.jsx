@@ -196,5 +196,11 @@ const mapStateToProps = state => ({
 
 });
 
-export default connect(mapStateToProps, {
-  deleteBookAction, fetchAllBooks, fetchSelectedBook })(Book);
+export default connect(
+  mapStateToProps,
+  {
+    deleteBookAction,
+    fetchAllBooks,
+    fetchSelectedBook
+  }
+)(Book);
