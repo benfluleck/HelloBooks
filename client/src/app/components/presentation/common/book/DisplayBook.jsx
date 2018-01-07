@@ -34,7 +34,6 @@ class Book extends React.Component {
       .handleDelete
       .bind(this);
   }
-
   /**
    * @description fetches the book with the specific id
    *
@@ -148,10 +147,9 @@ class Book extends React.Component {
           <div className="card">
             <a
               className="modal-trigger"
-              href="#modal"
+              href="#book-modal"
               onClick={this.handleBookClick}
               tabIndex="-1">
-
               <div
                 className="card-image"
                 data-tip={`<h4>Title: ${this.props.book.title}</h4><hr/> 

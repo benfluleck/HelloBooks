@@ -14,15 +14,16 @@ const { notifSend } = notifActions;
  * @returns {function} asynchronous action
  */
 export const showErrorNotification = ({ message, error }) => (dispatch) => {
-  if (error.response.data.token === null) {
+  if (error.response.data.status === 401) {
     dispatch(notifSend({
       message: 'Please Login Again',
       kind: 'info',
       dismissAfter: 3500
     }));
-    localStorage.removeItem('http://hellobooks:state');
     localStorage.removeItem('token');
+    localStorage.clear();
     setAuthorizationToken(false);
+    localStorage.removeItem('http://hellobooks:state');
   } else {
     dispatch(notifSend({
       message: message || error.response.data.message || error.data.message,

@@ -122,13 +122,13 @@ describe('<BaseBookModal', () => {
     const wrapper = setup();
     expect(wrapper.find('Modal').length).toBe(1);
     expect(wrapper.find('.book-modal').length).toBe(4);
-    expect(wrapper.find('#modal').length).toBe(1);
+    expect(wrapper.find('#book-modal').length).toBe(1);
   });
   it('renders without crashing if Authenticated is false', () => {
     const wrapper = setup();
     wrapper.setProps({ isAuthenticated: false });
     expect(wrapper.find('Modal').length).toBe(1);
     expect(wrapper.find('.book-modal').length).toBe(4);
-    expect(wrapper.find('#modal').length).toBe(1);
+    expect(wrapper.find('#book-modal').length).toBe(1);
   });
 });

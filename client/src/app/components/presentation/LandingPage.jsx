@@ -26,7 +26,7 @@ const LandingPage = ({ isAuthenticated }) => (
         <div className="overlay-main">
           <Row>
             <div className="overlay">
-              <h3>Latest Books Available:</h3>
+              Latest Books Available:
               <hr />
               <div>{!isAuthenticated && <WelcomeMessage />}</div>
               <DisplayRecentBooks />

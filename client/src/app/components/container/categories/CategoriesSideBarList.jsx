@@ -33,7 +33,14 @@ export const CategoriesSideBar = (props) => {
         icon="arrow_drop_down"
         className="collapsible"
       >
+        <Link name="category" to="/dashboard"
+          onClick={() => props.handleFetchAllBooks()}
+          className="category-button">
+          <div className="black-text category-name">
+          All Categories
+          </div></Link>
         {[...categoryNames]}
+
       </CollapsibleItem>
     </Collapsible>
   );
@@ -43,7 +50,8 @@ export const CategoriesSideBar = (props) => {
 CategoriesSideBar.propTypes = {
   categories: PropTypes.arrayOf(PropTypes.shape({
     category: PropTypes.object
-  }))
+  })),
+  handleFetchAllBooks: PropTypes.func
 };
 
 const CategoriesSideBarList = GetCategories(CategoriesSideBar);

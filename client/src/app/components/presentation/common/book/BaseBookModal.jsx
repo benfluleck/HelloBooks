@@ -21,7 +21,7 @@ class BaseBookModal extends React.PureComponent {
     const { header, actions, books } = this.props;
     return (
       <Modal
-        id="modal"
+        id="book-modal"
         fixedFooter
         header={header}
         actions={actions}

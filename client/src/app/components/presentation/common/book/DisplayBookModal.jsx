@@ -119,7 +119,7 @@ class DisplayBookModal extends React.Component {
           return;
         }
         this.props.fetchAllBorrowedBooks(0, 8);
-        $('#modal').modal('close');
+        $('#book-modal').modal('close');
       });
   }
 
@@ -128,6 +128,7 @@ class DisplayBookModal extends React.Component {
    *
    *
    * @param {param} loanStatus
+   *
    * @returns {Component} Component
    *
    * @memberOf DisplayBookModal
@@ -200,13 +201,6 @@ DisplayBookModal.propTypes = {
   borrowBookAction: PropTypes.func,
   returnBookAction: PropTypes.func,
   fetchAllBorrowedBooks: PropTypes.func,
-  // book: PropTypes.arrayOf(PropTypes.shape({
-  //   title: PropTypes.string,
-  //   author: PropTypes.string,
-  //   quantity: PropTypes.number,
-  //   description: PropTypes.string,
-  // })),
-  // book: PropTypes.object,
   borrowedBooksList: PropTypes.object
 };
 

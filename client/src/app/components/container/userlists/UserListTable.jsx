@@ -28,8 +28,8 @@ class UserListTable extends React.Component {
    *
   * */
   componentWillReceiveProps() {
-    this.setState({ initModal: true });
     $('.modal').modal();
+    this.setState({ initModal: true });
   }
   /**
     * @description get a selected User details
@@ -83,7 +83,8 @@ class UserListTable extends React.Component {
     return (rows ?
       <Row>
         <div className="center loanhistory-table">
-          <table className="centered highlight bordered history-table">
+          <table className={`centered highlight bordered history-table
+          responsive-table`}>
             <thead>
               <tr className="loan-header">
                 <th>Profile Pic</th>

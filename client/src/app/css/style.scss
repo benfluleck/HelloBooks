@@ -1,8 +1,8 @@
 @import '../../../../node_modules/react-tabs/style/react-tabs.scss';
 
 // Variables
-$font-stack: 'Coiny', sans-serif;
-$font-stack2: 'Purple Purse', sans-serif;
+$font-stack: 'Purple Purse', sans-serif;
+$font-stack2: 'EB Garamond', sans-serif;
 $base-orange: #fd6737;
 $base-white: #ffffff;
 $base-background: rgb(204, 204, 204);
@@ -201,6 +201,7 @@ form p {
 	overflow: hidden;
 	background-color: $base-white;
 	color: black;
+	font-size: 3rem;
 }
 
 .landing {
@@ -479,6 +480,28 @@ i.medium {
 	border-bottom-color: black;
 }
 
+#nav-mobile{
+	background-color: $base-orange;
+}
+
+.header-wrapper {
+  animation: pulse 8s 10;
+}
+
+@keyframes pulse {
+  0% {
+    background-color: #2B2C2F;
+	}
+	50%{
+		background-color: #82BAE3;
+	}
+  100% {
+    background-color: #fd6737;
+  }
+}
+
+
+
 .category-name:hover {
 	background-color: $base-light-orange;
 }
@@ -494,56 +517,6 @@ i.medium {
 .change-level-modal{
 	// width: 50%;
 	padding-top: 10px;
-	//margin: 0 auto;
-	padding-left: 50px;
-	font-family: 'Merriweather'
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }
 
@@ -557,7 +530,8 @@ i.medium {
 }
 
 .disabled{
-	font-size: 35px
+	font-size: 1.3em;
+	text-decoration: underline;
 }
 
 /**
@@ -689,12 +663,39 @@ i.medium {
 }
 
 @media only screen and (max-width: 438px) {
-	.card img,
-	.card-image img {
-		width: 100% !important;
-		height: auto !important;
+	.header-wrapper{
+		  height: 85vh !important;
+		
+		}
+		.header-text{
+				padding: 15px !important;
+				margin-left: 2.5rem;
+				margin-right: 2.5rem;
+		}
+		
+		
+		h1 {
+		   font-size: 3.4rem !important;
+		
+		}
+		
+		h3 {
+			 font-size: 2rem !important;
+		}
+}
+
+@media only screen and (min-width: 1000px){
+	.row{
+	margin-bottom: 28px !important;
+	}
+	.header-wrapper {
+		height: 84vh !important;
+	}
+	h1{
+		font-size: 1.6em;
 	}
 }
+
 @media only screen and (min-width: 1200px) {
 	.card img,
 	.card-image img {

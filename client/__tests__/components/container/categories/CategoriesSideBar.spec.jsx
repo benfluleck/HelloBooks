@@ -20,6 +20,6 @@ describe('CategoriesSideBar Component', () => {
     const wrapper = setup();
     expect(wrapper.find('Collapsible').length).toBe(1);
     expect(wrapper.find('CollapsibleItem').length).toBe(1);
-    expect(wrapper.find('Link').length).toBe(2);
+    expect(wrapper.find('Link').length).toBe(3);
   });
 });

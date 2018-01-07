@@ -30,6 +30,12 @@ const CategoriesDropdown = (props) => {
         <Button icon="arrow_drop_down">Categories</Button>
       }
       >
+        <NavItem name="category" to="/dashboard"
+          onClick={() => props.handleFetchAllBooks()}
+          href="#">
+          <div className="black-text">
+          All Categories
+          </div></NavItem>
         {[...categoryNames]}
       </Dropdown>
     </div>
@@ -39,7 +45,8 @@ const CategoriesDropdown = (props) => {
 CategoriesDropdown.propTypes = {
   categories: PropTypes.arrayOf(PropTypes.shape({
     category: PropTypes.object,
-  })).isRequired
+  })).isRequired,
+  handleFetchAllBooks: PropTypes.func
 };
 
 

@@ -24,8 +24,7 @@ const authenticate = (req, res, next) => {
     jwt.verify(token, process.env.JWT_SECRET, (error, decoded) => {
       if (error) {
         return res.status(401).json({
-          token: null,
-          message: 'Unauthorised access'
+          message: 'Unauthorised access, Please login again'
         });
       }
       req.user = decoded;
@@ -33,14 +32,11 @@ const authenticate = (req, res, next) => {
     });
   } else if (token === '') {
     res.status(403).send({
-      token: null,
-      state: null,
       message: 'Forbidden'
     });
   } else {
     res.status(401).send({
-      token: null,
-      message: 'Unauthorised access'
+      message: 'Unauthorised access, Please login again'
     });
   }
 };

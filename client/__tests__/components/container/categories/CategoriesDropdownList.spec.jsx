@@ -20,6 +20,6 @@ describe('CategoriesDropdown Component', () => {
   it('should render without throwing an error', () => {
     const wrapper = setup();
     expect(wrapper.find('Dropdown').length).toBe(1);
-    expect(wrapper.find('NavItem').length).toBe(2);
+    expect(wrapper.find('NavItem').length).toBe(3);
   });
 });

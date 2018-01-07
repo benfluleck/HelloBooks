@@ -130,41 +130,41 @@ class ChangeUserLevelModal extends React.Component {
       >
         <div className="change-level-modal">
           <Row>
-            <div className="disabled">
+            <div>
               <img
                 src={this.props.selectedUser.bookImage}
                 alt={this.props.selectedUser.title}
               />
-              <h5> Username : &nbsp;{this.props.selectedUser.username}
-              </h5>
+              <div className="center disabled">
+              Username : &nbsp;{this.props.selectedUser.username}
+              </div>
             </div>
           </Row>
           <Row>
-            <div className="disabled">
-              <h5> Current Userlevel : &nbsp;{this.state.userLevel}
-              </h5>
+            <div className="center disabled">
+             Current Userlevel : &nbsp;{this.state.userLevel}
             </div>
           </Row>
           <Row>
-            <Col>
-              <h5> Change User Level :</h5>
-            </Col>
-            <Col l={8}>
-              <Input l={8} type="select" onChange={this.onChange}>
-                <option
-                  value=""
-                >
+            <div>
+              <Col className="center disabled" l={6}>
+                <h5> Change User Level :</h5>
+              </Col>
+              <div className="center disabled" l={6}>
+                <select className="browser-default" onChange={this.onChange}>
+                  <option
+                    value=""
+                  >
                 Choose a New level
-                </option>
+                  </option>
 
-                {[...userLevelNames]}
-              </Input>
-            </Col>
-
+                  {[...userLevelNames]}
+                </select>
+              </div>
+            </div>
           </Row>
           <Row>
-            <div className="user-level-info">
-              <p>Text about the level goes here</p>
+            <div className="center disabled user-level-info">
               <Button onClick={this.onClick}>Update Level</Button>
             </div>
           </Row>
@@ -178,7 +178,6 @@ class ChangeUserLevelModal extends React.Component {
 
 
 ChangeUserLevelModal.defaultProps = {
-  selectedUser: [],
   userLevels: []
 };
 
@@ -188,11 +187,7 @@ ChangeUserLevelModal.propTypes = {
     PropTypes.number,
     PropTypes.array
   ]),
-  selectedUser: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-    PropTypes.array
-  ]),
+  selectedUser: PropTypes.object,
   getUserListAction: PropTypes.func.isRequired,
   changeUserLevelAction: PropTypes.func.isRequired,
   getUserLevelListAction: PropTypes.func.isRequired,

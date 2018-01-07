@@ -44,10 +44,8 @@ describe('Users', () => {
         expect(res.status)
           .to
           .equal(401);
-        expect(res.body.token)
-          .to.equal(null);
         expect(res.body.message)
-          .to.equal("Unauthorised access");
+          .to.equal("Unauthorised access, Please login again");
         done();
       });
   });
@@ -60,10 +58,8 @@ describe('Users', () => {
         expect(res.status)
           .to
           .equal(401);
-        expect(res.body.token)
-          .to.equal(null);
         expect(res.body.message)
-          .to.equal("Unauthorised access");
+          .to.equal("Unauthorised access, Please login again");
         done();
       });
   });
@@ -179,10 +175,8 @@ describe('Users', () => {
           expect(res.status)
             .to
             .equal(401);
-          expect(res.body.token)
-            .to.equal(null);
           expect(res.body.message)
-            .to.equal("Unauthorised access");
+            .to.equal("Unauthorised access, Please login again");
           done();
         });
     });
@@ -197,10 +191,8 @@ describe('Users', () => {
           expect(res.status)
             .to
             .equal(401);
-          expect(res.body.token)
-            .to.equal(null);
           expect(res.body.message)
-            .to.equal("Unauthorised access");
+            .to.equal("Unauthorised access, Please login again");
           done();
         });
     });
@@ -213,10 +205,8 @@ describe('Users', () => {
           expect(res.status)
             .to
             .equal(401);
-          expect(res.body.token)
-            .to.equal(null);
           expect(res.body.message)
-            .to.equal("Unauthorised access");
+            .to.equal("Unauthorised access, Please login again");
 
           done();
         });

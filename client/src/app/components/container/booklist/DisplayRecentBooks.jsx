@@ -39,6 +39,10 @@ class DisplayRecentBooks extends React.Component {
     />);
   }
 
+  componentWillReceiveProps = () => {
+    $('.modal').modal();
+  };
+
   /**
    * render Display Recent component
    *

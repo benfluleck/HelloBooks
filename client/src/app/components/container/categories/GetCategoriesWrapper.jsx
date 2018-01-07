@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Preloader } from 'react-materialize';
+import { fetchAllBooks } from '../../../actions/fetchBooks';
 import { fetchBooksForCategories } from '../../../actions/fetchCategories';
 
 
@@ -28,10 +29,13 @@ export class GetCategories extends React.Component {
     this.handleClick = this
       .handleClick
       .bind(this);
+    this.handleFetchAllBooks =
+    this.handleFetchAllBooks
+      .bind(this);
   }
 
   /**
-   * @param {object} id
+   * @param {object} id - category Id
    *
    * @returns {object} state
    *
@@ -50,6 +54,25 @@ export class GetCategories extends React.Component {
         );
     });
   }
+
+  /**
+   * @description fetches all books for all caategory link
+   *
+   * @returns {void}
+   *
+   * @memberOf GetCategories
+   *
+  * */
+  handleFetchAllBooks() {
+    console.log(' I am here >>>>>>>>>>>>>');
+    this
+      .props
+      .fetchAllBooks(
+        this.state.offset,
+        this.state.limit
+      );
+  }
+
   /**
    * render getCategories Wrapper
    *
@@ -68,6 +91,7 @@ export class GetCategories extends React.Component {
       onChange={this.props.onChange}
       onClick={this.handleClick}
       categories={this.props.categoryList}
+      handleFetchAllBooks = {this.handleFetchAllBooks}
     />);
   }
 }
@@ -91,7 +115,10 @@ const GetCategoriesWrapper = (WrappedComponent) => {
 
   return connect(
     mapStateToProps,
-    { fetchBooksForCategories }
+    {
+      fetchBooksForCategories,
+      fetchAllBooks
+    }
   )(GetCategories);
 };
 

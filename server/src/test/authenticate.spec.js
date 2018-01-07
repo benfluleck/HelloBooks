@@ -22,10 +22,8 @@ describe('Authentication', () => {
         expect(res.status)
           .to
           .equal(401);
-        expect(res.body.token)
-          .to.equal(null);
         expect(res.body.message)
-          .to.equal("Unauthorised access");
+          .to.equal("Unauthorised access, Please login again");
         done();
       });
   });
@@ -84,8 +82,6 @@ describe('Authentication', () => {
           expect(res.status)
             .to
             .equal(403);
-          expect(res.body.token)
-            .to.equal(null);
           done();
         });
     });
@@ -99,10 +95,8 @@ describe('Authentication', () => {
         expect(res.status)
           .to
           .equal(401);
-        expect(res.body.token)
-          .to.equal(null);
         expect(res.body.message)
-          .to.equal("Unauthorised access");
+          .to.equal("Unauthorised access, Please login again");
         done();
       });
   });
