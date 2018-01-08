@@ -44,10 +44,11 @@ const BorrowHistoryTable = (props) => {
   return (rows ?
     <Row>
       <div className="center loanhistory-table">
-        <table className="centered highlight bordered history-table">
+        <table className={`centered highlight
+        bordered history-table responsive-table`}>
           <thead>
             <tr className="loan-header">
-              <th>Book</th>
+              <th className="book-column">Book</th>
               <th>Date Borrowed</th>
               <th>Date To Be Returned</th>
               <th>User Return Date</th>

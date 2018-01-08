@@ -485,7 +485,7 @@ i.medium {
 }
 
 .header-wrapper {
-  animation: pulse 8s 10;
+  animation: pulse 5s infinite;
 }
 
 @keyframes pulse {
@@ -605,6 +605,7 @@ i.medium {
 	.overlay-main {
 		margin-top: -57vh;
 	}
+
 }
 
 @media screen and (max-width: 776px) {
@@ -682,6 +683,10 @@ i.medium {
 		h3 {
 			 font-size: 2rem !important;
 		}
+
+		.book-column{
+			min-height: 160px;
+		}
 }
 
 @media only screen and (min-width: 1000px){
@@ -689,12 +694,13 @@ i.medium {
 	margin-bottom: 28px !important;
 	}
 	.header-wrapper {
-		height: 84vh !important;
+		height: 101vh !important;
 	}
 	h1{
 		font-size: 1.6em;
 	}
 }
+
 
 @media only screen and (min-width: 1200px) {
 	.card img,
@@ -705,6 +711,15 @@ i.medium {
 	.book-icons-1{
 		right: -159px !important;
 	}
+	.header-wrapper {
+		height: 94vh !important;
+	}
+}
+
+@media screen and (min-width: 439px) and (max-width: 992px) {
+	.book-column{
+		min-height: 15rem;
+	}
 }
 
 
@@ -713,6 +728,19 @@ i.medium {
 	.card-image img {
 		height: 214px;
 	}
+}
+
+@media screen and (min-width: 759px) and (max-width: 975px) {
+	.header-wrapper {
+		height: 75vh !important;
+	}
+}
+
+@media only screen and (min-width: 1239px) {
+	.header-wrapper {
+		height: 81vh !important;
+	}
+
 }
 
 @media (max-width: 991px) {
