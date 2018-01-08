@@ -130,13 +130,15 @@ class Book extends React.Component {
                   <a
                     href="#edit-admin-book-modal"
                     onClick={this.handleEdit}
-                    className="#f57c00 btn-floating orange edit-btn-class waves-light darken-2 book-icons-1 modal-trigger">
+                    className={`#f57c00 btn-floating orange edit-btn-class 
+                    waves-light darken-2 book-icons-1 modal-trigger`}>
                     <i className="material-icons">mode_edit</i>
                     Edit
                   </a>
                   <a
                     onClick={this.handleDelete}
-                    className="#f57c00 btn-floating delete-book-btn waves-light orange darken-2 book-icons">
+                    className={`#f57c00 btn-floating 
+                    delete-book-btn waves-light orange darken-2 book-icons`}>
                     <i className="material-icons">delete</i>
                     Delete
                   </a>

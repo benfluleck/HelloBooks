@@ -64,7 +64,6 @@ export class GetCategories extends React.Component {
    *
   * */
   handleFetchAllBooks() {
-    console.log(' I am here >>>>>>>>>>>>>');
     this
       .props
       .fetchAllBooks(
@@ -100,6 +99,7 @@ GetCategories.propTypes = {
   categoryList: PropTypes
     .arrayOf(PropTypes.shape({ key: PropTypes.number })),
   fetchBooksForCategories: PropTypes.func,
+  fetchAllBooks: PropTypes.func,
   onChange: PropTypes.func,
   wrappedComponent: PropTypes.func,
 };

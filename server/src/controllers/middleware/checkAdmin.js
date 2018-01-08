@@ -20,6 +20,8 @@ export default (req, res, next) => {
     req.isAdmin = decodedToken.id.isAdmin;
     next();
   } else {
-    res.status(403).send({ message: 'Unauthorised Access, Please login again' });
+    res.status(403).send({
+      message: 'Unauthorised Access, Please login again'
+    });
   }
 };

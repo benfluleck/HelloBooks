@@ -10,7 +10,8 @@ import MessageforNoOverdueBooks from
   '../../presentation/messages/dashboardMessages/MessageforNoOverdueBooks';
 
 /**
- * @description Component for Display OverdueBooks on the Landing page for all users
+ * @description Component for Display
+ * OverdueBooks on the Landing page for all users
  *
  * @class DisplayLandingBooks
  *

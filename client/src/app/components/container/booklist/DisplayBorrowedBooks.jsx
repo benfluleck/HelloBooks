@@ -10,7 +10,8 @@ import MessageforNoBooks from
   '../../presentation/messages/dashboardMessages/MessageforNoBooks';
 
 /**
- * @description Component for Display BorrowedBooks on the Landing page for all users
+ * @description Component for Display BorrowedBooks
+ * on the Landing page for all users
  *
  * @class DisplayLandingBooks
  *
@@ -72,7 +73,8 @@ class DisplayAllBorrowedBooks extends React.Component {
             </div>
           </Col>
         </Row>
-        <div className="return-message">To return a book click on it and click the return button</div>
+        <div className="return-message">
+          To return a book click on it and click the return button</div>
         <PaginationWrapper
           config={config}
           fetch={this.props.fetchAllBorrowedBooks}

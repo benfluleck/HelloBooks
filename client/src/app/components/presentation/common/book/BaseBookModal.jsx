@@ -65,7 +65,8 @@ class BaseBookModal extends React.PureComponent {
 BaseBookModal.propTypes = {
   children: PropTypes.element,
   header: PropTypes.string,
-  actions: PropTypes.element
+  actions: PropTypes.element,
+  books: PropTypes.object
 };
 
 
