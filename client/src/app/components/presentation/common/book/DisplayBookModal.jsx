@@ -62,7 +62,7 @@ class DisplayBookModal extends React.Component {
     this
       .props
       .returnBookAction({ bookId: this.props.book.id });
-    $('#modal').modal('close');
+    $('#book-modal').modal('close');
   }
 
   /**
