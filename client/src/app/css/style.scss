@@ -17,6 +17,18 @@ header {
 	flex: 1 0 auto;
 }
 
+.borrow-message{
+	font-weight: 900;
+	letter-spacing: 0.5px;
+	font-size: 20px;
+}
+
+.return-message{
+	@extend .borrow-message;
+	padding-left: 23px;
+	
+}
+
 .side-nav {
 	width: 250px;
 }

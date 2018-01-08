@@ -51,7 +51,7 @@ class SearchBooks extends React.Component {
    */
   render() {
     return (
-      <Col s={12} m={8} l={4}>
+      <Col s={12} m={8} l={12}>
         <div className="autocomplete">
           <Col s={2}>
             <div className="autocomplete-icon">

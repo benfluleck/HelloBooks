@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Input, Button, Row, Col, Preloader } from 'react-materialize';
+import { Modal, Button, Row, Col, Preloader } from 'react-materialize';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getUserLevelListAction } from

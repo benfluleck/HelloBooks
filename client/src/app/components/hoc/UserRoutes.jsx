@@ -33,7 +33,7 @@ UserRoutes.propTypes = {
 
 const mapStateToProps = state => ({
   isAuthenticated: !!state.userReducer.isAuthenticated,
-  tokenExists: !!localStorage.getItem('token') | false,
+  tokenExists: !!localStorage.getItem('token') || false,
 });
 
 export default connect(mapStateToProps)(UserRoutes);

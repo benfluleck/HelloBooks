@@ -72,6 +72,7 @@ class DisplayAllBorrowedBooks extends React.Component {
             </div>
           </Col>
         </Row>
+        <div className="return-message">To return a book click the book from the book tabs and click return</div>
         <PaginationWrapper
           config={config}
           fetch={this.props.fetchAllBorrowedBooks}

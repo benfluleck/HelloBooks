@@ -6,6 +6,7 @@ import { Pagination, Row } from 'react-materialize';
  *
  *
  * @class PaginationWrapper
+ *
  * @extends {React.Component}
  */
 class PaginationWrapper extends React.Component {

@@ -94,7 +94,7 @@ class DisplayAllBooks extends React.Component {
     return (
       <div>
         <Row>
-          <Col m={9} l={9}>
+          <Col m={8} l={7}>
             {this.props.allBooksList.books.length === 0 ?
               null :
               <SearchBooks/>
@@ -112,7 +112,9 @@ class DisplayAllBooks extends React.Component {
               null
             }
           </Col>
-          <Col m={3} l={3}>
+          <Col m={4} l={5}>
+            <div className="borrow-message">
+               To borrow any book click on it </div>
             <div className="catdropdownlist">
               <CategoriesDropdownList/>
             </div>
