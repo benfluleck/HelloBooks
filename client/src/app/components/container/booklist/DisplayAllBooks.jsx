@@ -114,7 +114,7 @@ class DisplayAllBooks extends React.Component {
           </Col>
           <Col m={4} l={5}>
             <div className="borrow-message">
-               To borrow any book click on it </div>
+               To borrow a book click on it </div>
             <div className="catdropdownlist">
               <CategoriesDropdownList/>
             </div>
