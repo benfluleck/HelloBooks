@@ -140,7 +140,7 @@ HelloBooks consists of the following features:
 Three models are defined: `Users`, `Books` and `UserBooks`. `Book` must have a unique title and title  on their creation. A `User` can borrow a book `Book`. The routes are defined under `models/index`.
 
 ## API Documentation
-You can view the API Documentation [here](https://staging-hellobooks.herokuapp.com/api-docs)
+You can view the API Documentation [here](https://staging-hellobooks.herokuapp.com/apidocs)
 
 ## Express Routes
 
