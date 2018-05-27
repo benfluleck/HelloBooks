@@ -55,19 +55,19 @@ This is a javascript application built with [**Express**](https://expressjs.com/
 ## Installation
 
 1. Install [**Node JS**](https://nodejs.org/en/).
-1. Install [**Postgres**](https://www.postgresql.org/) .
-1. Clone the [**repository here**](https://github.com/benfluleck/HelloBooks.git)
-1. [**cd**] into the root of the **project directory**.
-1. Run `npm install` on the terminal to install Dependecies
-1. Install sequelize-cli, Create Postgresql database, Navigate to server directory and run migrations:
+2. Install [**Postgres**](https://www.postgresql.org/) .
+3. Clone the [**repository here**](https://github.com/benfluleck/HelloBooks.git)
+4. [**cd**] into the root of the **project directory**.
+5. Run `npm install` on the terminal to install Dependecies
+6. Install sequelize-cli, Create Postgresql database, Navigate to server directory and run migrations:
 ```
 npm install -g seqeulize-cli
 cd server
 sequelize db:migrate
 ```
-5. Create a `.env` file in the root directory of the application. Use a different database for your testing and development. Example of the content of a .env file is shown in the .env.sample
+7. Create a `.env` file in the root directory of the application. Use a different database for your testing and development. Example of the content of a .env file is shown in the .env.sample
 
-6. Start the application:
+8. Start the application:
 **_Different Build Environment_**
 
 **Production**
